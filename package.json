@@ -10,6 +10,9 @@
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-scripts": "2.1.4",
+    "tslint": "^5.12.1",
+    "tslint-config-airbnb": "^5.11.1",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "3.3.3"
   },
   "scripts": {
