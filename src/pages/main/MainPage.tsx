@@ -1,12 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
-
-const MainPageBlock = styled.div``;
+import MainTemplate from '../../components/main/MainTemplate';
 
 interface MainPageProps {}
 
 const MainPage: React.SFC<MainPageProps> = props => {
-  return <MainPageBlock />;
+  return <MainTemplate>메인임</MainTemplate>;
 };
 
 export default MainPage;
