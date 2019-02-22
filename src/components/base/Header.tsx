@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Logo } from '../../static/svg';
+import Button from '../common/Button';
 
 const HeaderBlock = styled.div`
   width: 100%;
@@ -25,7 +26,9 @@ const Header: React.SFC<HeaderProps> = props => {
         <div className="brand">
           <Logo />
         </div>
-        <div className="right">오른쪽</div>
+        <div className="right">
+          <Button>로그인</Button>
+        </div>
       </div>
     </HeaderBlock>
   );
