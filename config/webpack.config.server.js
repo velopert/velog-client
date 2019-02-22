@@ -3,9 +3,6 @@ const path = require('path');
 const webpack = require('webpack');
 const resolve = require('resolve');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const safePostCssParser = require('postcss-safe-parser');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const paths = require('./paths');
@@ -14,7 +11,6 @@ const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const nodeExternals = require('webpack-node-externals');
-const LoadablePlugin = require('@loadable/webpack-plugin');
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
@@ -354,7 +350,6 @@ module.exports = function(webpackEnv) {
       ],
     },
     plugins: [
-      new LoadablePlugin(),
       new ModuleNotFoundPlugin(paths.appPath),
       new webpack.DefinePlugin(env.stringified),
       // TypeScript type checking
