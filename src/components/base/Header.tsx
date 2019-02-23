@@ -2,11 +2,12 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Logo } from '../../static/svg';
 import Button from '../common/Button';
+import { breakpoints } from '../../lib/styles/responsive';
 
 const HeaderBlock = styled.div`
   width: 100%;
   .wrapper {
-    width: 1200px;
+    width: ${breakpoints.xlarge};
     height: 4rem;
     margin: 0 auto;
     padding-left: 1rem;
