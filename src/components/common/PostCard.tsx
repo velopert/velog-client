@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { userThumbnail } from '../../static/images';
 import Tag from './Tag';
+import { PartialPost } from '../../lib/graphql/post';
 
 const PostCardBlock = styled.div`
   padding-top: 4rem;
@@ -33,6 +34,7 @@ const PostCardBlock = styled.div`
     width: 100%;
     max-height: 369px;
     margin-bottom: 1rem;
+    object-fit: cover;
   }
   line-height: 1.5;
   h2 {
@@ -58,31 +60,36 @@ const PostCardBlock = styled.div`
   .tags-wrapper {
     margin-top: 0.5rem;
   }
+
+  & + & {
+    border-top: 1px solid ${palette.gray2};
+  }
 `;
 
-interface PostCardProps {}
+interface PostCardProps {
+  post: PartialPost;
+}
 
-const PostCard: React.SFC<PostCardProps> = props => {
+const PostCard: React.SFC<PostCardProps> = ({ post }) => {
   return (
     <PostCardBlock>
       <div className="user-info">
-        <img src={userThumbnail} />
-        <div className="username">velopert</div>
+        <img src={post.user.profile.thumbnail || userThumbnail} />
+        <div className="username">{post.user.username}</div>
       </div>
-      <img
-        className="post-thumbnail"
-        src="https://images.velog.io/post-images/p_ssungnni/47ef3d00-1f95-11e9-bad7-f369e1fa7a4b/-2019-01-24-2.02.24.png"
-      />
-      <h2>제목제목</h2>
-      <p>내용내용내용내용... 내용</p>
+      {post.thumbnail && (
+        <img className="post-thumbnail" src={post.thumbnail} />
+      )}
+      <h2>{post.title}</h2>
+      <p>{post.short_description}</p>
       <div className="subinfo">
         <span>2019년 3월 23일</span>
-        <span>0개의 댓글</span>
+        <span>{post.comments_count}개의 댓글</span>
       </div>
       <div className="tags-wrapper">
-        <Tag>리액트</Tag>
-        <Tag>웹 개발</Tag>
-        <Tag>몰라</Tag>
+        {post.tags.map(tag => (
+          <Tag key={tag}>{tag}</Tag>
+        ))}
       </div>
     </PostCardBlock>
   );

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import PostCardList from '../../components/common/PostCardList';
+
+import RecentPosts from '../../containers/main/RecentPosts';
 
 const RecentPostsPageBlock = styled.div``;
 
@@ -9,7 +10,7 @@ interface RecentPostsPageProps {}
 const RecentPostsPage: React.SFC<RecentPostsPageProps> = props => {
   return (
     <RecentPostsPageBlock>
-      <PostCardList />
+      <RecentPosts />
     </RecentPostsPageBlock>
   );
 };

@@ -1,24 +1,20 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import PostCard from './PostCard';
+import { Post, PartialPost } from '../../lib/graphql/post';
 
 const PostCardListBlock = styled.div``;
 
-interface PostCardListProps {}
+interface PostCardListProps {
+  posts: PartialPost[];
+}
 
-const PostCardList: React.SFC<PostCardListProps> = props => {
+const PostCardList: React.SFC<PostCardListProps> = ({ posts }) => {
   return (
     <PostCardListBlock>
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
+      {posts.map(post => (
+        <PostCard post={post} />
+      ))}
     </PostCardListBlock>
   );
 };

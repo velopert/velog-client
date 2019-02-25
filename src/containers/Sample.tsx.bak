@@ -1,13 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { getPostList, Post } from '../lib/graphql/post';
+import { Post, GET_POST_LIST } from '../lib/graphql/post';
 import { Query, QueryResult } from 'react-apollo';
 
 interface SampleProps {}
 
 const Sample: React.SFC<SampleProps> = props => {
   return (
-    <Query query={getPostList}>
+    <Query query={GET_POST_LIST}>
       {({ loading, error, data }: QueryResult<Post[]>) => {
         if (loading) return <div>loading...</div>;
         if (error) return <div>error</div>;
