@@ -22,6 +22,7 @@ const PostCardBlock = styled.div`
       background: ${palette.gray0};
       object-fit: cover;
       border-radius: 1.5rem;
+      box-shadow: 0px 0 8px rgba(0, 0, 0, 0.1);
     }
     .username {
       font-size: 0.875rem;

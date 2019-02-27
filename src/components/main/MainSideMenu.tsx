@@ -5,6 +5,8 @@ import palette from '../../lib/styles/palette';
 import { MdTrendingUp, MdAccessTime, MdRssFeed } from 'react-icons/md';
 
 const MainSideMenuBlock = styled.div`
+  position: sticky;
+  top: 64px;
   display: flex;
   flex-direction: column;
 `;
