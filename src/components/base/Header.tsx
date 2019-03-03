@@ -1,10 +1,12 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Logo } from '../../static/svg';
 import Button from '../common/Button';
 import { breakpoints } from '../../lib/styles/responsive';
 
-const HeaderBlock = styled.div`
+const HeaderBlock = styled.div<{
+  floating: boolean;
+}>`
   width: 100%;
   .wrapper {
     width: ${breakpoints.xlarge};
@@ -16,22 +18,45 @@ const HeaderBlock = styled.div`
     justify-content: space-between;
     align-items: center;
   }
+
+  ${props =>
+    props.floating &&
+    css`
+      position: fixed;
+      top: 0;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0px 0 8px rgba(0, 0, 0, 0.08);
+    `}
 `;
 
-interface HeaderProps {}
+const Placeholder = styled.div`
+  width: 100%;
+  height: 4rem;
+`;
 
-const Header: React.SFC<HeaderProps> = props => {
+interface HeaderProps {
+  floating: boolean;
+  floatingMargin: number;
+}
+
+const Header: React.SFC<HeaderProps> = ({ floating, floatingMargin }) => {
   return (
-    <HeaderBlock>
-      <div className="wrapper">
-        <div className="brand">
-          <Logo />
+    <>
+      <HeaderBlock
+        floating={floating}
+        style={{ marginTop: floating ? floatingMargin : 0 }}
+      >
+        <div className="wrapper">
+          <div className="brand">
+            <Logo />
+          </div>
+          <div className="right">
+            <Button>로그인</Button>
+          </div>
         </div>
-        <div className="right">
-          <Button>로그인</Button>
-        </div>
-      </div>
-    </HeaderBlock>
+      </HeaderBlock>
+      {floating && <Placeholder />}
+    </>
   );
 };
 

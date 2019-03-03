@@ -38,8 +38,8 @@ export type PartialPost = {
 };
 
 export const GET_POST_LIST = gql`
-  {
-    posts {
+  query Post($cursor: ID) {
+    posts(cursor: $cursor) {
       id
       title
       short_description
