@@ -37,9 +37,14 @@ const Placeholder = styled.div`
 interface HeaderProps {
   floating: boolean;
   floatingMargin: number;
+  onLoginClick: () => void;
 }
 
-const Header: React.SFC<HeaderProps> = ({ floating, floatingMargin }) => {
+const Header: React.SFC<HeaderProps> = ({
+  floating,
+  floatingMargin,
+  onLoginClick,
+}) => {
   return (
     <>
       <HeaderBlock
@@ -51,7 +56,7 @@ const Header: React.SFC<HeaderProps> = ({ floating, floatingMargin }) => {
             <Logo />
           </div>
           <div className="right">
-            <Button>로그인</Button>
+            <Button onClick={onLoginClick}>로그인</Button>
           </div>
         </div>
       </HeaderBlock>

@@ -2,7 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 import Header from '../../components/base/Header';
 import { getScrollTop } from '../../lib/utils';
-const { useEffect, useRef, useState, useCallback } = React;
+import CoreContext from '../../contexts/CoreContext';
+const { useEffect, useRef, useState, useCallback, useContext } = React;
 
 const HeaderContainerBlock = styled.div``;
 
@@ -11,7 +12,6 @@ interface HeaderContainerProps {}
 const HeaderContainer: React.SFC<HeaderContainerProps> = props => {
   const lastY = useRef(0);
   const direction = useRef<null | 'UP' | 'DOWN'>(null);
-  const needReset = useRef<boolean>(false);
 
   const [floating, setFloating] = useState(false);
   const [baseY, setBaseY] = useState(0);
@@ -57,7 +57,20 @@ const HeaderContainer: React.SFC<HeaderContainerProps> = props => {
     };
     return reset;
   }, [floating, baseY, floatingMargin]);
-  return <Header floating={floating} floatingMargin={floatingMargin} />;
+
+  const core = useContext(CoreContext);
+
+  const onLoginClick = () => {
+    core.actions.setLayer(true);
+  };
+
+  return (
+    <Header
+      floating={floating}
+      floatingMargin={floatingMargin}
+      onLoginClick={onLoginClick}
+    />
+  );
 };
 
 export default HeaderContainer;

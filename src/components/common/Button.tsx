@@ -28,12 +28,17 @@ const ButtonBlock = styled.button<{ theme: string }>`
     `}
 `;
 
-interface ButtonProps {
+interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
   theme?: string;
 }
 
-const Button: React.SFC<ButtonProps> = ({ theme, children }) => {
-  return <ButtonBlock theme={theme}>{children}</ButtonBlock>;
+const Button: React.SFC<ButtonProps> = ({ theme, children, ref, ...rest }) => {
+  const htmlProps = rest as any;
+  return (
+    <ButtonBlock theme={theme} {...htmlProps}>
+      {children}
+    </ButtonBlock>
+  );
 };
 
 Button.defaultProps = {
