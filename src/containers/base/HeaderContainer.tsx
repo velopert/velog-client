@@ -61,7 +61,7 @@ const HeaderContainer: React.SFC<HeaderContainerProps> = props => {
   const core = useContext(CoreContext);
 
   const onLoginClick = () => {
-    core.actions.setLayer(true);
+    core.actions.showAuthModal('LOGIN');
   };
 
   return (
