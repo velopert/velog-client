@@ -720,7 +720,7 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-transform-typescript" "^7.1.0"
 
-"@babel/runtime@7.3.1", "@babel/runtime@^7.1.5", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1":
+"@babel/runtime@7.3.1", "@babel/runtime@^7.1.5", "@babel/runtime@^7.3.1":
   version "7.3.1"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.3.1.tgz#574b03e8e8a9898eaf4a872a92ea20b7846f6f2a"
   integrity sha512-7jGW8ppV0ant637pIqAcFfQDDH1orEPGJb8aXfUozuCU3QqX7rX4DA8iwrbPrR1hcH0FTTHz47yQnk+bl5xHQA==
@@ -1163,6 +1163,13 @@
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
+
+"@types/redux-devtools-extension@^2.13.2":
+  version "2.13.2"
+  resolved "https://registry.yarnpkg.com/@types/redux-devtools-extension/-/redux-devtools-extension-2.13.2.tgz#b2e09a8c163b2b0f5072e6a5ac41474000df2111"
+  integrity sha1-suCajBY7Kw9QcualrEFHQADfIRE=
+  dependencies:
+    redux-devtools-extension "*"
 
 "@types/serve-static@*":
   version "1.13.2"
@@ -4928,7 +4935,7 @@ hoist-non-react-statics@^2.5.0:
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
   integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
 
-hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.2.1:
+hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.2.1, hoist-non-react-statics@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz#b09178f0122184fb95acf525daaecb4d8f45958b"
   integrity sha512-0XsbTXxgiaCDYDIWFcwkmerZPSwywfUqYmwT4jzewKTQSWoE6FCMoUVOeBJWK3E/CrWbxRG3m5GzY4lnIwGRBA==
@@ -5162,6 +5169,11 @@ immer@1.10.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/immer/-/immer-1.10.0.tgz#bad67605ba9c810275d91e1c2a47d4582e98286d"
   integrity sha512-O3sR1/opvCDGLEVcvrGTMtLac8GJ5IwZC4puPrLuRj3l7ICKvkmA0vGuU9OW8mV9WIBRnaxp5GJh9IEAaNOoYg==
+
+immer@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-2.1.1.tgz#13abfc251e742b7dbc23e7444a3bd288c7394e43"
+  integrity sha512-+S4ktJM7ugEy1aIfpsjTVf7ZLMMuwz8QqSxpJRZaCM+0ujfeU4kWcj57P02qQ/KRGMw7DwUS4lCKNNROHasXkw==
 
 immutable-tuple@^0.4.9:
   version "0.4.10"
@@ -8477,6 +8489,15 @@ prop-types@^15.6.2:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
+prop-types@^15.7.2:
+  version "15.7.2"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
+  integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
+  dependencies:
+    loose-envify "^1.4.0"
+    object-assign "^4.1.1"
+    react-is "^16.8.1"
+
 property-information@^5.0.0, property-information@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/property-information/-/property-information-5.0.1.tgz#c3b09f4f5750b1634c0b24205adbf78f18bdf94f"
@@ -8640,13 +8661,6 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-apollo-hooks@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/react-apollo-hooks/-/react-apollo-hooks-0.4.2.tgz#e031845f59b5daa1a322b4d857dafd207ab9553f"
-  integrity sha512-o4ZgTxLVf9p4cCQ8VRsplJ/xrrqyYt46EXfRl7UXLcl71R9rBLHkXwJ21mgbKwgP8aiqDG2oHKZaQY3lchEemQ==
-  dependencies:
-    lodash "^4.17.11"
-
 react-apollo@^2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/react-apollo/-/react-apollo-2.4.1.tgz#89db63ebacf01c1603553bb476f089492aaeab2c"
@@ -8720,22 +8734,27 @@ react-icons@^3.3.0:
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.3.0.tgz#09409cad23c39149e419af5c928eee6f9f456b93"
   integrity sha512-OY8yBAyww1VEro12Zbt6dZqz77zN7LXukC4oA4i4fWjxTjCbbqsPy6BrfAh7BYPtIRaTXhpoYlhdoDaT/kxdog==
 
-react-is@^16.6.0, react-is@^16.6.3, react-is@^16.7.0, react-is@^16.8.1:
+react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   version "16.8.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.1.tgz#a80141e246eb894824fb4f2901c0c50ef31d4cdb"
   integrity sha512-ioMCzVDWvCvKD8eeT+iukyWrBGrA3DiFYkXfBsVYIRdaREZuBjENG+KjrikavCLasozqRWTwFUagU/O4vPpRMA==
 
-react-redux@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-6.0.0.tgz#09e86eeed5febb98e9442458ad2970c8f1a173ef"
-  integrity sha512-EmbC3uLl60pw2VqSSkj6HpZ6jTk12RMrwXMBdYtM6niq0MdEaRq9KYCwpJflkOZj349BLGQm1MI/JO1W96kLWQ==
+react-is@^16.8.2:
+  version "16.8.4"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.4.tgz#90f336a68c3a29a096a3d648ab80e87ec61482a2"
+  integrity sha512-PVadd+WaUDOAciICm/J1waJaSvgq+4rHE/K70j0PFqKhkTBsPv/82UGQJNXAngz1fOQLLxI6z1sEDmJDQhCTAA==
+
+react-redux@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-6.0.1.tgz#0d423e2c1cb10ada87293d47e7de7c329623ba4d"
+  integrity sha512-T52I52Kxhbqy/6TEfBv85rQSDz6+Y28V/pf52vDWs1YRXG19mcFOGfHnY2HsNFHyhP+ST34Aih98fvt6tqwVcQ==
   dependencies:
-    "@babel/runtime" "^7.2.0"
-    hoist-non-react-statics "^3.2.1"
+    "@babel/runtime" "^7.3.1"
+    hoist-non-react-statics "^3.3.0"
     invariant "^2.2.4"
     loose-envify "^1.4.0"
-    prop-types "^15.6.2"
-    react-is "^16.6.3"
+    prop-types "^15.7.2"
+    react-is "^16.8.2"
 
 react-router-dom@^4.3.1:
   version "4.3.1"
@@ -8868,6 +8887,11 @@ recursive-readdir@2.2.2:
   integrity sha512-nRCcW9Sj7NuZwa2XvH9co8NPeXUBhZP7CRKJtU+cS6PW9FpCIFoI5ib0NT1ZrbNuPoRy0ylyCaUL8Gih4LSyFg==
   dependencies:
     minimatch "3.0.4"
+
+redux-devtools-extension@*, redux-devtools-extension@^2.13.8:
+  version "2.13.8"
+  resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.8.tgz#37b982688626e5e4993ff87220c9bbb7cd2d96e1"
+  integrity sha512-8qlpooP2QqPtZHQZRhx3x3OP5skEV1py/zUdMY28WNAocbafxdG2tRD1MWE7sp8obGMNYuLWanhhQ7EQvT1FBg==
 
 redux@^4.0.0, redux@^4.0.1:
   version "4.0.1"
@@ -10317,6 +10341,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typesafe-actions@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/typesafe-actions/-/typesafe-actions-3.2.1.tgz#833623a4079eda5dbcb775113f6dcf02b71c03f8"
+  integrity sha512-hvhuNqsai6LzXQ+Hl6vajC9bGd/kHHL1hJvI4GQ0Rs6Fax1cjbNEsuFGy/RbfLPhBAL10n6DECEHUa+Q9E+MxQ==
 
 typescript@3.3.3:
   version "3.3.3"

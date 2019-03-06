@@ -1,21 +1,27 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import { connect } from 'react-redux';
 import OpaqueLayer from '../../components/common/OpaqueLayer';
-import CoreContext from '../../contexts/CoreContext';
 import AuthModalContainer from '../auth/AuthModalContainer';
+import { RootState } from '../../modules';
 
-interface CoreProps {}
+interface OwnProps {}
+interface StateProps {
+  layer: boolean;
+}
+interface DispatchProps {}
+type CoreProps = OwnProps & StateProps & DispatchProps;
 
-const { useContext } = React;
-const Core: React.SFC<CoreProps> = props => {
-  const { state, actions } = useContext(CoreContext);
-
+const Core: React.SFC<CoreProps> = ({ layer }) => {
   return (
     <>
-      <OpaqueLayer visible={state.layer} />
+      <OpaqueLayer visible={layer} />
       <AuthModalContainer />
     </>
   );
 };
 
-export default Core;
+export default connect<StateProps, DispatchProps, OwnProps, RootState>(
+  state => ({
+    layer: state.core.layer,
+  }),
+)(Core);

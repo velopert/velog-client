@@ -15,7 +15,6 @@ import { createHttpLink } from 'apollo-link-http';
 import fetch from 'isomorphic-fetch';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import proxy from 'koa-better-http-proxy';
-import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
 
 const clientStats = path.resolve('./build/loadable-stats.json');
 

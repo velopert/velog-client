@@ -6,15 +6,23 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import { loadableReady } from '@loadable/component';
 import { ApolloProvider } from 'react-apollo';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import client from './lib/graphql/client';
+import rootReducer from './modules';
+
+const store = createStore(rootReducer, composeWithDevTools());
 
 loadableReady(() => {
   ReactDOM.hydrate(
-    <ApolloProvider client={client}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ApolloProvider>,
+    <Provider store={store}>
+      <ApolloProvider client={client}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ApolloProvider>
+    </Provider>,
     document.getElementById('root'),
   );
 });

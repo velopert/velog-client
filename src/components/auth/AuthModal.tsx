@@ -1,11 +1,15 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { MdClose } from 'react-icons/md';
 import zIndexes from '../../lib/styles/zIndexes';
 import palette from '../../lib/styles/palette';
 import { plutoWelcome } from '../../static/images';
+import transitions from '../../lib/styles/transitions';
+import useMounted from '../../lib/hooks/useMounted';
 
-const AuthModalBlock = styled.div`
+const { useState, useEffect } = React;
+
+const AuthModalBlock = styled.div<{ visible: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -18,6 +22,15 @@ const AuthModalBlock = styled.div`
   .wrapper {
     width: 606px;
     height: 480px;
+
+    ${props =>
+      props.visible
+        ? css`
+            animation: ${transitions.popInFromBottom} 0.4s forwards ease-in-out;
+          `
+        : css`
+            animation: ${transitions.popOutToBottom} 0.2s forwards ease-in-out;
+          `}
 
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.09);
     display: flex;
@@ -46,14 +59,20 @@ const AuthModalBlock = styled.div`
       flex: 1;
       background: white;
       padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
       .exit-wrapper {
         display: flex;
         justify-content: flex-end;
         font-size: 1.5rem;
         color: ${palette.gray6};
+        margin-bottom: 2.25rem;
         svg {
           cursor: pointer;
         }
+      }
+      .block-content {
+        flex: 1;
       }
     }
   }
@@ -64,10 +83,32 @@ interface AuthModalProps {
   onClose: () => void;
 }
 
-const AuthModal: React.SFC<AuthModalProps> = ({ visible, onClose }) => {
-  if (!visible) return null;
+const AuthModal: React.SFC<AuthModalProps> = ({
+  visible,
+  children,
+  onClose,
+}) => {
+  const [closed, setClosed] = useState(true);
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout | null = null;
+    if (visible) {
+      setClosed(false);
+    } else {
+      timeoutId = setTimeout(() => {
+        setClosed(true);
+      }, 200);
+    }
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [visible]);
+
+  if (!visible && closed) return null;
+
   return (
-    <AuthModalBlock>
+    <AuthModalBlock visible={visible}>
       <div className="wrapper">
         <div className="gray-block">
           <div>
@@ -79,6 +120,7 @@ const AuthModal: React.SFC<AuthModalProps> = ({ visible, onClose }) => {
           <div className="exit-wrapper">
             <MdClose onClick={onClose} />
           </div>
+          <div className="block-content">{children}</div>
         </div>
       </div>
     </AuthModalBlock>
