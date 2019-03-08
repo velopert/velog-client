@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthForm renders correctly 1`] = `
+<div>
+  <div
+    class="sc-bxivhb horKtT"
+  >
+    <div>
+      <h2>
+        회원가입
+      </h2>
+      <section>
+        <h4>
+          이메일로 
+          회원가입
+        </h4>
+        <form
+          class="sc-bdVaJa gHUyaJ"
+        >
+          <input
+            placeholder="이메일을 입력하세요."
+            tabindex="2"
+            value=""
+          />
+          <button
+            tabindex="3"
+          >
+            회원가입
+          </button>
+        </form>
+      </section>
+      <section>
+        <h4>
+          소셜 게정으로 
+          회원가입
+        </h4>
+        <div
+          class="sc-htpNat jVlyIb"
+        >
+          <button
+            class="sc-bwzfXH iJhiIE"
+            style="background: rgb(39, 46, 51);"
+            tabindex="4"
+          >
+            <svg>
+              icon-github.svg
+            </svg>
+          </button>
+          <button
+            class="sc-bwzfXH szcUU"
+            style="background: white;"
+            tabindex="5"
+          >
+            <svg>
+              icon-google.svg
+            </svg>
+          </button>
+          <button
+            class="sc-bwzfXH iJhiIE"
+            style="background: rgb(59, 89, 152);"
+            tabindex="6"
+          >
+            <svg>
+              icon-facebook.svg
+            </svg>
+          </button>
+        </div>
+      </section>
+    </div>
+    <div
+      class="foot"
+    >
+      <span>
+        계정이 이미 있으신가요?
+      </span>
+      <a
+        data-testid="switchmode"
+        tabindex="7"
+      >
+        로그인
+      </a>
+    </div>
+  </div>
+</div>
+`;

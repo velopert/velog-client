@@ -7,7 +7,7 @@ import { plutoWelcome } from '../../static/images';
 import transitions from '../../lib/styles/transitions';
 import useMounted from '../../lib/hooks/useMounted';
 
-const { useState, useEffect } = React;
+const { useState, useEffect, useRef } = React;
 
 const AuthModalBlock = styled.div<{ visible: boolean }>`
   position: fixed;
@@ -73,6 +73,8 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
       }
       .block-content {
         flex: 1;
+        display: flex;
+        flex-direction: column;
       }
     }
   }
@@ -118,7 +120,7 @@ const AuthModal: React.SFC<AuthModalProps> = ({
         </div>
         <div className="white-block">
           <div className="exit-wrapper">
-            <MdClose onClick={onClose} />
+            <MdClose onClick={onClose} tabIndex={1} />
           </div>
           <div className="block-content">{children}</div>
         </div>
