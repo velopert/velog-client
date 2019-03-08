@@ -60,7 +60,7 @@ const AuthForm: React.SFC<AuthFormProps> = ({ mode, onToggleMode }) => {
   return (
     <AuthFormBlock>
       <div>
-        <h2>{modeText}</h2>
+        <h2 data-testid="title">{modeText}</h2>
         <section>
           <h4>이메일로 {modeText}</h4>
           <AuthEmailForm

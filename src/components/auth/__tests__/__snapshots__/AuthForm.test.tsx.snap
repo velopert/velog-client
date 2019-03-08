@@ -6,7 +6,9 @@ exports[`AuthForm renders correctly 1`] = `
     class="sc-bxivhb horKtT"
   >
     <div>
-      <h2>
+      <h2
+        data-testid="title"
+      >
         회원가입
       </h2>
       <section>

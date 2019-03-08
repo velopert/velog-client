@@ -27,13 +27,13 @@ describe('AuthForm', () => {
   it('switches mode', async () => {
     const store = setupStore();
     store.dispatch(showAuthModal('REGISTER'));
-    const { container, getByText, getByTestId } = render(
+    const { getByTestId } = render(
       <Provider store={store}>
         <AuthModalContainer />
       </Provider>,
     );
-    expect(getByText('회원가입')).toHaveTextContent('a');
+    expect(getByTestId('title')).toHaveTextContent('회원가입');
     fireEvent.click(getByTestId('switchmode'));
-    console.log(store.getState());
+    expect(getByTestId('title')).toHaveTextContent('로그인');
   });
 });
