@@ -5,6 +5,7 @@ import AuthEmailForm from './AuthEmailForm';
 import { AuthMode } from '../../modules/core';
 import palette from '../../lib/styles/palette';
 import AuthSocialButtonGroup from './AuthSocialButtonGroup';
+import AuthEmailSuccess from './AuthEmailSuccess';
 
 const AuthFormBlock = styled.div`
   display: flex;
@@ -44,15 +45,24 @@ const AuthFormBlock = styled.div`
   }
 `;
 
-interface AuthFormProps {
+export interface AuthFormProps {
   mode: AuthMode;
+  loading: boolean;
   onToggleMode: () => void;
+  onSendAuthEmail: (email: string) => void;
+  registered: boolean | null;
 }
 
-const AuthForm: React.SFC<AuthFormProps> = ({ mode, onToggleMode }) => {
+const AuthForm: React.SFC<AuthFormProps> = ({
+  mode,
+  onToggleMode,
+  onSendAuthEmail,
+  loading,
+  registered,
+}) => {
   const [email, onChangeEmail] = useInput('');
   const onSubmit = (email: string) => {
-    console.log(email);
+    onSendAuthEmail(email);
   };
 
   const modeText = mode === 'REGISTER' ? '회원가입' : '로그인';
@@ -63,12 +73,17 @@ const AuthForm: React.SFC<AuthFormProps> = ({ mode, onToggleMode }) => {
         <h2 data-testid="title">{modeText}</h2>
         <section>
           <h4>이메일로 {modeText}</h4>
-          <AuthEmailForm
-            value={email}
-            onChange={onChangeEmail}
-            onSubmit={onSubmit}
-            mode={mode}
-          />
+          {registered ? (
+            <AuthEmailSuccess registered={registered} />
+          ) : (
+            <AuthEmailForm
+              value={email}
+              onChange={onChangeEmail}
+              onSubmit={onSubmit}
+              mode={mode}
+              disabled={loading}
+            />
+          )}
         </section>
         <section>
           <h4>소셜 게정으로 {modeText}</h4>
