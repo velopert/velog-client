@@ -73,7 +73,7 @@ const AuthForm: React.SFC<AuthFormProps> = ({
         <h2 data-testid="title">{modeText}</h2>
         <section>
           <h4>이메일로 {modeText}</h4>
-          {registered ? (
+          {registered !== null ? (
             <AuthEmailSuccess registered={registered} />
           ) : (
             <AuthEmailForm

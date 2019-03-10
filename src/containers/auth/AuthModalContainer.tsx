@@ -9,7 +9,8 @@ import {
 } from '../../modules/core';
 import { connect } from 'react-redux';
 import { RootState } from '../../modules';
-import { sendAuthEmail } from '../../lib/api/auth';
+import { sendAuthEmail, SendAuthEmailResponse } from '../../lib/api/auth';
+import useRequest from '../../lib/hooks/useRequest';
 
 interface OwnProps {}
 interface StateProps {
@@ -29,26 +30,24 @@ const AuthModalContainer: React.SFC<AuthModalContainerProps> = ({
   closeAuthModal,
   changeAuthModalMode,
 }) => {
+  const [_sendAuthEmail, loading, data, error, resetSendAuthEmail] = useRequest<
+    SendAuthEmailResponse
+  >(sendAuthEmail);
+
   const onClose = useCallback(() => {
     closeAuthModal();
+    resetSendAuthEmail();
   }, []);
+
   const onToggleMode = useCallback(() => {
     const nextMode = mode === 'REGISTER' ? 'LOGIN' : 'REGISTER';
     changeAuthModalMode(nextMode);
   }, [mode]);
 
-  const [loading, setLoading] = useState(false);
-  const [registered, setRegistered] = useState<boolean | null>(null);
+  const registered = data && data.registered;
 
   const onSendAuthEmail = useCallback(async (email: string) => {
-    try {
-      setLoading(true);
-      const result = await sendAuthEmail(email);
-      setLoading(false);
-      setRegistered(result.data.registered);
-    } catch (e) {
-      console.log(e);
-    }
+    _sendAuthEmail(email);
   }, []);
 
   return (
