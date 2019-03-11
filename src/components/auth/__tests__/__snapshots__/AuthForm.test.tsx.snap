@@ -33,7 +33,7 @@ exports[`AuthForm renders correctly 1`] = `
       </section>
       <section>
         <h4>
-          소셜 게정으로 
+          소셜 계정으로 
           회원가입
         </h4>
         <div

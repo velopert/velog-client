@@ -86,7 +86,7 @@ const AuthForm: React.SFC<AuthFormProps> = ({
           )}
         </section>
         <section>
-          <h4>소셜 게정으로 {modeText}</h4>
+          <h4>소셜 계정으로 {modeText}</h4>
           <AuthSocialButtonGroup />
         </section>
       </div>

@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router';
 
 import loadable from '@loadable/component';
 import Core from './containers/base/Core';
+import RegisterPage from './pages/RegisterPage';
 const MainPage = loadable(() => import('./pages/main/MainPage'));
 const PostPage = loadable(() => import('./pages/PostPage'));
 
@@ -15,6 +16,7 @@ const App: React.SFC<AppProps> = props => {
     <>
       <Switch>
         <Route path="/" component={MainPage} exact />
+        <Route path="/register" component={RegisterPage} />
         <Route path="/:mode(trending|recent|following)" component={MainPage} />
         <Route path="/@:username/:urlSlug" component={PostPage} />
       </Switch>
