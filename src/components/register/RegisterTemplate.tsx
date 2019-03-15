@@ -21,11 +21,12 @@ const RegisterTemplateBlock = styled.div`
 
 export interface RegisterTemplateProps {}
 
-const RegisterTemplate: React.SFC<RegisterTemplateProps> = props => {
+const RegisterTemplate: React.SFC<RegisterTemplateProps> = ({ children }) => {
   return (
     <RegisterTemplateBlock>
       <h1>환영합니다!</h1>
       <div className="description">기본 회원 정보를 등록해주세요.</div>
+      <div className="contents">{children}</div>
     </RegisterTemplateBlock>
   );
 };

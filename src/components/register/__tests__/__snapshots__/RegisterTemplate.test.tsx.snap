@@ -13,6 +13,9 @@ exports[`RegisterTemplate matches snapshot 1`] = `
     >
       기본 회원 정보를 등록해주세요.
     </div>
+    <div
+      class="contents"
+    />
   </div>
 </div>
 `;

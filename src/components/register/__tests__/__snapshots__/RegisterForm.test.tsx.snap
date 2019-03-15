@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RegisterForm matches snapshot 1`] = `
+<div>
+  <div
+    class="sc-htpNat jHxVO"
+  >
+    <div
+      class="sc-bdVaJa hDAwbH"
+    >
+      <label>
+        이름
+      </label>
+      <div
+        class="group"
+      >
+        <div
+          class="input-wrapper"
+        >
+          <input
+            name="name"
+            placeholder="이름을 입력하세요"
+            size="20"
+            value=""
+          />
+        </div>
+        <div
+          class="width-maker"
+        >
+          이름을 입력하세요
+        </div>
+      </div>
+    </div>
+    <div
+      class="sc-bdVaJa hDAwbH"
+    >
+      <label>
+        이메일
+      </label>
+      <div
+        class="group"
+      >
+        <div
+          class="input-wrapper"
+        >
+          <input
+            name="email"
+            placeholder="이메일을 입력하세요"
+            size="25"
+            value=""
+          />
+        </div>
+        <div
+          class="width-maker"
+        >
+          이메일을 입력하세요
+        </div>
+      </div>
+    </div>
+    <div
+      class="sc-bdVaJa hDAwbH"
+    >
+      <label>
+        아이디
+      </label>
+      <div
+        class="group"
+      >
+        <div
+          class="input-wrapper"
+        >
+          <input
+            name="username"
+            placeholder="아이디를 입력하세요"
+            size="15"
+            value=""
+          />
+        </div>
+        <div
+          class="width-maker"
+        >
+          아이디를 입력하세요
+        </div>
+      </div>
+    </div>
+    <div
+      class="sc-bdVaJa hDAwbH"
+    >
+      <label>
+        한 줄 소개
+      </label>
+      <div
+        class="group"
+      >
+        <div
+          class="input-wrapper"
+        >
+          <input
+            name="shortBio"
+            placeholder="당신을 한 줄로 소개해보세요"
+            size="30"
+            value=""
+          />
+        </div>
+        <div
+          class="width-maker"
+        >
+          당신을 한 줄로 소개해보세요
+        </div>
+      </div>
+    </div>
+    <div
+      class="buttons"
+    >
+      <button
+        class="sc-bwzfXH jNdqDj"
+        color="gray"
+      >
+        취소
+      </button>
+      <button
+        class="sc-bwzfXH blTXEF"
+        color="teal"
+        type="submit"
+      >
+        다음
+      </button>
+    </div>
+  </div>
+</div>
+`;
