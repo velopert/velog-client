@@ -21,6 +21,17 @@ const palette = {
   gray7: '#495057',
   gray8: '#343A40',
   gray9: '#212529',
+  /* red */
+  red0: '#fff5f5',
+  red1: '#ffe3e3',
+  red2: '#ffc9c9',
+  red3: '#ffa8a8',
+  red4: '#ff8787',
+  red5: '#ff6b6b',
+  red6: '#fa5252',
+  red7: '#f03e3e',
+  red8: '#e03131',
+  red9: '#c92a2a',
 };
 
 export default palette;

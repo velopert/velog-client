@@ -32,7 +32,7 @@ export const localEmailRegister = ({
   registerToken: string;
   form: LocalEmailRegisterForm;
 }) =>
-  apiClient.post<RegisterResponse>(
+  apiClient.post<AuthResponse>(
     '/api/v2/auth/register/local',
     snakeCaseKeys({ registerToken, form }),
   );
@@ -41,7 +41,7 @@ type LocalEmailRegisterForm = {
   username: string;
   shortBio: string;
 };
-export type RegisterResponse = {
+export type AuthResponse = {
   email: string;
   is_certified: boolean;
   username: string;
@@ -63,3 +63,11 @@ export type RegisterResponse = {
     refresh_token: string;
   };
 };
+
+/**
+ * Login using email code
+ * docs: https://documenter.getpostman.com/view/723994/S11RJuhq#ceb55dc0-68f7-4b74-9d30-4e8ce86da988
+ * @param code
+ */
+export const emailCodeLogin = (code: string) =>
+  apiClient.get<AuthResponse>(`/api/v2/auth/code/${code}`);

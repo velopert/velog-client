@@ -25,6 +25,7 @@ export default function useRequest<R = any>(
       setData(response.data);
     } catch (e) {
       setError(error);
+      throw e;
     }
     setLoading(false);
   };

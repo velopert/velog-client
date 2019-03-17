@@ -4,6 +4,9 @@ import { getScrollTop } from '../../lib/utils';
 import { RootState } from '../../modules';
 import { connect } from 'react-redux';
 import { showAuthModal } from '../../modules/core';
+import { QueryResult, Query } from 'react-apollo';
+import { GET_CURRENT_USER, CurrentUser } from '../../lib/graphql/user';
+
 const { useEffect, useRef, useState, useCallback } = React;
 
 interface OwnProps {}
@@ -69,11 +72,17 @@ const HeaderContainer: React.SFC<HeaderContainerProps> = ({
   };
 
   return (
-    <Header
-      floating={floating}
-      floatingMargin={floatingMargin}
-      onLoginClick={onLoginClick}
-    />
+    <Query query={GET_CURRENT_USER}>
+      {({ loading, error, data }: QueryResult<{ auth: CurrentUser }>) => {
+        return (
+          <Header
+            floating={floating}
+            floatingMargin={floatingMargin}
+            onLoginClick={onLoginClick}
+          />
+        );
+      }}
+    </Query>
   );
 };
 
