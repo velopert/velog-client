@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderUserIcon matches snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa dKjqSX"
+  >
+    <img
+      alt="thumbnail"
+      src="user-thumbnail.png"
+    />
+    <svg
+      fill="currentColor"
+      height="1em"
+      stroke="currentColor"
+      stroke-width="0"
+      viewBox="0 0 24 24"
+      width="1em"
+    >
+      <path
+        d="M7 10l5 5 5-5z"
+      />
+    </svg>
+  </div>
+</div>
+`;

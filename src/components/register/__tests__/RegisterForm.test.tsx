@@ -8,6 +8,7 @@ describe('RegisterForm', () => {
     const initialProps: RegisterFormProps = {
       onSubmit: () => {},
       defaultEmail: null,
+      error: null,
     };
     const utils = render(
       <MemoryRouter>
@@ -81,7 +82,7 @@ describe('RegisterForm', () => {
     const button = getByText('다음');
     fireEvent.click(button);
     expect(onSubmit).toBeCalledWith({
-      name: '벨로퍼트',
+      displayName: '벨로퍼트',
       email: 'public.velopert@gmail.com',
       username: 'velopert',
       shortBio: '안녕하세요',

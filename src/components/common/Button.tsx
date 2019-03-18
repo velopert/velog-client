@@ -4,13 +4,13 @@ import palette from '../../lib/styles/palette';
 
 const ButtonBlock = styled.button<{ theme: string }>`
   display: inline-flex;
-  height: 2rem;
   align-items: center;
+  height: 2rem;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  font-size: 1rem;
   outline: none;
   border: none;
 

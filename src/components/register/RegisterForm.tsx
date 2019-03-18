@@ -83,7 +83,7 @@ const RegisterForm: React.SFC<RegisterFormProps> = ({
       <div className="form-bottom">
         {error && <div className="error">{error}</div>}
         <div className="buttons">
-          <RoundButton inline color="gray" to="/">
+          <RoundButton inline color="gray" to="/" size="LARGE">
             취소
           </RoundButton>
           <RoundButton
@@ -92,6 +92,7 @@ const RegisterForm: React.SFC<RegisterFormProps> = ({
             onClick={() =>
               onSubmit({ ...form, email: defaultEmail || form.email })
             }
+            size="LARGE"
           >
             다음
           </RoundButton>

@@ -3,7 +3,7 @@
 exports[`RegisterForm matches snapshot 1`] = `
 <div>
   <div
-    class="sc-htpNat jHxVO"
+    class="sc-htpNat cSOxAO"
   >
     <div
       class="sc-bdVaJa hDAwbH"
@@ -18,7 +18,7 @@ exports[`RegisterForm matches snapshot 1`] = `
           class="input-wrapper"
         >
           <input
-            name="name"
+            name="displayName"
             placeholder="이름을 입력하세요"
             size="20"
             value=""
@@ -110,21 +110,25 @@ exports[`RegisterForm matches snapshot 1`] = `
       </div>
     </div>
     <div
-      class="buttons"
+      class="form-bottom"
     >
-      <button
-        class="sc-bwzfXH jNdqDj"
-        color="gray"
+      <div
+        class="buttons"
       >
-        취소
-      </button>
-      <button
-        class="sc-bwzfXH blTXEF"
-        color="teal"
-        type="submit"
-      >
-        다음
-      </button>
+        <button
+          class="sc-bwzfXH cZHLEW"
+          color="gray"
+        >
+          취소
+        </button>
+        <button
+          class="sc-bwzfXH kQNfPs"
+          color="teal"
+          type="submit"
+        >
+          다음
+        </button>
+      </div>
     </div>
   </div>
 </div>
