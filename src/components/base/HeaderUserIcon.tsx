@@ -36,11 +36,12 @@ const HeaderUserIconBlock = styled.div`
 
 export interface HeaderUserIconProps {
   user: CurrentUser;
+  onClick: () => void;
 }
 
-const HeaderUserIcon: React.SFC<HeaderUserIconProps> = props => {
+const HeaderUserIcon: React.SFC<HeaderUserIconProps> = ({ onClick }) => {
   return (
-    <HeaderUserIconBlock>
+    <HeaderUserIconBlock onClick={onClick}>
       <img src={userThumbnail} alt="thumbnail" />
       <MdArrowDropDown />
     </HeaderUserIconBlock>

@@ -5,6 +5,7 @@ import qs from 'qs';
 import { emailCodeLogin } from '../../lib/api/auth';
 import client from '../../lib/graphql/client';
 import { GET_CURRENT_USER, CurrentUser } from '../../lib/graphql/user';
+import storage from '../../lib/storage';
 
 interface EmailLoginProps extends RouteComponentProps<{}> {}
 
@@ -28,10 +29,7 @@ const EmailLogin: React.SFC<EmailLoginProps> = props => {
         const response = await client.query<{ auth: CurrentUser }>({
           query: GET_CURRENT_USER,
         });
-        window.localStorage.setItem(
-          'CURRENT_USER',
-          JSON.stringify(response.data.auth),
-        );
+        storage.setItem('CURRENT_USER', response.data.auth);
         props.history.replace('/');
       } catch (e) {
         // TODO: show 401

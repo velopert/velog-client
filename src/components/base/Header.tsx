@@ -6,12 +6,14 @@ import { breakpoints } from '../../lib/styles/responsive';
 import RoundButton from '../common/RoundButton';
 import { CurrentUser } from '../../lib/graphql/user';
 import HeaderUserIcon from './HeaderUserIcon';
+import useToggle from '../../lib/hooks/useToggle';
+import HeaderUserMenu from './HeaderUserMenu';
 
 const HeaderBlock = styled.div<{
   floating: boolean;
 }>`
   width: 100%;
-  .wrapper {
+  > .wrapper {
     width: ${breakpoints.xlarge};
     height: 6rem;
     margin: 0 auto;
@@ -21,6 +23,7 @@ const HeaderBlock = styled.div<{
     justify-content: space-between;
     align-items: center;
     .logged-in {
+      position: relative;
       display: flex;
       align-items: center;
     }
@@ -48,12 +51,16 @@ interface HeaderProps {
   user: CurrentUser | null;
 }
 
+const { useState } = React;
+
 const Header: React.SFC<HeaderProps> = ({
   floating,
   floatingMargin,
   onLoginClick,
   user,
 }) => {
+  const [userMenu, toggleUserMenu] = useToggle(false);
+
   return (
     <>
       <HeaderBlock
@@ -74,7 +81,13 @@ const Header: React.SFC<HeaderProps> = ({
                 >
                   새 글 작성
                 </RoundButton>
-                <HeaderUserIcon user={user} />
+                <HeaderUserIcon user={user} onClick={toggleUserMenu} />
+                <HeaderUserMenu
+                  onClose={toggleUserMenu}
+                  username={user.username}
+                  onLogout={() => {}}
+                  visible={userMenu}
+                />
               </div>
             ) : (
               <RoundButton color="darkGray" onClick={onLoginClick}>

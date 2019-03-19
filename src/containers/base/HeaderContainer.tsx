@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { showAuthModal } from '../../modules/core';
 import { QueryResult, Query } from 'react-apollo';
 import { GET_CURRENT_USER, CurrentUser } from '../../lib/graphql/user';
+import storage from '../../lib/storage';
 
 const { useEffect, useRef, useState, useCallback } = React;
 
@@ -74,12 +75,18 @@ const HeaderContainer: React.SFC<HeaderContainerProps> = ({
   return (
     <Query query={GET_CURRENT_USER}>
       {({ loading, error, data }: QueryResult<{ auth: CurrentUser }>) => {
+        const currentUser = storage.getItem('CURRENT_USER');
         return (
           <Header
             floating={floating}
             floatingMargin={floatingMargin}
             onLoginClick={onLoginClick}
-            user={data ? data.auth : null}
+            user={(() => {
+              if (loading) {
+                return currentUser;
+              }
+              return data ? data.auth : null;
+            })()}
           />
         );
       }}
