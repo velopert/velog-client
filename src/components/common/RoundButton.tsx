@@ -49,8 +49,8 @@ const RoundButtonBlock = styled.button<RoundButtonBlockProps>`
     props.size === 'DEFAULT' &&
     css`
       height: 2rem;
-      padding-left: 1.25rem;
-      padding-right: 1.25rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
       font-size: 1rem;
       border-radius: 1rem;
     `};

@@ -71,3 +71,5 @@ export type AuthResponse = {
  */
 export const emailCodeLogin = (code: string) =>
   apiClient.get<AuthResponse>(`/api/v2/auth/code/${code}`);
+
+export const logout = () => apiClient.post<void>('/api/v2/auth/logout');

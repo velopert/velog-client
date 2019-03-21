@@ -9,6 +9,7 @@ import RegisterPage from './pages/RegisterPage';
 const MainPage = loadable(() => import('./pages/main/MainPage'));
 const PostPage = loadable(() => import('./pages/PostPage'));
 import EmailLoginPage from './pages/EmailLoginPage';
+import WritePage from './pages/WritePage';
 
 interface AppProps {}
 
@@ -21,6 +22,7 @@ const App: React.SFC<AppProps> = props => {
         <Route path="/:mode(trending|recent|following)" component={MainPage} />
         <Route path="/@:username/:urlSlug" component={PostPage} />
         <Route path="/email-login" component={EmailLoginPage} />
+        <Route path="/write" component={WritePage} />
       </Switch>
       <Core />
     </>

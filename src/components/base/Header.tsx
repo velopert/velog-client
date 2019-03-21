@@ -8,6 +8,8 @@ import { CurrentUser } from '../../lib/graphql/user';
 import HeaderUserIcon from './HeaderUserIcon';
 import useToggle from '../../lib/hooks/useToggle';
 import HeaderUserMenu from './HeaderUserMenu';
+import { logout } from '../../lib/api/auth';
+import storage from '../../lib/storage';
 
 const HeaderBlock = styled.div<{
   floating: boolean;
@@ -51,7 +53,7 @@ interface HeaderProps {
   user: CurrentUser | null;
 }
 
-const { useState } = React;
+const { useState, useCallback } = React;
 
 const Header: React.SFC<HeaderProps> = ({
   floating,
@@ -61,6 +63,13 @@ const Header: React.SFC<HeaderProps> = ({
 }) => {
   const [userMenu, toggleUserMenu] = useToggle(false);
 
+  const onLogout = useCallback(async () => {
+    try {
+      await logout();
+    } catch {}
+    storage.removeItem('CURRENT_USER');
+    window.location.href = '/';
+  }, []);
   return (
     <>
       <HeaderBlock
@@ -77,7 +86,8 @@ const Header: React.SFC<HeaderProps> = ({
                 <RoundButton
                   border
                   color="darkGray"
-                  style={{ marginRight: '1.5rem' }}
+                  style={{ marginRight: '1.25rem' }}
+                  to="/write"
                 >
                   새 글 작성
                 </RoundButton>
@@ -85,7 +95,7 @@ const Header: React.SFC<HeaderProps> = ({
                 <HeaderUserMenu
                   onClose={toggleUserMenu}
                   username={user.username}
-                  onLogout={() => {}}
+                  onLogout={onLogout}
                   visible={userMenu}
                 />
               </div>

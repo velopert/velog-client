@@ -6,7 +6,7 @@ import { MdTrendingUp, MdAccessTime, MdRssFeed } from 'react-icons/md';
 
 const MainSideMenuBlock = styled.div`
   position: sticky;
-  top: 64px;
+  top: 96px;
   display: flex;
   flex-direction: column;
 `;

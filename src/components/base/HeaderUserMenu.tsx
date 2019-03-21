@@ -9,6 +9,7 @@ const HeaderUserMenuBlock = styled.div`
   margin-top: 1rem;
   right: 0;
   > .menu-wrapper {
+    width: 12rem;
     background: white;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
   }

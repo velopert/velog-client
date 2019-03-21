@@ -17,3 +17,7 @@ code {
 input, button {
   font-family: inherit;
 }
+
+html, body, #root {
+  height: 100%;
+}
