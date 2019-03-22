@@ -727,6 +727,13 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
+"@babel/runtime@^7.1.2":
+  version "7.4.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.2.tgz#f5ab6897320f16decd855eed70b705908a313fe8"
+  integrity sha512-7Bl2rALb7HpvXFL7TETNzKSAeBVCPHELzc0C//9FCxN8nsiueWSJBqaF+2oIJScyILStASR/Cx5WMkXGYTiJFA==
+  dependencies:
+    regenerator-runtime "^0.13.2"
+
 "@babel/template@^7.1.0", "@babel/template@^7.1.2", "@babel/template@^7.2.2":
   version "7.2.2"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.2.2.tgz#005b3fdf0ed96e88041330379e0da9a708eb2907"
@@ -1187,6 +1194,13 @@
   integrity sha512-TZVfpT6nvUv/lbho/nRtckEtgkhspOQr3qxrnpXixwgQRKKyg5PvDfNKc8Uend/p/Pi70614VCmC0NPAKWF+0g==
   dependencies:
     "@types/history" "*"
+    "@types/react" "*"
+
+"@types/react-textarea-autosize@^4.3.3":
+  version "4.3.3"
+  resolved "https://registry.yarnpkg.com/@types/react-textarea-autosize/-/react-textarea-autosize-4.3.3.tgz#85f542a4c582836d01b9751b3948dfad1642f0cb"
+  integrity sha512-fl0yK995xJg31Y/7EkR0rkg9hbIqX6mas7e/DZdMr0mb+CDZ6gwdYXor6XjWJqGW3MRsuKY9HbqHne9ZWQqNVg==
+  dependencies:
     "@types/react" "*"
 
 "@types/react@*", "@types/react@16.8.2":
@@ -8871,11 +8885,6 @@ quill-delta@^4.0.1:
     extend "^3.0.2"
     fast-diff "1.2.0"
 
-quill-markdown-shortcuts@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/quill-markdown-shortcuts/-/quill-markdown-shortcuts-0.0.6.tgz#4b4fb548e4ac058032877295add148c41d03eb7f"
-  integrity sha512-mBgb5fTvUqiZ9zHn9gKLHNQnj3E+BeHKqNte59QpaioAEFiN9DEW3SW1eXO8P+Zgf+4okMk2Z2oNR/OdD5BXqw==
-
 quill@^1.3.6:
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/quill/-/quill-1.3.6.tgz#99f4de1fee85925a0d7d4163b6d8328f23317a4d"
@@ -9083,6 +9092,14 @@ react-testing-library@^5.9.0:
     "@babel/runtime" "^7.3.1"
     dom-testing-library "^3.13.1"
 
+react-textarea-autosize@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/react-textarea-autosize/-/react-textarea-autosize-7.1.0.tgz#3132cb77e65d94417558d37c0bfe415a5afd3445"
+  integrity sha512-c2FlR/fP0qbxmlrW96SdrbgP/v0XZMTupqB90zybvmDVDutytUgPl7beU35klwcTeMepUIQEpQUn3P3bdshGPg==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+    prop-types "^15.6.0"
+
 react@^16.8.2:
   version "16.8.2"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.2.tgz#83064596feaa98d9c2857c4deae1848b542c9c0c"
@@ -9241,6 +9258,11 @@ regenerator-runtime@^0.12.0:
   version "0.12.1"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.12.1.tgz#fa1a71544764c036f8c49b13a08b2594c9f8a0de"
   integrity sha512-odxIc1/vDlo4iZcfXqRYFj0vpXFNoGdKMAUieAlFYO6m/nl5e9KR/beGf41z4a1FI+aQgtjhuaSlDxQ0hmkrHg==
+
+regenerator-runtime@^0.13.2:
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.2.tgz#32e59c9a6fb9b1a4aff09b4930ca2d4477343447"
+  integrity sha512-S/TQAZJO+D3m9xeN1WTI8dLKBBiRgXBlTJvbWjCThHWZj9EvHK70Ff50/tYj2J/fvBY6JtFVwRuazHN2E7M9BA==
 
 regenerator-transform@^0.13.3:
   version "0.13.3"

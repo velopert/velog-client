@@ -479,9 +479,6 @@ module.exports = function(webpackEnv) {
       ],
     },
     plugins: [
-      new webpack.ProvidePlugin({
-        Quill: 'quill',
-      }),
       new LoadablePlugin(),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
