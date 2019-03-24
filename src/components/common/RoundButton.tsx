@@ -46,6 +46,15 @@ const RoundButtonBlock = styled.button<RoundButtonBlockProps>`
     `}
 
   ${props =>
+    props.size === 'SMALL' &&
+    css`
+      height: 1.5rem;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+      font-size: 0.875rem;
+      border-radius: 0.75rem;
+    `};
+  ${props =>
     props.size === 'DEFAULT' &&
     css`
       height: 2rem;
@@ -133,7 +142,7 @@ const RoundButton: React.SFC<RoundButtonProps> = ({
     );
   }
   return (
-    <RoundButtonBlock color={color} size={size} {...rest} border={border} />
+    <RoundButtonBlock color={color} size={size} border={border} {...rest} />
   );
 };
 

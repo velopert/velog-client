@@ -16,7 +16,7 @@ code {
     monospace;
 }
 
-input, button {
+input, button, textarea {
   font-family: inherit;
 }
 
