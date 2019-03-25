@@ -6,27 +6,29 @@ import {
   MdFormatUnderlined,
   MdFormatStrikethrough,
   MdInsertLink,
+  MdFormatQuote,
+  MdImage,
+  MdCode,
 } from 'react-icons/md';
 import palette from '../../lib/styles/palette';
 
 const ToolbarBlock = styled.div<{ visible: boolean }>`
-  padding-top: 1.5rem;
-
   width: 100%;
-  height: 2.5rem;
+  position: sticky;
+  top: 0;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+  position: sticky;
+  width: 100%;
+  background: white;
 
   ${props =>
     !props.visible &&
     css`
       visibility: hidden;
     `}
-
-  .wrapper {
-    display: flex;
-    align-items: center;
-    padding-bottom: 4.5rem;
-    position: sticky;
-  }
 `;
 
 const TooblarGroup = styled.div`
@@ -43,12 +45,12 @@ const Heading = styled.div`
   }
 `;
 const ToolbarItem = styled.button`
-  width: 2.5rem;
+  width: 3rem;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   color: ${palette.gray6};
   cursor: pointer;
   &:hover {
@@ -79,51 +81,58 @@ interface ToolbarProps {
 const Toolbar: React.SFC<ToolbarProps> = ({ visible }) => {
   return (
     <ToolbarBlock visible={visible} id="toolbar">
-      <div className="wrapper">
-        <TooblarGroup>
-          <ToolbarItem className="ql-header" value={1}>
-            <Heading>
-              H<span>1</span>
-            </Heading>
-          </ToolbarItem>
-          <ToolbarItem className="ql-header" value={2}>
-            <Heading>
-              H<span>2</span>
-            </Heading>
-          </ToolbarItem>
-          <ToolbarItem className="ql-header" value={3}>
-            <Heading>
-              H<span>3</span>
-            </Heading>
-          </ToolbarItem>
-          <ToolbarItem className="ql-header" value={4}>
-            <Heading>
-              H<span>4</span>
-            </Heading>
-          </ToolbarItem>
-        </TooblarGroup>
-        <Separator />
-        <TooblarGroup>
-          <ToolbarItem className="ql-bold">
-            <MdFormatBold />
-          </ToolbarItem>
-          <ToolbarItem className="ql-italic">
-            <MdFormatItalic />
-          </ToolbarItem>
-          <ToolbarItem className="ql-underline">
-            <MdFormatUnderlined />
-          </ToolbarItem>
-          <ToolbarItem className="ql-strike">
-            <MdFormatStrikethrough />
-          </ToolbarItem>
-        </TooblarGroup>
-        <Separator />
-        <TooblarGroup>
-          <ToolbarItem className="ql-link">
-            <MdInsertLink />
-          </ToolbarItem>
-        </TooblarGroup>
-      </div>
+      <TooblarGroup>
+        <ToolbarItem className="ql-header" value={1}>
+          <Heading>
+            H<span>1</span>
+          </Heading>
+        </ToolbarItem>
+        <ToolbarItem className="ql-header" value={2}>
+          <Heading>
+            H<span>2</span>
+          </Heading>
+        </ToolbarItem>
+        <ToolbarItem className="ql-header" value={3}>
+          <Heading>
+            H<span>3</span>
+          </Heading>
+        </ToolbarItem>
+        <ToolbarItem className="ql-header" value={4}>
+          <Heading>
+            H<span>4</span>
+          </Heading>
+        </ToolbarItem>
+      </TooblarGroup>
+      <Separator />
+      <TooblarGroup>
+        <ToolbarItem className="ql-bold">
+          <MdFormatBold />
+        </ToolbarItem>
+        <ToolbarItem className="ql-italic">
+          <MdFormatItalic />
+        </ToolbarItem>
+        <ToolbarItem className="ql-underline">
+          <MdFormatUnderlined />
+        </ToolbarItem>
+        <ToolbarItem className="ql-strike">
+          <MdFormatStrikethrough />
+        </ToolbarItem>
+      </TooblarGroup>
+      <Separator />
+      <TooblarGroup>
+        <ToolbarItem className="ql-blockquote">
+          <MdFormatQuote />
+        </ToolbarItem>
+        <ToolbarItem className="ql-link">
+          <MdInsertLink />
+        </ToolbarItem>
+        <ToolbarItem className="ql-image">
+          <MdImage />
+        </ToolbarItem>
+        <ToolbarItem className="ql-code-block">
+          <MdCode />
+        </ToolbarItem>
+      </TooblarGroup>
     </ToolbarBlock>
   );
 };

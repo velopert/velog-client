@@ -479,6 +479,10 @@ module.exports = function(webpackEnv) {
       ],
     },
     plugins: [
+      new webpack.ProvidePlugin({
+        hljs: 'highlight.js',
+        'window.hljs': 'highlight.js',
+      }),
       new LoadablePlugin(),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(

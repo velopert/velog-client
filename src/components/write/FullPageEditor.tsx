@@ -1,12 +1,17 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import hljs from 'highlight.js';
 import Quill from 'quill';
+import 'highlight.js/styles/atom-one-dark.css';
 import 'quill/dist/quill.snow.css';
 import MarkdownShortcuts from '../../lib/quill/markdownShortcuts';
 import TextareaAutosize from 'react-textarea-autosize';
 import palette from '../../lib/styles/palette';
 import Toolbar from './Toolbar';
 import AddLink from './AddLink';
+import postStyles from '../../lib/styles/postStyles';
+
+console.log((window as any).hljs);
 
 Quill.register('modules/markdownShortcuts', MarkdownShortcuts);
 
@@ -22,6 +27,7 @@ export interface FullPageEditorState {
 }
 
 const FullPageEditorWrapper = styled.div`
+  padding-top: 1.5rem;
   position: relative;
   /* display: flex;
   flex-direction: column;
@@ -67,9 +73,12 @@ const Editor = styled.div`
     .ql-syntax {
       background: ${palette.gray9};
       color: white;
-      font-size: 1rem;
+      font-size: 1.125rem;
       padding: 1rem;
+      font-family: 'Fira Mono', monospace;
     }
+
+    ${postStyles}
   }
   .ql-editor.ql-blank::before {
     left: 0px;
@@ -95,6 +104,14 @@ export default class FullPageEditor extends React.Component<
     },
   };
   componentDidMount() {
+    // setup highlight.js
+    if (!(window as any).HLJS_CONFIGURED) {
+      (window as any).HLJS_CONFIGURED = true;
+      hljs.configure({
+        languages: ['javascript', 'python'],
+      });
+    }
+
     // set focus to title
     if (this.titleTextarea) {
       this.titleTextarea.focus();
@@ -125,6 +142,7 @@ export default class FullPageEditor extends React.Component<
             },
           },
         },
+        syntax: true,
       },
       placeholder: '당신의 이야기를 적어보세요...',
     });
