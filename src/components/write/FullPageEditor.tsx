@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import hljs from 'highlight.js';
-import Quill from 'quill';
+import Quill, { RangeStatic } from 'quill';
 import 'highlight.js/styles/atom-one-dark.css';
 import 'quill/dist/quill.snow.css';
 import MarkdownShortcuts from '../../lib/quill/markdownShortcuts';
@@ -76,6 +76,7 @@ const Editor = styled.div`
       font-size: 1.125rem;
       padding: 1rem;
       font-family: 'Fira Mono', monospace;
+      border-radius: 8px;
     }
 
     ${postStyles}
@@ -116,8 +117,32 @@ export default class FullPageEditor extends React.Component<
     if (this.titleTextarea) {
       this.titleTextarea.focus();
     }
+
+    // // keyboard bindings
+    // const bindings = {
+    //   autoindent: {
+    //     key: 'enter',
+    //     handler: (range: RangeStatic, context: any) => {
+    //       console.log(range);
+    //       const lastNewLineIndex = quill
+    //         .getText()
+    //         .lastIndexOf('\n', range.index - 1);
+
+    //       const lastLine = quill.getText(
+    //         lastNewLineIndex + 1,
+    //         range.index - lastNewLineIndex,
+    //       );
+    //       console.log(lastLine);
+    //       // quill.insertText(range.index, '\n');
+    //     },
+    //   },
+    // };
+
     const quill = new Quill(this.editor.current as Element, {
       modules: {
+        keyboard: {
+          // bindings,
+        },
         markdownShortcuts: {},
         toolbar: {
           container: '#toolbar',
@@ -133,12 +158,6 @@ export default class FullPageEditor extends React.Component<
                   top: bounds.top + bounds.height,
                 },
               });
-              // if (value) {
-              //   var href = prompt('링크를 입력하세요.');
-              //   quill.format('link', href);
-              // } else {
-              //   quill.format('link', false);
-              // }
             },
           },
         },
@@ -162,6 +181,42 @@ export default class FullPageEditor extends React.Component<
         this.setState({
           editorFocus: true,
         });
+      }
+    });
+    const getIndent = (text: string) => text.length - text.trimLeft().length;
+
+    const onEnter = () => {
+      // handle keep-indent
+      const text = quill.getText();
+      const selection = quill.getSelection();
+      if (!selection) return;
+      console.log(selection);
+      const lastLineBreakIndex = text.lastIndexOf('\n', selection.index - 1);
+      const lastLine = text.substr(
+        lastLineBreakIndex + 1,
+        selection.index - lastLineBreakIndex,
+      );
+      const format = quill.getFormat(
+        lastLineBreakIndex + 1,
+        selection.index - lastLineBreakIndex,
+      );
+      if (format['code-block']) {
+        const indentation = getIndent(lastLine);
+        if (indentation === 0) return;
+        const spaces = ' '.repeat(indentation);
+        quill.insertText(selection.index + 1, spaces);
+        setTimeout(() => {
+          quill.setSelection(selection.index + 1 + indentation, 0);
+        });
+        // TODO: empty newline causes weird behavior
+      }
+    };
+    quill.on('text-change', (delta, oldContents, source) => {
+      const lastOps = delta.ops[delta.ops.length - 1];
+      if (lastOps) {
+        if (lastOps.insert === '\n') {
+          onEnter();
+        }
       }
     });
   }
