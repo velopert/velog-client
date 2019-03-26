@@ -203,12 +203,15 @@ export default class FullPageEditor extends React.Component<
       if (format['code-block']) {
         const indentation = getIndent(lastLine);
         if (indentation === 0) return;
+        const isEmpty = lastLine.trimLeft().length === 0;
         const spaces = ' '.repeat(indentation);
         quill.insertText(selection.index + 1, spaces);
         setTimeout(() => {
-          quill.setSelection(selection.index + 1 + indentation, 0);
+          quill.setSelection(
+            selection.index + (isEmpty ? 0 : 1) + indentation,
+            0,
+          );
         });
-        // TODO: empty newline causes weird behavior
       }
     };
     quill.on('text-change', (delta, oldContents, source) => {
