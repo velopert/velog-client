@@ -22,6 +22,7 @@ export interface FullPageEditorState {
     left: number;
     top: number;
   };
+  addLinkDefaultValue: string;
 }
 
 const FullPageEditorWrapper = styled.div`
@@ -66,7 +67,11 @@ const Editor = styled.div`
     padding: 0;
     font-size: 1.3125rem;
     font-family: inherit;
-    line-height: 1.875;
+    &:not(.ql-blank) {
+      p {
+        line-height: 1.875;
+      }
+    }
     color: ${palette.gray9};
     .ql-syntax {
       margin-top: 2rem;
@@ -80,6 +85,37 @@ const Editor = styled.div`
       overflow-x: auto;
     }
 
+    ul,
+    ol {
+      padding-left: 0;
+      li + li {
+        margin-top: 1rem;
+      }
+      .ql-indent-1 {
+        padding-left: 3em !important;
+      }
+      .ql-indent-2 {
+        padding-left: 4.5em !important;
+      }
+      .ql-indent-3 {
+        padding-left: 6em !important;
+      }
+      .ql-indent-4 {
+        padding-left: 7.5em !important;
+      }
+      .ql-indent-5 {
+        padding-left: 9em !important;
+      }
+      .ql-indent-6 {
+        padding-left: 10.5em !important;
+      }
+      .ql-indent-7 {
+        padding-left: 12em !important;
+      }
+      .ql-indent-8 {
+        padding-left: 13.5em !important;
+      }
+    }
     ${postStyles}
   }
   .ql-editor.ql-blank::before {
@@ -104,6 +140,7 @@ export default class FullPageEditor extends React.Component<
       top: 0,
       left: 0,
     },
+    addLinkDefaultValue: '',
   };
   componentDidMount() {
     // setup highlight.js
@@ -147,6 +184,19 @@ export default class FullPageEditor extends React.Component<
     };
 
     const quill = new Quill(this.editor.current as Element, {
+      formats: [
+        'bold',
+        'header',
+        'italic',
+        'link',
+        'list',
+        'blockquote',
+        'image',
+        'indent',
+        'underline',
+        'strike',
+        'code-block',
+      ],
       modules: {
         keyboard: {
           bindings,
@@ -159,18 +209,24 @@ export default class FullPageEditor extends React.Component<
               const range = quill.getSelection();
               if (!range) return;
               const bounds = quill.getBounds(range.index);
+              const format = quill.getFormat();
+              const defaultValue = format.link || '';
               this.setState({
                 addLink: true,
                 addLinkPosition: {
                   left: bounds.left,
                   top: bounds.top + bounds.height,
                 },
+                addLinkDefaultValue: defaultValue,
               });
             },
           },
         },
         syntax: {
           interval: 200,
+        },
+        clipboard: {
+          matchVisual: false, // https://quilljs.com/docs/modules/clipboard/#matchvisual
         },
       },
       placeholder: '당신의 이야기를 적어보세요...',
@@ -280,12 +336,23 @@ export default class FullPageEditor extends React.Component<
     });
   };
 
+  handleDeleteLink = () => {
+    if (!this.quill) return;
+    this.quill.format('link', false);
+    this.setState({ addLink: false });
+  };
+
   handleCancelAddLink = () => {
     this.setState({ addLink: false });
   };
 
   public render() {
-    const { addLink, addLinkPosition, titleFocus } = this.state;
+    const {
+      addLink,
+      addLinkPosition,
+      titleFocus,
+      addLinkDefaultValue,
+    } = this.state;
     return (
       <FullPageEditorWrapper>
         <Toolbar visible={!titleFocus} />
@@ -303,8 +370,10 @@ export default class FullPageEditor extends React.Component<
           {addLink && (
             <AddLink
               {...addLinkPosition}
+              defaultValue={addLinkDefaultValue}
               onConfirm={this.handleAddLink}
               onClose={this.handleCancelAddLink}
+              onDelete={this.handleDeleteLink}
             />
           )}
         </Editor>
