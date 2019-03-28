@@ -11,8 +11,6 @@ import Toolbar from './Toolbar';
 import AddLink from './AddLink';
 import postStyles from '../../lib/styles/postStyles';
 
-console.log((window as any).hljs);
-
 Quill.register('modules/markdownShortcuts', MarkdownShortcuts);
 
 export interface FullPageEditorProps {}
@@ -71,12 +69,15 @@ const Editor = styled.div`
     line-height: 1.875;
     color: ${palette.gray9};
     .ql-syntax {
-      background: ${palette.gray9};
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      background: ${palette.gray8};
       color: white;
-      font-size: 1.125rem;
+      font-size: 1rem;
       padding: 1rem;
       font-family: 'Fira Mono', monospace;
       border-radius: 8px;
+      overflow-x: auto;
     }
 
     ${postStyles}
@@ -118,30 +119,37 @@ export default class FullPageEditor extends React.Component<
       this.titleTextarea.focus();
     }
 
-    // // keyboard bindings
-    // const bindings = {
-    //   autoindent: {
-    //     key: 'enter',
-    //     handler: (range: RangeStatic, context: any) => {
-    //       console.log(range);
-    //       const lastNewLineIndex = quill
-    //         .getText()
-    //         .lastIndexOf('\n', range.index - 1);
-
-    //       const lastLine = quill.getText(
-    //         lastNewLineIndex + 1,
-    //         range.index - lastNewLineIndex,
-    //       );
-    //       console.log(lastLine);
-    //       // quill.insertText(range.index, '\n');
-    //     },
-    //   },
-    // };
+    // keyboard bindings
+    const bindings = {
+      // autoindent: {
+      //   key: 'enter',
+      //   handler: (range: RangeStatic, context: any) => {
+      //     console.log(range);
+      //     const lastNewLineIndex = quill
+      //       .getText()
+      //       .lastIndexOf('\n', range.index - 1);
+      //     const lastLine = quill.getText(
+      //       lastNewLineIndex + 1,
+      //       range.index - lastNewLineIndex,
+      //     );
+      //     console.log(lastLine);
+      //     // quill.insertText(range.index, '\n');
+      //   },
+      // },
+      removeCodeBlock: {
+        key: 'backspace',
+        empty: true,
+        format: ['code-block'],
+        handler: (range: RangeStatic, context: any) => {
+          quill.format('code-block', false);
+        },
+      },
+    };
 
     const quill = new Quill(this.editor.current as Element, {
       modules: {
         keyboard: {
-          // bindings,
+          bindings,
         },
         markdownShortcuts: {},
         toolbar: {
@@ -161,7 +169,9 @@ export default class FullPageEditor extends React.Component<
             },
           },
         },
-        syntax: true,
+        syntax: {
+          interval: 200,
+        },
       },
       placeholder: '당신의 이야기를 적어보세요...',
     });
@@ -190,27 +200,34 @@ export default class FullPageEditor extends React.Component<
       const text = quill.getText();
       const selection = quill.getSelection();
       if (!selection) return;
-      console.log(selection);
       const lastLineBreakIndex = text.lastIndexOf('\n', selection.index - 1);
       const lastLine = text.substr(
         lastLineBreakIndex + 1,
-        selection.index - lastLineBreakIndex,
+        selection.index - lastLineBreakIndex - 1,
       );
       const format = quill.getFormat(
         lastLineBreakIndex + 1,
-        selection.index - lastLineBreakIndex,
+        selection.index - lastLineBreakIndex - 1,
       );
+
+      // indent
       if (format['code-block']) {
-        const indentation = getIndent(lastLine);
+        console.log(`"${lastLine}"`);
+        let indentation = getIndent(lastLine);
+        console.log(indentation);
+        const shouldExtraIndent = (() => {
+          return /\)\:$/.test(lastLine) || /\)? ?{$/.test(lastLine);
+        })();
+        if (shouldExtraIndent) {
+          indentation += 2;
+        }
         if (indentation === 0) return;
-        const isEmpty = lastLine.trimLeft().length === 0;
         const spaces = ' '.repeat(indentation);
+        if (lastLine === '\n') return;
+        console.log(lastLine);
         quill.insertText(selection.index + 1, spaces);
         setTimeout(() => {
-          quill.setSelection(
-            selection.index + (isEmpty ? 0 : 1) + indentation,
-            0,
-          );
+          quill.setSelection(selection.index + 1 + indentation, 0);
         });
       }
     };
@@ -222,6 +239,15 @@ export default class FullPageEditor extends React.Component<
         }
       }
     });
+
+    // quill.keyboard.addBinding(
+    //   { key: 'backspace' },
+
+    //   (range, context) => {
+    //     console.log(range);
+    //     quill.deleteText(range.index - 1, 1);
+    //   },
+    // );
   }
 
   handleTitleFocus = () => {
