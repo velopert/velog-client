@@ -10,6 +10,7 @@ import palette from '../../lib/styles/palette';
 import Toolbar from './Toolbar';
 import AddLink from './AddLink';
 import postStyles from '../../lib/styles/postStyles';
+import TitleTextarea from './TitleTextarea';
 
 Quill.register('modules/markdownShortcuts', MarkdownShortcuts);
 
@@ -40,21 +41,6 @@ const FullPageEditorWrapper = styled.div`
 
   width: 768px;
   margin: 0 auto;
-`;
-
-const TitleTextarea = styled(TextareaAutosize)`
-  padding: 0;
-  font-size: 2.5rem;
-  width: 100%;
-  resize: none;
-  line-height: 1.5;
-  outline: none;
-  border: none;
-  font-weight: bold;
-  color: ${palette.gray9};
-  &::placeholder {
-    color: ${palette.gray5};
-  }
 `;
 
 const Editor = styled.div`

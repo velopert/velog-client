@@ -10,6 +10,7 @@ import {
   MdImage,
   MdCode,
 } from 'react-icons/md';
+import { FaMarkdown } from 'react-icons/fa';
 import palette from '../../lib/styles/palette';
 import zIndexes from '../../lib/styles/zIndexes';
 import { getScrollTop } from '../../lib/utils';
