@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MarkdownEditor matches snapshot 1`] = `
+<div>
+  <div
+    class="sc-bwzfXH erJALV"
+  >
+    <div
+      class="wrapper"
+    >
+      <textarea
+        class="sc-bdVaJa cuPLSE"
+        placeholder="제목을 입력하세요"
+        style="height: 0px;"
+      />
+    </div>
+  </div>
+</div>
+`;

@@ -11,6 +11,7 @@ import Toolbar from './Toolbar';
 import AddLink from './AddLink';
 import postStyles from '../../lib/styles/postStyles';
 import TitleTextarea from './TitleTextarea';
+import { getScrollTop } from '../../lib/utils';
 
 Quill.register('modules/markdownShortcuts', MarkdownShortcuts);
 
@@ -24,6 +25,7 @@ export interface FullPageEditorState {
     top: number;
   };
   addLinkDefaultValue: string;
+  shadow: boolean;
 }
 
 const FullPageEditorWrapper = styled.div`
@@ -127,8 +129,24 @@ export default class FullPageEditor extends React.Component<
       left: 0,
     },
     addLinkDefaultValue: '',
+    shadow: false,
   };
+
+  handleScroll = () => {
+    const { shadow } = this.state;
+    const top = getScrollTop();
+    const nextShadow = top > 80;
+    if (nextShadow !== shadow) {
+      this.setState({
+        shadow: nextShadow,
+      });
+    }
+  };
+
   componentDidMount() {
+    // bind scroll event
+    document.addEventListener('scroll', this.handleScroll);
+
     // setup highlight.js
     if (!(window as any).HLJS_CONFIGURED) {
       (window as any).HLJS_CONFIGURED = true;
@@ -292,6 +310,10 @@ export default class FullPageEditor extends React.Component<
     // );
   }
 
+  componentWillUnmount() {
+    document.removeEventListener('scroll', this.handleScroll);
+  }
+
   handleTitleFocus = () => {
     this.setState({
       titleFocus: true,
@@ -338,10 +360,11 @@ export default class FullPageEditor extends React.Component<
       addLinkPosition,
       titleFocus,
       addLinkDefaultValue,
+      shadow,
     } = this.state;
     return (
       <FullPageEditorWrapper>
-        <Toolbar visible={!titleFocus} />
+        <Toolbar visible={!titleFocus} shadow={shadow} mode="WYSIWYG" />
         <TitleTextarea
           placeholder="제목을 입력하세요"
           onKeyDown={this.handleTitleKeyDown}

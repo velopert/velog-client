@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import FullPageEditor from '../components/write/FullPageEditor';
 import EditorPanes from '../components/write/EditorPanes';
+import MarkdownEditor from '../components/write/MarkdownEditor';
 
 const WritePageBlock = styled.div`
   width: 100%;
@@ -14,7 +15,7 @@ const WritePage: React.SFC<WritePageProps> = props => {
   return (
     <WritePageBlock>
       {/* <FullPageEditor /> */}
-      <EditorPanes left="hello" right="bye" />
+      <EditorPanes left={<MarkdownEditor />} right="bye" />
     </WritePageBlock>
   );
 };

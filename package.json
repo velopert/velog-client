@@ -42,6 +42,7 @@
     "babel-plugin-named-asset-import": "^0.3.1",
     "babel-preset-react-app": "^7.0.1",
     "bfj": "6.1.1",
+    "browser-env": "^3.2.6",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "codemirror": "^5.45.0",
     "css-loader": "1.0.0",

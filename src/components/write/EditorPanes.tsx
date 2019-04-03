@@ -7,7 +7,10 @@ const EditorPanesBlock = styled.div`
   height: 100%;
   display: flex;
 `;
-const EditorPane = styled.div``;
+const EditorPane = styled.div`
+  min-width: 0;
+  flex: 1;
+`;
 
 export interface EditorPanesProps {
   theme?: 'LIGHT' | 'DARK';
@@ -26,7 +29,6 @@ const EditorPanes: React.SFC<EditorPanesProps> = ({
         data-testid="left"
         style={{
           backgroundColor: theme === 'DARK' ? '#263238' : 'white',
-          flex: 1,
         }}
       >
         {left}
@@ -35,7 +37,6 @@ const EditorPanes: React.SFC<EditorPanesProps> = ({
         data-testid="right"
         style={{
           backgroundColor: theme === 'DARK' ? 'white' : palette.gray0,
-          flex: 1,
         }}
       >
         {right}
