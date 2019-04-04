@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import 'codemirror/lib/codemirror.css';
 // import 'codemirror/theme/dracula.css';
-import CodeMirror from 'codemirror';
+import CodeMirror, { EditorFromTextArea } from 'codemirror';
 import TitleTextarea from './TitleTextarea';
 require('codemirror/mode/markdown/markdown');
 require('codemirror/mode/javascript/javascript');
@@ -72,16 +72,18 @@ export default class MarkdownEditor extends React.Component<
   state = {
     shadow: false,
   };
+  codemirror: EditorFromTextArea | null = null;
 
   initialize = () => {
     if (!this.editorElement.current) return;
-    CodeMirror.fromTextArea(this.editorElement.current, {
+    this.codemirror = CodeMirror.fromTextArea(this.editorElement.current, {
       mode: 'markdown',
       theme: 'one-light',
       placeholder: '당신의 이야기를 적어보세요...',
       viewportMargin: Infinity,
       lineWrapping: true,
     });
+    (window as any).codemirror = this.codemirror;
   };
 
   handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
@@ -100,6 +102,59 @@ export default class MarkdownEditor extends React.Component<
     }
   }
 
+  handleToolbarClick = (mode: string) => {
+    const codemirror = this.codemirror;
+
+    if (!codemirror) return;
+    const doc = codemirror.getDoc();
+
+    const cursor = doc.getCursor();
+    const line = doc.getLine(cursor.line);
+
+    const selectWholeLine = () => {
+      doc.setSelection(
+        {
+          line: cursor.line,
+          ch: 0,
+        },
+        {
+          line: cursor.line,
+          ch: line.length,
+        },
+      );
+    };
+
+    const removeHeading = (text: string) => {
+      return text.replace(/#{1,6} /, '');
+    };
+
+    const handlers: {
+      [key: string]: Function;
+    } = {
+      ...[1, 2, 3, 4] // creates handlers for heading1, heading2, heading3, heading4
+        .map(number => () => {
+          // create handler function
+          const characters = '#'.repeat(number);
+          const plain = removeHeading(line);
+          selectWholeLine();
+          doc.replaceSelection(`${characters} ${plain}`);
+        })
+        .reduce((headingHandlers, handler, index) => {
+          // reduce into handlers object
+          return Object.assign(headingHandlers, {
+            [`heading${index + 1}`]: handler,
+          });
+        }, {}),
+      bold: () => {},
+    };
+
+    const handler = handlers[mode];
+    if (!handler) return;
+
+    handler();
+    codemirror.focus();
+  };
+
   public render() {
     const { shadow } = this.state;
     return (
@@ -108,7 +163,12 @@ export default class MarkdownEditor extends React.Component<
           <PaddingWrapper>
             <TitleTextarea placeholder="제목을 입력하세요" />
           </PaddingWrapper>
-          <Toolbar visible shadow={shadow} mode="MARKDOWN" />
+          <Toolbar
+            visible
+            shadow={shadow}
+            mode="MARKDOWN"
+            onClick={this.handleToolbarClick}
+          />
           <PaddingWrapper>
             <textarea id="bla" ref={this.editorElement} />
           </PaddingWrapper>

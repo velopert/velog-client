@@ -94,7 +94,7 @@ const Separator = styled.div`
   margin-right: 0.5rem;
   background: ${palette.gray4};
 `;
-interface ToolbarProps {
+export interface ToolbarProps {
   visible: boolean;
   shadow: boolean;
   mode: 'MARKDOWN' | 'WYSIWYG';
