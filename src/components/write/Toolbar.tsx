@@ -48,6 +48,7 @@ const ToolbarBlock = styled.div<{
       margin-bottom: 1rem;
       padding-left: 3rem;
       padding-right: 3rem;
+      width: auto;
     `}
 `;
 
