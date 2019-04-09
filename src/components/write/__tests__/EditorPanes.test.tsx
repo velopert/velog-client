@@ -33,7 +33,7 @@ describe('EditorPanes', () => {
     it('LIGHT theme', () => {
       const utils = setup({ theme: 'LIGHT' });
       expect(utils.left.style.backgroundColor).toBe('white');
-      expect(utils.right.style.backgroundColor).toBe('rgb(248, 249, 250)');
+      expect(utils.right.style.backgroundColor).toBe('rgb(251, 253, 252)');
     });
   });
   it('shows left and right node', () => {

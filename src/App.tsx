@@ -3,11 +3,11 @@ import { Route, Switch } from 'react-router';
 import loadable from '@loadable/component';
 import Core from './containers/base/Core';
 import RegisterPage from './pages/RegisterPage';
-import EmailLoginPage from './pages/EmailLoginPage';
-import WritePage from './pages/WritePage';
 
 const MainPage = loadable(() => import('./pages/main/MainPage'));
 const PostPage = loadable(() => import('./pages/PostPage'));
+const EmailLoginPage = loadable(() => import('./pages/EmailLoginPage'));
+const WritePage = loadable(() => import('./pages/WritePage'));
 
 const App: FC = () => {
   return (

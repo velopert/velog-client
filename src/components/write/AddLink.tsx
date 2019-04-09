@@ -7,7 +7,9 @@ import RoundButton from '../common/RoundButton';
 import { MdDelete } from 'react-icons/md';
 
 const AddLinkBlock = styled.div`
+  z-index: 5;
   position: absolute;
+  margin-bottom: 1rem;
   & > .wrapper {
     margin-top: 1rem;
     width: 20rem;
@@ -47,22 +49,24 @@ const AddLinkBlock = styled.div`
         padding: 0;
       }
     }
-    padding: 1.25rem 1rem;
+    padding: 1.5rem 1rem;
   }
 `;
 
 interface AddLinkProps {
   left: number;
   top: number;
+  stickToRight?: boolean;
   onConfirm: (link: string) => void;
   onClose: () => void;
-  onDelete: () => void;
+  onDelete?: () => void;
   defaultValue: string;
 }
 
 const AddLink: FC<AddLinkProps> = ({
   left,
   top,
+  stickToRight,
   onConfirm,
   onClose,
   onDelete,
@@ -85,8 +89,9 @@ const AddLink: FC<AddLinkProps> = ({
     <OutsideClickHandler onOutsideClick={onClose}>
       <AddLinkBlock
         style={{
-          left,
+          left: stickToRight ? 'initial' : left,
           top,
+          right: stickToRight ? '3rem' : 'initial',
         }}
       >
         <div className="wrapper">
@@ -94,7 +99,6 @@ const AddLink: FC<AddLinkProps> = ({
             <div className="title">링크 {defaultValue ? '수정' : '등록'}</div>
             {defaultValue && <MdDelete onClick={onDelete} />}
           </div>
-
           <form onSubmit={onSubmit}>
             <input
               value={value}
