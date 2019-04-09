@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import styled, { StyledComponent } from 'styled-components';
 import PageTemplate from '../base/PageTemplate';
 import { breakpoints } from '../../lib/styles/responsive';

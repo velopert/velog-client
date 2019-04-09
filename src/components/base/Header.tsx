@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { Logo } from '../../static/svg';
 import Button from '../common/Button';

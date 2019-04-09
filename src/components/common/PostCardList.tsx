@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PostCard from './PostCard';
 import { Post, PartialPost } from '../../lib/graphql/post';

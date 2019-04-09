@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { FacebookIcon, GoogleIcon, GithubIcon } from '../../static/svg';
 import palette from '../../lib/styles/palette';

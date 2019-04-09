@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import hljs from 'highlight.js';
 import Quill, { RangeStatic } from 'quill';

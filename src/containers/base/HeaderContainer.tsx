@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Header from '../../components/base/Header';
 import { getScrollTop } from '../../lib/utils';
 import { RootState } from '../../modules';

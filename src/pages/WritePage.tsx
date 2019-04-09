@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import FullPageEditor from '../components/write/FullPageEditor';
 import EditorPanes from '../components/write/EditorPanes';

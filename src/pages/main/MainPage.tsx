@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import MainTemplate from '../../components/main/MainTemplate';

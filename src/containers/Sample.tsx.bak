@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Post, GET_POST_LIST } from '../lib/graphql/post';
 import { Query, QueryResult } from 'react-apollo';

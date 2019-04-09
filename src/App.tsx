@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router';
 // import MainPage from './pages/main/MainPage';
 // import PostPage from './pages/PostPage';
