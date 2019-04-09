@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import 'codemirror/lib/codemirror.css';
-// import 'codemirror/theme/dracula.css';
 import CodeMirror, { EditorFromTextArea } from 'codemirror';
 import TitleTextarea from './TitleTextarea';
 require('codemirror/mode/markdown/markdown');

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import FullPageEditor from '../components/write/FullPageEditor';
 import EditorPanes from '../components/write/EditorPanes';
 import MarkdownEditor from '../components/write/MarkdownEditor';
 

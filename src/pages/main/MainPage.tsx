@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import styled from 'styled-components';
 import MainTemplate from '../../components/main/MainTemplate';
 import MainSideMenu from '../../components/main/MainSideMenu';
 import MainNoticeWidget from '../../components/main/MainNoticeWidget';

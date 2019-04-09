@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import AuthModal from '../../components/auth/AuthModal';
 import AuthForm from '../../components/auth/AuthForm';
 import {

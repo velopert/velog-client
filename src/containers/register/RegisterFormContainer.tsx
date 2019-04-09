@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import RegisterForm, {
   RegisterFormType,
 } from '../../components/register/RegisterForm';

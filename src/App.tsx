@@ -1,15 +1,13 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
-// import MainPage from './pages/main/MainPage';
-// import PostPage from './pages/PostPage';
-
 import loadable from '@loadable/component';
 import Core from './containers/base/Core';
 import RegisterPage from './pages/RegisterPage';
-const MainPage = loadable(() => import('./pages/main/MainPage'));
-const PostPage = loadable(() => import('./pages/PostPage'));
 import EmailLoginPage from './pages/EmailLoginPage';
 import WritePage from './pages/WritePage';
+
+const MainPage = loadable(() => import('./pages/main/MainPage'));
+const PostPage = loadable(() => import('./pages/PostPage'));
 
 interface AppProps {}
 

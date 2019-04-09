@@ -5,7 +5,6 @@ import Quill, { RangeStatic } from 'quill';
 import 'highlight.js/styles/atom-one-dark.css';
 import 'quill/dist/quill.snow.css';
 import MarkdownShortcuts from '../../lib/quill/markdownShortcuts';
-import TextareaAutosize from 'react-textarea-autosize';
 import palette from '../../lib/styles/palette';
 import Toolbar from './Toolbar';
 import AddLink from './AddLink';

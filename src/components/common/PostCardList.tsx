@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PostCard from './PostCard';
-import { Post, PartialPost } from '../../lib/graphql/post';
+import { PartialPost } from '../../lib/graphql/post';
 
 const PostCardListBlock = styled.div``;
 
