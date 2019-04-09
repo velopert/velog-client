@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, DetailedHTMLProps, ButtonHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { Route } from 'react-router';
@@ -102,8 +102,8 @@ const RoundButtonBlock = styled.button<RoundButtonBlockProps>`
   cursor: pointer;
 `;
 
-type ButtonProps = React.DetailedHTMLProps<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
+type ButtonProps = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 >;
 

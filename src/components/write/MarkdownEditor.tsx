@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, createRef, UIEventHandler } from 'react';
 import styled from 'styled-components';
 import 'codemirror/lib/codemirror.css';
 import CodeMirror, { EditorFromTextArea } from 'codemirror';
@@ -61,12 +61,12 @@ const PaddingWrapper = styled.div`
   padding-left: 3rem;
   padding-right: 3rem;
 `;
-export default class MarkdownEditor extends React.Component<
+export default class MarkdownEditor extends Component<
   MarkdownEditorProps,
   MarkdownEditorState
 > {
-  block = React.createRef<HTMLDivElement>();
-  editorElement = React.createRef<HTMLTextAreaElement>();
+  block = createRef<HTMLDivElement>();
+  editorElement = createRef<HTMLTextAreaElement>();
   toolbarTop = 0;
   state = {
     shadow: false,
@@ -85,7 +85,7 @@ export default class MarkdownEditor extends React.Component<
     (window as any).codemirror = this.codemirror;
   };
 
-  handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+  handleScroll: UIEventHandler<HTMLDivElement> = e => {
     const { shadow } = this.state;
     const nextShadow = e.currentTarget.scrollTop > this.toolbarTop;
     if (shadow !== nextShadow) {

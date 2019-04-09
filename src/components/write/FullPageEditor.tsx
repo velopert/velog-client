@@ -1,4 +1,9 @@
-import React from 'react';
+import React, {
+  Component,
+  createRef,
+  KeyboardEvent,
+  KeyboardEventHandler,
+} from 'react';
 import styled from 'styled-components';
 import hljs from 'highlight.js';
 import Quill, { RangeStatic } from 'quill';
@@ -111,11 +116,11 @@ const Editor = styled.div`
   }
 `;
 
-export default class FullPageEditor extends React.Component<
+export default class FullPageEditor extends Component<
   FullPageEditorProps,
   FullPageEditorState
 > {
-  editor = React.createRef<HTMLDivElement>();
+  editor = createRef<HTMLDivElement>();
   titleTextarea: HTMLTextAreaElement | null = null;
   quill: Quill | null = null;
 
@@ -326,7 +331,7 @@ export default class FullPageEditor extends React.Component<
   };
 
   // blocks [Enter] key
-  handleTitleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  handleTitleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = e => {
     if (e.keyCode === 13) {
       e.preventDefault();
       if (this.quill) {

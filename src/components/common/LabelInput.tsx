@@ -1,4 +1,11 @@
-import React, { FC, useState, useCallback } from 'react';
+import React, {
+  FC,
+  useState,
+  useCallback,
+  DetailedHTMLProps,
+  InputHTMLAttributes,
+  ChangeEventHandler,
+} from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { MdLockOutline } from 'react-icons/md';
@@ -74,8 +81,8 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
   }
 `;
 
-type InputProps = React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
+type InputProps = DetailedHTMLProps<
+  InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 >;
 
@@ -84,7 +91,7 @@ export interface LabelInputProps extends InputProps {
   placeholder?: string;
   name?: string;
   value?: string;
-  onChange?: React.ChangeEventHandler;
+  onChange?: ChangeEventHandler;
 }
 
 const LabelInput: FC<LabelInputProps> = ({

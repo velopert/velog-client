@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, HTMLProps } from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 
@@ -28,7 +28,7 @@ const ButtonBlock = styled.button<{ theme: string }>`
     `}
 `;
 
-interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
+interface ButtonProps extends HTMLProps<HTMLButtonElement> {
   theme?: string;
 }
 

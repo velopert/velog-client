@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { userThumbnail } from '../../static/images';
@@ -71,7 +71,7 @@ interface PostCardProps {
   post: PartialPost;
 }
 
-const PostCard: FC<PostCardProps> = React.memo(({ post }) => {
+const PostCard: FC<PostCardProps> = memo(({ post }) => {
   return (
     <PostCardBlock>
       <div className="user-info">

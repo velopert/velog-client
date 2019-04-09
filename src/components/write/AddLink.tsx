@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useRef, useEffect } from 'react';
+import React, { FC, useCallback, useRef, useEffect, FormEvent } from 'react';
 import styled from 'styled-components';
 import OutsideClickHandler from 'react-outside-click-handler';
 import useInput from '../../lib/hooks/useInput';
@@ -70,7 +70,7 @@ const AddLink: FC<AddLinkProps> = ({
 }) => {
   const [value, onChange] = useInput(defaultValue);
   const onSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
+    (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       onConfirm(value);
     },

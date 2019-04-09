@@ -1,4 +1,4 @@
-import { useReducer, useCallback } from 'react';
+import { useReducer, useCallback, ChangeEventHandler } from 'react';
 
 type DefaultValues = {
   [key: string]: string;
@@ -23,7 +23,7 @@ function reducer<T>(state: T, action: UseInputsAction | null) {
 }
 export default function useInputs<T>(defaultValues: T) {
   const [state, dispatch] = useReducer(reducer, defaultValues);
-  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(e => {
     dispatch({
       name: e.target.name,
       value: e.target.value,

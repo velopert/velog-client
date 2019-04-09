@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 
@@ -47,7 +47,7 @@ const AuthEmailFormBlock = styled.form`
 `;
 
 interface AuthEmailFormProps {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   value: string;
   onSubmit: (value: string) => void;
   mode: 'REGISTER' | 'LOGIN';

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 
@@ -14,8 +14,8 @@ const EditorPane = styled.div`
 
 export interface EditorPanesProps {
   theme?: 'LIGHT' | 'DARK';
-  left?: React.ReactNode;
-  right?: React.ReactNode;
+  left?: ReactNode;
+  right?: ReactNode;
 }
 
 const EditorPanes: FC<EditorPanesProps> = ({

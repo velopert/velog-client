@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, CSSProperties } from 'react';
 import styled from 'styled-components';
 import HeaderContainer from '../../containers/base/HeaderContainer';
 
@@ -6,7 +6,7 @@ const PageTemplateBlock = styled.div``;
 
 interface PageTemplateProps {
   hideHeader?: boolean;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   className?: string;
 }
 

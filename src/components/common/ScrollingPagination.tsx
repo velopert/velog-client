@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { getScrollBottom } from '../../lib/utils';
 
 interface ScrollingPaginationProps {
@@ -8,11 +8,12 @@ interface ScrollingPaginationProps {
   onPrefetch: (cursor: string) => void;
 }
 
-export default class ScrollingPagination extends React.Component<
+export default class ScrollingPagination extends Component<
   ScrollingPaginationProps,
   any
 > {
   prevCursor: null | string = null;
+
   loadMore = () => {
     const { onLoadMore, lastCursor, loading } = this.props;
     if (!lastCursor) return;
@@ -22,21 +23,25 @@ export default class ScrollingPagination extends React.Component<
     onLoadMore(lastCursor);
     this.prevCursor = lastCursor;
   };
+
   handleScroll = () => {
     const scrollBottom = getScrollBottom();
     if (scrollBottom < 768) {
       this.loadMore();
     }
   };
+
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
     if (this.props.lastCursor) {
       this.props.onPrefetch(this.props.lastCursor);
     }
   }
+
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
   }
+
   componentDidUpdate(prevProps: ScrollingPaginationProps) {
     if (
       prevProps.lastCursor !== this.props.lastCursor &&
