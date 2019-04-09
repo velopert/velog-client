@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 
@@ -24,7 +24,7 @@ const MainRightFooterBlock = styled.div`
 
 interface MainRightFooterProps {}
 
-const MainRightFooter: React.SFC<MainRightFooterProps> = props => {
+const MainRightFooter: FC<MainRightFooterProps> = props => {
   return (
     <MainRightFooterBlock>
       <div className="links">

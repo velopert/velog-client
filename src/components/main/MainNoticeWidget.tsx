@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 
@@ -24,7 +24,7 @@ const MainNoticeWidgetBlock = styled.div`
 
 interface MainNoticeWidgetProps {}
 
-const MainNoticeWidget: React.SFC<MainNoticeWidgetProps> = props => {
+const MainNoticeWidget: FC<MainNoticeWidgetProps> = props => {
   return (
     <MainNoticeWidgetBlock>
       <div className="title-bar">공지사항</div>

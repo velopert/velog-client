@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 
@@ -21,7 +21,7 @@ const RegisterTemplateBlock = styled.div`
 
 export interface RegisterTemplateProps {}
 
-const RegisterTemplate: React.SFC<RegisterTemplateProps> = ({ children }) => {
+const RegisterTemplate: FC<RegisterTemplateProps> = ({ children }) => {
   return (
     <RegisterTemplateBlock>
       <h1>환영합니다!</h1>

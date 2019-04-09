@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { Route } from 'react-router';
@@ -115,7 +115,7 @@ interface RoundButtonProps extends ButtonProps {
   border?: boolean;
 }
 
-const RoundButton: React.SFC<RoundButtonProps> = ({
+const RoundButton: FC<RoundButtonProps> = ({
   ref,
   to,
   color = 'teal',

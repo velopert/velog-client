@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
@@ -24,7 +24,7 @@ interface HeaderUserMenuItemProps {
   onClick?: () => void;
 }
 
-const HeaderUserMenuItem: React.SFC<HeaderUserMenuItemProps> = ({
+const HeaderUserMenuItem: FC<HeaderUserMenuItemProps> = ({
   children,
   to,
   onClick,

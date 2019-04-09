@@ -5,7 +5,7 @@ import { Query, QueryResult } from 'react-apollo';
 
 interface SampleProps {}
 
-const Sample: React.SFC<SampleProps> = props => {
+const Sample: FC<SampleProps> = props => {
   return (
     <Query query={GET_POST_LIST}>
       {({ loading, error, data }: QueryResult<Post[]>) => {

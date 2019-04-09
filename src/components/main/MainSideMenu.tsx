@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
@@ -34,7 +34,7 @@ const MenuItem = styled(NavLink)`
 
 interface MainSideMenuProps {}
 
-const MainSideMenu: React.SFC<MainSideMenuProps> = props => {
+const MainSideMenu: FC<MainSideMenuProps> = props => {
   return (
     <MainSideMenuBlock>
       <MenuItem

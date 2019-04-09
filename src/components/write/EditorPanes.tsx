@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 
@@ -18,7 +18,7 @@ export interface EditorPanesProps {
   right?: React.ReactNode;
 }
 
-const EditorPanes: React.SFC<EditorPanesProps> = ({
+const EditorPanes: FC<EditorPanesProps> = ({
   theme = 'LIGHT',
   left,
   right,

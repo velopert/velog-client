@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 import transitions from '../../lib/styles/transitions';
 import zIndexes from '../../lib/styles/zIndexes';
@@ -31,7 +31,7 @@ interface OpaqueLayerProps {
 
 const { useState, useEffect, useRef } = React;
 
-const OpaqueLayer: React.SFC<OpaqueLayerProps> = ({ visible }) => {
+const OpaqueLayer: FC<OpaqueLayerProps> = ({ visible }) => {
   const [animate, setAnimate] = useState(false);
   const timeoutId = useRef<NodeJS.Timeout | null>(null);
   const mounted = useRef(false);

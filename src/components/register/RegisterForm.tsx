@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import LabelInput from '../common/LabelInput';
 import useInputs from '../../lib/hooks/useInputs';
@@ -33,7 +33,7 @@ export interface RegisterFormProps {
   error: string | null;
 }
 
-const RegisterForm: React.SFC<RegisterFormProps> = ({
+const RegisterForm: FC<RegisterFormProps> = ({
   onSubmit,
   defaultEmail,
   error,

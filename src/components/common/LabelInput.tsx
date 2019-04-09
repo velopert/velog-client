@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { MdLockOutline } from 'react-icons/md';
@@ -88,7 +88,7 @@ export interface LabelInputProps extends InputProps {
 }
 
 const { useEffect, useState, useCallback } = React;
-const LabelInput: React.SFC<LabelInputProps> = ({
+const LabelInput: FC<LabelInputProps> = ({
   label,
   name,
   value,

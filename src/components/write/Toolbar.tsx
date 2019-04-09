@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 import {
   MdFormatBold,
@@ -102,7 +102,7 @@ export interface ToolbarProps {
 }
 
 const { useEffect, useState, useCallback } = React;
-const Toolbar: React.SFC<ToolbarProps> = ({
+const Toolbar: FC<ToolbarProps> = ({
   visible,
   shadow,
   mode,

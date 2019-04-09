@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Header from '../../components/base/Header';
 import { getScrollTop } from '../../lib/utils';
 import { RootState } from '../../modules';
@@ -17,9 +17,7 @@ interface DispatchProps {
 }
 type HeaderContainerProps = OwnProps & StateProps & DispatchProps;
 
-const HeaderContainer: React.SFC<HeaderContainerProps> = ({
-  showAuthModal,
-}) => {
+const HeaderContainer: FC<HeaderContainerProps> = ({ showAuthModal }) => {
   const lastY = useRef(0);
   const direction = useRef<null | 'UP' | 'DOWN'>(null);
 

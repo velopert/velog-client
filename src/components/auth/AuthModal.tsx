@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 import { MdClose } from 'react-icons/md';
 import zIndexes from '../../lib/styles/zIndexes';
@@ -84,11 +84,7 @@ interface AuthModalProps {
   onClose: () => void;
 }
 
-const AuthModal: React.SFC<AuthModalProps> = ({
-  visible,
-  children,
-  onClose,
-}) => {
+const AuthModal: FC<AuthModalProps> = ({ visible, children, onClose }) => {
   const [closed, setClosed] = useState(true);
   useEffect(() => {
     let timeoutId: NodeJS.Timeout | null = null;

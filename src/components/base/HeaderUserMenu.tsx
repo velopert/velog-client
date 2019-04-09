@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import OutsideClickHandler from 'react-outside-click-handler';
 import HeaderUserMenuItem from './HeaderUserMenuItem';
@@ -22,7 +22,7 @@ interface HeaderUserMenuProps {
   visible: boolean;
 }
 
-const HeaderUserMenu: React.SFC<HeaderUserMenuProps> = ({
+const HeaderUserMenu: FC<HeaderUserMenuProps> = ({
   onClose,
   onLogout,
   username,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import EditorPanes from '../components/write/EditorPanes';
 import MarkdownEditor from '../components/write/MarkdownEditor';
@@ -10,7 +10,7 @@ const WritePageBlock = styled.div`
 
 interface WritePageProps {}
 
-const WritePage: React.SFC<WritePageProps> = props => {
+const WritePage: FC<WritePageProps> = props => {
   return (
     <WritePageBlock>
       {/* <FullPageEditor /> */}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 
@@ -54,7 +54,7 @@ interface AuthEmailFormProps {
   disabled: boolean;
 }
 
-const AuthEmailForm: React.SFC<AuthEmailFormProps> = ({
+const AuthEmailForm: FC<AuthEmailFormProps> = ({
   onChange,
   value,
   onSubmit,

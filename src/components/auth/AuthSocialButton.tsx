@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 import { FacebookIcon, GoogleIcon, GithubIcon } from '../../static/svg';
 import palette from '../../lib/styles/palette';
@@ -46,7 +46,7 @@ const providerMap = {
   },
 };
 
-const AuthSocialButton: React.SFC<AuthSocialButtonProps> = ({
+const AuthSocialButton: FC<AuthSocialButtonProps> = ({
   provider,
   tabIndex,
 }) => {

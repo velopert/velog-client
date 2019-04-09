@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Route, Switch } from 'react-router';
 import loadable from '@loadable/component';
 import Core from './containers/base/Core';
@@ -11,7 +11,7 @@ const PostPage = loadable(() => import('./pages/PostPage'));
 
 interface AppProps {}
 
-const App: React.SFC<AppProps> = props => {
+const App: FC<AppProps> = props => {
   return (
     <>
       <Switch>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { MdCheck } from 'react-icons/md';
 import palette from '../../lib/styles/palette';
@@ -26,7 +26,7 @@ export interface AuthEmailSuccessProps {
   registered: boolean;
 }
 
-const AuthEmailSuccess: React.SFC<AuthEmailSuccessProps> = ({ registered }) => {
+const AuthEmailSuccess: FC<AuthEmailSuccessProps> = ({ registered }) => {
   const text = registered ? '로그인' : '회원가입';
   return (
     <AuthEmailSuccessBlock>

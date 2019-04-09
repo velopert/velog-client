@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import PostTemplate from '../components/post/PostTemplate';
 
 interface PostPageProps {}
 
-const PostPage: React.SFC<PostPageProps> = props => {
+const PostPage: FC<PostPageProps> = props => {
   return <PostTemplate />;
 };
 

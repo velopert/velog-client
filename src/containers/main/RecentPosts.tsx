@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import PostCardList from '../../components/common/PostCardList';
 import { GET_POST_LIST, PartialPost } from '../../lib/graphql/post';
 import { QueryResult, Query } from 'react-apollo';
@@ -7,7 +7,7 @@ import ScrollingPagination from '../../components/common/ScrollingPagination';
 interface RecentPostsProps {}
 
 const { useState } = React;
-const RecentPosts: React.SFC<RecentPostsProps> = props => {
+const RecentPosts: FC<RecentPostsProps> = props => {
   const [loadingMore, setLoadingMore] = useState(false);
   return (
     <Query query={GET_POST_LIST}>

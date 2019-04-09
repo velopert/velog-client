@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import PageTemplate from '../base/PageTemplate';
 import { breakpoints } from '../../lib/styles/responsive';
@@ -31,7 +31,7 @@ type MainTemplateNamespace = {
 };
 
 interface MainTemplateProps {}
-const MainTemplate: React.SFC<MainTemplateProps> & MainTemplateNamespace = ({
+const MainTemplate: FC<MainTemplateProps> & MainTemplateNamespace = ({
   children,
 }) => {
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import OutsideClickHandler from 'react-outside-click-handler';
 import useInput from '../../lib/hooks/useInput';
@@ -62,7 +62,7 @@ interface AddLinkProps {
 
 const { useCallback, useRef, useEffect } = React;
 
-const AddLink: React.SFC<AddLinkProps> = ({
+const AddLink: FC<AddLinkProps> = ({
   left,
   top,
   onConfirm,

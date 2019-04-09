@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 
@@ -19,7 +19,7 @@ const TagBlock = styled.div`
 
 interface TagProps {}
 
-const Tag: React.SFC<TagProps> = ({ children }) => {
+const Tag: FC<TagProps> = ({ children }) => {
   return <TagBlock>{children}</TagBlock>;
 };
 

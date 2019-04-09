@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import RecentPosts from '../../containers/main/RecentPosts';
 
@@ -6,7 +6,7 @@ const RecentPostsPageBlock = styled.div``;
 
 interface RecentPostsPageProps {}
 
-const RecentPostsPage: React.SFC<RecentPostsPageProps> = props => {
+const RecentPostsPage: FC<RecentPostsPageProps> = props => {
   return (
     <RecentPostsPageBlock>
       <RecentPosts />

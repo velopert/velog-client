@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import AuthSocialButton from './AuthSocialButton';
 
@@ -10,7 +10,7 @@ const AuthSocialButtonGroupBlock = styled.div`
 
 interface AuthSocialButtonGroupProps {}
 
-const AuthSocialButtonGroup: React.SFC<AuthSocialButtonGroupProps> = props => {
+const AuthSocialButtonGroup: FC<AuthSocialButtonGroupProps> = props => {
   return (
     <AuthSocialButtonGroupBlock>
       <AuthSocialButton provider="github" tabIndex={4} />

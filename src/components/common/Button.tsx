@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 
@@ -32,7 +32,7 @@ interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
   theme?: string;
 }
 
-const Button: React.SFC<ButtonProps> = ({ theme, children, ref, ...rest }) => {
+const Button: FC<ButtonProps> = ({ theme, children, ref, ...rest }) => {
   const htmlProps = rest as any;
   return (
     <ButtonBlock theme={theme} {...htmlProps}>

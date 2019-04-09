@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
-import Header from './Header';
 import HeaderContainer from '../../containers/base/HeaderContainer';
 
 const PageTemplateBlock = styled.div``;
@@ -11,7 +10,7 @@ interface PageTemplateProps {
   className?: string;
 }
 
-const PageTemplate: React.SFC<PageTemplateProps> = ({
+const PageTemplate: FC<PageTemplateProps> = ({
   hideHeader,
   style,
   className,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import PostCard from './PostCard';
 import { PartialPost } from '../../lib/graphql/post';
@@ -9,7 +9,7 @@ interface PostCardListProps {
   posts: PartialPost[];
 }
 
-const PostCardList: React.SFC<PostCardListProps> = ({ posts }) => {
+const PostCardList: FC<PostCardListProps> = ({ posts }) => {
   return (
     <PostCardListBlock>
       {posts.map(post => (

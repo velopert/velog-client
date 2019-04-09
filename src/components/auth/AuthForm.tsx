@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import useInput from '../../lib/hooks/useInput';
 import AuthEmailForm from './AuthEmailForm';
@@ -53,7 +53,7 @@ export interface AuthFormProps {
   registered: boolean | null;
 }
 
-const AuthForm: React.SFC<AuthFormProps> = ({
+const AuthForm: FC<AuthFormProps> = ({
   mode,
   onToggleMode,
   onSendAuthEmail,

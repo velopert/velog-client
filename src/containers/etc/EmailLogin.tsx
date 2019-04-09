@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
 import qs from 'qs';
 import { emailCodeLogin } from '../../lib/api/auth';
@@ -13,7 +13,7 @@ const { useEffect } = React;
 /**
  * Login with email code
  */
-const EmailLogin: React.SFC<EmailLoginProps> = props => {
+const EmailLogin: FC<EmailLoginProps> = props => {
   useEffect(() => {
     const query = qs.parse(props.location.search, {
       ignoreQueryPrefix: true,

@@ -35,14 +35,14 @@ declare module '*.png' {
 }
 
 declare module '*.webp' {
-    const src: string;
-    export default src;
+  const src: string;
+  export default src;
 }
 
 declare module '*.svg' {
-  import React from 'react';
+  import { FC } from 'react';
 
-  export const ReactComponent: React.SFC<React.SVGProps<SVGSVGElement>>;
+  export const ReactComponent: FC<React.SVGProps<SVGSVGElement>>;
 
   const src: string;
   export default src;

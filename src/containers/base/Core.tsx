@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import OpaqueLayer from '../../components/common/OpaqueLayer';
 import AuthModalContainer from '../auth/AuthModalContainer';
@@ -11,7 +11,7 @@ interface StateProps {
 interface DispatchProps {}
 type CoreProps = OwnProps & StateProps & DispatchProps;
 
-const Core: React.SFC<CoreProps> = ({ layer }) => {
+const Core: FC<CoreProps> = ({ layer }) => {
   return (
     <>
       <OpaqueLayer visible={layer} />

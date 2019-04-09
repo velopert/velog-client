@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import AuthModal from '../../components/auth/AuthModal';
 import AuthForm from '../../components/auth/AuthForm';
 import {
@@ -23,7 +23,7 @@ interface DispatchProps {
 type AuthModalContainerProps = OwnProps & StateProps & DispatchProps;
 
 const { useCallback, useState } = React;
-const AuthModalContainer: React.SFC<AuthModalContainerProps> = ({
+const AuthModalContainer: FC<AuthModalContainerProps> = ({
   visible,
   mode,
   closeAuthModal,

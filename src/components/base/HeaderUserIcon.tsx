@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { CurrentUser } from '../../lib/graphql/user';
 import { MdArrowDropDown } from 'react-icons/md';
@@ -39,7 +39,7 @@ export interface HeaderUserIconProps {
   onClick: () => void;
 }
 
-const HeaderUserIcon: React.SFC<HeaderUserIconProps> = ({ onClick }) => {
+const HeaderUserIcon: FC<HeaderUserIconProps> = ({ onClick }) => {
   return (
     <HeaderUserIconBlock onClick={onClick}>
       <img src={userThumbnail} alt="thumbnail" />
