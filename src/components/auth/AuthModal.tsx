@@ -1,12 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { MdClose } from 'react-icons/md';
 import zIndexes from '../../lib/styles/zIndexes';
 import palette from '../../lib/styles/palette';
 import { plutoWelcome } from '../../static/images';
 import transitions from '../../lib/styles/transitions';
-
-const { useState, useEffect } = React;
 
 const AuthModalBlock = styled.div<{ visible: boolean }>`
   position: fixed;

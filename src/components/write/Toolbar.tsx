@@ -101,7 +101,6 @@ export interface ToolbarProps {
   onClick?: Function;
 }
 
-const { useEffect, useState, useCallback } = React;
 const Toolbar: FC<ToolbarProps> = ({
   visible,
   shadow,

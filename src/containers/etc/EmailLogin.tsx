@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
 import qs from 'qs';
 import { emailCodeLogin } from '../../lib/api/auth';
@@ -7,8 +7,6 @@ import { GET_CURRENT_USER, CurrentUser } from '../../lib/graphql/user';
 import storage from '../../lib/storage';
 
 interface EmailLoginProps extends RouteComponentProps<{}> {}
-
-const { useEffect } = React;
 
 /**
  * Login with email code

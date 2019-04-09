@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import { Logo } from '../../static/svg';
 import { breakpoints } from '../../lib/styles/responsive';
@@ -51,8 +51,6 @@ interface HeaderProps {
   onLoginClick: () => void;
   user: CurrentUser | null;
 }
-
-const { useState, useCallback } = React;
 
 const Header: FC<HeaderProps> = ({
   floating,

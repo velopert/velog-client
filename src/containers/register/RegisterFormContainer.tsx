@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import RegisterForm, {
   RegisterFormType,
 } from '../../components/register/RegisterForm';
@@ -14,7 +14,6 @@ import qs from 'qs';
 
 interface RegisterFormContainerProps extends RouteComponentProps<{}> {}
 
-const { useEffect, useState } = React;
 const RegisterFormContainer: FC<RegisterFormContainerProps> = ({
   match,
   location,

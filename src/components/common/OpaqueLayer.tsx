@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import transitions from '../../lib/styles/transitions';
 import zIndexes from '../../lib/styles/zIndexes';
@@ -28,8 +28,6 @@ const OpaqueLayerBlock = styled.div<{
 interface OpaqueLayerProps {
   visible: boolean;
 }
-
-const { useState, useEffect, useRef } = React;
 
 const OpaqueLayer: FC<OpaqueLayerProps> = ({ visible }) => {
   const [animate, setAnimate] = useState(false);

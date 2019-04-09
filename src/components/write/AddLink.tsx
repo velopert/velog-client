@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import OutsideClickHandler from 'react-outside-click-handler';
 import useInput from '../../lib/hooks/useInput';
@@ -59,8 +59,6 @@ interface AddLinkProps {
   onDelete: () => void;
   defaultValue: string;
 }
-
-const { useCallback, useRef, useEffect } = React;
 
 const AddLink: FC<AddLinkProps> = ({
   left,

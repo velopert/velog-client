@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useRef, useState, useCallback } from 'react';
 import Header from '../../components/base/Header';
 import { getScrollTop } from '../../lib/utils';
 import { RootState } from '../../modules';
@@ -7,8 +7,6 @@ import { showAuthModal } from '../../modules/core';
 import { QueryResult, Query } from 'react-apollo';
 import { GET_CURRENT_USER, CurrentUser } from '../../lib/graphql/user';
 import storage from '../../lib/storage';
-
-const { useEffect, useRef, useState, useCallback } = React;
 
 interface OwnProps {}
 interface StateProps {}
