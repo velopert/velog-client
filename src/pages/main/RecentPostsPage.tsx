@@ -4,9 +4,7 @@ import RecentPosts from '../../containers/main/RecentPosts';
 
 const RecentPostsPageBlock = styled.div``;
 
-interface RecentPostsPageProps {}
-
-const RecentPostsPage: FC<RecentPostsPageProps> = props => {
+const RecentPostsPage: FC = () => {
   return (
     <RecentPostsPageBlock>
       <RecentPosts />

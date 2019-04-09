@@ -6,7 +6,11 @@ import palette from '../../lib/styles/palette';
 import { plutoWelcome } from '../../static/images';
 import transitions from '../../lib/styles/transitions';
 
-const AuthModalBlock = styled.div<{ visible: boolean }>`
+interface AuthModalBlockProps {
+  visible: boolean;
+}
+
+const AuthModalBlock = styled.div<AuthModalBlockProps>`
   position: fixed;
   top: 0;
   left: 0;

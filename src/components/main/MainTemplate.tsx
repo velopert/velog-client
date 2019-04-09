@@ -30,10 +30,7 @@ type MainTemplateNamespace = {
   Right: typeof Right;
 };
 
-interface MainTemplateProps {}
-const MainTemplate: FC<MainTemplateProps> & MainTemplateNamespace = ({
-  children,
-}) => {
+const MainTemplate: FC & MainTemplateNamespace = ({ children }) => {
   return (
     <MainTemplateBlock>
       <main>{children}</main>

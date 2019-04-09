@@ -94,11 +94,12 @@ const Separator = styled.div`
   margin-right: 0.5rem;
   background: ${palette.gray4};
 `;
+
 export interface ToolbarProps {
   visible: boolean;
   shadow: boolean;
   mode: 'MARKDOWN' | 'WYSIWYG';
-  onClick?: Function;
+  onClick?: (value: string) => void;
 }
 
 const Toolbar: FC<ToolbarProps> = ({

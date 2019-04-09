@@ -9,9 +9,7 @@ import WritePage from './pages/WritePage';
 const MainPage = loadable(() => import('./pages/main/MainPage'));
 const PostPage = loadable(() => import('./pages/PostPage'));
 
-interface AppProps {}
-
-const App: FC<AppProps> = props => {
+const App: FC = () => {
   return (
     <>
       <Switch>

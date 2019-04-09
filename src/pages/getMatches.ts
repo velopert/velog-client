@@ -1,4 +1,4 @@
-import { matchPath, RouteProps, match } from 'react-router';
+import { matchPath, RouteProps } from 'react-router';
 import MainPage from './main/MainPage';
 
 const config: RouteProps[] = [

@@ -8,9 +8,7 @@ const WritePageBlock = styled.div`
   height: 100%;
 `;
 
-interface WritePageProps {}
-
-const WritePage: FC<WritePageProps> = props => {
+const WritePage: FC = () => {
   return (
     <WritePageBlock>
       {/* <FullPageEditor /> */}

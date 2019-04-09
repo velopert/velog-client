@@ -32,9 +32,7 @@ const MenuItem = styled(NavLink)`
   }
 `;
 
-interface MainSideMenuProps {}
-
-const MainSideMenu: FC<MainSideMenuProps> = props => {
+const MainSideMenu: FC = () => {
   return (
     <MainSideMenuBlock>
       <MenuItem

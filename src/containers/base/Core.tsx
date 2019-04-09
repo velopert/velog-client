@@ -5,10 +5,13 @@ import AuthModalContainer from '../auth/AuthModalContainer';
 import { RootState } from '../../modules';
 
 interface OwnProps {}
+
 interface StateProps {
   layer: boolean;
 }
+
 interface DispatchProps {}
+
 type CoreProps = OwnProps & StateProps & DispatchProps;
 
 const Core: FC<CoreProps> = ({ layer }) => {

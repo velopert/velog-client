@@ -1,9 +1,4 @@
-import React, {
-  Component,
-  createRef,
-  KeyboardEvent,
-  KeyboardEventHandler,
-} from 'react';
+import React, { Component, createRef, KeyboardEventHandler } from 'react';
 import styled from 'styled-components';
 import hljs from 'highlight.js';
 import Quill, { RangeStatic } from 'quill';

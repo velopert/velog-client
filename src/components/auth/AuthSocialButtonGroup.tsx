@@ -8,9 +8,7 @@ const AuthSocialButtonGroupBlock = styled.div`
   margin-top: 1.5rem;
 `;
 
-interface AuthSocialButtonGroupProps {}
-
-const AuthSocialButtonGroup: FC<AuthSocialButtonGroupProps> = props => {
+const AuthSocialButtonGroup: FC = () => {
   return (
     <AuthSocialButtonGroupBlock>
       <AuthSocialButton provider="github" tabIndex={4} />

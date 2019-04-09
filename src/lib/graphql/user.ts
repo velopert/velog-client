@@ -8,6 +8,7 @@ export type UserProfile = {
   about: string;
   profile_links: string;
 };
+
 export type User = {
   id: string;
   username: string;

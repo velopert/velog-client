@@ -17,9 +17,7 @@ const TagBlock = styled.div`
   }
 `;
 
-interface TagProps {}
-
-const Tag: FC<TagProps> = ({ children }) => {
+const Tag: FC = ({ children }) => {
   return <TagBlock>{children}</TagBlock>;
 };
 

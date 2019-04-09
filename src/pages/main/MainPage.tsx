@@ -6,9 +6,7 @@ import MainNoticeWidget from '../../components/main/MainNoticeWidget';
 import MainRightFooter from '../../components/main/MainRightFooter';
 import RecentPostsPage from './RecentPostsPage';
 
-interface MainPageProps {}
-
-const MainPage: FC<MainPageProps> = props => {
+const MainPage: FC = () => {
   return (
     <MainTemplate>
       <MainTemplate.Left>

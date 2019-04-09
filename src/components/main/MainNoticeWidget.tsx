@@ -22,9 +22,7 @@ const MainNoticeWidgetBlock = styled.div`
   }
 `;
 
-interface MainNoticeWidgetProps {}
-
-const MainNoticeWidget: FC<MainNoticeWidgetProps> = props => {
+const MainNoticeWidget: FC = () => {
   return (
     <MainNoticeWidgetBlock>
       <div className="title-bar">공지사항</div>

@@ -12,10 +12,9 @@ import {
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import qs from 'qs';
 
-interface RegisterFormContainerProps extends RouteComponentProps<{}> {}
+type RegisterFormContainerProps = RouteComponentProps;
 
 const RegisterFormContainer: FC<RegisterFormContainerProps> = ({
-  match,
   location,
   history,
 }) => {
@@ -24,14 +23,14 @@ const RegisterFormContainer: FC<RegisterFormContainerProps> = ({
   });
 
   const [error, setError] = useState<null | string>(null);
-  const [onGetRegisterToken, loading, registerToken] = useRequest<
+  const [onGetRegisterToken, _loading, registerToken] = useRequest<
     GetRegisterTokenResponse
   >((code: string) => getRegisterToken(code));
 
   const [
     onLocalRegister,
-    localRegisterLoading,
-    localRegisterResult,
+    _localRegisterLoading,
+    _localRegisterResult,
   ] = useRequest<AuthResponse>(localEmailRegister);
 
   const onSubmit = async (form: RegisterFormType) => {

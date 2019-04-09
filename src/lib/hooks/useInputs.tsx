@@ -1,13 +1,10 @@
 import { useReducer, useCallback, ChangeEventHandler } from 'react';
 
-type DefaultValues = {
-  [key: string]: string;
-};
-
 type UseInputsAction = {
   name: string;
   value: string;
 };
+
 function reducer<T>(state: T, action: UseInputsAction | null) {
   if (!action) {
     const initialState: any = {};

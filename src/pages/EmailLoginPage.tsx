@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import EmailLogin from '../containers/etc/EmailLogin';
 
-const EmailLoginPage: FC<{}> = props => {
+const EmailLoginPage: FC = () => {
   return <EmailLogin />;
 };
 

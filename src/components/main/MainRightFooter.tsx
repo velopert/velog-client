@@ -22,9 +22,7 @@ const MainRightFooterBlock = styled.div`
   }
 `;
 
-interface MainRightFooterProps {}
-
-const MainRightFooter: FC<MainRightFooterProps> = props => {
+const MainRightFooter: FC = () => {
   return (
     <MainRightFooterBlock>
       <div className="links">

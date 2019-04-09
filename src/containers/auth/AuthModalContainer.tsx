@@ -12,14 +12,17 @@ import { sendAuthEmail, SendAuthEmailResponse } from '../../lib/api/auth';
 import useRequest from '../../lib/hooks/useRequest';
 
 interface OwnProps {}
+
 interface StateProps {
   visible: boolean;
   mode: AuthMode;
 }
+
 interface DispatchProps {
   closeAuthModal: typeof closeAuthModal;
   changeAuthModalMode: typeof changeAuthModalMode;
 }
+
 type AuthModalContainerProps = OwnProps & StateProps & DispatchProps;
 
 const AuthModalContainer: FC<AuthModalContainerProps> = ({

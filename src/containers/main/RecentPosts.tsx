@@ -4,19 +4,11 @@ import { GET_POST_LIST, PartialPost } from '../../lib/graphql/post';
 import { QueryResult, Query } from 'react-apollo';
 import ScrollingPagination from '../../components/common/ScrollingPagination';
 
-interface RecentPostsProps {}
-
-const RecentPosts: FC<RecentPostsProps> = props => {
+const RecentPosts: FC = () => {
   const [loadingMore, setLoadingMore] = useState(false);
   return (
     <Query query={GET_POST_LIST}>
-      {({
-        loading,
-        error,
-        data,
-        fetchMore,
-        client,
-      }: QueryResult<{ posts: PartialPost[] }>) => {
+      {({ error, data, client }: QueryResult<{ posts: PartialPost[] }>) => {
         if (error || !data || !data.posts) return null;
         return (
           <>

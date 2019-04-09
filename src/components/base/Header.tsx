@@ -10,9 +10,11 @@ import HeaderUserMenu from './HeaderUserMenu';
 import { logout } from '../../lib/api/auth';
 import storage from '../../lib/storage';
 
-const HeaderBlock = styled.div<{
+interface HeaderBlockProps {
   floating: boolean;
-}>`
+}
+
+const HeaderBlock = styled.div<HeaderBlockProps>`
   width: 100%;
   > .wrapper {
     width: ${breakpoints.xlarge};

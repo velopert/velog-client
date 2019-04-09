@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
 import qs from 'qs';
 import { emailCodeLogin } from '../../lib/api/auth';

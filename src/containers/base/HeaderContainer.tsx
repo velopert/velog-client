@@ -9,10 +9,13 @@ import { GET_CURRENT_USER, CurrentUser } from '../../lib/graphql/user';
 import storage from '../../lib/storage';
 
 interface OwnProps {}
+
 interface StateProps {}
+
 interface DispatchProps {
   showAuthModal: typeof showAuthModal;
 }
+
 type HeaderContainerProps = OwnProps & StateProps & DispatchProps;
 
 const HeaderContainer: FC<HeaderContainerProps> = ({ showAuthModal }) => {
@@ -91,6 +94,6 @@ const HeaderContainer: FC<HeaderContainerProps> = ({ showAuthModal }) => {
 };
 
 export default connect<StateProps, DispatchProps, OwnProps, RootState>(
-  state => ({}),
+  () => ({}),
   { showAuthModal },
 )(HeaderContainer);

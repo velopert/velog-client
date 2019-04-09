@@ -4,9 +4,7 @@ import PageTemplate from '../base/PageTemplate';
 
 const PostTemplateBlock = styled(PageTemplate)``;
 
-interface PostTemplateProps {}
-
-const PostTemplate: FC<PostTemplateProps> = props => {
+const PostTemplate: FC = () => {
   return <PostTemplateBlock>포스트임</PostTemplateBlock>;
 };
 
