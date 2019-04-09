@@ -8,8 +8,8 @@ import Core from './containers/base/Core';
 import RegisterPage from './pages/RegisterPage';
 const MainPage = loadable(() => import('./pages/main/MainPage'));
 const PostPage = loadable(() => import('./pages/PostPage'));
-import EmailLoginPage from './pages/EmailLoginPage';
-import WritePage from './pages/WritePage';
+const EmailLoginPage = loadable(() => import('./pages/EmailLoginPage'));
+const WritePage = loadable(() => import('./pages/WritePage'));
 
 interface AppProps {}
 

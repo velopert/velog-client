@@ -12,7 +12,9 @@ import palette from '../../lib/styles/palette';
 import Toolbar from './Toolbar';
 import AddLink from './AddLink';
 
-export interface MarkdownEditorProps {}
+export interface MarkdownEditorProps {
+  onChangeMarkdown: (markdown: string) => void;
+}
 type MarkdownEditorState = {
   shadow: boolean;
   addLink: {
@@ -112,6 +114,9 @@ export default class MarkdownEditor extends React.Component<
       lineWrapping: true,
     });
     (window as any).codemirror = this.codemirror;
+    this.codemirror.on('change', cm => {
+      this.props.onChangeMarkdown(cm.getValue());
+    });
   };
 
   handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
