@@ -10,6 +10,8 @@ const EditorPanesBlock = styled.div`
 const EditorPane = styled.div<{ shadow?: boolean }>`
   min-width: 0;
   flex: 1;
+  display: flex;
+  flex-direction: column;
   ${props =>
     props.shadow &&
     css`

@@ -53,6 +53,8 @@ const MarkdownEditorBlock = styled.div`
     font-size: 1.3125rem;
     line-height: 1.5;
     color: ${palette.gray8};
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
     .cm-header {
       line-height: 2;
       color: ${palette.gray9};

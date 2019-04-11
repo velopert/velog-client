@@ -11,28 +11,42 @@ export interface MarkdownRenderProps {
   codeTheme?: string;
 }
 
-console.log('a');
-
 const MarkdownRenderBlock = styled.div`
   font-size: 1.3125rem;
   &.atom-one-dark {
     ${prismThemes['atom-one-dark']}
-    pre {
-      /* color: ${palette.gray0}; */
-      background: #313440;
-      border-radius: 4px;
-    }
+  }
+  &.atom-one-light {
+    ${prismThemes['atom-one-light']}
+  }
+  &.github {
+    ${prismThemes['github']}
+  }
+  &.monokai {
+    ${prismThemes['monokai']}
+  }
+  &.dracula {
+    ${prismThemes['dracula']}
+  }
+  &.duotone-light {
+    ${prismThemes['duotone-light']}
   }
 
   pre {
-    padding: 1em;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+    font-size: 1rem;
+    padding: 1rem;
+    border-radius: 4px;
+    line-height: 1.5;
+    overflow-x: auto;
   }
 `;
 
 const { useState, useEffect } = React;
 const MarkdownRender: React.SFC<MarkdownRenderProps> = ({
   markdown,
-  codeTheme = 'atom-one-dark',
+  codeTheme = 'atom-one-light',
 }) => {
   const [html, setHtml] = useState('');
   useEffect(() => {
