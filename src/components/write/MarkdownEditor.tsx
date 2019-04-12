@@ -14,6 +14,8 @@ import AddLink from './AddLink';
 
 export interface MarkdownEditorProps {
   onChangeMarkdown: (markdown: string) => void;
+  onChangeTitle: (title: string) => void;
+  title: string;
 }
 type MarkdownEditorState = {
   shadow: boolean;
@@ -514,13 +516,22 @@ ${selected}
     codemirror.focus();
   };
 
+  handleTitleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    this.props.onChangeTitle(e.target.value);
+  };
+
   public render() {
     const { shadow, addLink } = this.state;
+    const { title } = this.props;
     return (
       <MarkdownEditorBlock ref={this.block} onScroll={this.handleScroll}>
         <div className="wrapper">
           <PaddingWrapper>
-            <TitleTextarea placeholder="제목을 입력하세요" />
+            <TitleTextarea
+              placeholder="제목을 입력하세요"
+              onChange={this.handleTitleChange}
+              value={title}
+            />
           </PaddingWrapper>
           <Toolbar
             visible

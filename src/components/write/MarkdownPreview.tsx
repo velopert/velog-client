@@ -4,6 +4,8 @@ import MarkdownRender from '../common/MarkdownRender';
 import palette from '../../lib/styles/palette';
 
 const MarkdownPreviewBlock = styled.div`
+  word-break: break-word;
+  font-size: 1.3125rem;
   &::-webkit-scrollbar {
     border-radius: 3px;
     width: 6px;
@@ -21,15 +23,27 @@ const MarkdownPreviewBlock = styled.div`
   padding: 3rem;
   flex: 1;
   overflow-y: auto;
+  color: ${palette.gray9};
 `;
 
-interface MarkdownPreviewProps {
+const Title = styled.h1`
+  font-size: 2.5em;
+  margin-bottom: 4rem;
+  font-weight: 800;
+`;
+
+export interface MarkdownPreviewProps {
   markdown: string;
+  title: string;
 }
 
-const MarkdownPreview: React.SFC<MarkdownPreviewProps> = ({ markdown }) => {
+const MarkdownPreview: React.SFC<MarkdownPreviewProps> = ({
+  markdown,
+  title,
+}) => {
   return (
     <MarkdownPreviewBlock>
+      <Title>{title}</Title>
       <MarkdownRender markdown={markdown} />
     </MarkdownPreviewBlock>
   );

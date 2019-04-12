@@ -8,6 +8,7 @@ describe('write redux module', () => {
     const state = getInitialState();
     expect(state).toEqual({
       markdown: '',
+      title: '',
     });
   });
   describe('action handlers', () => {
@@ -15,6 +16,11 @@ describe('write redux module', () => {
       let state = getInitialState();
       state = reducer(state, write.changeMarkdown('Hello'));
       expect(state.markdown).toBe('Hello');
+    });
+    it('CHANGE_TITLE', () => {
+      let state = getInitialState();
+      state = reducer(state, write.changeTitle('World'));
+      expect(state.title).toBe('World');
     });
   });
 });
