@@ -12,11 +12,12 @@ import AddLink from './AddLink';
 import postStyles from '../../lib/styles/postStyles';
 import TitleTextarea from './TitleTextarea';
 import { getScrollTop } from '../../lib/utils';
+import convertToMarkdown from '../../lib/convertToMarkdown';
 
 Quill.register('modules/markdownShortcuts', MarkdownShortcuts);
 
-export interface FullPageEditorProps {}
-export interface FullPageEditorState {
+export interface QuillEditorProps {}
+export interface QuillEditorState {
   titleFocus: boolean;
   editorFocus: boolean;
   addLink: boolean;
@@ -28,8 +29,12 @@ export interface FullPageEditorState {
   shadow: boolean;
 }
 
-const FullPageEditorWrapper = styled.div`
-  padding-top: 1.5rem;
+const StyledTitleTextarea = styled(TitleTextarea)`
+  margin-bottom: 2rem;
+`;
+
+const QuillEditorWrapper = styled.div`
+  padding-top: 5rem;
   position: relative;
   /* display: flex;
   flex-direction: column;
@@ -46,7 +51,7 @@ const FullPageEditorWrapper = styled.div`
 `;
 
 const Editor = styled.div`
-  margin-top: 2rem;
+  margin-top: 1rem;
   position: relative;
   .ql-container {
     font-family: inherit;
@@ -112,9 +117,9 @@ const Editor = styled.div`
   }
 `;
 
-export default class FullPageEditor extends React.Component<
-  FullPageEditorProps,
-  FullPageEditorState
+export default class QuillEditor extends React.Component<
+  QuillEditorProps,
+  QuillEditorState
 > {
   editor = React.createRef<HTMLDivElement>();
   titleTextarea: HTMLTextAreaElement | null = null;
@@ -183,6 +188,22 @@ export default class FullPageEditor extends React.Component<
         format: ['code-block'],
         handler: (range: RangeStatic, context: any) => {
           quill.format('code-block', false);
+        },
+      },
+      removeQuote: {
+        key: 'enter',
+        empty: true,
+        format: ['blockquote'],
+        handler: (range: RangeStatic, context: any) => {
+          quill.format('blockquote', false);
+        },
+      },
+      removeQuoteWithBackspace: {
+        key: 'backspace',
+        empty: true,
+        format: ['blockquote'],
+        handler: (range: RangeStatic, context: any) => {
+          quill.format('blockquote', false);
         },
       },
     };
@@ -328,7 +349,7 @@ export default class FullPageEditor extends React.Component<
 
   // blocks [Enter] key
   handleTitleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.keyCode === 13) {
+    if ([9, 13].includes(e.keyCode)) {
       e.preventDefault();
       if (this.quill) {
         this.quill.focus();
@@ -354,6 +375,12 @@ export default class FullPageEditor extends React.Component<
     this.setState({ addLink: false });
   };
 
+  handleConvertToMarkdown = () => {
+    if (!this.quill) return;
+    const html = this.quill.root.innerHTML;
+    console.log(convertToMarkdown(html));
+  };
+
   public render() {
     const {
       addLink,
@@ -363,9 +390,8 @@ export default class FullPageEditor extends React.Component<
       shadow,
     } = this.state;
     return (
-      <FullPageEditorWrapper>
-        <Toolbar visible={!titleFocus} shadow={shadow} mode="WYSIWYG" />
-        <TitleTextarea
+      <QuillEditorWrapper>
+        <StyledTitleTextarea
           placeholder="제목을 입력하세요"
           onKeyDown={this.handleTitleKeyDown}
           inputRef={ref => {
@@ -373,9 +399,15 @@ export default class FullPageEditor extends React.Component<
           }}
           onFocus={this.handleTitleFocus}
           onBlur={this.handleTitleBlur}
+          tabIndex={1}
+        />
+        <Toolbar
+          shadow={shadow}
+          mode="WYSIWYG"
+          onConvertToMarkdown={this.handleConvertToMarkdown}
         />
         <Editor>
-          <div ref={this.editor} />
+          <div ref={this.editor} tabIndex={2} />
           {addLink && (
             <AddLink
               {...addLinkPosition}
@@ -386,7 +418,7 @@ export default class FullPageEditor extends React.Component<
             />
           )}
         </Editor>
-      </FullPageEditorWrapper>
+      </QuillEditorWrapper>
     );
   }
 }

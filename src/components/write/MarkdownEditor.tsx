@@ -534,7 +534,6 @@ ${selected}
             />
           </PaddingWrapper>
           <Toolbar
-            visible
             shadow={shadow}
             mode="MARKDOWN"
             onClick={this.handleToolbarClick}

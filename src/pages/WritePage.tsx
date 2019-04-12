@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-// import FullPageEditor from '../components/write/FullPageEditor';
+import QuillEditor from '../components/write/QuillEditor';
 import EditorPanes from '../components/write/EditorPanes';
 
 import MarkdownEditorContainer from '../containers/write/MarkdownEditorContainer';
@@ -16,11 +16,11 @@ interface WritePageProps {}
 const WritePage: React.SFC<WritePageProps> = props => {
   return (
     <WritePageBlock>
-      {/* <FullPageEditor /> */}
-      <EditorPanes
+      <QuillEditor />
+      {/* <EditorPanes
         left={<MarkdownEditorContainer />}
         right={<MarkdownPreviewContainer />}
-      />
+      /> */}
     </WritePageBlock>
   );
 };

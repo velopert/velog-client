@@ -6,24 +6,24 @@ const TurndownService = require('turndown');
 // }
 // </pre><p><br></p><p>asdfasdf</p><p><br></p><blockquote>asdfasdf</blockquote><blockquote><br></blockquote><blockquote>asdf</blockquote><blockquote><br></blockquote><blockquote>asdf</blockquote><blockquote>asdfasfasdfasd</blockquote><blockquote>fasfasdfasd</blockquote><blockquote>fasdfasdf</blockquote><p><br></p><p>이정도면 <a href="https://google.com/" target="_blank">있는거</a> 다 사용한거죠? </p><p><br></p><p><br></p><p><br></p></div><div class="ql-clipboard" contenteditable="true" tabindex="-1"></div>`;
 
-let html = `<div class="ql-editor" data-gramm="false" contenteditable="true" data-placeholder="당신의 이야기를 적어보세요..."><pre class="ql-syntax" spellcheck="false"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>() </span>{
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'hello world!'</span>);
-}
-</pre></div><div class="ql-clipboard" contenteditable="true" tabindex="-1"></div>`;
+let html = `<del>Hi there</del>`;
 const replaceMultiBlockquote = text =>
   text.replace(/<\/blockquote><blockquote>/g, '<br/>'); // credits to Hyeseong kim
 
 html = replaceMultiBlockquote(html);
 const turndownService = new TurndownService();
 
-turndownService.keep('del');
+turndownService.addRule('linethrough', {
+  filter: ['del'],
+  replacement: content => `~${content}~`,
+});
 
 turndownService.addRule('codeblock', {
   filter: ['pre'],
   replacement: content => {
     return `\`\`\`
 ${content}
-\`\`\``;
+\`\`\`(${content})`;
   },
 });
 
@@ -49,7 +49,7 @@ Array.from({ length: 8 }).forEach((_, i) => {
   });
 });
 
-turndownService.addRule('listItem', {
+turndownService.addRule('ordered listItem', {
   filter: el => {
     return el.tagName === 'LI' && el.parentElement.tagName === 'OL';
   },

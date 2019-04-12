@@ -12,10 +12,10 @@ import {
 } from 'react-icons/md';
 import palette from '../../lib/styles/palette';
 import zIndexes from '../../lib/styles/zIndexes';
+import { FaMarkdown } from 'react-icons/fa';
 
 // box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.09);
 const ToolbarBlock = styled.div<{
-  visible: boolean;
   shadow: boolean;
   forMarkdown: boolean;
 }>`
@@ -25,7 +25,7 @@ const ToolbarBlock = styled.div<{
   height: 3rem;
   display: flex;
   align-items: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   position: sticky;
   width: 100%;
   background: white;
@@ -37,11 +37,6 @@ const ToolbarBlock = styled.div<{
       box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.09);
     `}
   ${props =>
-    !props.visible &&
-    css`
-      visibility: hidden;
-    `};
-  ${props =>
     props.forMarkdown &&
     css`
       margin-top: 2rem;
@@ -52,7 +47,7 @@ const ToolbarBlock = styled.div<{
     `}
 `;
 
-const TooblarGroup = styled.div`
+const ToolbarGroup = styled.div`
   display: flex;
   height: 100%;
 `;
@@ -96,28 +91,23 @@ const Separator = styled.div`
   background: ${palette.gray4};
 `;
 export interface ToolbarProps {
-  visible: boolean;
   shadow: boolean;
   mode: 'MARKDOWN' | 'WYSIWYG';
   onClick?: Function;
+  onConvertToMarkdown?: () => void;
 }
 
 const { useEffect, useState, useCallback } = React;
 const Toolbar: React.SFC<ToolbarProps> = ({
-  visible,
   shadow,
   mode,
   onClick = () => {},
+  onConvertToMarkdown,
 }) => {
   const forMarkdown = mode === 'MARKDOWN';
   return (
-    <ToolbarBlock
-      visible={visible}
-      id="toolbar"
-      shadow={shadow}
-      forMarkdown={forMarkdown}
-    >
-      <TooblarGroup>
+    <ToolbarBlock id="toolbar" shadow={shadow} forMarkdown={forMarkdown}>
+      <ToolbarGroup>
         <ToolbarItem
           className="ql-header"
           value={1}
@@ -154,9 +144,9 @@ const Toolbar: React.SFC<ToolbarProps> = ({
             H<span>4</span>
           </Heading>
         </ToolbarItem>
-      </TooblarGroup>
+      </ToolbarGroup>
       <Separator />
-      <TooblarGroup>
+      <ToolbarGroup>
         <ToolbarItem className="ql-bold" onClick={() => onClick('bold')}>
           <MdFormatBold />
         </ToolbarItem>
@@ -171,9 +161,9 @@ const Toolbar: React.SFC<ToolbarProps> = ({
         <ToolbarItem className="ql-strike" onClick={() => onClick('strike')}>
           <MdFormatStrikethrough />
         </ToolbarItem>
-      </TooblarGroup>
+      </ToolbarGroup>
       <Separator />
-      <TooblarGroup>
+      <ToolbarGroup>
         <ToolbarItem
           className="ql-blockquote"
           onClick={() => onClick('blockquote')}
@@ -192,7 +182,15 @@ const Toolbar: React.SFC<ToolbarProps> = ({
         >
           <MdCode />
         </ToolbarItem>
-      </TooblarGroup>
+      </ToolbarGroup>
+      <Separator />
+      <ToolbarGroup>
+        {forMarkdown ? null : (
+          <ToolbarItem onClick={onConvertToMarkdown}>
+            <FaMarkdown />
+          </ToolbarItem>
+        )}
+      </ToolbarGroup>
     </ToolbarBlock>
   );
 };
