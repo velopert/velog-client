@@ -14,6 +14,8 @@ import TitleTextarea from './TitleTextarea';
 import { getScrollTop } from '../../lib/utils';
 import convertToMarkdown from '../../lib/convertToMarkdown';
 
+import PopupBase from '../common/PopupBase';
+
 Quill.register('modules/markdownShortcuts', MarkdownShortcuts);
 
 export interface QuillEditorProps {}
@@ -78,6 +80,20 @@ const Editor = styled.div`
       overflow-x: auto;
     }
 
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
+
+    p + h1,
+    p + h2,
+    p + h3,
+    p + h4 {
+      margin-top: 1.5em;
+    }
     ul,
     ol {
       padding-left: 0;
@@ -110,6 +126,11 @@ const Editor = styled.div`
       }
     }
     ${postStyles}
+
+    p + blockquote, blockquote + p {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
   }
   .ql-editor.ql-blank::before {
     left: 0px;
@@ -418,6 +439,7 @@ export default class QuillEditor extends React.Component<
             />
           )}
         </Editor>
+        <PopupBase visible={true} />
       </QuillEditorWrapper>
     );
   }
