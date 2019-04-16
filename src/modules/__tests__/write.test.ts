@@ -9,6 +9,7 @@ describe('write redux module', () => {
     expect(state).toEqual({
       markdown: '',
       title: '',
+      mode: 'WYSIWYG',
     });
   });
   describe('action handlers', () => {
@@ -21,6 +22,13 @@ describe('write redux module', () => {
       let state = getInitialState();
       state = reducer(state, write.changeTitle('World'));
       expect(state.title).toBe('World');
+    });
+    it('CONVERT_EDITOR_MODE', () => {
+      let state = getInitialState();
+      state = reducer(state, write.convertEditorMode());
+      expect(state.mode).toBe('MARKDOWN');
+      state = reducer(state, write.convertEditorMode());
+      expect(state.mode).toBe('WYSIWYG');
     });
   });
 });

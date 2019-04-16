@@ -23,6 +23,8 @@ const ButtonBlock = styled.button<{ color: ColorType }>`
     background: ${props => buttonColorMap[props.color].hoverBackground};
   }
   border-radius: 4px;
+  padding-top: 0;
+  padding-bottom: 0;
 `;
 
 interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {

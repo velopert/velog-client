@@ -16,6 +16,7 @@ import convertToMarkdown from '../../lib/convertToMarkdown';
 import PopupOKCancel from '../common/PopupOKCancel';
 
 import PopupBase from '../common/PopupBase';
+import AskChangeEditor from './AskChangeEditor';
 
 Quill.register('modules/markdownShortcuts', MarkdownShortcuts);
 
@@ -30,6 +31,7 @@ export interface QuillEditorState {
   };
   addLinkDefaultValue: string;
   shadow: boolean;
+  askChangeEditor: boolean;
 }
 
 const StyledTitleTextarea = styled(TitleTextarea)`
@@ -157,6 +159,7 @@ export default class QuillEditor extends React.Component<
     },
     addLinkDefaultValue: '',
     shadow: false,
+    askChangeEditor: false,
   };
 
   handleScroll = () => {
@@ -397,10 +400,19 @@ export default class QuillEditor extends React.Component<
     this.setState({ addLink: false });
   };
 
-  handleConvertToMarkdown = () => {
-    if (!this.quill) return;
-    const html = this.quill.root.innerHTML;
-    console.log(convertToMarkdown(html));
+  handleAskChangeEditor = () => {
+    this.setState({
+      askChangeEditor: true,
+    });
+    // if (!this.quill) return;
+    // const html = this.quill.root.innerHTML;
+    // console.log(convertToMarkdown(html));
+  };
+
+  handleCancelChangeEditor = () => {
+    this.setState({
+      askChangeEditor: false,
+    });
   };
 
   public render() {
@@ -408,6 +420,7 @@ export default class QuillEditor extends React.Component<
       addLink,
       addLinkPosition,
       titleFocus,
+      askChangeEditor,
       addLinkDefaultValue,
       shadow,
     } = this.state;
@@ -426,7 +439,7 @@ export default class QuillEditor extends React.Component<
         <Toolbar
           shadow={shadow}
           mode="WYSIWYG"
-          onConvertToMarkdown={this.handleConvertToMarkdown}
+          onConvertToMarkdown={this.handleAskChangeEditor}
         />
         <Editor>
           <div ref={this.editor} tabIndex={2} />
@@ -440,6 +453,10 @@ export default class QuillEditor extends React.Component<
             />
           )}
         </Editor>
+        <AskChangeEditor
+          visible={askChangeEditor}
+          onCancel={this.handleCancelChangeEditor}
+        />
       </QuillEditorWrapper>
     );
   }

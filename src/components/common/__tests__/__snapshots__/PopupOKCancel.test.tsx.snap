@@ -24,13 +24,13 @@ exports[`PopupOKCancel matches snapshot 1`] = `
           class="button-area"
         >
           <button
-            class="sc-bxivhb gSCPGr"
+            class="sc-bxivhb jsqGIL"
             color="gray"
           >
             취소
           </button>
           <button
-            class="sc-bxivhb iVzCmN"
+            class="sc-bxivhb dUoVUJ"
             color="teal"
           >
             확인
