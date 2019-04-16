@@ -92,7 +92,7 @@ const AuthModal: React.SFC<AuthModalProps> = ({
 }) => {
   const [closed, setClosed] = useState(true);
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout | null = null;
+    let timeoutId: number | null = null;
     if (visible) {
       setClosed(false);
     } else {

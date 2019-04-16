@@ -1,8 +1,10 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import palette from '../../lib/styles/palette';
+import palette, { buttonColorMap } from '../../lib/styles/palette';
 
-const ButtonBlock = styled.button<{ theme: string }>`
+type ColorType = 'teal' | 'gray' | 'darkgray';
+
+const ButtonBlock = styled.button<{ color: ColorType }>`
   display: inline-flex;
   align-items: center;
   height: 2rem;
@@ -13,36 +15,32 @@ const ButtonBlock = styled.button<{ theme: string }>`
   cursor: pointer;
   outline: none;
   border: none;
-
-  ${props =>
-    props.theme === 'default' &&
-    css`
-      background: ${palette.gray8};
-      color: white;
-      border-radius: 1rem;
-
-      &:hover,
-      &:focus {
-        background: ${palette.gray6};
-      }
-    `}
+  color: white;
+  background: ${props => buttonColorMap[props.color].background};
+  color: ${props => buttonColorMap[props.color].color};
+  &:hover,
+  &:focus {
+    background: ${props => buttonColorMap[props.color].hoverBackground};
+  }
+  border-radius: 4px;
 `;
 
 interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
-  theme?: string;
+  color?: ColorType;
 }
 
-const Button: React.SFC<ButtonProps> = ({ theme, children, ref, ...rest }) => {
+const Button: React.SFC<ButtonProps> = ({
+  children,
+  ref,
+  color = 'teal',
+  ...rest
+}) => {
   const htmlProps = rest as any;
   return (
-    <ButtonBlock theme={theme} {...htmlProps}>
+    <ButtonBlock color={color} {...htmlProps}>
       {children}
     </ButtonBlock>
   );
-};
-
-Button.defaultProps = {
-  theme: 'default', // black button
 };
 
 export default Button;

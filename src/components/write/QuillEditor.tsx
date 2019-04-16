@@ -13,6 +13,7 @@ import postStyles from '../../lib/styles/postStyles';
 import TitleTextarea from './TitleTextarea';
 import { getScrollTop } from '../../lib/utils';
 import convertToMarkdown from '../../lib/convertToMarkdown';
+import PopupOKCancel from '../common/PopupOKCancel';
 
 import PopupBase from '../common/PopupBase';
 
@@ -439,7 +440,6 @@ export default class QuillEditor extends React.Component<
             />
           )}
         </Editor>
-        <PopupBase visible={true} />
       </QuillEditorWrapper>
     );
   }

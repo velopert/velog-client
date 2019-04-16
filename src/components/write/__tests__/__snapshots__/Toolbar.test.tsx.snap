@@ -3,7 +3,7 @@
 exports[`Toolbar matches snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa dpLdTa"
+    class="sc-bdVaJa cjvcs"
     id="toolbar"
   >
     <div
@@ -188,6 +188,12 @@ exports[`Toolbar matches snapshot 1`] = `
         </svg>
       </button>
     </div>
+    <div
+      class="sc-ifAKCX eqJNNy"
+    />
+    <div
+      class="sc-bwzfXH bgRFUk"
+    />
   </div>
 </div>
 `;

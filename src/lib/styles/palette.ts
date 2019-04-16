@@ -34,4 +34,28 @@ const palette = {
   red9: '#c92a2a',
 };
 
+export const buttonColorMap: {
+  [color: string]: {
+    background: string;
+    color: string;
+    hoverBackground: string;
+  };
+} = {
+  teal: {
+    background: palette.teal6,
+    color: 'white',
+    hoverBackground: palette.teal5,
+  },
+  gray: {
+    background: palette.gray2,
+    color: palette.gray7,
+    hoverBackground: palette.gray1,
+  },
+  darkGray: {
+    background: palette.gray8,
+    color: 'white',
+    hoverBackground: palette.gray6,
+  },
+};
+
 export default palette;

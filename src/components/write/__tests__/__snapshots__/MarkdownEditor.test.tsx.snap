@@ -18,7 +18,7 @@ exports[`MarkdownEditor matches snapshot 1`] = `
         />
       </div>
       <div
-        class="sc-bwzfXH evPSUu"
+        class="sc-bwzfXH knqGhr"
         id="toolbar"
       >
         <div
@@ -203,6 +203,12 @@ exports[`MarkdownEditor matches snapshot 1`] = `
             </svg>
           </button>
         </div>
+        <div
+          class="sc-EHOje cbmVMA"
+        />
+        <div
+          class="sc-htpNat jgwOvs"
+        />
       </div>
       <div
         class="sc-dnqmqq iuihSe"

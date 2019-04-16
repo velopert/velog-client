@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PopupOKCancel matches snapshot 1`] = `
+<div>
+  <div
+    class="sc-bdVaJa kNCPvv"
+  />
+  <div
+    class="sc-bwzfXH fIoYbF"
+  >
+    <div
+      class="sc-htpNat rpSHm"
+    >
+      <div
+        class="sc-ifAKCX jgCToZ"
+      >
+        <h3>
+          제목
+        </h3>
+        <p>
+          내용
+        </p>
+        <div
+          class="button-area"
+        >
+          <button
+            class="sc-bxivhb gSCPGr"
+            color="gray"
+          >
+            취소
+          </button>
+          <button
+            class="sc-bxivhb iVzCmN"
+            color="teal"
+          >
+            확인
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

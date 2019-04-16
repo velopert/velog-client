@@ -1,7 +1,8 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import OpaqueLayer from './OpaqueLayer';
 import zIndexes from '../../lib/styles/zIndexes';
+import transitions from '../../lib/styles/transitions';
 
 const PopupBaseBlock = styled.div`
   position: fixed;
@@ -13,24 +14,55 @@ const PopupBaseBlock = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  & > .wrapper {
-    width: 25rem;
-    background: white;
-    padding: 2rem 1.5rem;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.09);
-  }
+`;
+
+const PopupWrapper = styled.div<{ visible: boolean }>`
+  width: 25rem;
+  border-radius: 4px;
+  background: white;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.09);
+  ${props =>
+    props.visible
+      ? css`
+          animation: ${transitions.popInFromBottom} 0.4s forwards ease-in-out;
+        `
+      : css`
+          animation: ${transitions.popOutToBottom} 0.2s forwards ease-in-out;
+        `}
 `;
 
 interface PopupBaseProps {
   visible: boolean;
 }
 
-const PopupBase: React.SFC<PopupBaseProps> = ({ visible }) => {
+const { useState, useEffect } = React;
+
+const PopupBase: React.SFC<PopupBaseProps> = ({ visible, children }) => {
+  const [closed, setClosed] = useState(true);
+  useEffect(() => {
+    let timeoutId: number | null = null;
+    if (visible) {
+      setClosed(false);
+    } else {
+      timeoutId = setTimeout(() => {
+        setClosed(true);
+      }, 200);
+    }
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [visible]);
+
+  if (!visible && closed) return null;
+
   return (
     <>
       <OpaqueLayer visible={visible} />
       <PopupBaseBlock>
-        <div className="wrapper">Hey tehre!</div>
+        <PopupWrapper visible={visible}>{children}</PopupWrapper>
       </PopupBaseBlock>
     </>
   );

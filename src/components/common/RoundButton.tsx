@@ -1,33 +1,9 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import palette from '../../lib/styles/palette';
+import palette, { buttonColorMap } from '../../lib/styles/palette';
 import { Route } from 'react-router';
 
 type ButtonSize = 'SMALL' | 'DEFAULT' | 'LARGE';
-
-const colorMap: {
-  [color: string]: {
-    background: string;
-    color: string;
-    hoverBackground: string;
-  };
-} = {
-  teal: {
-    background: palette.teal6,
-    color: 'white',
-    hoverBackground: palette.teal5,
-  },
-  gray: {
-    background: palette.gray2,
-    color: palette.gray7,
-    hoverBackground: palette.gray1,
-  },
-  darkGray: {
-    background: palette.gray8,
-    color: 'white',
-    hoverBackground: palette.gray6,
-  },
-};
 
 type RoundButtonBlockProps = {
   inline?: boolean;
@@ -77,20 +53,20 @@ const RoundButtonBlock = styled.button<RoundButtonBlockProps>`
   border: none;
   outline: none;
   font-weight: bold;
-  background: ${props => colorMap[props.color].background};
-  color: ${props => colorMap[props.color].color};
+  background: ${props => buttonColorMap[props.color].background};
+  color: ${props => buttonColorMap[props.color].color};
   &:hover {
-    background: ${props => colorMap[props.color].hoverBackground};
+    background: ${props => buttonColorMap[props.color].hoverBackground};
   }
 
   ${props =>
     props.border &&
     css<RoundButtonBlockProps>`
       background: transparent;
-      border: 1px solid ${props => colorMap[props.color].background};
-      color: ${props => colorMap[props.color].background};
+      border: 1px solid ${props => buttonColorMap[props.color].background};
+      color: ${props => buttonColorMap[props.color].background};
       &:hover {
-        background: ${props => colorMap[props.color].background};
+        background: ${props => buttonColorMap[props.color].background};
         color: white;
       }
     `}
