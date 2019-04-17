@@ -7,17 +7,20 @@ const AskChangeEditorBlock = styled.div``;
 interface AskChangeEditorProps {
   visible: boolean;
   onCancel: () => void;
+  onConfirm: () => void;
 }
 
 const AskChangeEditor: React.FC<AskChangeEditorProps> = ({
   visible,
   onCancel,
+  onConfirm,
 }) => {
   return (
     <PopupOKCancel
       visible={visible}
       title="마크다운 에디터로 전환"
       onCancel={onCancel}
+      onConfirm={onConfirm}
     >
       에디터 모드를 전환하시겠습니까?
       <br />

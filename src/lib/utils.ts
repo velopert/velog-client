@@ -27,3 +27,8 @@ export function createReducer<S>(handlers: Handlers<S>, initialState: S) {
     return handler(state, action);
   };
 }
+
+export function detectJSDOM() {
+  if (typeof navigator === 'undefined') return false;
+  return navigator.userAgent.includes('jsdom');
+}

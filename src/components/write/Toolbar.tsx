@@ -186,7 +186,7 @@ const Toolbar: React.SFC<ToolbarProps> = ({
       <Separator />
       <ToolbarGroup>
         {forMarkdown ? null : (
-          <ToolbarItem onClick={onConvertToMarkdown}>
+          <ToolbarItem data-testid="mdconvert" onClick={onConvertToMarkdown}>
             <FaMarkdown />
           </ToolbarItem>
         )}

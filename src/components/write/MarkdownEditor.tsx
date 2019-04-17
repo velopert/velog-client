@@ -524,7 +524,11 @@ ${selected}
     const { shadow, addLink } = this.state;
     const { title } = this.props;
     return (
-      <MarkdownEditorBlock ref={this.block} onScroll={this.handleScroll}>
+      <MarkdownEditorBlock
+        ref={this.block}
+        onScroll={this.handleScroll}
+        data-testid="codemirror"
+      >
         <div className="wrapper">
           <PaddingWrapper>
             <TitleTextarea

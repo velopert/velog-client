@@ -4,6 +4,7 @@ exports[`MarkdownEditor matches snapshot 1`] = `
 <div>
   <div
     class="sc-htoDjs jVrSIz"
+    data-testid="codemirror"
   >
     <div
       class="wrapper"

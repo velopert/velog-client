@@ -12,14 +12,19 @@ export const convertEditorMode = createStandardAction(CONVERT_EDITOR_MODE)();
 type ChangeMarkdown = ReturnType<typeof changeMarkdown>;
 type ChangeTitle = ReturnType<typeof changeTitle>;
 
+export enum WriteMode {
+  MARKDOWN = 'MARKDOWN',
+  WYSIWYG = 'WYSIWYG',
+}
+
 export type WriteState = {
-  mode: 'MARKDOWN' | 'WYSIWYG';
+  mode: WriteMode;
   markdown: string;
   title: string;
 };
 
 const initialState: WriteState = {
-  mode: 'WYSIWYG',
+  mode: WriteMode.WYSIWYG,
   markdown: '',
   title: '',
 };
@@ -36,9 +41,10 @@ const write = createReducer(
     }),
     [CONVERT_EDITOR_MODE]: state => ({
       ...state,
-      mode: (state.mode === 'MARKDOWN' ? 'WYSIWYG' : 'MARKDOWN') as
-        | 'MARKDOWN'
-        | 'WYSIWYG',
+      mode:
+        state.mode === WriteMode.MARKDOWN
+          ? WriteMode.WYSIWYG
+          : WriteMode.MARKDOWN,
     }),
   },
   initialState,

@@ -11,7 +11,7 @@ import Toolbar from './Toolbar';
 import AddLink from './AddLink';
 import postStyles from '../../lib/styles/postStyles';
 import TitleTextarea from './TitleTextarea';
-import { getScrollTop } from '../../lib/utils';
+import { getScrollTop, detectJSDOM } from '../../lib/utils';
 import convertToMarkdown from '../../lib/convertToMarkdown';
 import PopupOKCancel from '../common/PopupOKCancel';
 
@@ -20,7 +20,9 @@ import AskChangeEditor from './AskChangeEditor';
 
 Quill.register('modules/markdownShortcuts', MarkdownShortcuts);
 
-export interface QuillEditorProps {}
+export interface QuillEditorProps {
+  onConvertEditorMode: () => void;
+}
 export interface QuillEditorState {
   titleFocus: boolean;
   editorFocus: boolean;
@@ -176,6 +178,9 @@ export default class QuillEditor extends React.Component<
   componentDidMount() {
     // bind scroll event
     document.addEventListener('scroll', this.handleScroll);
+    if (detectJSDOM()) {
+      return;
+    }
 
     // setup highlight.js
     if (!(window as any).HLJS_CONFIGURED) {
@@ -415,6 +420,13 @@ export default class QuillEditor extends React.Component<
     });
   };
 
+  handleConfirmChangeEditor = () => {
+    this.setState({
+      askChangeEditor: false,
+    });
+    this.props.onConvertEditorMode();
+  };
+
   public render() {
     const {
       addLink,
@@ -425,7 +437,7 @@ export default class QuillEditor extends React.Component<
       shadow,
     } = this.state;
     return (
-      <QuillEditorWrapper>
+      <QuillEditorWrapper data-testid="quill">
         <StyledTitleTextarea
           placeholder="제목을 입력하세요"
           onKeyDown={this.handleTitleKeyDown}
@@ -456,6 +468,7 @@ export default class QuillEditor extends React.Component<
         <AskChangeEditor
           visible={askChangeEditor}
           onCancel={this.handleCancelChangeEditor}
+          onConfirm={this.handleConfirmChangeEditor}
         />
       </QuillEditorWrapper>
     );
