@@ -11,11 +11,13 @@ import './atom-one-light.css';
 import palette from '../../lib/styles/palette';
 import Toolbar from './Toolbar';
 import AddLink from './AddLink';
+import { detectJSDOM } from '../../lib/utils';
 
 export interface MarkdownEditorProps {
   onChangeMarkdown: (markdown: string) => void;
   onChangeTitle: (title: string) => void;
   title: string;
+  markdown: string;
 }
 type MarkdownEditorState = {
   shadow: boolean;
@@ -110,6 +112,7 @@ export default class MarkdownEditor extends React.Component<
 
   initialize = () => {
     if (!this.editorElement.current) return;
+
     this.codemirror = CodeMirror.fromTextArea(this.editorElement.current, {
       mode: 'markdown',
       theme: 'one-light',
@@ -118,6 +121,8 @@ export default class MarkdownEditor extends React.Component<
       lineWrapping: true,
     });
     (window as any).codemirror = this.codemirror;
+    if (detectJSDOM()) return;
+    this.codemirror.setValue(this.props.markdown);
     this.codemirror.on('change', cm => {
       this.props.onChangeMarkdown(cm.getValue());
     });

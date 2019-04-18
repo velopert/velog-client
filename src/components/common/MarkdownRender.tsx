@@ -5,6 +5,7 @@ import htmlPlugin from 'remark-html';
 import prismPlugin from '../../lib/remark/prismPlugin';
 import prismThemes from '../../lib/styles/prismThemes';
 import palette from '../../lib/styles/palette';
+import breaks from 'remark-breaks';
 
 export interface MarkdownRenderProps {
   markdown: string;
@@ -51,6 +52,7 @@ const MarkdownRender: React.SFC<MarkdownRenderProps> = ({
   const [html, setHtml] = useState('');
   useEffect(() => {
     remark()
+      .use(breaks)
       .use(prismPlugin)
       .use(htmlPlugin)
       .process(markdown, (err: any, file: any) => {

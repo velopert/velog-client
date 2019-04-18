@@ -6,9 +6,15 @@ describe('QuillEditor', () => {
   const setup = (props: Partial<QuillEditorProps> = {}) => {
     const initialProps: QuillEditorProps = {
       onConvertEditorMode: () => undefined,
+      onChangeTitle: () => undefined,
+      title: '',
     };
     const utils = render(<QuillEditor {...initialProps} {...props} />);
+    const titleTextarea = utils.getByPlaceholderText(
+      '제목을 입력하세요',
+    ) as HTMLTextAreaElement;
     return {
+      titleTextarea,
       ...utils,
     };
   };
@@ -29,5 +35,23 @@ describe('QuillEditor', () => {
     const confirmButton = getByText('확인');
     fireEvent.click(confirmButton);
     expect(onConvertEditorMode).toBeCalled();
+  });
+  it('shows the title props', () => {
+    const { titleTextarea } = setup({
+      title: 'Hi there!',
+    });
+    expect(titleTextarea.value).toBe('Hi there!');
+  });
+  it('changes title textarea', () => {
+    const onChangeTitle = jest.fn();
+    const { titleTextarea } = setup({
+      onChangeTitle,
+    });
+    fireEvent.change(titleTextarea, {
+      target: {
+        value: '안녕하세요',
+      },
+    });
+    expect(onChangeTitle).toBeCalledWith('안녕하세요');
   });
 });

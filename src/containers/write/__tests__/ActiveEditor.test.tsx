@@ -35,12 +35,7 @@ describe('ActiveEditor', () => {
     fireEvent.click(convertButton);
     const confirmButton = getByText('확인');
     fireEvent.click(confirmButton);
-    await waitForElement(() => getByTestId('codemirror'));
-    // setTimeout(() => {
-    //   const element = queryByTestId('codemirrozr');
-    //   console.log(element);
-    //   expect(element).toBeTruthy();
-    // }, 200);
+
     getByTestId('codemirror');
   });
 });

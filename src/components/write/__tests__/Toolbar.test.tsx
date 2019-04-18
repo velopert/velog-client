@@ -5,7 +5,6 @@ import Toolbar, { ToolbarProps } from '../Toolbar';
 describe('Toolbar', () => {
   const setup = (props: Partial<ToolbarProps> = {}) => {
     const initialProps: ToolbarProps = {
-      visible: true,
       shadow: false,
       mode: 'MARKDOWN',
       onClick: () => {},

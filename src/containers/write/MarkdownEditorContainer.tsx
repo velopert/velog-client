@@ -7,6 +7,7 @@ import { changeMarkdown, changeTitle } from '../../modules/write';
 interface OwnProps {}
 interface StateProps {
   title: string;
+  markdown: string;
 }
 interface DispatchProps {
   changeMarkdown: typeof changeMarkdown;
@@ -18,10 +19,12 @@ const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = ({
   changeMarkdown,
   changeTitle,
   title,
+  markdown,
 }) => {
   return (
     <MarkdownEditor
       title={title}
+      markdown={markdown}
       onChangeMarkdown={changeMarkdown}
       onChangeTitle={changeTitle}
     />
@@ -31,6 +34,7 @@ const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = ({
 export default connect<StateProps, DispatchProps, OwnProps, RootState>(
   state => ({
     title: state.write.title,
+    markdown: state.write.markdown,
   }),
   {
     changeMarkdown,

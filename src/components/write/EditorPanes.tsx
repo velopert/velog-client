@@ -1,11 +1,13 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
+import transitions from '../../lib/styles/transitions';
 
 const EditorPanesBlock = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  animation: ${transitions.fadeIn} 0.5s forwards;
 `;
 const EditorPane = styled.div<{ shadow?: boolean }>`
   min-width: 0;

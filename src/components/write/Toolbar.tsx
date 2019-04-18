@@ -9,6 +9,7 @@ import {
   MdFormatQuote,
   MdImage,
   MdCode,
+  MdRemoveRedEye,
 } from 'react-icons/md';
 import palette from '../../lib/styles/palette';
 import zIndexes from '../../lib/styles/zIndexes';
@@ -94,7 +95,7 @@ export interface ToolbarProps {
   shadow: boolean;
   mode: 'MARKDOWN' | 'WYSIWYG';
   onClick?: Function;
-  onConvertToMarkdown?: () => void;
+  onConvert?: () => void;
 }
 
 const { useEffect, useState, useCallback } = React;
@@ -102,7 +103,7 @@ const Toolbar: React.SFC<ToolbarProps> = ({
   shadow,
   mode,
   onClick = () => {},
-  onConvertToMarkdown,
+  onConvert,
 }) => {
   const forMarkdown = mode === 'MARKDOWN';
   return (
@@ -185,8 +186,12 @@ const Toolbar: React.SFC<ToolbarProps> = ({
       </ToolbarGroup>
       <Separator />
       <ToolbarGroup>
-        {forMarkdown ? null : (
-          <ToolbarItem data-testid="mdconvert" onClick={onConvertToMarkdown}>
+        {forMarkdown ? (
+          <ToolbarItem data-testid="quillconvert" onClick={onConvert}>
+            <MdRemoveRedEye />
+          </ToolbarItem>
+        ) : (
+          <ToolbarItem data-testid="mdconvert" onClick={onConvert}>
             <FaMarkdown />
           </ToolbarItem>
         )}

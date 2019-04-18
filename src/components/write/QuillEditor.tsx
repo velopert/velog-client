@@ -21,7 +21,9 @@ import AskChangeEditor from './AskChangeEditor';
 Quill.register('modules/markdownShortcuts', MarkdownShortcuts);
 
 export interface QuillEditorProps {
-  onConvertEditorMode: () => void;
+  onConvertEditorMode: (markdown: string) => void;
+  onChangeTitle: (title: string) => void;
+  title: string;
 }
 export interface QuillEditorState {
   titleFocus: boolean;
@@ -132,8 +134,10 @@ const Editor = styled.div`
     }
     ${postStyles}
 
-    p + blockquote, blockquote + p {
+    p + blockquote {
       margin-top: 1rem;
+    }
+    blockquote + p {
       margin-bottom: 1rem;
     }
   }
@@ -409,9 +413,6 @@ export default class QuillEditor extends React.Component<
     this.setState({
       askChangeEditor: true,
     });
-    // if (!this.quill) return;
-    // const html = this.quill.root.innerHTML;
-    // console.log(convertToMarkdown(html));
   };
 
   handleCancelChangeEditor = () => {
@@ -424,10 +425,22 @@ export default class QuillEditor extends React.Component<
     this.setState({
       askChangeEditor: false,
     });
-    this.props.onConvertEditorMode();
+    if (detectJSDOM()) {
+      this.props.onConvertEditorMode('');
+      return;
+    }
+    if (!this.quill) return;
+    const html = this.quill.root.innerHTML;
+    const markdown = convertToMarkdown(html);
+    this.props.onConvertEditorMode(markdown);
+  };
+
+  handleChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    this.props.onChangeTitle(e.target.value);
   };
 
   public render() {
+    const { title } = this.props;
     const {
       addLink,
       addLinkPosition,
@@ -447,11 +460,13 @@ export default class QuillEditor extends React.Component<
           onFocus={this.handleTitleFocus}
           onBlur={this.handleTitleBlur}
           tabIndex={1}
+          onChange={this.handleChangeTitle}
+          value={title}
         />
         <Toolbar
           shadow={shadow}
           mode="WYSIWYG"
-          onConvertToMarkdown={this.handleAskChangeEditor}
+          onConvert={this.handleAskChangeEditor}
         />
         <Editor>
           <div ref={this.editor} tabIndex={2} />
