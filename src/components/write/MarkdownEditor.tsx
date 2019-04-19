@@ -12,10 +12,13 @@ import palette from '../../lib/styles/palette';
 import Toolbar from './Toolbar';
 import AddLink from './AddLink';
 import { detectJSDOM } from '../../lib/utils';
+import AskChangeEditor from './AskChangeEditor';
+import { WriteMode } from '../../modules/write';
 
 export interface MarkdownEditorProps {
   onChangeMarkdown: (markdown: string) => void;
   onChangeTitle: (title: string) => void;
+  onConvert: (markdown: string) => void;
   title: string;
   markdown: string;
 }
@@ -27,6 +30,7 @@ type MarkdownEditorState = {
     visible: boolean;
     stickToRight: boolean;
   };
+  askChangeEditor: boolean;
 };
 
 (window as any).CodeMirror = CodeMirror;
@@ -107,6 +111,7 @@ export default class MarkdownEditor extends React.Component<
       visible: false,
       stickToRight: false,
     },
+    askChangeEditor: false,
   };
   codemirror: EditorFromTextArea | null = null;
 
@@ -525,6 +530,27 @@ ${selected}
     this.props.onChangeTitle(e.target.value);
   };
 
+  handleAskConvert = () => {
+    this.setState({
+      askChangeEditor: true,
+    });
+  };
+
+  handleConfirmConvert = () => {
+    this.setState({
+      askChangeEditor: false,
+    });
+    if (!this.codemirror) return;
+    const markdown = this.codemirror.getValue();
+    this.props.onConvert(markdown);
+  };
+
+  handleCancelConvert = () => {
+    this.setState({
+      askChangeEditor: false,
+    });
+  };
+
   public render() {
     const { shadow, addLink } = this.state;
     const { title } = this.props;
@@ -546,6 +572,7 @@ ${selected}
             shadow={shadow}
             mode="MARKDOWN"
             onClick={this.handleToolbarClick}
+            onConvert={this.handleAskConvert}
           />
           <PaddingWrapper>
             {addLink.visible && (
@@ -561,6 +588,12 @@ ${selected}
             <textarea id="bla" ref={this.editorElement} />
           </PaddingWrapper>
         </div>
+        <AskChangeEditor
+          visible={this.state.askChangeEditor}
+          onConfirm={this.handleConfirmConvert}
+          onCancel={this.handleCancelConvert}
+          convertTo={WriteMode.WYSIWYG}
+        />
       </MarkdownEditorBlock>
     );
   }

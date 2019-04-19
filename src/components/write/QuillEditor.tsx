@@ -17,6 +17,7 @@ import PopupOKCancel from '../common/PopupOKCancel';
 
 import PopupBase from '../common/PopupBase';
 import AskChangeEditor from './AskChangeEditor';
+import { WriteMode } from '../../modules/write';
 
 Quill.register('modules/markdownShortcuts', MarkdownShortcuts);
 
@@ -432,7 +433,7 @@ export default class QuillEditor extends React.Component<
     if (!this.quill) return;
     const html = this.quill.root.innerHTML;
     const markdown = convertToMarkdown(html);
-    this.props.onConvertEditorMode(markdown);
+    this.props.onConvertEditorMode(markdown.replace(/\n\n/g, '\n'));
   };
 
   handleChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -481,6 +482,7 @@ export default class QuillEditor extends React.Component<
           )}
         </Editor>
         <AskChangeEditor
+          convertTo={WriteMode.MARKDOWN}
           visible={askChangeEditor}
           onCancel={this.handleCancelChangeEditor}
           onConfirm={this.handleConfirmChangeEditor}

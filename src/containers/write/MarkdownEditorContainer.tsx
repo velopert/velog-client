@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { RootState } from '../../modules';
 import { changeMarkdown, changeTitle } from '../../modules/write';
 
+import remark from 'remark';
+import htmlPlugin from 'remark-html';
+import breaks from 'remark-breaks';
+
 interface OwnProps {}
 interface StateProps {
   title: string;
@@ -21,12 +25,22 @@ const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = ({
   title,
   markdown,
 }) => {
+  const onConvert = (markdown: string) => {
+    remark()
+      .use(breaks)
+      .use(htmlPlugin)
+      .process(markdown, (err: any, file: any) => {
+        const html = String(file);
+        console.log(html);
+      });
+  };
   return (
     <MarkdownEditor
       title={title}
       markdown={markdown}
       onChangeMarkdown={changeMarkdown}
       onChangeTitle={changeTitle}
+      onConvert={onConvert}
     />
   );
 };

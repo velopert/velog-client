@@ -12,10 +12,12 @@ const PopupOKCancelBlock = styled.div`
     line-height: 1.5;
     font-weight: bold;
   }
-  p {
+  .message {
     line-height: 1.5;
-    font-size: 1.125rem;
+    font-size: 1rem;
     color: ${palette.gray7};
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
   .button-area {
     display: flex;
@@ -45,7 +47,7 @@ const PopupOKCancel: React.FC<PopupOKCancelProps> = ({
     <PopupBase visible={visible}>
       <PopupOKCancelBlock>
         {title && <h3>{title}</h3>}
-        <p>{children}</p>
+        <div className="message">{children}</div>
         <div className="button-area">
           <Button color="gray" onClick={onCancel}>
             취소

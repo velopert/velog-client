@@ -7,6 +7,8 @@ describe('MarkdownEditor', () => {
     const initialProps: MarkdownEditorProps = {
       onChangeMarkdown: () => {},
       onChangeTitle: () => {},
+      onConvert: (markdown: string) => {},
+      markdown: '',
       title: '',
     };
     const utils = render(<MarkdownEditor {...initialProps} {...props} />);
@@ -47,5 +49,18 @@ describe('MarkdownEditor', () => {
       title: 'hello world',
     });
     expect(utils.titleTextarea.value).toBe('hello world');
+  });
+
+  it('convert editor', () => {
+    const onConvert = jest.fn();
+    const { getByTestId, getByText } = setup({
+      onConvert,
+    });
+    const convertButton = getByTestId('quillconvert');
+    fireEvent.click(convertButton);
+    getByText('쉬운 에디터로 전환');
+    const confirmButton = getByText('확인');
+    fireEvent.click(confirmButton);
+    expect(onConvert).toBeCalled();
   });
 });
