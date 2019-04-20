@@ -11,7 +11,7 @@ import Toolbar from './Toolbar';
 import AddLink from './AddLink';
 import postStyles from '../../lib/styles/postStyles';
 import TitleTextarea from './TitleTextarea';
-import { getScrollTop, detectJSDOM } from '../../lib/utils';
+import { getScrollTop, detectJSDOM, getScrollBottom } from '../../lib/utils';
 import convertToMarkdown from '../../lib/convertToMarkdown';
 import PopupOKCancel from '../common/PopupOKCancel';
 
@@ -46,6 +46,7 @@ const StyledTitleTextarea = styled(TitleTextarea)`
 
 const QuillEditorWrapper = styled.div`
   padding-top: 5rem;
+  padding-bottom: 10rem;
   position: relative;
   /* display: flex;
   flex-direction: column;
@@ -181,6 +182,13 @@ export default class QuillEditor extends React.Component<
     }
   };
 
+  stickToBottomIfNeeded = () => {
+    const scrollBottom = getScrollBottom();
+    if (scrollBottom < 192) {
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  };
+
   componentDidMount() {
     // bind scroll event
     document.addEventListener('scroll', this.handleScroll);
@@ -313,6 +321,7 @@ export default class QuillEditor extends React.Component<
     const getIndent = (text: string) => text.length - text.trimLeft().length;
 
     const onEnter = () => {
+      this.stickToBottomIfNeeded();
       // handle keep-indent
       const text = quill.getText();
       const selection = quill.getSelection();
@@ -400,7 +409,9 @@ export default class QuillEditor extends React.Component<
 
   handleAddLink = (value: string) => {
     if (!this.quill) return;
+    const scrollTop = getScrollTop();
     this.quill.format('link', value);
+    window.scrollTo(0, scrollTop); // Chrome scroll jumping bug
     this.setState({
       addLink: false,
     });
