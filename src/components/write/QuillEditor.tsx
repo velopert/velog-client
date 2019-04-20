@@ -25,6 +25,7 @@ export interface QuillEditorProps {
   onConvertEditorMode: (markdown: string) => void;
   onChangeTitle: (title: string) => void;
   title: string;
+  initialHtml: string;
 }
 export interface QuillEditorState {
   titleFocus: boolean;
@@ -100,7 +101,7 @@ const Editor = styled.div`
     p + h2,
     p + h3,
     p + h4 {
-      margin-top: 1.5em;
+      margin-top: 1em;
     }
     ul,
     ol {
@@ -355,6 +356,11 @@ export default class QuillEditor extends React.Component<
         }
       }
     });
+
+    const { initialHtml } = this.props;
+    if (initialHtml) {
+      quill.clipboard.dangerouslyPasteHTML(initialHtml);
+    }
 
     // quill.keyboard.addBinding(
     //   { key: 'backspace' },

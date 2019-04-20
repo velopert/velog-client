@@ -8,6 +8,7 @@ describe('QuillEditor', () => {
       onConvertEditorMode: () => undefined,
       onChangeTitle: () => undefined,
       title: '',
+      initialHtml: '',
     };
     const utils = render(<QuillEditor {...initialProps} {...props} />);
     const titleTextarea = utils.getByPlaceholderText(

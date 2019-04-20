@@ -16,6 +16,7 @@ export type QuillEditorContainerProps = OwnProps & StateProps & DispatchProps;
 const mapStateToProps = ({ write }: RootState) => ({
   mode: write.mode,
   title: write.title,
+  html: write.html,
 });
 const mapDispatchToProps = {
   convertEditorMode,
@@ -29,6 +30,7 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
   changeMarkdown,
   convertEditorMode,
   changeTitle,
+  html,
 }) => {
   const onConvertEditorMode = (markdown: string) => {
     batch(() => {
@@ -42,6 +44,7 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
       title={title}
       onConvertEditorMode={onConvertEditorMode}
       onChangeTitle={onChangeTitle}
+      initialHtml={html}
     />
   );
 };

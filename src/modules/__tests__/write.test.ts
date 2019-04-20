@@ -10,6 +10,7 @@ describe('write redux module', () => {
       markdown: '',
       title: '',
       mode: 'WYSIWYG',
+      html: '',
     });
   });
   describe('action handlers', () => {
@@ -29,6 +30,12 @@ describe('write redux module', () => {
       expect(state.mode).toBe('MARKDOWN');
       state = reducer(state, write.convertEditorMode());
       expect(state.mode).toBe('WYSIWYG');
+    });
+    it('SET_HTML', () => {
+      let state = getInitialState();
+      const html = '<p>Hello World</p>';
+      state = reducer(state, write.setHtml(html));
+      expect(state.html).toBe(html);
     });
   });
 });
