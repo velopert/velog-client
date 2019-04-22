@@ -338,9 +338,7 @@ export default class QuillEditor extends React.Component<
 
       // indent
       if (format['code-block']) {
-        console.log(`"${lastLine}"`);
         let indentation = getIndent(lastLine);
-        console.log(indentation);
         const shouldExtraIndent = (() => {
           return /\)\:$/.test(lastLine) || /\)? ?{$/.test(lastLine);
         })();
