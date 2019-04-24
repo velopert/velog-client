@@ -7,6 +7,7 @@ import {
   changeTitle,
   changeMarkdown,
 } from '../../modules/write';
+import TagInputContainer from './TagInputContainer';
 
 interface OwnProps {}
 type StateProps = ReturnType<typeof mapStateToProps>;
@@ -45,6 +46,7 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
       onConvertEditorMode={onConvertEditorMode}
       onChangeTitle={onChangeTitle}
       initialHtml={html}
+      tagInput={<TagInputContainer />}
     />
   );
 };

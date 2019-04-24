@@ -14,6 +14,7 @@ import AddLink from './AddLink';
 import { detectJSDOM } from '../../lib/utils';
 import AskChangeEditor from './AskChangeEditor';
 import { WriteMode } from '../../modules/write';
+import TagInput from './TagInput';
 
 export interface MarkdownEditorProps {
   onChangeMarkdown: (markdown: string) => void;
@@ -21,6 +22,7 @@ export interface MarkdownEditorProps {
   onConvert: (markdown: string) => void;
   title: string;
   markdown: string;
+  tagInput: React.ReactNode;
 }
 type MarkdownEditorState = {
   shadow: boolean;
@@ -90,6 +92,15 @@ const MarkdownEditorBlock = styled.div`
       font-style: italic;
     }
   }
+`;
+
+const HorizontalBar = styled.div`
+  background: ${palette.gray7};
+  height: 6px;
+  width: 4rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 1px;
 `;
 
 const PaddingWrapper = styled.div`
@@ -553,7 +564,7 @@ ${selected}
 
   public render() {
     const { shadow, addLink } = this.state;
-    const { title } = this.props;
+    const { title, tagInput } = this.props;
     return (
       <MarkdownEditorBlock
         ref={this.block}
@@ -567,6 +578,8 @@ ${selected}
               onChange={this.handleTitleChange}
               value={title}
             />
+            <HorizontalBar />
+            {tagInput}
           </PaddingWrapper>
           <Toolbar
             shadow={shadow}

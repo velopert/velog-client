@@ -11,6 +11,7 @@ describe('write redux module', () => {
       title: '',
       mode: 'WYSIWYG',
       html: '',
+      tags: [],
     });
   });
   describe('action handlers', () => {
@@ -36,6 +37,12 @@ describe('write redux module', () => {
       const html = '<p>Hello World</p>';
       state = reducer(state, write.setHtml(html));
       expect(state.html).toBe(html);
+    });
+    it('CHANGE_TAGS', () => {
+      let state = getInitialState();
+      const nextTags = ['태그1', '태그2'];
+      state = reducer(state, write.changeTags(nextTags));
+      expect(state.tags).toBe(nextTags);
     });
   });
 });

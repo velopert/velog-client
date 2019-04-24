@@ -42,11 +42,23 @@ const popOutToBottom = keyframes`
     transform: translateY(400px) scale(0.75);
   }`;
 
+const popIn = keyframes`
+  0% {
+    opacity: 0.7;
+    transform: scale3d(0.8, 0.8, 1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+`;
+
 const transitions = {
   fadeIn,
   fadeOut,
   popInFromBottom,
   popOutToBottom,
+  popIn,
 };
 
 export default transitions;

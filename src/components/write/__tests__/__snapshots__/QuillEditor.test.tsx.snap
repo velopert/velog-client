@@ -3,14 +3,17 @@
 exports[`QuillEditor matches snapshot 1`] = `
 <div>
   <div
-    class="sc-fjdhpX OtBLQ"
+    class="sc-fjdhpX jdbyiP"
     data-testid="quill"
   >
     <textarea
-      class="sc-gzVnrw sc-jTzLTM clOvSP"
+      class="sc-gzVnrw sc-jTzLTM dEPvcD"
       placeholder="제목을 입력하세요"
       style="height: 0px;"
       tabindex="1"
+    />
+    <div
+      class="sc-jzJRlG bcnBQv"
     />
     <div
       class="sc-bdVaJa cuQacX"
@@ -240,7 +243,7 @@ exports[`QuillEditor matches snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-jzJRlG dYnpmW"
+      class="sc-cSHVUG izPnWC"
     >
       <div
         tabindex="2"

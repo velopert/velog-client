@@ -10,12 +10,15 @@ exports[`MarkdownEditor matches snapshot 1`] = `
       class="wrapper"
     >
       <div
-        class="sc-fjdhpX eFQAsj"
+        class="sc-jzJRlG cocNVz"
       >
         <textarea
-          class="sc-bdVaJa cuPLSE"
+          class="sc-bdVaJa kRoaVK"
           placeholder="제목을 입력하세요"
           style="height: 0px;"
+        />
+        <div
+          class="sc-fjdhpX gWglfo"
         />
       </div>
       <div
@@ -230,7 +233,7 @@ exports[`MarkdownEditor matches snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-fjdhpX eFQAsj"
+        class="sc-jzJRlG cocNVz"
       >
         <textarea
           id="bla"

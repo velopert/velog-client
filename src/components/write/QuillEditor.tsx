@@ -18,6 +18,7 @@ import PopupOKCancel from '../common/PopupOKCancel';
 import PopupBase from '../common/PopupBase';
 import AskChangeEditor from './AskChangeEditor';
 import { WriteMode } from '../../modules/write';
+import TagInput from './TagInput';
 
 Quill.register('modules/markdownShortcuts', MarkdownShortcuts);
 
@@ -26,6 +27,7 @@ export interface QuillEditorProps {
   onChangeTitle: (title: string) => void;
   title: string;
   initialHtml: string;
+  tagInput: React.ReactNode;
 }
 export interface QuillEditorState {
   titleFocus: boolean;
@@ -40,9 +42,7 @@ export interface QuillEditorState {
   askChangeEditor: boolean;
 }
 
-const StyledTitleTextarea = styled(TitleTextarea)`
-  margin-bottom: 2rem;
-`;
+const StyledTitleTextarea = styled(TitleTextarea)``;
 
 const QuillEditorWrapper = styled.div`
   padding-top: 5rem;
@@ -60,6 +60,15 @@ const QuillEditorWrapper = styled.div`
 
   width: 768px;
   margin: 0 auto;
+`;
+
+const HorizontalBar = styled.div`
+  background: ${palette.gray7};
+  height: 6px;
+  width: 4rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 1px;
 `;
 
 const Editor = styled.div`
@@ -397,11 +406,11 @@ export default class QuillEditor extends React.Component<
 
   // blocks [Enter] key
   handleTitleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if ([9, 13].includes(e.keyCode)) {
+    if ([13].includes(e.keyCode)) {
       e.preventDefault();
-      if (this.quill) {
-        this.quill.focus();
-      }
+      // if (this.quill) {
+      //   this.quill.focus();
+      // }
     }
   };
 
@@ -456,7 +465,7 @@ export default class QuillEditor extends React.Component<
   };
 
   public render() {
-    const { title } = this.props;
+    const { title, tagInput } = this.props;
     const {
       addLink,
       addLinkPosition,
@@ -479,6 +488,8 @@ export default class QuillEditor extends React.Component<
           onChange={this.handleChangeTitle}
           value={title}
         />
+        <HorizontalBar />
+        {tagInput}
         <Toolbar
           shadow={shadow}
           mode="WYSIWYG"
