@@ -6,8 +6,10 @@ import {
   convertEditorMode,
   changeTitle,
   changeMarkdown,
+  WriteMode,
 } from '../../modules/write';
 import TagInputContainer from './TagInputContainer';
+import WriteFooter from '../../components/write/WriteFooter';
 
 interface OwnProps {}
 type StateProps = ReturnType<typeof mapStateToProps>;
@@ -47,6 +49,7 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
       onChangeTitle={onChangeTitle}
       initialHtml={html}
       tagInput={<TagInputContainer />}
+      footer={<WriteFooter />}
     />
   );
 };

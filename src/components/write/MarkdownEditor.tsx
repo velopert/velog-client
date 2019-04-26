@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import 'codemirror/lib/codemirror.css';
 // import 'codemirror/theme/dracula.css';
 import CodeMirror, { EditorFromTextArea } from 'codemirror';
@@ -15,6 +15,8 @@ import { detectJSDOM } from '../../lib/utils';
 import AskChangeEditor from './AskChangeEditor';
 import { WriteMode } from '../../modules/write';
 import TagInput from './TagInput';
+import WriteFooter from './WriteFooter';
+import zIndexes from '../../lib/styles/zIndexes';
 
 export interface MarkdownEditorProps {
   onChangeMarkdown: (markdown: string) => void;
@@ -23,6 +25,7 @@ export interface MarkdownEditorProps {
   title: string;
   markdown: string;
   tagInput: React.ReactNode;
+  footer: React.ReactNode;
 }
 type MarkdownEditorState = {
   shadow: boolean;
@@ -33,6 +36,7 @@ type MarkdownEditorState = {
     stickToRight: boolean;
   };
   askChangeEditor: boolean;
+  clientWidth: number;
 };
 
 (window as any).CodeMirror = CodeMirror;
@@ -50,13 +54,14 @@ const MarkdownEditorBlock = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
+    z-index: 100;
     background: ${palette.gray9};
     /* -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75); */
   }
 
   & > .wrapper {
     padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-bottom: 10rem;
   }
   .CodeMirror {
     height: auto;
@@ -107,11 +112,19 @@ const PaddingWrapper = styled.div`
   padding-left: 3rem;
   padding-right: 3rem;
 `;
+
+const FooterWrapper = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: ${zIndexes.WriteFooter};
+`;
 export default class MarkdownEditor extends React.Component<
   MarkdownEditorProps,
   MarkdownEditorState
 > {
   block = React.createRef<HTMLDivElement>();
+  toolbarElement = React.createRef<HTMLDivElement>();
   editorElement = React.createRef<HTMLTextAreaElement>();
   toolbarTop = 0;
   state = {
@@ -123,6 +136,7 @@ export default class MarkdownEditor extends React.Component<
       stickToRight: false,
     },
     askChangeEditor: false,
+    clientWidth: 0,
   };
   codemirror: EditorFromTextArea | null = null;
 
@@ -141,23 +155,55 @@ export default class MarkdownEditor extends React.Component<
     this.codemirror.setValue(this.props.markdown);
     this.codemirror.on('change', cm => {
       this.props.onChangeMarkdown(cm.getValue());
+      this.stickToBottomIfNeeded();
     });
+  };
+
+  stickToBottomIfNeeded = () => {
+    if (!this.block.current) return;
+    const { scrollHeight, scrollTop, clientHeight } = this.block.current;
+    const scrollBottom = scrollHeight - scrollTop - clientHeight;
+    if (scrollBottom < 192) {
+      this.block.current.scrollTo(0, scrollHeight);
+    }
   };
 
   handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const { shadow } = this.state;
     const nextShadow = e.currentTarget.scrollTop > this.toolbarTop;
+    console.log(e.currentTarget.scrollTop, this.toolbarTop);
     if (shadow !== nextShadow) {
       this.setState({
         shadow: nextShadow,
       });
     }
   };
+
+  handleResize = () => {
+    if (this.block.current) {
+      this.setState({
+        clientWidth: this.block.current.clientWidth,
+      });
+    }
+  };
+
   componentDidMount() {
     this.initialize();
+    setTimeout(() => {
+      if (this.toolbarElement.current) {
+        this.toolbarTop = this.toolbarElement.current.getBoundingClientRect().top;
+      }
+    });
     if (this.block.current) {
-      this.toolbarTop = this.block.current.getBoundingClientRect().top;
+      this.setState({
+        clientWidth: this.block.current.clientWidth,
+      });
     }
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
   }
 
   handleOpenAddLink = () => {
@@ -563,8 +609,8 @@ ${selected}
   };
 
   public render() {
-    const { shadow, addLink } = this.state;
-    const { title, tagInput } = this.props;
+    const { shadow, addLink, clientWidth } = this.state;
+    const { title, tagInput, footer } = this.props;
     return (
       <MarkdownEditorBlock
         ref={this.block}
@@ -586,6 +632,7 @@ ${selected}
             mode="MARKDOWN"
             onClick={this.handleToolbarClick}
             onConvert={this.handleAskConvert}
+            innerRef={this.toolbarElement}
           />
           <PaddingWrapper>
             {addLink.visible && (
@@ -607,6 +654,7 @@ ${selected}
           onCancel={this.handleCancelConvert}
           convertTo={WriteMode.WYSIWYG}
         />
+        <FooterWrapper style={{ width: clientWidth }}>{footer}</FooterWrapper>
       </MarkdownEditorBlock>
     );
   }

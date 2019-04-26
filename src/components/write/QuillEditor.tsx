@@ -19,6 +19,7 @@ import PopupBase from '../common/PopupBase';
 import AskChangeEditor from './AskChangeEditor';
 import { WriteMode } from '../../modules/write';
 import TagInput from './TagInput';
+import zIndexes from '../../lib/styles/zIndexes';
 
 Quill.register('modules/markdownShortcuts', MarkdownShortcuts);
 
@@ -27,7 +28,9 @@ export interface QuillEditorProps {
   onChangeTitle: (title: string) => void;
   title: string;
   initialHtml: string;
+
   tagInput: React.ReactNode;
+  footer: React.ReactNode;
 }
 export interface QuillEditorState {
   titleFocus: boolean;
@@ -157,6 +160,14 @@ const Editor = styled.div`
     left: 0px;
     color: ${palette.gray5};
   }
+`;
+
+const FooterWrapper = styled.div`
+  position: fixed;
+  z-index: ${zIndexes.WriteFooter};
+  left: 0;
+  bottom: 0;
+  width: 100%;
 `;
 
 export default class QuillEditor extends React.Component<
@@ -465,7 +476,7 @@ export default class QuillEditor extends React.Component<
   };
 
   public render() {
-    const { title, tagInput } = this.props;
+    const { title, tagInput, footer } = this.props;
     const {
       addLink,
       addLinkPosition,
@@ -513,6 +524,7 @@ export default class QuillEditor extends React.Component<
           onCancel={this.handleCancelChangeEditor}
           onConfirm={this.handleConfirmChangeEditor}
         />
+        <FooterWrapper>{footer}</FooterWrapper>
       </QuillEditorWrapper>
     );
   }

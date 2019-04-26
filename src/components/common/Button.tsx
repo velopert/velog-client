@@ -2,9 +2,9 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import palette, { buttonColorMap } from '../../lib/styles/palette';
 
-type ColorType = 'teal' | 'gray' | 'darkgray';
+type ColorType = 'teal' | 'gray' | 'darkGray';
 
-const ButtonBlock = styled.button<{ color: ColorType }>`
+const ButtonBlock = styled.button<{ color: ColorType; inline: boolean }>`
   display: inline-flex;
   align-items: center;
   height: 2rem;
@@ -25,21 +25,30 @@ const ButtonBlock = styled.button<{ color: ColorType }>`
   border-radius: 4px;
   padding-top: 0;
   padding-bottom: 0;
+  ${props =>
+    props.inline &&
+    css`
+      & + & {
+        margin-left: 0.5rem;
+      }
+    `}
 `;
 
 interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
   color?: ColorType;
+  inline?: boolean;
 }
 
 const Button: React.SFC<ButtonProps> = ({
   children,
   ref,
   color = 'teal',
+  inline,
   ...rest
 }) => {
   const htmlProps = rest as any;
   return (
-    <ButtonBlock color={color} {...htmlProps}>
+    <ButtonBlock color={color} inline={inline} {...htmlProps}>
       {children}
     </ButtonBlock>
   );

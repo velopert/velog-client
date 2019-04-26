@@ -15,6 +15,9 @@ exports[`QuillEditor matches snapshot 1`] = `
     <div
       class="sc-jzJRlG bcnBQv"
     />
+    <div>
+      tagInput
+    </div>
     <div
       class="sc-bdVaJa cuQacX"
       id="toolbar"
@@ -248,6 +251,13 @@ exports[`QuillEditor matches snapshot 1`] = `
       <div
         tabindex="2"
       />
+    </div>
+    <div
+      class="sc-kAzzGY eitSrB"
+    >
+      <div>
+        footer
+      </div>
     </div>
   </div>
 </div>

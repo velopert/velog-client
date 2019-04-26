@@ -96,6 +96,7 @@ export interface ToolbarProps {
   mode: 'MARKDOWN' | 'WYSIWYG';
   onClick?: Function;
   onConvert?: () => void;
+  innerRef?: React.RefObject<HTMLDivElement>;
 }
 
 const { useEffect, useState, useCallback } = React;
@@ -104,10 +105,16 @@ const Toolbar: React.SFC<ToolbarProps> = ({
   mode,
   onClick = () => {},
   onConvert,
+  innerRef,
 }) => {
   const forMarkdown = mode === 'MARKDOWN';
   return (
-    <ToolbarBlock id="toolbar" shadow={shadow} forMarkdown={forMarkdown}>
+    <ToolbarBlock
+      id="toolbar"
+      shadow={shadow}
+      forMarkdown={forMarkdown}
+      ref={innerRef}
+    >
       <ToolbarGroup>
         <ToolbarItem
           className="ql-header"

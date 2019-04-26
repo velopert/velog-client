@@ -23,10 +23,6 @@ describe('QuillEditorContainer', () => {
   it('renders properly', () => {
     setup();
   });
-  it('matches snapshot', () => {
-    const { container } = setup();
-    expect(container).toMatchSnapshot();
-  });
   it('changes title', () => {
     const utils = setup();
     const titleTextarea = utils.getByPlaceholderText('제목을 입력하세요');

@@ -3,6 +3,7 @@ const zIndexes = {
   AuthModal: 20,
   Toolbar: 10,
   Popup: 25,
+  WriteFooter: 10,
 };
 
 export default zIndexes;

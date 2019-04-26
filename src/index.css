@@ -10,6 +10,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #212529;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: inherit;
 }
 
 code {

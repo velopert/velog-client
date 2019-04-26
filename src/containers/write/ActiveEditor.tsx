@@ -4,6 +4,7 @@ import { RootState } from '../../modules';
 import { WriteMode } from '../../modules/write';
 import EditorPanesContainer from './EditorPanesContainer';
 import QuillEditorContainer from './QuillEditorContainer';
+import WriteFooter from '../../components/write/WriteFooter';
 
 interface OwnProps {}
 type StateProps = ReturnType<typeof mapStateToProps>;
@@ -17,7 +18,9 @@ const mapDispatchToProps = {};
 
 const ActiveEditor: React.FC<ActiveEditorProps> = ({ mode }) => {
   return mode === WriteMode.MARKDOWN ? (
-    <EditorPanesContainer />
+    <>
+      <EditorPanesContainer />
+    </>
   ) : (
     <QuillEditorContainer />
   );

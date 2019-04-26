@@ -9,6 +9,8 @@ describe('QuillEditor', () => {
       onChangeTitle: () => undefined,
       title: '',
       initialHtml: '',
+      tagInput: <div>tagInput</div>,
+      footer: <div>footer</div>,
     };
     const utils = render(<QuillEditor {...initialProps} {...props} />);
     const titleTextarea = utils.getByPlaceholderText(
@@ -25,6 +27,11 @@ describe('QuillEditor', () => {
   it('matches snapshot', () => {
     const { container } = setup({});
     expect(container).toMatchSnapshot();
+  });
+  it('renders tagInput and footer', () => {
+    const { getByText } = setup();
+    getByText('footer');
+    getByText('tagInput');
   });
   it('calls onConvertEditorMode', async () => {
     const onConvertEditorMode = jest.fn();

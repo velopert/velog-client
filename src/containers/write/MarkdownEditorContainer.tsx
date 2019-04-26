@@ -14,6 +14,7 @@ import remark from 'remark';
 import htmlPlugin from 'remark-html';
 import breaks from 'remark-breaks';
 import TagInputContainer from './TagInputContainer';
+import WriteFooter from '../../components/write/WriteFooter';
 
 interface OwnProps {}
 interface StateProps {
@@ -54,6 +55,7 @@ const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = ({
       onChangeTitle={changeTitle}
       onConvert={onConvert}
       tagInput={<TagInputContainer />}
+      footer={<WriteFooter />}
     />
   );
 };

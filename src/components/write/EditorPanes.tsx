@@ -2,6 +2,8 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import transitions from '../../lib/styles/transitions';
+import WriteFooter from './WriteFooter';
+import { WriteMode } from '../../modules/write';
 
 const EditorPanesBlock = styled.div`
   width: 100%;
@@ -14,6 +16,7 @@ const EditorPane = styled.div<{ shadow?: boolean }>`
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
   ${props =>
     props.shadow &&
     css`
