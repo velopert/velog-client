@@ -29,9 +29,6 @@ const MarkdownRenderBlock = styled.div`
   &.dracula {
     ${prismThemes['dracula']}
   }
-  &.duotone-light {
-    ${prismThemes['duotone-light']}
-  }
 
   pre {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
