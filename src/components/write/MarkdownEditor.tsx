@@ -177,6 +177,14 @@ export default class MarkdownEditor extends React.Component<
         shadow: nextShadow,
       });
     }
+    if (this.block.current) {
+      const { clientWidth } = this.block.current;
+      if (clientWidth !== this.state.clientWidth) {
+        this.setState({
+          clientWidth,
+        });
+      }
+    }
   };
 
   handleResize = () => {
