@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PublishSection matches snapshot 1`] = `
+<div>
+  <section
+    class="sc-bdVaJa hZwUEX"
+  >
+    <h3>
+      섹션 제목
+    </h3>
+    <div
+      class="contents"
+    >
+      섹션 내용
+    </div>
+  </section>
+</div>
+`;

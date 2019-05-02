@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PublishPrivacySetting matches snapshot 1`] = `
+<div>
+  <section
+    class="sc-bwzfXH difkFg sc-bdVaJa hZwUEX"
+  >
+    <h3>
+      공개 설정
+    </h3>
+    <div
+      class="contents"
+    >
+      <button
+        class="sc-htpNat fiKwql"
+      >
+        <svg>
+          icon-globe.svg
+        </svg>
+        전체 공개
+      </button>
+      <button
+        class="sc-htpNat iuWnze"
+      >
+        <svg>
+          icon-lock.svg
+        </svg>
+        나만 보기
+      </button>
+    </div>
+  </section>
+</div>
+`;
