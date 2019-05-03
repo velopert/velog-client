@@ -24,6 +24,11 @@ const Pane = styled.div`
   flex: 1;
   min-width: 0;
 `;
+const RightPane = styled(Pane)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 const Separator = styled.div`
   width: 1px;
   min-height: 425px;
@@ -46,7 +51,7 @@ const PublishScreenTemplate: React.FC<PublishScreenTemplateProps> = ({
       <Wrapper>
         <Pane>{left}</Pane>
         <Separator />
-        <Pane>{right}</Pane>
+        <RightPane>{right}</RightPane>
       </Wrapper>
     </PublishScreenTemplateBlock>
   );

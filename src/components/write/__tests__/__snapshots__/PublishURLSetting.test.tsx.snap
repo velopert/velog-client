@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PublishURLSetting matches snapshot 1`] = `
+<div>
+  <section
+    class="sc-bwzfXH uTxCW sc-bdVaJa ezdyV"
+  >
+    <h3>
+      URL 설정
+    </h3>
+    <div
+      class="contents"
+    >
+      <div
+        class="sc-htpNat hgJOta"
+      >
+        <div
+          class="username"
+        >
+          /@
+          velog
+          /
+        </div>
+        <input
+          class="sc-bxivhb knHhGg"
+          value="url-slug"
+        />
+      </div>
+    </div>
+  </section>
+</div>
+`;

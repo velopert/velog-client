@@ -3,7 +3,7 @@
 exports[`PublishPrivacySetting matches snapshot 1`] = `
 <div>
   <section
-    class="sc-bwzfXH difkFg sc-bdVaJa hZwUEX"
+    class="sc-bwzfXH difkFg sc-bdVaJa ezdyV"
   >
     <h3>
       공개 설정
@@ -12,7 +12,7 @@ exports[`PublishPrivacySetting matches snapshot 1`] = `
       class="contents"
     >
       <button
-        class="sc-htpNat fiKwql"
+        class="sc-htpNat kJRdJz"
       >
         <svg>
           icon-globe.svg
@@ -20,7 +20,7 @@ exports[`PublishPrivacySetting matches snapshot 1`] = `
         전체 공개
       </button>
       <button
-        class="sc-htpNat iuWnze"
+        class="sc-htpNat huLiCC"
       >
         <svg>
           icon-lock.svg

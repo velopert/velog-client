@@ -29,7 +29,7 @@ const Button = styled.button<{ active: boolean }>`
   border-radius: 4px;
   cursor: pointer;
   &:hover {
-    background: ${palette.gray0};
+    background: #fdfdfd;
   }
   ${props =>
     props.active &&

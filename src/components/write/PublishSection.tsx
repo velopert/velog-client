@@ -14,7 +14,7 @@ const PublishSectionBlock = styled.section`
   }
 
   & + & {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
   }
 `;
 
