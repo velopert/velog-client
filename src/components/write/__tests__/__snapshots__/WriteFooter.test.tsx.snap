@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WriteFooter matches snapshot 1`] = `
+<div>
+  <div
+    class="sc-bwzfXH cvCbtW"
+  >
+    <button
+      class="sc-htpNat bGXGEN sc-bdVaJa hOxnkh"
+      color="lightGray"
+    >
+      임시저장
+    </button>
+    <button
+      class="sc-htpNat bGXGEN sc-bdVaJa hWgIMi"
+      color="teal"
+    >
+      출간하기
+    </button>
+  </div>
+</div>
+`;

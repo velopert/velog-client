@@ -6,6 +6,7 @@ import {
   convertEditorMode,
   changeTitle,
   changeMarkdown,
+  openPublish,
   WriteMode,
 } from '../../modules/write';
 import TagInputContainer from './TagInputContainer';
@@ -25,7 +26,10 @@ const mapDispatchToProps = {
   convertEditorMode,
   changeTitle,
   changeMarkdown,
+  openPublish,
 };
+
+const { useCallback } = React;
 
 const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
   mode,
@@ -33,6 +37,7 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
   changeMarkdown,
   convertEditorMode,
   changeTitle,
+  openPublish,
   html,
 }) => {
   const onConvertEditorMode = (markdown: string) => {
@@ -42,6 +47,9 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
     });
   }; // after transition
   const onChangeTitle = (title: string) => changeTitle(title);
+  const onPublish = useCallback(() => {
+    openPublish();
+  }, [openPublish]);
   return (
     <QuillEditor
       title={title}
@@ -49,7 +57,7 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
       onChangeTitle={onChangeTitle}
       initialHtml={html}
       tagInput={<TagInputContainer />}
-      footer={<WriteFooter />}
+      footer={<WriteFooter onPublish={onPublish} onTempSave={() => {}} />}
     />
   );
 };

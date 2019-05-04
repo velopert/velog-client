@@ -11,12 +11,15 @@ import PublishActionButtons from '../../components/write/PublishActionButtons';
 interface OwnProps {}
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
-type PublishScreenProps = OwnProps & StateProps & DispatchProps;
+export type PublishScreenProps = OwnProps & StateProps & DispatchProps;
 
-const mapStateToProps = (state: RootState) => ({});
+const mapStateToProps = ({ write }: RootState) => ({
+  publish: write.publish,
+});
 const mapDispatchToProps = {};
 
-const PublishScreen: React.FC<PublishScreenProps> = props => {
+const PublishScreen: React.FC<PublishScreenProps> = ({ publish }) => {
+  if (!publish) return null;
   return (
     <PublishScreenTemplate
       left={<PublishPreviewContainer />}

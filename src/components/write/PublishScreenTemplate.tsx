@@ -2,6 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import zIndexes from '../../lib/styles/zIndexes';
+import transitions from '../../lib/styles/transitions';
+import HideScroll from '../common/HideScroll';
 
 const PublishScreenTemplateBlock = styled.div`
   display: flex;
@@ -14,6 +16,7 @@ const PublishScreenTemplateBlock = styled.div`
   height: 100%;
   background: ${palette.gray0};
   z-index: ${zIndexes.PublishScreen};
+  animation: ${transitions.slideUp} 0.25s forwards ease-in;
 `;
 
 const Wrapper = styled.div`
@@ -53,6 +56,7 @@ const PublishScreenTemplate: React.FC<PublishScreenTemplateProps> = ({
         <Separator />
         <RightPane>{right}</RightPane>
       </Wrapper>
+      <HideScroll />
     </PublishScreenTemplateBlock>
   );
 };

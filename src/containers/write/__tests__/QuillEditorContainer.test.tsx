@@ -33,4 +33,10 @@ describe('QuillEditorContainer', () => {
     });
     expect(utils.store.getState().write.title).toBe('Hello world');
   });
+  it('opens publish screen', () => {
+    const utils = setup();
+    const publishButton = utils.getByText('출간하기');
+    fireEvent.click(publishButton);
+    expect(utils.store.getState().write.publish).toBe(true);
+  });
 });

@@ -12,6 +12,7 @@ describe('write redux module', () => {
       mode: 'WYSIWYG',
       html: '',
       tags: [],
+      publish: false,
     });
   });
   describe('action handlers', () => {
@@ -43,6 +44,16 @@ describe('write redux module', () => {
       const nextTags = ['태그1', '태그2'];
       state = reducer(state, write.changeTags(nextTags));
       expect(state.tags).toBe(nextTags);
+    });
+    it('OPEN_PUBLISH', () => {
+      let state = getInitialState();
+      state = reducer(state, write.openPublish());
+      expect(state.publish).toBe(true);
+    });
+    it('CLOSE_PUBLISH', () => {
+      let state = getInitialState();
+      state = reducer(state, write.closePublish());
+      expect(state.publish).toBe(false);
     });
   });
 });

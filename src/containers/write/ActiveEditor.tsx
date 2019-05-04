@@ -4,7 +4,6 @@ import { RootState } from '../../modules';
 import { WriteMode } from '../../modules/write';
 import EditorPanesContainer from './EditorPanesContainer';
 import QuillEditorContainer from './QuillEditorContainer';
-import WriteFooter from '../../components/write/WriteFooter';
 
 interface OwnProps {}
 type StateProps = ReturnType<typeof mapStateToProps>;
