@@ -278,7 +278,7 @@ exports[`ActiveEditor matches snapshot 1`] = `
       >
         <button
           class="sc-jKJlTe HPPIJ sc-VigVT kMJEjy"
-          color="gray"
+          color="lightGray"
         >
           임시저장
         </button>
