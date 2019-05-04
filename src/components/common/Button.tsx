@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import palette, { buttonColorMap } from '../../lib/styles/palette';
 
-type ColorType = 'teal' | 'gray' | 'darkGray';
+type ColorType = 'teal' | 'gray' | 'darkGray' | 'lightGray';
 
 const ButtonBlock = styled.button<{ color: ColorType; inline: boolean }>`
   display: inline-flex;

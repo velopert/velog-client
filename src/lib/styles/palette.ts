@@ -46,10 +46,15 @@ export const buttonColorMap: {
     color: 'white',
     hoverBackground: palette.teal5,
   },
-  gray: {
+  lightGray: {
     background: palette.gray2,
     color: palette.gray7,
     hoverBackground: palette.gray1,
+  },
+  gray: {
+    background: palette.gray6,
+    color: 'white',
+    hoverBackground: palette.gray5,
   },
   darkGray: {
     background: palette.gray8,

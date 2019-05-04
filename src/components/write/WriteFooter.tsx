@@ -28,7 +28,7 @@ interface WriteFooterProps {}
 const WriteFooter: React.FC<WriteFooterProps> = props => {
   return (
     <WriteFooterBlock>
-      <StyledButton inline color="gray">
+      <StyledButton inline color="lightGray">
         임시저장
       </StyledButton>
       <StyledButton inline color="teal">

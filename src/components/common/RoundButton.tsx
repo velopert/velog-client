@@ -87,7 +87,7 @@ interface RoundButtonProps extends ButtonProps {
   inline?: boolean;
   to?: string;
   size?: ButtonSize;
-  color?: 'teal' | 'gray' | 'darkGray';
+  color?: 'teal' | 'gray' | 'darkGray' | 'lightGray';
   border?: boolean;
 }
 
