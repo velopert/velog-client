@@ -62,6 +62,15 @@ const slideUp = keyframes`
   };
 `;
 
+const slideDown = keyframes`
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(100%);
+  };
+`;
+
 const transitions = {
   fadeIn,
   fadeOut,
@@ -69,6 +78,7 @@ const transitions = {
   popOutToBottom,
   popIn,
   slideUp,
+  slideDown,
 };
 
 export default transitions;

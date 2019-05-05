@@ -48,6 +48,8 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
   }; // after transition
   const onChangeTitle = (title: string) => changeTitle(title);
   const onPublish = useCallback(() => {
+    window.document.body.style.overflowX = 'hidden';
+    window.document.body.style.overflowY = 'hidden';
     openPublish();
   }, [openPublish]);
   return (

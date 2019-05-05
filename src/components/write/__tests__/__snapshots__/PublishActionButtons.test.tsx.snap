@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PublishActionButtons matches snapshot 1`] = `
+<div>
+  <div
+    class="sc-bwzfXH eprlzE"
+  >
+    <button
+      class="sc-htpNat VJRfM sc-bdVaJa bAArFn"
+      color="gray"
+      data-testid="cancelPublish"
+    >
+      취소
+    </button>
+    <button
+      class="sc-htpNat VJRfM sc-bdVaJa lgjZOb"
+      color="teal"
+      data-testid="publish"
+    >
+      출간하기
+    </button>
+  </div>
+</div>
+`;

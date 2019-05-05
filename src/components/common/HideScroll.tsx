@@ -2,14 +2,14 @@ import * as React from 'react';
 
 export interface HideScrollProps {}
 
-const { useEffect } = React;
+const { useLayoutEffect } = React;
 
 /**
  * Hides body scrollbar on mount
  * Revert on unmount
  */
 const HideScroll: React.FC<HideScrollProps> = props => {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const prevStyles = getComputedStyle(window.document.body);
     window.document.body.style.overflowX = 'hidden';
     window.document.body.style.overflowY = 'hidden';
