@@ -47,6 +47,7 @@ describe('RegisterForm', () => {
         },
       });
     };
+
     return {
       ...utils,
       form,
@@ -64,12 +65,12 @@ describe('RegisterForm', () => {
 
   it('changes input', () => {
     const utils = setup();
-    const { form, getByValue, changeInputs } = utils;
+    const { form, getByDisplayValue, changeInputs } = utils;
     changeInputs();
-    getByValue('벨로퍼트');
-    getByValue(/velopert/);
-    getByValue('velopert');
-    getByValue('안녕하세요');
+    getByDisplayValue('벨로퍼트');
+    getByDisplayValue('public.velopert@gmail.com');
+    getByDisplayValue('velopert');
+    getByDisplayValue('안녕하세요');
   });
 
   it('submits form', () => {

@@ -32,7 +32,7 @@ describe('PublishURLSetting', () => {
     const utils = setup({
       onChangeUrlSlug,
     });
-    const input = utils.getByValue('url-slug');
+    const input = utils.getByDisplayValue('url-slug');
     fireEvent.change(input, { target: { value: 'hello-world' } });
     expect(onChangeUrlSlug).toBeCalledWith('hello-world');
   });
