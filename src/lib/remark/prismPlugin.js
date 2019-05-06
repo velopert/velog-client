@@ -1,3 +1,4 @@
+/* eslint-disable */
 import visit from 'unist-util-visit';
 import Prism from 'prismjs';
 

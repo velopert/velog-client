@@ -5,9 +5,8 @@ import zIndexes from '../../lib/styles/zIndexes';
 import palette from '../../lib/styles/palette';
 import { plutoWelcome } from '../../static/images';
 import transitions from '../../lib/styles/transitions';
-import useMounted from '../../lib/hooks/useMounted';
 
-const { useState, useEffect, useRef } = React;
+const { useState, useEffect } = React;
 
 const AuthModalBlock = styled.div<{ visible: boolean }>`
   position: fixed;

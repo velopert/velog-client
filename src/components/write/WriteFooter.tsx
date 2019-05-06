@@ -1,7 +1,6 @@
 import * as React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Button from '../common/Button';
-import { WriteMode } from '../../modules/write';
 
 const WriteFooterBlock = styled.div`
   padding-left: 1rem;

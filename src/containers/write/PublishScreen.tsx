@@ -10,9 +10,6 @@ import PublishActionButtons from '../../components/write/PublishActionButtons';
 import { closePublish } from '../../modules/write';
 
 interface OwnProps {}
-type StateProps = ReturnType<typeof mapStateToProps>;
-type DispatchProps = typeof mapDispatchToProps;
-export type PublishScreenProps = OwnProps & StateProps & DispatchProps;
 
 const mapStateToProps = ({ write }: RootState) => ({
   visible: write.publish,
@@ -20,6 +17,10 @@ const mapStateToProps = ({ write }: RootState) => ({
 const mapDispatchToProps = {
   closePublish,
 };
+
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = typeof mapDispatchToProps;
+export type PublishScreenProps = OwnProps & StateProps & DispatchProps;
 
 const { useCallback } = React;
 

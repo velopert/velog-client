@@ -34,7 +34,8 @@ const AuthFormBlock = styled.div`
     span {
       margin-right: 0.25rem;
     }
-    a {
+    .link {
+      display: inline-block;
       font-weight: bold;
       color: ${palette.teal6};
       cursor: pointer;
@@ -96,9 +97,14 @@ const AuthForm: React.SFC<AuthFormProps> = ({
             ? '아직 회원이 아니신가요?'
             : '계정이 이미 있으신가요?'}
         </span>
-        <a tabIndex={7} onClick={onToggleMode} data-testid="switchmode">
+        <div
+          className="link"
+          tabIndex={7}
+          onClick={onToggleMode}
+          data-testid="switchmode"
+        >
           {mode === 'LOGIN' ? '회원가입' : '로그인'}
-        </a>
+        </div>
       </div>
     </AuthFormBlock>
   );

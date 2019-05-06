@@ -7,7 +7,6 @@ import {
   changeTitle,
   changeMarkdown,
   openPublish,
-  WriteMode,
 } from '../../modules/write';
 import TagInputContainer from './TagInputContainer';
 import WriteFooter from '../../components/write/WriteFooter';
@@ -32,7 +31,6 @@ const mapDispatchToProps = {
 const { useCallback } = React;
 
 const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
-  mode,
   title,
   changeMarkdown,
   convertEditorMode,

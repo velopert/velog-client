@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { Logo } from '../../static/svg';
-import Button from '../common/Button';
 import { breakpoints } from '../../lib/styles/responsive';
 import RoundButton from '../common/RoundButton';
 import { CurrentUser } from '../../lib/graphql/user';
@@ -53,7 +52,7 @@ interface HeaderProps {
   user: CurrentUser | null;
 }
 
-const { useState, useCallback } = React;
+const { useCallback } = React;
 
 const Header: React.SFC<HeaderProps> = ({
   floating,

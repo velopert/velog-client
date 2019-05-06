@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
-import useInput from '../../lib/hooks/useInput';
 import transitions from '../../lib/styles/transitions';
 
 const TagInputBlock = styled.div`
@@ -78,7 +77,7 @@ const Help = styled.div<{ visible: boolean }>`
 `;
 
 const { useState, useCallback, useEffect, useRef } = React;
-const TagInput: React.FC<TagInputProps> = (props, ref) => {
+const TagInput: React.FC<TagInputProps> = props => {
   const [tags, setTags] = useState<string[]>([]);
   const [value, setValue] = useState('');
   const [focus, setFocus] = useState(false);
@@ -140,7 +139,7 @@ const TagInput: React.FC<TagInputProps> = (props, ref) => {
         insertTag(e.currentTarget.innerText);
       }
     },
-    [tags, value],
+    [insertTag, tags, value],
   );
 
   const onFocus = () => {

@@ -97,6 +97,10 @@ const LabelInput: React.SFC<LabelInputProps> = ({
   ...rest
 }) => {
   const [focus, setFocus] = useState(false);
+
+  useEffect(() => {
+    console.log(value);
+  }, [value]);
   const onFocus = useCallback(() => {
     setFocus(true);
   }, []);
