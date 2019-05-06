@@ -37,6 +37,5 @@ describe('PublishScreen', () => {
     await wait(() => {
       expect(utils.queryByText('취소')).not.toBeInTheDocument();
     });
-    expect(utils.queryByText('취소')).toBeFalsy();
   });
 });

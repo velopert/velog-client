@@ -22,12 +22,14 @@ describe('AuthForm', () => {
 
   describe('handles modes', () => {
     it('REGISTER', () => {
-      const { getAllByText } = setup();
-      getAllByText('회원가입');
+      const { getByTestId } = setup();
+      const title = getByTestId('title');
+      expect(title).toHaveTextContent('회원가입');
     });
     it('LOGIN', () => {
-      const { getAllByText } = setup({ mode: 'LOGIN' });
-      getAllByText('로그인');
+      const { getByTestId } = setup({ mode: 'LOGIN' });
+      const title = getByTestId('title');
+      expect(title).toHaveTextContent('로그인');
     });
   });
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import MarkdownEditorContainer, {
   MarkdownEditorContainerProps,
 } from '../MarkdownEditorContainer';
@@ -16,14 +16,17 @@ describe('MarkdownEditorContainer', () => {
       </Provider>,
     );
     return {
+      store,
       ...utils,
     };
   };
   it('renders properly', () => {
     setup();
   });
-  it('matches snapshot', () => {
-    const { container } = setup();
-    expect(container).toMatchSnapshot();
+  it('opens publish screen', () => {
+    const utils = setup();
+    const publishButton = utils.getByText('출간하기');
+    fireEvent.click(publishButton);
+    expect(utils.store.getState().write.publish).toBe(true);
   });
 });
