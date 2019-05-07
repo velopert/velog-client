@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import AuthModal from '../../components/auth/AuthModal';
 import AuthForm from '../../components/auth/AuthForm';
 import {
@@ -23,14 +22,14 @@ interface DispatchProps {
 }
 type AuthModalContainerProps = OwnProps & StateProps & DispatchProps;
 
-const { useCallback, useState } = React;
+const { useCallback } = React;
 const AuthModalContainer: React.SFC<AuthModalContainerProps> = ({
   visible,
   mode,
   closeAuthModal,
   changeAuthModalMode,
 }) => {
-  const [_sendAuthEmail, loading, data, error, resetSendAuthEmail] = useRequest<
+  const [_sendAuthEmail, loading, data, , resetSendAuthEmail] = useRequest<
     SendAuthEmailResponse
   >(sendAuthEmail);
 
@@ -46,9 +45,12 @@ const AuthModalContainer: React.SFC<AuthModalContainerProps> = ({
 
   const registered = data && data.registered;
 
-  const onSendAuthEmail = useCallback(async (email: string) => {
-    _sendAuthEmail(email);
-  }, [_sendAuthEmail]);
+  const onSendAuthEmail = useCallback(
+    async (email: string) => {
+      _sendAuthEmail(email);
+    },
+    [_sendAuthEmail],
+  );
 
   return (
     <AuthModal visible={visible} onClose={onClose}>

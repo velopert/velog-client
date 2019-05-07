@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import RegisterForm, {
   RegisterFormType,
 } from '../../components/register/RegisterForm';
@@ -17,7 +16,6 @@ interface RegisterFormContainerProps extends RouteComponentProps<{}> {}
 
 const { useEffect, useState } = React;
 const RegisterFormContainer: React.SFC<RegisterFormContainerProps> = ({
-  match,
   location,
   history,
 }) => {
@@ -26,15 +24,11 @@ const RegisterFormContainer: React.SFC<RegisterFormContainerProps> = ({
   });
 
   const [error, setError] = useState<null | string>(null);
-  const [onGetRegisterToken, loading, registerToken] = useRequest<
+  const [onGetRegisterToken, , registerToken] = useRequest<
     GetRegisterTokenResponse
   >((code: string) => getRegisterToken(code));
 
-  const [
-    onLocalRegister,
-    localRegisterLoading,
-    localRegisterResult,
-  ] = useRequest<AuthResponse>(localEmailRegister);
+  const [onLocalRegister, ,] = useRequest<AuthResponse>(localEmailRegister);
 
   const onSubmit = async (form: RegisterFormType) => {
     setError(null);

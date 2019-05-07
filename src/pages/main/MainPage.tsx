@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Route } from 'react-router-dom';
-import styled from 'styled-components';
 import MainTemplate from '../../components/main/MainTemplate';
 import MainSideMenu from '../../components/main/MainSideMenu';
 import MainNoticeWidget from '../../components/main/MainNoticeWidget';
@@ -9,7 +8,7 @@ import RecentPostsPage from './RecentPostsPage';
 
 interface MainPageProps {}
 
-const MainPage: React.SFC<MainPageProps> = props => {
+const MainPage: React.SFC<MainPageProps> = () => {
   return (
     <MainTemplate>
       <MainTemplate.Left>

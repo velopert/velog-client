@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import 'codemirror/lib/codemirror.css';
 // import 'codemirror/theme/dracula.css';
 import CodeMirror, { EditorFromTextArea } from 'codemirror';
@@ -14,8 +14,6 @@ import AddLink from './AddLink';
 import { detectJSDOM } from '../../lib/utils';
 import AskChangeEditor from './AskChangeEditor';
 import { WriteMode } from '../../modules/write';
-import TagInput from './TagInput';
-import WriteFooter from './WriteFooter';
 import zIndexes from '../../lib/styles/zIndexes';
 
 export interface MarkdownEditorProps {

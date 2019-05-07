@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
+import { Link } from 'react-router-dom';
 
 const MainRightFooterBlock = styled.div`
   margin-top: 6.25rem;
@@ -28,9 +29,9 @@ const MainRightFooter: React.SFC<MainRightFooterProps> = props => {
   return (
     <MainRightFooterBlock>
       <div className="links">
-        <a>소개</a>
-        <a>서비스 정책</a>
-        <a>FAQ</a>
+        <Link to="/">소개</Link>
+        <Link to="/">서비스 정책</Link>
+        <Link to="/">FAQ</Link>
       </div>
       <div className="copyright">© 2019 · velog</div>
     </MainRightFooterBlock>

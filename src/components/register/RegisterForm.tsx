@@ -2,7 +2,6 @@ import * as React from 'react';
 import styled from 'styled-components';
 import LabelInput from '../common/LabelInput';
 import useInputs from '../../lib/hooks/useInputs';
-import { string } from 'prop-types';
 import RoundButton from '../common/RoundButton';
 import palette from '../../lib/styles/palette';
 

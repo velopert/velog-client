@@ -4,7 +4,6 @@ import remark from 'remark';
 import htmlPlugin from 'remark-html';
 import prismPlugin from '../../lib/remark/prismPlugin';
 import prismThemes from '../../lib/styles/prismThemes';
-import palette from '../../lib/styles/palette';
 import breaks from 'remark-breaks';
 
 export interface MarkdownRenderProps {

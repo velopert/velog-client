@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AxiosResponse, AxiosPromise } from 'axios';
+import { AxiosPromise } from 'axios';
 
 type PromiseCreator<R> = (...params: any[]) => AxiosPromise<R>;
 
