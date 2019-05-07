@@ -37,7 +37,7 @@ const EmailLogin: React.SFC<EmailLoginProps> = props => {
       }
     };
     fn();
-  }, []);
+  }, [props.history, props.location.search]);
   return null;
 };
 

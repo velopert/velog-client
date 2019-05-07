@@ -100,7 +100,7 @@ const RegisterFormContainer: React.SFC<RegisterFormContainerProps> = ({
       return;
     }
     onGetRegisterToken(query.code);
-  }, []);
+  }, [onGetRegisterToken, query.code]);
   return (
     <RegisterForm
       onSubmit={onSubmit}

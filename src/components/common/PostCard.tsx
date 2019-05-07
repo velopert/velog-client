@@ -75,11 +75,18 @@ const PostCard: React.SFC<PostCardProps> = React.memo(({ post }) => {
   return (
     <PostCardBlock>
       <div className="user-info">
-        <img src={post.user.profile.thumbnail || userThumbnail} />
+        <img
+          src={post.user.profile.thumbnail || userThumbnail}
+          alt="thumbnail"
+        />
         <div className="username">{post.user.username}</div>
       </div>
       {post.thumbnail && (
-        <img className="post-thumbnail" src={post.thumbnail} />
+        <img
+          className="post-thumbnail"
+          src={post.thumbnail}
+          alt="post-thumbnail"
+        />
       )}
       <h2>{post.title}</h2>
       <p>{post.short_description}</p>
