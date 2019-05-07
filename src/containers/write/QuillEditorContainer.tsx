@@ -7,6 +7,8 @@ import {
   changeTitle,
   changeMarkdown,
   openPublish,
+  setHtml,
+  setTextBody,
 } from '../../modules/write';
 import TagInputContainer from './TagInputContainer';
 import WriteFooter from '../../components/write/WriteFooter';
@@ -26,6 +28,8 @@ const mapDispatchToProps = {
   changeTitle,
   changeMarkdown,
   openPublish,
+  setHtml,
+  setTextBody,
 };
 
 const { useCallback } = React;
@@ -37,6 +41,8 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
   changeTitle,
   openPublish,
   html,
+  setHtml,
+  setTextBody,
 }) => {
   const onConvertEditorMode = (markdown: string) => {
     batch(() => {
@@ -45,6 +51,9 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
     });
   }; // after transition
   const onChangeTitle = (title: string) => changeTitle(title);
+  const onChangeHtml = (html: string) => setHtml(html);
+  const onChangeTextBody = (textBody: string) => setTextBody(textBody);
+
   const onPublish = useCallback(() => {
     window.document.body.style.overflowX = 'hidden';
     window.document.body.style.overflowY = 'hidden';
@@ -57,6 +66,8 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
       onChangeTitle={onChangeTitle}
       initialHtml={html}
       tagInput={<TagInputContainer />}
+      onChangeHtml={onChangeHtml}
+      onChangeTextBody={onChangeTextBody}
       footer={<WriteFooter onPublish={onPublish} onTempSave={() => {}} />}
     />
   );

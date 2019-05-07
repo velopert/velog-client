@@ -13,6 +13,9 @@ describe('write redux module', () => {
       html: '',
       tags: [],
       publish: false,
+      textBody: '',
+      defaultDescription: '',
+      description: '',
     });
   });
   describe('action handlers', () => {
@@ -54,6 +57,21 @@ describe('write redux module', () => {
       let state = getInitialState();
       state = reducer(state, write.closePublish());
       expect(state.publish).toBe(false);
+    });
+    it('SET_TEXT_BODY', () => {
+      let state = getInitialState();
+      state = reducer(state, write.setTextBody('textbody'));
+      expect(state.textBody).toBe('textbody');
+    });
+    it('SET_DEFAULT_DESCRIPTION', () => {
+      let state = getInitialState();
+      state = reducer(state, write.setDefaultDescription('description'));
+      expect(state.defaultDescription).toBe('description');
+    });
+    it('CHANGE_DESCRIPTION', () => {
+      let state = getInitialState();
+      state = reducer(state, write.changeDescription('description'));
+      expect(state.description).toBe('description');
     });
   });
 });

@@ -85,7 +85,9 @@ const TextLimit = styled.div`
   color: ${palette.gray6};
 `;
 
-export interface PublishPreviewProps {}
+export interface PublishPreviewProps {
+  title: string;
+}
 
 interface ThumbnailProps {}
 const Thumbnail: React.FC<ThumbnailProps> = () => {
@@ -101,15 +103,12 @@ const Thumbnail: React.FC<ThumbnailProps> = () => {
   );
 };
 
-const PublishPreview: React.FC<PublishPreviewProps> = props => {
+const PublishPreview: React.FC<PublishPreviewProps> = ({ title }) => {
   return (
     <PublishPreviewBlock title="포스트 카드 미리보기">
       <Thumbnail />
       <PostInfo>
-        <h4>
-          타이틀입니다 타이틀입니다 길어지면 어쩔겁
-          타이틀타이틀타잍르틀틀트니까??????
-        </h4>
+        <h4>{title}</h4>
         <ShortDescriptionTextarea />
         <TextLimit>118/150</TextLimit>
       </PostInfo>

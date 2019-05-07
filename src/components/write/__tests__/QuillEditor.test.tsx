@@ -5,6 +5,8 @@ import QuillEditor, { QuillEditorProps } from '../QuillEditor';
 describe('QuillEditor', () => {
   const setup = (props: Partial<QuillEditorProps> = {}) => {
     const initialProps: QuillEditorProps = {
+      onChangeTextBody: () => undefined,
+      onChangeHtml: () => undefined,
       onConvertEditorMode: () => undefined,
       onChangeTitle: () => undefined,
       title: '',

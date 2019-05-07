@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PublishPreview matches snapshot 1`] = `
+<div>
+  <section
+    class="sc-bwzfXH uTxCW sc-bdVaJa ezdyV"
+  >
+    <h3>
+      포스트 카드 미리보기
+    </h3>
+    <div
+      class="contents"
+    >
+      <div
+        class="sc-htpNat fGfspC"
+      >
+        <div
+          class="sc-bxivhb oVXVi"
+        >
+          <div
+            class="sc-ifAKCX bnjEss"
+          >
+            <svg>
+              vector-image.svg
+            </svg>
+            <button
+              class="sc-EHOje gyfGXD"
+            >
+              썸네일 업로드
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="sc-bZQynM dcFljb"
+      >
+        <h4>
+          타이틀
+        </h4>
+        <textarea
+          class="sc-gzVnrw eOJEaf"
+        />
+        <div
+          class="sc-htoDjs dTqKOk"
+        >
+          118/150
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+`;
