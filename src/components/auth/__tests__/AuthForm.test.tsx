@@ -40,7 +40,7 @@ describe('AuthForm', () => {
       onToggleMode,
     });
 
-    const anchor = container.querySelector('a');
+    const anchor = container.querySelector('.link');
     expect(anchor).toBeTruthy();
     if (!anchor) return;
     fireEvent.click(anchor);

@@ -3,14 +3,14 @@
 exports[`MarkdownEditor matches snapshot 1`] = `
 <div>
   <div
-    class="sc-jTzLTM Oanfh"
+    class="sc-VigVT VYBeq"
     data-testid="codemirror"
   >
     <div
       class="wrapper"
     >
       <div
-        class="sc-jzJRlG cocNVz"
+        class="sc-fjdhpX eFQAsj"
       >
         <textarea
           class="sc-bdVaJa kRoaVK"
@@ -18,7 +18,7 @@ exports[`MarkdownEditor matches snapshot 1`] = `
           style="height: 0px;"
         />
         <div
-          class="sc-fjdhpX gWglfo"
+          class="sc-jTzLTM iIUHSo"
         />
       </div>
       <div
@@ -233,7 +233,7 @@ exports[`MarkdownEditor matches snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-jzJRlG cocNVz"
+        class="sc-fjdhpX eFQAsj"
       >
         <textarea
           id="bla"
@@ -342,7 +342,7 @@ exports[`MarkdownEditor matches snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-cSHVUG fnIIPU"
+      class="sc-jzJRlG iZTpux"
       style="width: 0px;"
     />
   </div>

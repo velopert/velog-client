@@ -86,7 +86,7 @@ export interface LabelInputProps extends InputProps {
   onChange?: React.ChangeEventHandler;
 }
 
-const { useEffect, useState, useCallback } = React;
+const { useState, useCallback } = React;
 const LabelInput: React.SFC<LabelInputProps> = ({
   label,
   name,
@@ -98,9 +98,6 @@ const LabelInput: React.SFC<LabelInputProps> = ({
 }) => {
   const [focus, setFocus] = useState(false);
 
-  useEffect(() => {
-    console.log(value);
-  }, [value]);
   const onFocus = useCallback(() => {
     setFocus(true);
   }, []);

@@ -3,29 +3,29 @@
 exports[`ActiveEditor matches snapshot 1`] = `
 <div>
   <div
-    class="sc-iAyFgw lkfLJh"
+    class="sc-kkGfuU bkLzLm"
     data-testid="quill"
   >
     <textarea
-      class="sc-htpNat sc-kkGfuU dQWWzb"
+      class="sc-htpNat sc-kEYyzF dmZCzN"
       placeholder="제목을 입력하세요"
       style="height: 0px;"
       tabindex="1"
     />
     <div
-      class="sc-hSdWYo hTdPgj"
+      class="sc-iAyFgw kuLbpQ"
     />
     <div
-      class="sc-kgoBCf koOGss"
+      class="sc-chPdSV drnliS"
     >
       <div
-        class="sc-kGXeez cSPBtb"
+        class="sc-kgoBCf eUtUpj"
         contenteditable="true"
         placeholder="태그를 입력하세요"
         tabindex="2"
       />
       <div
-        class="sc-dxgOiQ IaJXk"
+        class="sc-kpOJdX kEzcZB"
       >
         <div
           class="inside"
@@ -264,26 +264,26 @@ exports[`ActiveEditor matches snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-eHgmQL kpnqPw"
+      class="sc-hSdWYo NXGSh"
     >
       <div
         tabindex="2"
       />
     </div>
     <div
-      class="sc-cvbbAY gHGMEi"
+      class="sc-eHgmQL cqEIGc"
     >
       <div
-        class="sc-ckVGcZ fxFKyJ"
+        class="sc-dxgOiQ jULWpa"
       >
         <button
-          class="sc-jKJlTe HPPIJ sc-VigVT kMJEjy"
+          class="sc-ckVGcZ bCLYWM sc-VigVT kMJEjy"
           color="lightGray"
         >
           임시저장
         </button>
         <button
-          class="sc-jKJlTe HPPIJ sc-VigVT eGnsUD"
+          class="sc-ckVGcZ bCLYWM sc-VigVT eGnsUD"
           color="teal"
         >
           출간하기

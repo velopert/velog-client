@@ -47,7 +47,7 @@ exports[`AuthForm renders correctly 1`] = `
           class="block-content"
         >
           <div
-            class="sc-EHOje esguUg"
+            class="sc-EHOje gSRKdC"
           >
             <div>
               <h2
@@ -119,12 +119,13 @@ exports[`AuthForm renders correctly 1`] = `
               <span>
                 계정이 이미 있으신가요?
               </span>
-              <a
+              <div
+                class="link"
                 data-testid="switchmode"
                 tabindex="7"
               >
                 로그인
-              </a>
+              </div>
             </div>
           </div>
         </div>
