@@ -6,6 +6,7 @@ import QuillEditorContainer, {
 import { Provider } from 'react-redux';
 import rootReducer from '../../../modules';
 import { createStore } from 'redux';
+import { setTextBody } from '../../../modules/write';
 
 describe('QuillEditorContainer', () => {
   const setup = (props: Partial<QuillEditorContainerProps> = {}) => {
@@ -38,5 +39,13 @@ describe('QuillEditorContainer', () => {
     const publishButton = utils.getByText('출간하기');
     fireEvent.click(publishButton);
     expect(utils.store.getState().write.publish).toBe(true);
+  });
+  it('sets default description properly', () => {
+    const utils = setup();
+    const { store } = utils;
+    store.dispatch(setTextBody('textbody'));
+    const publishButton = utils.getByText('출간하기');
+    fireEvent.click(publishButton);
+    expect(utils.store.getState().write.defaultDescription).toBe('textbody');
   });
 });

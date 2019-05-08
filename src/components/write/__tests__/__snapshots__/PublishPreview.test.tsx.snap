@@ -39,11 +39,13 @@ exports[`PublishPreview matches snapshot 1`] = `
         </h4>
         <textarea
           class="sc-gzVnrw eOJEaf"
+          placeholder="당신의 포스트를 짧게 소개해보세요."
         />
         <div
           class="sc-htoDjs dTqKOk"
         >
-          118/150
+          0
+          /150
         </div>
       </div>
     </div>

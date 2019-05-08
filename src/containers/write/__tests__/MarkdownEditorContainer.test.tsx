@@ -6,6 +6,7 @@ import MarkdownEditorContainer, {
 import { Provider } from 'react-redux';
 import rootReducer from '../../../modules';
 import { createStore } from 'redux';
+import { changeMarkdown } from '../../../modules/write';
 
 describe('MarkdownEditorContainer', () => {
   const setup = (props: Partial<MarkdownEditorContainerProps> = {}) => {
@@ -28,5 +29,13 @@ describe('MarkdownEditorContainer', () => {
     const publishButton = utils.getByText('출간하기');
     fireEvent.click(publishButton);
     expect(utils.store.getState().write.publish).toBe(true);
+  });
+  it('sets stripped markdown to defaultDescription', () => {
+    const utils = setup();
+    const { store } = utils;
+    store.dispatch(changeMarkdown('# heading\nHello World'));
+    const publishButton = utils.getByText('출간하기');
+    fireEvent.click(publishButton);
+    expect(utils.store.getState().write.defaultDescription).toBe('Hello World');
   });
 });

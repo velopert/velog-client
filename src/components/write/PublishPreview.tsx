@@ -87,6 +87,9 @@ const TextLimit = styled.div`
 
 export interface PublishPreviewProps {
   title: string;
+  description: string;
+  defaultDescription: string;
+  onChangeDescription: (description: string) => void;
 }
 
 interface ThumbnailProps {}
@@ -103,14 +106,27 @@ const Thumbnail: React.FC<ThumbnailProps> = () => {
   );
 };
 
-const PublishPreview: React.FC<PublishPreviewProps> = ({ title }) => {
+const PublishPreview: React.FC<PublishPreviewProps> = ({
+  title,
+  description,
+  defaultDescription,
+  onChangeDescription,
+}) => {
+  const descriptionToShow: string = description || defaultDescription;
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    onChangeDescription(e.target.value);
+  };
   return (
     <PublishPreviewBlock title="포스트 카드 미리보기">
       <Thumbnail />
       <PostInfo>
         <h4>{title}</h4>
-        <ShortDescriptionTextarea />
-        <TextLimit>118/150</TextLimit>
+        <ShortDescriptionTextarea
+          placeholder="당신의 포스트를 짧게 소개해보세요."
+          value={descriptionToShow}
+          onChange={onChange}
+        />
+        <TextLimit>{descriptionToShow.length}/150</TextLimit>
       </PostInfo>
     </PublishPreviewBlock>
   );

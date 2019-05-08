@@ -8,11 +8,13 @@ import {
   setHtml,
   convertEditorMode,
   openPublish,
+  setDefaultDescription,
 } from '../../modules/write';
 
 import remark from 'remark';
 import htmlPlugin from 'remark-html';
 import breaks from 'remark-breaks';
+import strip from 'strip-markdown';
 import TagInputContainer from './TagInputContainer';
 import WriteFooter from '../../components/write/WriteFooter';
 
@@ -27,6 +29,7 @@ interface DispatchProps {
   setHtml: typeof setHtml;
   convertEditorMode: typeof convertEditorMode;
   openPublish: typeof openPublish;
+  setDefaultDescription: typeof setDefaultDescription;
 }
 export type MarkdownEditorContainerProps = OwnProps &
   StateProps &
@@ -42,6 +45,7 @@ const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = ({
   title,
   markdown,
   openPublish,
+  setDefaultDescription,
 }) => {
   const onConvert = (markdown: string) => {
     remark()
@@ -55,8 +59,16 @@ const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = ({
   };
 
   const onPublish = useCallback(() => {
-    openPublish();
-  }, [openPublish]);
+    // (/#(.*?)\n/g, '').replace(/\n/g, '')
+    remark()
+      .use(strip)
+      .process(markdown.replace(/#(.*?)\n/g, ''), (err: any, file: any) => {
+        const text = String(file);
+        const sliced = text.replace(/\n/g, '').slice(0, 150);
+        setDefaultDescription(sliced);
+        openPublish();
+      });
+  }, [markdown, openPublish, setDefaultDescription]);
   return (
     <MarkdownEditor
       title={title}
@@ -81,5 +93,6 @@ export default connect<StateProps, DispatchProps, OwnProps, RootState>(
     setHtml,
     convertEditorMode,
     openPublish,
+    setDefaultDescription,
   },
 )(MarkdownEditorContainer);

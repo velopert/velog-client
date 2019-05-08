@@ -48,7 +48,7 @@ export type WriteState = {
   title: string;
   html: string;
   tags: string[];
-  publish: boolean;
+  publish: boolean; // publish screen visibility
   textBody: string;
   defaultDescription: string;
   description: string;

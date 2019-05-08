@@ -9,6 +9,7 @@ import {
   openPublish,
   setHtml,
   setTextBody,
+  setDefaultDescription,
 } from '../../modules/write';
 import TagInputContainer from './TagInputContainer';
 import WriteFooter from '../../components/write/WriteFooter';
@@ -22,6 +23,7 @@ const mapStateToProps = ({ write }: RootState) => ({
   mode: write.mode,
   title: write.title,
   html: write.html,
+  textBody: write.textBody,
 });
 const mapDispatchToProps = {
   convertEditorMode,
@@ -30,6 +32,7 @@ const mapDispatchToProps = {
   openPublish,
   setHtml,
   setTextBody,
+  setDefaultDescription,
 };
 
 const { useCallback } = React;
@@ -43,6 +46,8 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
   html,
   setHtml,
   setTextBody,
+  setDefaultDescription,
+  textBody,
 }) => {
   const onConvertEditorMode = (markdown: string) => {
     batch(() => {
@@ -58,7 +63,8 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
     window.document.body.style.overflowX = 'hidden';
     window.document.body.style.overflowY = 'hidden';
     openPublish();
-  }, [openPublish]);
+    setDefaultDescription(textBody.replace(/\n/g, '').slice(0, 150));
+  }, [openPublish, setDefaultDescription, textBody]);
   return (
     <QuillEditor
       title={title}
