@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PublishSection from './PublishSection';
 import palette from '../../lib/styles/palette';
 import { ImageVector } from '../../static/svg';
@@ -78,11 +78,16 @@ const ShortDescriptionTextarea = styled.textarea`
   margin-top: 0.5rem;
 `;
 
-const TextLimit = styled.div`
+const TextLimit = styled.div<{ limit: boolean }>`
   text-align: right;
   margin-top: 0.25rem;
   font-size: 0.75rem;
   color: ${palette.gray6};
+  ${props =>
+    props.limit &&
+    css`
+      color: ${palette.red6};
+    `}
 `;
 
 export interface PublishPreviewProps {
@@ -106,6 +111,7 @@ const Thumbnail: React.FC<ThumbnailProps> = () => {
   );
 };
 
+const { useCallback } = React;
 const PublishPreview: React.FC<PublishPreviewProps> = ({
   title,
   description,
@@ -116,6 +122,14 @@ const PublishPreview: React.FC<PublishPreviewProps> = ({
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     onChangeDescription(e.target.value);
   };
+  const onKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+      }
+    },
+    [],
+  );
   return (
     <PublishPreviewBlock title="포스트 카드 미리보기">
       <Thumbnail />
@@ -125,8 +139,16 @@ const PublishPreview: React.FC<PublishPreviewProps> = ({
           placeholder="당신의 포스트를 짧게 소개해보세요."
           value={descriptionToShow}
           onChange={onChange}
+          onKeyDown={onKeyDown}
         />
-        <TextLimit>{descriptionToShow.length}/150</TextLimit>
+        <TextLimit
+          limit={
+            descriptionToShow !== defaultDescription &&
+            descriptionToShow.length === 150
+          }
+        >
+          {descriptionToShow.length}/150
+        </TextLimit>
       </PostInfo>
     </PublishPreviewBlock>
   );

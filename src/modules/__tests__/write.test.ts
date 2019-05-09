@@ -16,6 +16,7 @@ describe('write redux module', () => {
       textBody: '',
       defaultDescription: '',
       description: '',
+      isPrivate: false,
     });
   });
   describe('action handlers', () => {
@@ -72,6 +73,17 @@ describe('write redux module', () => {
       let state = getInitialState();
       state = reducer(state, write.changeDescription('description'));
       expect(state.description).toBe('description');
+
+      const longText = new Array(151).fill('a').join('');
+      state = reducer(state, write.changeDescription(longText));
+      expect(state.description).toHaveLength(150);
+    });
+    it('SET_PRIVACY', () => {
+      let state = getInitialState();
+      state = reducer(state, write.setPrivacy(true));
+      expect(state.isPrivate).toBeTruthy();
+      state = reducer(state, write.setPrivacy(false));
+      expect(state.isPrivate).toBeFalsy();
     });
   });
 });

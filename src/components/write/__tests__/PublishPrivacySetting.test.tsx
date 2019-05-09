@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import PublishPrivacySetting, {
   PublishPrivacySettingProps,
   PrivacySetting,
@@ -8,7 +8,7 @@ import PublishPrivacySetting, {
 describe('PublishPrivacySetting', () => {
   const setup = (props: Partial<PublishPrivacySettingProps> = {}) => {
     const initialProps: PublishPrivacySettingProps = {
-      selected: PrivacySetting.PUBLIC,
+      isPrivate: false,
       onSelect: () => {},
     };
     const utils = render(
@@ -23,9 +23,6 @@ describe('PublishPrivacySetting', () => {
       buttons,
     };
   };
-  it('renders properly', () => {
-    setup();
-  });
   it('matches snapshot', () => {
     const { container } = setup();
     expect(container).toMatchSnapshot();
@@ -38,11 +35,18 @@ describe('PublishPrivacySetting', () => {
       );
     });
     it('PRIVATE', () => {
-      const utils = setup({ selected: PrivacySetting.PRIVATE });
+      const utils = setup({ isPrivate: true });
       expect(getComputedStyle(utils.buttons.private).color).toBe(
         'rgb(32, 201, 151)',
       );
     });
   });
-  // it('calls onSelect function onClick', () => {})
+  it('calls onSelect function onClick', () => {
+    const onSelect = jest.fn();
+    const utils = setup({ onSelect });
+    fireEvent.click(utils.buttons.private);
+    expect(onSelect).toBeCalledWith(true);
+    fireEvent.click(utils.buttons.public);
+    expect(onSelect).toBeCalledWith(false);
+  });
 });

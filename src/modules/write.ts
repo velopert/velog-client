@@ -11,6 +11,7 @@ const OPEN_PUBLISH = 'write/OPEN_PUBLISH';
 const CLOSE_PUBLISH = 'write/CLOSE_PUBLISH';
 const SET_DEFAULT_DESCRIPTION = 'write/SET_DEFAULT_DESCRIPTION';
 const CHANGE_DESCRIPTION = 'write/CHANGE_DESCRIPTION';
+const SET_PRIVACY = 'write/SET_PRIVACY';
 
 export const changeMarkdown = createStandardAction(CHANGE_MARKDOWN)<string>();
 export const changeTitle = createStandardAction(CHANGE_TITLE)<string>();
@@ -26,6 +27,7 @@ export const setDefaultDescription = createStandardAction(
 export const changeDescription = createStandardAction(CHANGE_DESCRIPTION)<
   string
 >();
+export const setPrivacy = createStandardAction(SET_PRIVACY)<boolean>();
 
 type ChangeMarkdown = ReturnType<typeof changeMarkdown>;
 type ChangeTitle = ReturnType<typeof changeTitle>;
@@ -36,6 +38,7 @@ type ClosePublish = ReturnType<typeof closePublish>;
 type SetTextBody = ReturnType<typeof setTextBody>;
 type SetDefaultDescription = ReturnType<typeof setDefaultDescription>;
 type ChangeDescription = ReturnType<typeof changeDescription>;
+type SetPrivacy = ReturnType<typeof setPrivacy>;
 
 export enum WriteMode {
   MARKDOWN = 'MARKDOWN',
@@ -52,6 +55,7 @@ export type WriteState = {
   textBody: string;
   defaultDescription: string;
   description: string;
+  isPrivate: boolean;
 };
 
 const initialState: WriteState = {
@@ -64,6 +68,7 @@ const initialState: WriteState = {
   textBody: '',
   defaultDescription: '',
   description: '',
+  isPrivate: false,
 };
 
 const write = createReducer(
@@ -95,7 +100,9 @@ const write = createReducer(
     [CHANGE_DESCRIPTION]: (
       state,
       { payload: description }: ChangeDescription,
-    ) => updateKey(state, 'description', description),
+    ) => updateKey(state, 'description', description.slice(0, 150)),
+    [SET_PRIVACY]: (state, { payload: isPrivate }: SetPrivacy) =>
+      updateKey(state, 'isPrivate', isPrivate),
   },
   initialState,
 );
