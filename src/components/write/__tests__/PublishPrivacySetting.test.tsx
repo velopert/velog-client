@@ -2,7 +2,6 @@ import * as React from 'react';
 import { render, fireEvent } from 'react-testing-library';
 import PublishPrivacySetting, {
   PublishPrivacySettingProps,
-  PrivacySetting,
 } from '../PublishPrivacySetting';
 
 describe('PublishPrivacySetting', () => {

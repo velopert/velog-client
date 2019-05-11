@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import OpaqueLayer from '../../components/common/OpaqueLayer';
 import AuthModalContainer from '../auth/AuthModalContainer';
 import { RootState } from '../../modules';
+import UserLoader from './UserLoader';
 
 interface OwnProps {}
 interface StateProps {
@@ -16,6 +17,7 @@ const Core: React.SFC<CoreProps> = ({ layer }) => {
     <>
       <OpaqueLayer visible={layer} />
       <AuthModalContainer />
+      <UserLoader />
     </>
   );
 };

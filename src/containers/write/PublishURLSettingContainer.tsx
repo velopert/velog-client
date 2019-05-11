@@ -6,7 +6,9 @@ import PublishURLSetting from '../../components/write/PublishURLSetting';
 interface OwnProps {}
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
-type PublishURLSettingContainerProps = OwnProps & StateProps & DispatchProps;
+export type PublishURLSettingContainerProps = OwnProps &
+  StateProps &
+  DispatchProps;
 
 const mapStateToProps = (state: RootState) => ({});
 const mapDispatchToProps = {};

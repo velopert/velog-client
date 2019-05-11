@@ -4,9 +4,9 @@ export type UserProfile = {
   id: string;
   display_name: string;
   short_bio: string;
-  thumbnail: string;
+  thumbnail: string | null;
   about: string;
-  profile_links: string;
+  profile_links: any;
 };
 export type User = {
   id: string;
@@ -33,7 +33,7 @@ export type CurrentUser = {
   id: string;
   username: string;
   profile: {
-    thumbnail: string;
+    thumbnail: string | null;
     display_name: string;
   };
 };

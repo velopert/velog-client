@@ -11,8 +11,18 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import client from './lib/graphql/client';
 import rootReducer from './modules';
+import storage from './lib/storage';
+import { setUser } from './modules/core';
 
 const store = createStore(rootReducer, composeWithDevTools());
+
+const loadUser = () => {
+  const user = storage.getItem('CURRENT_USER');
+  if (!user) return;
+  store.dispatch(setUser(user));
+};
+
+loadUser();
 
 loadableReady(() => {
   ReactDOM.hydrate(

@@ -1,6 +1,16 @@
 import * as core from '../core';
+import { User, CurrentUser } from '../../lib/graphql/user';
 
 const reducer = core.default;
+
+export const dummy: CurrentUser = {
+  id: 'dummy_id',
+  username: 'dummy',
+  profile: {
+    display_name: 'dummy',
+    thumbnail: null,
+  },
+};
 
 describe('core reducer', () => {
   const getInitialState = () => reducer(undefined, {});
@@ -9,6 +19,7 @@ describe('core reducer', () => {
     expect(state).toEqual({
       layer: false,
       auth: { visible: false, mode: 'LOGIN' },
+      user: null,
     });
   });
 
@@ -55,6 +66,12 @@ describe('core reducer', () => {
       state = reducer(state, core.closeAuthModal());
       expect(state.auth.visible).toBe(false);
       expect(state.layer).toBe(false);
+    });
+
+    it('SET_USER', () => {
+      let state = getInitialState();
+      state = reducer(state, core.setUser(dummy));
+      expect(state.user).toBe(dummy);
     });
   });
 });
