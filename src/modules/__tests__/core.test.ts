@@ -1,5 +1,5 @@
 import * as core from '../core';
-import { User, CurrentUser } from '../../lib/graphql/user';
+import { CurrentUser } from '../../lib/graphql/user';
 
 const reducer = core.default;
 
