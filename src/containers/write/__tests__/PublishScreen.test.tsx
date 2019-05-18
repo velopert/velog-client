@@ -9,14 +9,17 @@ import {
   openPublish,
   setDefaultDescription,
 } from '../../../modules/write';
+import { MockedProvider } from 'react-apollo/test-utils';
 
 describe('PublishScreen', () => {
   const setup = (props: Partial<PublishScreenProps> = {}) => {
     const store = createStore(rootReducer);
     const utils = render(
-      <Provider store={store}>
-        <PublishScreen {...props} />
-      </Provider>,
+      <MockedProvider>
+        <Provider store={store}>
+          <PublishScreen {...props} />
+        </Provider>
+      </MockedProvider>,
     );
     return {
       ...utils,

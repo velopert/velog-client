@@ -95,33 +95,38 @@ export interface PublishPreviewProps {
   description: string;
   defaultDescription: string;
   onChangeDescription: (description: string) => void;
+  onUpload: () => any;
 }
 
-interface ThumbnailProps {}
-const Thumbnail: React.FC<ThumbnailProps> = () => {
+interface ThumbnailProps {
+  onUploadClick: () => void;
+}
+const Thumbnail: React.FC<ThumbnailProps> = ({ onUploadClick }) => {
   return (
     <ThumbnailSizer>
       <ThumbnailBlock>
         <MissingThumbnail>
           <ImageVector />
-          <UploadButton>썸네일 업로드</UploadButton>
+          <UploadButton onClick={onUploadClick}>썸네일 업로드</UploadButton>
         </MissingThumbnail>
       </ThumbnailBlock>
     </ThumbnailSizer>
   );
 };
 
-const { useCallback } = React;
+const { useCallback, useEffect } = React;
 const PublishPreview: React.FC<PublishPreviewProps> = ({
   title,
   description,
   defaultDescription,
   onChangeDescription,
+  onUpload,
 }) => {
   const descriptionToShow: string = description || defaultDescription;
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     onChangeDescription(e.target.value);
   };
+
   const onKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       if (e.keyCode === 13) {
@@ -132,7 +137,7 @@ const PublishPreview: React.FC<PublishPreviewProps> = ({
   );
   return (
     <PublishPreviewBlock title="포스트 카드 미리보기">
-      <Thumbnail />
+      <Thumbnail onUploadClick={onUpload} />
       <PostInfo>
         <h4>{title}</h4>
         <ShortDescriptionTextarea

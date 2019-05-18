@@ -12,6 +12,7 @@ const CLOSE_PUBLISH = 'write/CLOSE_PUBLISH';
 const SET_DEFAULT_DESCRIPTION = 'write/SET_DEFAULT_DESCRIPTION';
 const CHANGE_DESCRIPTION = 'write/CHANGE_DESCRIPTION';
 const SET_PRIVACY = 'write/SET_PRIVACY';
+const CHANGE_URL_SLUG = 'write/CHANGE_URL';
 
 export const changeMarkdown = createStandardAction(CHANGE_MARKDOWN)<string>();
 export const changeTitle = createStandardAction(CHANGE_TITLE)<string>();
@@ -28,6 +29,7 @@ export const changeDescription = createStandardAction(CHANGE_DESCRIPTION)<
   string
 >();
 export const setPrivacy = createStandardAction(SET_PRIVACY)<boolean>();
+export const changeUrlSlug = createStandardAction(CHANGE_URL_SLUG)<string>();
 
 type ChangeMarkdown = ReturnType<typeof changeMarkdown>;
 type ChangeTitle = ReturnType<typeof changeTitle>;
@@ -39,6 +41,7 @@ type SetTextBody = ReturnType<typeof setTextBody>;
 type SetDefaultDescription = ReturnType<typeof setDefaultDescription>;
 type ChangeDescription = ReturnType<typeof changeDescription>;
 type SetPrivacy = ReturnType<typeof setPrivacy>;
+type ChangeUrlSlug = ReturnType<typeof changeUrlSlug>;
 
 export enum WriteMode {
   MARKDOWN = 'MARKDOWN',
@@ -56,6 +59,7 @@ export type WriteState = {
   defaultDescription: string;
   description: string;
   isPrivate: boolean;
+  urlSlug: string;
 };
 
 const initialState: WriteState = {
@@ -69,6 +73,7 @@ const initialState: WriteState = {
   defaultDescription: '',
   description: '',
   isPrivate: false,
+  urlSlug: '',
 };
 
 const write = createReducer(
@@ -103,6 +108,8 @@ const write = createReducer(
     ) => updateKey(state, 'description', description.slice(0, 150)),
     [SET_PRIVACY]: (state, { payload: isPrivate }: SetPrivacy) =>
       updateKey(state, 'isPrivate', isPrivate),
+    [CHANGE_URL_SLUG]: (state, { payload: urlSlug }: ChangeUrlSlug) =>
+      updateKey(state, 'urlSlug', urlSlug),
   },
   initialState,
 );

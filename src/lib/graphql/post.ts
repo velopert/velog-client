@@ -59,3 +59,43 @@ export const GET_POST_LIST = gql`
     }
   }
 `;
+
+export const WRITE_POST = gql`
+  mutation WritePost(
+    $title: String
+    $body: String
+    $tags: [String]
+    $is_markdown: Boolean
+    $is_temp: Boolean
+    $url_slug: String
+    $thumbnail: String
+    $meta: JSON
+  ) {
+    writePost(
+      title: $title
+      body: $body
+      tags: $tags
+      is_markdown: $is_markdown
+      is_temp: $is_temp
+      url_slug: $url_slug
+      thumbnail: $thumbnail
+      meta: $meta
+    ) {
+      id
+      title
+      body
+      thumbnail
+      is_markdown
+      is_temp
+      user {
+        id
+        username
+        profile {
+          thumbnail
+        }
+      }
+      url_slug
+      meta
+    }
+  }
+`;

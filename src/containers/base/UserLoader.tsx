@@ -37,8 +37,7 @@ const UserLoader: React.FC<UserLoaderProps> = ({ setUser }) => {
       {({ loading, error, data }: QueryResult<{ auth: CurrentUser }>) => {
         if (loading || error) return null;
         const user = data && data.auth;
-        if (!user) return null;
-        return <DetectUserChange user={user} onSetUser={onSetUser} />;
+        return <DetectUserChange user={user || null} onSetUser={onSetUser} />;
       }}
     </Query>
   );

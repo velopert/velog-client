@@ -17,6 +17,7 @@ describe('write redux module', () => {
       defaultDescription: '',
       description: '',
       isPrivate: false,
+      urlSlug: '',
     });
   });
   describe('action handlers', () => {
@@ -84,6 +85,11 @@ describe('write redux module', () => {
       expect(state.isPrivate).toBeTruthy();
       state = reducer(state, write.setPrivacy(false));
       expect(state.isPrivate).toBeFalsy();
+    });
+    it('CHANGE_URL_SLUG', () => {
+      let state = getInitialState();
+      state = reducer(state, write.changeUrlSlug('urlslug'));
+      expect(state.urlSlug).toBe('urlslug');
     });
   });
 });
