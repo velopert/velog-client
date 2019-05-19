@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { RootState } from '../../modules';
 import PublishPreview from '../../components/write/PublishPreview';
-import { changeDescription } from '../../modules/write';
+import { changeDescription, setThumbnail } from '../../modules/write';
 import useUpload from '../../lib/hooks/useUpload';
 import useS3Upload from '../../lib/hooks/useS3Upload';
 
@@ -10,10 +10,12 @@ const mapStateToProps = (state: RootState) => ({
   title: state.write.title,
   description: state.write.description,
   defaultDescription: state.write.defaultDescription,
+  thumbnail: state.write.thumbnail,
 });
 
 const mapDispatchToProps = {
   changeDescription,
+  setThumbnail,
 };
 
 interface OwnProps {}
@@ -28,6 +30,8 @@ const PublishPreviewContainer: React.FC<PublishPreviewContainerProps> = ({
   description,
   changeDescription,
   defaultDescription,
+  thumbnail,
+  setThumbnail,
 }) => {
   const onChangeDescription = useCallback(
     (description: string) => changeDescription(description),
@@ -35,7 +39,7 @@ const PublishPreviewContainer: React.FC<PublishPreviewContainerProps> = ({
   );
 
   const [upload, file] = useUpload();
-  const [s3Upload, image, error] = useS3Upload();
+  const [s3Upload, image] = useS3Upload();
 
   const onUpload = () => {
     upload();
@@ -48,6 +52,15 @@ const PublishPreviewContainer: React.FC<PublishPreviewContainerProps> = ({
     });
   }, [file, s3Upload]);
 
+  useEffect(() => {
+    if (!image) return;
+    setThumbnail(image);
+  }, [image, setThumbnail]);
+
+  const onResetThumbnail = useCallback(() => {
+    setThumbnail(null);
+  }, [setThumbnail]);
+
   return (
     <PublishPreview
       title={title}
@@ -55,6 +68,8 @@ const PublishPreviewContainer: React.FC<PublishPreviewContainerProps> = ({
       description={description}
       onChangeDescription={onChangeDescription}
       onUpload={onUpload}
+      thumbnail={thumbnail}
+      onResetThumbnail={onResetThumbnail}
     />
   );
 };

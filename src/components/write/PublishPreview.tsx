@@ -32,6 +32,13 @@ const MissingThumbnail = styled.div`
   flex-direction: column;
 `;
 
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+`;
+
 const UploadButton = styled.button`
   margin-top: 1rem;
   padding: 0.25rem 2rem;
@@ -90,37 +97,103 @@ const TextLimit = styled.div<{ limit: boolean }>`
     `}
 `;
 
-export interface PublishPreviewProps {
-  title: string;
-  description: string;
-  defaultDescription: string;
-  onChangeDescription: (description: string) => void;
-  onUpload: () => any;
-}
-
 interface ThumbnailProps {
+  thumbnail: string | null;
   onUploadClick: () => void;
 }
-const Thumbnail: React.FC<ThumbnailProps> = ({ onUploadClick }) => {
+const Thumbnail: React.FC<ThumbnailProps> = ({ onUploadClick, thumbnail }) => {
   return (
     <ThumbnailSizer>
       <ThumbnailBlock>
-        <MissingThumbnail>
-          <ImageVector />
-          <UploadButton onClick={onUploadClick}>썸네일 업로드</UploadButton>
-        </MissingThumbnail>
+        {thumbnail ? (
+          <Image src={thumbnail} data-testid="image" />
+        ) : (
+          <MissingThumbnail>
+            <ImageVector />
+            <UploadButton onClick={onUploadClick}>썸네일 업로드</UploadButton>
+          </MissingThumbnail>
+        )}
       </ThumbnailBlock>
     </ThumbnailSizer>
   );
 };
 
-const { useCallback, useEffect } = React;
+const ThumbnailModifyBlock = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+  & > .actions {
+    display: flex;
+    align-items: center;
+    button {
+      background: none;
+      outline: none;
+      border: none;
+      font-size: 1rem;
+      color: ${palette.gray6};
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+      &:hover {
+        color: ${palette.gray5};
+      }
+      &:active {
+        color: ${palette.gray7};
+      }
+    }
+    .middledot {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+      display: block;
+      width: 2px;
+      height: 2px;
+      border-radius: 1px;
+      background: ${palette.gray6};
+    }
+  }
+`;
+type ThumbnailModifyProps = {
+  visible: boolean;
+  onResetThumbnail: () => void;
+  onChangeThumbnail: () => void;
+};
+const ThumbnailModify: React.FC<ThumbnailModifyProps> = ({
+  visible,
+  onResetThumbnail,
+  onChangeThumbnail,
+}) => {
+  if (!visible) return null;
+  return (
+    <ThumbnailModifyBlock>
+      <div className="actions">
+        <button onClick={onChangeThumbnail}>재업로드</button>
+        <div className="middledot" />
+        <button onClick={onResetThumbnail}>제거</button>
+      </div>
+    </ThumbnailModifyBlock>
+  );
+};
+
+const { useCallback } = React;
+
+export interface PublishPreviewProps {
+  title: string;
+  description: string;
+  defaultDescription: string;
+  thumbnail: string | null;
+  onChangeDescription: (description: string) => void;
+  onResetThumbnail: () => void;
+  onUpload: () => any;
+}
+
 const PublishPreview: React.FC<PublishPreviewProps> = ({
   title,
+  thumbnail,
   description,
   defaultDescription,
   onChangeDescription,
   onUpload,
+  onResetThumbnail,
 }) => {
   const descriptionToShow: string = description || defaultDescription;
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -137,7 +210,12 @@ const PublishPreview: React.FC<PublishPreviewProps> = ({
   );
   return (
     <PublishPreviewBlock title="포스트 카드 미리보기">
-      <Thumbnail onUploadClick={onUpload} />
+      <ThumbnailModify
+        visible={!!thumbnail}
+        onResetThumbnail={onResetThumbnail}
+        onChangeThumbnail={onUpload}
+      />
+      <Thumbnail onUploadClick={onUpload} thumbnail={thumbnail} />
       <PostInfo>
         <h4>{title}</h4>
         <ShortDescriptionTextarea

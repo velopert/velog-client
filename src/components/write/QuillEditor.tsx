@@ -307,6 +307,9 @@ export default class QuillEditor extends React.Component<
                 addLinkDefaultValue: defaultValue,
               });
             },
+            image: () => {
+              console.log('whaaaat');
+            },
           },
         },
         syntax: {

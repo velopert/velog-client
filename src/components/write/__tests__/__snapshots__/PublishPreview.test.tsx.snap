@@ -24,7 +24,7 @@ exports[`PublishPreview matches snapshot 1`] = `
               vector-image.svg
             </svg>
             <button
-              class="sc-EHOje gyfGXD"
+              class="sc-bZQynM gnnAiV"
             >
               썸네일 업로드
             </button>
@@ -32,17 +32,17 @@ exports[`PublishPreview matches snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-bZQynM dcFljb"
+        class="sc-gzVnrw bFpawa"
       >
         <h4>
           타이틀
         </h4>
         <textarea
-          class="sc-gzVnrw eOJEaf"
+          class="sc-htoDjs cNItPr"
           placeholder="당신의 포스트를 짧게 소개해보세요."
         />
         <div
-          class="sc-htoDjs hGOLkC"
+          class="sc-dnqmqq JcFnD"
         >
           0
           /150

@@ -18,6 +18,7 @@ describe('write redux module', () => {
       description: '',
       isPrivate: false,
       urlSlug: '',
+      thumbnail: null,
     });
   });
   describe('action handlers', () => {
@@ -90,6 +91,14 @@ describe('write redux module', () => {
       let state = getInitialState();
       state = reducer(state, write.changeUrlSlug('urlslug'));
       expect(state.urlSlug).toBe('urlslug');
+    });
+    it('SET_THUMBNAIL', () => {
+      let state = getInitialState();
+      state = reducer(
+        state,
+        write.setThumbnail('https://images.velog.io/sample.jpg'),
+      );
+      expect(state.thumbnail).toBe('https://images.velog.io/sample.jpg');
     });
   });
 });

@@ -9,6 +9,9 @@ describe('PublishPreview', () => {
       description: '',
       defaultDescription: '',
       onChangeDescription: () => {},
+      onResetThumbnail: () => {},
+      onUpload: () => {},
+      thumbnail: null,
     };
     const utils = render(<PublishPreview {...initialProps} {...props} />);
     const textarea = utils.getByPlaceholderText(
@@ -66,5 +69,19 @@ describe('PublishPreview', () => {
     expect(window.getComputedStyle(textLimitDiv).color).toBe(
       'rgb(250, 82, 82)',
     );
+  });
+  it('calls onUpload', () => {
+    const onUpload = jest.fn();
+    const utils = setup({ onUpload });
+    const uploadButton = utils.getByText('썸네일 업로드');
+    fireEvent.click(uploadButton);
+    expect(onUpload).toBeCalled();
+  });
+  it('shows a thumbnail', () => {
+    const utils = setup({ thumbnail: 'https://images.velog.io/sample.png' });
+    const image = utils.getByTestId('image') as HTMLImageElement;
+    expect(image).toHaveAttribute('src', 'https://images.velog.io/sample.png');
+    utils.getByText('재업로드');
+    utils.getByText('제거');
   });
 });
