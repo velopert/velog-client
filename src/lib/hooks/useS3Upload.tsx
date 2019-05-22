@@ -1,10 +1,12 @@
 import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { createSignedUrl } from '../api/files';
+import { useJazzbar } from '../jazzbar';
 
 const useS3Upload = () => {
   const [error, setError] = useState<Error | null>(null);
   const [image, setImage] = useState<string | null>(null);
+  const [setProgress] = useJazzbar();
 
   const s3Upload = useCallback(
     async (
@@ -37,6 +39,7 @@ const useS3Upload = () => {
           },
           onUploadProgress: e => {
             console.log(Math.round((e.loaded / e.total) * 100));
+            setProgress(Math.round((e.loaded / e.total) * 100));
           },
         });
         setImage(image_path);
@@ -44,7 +47,7 @@ const useS3Upload = () => {
         setError(e);
       }
     },
-    [],
+    [setProgress],
   );
 
   return [s3Upload, image, error] as [

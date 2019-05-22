@@ -10,9 +10,12 @@ import {
   setHtml,
   setTextBody,
   setDefaultDescription,
+  setThumbnail,
 } from '../../modules/write';
 import TagInputContainer from './TagInputContainer';
 import WriteFooter from '../../components/write/WriteFooter';
+import useUpload from '../../lib/hooks/useUpload';
+import useS3Upload from '../../lib/hooks/useS3Upload';
 
 interface OwnProps {}
 type StateProps = ReturnType<typeof mapStateToProps>;
@@ -24,6 +27,7 @@ const mapStateToProps = ({ write }: RootState) => ({
   title: write.title,
   html: write.html,
   textBody: write.textBody,
+  thumbnail: write.thumbnail,
 });
 const mapDispatchToProps = {
   convertEditorMode,
@@ -33,9 +37,10 @@ const mapDispatchToProps = {
   setHtml,
   setTextBody,
   setDefaultDescription,
+  setThumbnail,
 };
 
-const { useCallback } = React;
+const { useCallback, useEffect } = React;
 
 const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
   title,
@@ -48,6 +53,8 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
   setTextBody,
   setDefaultDescription,
   textBody,
+  thumbnail,
+  setThumbnail,
 }) => {
   const onConvertEditorMode = (markdown: string) => {
     batch(() => {
@@ -65,6 +72,23 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
     openPublish();
     setDefaultDescription(textBody.replace(/\n/g, '').slice(0, 150));
   }, [openPublish, setDefaultDescription, textBody]);
+
+  const [upload, file] = useUpload();
+  const [s3Upload, image] = useS3Upload();
+
+  useEffect(() => {
+    if (!file) return;
+    s3Upload(file, {
+      type: 'post',
+    });
+  }, [file, s3Upload]);
+
+  useEffect(() => {
+    if (!thumbnail && image) {
+      setThumbnail(image);
+    }
+  }, [image, setThumbnail, thumbnail]);
+
   return (
     <QuillEditor
       title={title}
@@ -75,6 +99,8 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
       onChangeHtml={onChangeHtml}
       onChangeTextBody={onChangeTextBody}
       footer={<WriteFooter onPublish={onPublish} onTempSave={() => {}} />}
+      onUpload={upload}
+      lastUploadedImage={image}
     />
   );
 };

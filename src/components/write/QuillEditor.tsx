@@ -29,6 +29,8 @@ export interface QuillEditorProps {
 
   tagInput: React.ReactNode;
   footer: React.ReactNode;
+  onUpload: () => void;
+  lastUploadedImage: string | null;
 }
 export interface QuillEditorState {
   titleFocus: boolean;
@@ -82,6 +84,13 @@ const Editor = styled.div`
     padding: 0;
     font-size: 1.3125rem;
     font-family: inherit;
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
     &:not(.ql-blank) {
       p {
         line-height: 1.875;
@@ -207,6 +216,25 @@ export default class QuillEditor extends React.Component<
     }
   };
 
+  addImageToEditor = (image: string) => {
+    if (!this.quill) return;
+    const range = this.quill.getSelection();
+    if (!range) return;
+    this.quill.insertEmbed(range.index, 'image', image);
+    this.quill.insertText(range.index + 2, '');
+    this.quill.setSelection(range.index + 2, 0);
+    this.quill.focus();
+  };
+  componentDidUpdate(prevProps: QuillEditorProps) {
+    const { lastUploadedImage } = this.props;
+    if (
+      lastUploadedImage &&
+      prevProps.lastUploadedImage !== lastUploadedImage
+    ) {
+      this.addImageToEditor(lastUploadedImage);
+    }
+  }
+
   componentDidMount() {
     // bind scroll event
     document.addEventListener('scroll', this.handleScroll);
@@ -308,7 +336,7 @@ export default class QuillEditor extends React.Component<
               });
             },
             image: () => {
-              console.log('whaaaat');
+              this.props.onUpload();
             },
           },
         },

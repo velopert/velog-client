@@ -7,6 +7,8 @@ const useUpload = () => {
     const input = document.createElement('input');
     input.type = 'file';
     input.onchange = () => {
+      console.log('onchange');
+      console.log(input.files);
       if (!input.files) return;
       const file = input.files[0];
       setFile(file);

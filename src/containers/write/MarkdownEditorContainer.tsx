@@ -9,6 +9,7 @@ import {
   convertEditorMode,
   openPublish,
   setDefaultDescription,
+  setThumbnail,
 } from '../../modules/write';
 
 import remark from 'remark';
@@ -17,11 +18,14 @@ import breaks from 'remark-breaks';
 import strip from 'strip-markdown';
 import TagInputContainer from './TagInputContainer';
 import WriteFooter from '../../components/write/WriteFooter';
+import useUpload from '../../lib/hooks/useUpload';
+import useS3Upload from '../../lib/hooks/useS3Upload';
 
 interface OwnProps {}
 interface StateProps {
   title: string;
   markdown: string;
+  thumbnail: null | string;
 }
 interface DispatchProps {
   changeMarkdown: typeof changeMarkdown;
@@ -30,12 +34,14 @@ interface DispatchProps {
   convertEditorMode: typeof convertEditorMode;
   openPublish: typeof openPublish;
   setDefaultDescription: typeof setDefaultDescription;
+  setThumbnail: typeof setThumbnail;
 }
+
 export type MarkdownEditorContainerProps = OwnProps &
   StateProps &
   DispatchProps;
 
-const { useCallback } = React;
+const { useCallback, useEffect } = React;
 
 const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = ({
   changeMarkdown,
@@ -44,6 +50,7 @@ const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = ({
   convertEditorMode,
   title,
   markdown,
+  thumbnail,
   openPublish,
   setDefaultDescription,
 }) => {
@@ -69,8 +76,27 @@ const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = ({
         openPublish();
       });
   }, [markdown, openPublish, setDefaultDescription]);
+
+  const [upload, file] = useUpload();
+  const [s3Upload, image] = useS3Upload();
+
+  useEffect(() => {
+    if (!file) return;
+    s3Upload(file, {
+      type: 'post',
+    });
+  }, [file, s3Upload]);
+
+  useEffect(() => {
+    if (!thumbnail && image) {
+      setThumbnail(image);
+    }
+  }, [image, thumbnail]);
+
   return (
     <MarkdownEditor
+      onUpload={upload}
+      lastUploadedImage={image}
       title={title}
       markdown={markdown}
       onChangeMarkdown={changeMarkdown}
@@ -86,6 +112,7 @@ export default connect<StateProps, DispatchProps, OwnProps, RootState>(
   state => ({
     title: state.write.title,
     markdown: state.write.markdown,
+    thumbnail: state.write.thumbnail,
   }),
   {
     changeMarkdown,
@@ -94,5 +121,6 @@ export default connect<StateProps, DispatchProps, OwnProps, RootState>(
     convertEditorMode,
     openPublish,
     setDefaultDescription,
+    setThumbnail,
   },
 )(MarkdownEditorContainer);

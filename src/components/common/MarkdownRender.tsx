@@ -38,6 +38,14 @@ const MarkdownRenderBlock = styled.div`
     line-height: 1.5;
     overflow-x: auto;
   }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const { useState, useEffect } = React;
