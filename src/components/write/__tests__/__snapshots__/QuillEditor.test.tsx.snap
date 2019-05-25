@@ -3,7 +3,7 @@
 exports[`QuillEditor matches snapshot 1`] = `
 <div>
   <div
-    class="sc-jTzLTM fLFCCI"
+    class="sc-jTzLTM Uenvm"
     data-testid="quill"
   >
     <textarea

@@ -20,12 +20,15 @@ import TagInputContainer from './TagInputContainer';
 import WriteFooter from '../../components/write/WriteFooter';
 import useUpload from '../../lib/hooks/useUpload';
 import useS3Upload from '../../lib/hooks/useS3Upload';
+import DragDropUpload from '../../components/common/DragDropUpload';
+import PasteUpload from '../../components/common/PasteUpload';
 
 interface OwnProps {}
 interface StateProps {
   title: string;
   markdown: string;
   thumbnail: null | string;
+  publish: boolean;
 }
 interface DispatchProps {
   changeMarkdown: typeof changeMarkdown;
@@ -53,6 +56,7 @@ const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = ({
   thumbnail,
   openPublish,
   setDefaultDescription,
+  publish,
 }) => {
   const onConvert = (markdown: string) => {
     remark()
@@ -93,18 +97,30 @@ const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = ({
     }
   }, [image, thumbnail]);
 
+  const onDragDropUpload = useCallback(
+    (file: File) => {
+      s3Upload(file, {
+        type: 'post',
+      });
+    },
+    [s3Upload],
+  );
   return (
-    <MarkdownEditor
-      onUpload={upload}
-      lastUploadedImage={image}
-      title={title}
-      markdown={markdown}
-      onChangeMarkdown={changeMarkdown}
-      onChangeTitle={changeTitle}
-      onConvert={onConvert}
-      tagInput={<TagInputContainer />}
-      footer={<WriteFooter onPublish={onPublish} onTempSave={() => {}} />}
-    />
+    <>
+      <MarkdownEditor
+        onUpload={upload}
+        lastUploadedImage={publish ? null : image}
+        title={title}
+        markdown={markdown}
+        onChangeMarkdown={changeMarkdown}
+        onChangeTitle={changeTitle}
+        onConvert={onConvert}
+        tagInput={<TagInputContainer />}
+        footer={<WriteFooter onPublish={onPublish} onTempSave={() => {}} />}
+      />
+      <DragDropUpload onUpload={onDragDropUpload} />
+      <PasteUpload onUpload={onDragDropUpload} />
+    </>
   );
 };
 
@@ -113,6 +129,7 @@ export default connect<StateProps, DispatchProps, OwnProps, RootState>(
     title: state.write.title,
     markdown: state.write.markdown,
     thumbnail: state.write.thumbnail,
+    publish: state.write.publish,
   }),
   {
     changeMarkdown,

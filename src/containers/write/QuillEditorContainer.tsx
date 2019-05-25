@@ -16,6 +16,8 @@ import TagInputContainer from './TagInputContainer';
 import WriteFooter from '../../components/write/WriteFooter';
 import useUpload from '../../lib/hooks/useUpload';
 import useS3Upload from '../../lib/hooks/useS3Upload';
+import DragDropUpload from '../../components/common/DragDropUpload';
+import PasteUpload from '../../components/common/PasteUpload';
 
 interface OwnProps {}
 type StateProps = ReturnType<typeof mapStateToProps>;
@@ -28,6 +30,7 @@ const mapStateToProps = ({ write }: RootState) => ({
   html: write.html,
   textBody: write.textBody,
   thumbnail: write.thumbnail,
+  publish: write.publish,
 });
 const mapDispatchToProps = {
   convertEditorMode,
@@ -55,6 +58,7 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
   textBody,
   thumbnail,
   setThumbnail,
+  publish,
 }) => {
   const onConvertEditorMode = (markdown: string) => {
     batch(() => {
@@ -89,19 +93,32 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
     }
   }, [image, setThumbnail, thumbnail]);
 
+  const onDragDropUpload = useCallback(
+    (file: File) => {
+      s3Upload(file, {
+        type: 'post',
+      });
+    },
+    [s3Upload],
+  );
+
   return (
-    <QuillEditor
-      title={title}
-      onConvertEditorMode={onConvertEditorMode}
-      onChangeTitle={onChangeTitle}
-      initialHtml={html}
-      tagInput={<TagInputContainer />}
-      onChangeHtml={onChangeHtml}
-      onChangeTextBody={onChangeTextBody}
-      footer={<WriteFooter onPublish={onPublish} onTempSave={() => {}} />}
-      onUpload={upload}
-      lastUploadedImage={image}
-    />
+    <>
+      <QuillEditor
+        title={title}
+        onConvertEditorMode={onConvertEditorMode}
+        onChangeTitle={onChangeTitle}
+        initialHtml={html}
+        tagInput={<TagInputContainer />}
+        onChangeHtml={onChangeHtml}
+        onChangeTextBody={onChangeTextBody}
+        footer={<WriteFooter onPublish={onPublish} onTempSave={() => {}} />}
+        onUpload={upload}
+        lastUploadedImage={publish ? null : image}
+      />
+      <DragDropUpload onUpload={onDragDropUpload} />
+      <PasteUpload onUpload={onDragDropUpload} />
+    </>
   );
 };
 

@@ -48,6 +48,9 @@ export interface QuillEditorState {
 const StyledTitleTextarea = styled(TitleTextarea)``;
 
 const QuillEditorWrapper = styled.div`
+  img {
+    pointer-events: none;
+  }
   padding-top: 5rem;
   padding-bottom: 10rem;
   position: relative;
@@ -218,7 +221,9 @@ export default class QuillEditor extends React.Component<
 
   addImageToEditor = (image: string) => {
     if (!this.quill) return;
+    this.quill.focus();
     const range = this.quill.getSelection();
+    console.log(range);
     if (!range) return;
     this.quill.insertEmbed(range.index, 'image', image);
     this.quill.insertText(range.index + 2, '');

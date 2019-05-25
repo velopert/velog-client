@@ -19,6 +19,7 @@ const mapStateToProps = ({ write }: RootState) =>
       'description',
       'isPrivate',
       'urlSlug',
+      'thumbnail',
     ],
     write,
   );
@@ -57,7 +58,7 @@ const PublishActionButtonsContainer: React.FC<
                     is_temp: false,
                     is_private: rest.isPrivate,
                     url_slug: rest.urlSlug,
-                    thumbnail: null,
+                    thumbnail: rest.thumbnail,
                     meta: {},
                   },
                 });

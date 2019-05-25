@@ -157,6 +157,14 @@ export default class MarkdownEditor extends React.Component<
       this.props.onChangeMarkdown(cm.getValue());
       this.stickToBottomIfNeeded();
     });
+    this.codemirror.on('paste', (editor: any, e: any) => {
+      const { items } = e.clipboardData || e.originalEvent.clipboardData;
+      console.log(items);
+      if (items.length !== 2) return;
+      if (items[1].kind === 'file') {
+        e.preventDefault();
+      }
+    });
   };
 
   stickToBottomIfNeeded = () => {

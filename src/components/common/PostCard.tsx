@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { userThumbnail } from '../../static/images';
@@ -8,6 +9,10 @@ import { PartialPost } from '../../lib/graphql/post';
 const PostCardBlock = styled.div`
   padding-top: 4rem;
   padding-bottom: 4rem;
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
   &:first-child {
     padding-top: 0;
   }
@@ -72,6 +77,7 @@ interface PostCardProps {
 }
 
 const PostCard: React.SFC<PostCardProps> = React.memo(({ post }) => {
+  const url = `/@${post.user.username}/${post.url_slug}`;
   return (
     <PostCardBlock>
       <div className="user-info">
@@ -88,7 +94,9 @@ const PostCard: React.SFC<PostCardProps> = React.memo(({ post }) => {
           alt="post-thumbnail"
         />
       )}
-      <h2>{post.title}</h2>
+      <Link to={url}>
+        <h2>{post.title}</h2>
+      </Link>
       <p>{post.short_description}</p>
       <div className="subinfo">
         <span>2019년 3월 23일</span>

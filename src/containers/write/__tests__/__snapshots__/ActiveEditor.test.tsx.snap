@@ -3,17 +3,17 @@
 exports[`ActiveEditor matches snapshot 1`] = `
 <div>
   <div
-    class="sc-kkGfuU bkLzLm"
+    class="sc-hSdWYo lcVLLB"
     data-testid="quill"
   >
     <textarea
-      class="sc-htpNat sc-kEYyzF dmZCzN"
+      class="sc-htpNat sc-iAyFgw kYImpO"
       placeholder="제목을 입력하세요"
       style="height: 0px;"
       tabindex="1"
     />
     <div
-      class="sc-iAyFgw kuLbpQ"
+      class="sc-eHgmQL qfjoV"
     />
     <div
       class="sc-chPdSV drnliS"
@@ -264,14 +264,14 @@ exports[`ActiveEditor matches snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-hSdWYo dxytaS"
+      class="sc-cvbbAY jwSZfN"
     >
       <div
         tabindex="2"
       />
     </div>
     <div
-      class="sc-eHgmQL cqEIGc"
+      class="sc-jWBwVP gTJngf"
     >
       <div
         class="sc-dxgOiQ jULWpa"
