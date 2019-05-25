@@ -9,7 +9,7 @@ const PublishScreenTemplateBlock = styled.div<{ visible: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;

@@ -6,6 +6,7 @@ import { closePublish, WriteMode } from '../../modules/write';
 import { Mutation, MutationResult } from 'react-apollo';
 import { WRITE_POST, Post } from '../../lib/graphql/post';
 import { pick } from 'ramda';
+import { escapeForUrl } from '../../lib/utils';
 
 const mapStateToProps = ({ write }: RootState) =>
   pick(
@@ -57,7 +58,7 @@ const PublishActionButtonsContainer: React.FC<
                     is_markdown: rest.mode === WriteMode.MARKDOWN,
                     is_temp: false,
                     is_private: rest.isPrivate,
-                    url_slug: rest.urlSlug,
+                    url_slug: rest.urlSlug || escapeForUrl(rest.title),
                     thumbnail: rest.thumbnail,
                     meta: {},
                   },
