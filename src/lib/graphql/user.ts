@@ -8,12 +8,17 @@ export type UserProfile = {
   about: string;
   profile_links: any;
 };
+export type VelogConfig = {
+  id: string;
+  title: string;
+};
 export type User = {
   id: string;
   username: string;
   email: string | null;
   is_certified: boolean;
   profile: UserProfile;
+  velogConfig: VelogConfig | null;
 };
 
 export const GET_CURRENT_USER = gql`
