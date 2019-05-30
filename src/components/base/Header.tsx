@@ -74,6 +74,7 @@ const Header: React.SFC<HeaderProps> = ({
       <HeaderBlock
         floating={floating}
         style={{ marginTop: floating ? floatingMargin : 0 }}
+        data-testid="Header"
       >
         <div className="wrapper">
           <div className="brand">
