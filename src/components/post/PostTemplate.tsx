@@ -6,8 +6,8 @@ const PostTemplateBlock = styled(PageTemplate)``;
 
 interface PostTemplateProps {}
 
-const PostTemplate: React.SFC<PostTemplateProps> = props => {
-  return <PostTemplateBlock>포스트임</PostTemplateBlock>;
+const PostTemplate: React.SFC<PostTemplateProps> = ({ children }) => {
+  return <PostTemplateBlock>{children}</PostTemplateBlock>;
 };
 
 export default PostTemplate;
