@@ -11,6 +11,7 @@ const MainPage = loadable(() => import('./pages/main/MainPage'));
 const PostPage = loadable(() => import('./pages/PostPage'));
 const EmailLoginPage = loadable(() => import('./pages/EmailLoginPage'));
 const WritePage = loadable(() => import('./pages/WritePage'));
+const VelogPage = loadable(() => import('./pages/velog/VelogPage'));
 
 interface AppProps {}
 
@@ -21,7 +22,8 @@ const App: React.SFC<AppProps> = props => {
         <Route path="/" component={MainPage} exact />
         <Route path="/register" component={RegisterPage} />
         <Route path="/:mode(trending|recent|following)" component={MainPage} />
-        <Route path="/@:username/:urlSlug" component={PostPage} />
+        <Route path="/@:username" component={VelogPage} />
+        {/* <Route path="/@:username/:urlSlug" component={PostPage} /> */}
         <Route path="/email-login" component={EmailLoginPage} />
         <Route path="/write" component={WritePage} />
       </Switch>
