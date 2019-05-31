@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render } from 'react-testing-library';
+import { render, waitForDomChange } from 'react-testing-library';
 import ConfigLoader, { ConfigLoaderProps } from '../ConfigLoader';
 import { MockedProvider } from 'react-apollo/test-utils';
 import { GET_VELOG_CONFIG } from '../../../lib/graphql/user';
@@ -9,20 +9,21 @@ describe('ConfigLoader', () => {
     const initialProps: ConfigLoaderProps = { username: 'velopert' };
     const mocks = [
       {
-        request: GET_VELOG_CONFIG,
-        variables: {
-          name: 'velopert',
+        request: {
+          query: GET_VELOG_CONFIG,
+          variables: {
+            username: 'velopert',
+          },
         },
         result: {
           data: {
-            title: 'VELOPERT.LOG',
-            logo_image: null,
+            velog_config: { title: 'VELOPERT.LOG', logo_image: null },
           },
         },
       },
     ];
     const utils = render(
-      <MockedProvider mocks={mocks}>
+      <MockedProvider mocks={mocks} addTypename={false}>
         <ConfigLoader {...initialProps} {...props} />
       </MockedProvider>,
     );
@@ -33,8 +34,9 @@ describe('ConfigLoader', () => {
   it('renders properly', () => {
     setup();
   });
-  it('matches snapshot', () => {
+  it('matches snapshot', async () => {
     const { container } = setup();
+    await waitForDomChange({ container });
     expect(container).toMatchSnapshot();
   });
 });

@@ -9,9 +9,17 @@ export interface ConfigLoaderProps {
 const ConfigLoader: React.FC<ConfigLoaderProps> = ({ username }) => {
   return (
     <Query query={GET_VELOG_CONFIG} variables={{ username }}>
-      {(result: QueryResult<{ velog_config: VelogConfig }>) => {
-        // console.log(result);
-        return null;
+      {({
+        loading,
+        data,
+        error,
+      }: QueryResult<{ velog_config: VelogConfig }>) => {
+        if (error) {
+          console.log(error);
+        }
+        if (error || loading) return null;
+        if (!data) return null;
+        return <div>{data.velog_config.title}</div>;
       }}
     </Query>
   );

@@ -1,3 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ConfigLoader matches snapshot 1`] = `<div />`;
+exports[`ConfigLoader matches snapshot 1`] = `
+<div>
+  <div>
+    VELOPERT.LOG
+  </div>
+</div>
+`;
