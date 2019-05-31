@@ -34,6 +34,15 @@ export const GET_CURRENT_USER = gql`
   }
 `;
 
+export const GET_VELOG_CONFIG = gql`
+  query VelogConfig($username: String) {
+    velog_config(username: $username) {
+      title
+      logo_image
+    }
+  }
+`;
+
 export type CurrentUser = {
   id: string;
   username: string;

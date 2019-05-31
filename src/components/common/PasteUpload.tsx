@@ -7,7 +7,10 @@ export interface PasteUploadProps {
 const PasteUpload: React.FC<PasteUploadProps> = ({ onUpload }) => {
   useEffect(() => {
     const onPaste: EventListener = e => {
-      const { items } = (e as ClipboardEvent).clipboardData;
+      const { clipboardData } = e as ClipboardEvent;
+      if (!clipboardData) return;
+
+      const { items } = clipboardData;
       if (items.length === 0) return;
 
       const itemsArray = (() => {

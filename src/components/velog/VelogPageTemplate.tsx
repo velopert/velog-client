@@ -6,8 +6,8 @@ const VelogPageTemplateBlock = styled(PageTemplate)``;
 
 export interface VelogPageTemplateProps {}
 
-const VelogPageTemplate: React.FC<VelogPageTemplateProps> = props => {
-  return <VelogPageTemplateBlock />;
+const VelogPageTemplate: React.FC<VelogPageTemplateProps> = ({ children }) => {
+  return <VelogPageTemplateBlock>{children}</VelogPageTemplateBlock>;
 };
 
 export default VelogPageTemplate;
