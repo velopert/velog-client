@@ -9,7 +9,7 @@ type UserLogo = {
   logo_image: string | null;
 };
 
-interface HeaderState {
+export interface HeaderState {
   custom: boolean;
   userLogo: null | UserLogo;
 }

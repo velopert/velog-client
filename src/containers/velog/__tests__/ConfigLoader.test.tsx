@@ -4,6 +4,7 @@ import ConfigLoader, { ConfigLoaderProps } from '../ConfigLoader';
 import { MockedProvider } from 'react-apollo/test-utils';
 import { GET_VELOG_CONFIG } from '../../../lib/graphql/user';
 import renderWithRedux from '../../../lib/renderWithRedux';
+import waitUntil from '../../../lib/waitUntil';
 
 describe('ConfigLoader', () => {
   const setup = (props: Partial<ConfigLoaderProps> = {}) => {
@@ -35,9 +36,13 @@ describe('ConfigLoader', () => {
   it('renders properly', () => {
     setup();
   });
-  it('matches snapshot', async () => {
-    // const { container } = setup();
-    // await waitForDomChange({ container });
-    // expect(container).toMatchSnapshot();
+  it('loads GET_VELOG_CONFIG and dispatches setUserLogo', async () => {
+    const { store } = setup();
+    const userLogo = store.getState().header.userLogo;
+    await waitUntil(() => store.getState().header.userLogo !== userLogo);
+    expect(store.getState().header.userLogo).toHaveProperty(
+      'title',
+      'VELOPERT.LOG',
+    );
   });
 });
