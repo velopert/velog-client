@@ -10,7 +10,8 @@ export type UserProfile = {
 };
 export type VelogConfig = {
   id: string;
-  title: string;
+  title: string | null;
+  logo_image: string | null;
 };
 export type User = {
   id: string;

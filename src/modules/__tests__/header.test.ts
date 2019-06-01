@@ -1,4 +1,4 @@
-import header, { setCustom } from '../header';
+import header, { setCustom, setUserLogo } from '../header';
 
 describe('header redux module', () => {
   describe('reducer', () => {
@@ -15,6 +15,13 @@ describe('header redux module', () => {
       expect(state.custom).toBe(true);
       state = header(initialState, setCustom(false));
       expect(state.custom).toBe(false);
+    });
+    it('handles SET_USER_LOGO action', () => {
+      let state = header(
+        initialState,
+        setUserLogo({ title: 'SAMPLE', logo_image: null }),
+      );
+      expect(state.userLogo).toHaveProperty('title', 'SAMPLE');
     });
   });
 });
