@@ -1,10 +1,11 @@
-import header, { setCustom, setUserLogo } from '../header';
+import header, { setCustom, setUserLogo, setVelogUsername } from '../header';
 
 describe('header redux module', () => {
   describe('reducer', () => {
     const initialState = {
       custom: false,
       userLogo: null,
+      velogUsername: null,
     };
     it('should have initialState', () => {
       const state = header(undefined, {});
@@ -22,6 +23,10 @@ describe('header redux module', () => {
         setUserLogo({ title: 'SAMPLE', logo_image: null }),
       );
       expect(state.userLogo).toHaveProperty('title', 'SAMPLE');
+    });
+    it('handles SET_VELOG_USER', () => {
+      let state = header(initialState, setVelogUsername('velopert'));
+      expect(state.velogUsername).toBe('velopert');
     });
   });
 });

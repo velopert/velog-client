@@ -2,33 +2,54 @@ import React, { useEffect } from 'react';
 import { Query, QueryResult } from 'react-apollo';
 import { connect } from 'react-redux';
 import { GET_VELOG_CONFIG, VelogConfig } from '../../lib/graphql/user';
-import { setUserLogo } from '../../modules/header';
-
-export interface ConfigLoaderProps {
-  username: string;
-}
+import { setUserLogo, setCustom, setVelogUsername } from '../../modules/header';
+import { RootState } from '../../modules';
 
 interface ConfigEffectProps {
   velogConfig: VelogConfig;
-  setUserLogo: typeof setUserLogo;
+  onConfigChange: (config: VelogConfig) => any;
 }
 
 const ConfigEffect: React.FC<ConfigEffectProps> = ({
   velogConfig,
-  setUserLogo,
+  onConfigChange,
 }) => {
   useEffect(() => {
-    setUserLogo(velogConfig);
-  }, [setUserLogo, velogConfig]);
+    onConfigChange(velogConfig);
+  }, [onConfigChange, velogConfig]);
   return null;
 };
 
-const ConfigEffectContainer = connect(
-  () => ({}),
-  { setUserLogo },
-)(ConfigEffect);
+const mapDispatchToProps = {
+  setUserLogo,
+  setCustom,
+  setVelogUsername,
+};
 
-const ConfigLoader: React.FC<ConfigLoaderProps> = ({ username }) => {
+type OwnProps = {
+  username: string;
+};
+type StateProps = {};
+type DispatchProps = typeof mapDispatchToProps;
+export type ConfigLoaderProps = OwnProps & StateProps & DispatchProps;
+
+const ConfigLoader: React.FC<ConfigLoaderProps> = ({
+  username,
+  setUserLogo,
+  setCustom,
+  setVelogUsername,
+}) => {
+  useEffect(() => {
+    setCustom(true);
+    return () => {
+      setCustom(false);
+    };
+  }, [setCustom]);
+
+  useEffect(() => {
+    setVelogUsername(username);
+  }, [setVelogUsername, username]);
+
   return (
     <Query query={GET_VELOG_CONFIG} variables={{ username }}>
       {({
@@ -41,10 +62,18 @@ const ConfigLoader: React.FC<ConfigLoaderProps> = ({ username }) => {
         }
         if (error || loading) return null;
         if (!data) return null;
-        return <ConfigEffectContainer velogConfig={data.velog_config} />;
+        return (
+          <ConfigEffect
+            velogConfig={data.velog_config}
+            onConfigChange={setUserLogo}
+          />
+        );
       }}
     </Query>
   );
 };
 
-export default ConfigLoader;
+export default connect<StateProps, DispatchProps, OwnProps, RootState>(
+  () => ({}),
+  mapDispatchToProps,
+)(ConfigLoader);

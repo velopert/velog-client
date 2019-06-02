@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { render, waitForDomChange } from 'react-testing-library';
 import ConfigLoader, { ConfigLoaderProps } from '../ConfigLoader';
 import { MockedProvider } from 'react-apollo/test-utils';
 import { GET_VELOG_CONFIG } from '../../../lib/graphql/user';
@@ -8,7 +7,9 @@ import waitUntil from '../../../lib/waitUntil';
 
 describe('ConfigLoader', () => {
   const setup = (props: Partial<ConfigLoaderProps> = {}) => {
-    const initialProps: ConfigLoaderProps = { username: 'velopert' };
+    const initialProps: Partial<ConfigLoaderProps> & { username: string } = {
+      username: 'velopert',
+    };
     const mocks = [
       {
         request: {
@@ -36,7 +37,17 @@ describe('ConfigLoader', () => {
   it('renders properly', () => {
     setup();
   });
-  it('loads GET_VELOG_CONFIG and dispatches setUserLogo', async () => {
+  it('dispatches SET_VELOG_USERNAME action', () => {
+    const { store } = setup();
+    expect(store.getState().header.velogUsername).toBe('velopert');
+  });
+  it('dispatches SET_CUSTOM action', () => {
+    const { store, unmount } = setup();
+    expect(store.getState().header.custom).toBeTruthy();
+    unmount();
+    expect(store.getState().header.custom).toBeFalsy();
+  });
+  it('loads GET_VELOG_CONFIG and dispatches SET_USER_LOGO action', async () => {
     const { store } = setup();
     const userLogo = store.getState().header.userLogo;
     await waitUntil(() => store.getState().header.userLogo !== userLogo);
