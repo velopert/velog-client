@@ -11,6 +11,7 @@ import { logout } from '../../lib/api/auth';
 import storage from '../../lib/storage';
 import { UserLogo } from '../../modules/header';
 import { Link } from 'react-router-dom';
+import HeaderLogo from './HeaderLogo';
 
 const HeaderBlock = styled.div<{
   floating: boolean;
@@ -59,17 +60,6 @@ interface HeaderProps {
 
 const { useCallback } = React;
 
-const CustomLogo = styled(Link)``;
-
-const createFallbackTitle = (username: string | null) => {
-  if (!username) return null;
-  const lastChar = username.slice(-1).toLowerCase();
-  if (lastChar === 's') {
-    return `${username}' velog`;
-  }
-  return `${username}'s velog`;
-};
-
 const Header: React.SFC<HeaderProps> = ({
   floating,
   floatingMargin,
@@ -97,17 +87,11 @@ const Header: React.SFC<HeaderProps> = ({
       >
         <div className="wrapper">
           <div className="brand">
-            {custom ? (
-              userLogo ? (
-                <CustomLogo to="/">
-                  {userLogo.title
-                    ? userLogo.title
-                    : createFallbackTitle(velogUsername)}
-                </CustomLogo>
-              ) : null
-            ) : (
-              <Logo />
-            )}
+            <HeaderLogo
+              custom={custom}
+              userLogo={userLogo}
+              velogUsername={velogUsername}
+            />
           </div>
           <div className="right">
             {user ? (

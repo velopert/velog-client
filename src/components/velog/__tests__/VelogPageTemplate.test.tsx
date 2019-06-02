@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import { render } from 'react-testing-library';
 import VelogPageTemplate, {
   VelogPageTemplateProps,
@@ -9,7 +10,9 @@ describe('VelogPageTemplate', () => {
   const setup = (props: Partial<VelogPageTemplateProps> = {}) => {
     const initialProps: VelogPageTemplateProps = {};
     const utils = renderWithRedux(
-      <VelogPageTemplate {...initialProps} {...props} />,
+      <MemoryRouter>
+        <VelogPageTemplate {...initialProps} {...props} />
+      </MemoryRouter>,
     );
     return {
       ...utils,
