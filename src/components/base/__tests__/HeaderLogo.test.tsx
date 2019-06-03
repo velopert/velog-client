@@ -25,7 +25,45 @@ describe('HeaderLogo', () => {
     getByTestId('velog-logo');
   });
 
-  it('shows null when custom is true and data is not loaded', () => {});
-  it('shows custom velog title when custom is true data is loaded', () => {});
-  it('shows fallback velog title when velog title is null', () => {});
+  it('shows null when custom is true and data is not loaded', () => {
+    const utils = setup({
+      custom: true,
+      userLogo: null,
+      velogUsername: 'velopert',
+    });
+    expect(utils.container.innerHTML).toBe('');
+  });
+  it('shows custom velog title when custom is true and data is loaded', () => {
+    const { getByText } = setup({
+      custom: true,
+      userLogo: {
+        logo_image: null,
+        title: 'VELOPERT.LOG',
+      },
+      velogUsername: 'velopert',
+    });
+    getByText('VELOPERT.LOG');
+  });
+  it('shows fallback velog title when velog title is null', () => {
+    const { getByText } = setup({
+      custom: true,
+      userLogo: {
+        logo_image: null,
+        title: null,
+      },
+      velogUsername: 'velopert',
+    });
+    getByText(`velopert's velog`);
+  });
+  it('shows fallback velog title with username ends with s', () => {
+    const { getByText } = setup({
+      custom: true,
+      userLogo: {
+        logo_image: null,
+        title: null,
+      },
+      velogUsername: 'usernames',
+    });
+    getByText(`usernames' velog`);
+  });
 });
