@@ -8,7 +8,6 @@ import Core from './containers/base/Core';
 import RegisterPage from './pages/RegisterPage';
 import { JazzbarProvider } from './lib/jazzbar';
 const MainPage = loadable(() => import('./pages/main/MainPage'));
-const PostPage = loadable(() => import('./pages/PostPage'));
 const EmailLoginPage = loadable(() => import('./pages/EmailLoginPage'));
 const WritePage = loadable(() => import('./pages/WritePage'));
 const VelogPage = loadable(() => import('./pages/velog/VelogPage'));
