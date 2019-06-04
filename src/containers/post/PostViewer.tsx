@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { Query, QueryResult } from 'react-apollo';
 import { READ_POST, SinglePost } from '../../lib/graphql/post';
 import PostHead from '../../components/post/PostHead';
@@ -19,7 +18,7 @@ const PostViewer: React.FC<PostViewerProps> = ({ username, urlSlug }) => {
       }}
     >
       {({ loading, error, data }: QueryResult<{ post: SinglePost }>) => {
-        console.log(data);
+        console.log(error);
         if (loading) return null; // TODO: show placeholder
         if (!data || !data.post) return null;
         if (error) return null; // SHOW ERROR

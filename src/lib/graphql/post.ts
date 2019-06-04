@@ -98,6 +98,7 @@ export const READ_POST = gql`
       is_private
       is_temp
       user {
+        id
         username
         profile {
           display_name

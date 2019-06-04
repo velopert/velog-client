@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { Logo } from '../../static/svg';
 import { breakpoints } from '../../lib/styles/responsive';
 import RoundButton from '../common/RoundButton';
 import { CurrentUser } from '../../lib/graphql/user';
@@ -10,7 +9,6 @@ import HeaderUserMenu from './HeaderUserMenu';
 import { logout } from '../../lib/api/auth';
 import storage from '../../lib/storage';
 import { UserLogo } from '../../modules/header';
-import { Link } from 'react-router-dom';
 import HeaderLogo from './HeaderLogo';
 
 const HeaderBlock = styled.div<{

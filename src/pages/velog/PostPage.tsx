@@ -1,9 +1,6 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { RouteComponentProps } from 'react-router';
 import PostViewer from '../../containers/post/PostViewer';
-
-const PostPageBlock = styled.div``;
 
 export interface PostPageProps
   extends RouteComponentProps<{
