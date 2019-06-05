@@ -30,6 +30,10 @@ const PostViewer: React.FC<PostViewerProps> = ({ username, urlSlug }) => {
               tags={post.tags}
               username={username}
               date={post.released_at}
+              thumbnail={post.thumbnail}
+              hideThumbnail={
+                !!post.thumbnail && post.body.includes(post.thumbnail)
+              }
             />
           </>
         );
