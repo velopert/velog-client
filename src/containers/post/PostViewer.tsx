@@ -18,10 +18,12 @@ const PostViewer: React.FC<PostViewerProps> = ({ username, urlSlug }) => {
       }}
     >
       {({ loading, error, data }: QueryResult<{ post: SinglePost }>) => {
-        console.log(error);
+        if (error) {
+          console.log(error);
+          return null; // SHOW ERROR
+        }
         if (loading) return null; // TODO: show placeholder
         if (!data || !data.post) return null;
-        if (error) return null; // SHOW ERROR
         const { post } = data;
         return (
           <>
