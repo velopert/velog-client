@@ -2,7 +2,6 @@ import { css } from 'styled-components';
 import palette from './palette';
 
 const postStyles = css`
-  font-size: 1.3125rem;
   blockquote {
     padding: 1.125rem;
     border-left: 8px solid ${palette.teal6};

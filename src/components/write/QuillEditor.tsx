@@ -16,6 +16,7 @@ import convertToMarkdown from '../../lib/convertToMarkdown';
 import AskChangeEditor from './AskChangeEditor';
 import { WriteMode } from '../../modules/write';
 import zIndexes from '../../lib/styles/zIndexes';
+import Typography from '../common/Typography';
 
 Quill.register('modules/markdownShortcuts', MarkdownShortcuts);
 
@@ -85,7 +86,6 @@ const Editor = styled.div`
   }
   .ql-editor {
     padding: 0;
-    font-size: 1.3125rem;
     font-family: inherit;
     img {
       max-width: 100%;
@@ -93,10 +93,12 @@ const Editor = styled.div`
       display: block;
       margin-top: 1.5rem;
       margin-bottom: 1.5rem;
+      margin-right: auto;
+      margin-left: auto;
     }
     &:not(.ql-blank) {
       p {
-        line-height: 1.875;
+        line-height: 1.75;
       }
     }
     color: ${palette.gray9};
@@ -158,6 +160,7 @@ const Editor = styled.div`
       }
     }
     ${postStyles}
+    font-size: 1.125rem;
 
     p + blockquote {
       margin-top: 1rem;
@@ -542,16 +545,18 @@ export default class QuillEditor extends React.Component<
           onConvert={this.handleAskChangeEditor}
         />
         <Editor>
-          <div ref={this.editor} tabIndex={2} />
-          {addLink && (
-            <AddLink
-              {...addLinkPosition}
-              defaultValue={addLinkDefaultValue}
-              onConfirm={this.handleAddLink}
-              onClose={this.handleCancelAddLink}
-              onDelete={this.handleDeleteLink}
-            />
-          )}
+          <Typography>
+            <div ref={this.editor} tabIndex={2} />
+            {addLink && (
+              <AddLink
+                {...addLinkPosition}
+                defaultValue={addLinkDefaultValue}
+                onConfirm={this.handleAddLink}
+                onClose={this.handleCancelAddLink}
+                onDelete={this.handleDeleteLink}
+              />
+            )}
+          </Typography>
         </Editor>
         <AskChangeEditor
           convertTo={WriteMode.MARKDOWN}

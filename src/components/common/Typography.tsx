@@ -10,6 +10,7 @@ const TypographyBlock = styled.div`
   word-break: keep-all;
   word-wrap: break-word;
   font-family: 'Spoqa Han Sans';
+
   a {
     color: ${palette.teal7};
     text-decoration: none;
@@ -30,6 +31,16 @@ const TypographyBlock = styled.div`
     background: #dedede;
     margin-top: 2rem;
     margin-bottom: 2rem;
+  }
+
+  p {
+    img {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
   }
 `;
 

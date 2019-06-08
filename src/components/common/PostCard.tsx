@@ -65,6 +65,7 @@ const PostCardBlock = styled.div`
   }
   .tags-wrapper {
     margin-top: 0.5rem;
+    margin-bottom: -0.5rem;
   }
 
   & + & {

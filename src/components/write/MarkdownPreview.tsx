@@ -5,7 +5,6 @@ import palette from '../../lib/styles/palette';
 
 const MarkdownPreviewBlock = styled.div`
   word-break: break-word;
-  font-size: 1.3125rem;
   &::-webkit-scrollbar {
     border-radius: 3px;
     width: 6px;

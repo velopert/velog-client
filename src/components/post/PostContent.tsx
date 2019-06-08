@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import MarkdownRender from '../common/MarkdownRender';
 import palette from '../../lib/styles/palette';
+import PostHtmlContent from './PostHtmlContent';
 
 const PostContentBlock = styled.div`
   width: 768px;
@@ -17,7 +18,11 @@ export interface PostContentProps {
 const PostContent: React.FC<PostContentProps> = ({ isMarkdown, body }) => {
   return (
     <PostContentBlock>
-      {isMarkdown ? <MarkdownRender markdown={body} /> : null}
+      {isMarkdown ? (
+        <MarkdownRender markdown={body} />
+      ) : (
+        <PostHtmlContent html={body} />
+      )}
     </PostContentBlock>
   );
 };
