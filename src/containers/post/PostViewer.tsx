@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Query, QueryResult } from 'react-apollo';
 import { READ_POST, SinglePost } from '../../lib/graphql/post';
 import PostHead from '../../components/post/PostHead';
+import PostContent from '../../components/post/PostContent';
 
 export interface PostViewerProps {
   username: string;
@@ -37,6 +38,7 @@ const PostViewer: React.FC<PostViewerProps> = ({ username, urlSlug }) => {
                 !!post.thumbnail && post.body.includes(post.thumbnail)
               }
             />
+            <PostContent isMarkdown={post.is_markdown} body={post.body} />
           </>
         );
       }}

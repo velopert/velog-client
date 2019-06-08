@@ -17,7 +17,7 @@ const HeaderBlock = styled.div<{
   width: 100%;
   > .wrapper {
     width: ${breakpoints.xlarge};
-    height: 6rem;
+    height: 5rem;
     margin: 0 auto;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -43,7 +43,7 @@ const HeaderBlock = styled.div<{
 
 const Placeholder = styled.div`
   width: 100%;
-  height: 4rem;
+  height: 5rem;
 `;
 
 interface HeaderProps {

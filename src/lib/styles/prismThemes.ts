@@ -187,8 +187,10 @@ const prismThemes = {
       color: #24292e;
     }
     pre {
+      box-shadow: 0px 0px 2px #00000005;
+      background: #fbfcfd;
       color: #24292e;
-      background: white;
+      /* background: white; */
     }
     .token.builtin {
       color: #0184bc;

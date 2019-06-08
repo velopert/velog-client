@@ -24,6 +24,7 @@ const Tag = styled(Link)`
   &:hover {
     background: ${palette.gray0};
   }
+  font-size: 0.875rem;
 `;
 
 export interface PostTagsProps {

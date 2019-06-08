@@ -6,6 +6,7 @@ import CodeMirror, { EditorFromTextArea } from 'codemirror';
 import TitleTextarea from './TitleTextarea';
 require('codemirror/mode/markdown/markdown');
 require('codemirror/mode/javascript/javascript');
+require('codemirror/mode/jsx/jsx');
 require('codemirror/addon/display/placeholder');
 import './atom-one-light.css';
 import palette from '../../lib/styles/palette';
@@ -65,10 +66,11 @@ const MarkdownEditorBlock = styled.div`
   }
   .CodeMirror {
     height: auto;
-    font-size: 1.3125rem;
+    font-size: 1.125rem;
     line-height: 1.5;
     color: ${palette.gray8};
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: 'Fira Mono', 'Spoqa Han Sans', monospace;
+    /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', */
       monospace;
     .cm-header {
       line-height: 2;

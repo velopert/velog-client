@@ -8,6 +8,7 @@ import PostTags from './PostTags';
 const PostHeadBlock = styled(VelogResponsive)`
   margin-top: 5.5rem;
   h1 {
+    font-family: 'Spoqa Han Sans';
     font-size: 3rem;
     line-height: 1.25;
     letter-spacing: -0.02rem;
@@ -21,6 +22,7 @@ const PostHeadBlock = styled(VelogResponsive)`
 const SubInfo = styled.div`
   font-size: 1rem;
   color: ${palette.gray7};
+  font-family: 'Spoqa Han Sans';
   .username {
     color: ${palette.gray8};
     font-weight: bold;

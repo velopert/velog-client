@@ -5,6 +5,7 @@ import htmlPlugin from 'remark-html';
 import prismPlugin from '../../lib/remark/prismPlugin';
 import prismThemes from '../../lib/styles/prismThemes';
 import breaks from 'remark-breaks';
+import Typography from './Typography';
 
 export interface MarkdownRenderProps {
   markdown: string;
@@ -12,7 +13,6 @@ export interface MarkdownRenderProps {
 }
 
 const MarkdownRenderBlock = styled.div`
-  font-size: 1.3125rem;
   &.atom-one-dark {
     ${prismThemes['atom-one-dark']}
   }
@@ -30,13 +30,14 @@ const MarkdownRenderBlock = styled.div`
   }
 
   pre {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
+    font-family: 'Fira Mono', source-code-pro, Menlo, Monaco, Consolas,
+      'Courier New', monospace;
     font-size: 1rem;
     padding: 1rem;
     border-radius: 4px;
     line-height: 1.5;
     overflow-x: auto;
+    letter-spacing: 0px;
   }
 
   img {
@@ -67,10 +68,12 @@ const MarkdownRender: React.SFC<MarkdownRenderProps> = ({
 
   const markup = { __html: html };
   return (
-    <MarkdownRenderBlock
-      dangerouslySetInnerHTML={markup}
-      className={codeTheme}
-    />
+    <Typography>
+      <MarkdownRenderBlock
+        dangerouslySetInnerHTML={markup}
+        className={codeTheme}
+      />
+    </Typography>
   );
 };
 

@@ -34,19 +34,19 @@ const HeaderContainer: React.SFC<HeaderContainerProps> = ({
 
   const [floating, setFloating] = useState(false);
   const [baseY, setBaseY] = useState(0);
-  const [floatingMargin, setFloatingMargin] = useState(-60);
+  const [floatingMargin, setFloatingMargin] = useState(-80);
   const onScroll = useCallback(() => {
     const scrollTop = getScrollTop();
 
     // turns floating OFF
     if (floating && scrollTop === 0) {
       setFloating(false);
-      setFloatingMargin(-60);
+      setFloatingMargin(-80);
       return;
     }
 
     if (floating) {
-      const calculated = -60 + baseY - scrollTop;
+      const calculated = -80 + baseY - scrollTop;
       setFloatingMargin(calculated > 0 ? 0 : calculated);
     }
 
@@ -55,9 +55,9 @@ const HeaderContainer: React.SFC<HeaderContainerProps> = ({
     // Fixes flickering issue
     if (
       d !== direction.current &&
-      (floatingMargin === 0 || floatingMargin <= -60)
+      (floatingMargin === 0 || floatingMargin <= -80)
     ) {
-      setBaseY(scrollTop + (d === 'DOWN' ? 60 : 0));
+      setBaseY(scrollTop + (d === 'DOWN' ? 80 : 0));
     }
 
     // turns floating ON
