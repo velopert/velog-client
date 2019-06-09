@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import MarkdownRender from '../common/MarkdownRender';
-import palette from '../../lib/styles/palette';
 import PostHtmlContent from './PostHtmlContent';
 
 const PostContentBlock = styled.div`

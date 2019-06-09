@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Fira+Mono');
-
 body {
   margin: 0;
   padding: 0;
@@ -17,7 +15,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: 'Fira Mono', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
