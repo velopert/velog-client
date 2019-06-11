@@ -264,11 +264,15 @@ exports[`ActiveEditor matches snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-jWBwVP bbFtdm"
+      class="sc-jWBwVP boWCkI"
     >
       <div
-        tabindex="2"
-      />
+        class="sc-hMqMXs eaqQgC"
+      >
+        <div
+          tabindex="2"
+        />
+      </div>
     </div>
     <div
       class="sc-brqgnP hWMpZm"

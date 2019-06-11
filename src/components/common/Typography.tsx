@@ -6,7 +6,7 @@ const TypographyBlock = styled.div`
   font-size: 1.125rem;
   color: ${palette.gray7};
   line-height: 1.75;
-  letter-spacing: -0.4px;
+  letter-spacing: -0.02em;
   word-break: keep-all;
   word-wrap: break-word;
   font-family: 'Spoqa Han Sans';
