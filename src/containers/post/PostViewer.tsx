@@ -3,6 +3,7 @@ import { Query, QueryResult } from 'react-apollo';
 import { READ_POST, SinglePost } from '../../lib/graphql/post';
 import PostHead from '../../components/post/PostHead';
 import PostContent from '../../components/post/PostContent';
+import PostComments from './PostComments';
 
 export interface PostViewerProps {
   username: string;
@@ -39,6 +40,7 @@ const PostViewer: React.FC<PostViewerProps> = ({ username, urlSlug }) => {
               }
             />
             <PostContent isMarkdown={post.is_markdown} body={post.body} />
+            <PostComments />
           </>
         );
       }}
