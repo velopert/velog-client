@@ -48,7 +48,17 @@ const Button: React.SFC<ButtonProps> = ({
 }) => {
   const htmlProps = rest as any;
   return (
-    <ButtonBlock color={color} inline={inline} {...htmlProps}>
+    <ButtonBlock
+      color={color}
+      inline={inline}
+      {...htmlProps}
+      onClick={e => {
+        if (htmlProps.onClick) {
+          htmlProps.onClick(e);
+        }
+        (e.target as HTMLButtonElement).blur();
+      }}
+    >
       {children}
     </ButtonBlock>
   );

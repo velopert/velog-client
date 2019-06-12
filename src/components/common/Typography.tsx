@@ -9,7 +9,9 @@ const TypographyBlock = styled.div`
   letter-spacing: -0.02em;
   word-break: keep-all;
   word-wrap: break-word;
-  font-family: 'Spoqa Han Sans';
+  font-family: 'Spoqa Han Sans', -apple-system, BlinkMacSystemFont,
+    -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Apple SD Gothic Neo',
+    arial, 나눔고딕, 'Nanum Gothic', 돋움;
 
   a {
     color: ${palette.teal7};
