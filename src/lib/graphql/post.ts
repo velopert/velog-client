@@ -18,10 +18,24 @@ export type Post = {
   created_at: string;
   updated_at: string;
   short_description: string;
-  comments: [any];
-  tags: [string];
+  comments: Comment[];
+  tags: string[];
   comments_count: number;
 };
+
+export interface Comment {
+  id: string;
+  user: {
+    id: string;
+    username: string;
+    profile: {
+      thumbnail: string;
+    };
+  };
+  text: string;
+  replies_count: number;
+  replies?: Comment[];
+}
 
 // Post Type for PostList
 export type PartialPost = {
@@ -33,7 +47,7 @@ export type PartialPost = {
   url_slug: string;
   is_private: boolean;
   released_at: string;
-  tags: [string];
+  tags: string[];
   comments_count: number;
 };
 
@@ -62,6 +76,7 @@ export interface SinglePost {
       title: string;
     };
   };
+  comments: Comment[];
 }
 
 export const GET_POST_LIST = gql`
@@ -112,6 +127,38 @@ export const READ_POST = gql`
           title
         }
       }
+      comments {
+        id
+        user {
+          id
+          username
+          profile {
+            thumbnail
+          }
+        }
+        text
+        replies_count
+      }
+    }
+  }
+`;
+
+export const RELOAD_COMMENTS = gql`
+  query ReloadComments($id: ID!) {
+    post(id: $id) {
+      id
+      comments {
+        id
+        user {
+          id
+          username
+          profile {
+            thumbnail
+          }
+        }
+        text
+        replies_count
+      }
     }
   }
 `;
@@ -152,6 +199,23 @@ export const WRITE_POST = gql`
       }
       url_slug
       meta
+    }
+  }
+`;
+
+export const WRITE_COMMENT = gql`
+  mutation WriteComment($post_id: ID!, $text: String!, $comment_id: ID) {
+    writeComment(post_id: $post_id, text: $text, comment_id: $comment_id) {
+      id
+      user {
+        id
+        username
+        profile {
+          thumbnail
+        }
+      }
+      text
+      replies_count
     }
   }
 `;

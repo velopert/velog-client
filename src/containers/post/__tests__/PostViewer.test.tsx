@@ -49,6 +49,69 @@ describe('PostViewer', () => {
                   title: 'VELOPERT.LOG',
                 },
               },
+              comments_count: 8,
+              comments: [
+                {
+                  id: '70d24d3b-a6ce-46a3-86c5-1cba95843841',
+                  user: {
+                    id: '0bcdf3e5-a228-42c3-8b52-3f0dc118dfd8',
+                    username: 'blablabla',
+                    profile: {
+                      thumbnail: null,
+                    },
+                  },
+                  text: 'Hey there',
+                  replies_count: 0,
+                },
+                {
+                  id: '0f700ebd-0dec-469a-adb8-c47bae2b8f18',
+                  user: {
+                    id: '0bcdf3e5-a228-42c3-8b52-3f0dc118dfd8',
+                    username: 'blablabla',
+                    profile: {
+                      thumbnail: null,
+                    },
+                  },
+                  text: 'Hey there',
+                  replies_count: 0,
+                },
+                {
+                  id: '90f3b558-4af3-41bb-95dd-ed9571609f25',
+                  user: {
+                    id: '0bcdf3e5-a228-42c3-8b52-3f0dc118dfd8',
+                    username: 'blablabla',
+                    profile: {
+                      thumbnail: null,
+                    },
+                  },
+                  text: 'Hey there',
+                  replies_count: 0,
+                },
+                {
+                  id: 'd4365762-08e8-4928-a387-4255e4392291',
+                  user: {
+                    id: '0bcdf3e5-a228-42c3-8b52-3f0dc118dfd8',
+                    username: 'blablabla',
+                    profile: {
+                      thumbnail: null,
+                    },
+                  },
+                  text: 'Hey there',
+                  replies_count: 3,
+                },
+                {
+                  id: '383d590d-d3ed-4f07-994e-cbea3127195d',
+                  user: {
+                    id: '0bcdf3e5-a228-42c3-8b52-3f0dc118dfd8',
+                    username: 'blablabla',
+                    profile: {
+                      thumbnail: null,
+                    },
+                  },
+                  text: 'Hey there',
+                  replies_count: 0,
+                },
+              ],
             },
           },
         },
