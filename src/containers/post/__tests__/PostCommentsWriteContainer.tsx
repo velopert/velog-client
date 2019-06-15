@@ -3,12 +3,17 @@ import { render, fireEvent } from 'react-testing-library';
 import PostCommentsWriteContainer, {
   PostCommentsWriteContainerProps,
 } from '../PostCommentsWriteContainer';
+import { MockedProvider } from 'react-apollo/test-utils';
 
 describe('PostCommentsWriteContainer', () => {
   const setup = (props: Partial<PostCommentsWriteContainerProps> = {}) => {
-    const initialProps: PostCommentsWriteContainerProps = {};
+    const initialProps: PostCommentsWriteContainerProps = {
+      postId: 'd91aa54b-0e2c-4a18-9104-ec32ea7218a3',
+    };
     const utils = render(
-      <PostCommentsWriteContainer {...initialProps} {...props} />,
+      <MockedProvider>
+        <PostCommentsWriteContainer {...initialProps} {...props} />
+      </MockedProvider>,
     );
 
     const textarea = utils.getByPlaceholderText(
