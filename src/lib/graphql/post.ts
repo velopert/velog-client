@@ -160,6 +160,7 @@ export const RELOAD_COMMENTS = gql`
         }
         text
         replies_count
+        created_at
       }
     }
   }

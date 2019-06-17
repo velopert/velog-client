@@ -5,8 +5,15 @@ import palette from '../../lib/styles/palette';
 import { formatDate } from '../../lib/utils';
 import Typography from '../common/Typography';
 import { PlusBoxIcon } from '../../static/svg';
+import { userThumbnail } from '../../static/images';
 
-const PostCommentItemBlock = styled.div``;
+const PostCommentItemBlock = styled.div`
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  & + & {
+    border-top: 1px solid ${palette.gray2};
+  }
+`;
 const CommentHead = styled.div`
   margin-bottom: 1.5rem;
   display: flex;
@@ -15,7 +22,10 @@ const CommentHead = styled.div`
     display: flex;
     align-items: center;
     img {
+      width: 3.375rem;
+      height: 3.375rem;
       display: block;
+      border-radius: 50%;
     }
     .comment-info {
       margin-left: 1rem;
@@ -26,6 +36,7 @@ const CommentHead = styled.div`
         color: ${palette.gray8};
       }
       .date {
+        margin-top: 0.5rem;
         color: ${palette.gray6};
         font-size: 0.875rem;
       }
@@ -40,9 +51,9 @@ const CommentHead = styled.div`
         color: ${palette.gray5};
         text-decoration: underline;
       }
-      & + & {
-        margin-left: 0.5rem;
-      }
+    }
+    span + span {
+      margin-left: 0.5rem;
     }
   }
 `;
@@ -54,6 +65,7 @@ const CommentFoot = styled.div`
     display: flex;
     align-items: center;
     color: ${palette.teal6};
+    font-weight: bold;
     svg {
       margin-right: 0.5rem;
     }
@@ -71,7 +83,7 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({ comment }) => {
       <CommentHead>
         <div className="profile">
           <img
-            src={user.profile.thumbnail || ''}
+            src={user.profile.thumbnail || userThumbnail}
             alt="comment-user-thumbnail"
           />
           <div className="comment-info">

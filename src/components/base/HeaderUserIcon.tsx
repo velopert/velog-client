@@ -39,6 +39,7 @@ export interface HeaderUserIconProps {
   onClick: () => void;
 }
 
+// TODO: show user thumbnail
 const HeaderUserIcon: React.SFC<HeaderUserIconProps> = ({ onClick }) => {
   return (
     <HeaderUserIconBlock onClick={onClick}>

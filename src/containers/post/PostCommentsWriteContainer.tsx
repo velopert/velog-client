@@ -31,15 +31,20 @@ const PostCommentsWriteContainer: React.FC<PostCommentsWriteContainerProps> = ({
               },
             });
             setComment('');
-            client.query({
+            await client.query({
               query: RELOAD_COMMENTS,
               variables: {
                 id: postId,
               },
               fetchPolicy: 'network-only',
             });
-          } catch (e) {}
+          } catch (e) {
+            console.log(e);
+          }
         };
+        if (error) {
+          console.log(error);
+        }
         return (
           <PostCommentsWrite
             onChange={onChange}
