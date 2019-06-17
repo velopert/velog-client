@@ -166,6 +166,24 @@ export const RELOAD_COMMENTS = gql`
   }
 `;
 
+export const RELOAD_REPLIES = gql`
+  query ReloadReplies($id: ID!) {
+    comment($comment_id: $id) {
+      id
+      user {
+        id
+        username
+        profile {
+          thumbnail
+        }
+      }
+      text
+      replies_count
+      created_at
+    }
+  }
+`;
+
 export const WRITE_POST = gql`
   mutation WritePost(
     $title: String
