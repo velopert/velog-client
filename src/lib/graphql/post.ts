@@ -168,7 +168,7 @@ export const RELOAD_COMMENTS = gql`
 
 export const RELOAD_REPLIES = gql`
   query ReloadReplies($id: ID!) {
-    comment($comment_id: $id) {
+    comment(comment_id: $id) {
       id
       user {
         id
