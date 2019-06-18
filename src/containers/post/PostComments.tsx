@@ -18,7 +18,6 @@ const PostComments: React.FC<PostCommentsProps> = ({ comments, postId }) => {
         {(writeComment, { client }: MutationResult) => {
           type ReplyOptions = {
             commentId: string;
-            postId: string;
             text: string;
           };
           const onLoadReplies = (id: string) => {
@@ -30,7 +29,7 @@ const PostComments: React.FC<PostCommentsProps> = ({ comments, postId }) => {
               fetchPolicy: 'network-only',
             });
           };
-          const onReply = async ({ commentId, postId, text }: ReplyOptions) => {
+          const onReply = async ({ commentId, text }: ReplyOptions) => {
             try {
               await writeComment({
                 variables: {

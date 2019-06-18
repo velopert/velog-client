@@ -1,11 +1,12 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Comment } from '../../lib/graphql/post';
 import palette from '../../lib/styles/palette';
 import { formatDate } from '../../lib/utils';
 import Typography from '../common/Typography';
-import { PlusBoxIcon } from '../../static/svg';
+import { PlusBoxIcon, MinusBoxIcon } from '../../static/svg';
 import { userThumbnail } from '../../static/images';
+import useBoolean from '../../lib/hooks/useBoolean';
 
 const PostCommentItemBlock = styled.div`
   padding-top: 1.5rem;
@@ -61,23 +62,66 @@ const CommentHead = styled.div`
 const CommentText = styled.p``;
 const CommentFoot = styled.div`
   margin-top: 2rem;
-  .toggler {
-    display: flex;
-    align-items: center;
-    color: ${palette.teal6};
-    font-weight: bold;
-    svg {
-      margin-right: 0.5rem;
-    }
+`;
+const TogglerBlock = styled.div`
+  display: flex;
+  align-items: center;
+  color: ${palette.teal6};
+  font-weight: bold;
+  svg {
+    margin-right: 0.5rem;
+  }
+  cursor: pointer;
+  &:hover {
+    color: ${palette.teal5};
   }
 `;
 
 export interface PostCommentItemProps {
   comment: Comment;
+  onLoadReplies: (id: string) => Promise<any>;
+  onReply: (options: { commentId: string; text: string }) => any;
 }
 
-const PostCommentItem: React.FC<PostCommentItemProps> = ({ comment }) => {
-  const { user, created_at, text } = comment;
+interface TogglerProps {
+  open: boolean;
+  count: number;
+  onToggle: () => any;
+}
+
+const Toggler: React.FC<TogglerProps> = ({ open, onToggle, count }) => {
+  const openText = count ? `${count}개의 답글` : `답글 달기`;
+
+  return (
+    <TogglerBlock onClick={onToggle}>
+      {open ? <MinusBoxIcon /> : <PlusBoxIcon />}
+      <span>{open ? '숨기기' : openText}</span>
+    </TogglerBlock>
+  );
+};
+
+const PostCommentItem: React.FC<PostCommentItemProps> = ({
+  comment,
+  onLoadReplies,
+  onReply,
+}) => {
+  const { id, user, created_at, text, replies, replies_count } = comment;
+  const [open, onToggle] = useBoolean(false);
+
+  console.log(comment);
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        await onLoadReplies(id);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    if (open && !replies) {
+      fetch();
+    }
+  }, [id, onLoadReplies, open, replies]);
+
   return (
     <PostCommentItemBlock>
       <CommentHead>
@@ -100,10 +144,7 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({ comment }) => {
         <CommentText>{text}</CommentText>
       </Typography>
       <CommentFoot>
-        <div className="toggler">
-          <PlusBoxIcon />
-          <span>답글 달기</span>
-        </div>
+        <Toggler open={open} onToggle={onToggle} count={replies_count} />
       </CommentFoot>
     </PostCommentItemBlock>
   );

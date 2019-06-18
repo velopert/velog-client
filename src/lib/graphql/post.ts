@@ -166,6 +166,24 @@ export const RELOAD_COMMENTS = gql`
   }
 `;
 
+export const GET_COMMENT = gql`
+  query GetComment($id: ID!) {
+    comment(comment_id: $id) {
+      id
+      user {
+        id
+        username
+        profile {
+          thumbnail
+        }
+      }
+      text
+      replies_count
+      created_at
+    }
+  }
+`;
+
 export const RELOAD_REPLIES = gql`
   query ReloadReplies($id: ID!) {
     comment(comment_id: $id) {
@@ -180,6 +198,19 @@ export const RELOAD_REPLIES = gql`
       text
       replies_count
       created_at
+      replies {
+        id
+        user {
+          id
+          username
+          profile {
+            thumbnail
+          }
+        }
+        text
+        replies_count
+        created_at
+      }
     }
   }
 `;

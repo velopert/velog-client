@@ -20,7 +20,11 @@ describe('PostCommentItem', () => {
   };
 
   const setup = (props: Partial<PostCommentItemProps> = {}) => {
-    const initialProps: PostCommentItemProps = { comment: sampleComment };
+    const initialProps: PostCommentItemProps = {
+      comment: sampleComment,
+      onLoadReplies: () => Promise.resolve(),
+      onReply: () => {},
+    };
     const utils = render(<PostCommentItem {...initialProps} {...props} />);
     return {
       ...utils,
