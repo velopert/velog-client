@@ -80,6 +80,11 @@ export interface SinglePost {
   comments: Comment[];
 }
 
+export interface CommentWithReplies {
+  id: string;
+  replies: Comment[];
+}
+
 export const GET_POST_LIST = gql`
   query Posts($cursor: ID) {
     posts(cursor: $cursor) {
@@ -184,20 +189,10 @@ export const GET_COMMENT = gql`
   }
 `;
 
-export const RELOAD_REPLIES = gql`
+export const GET_REPLIES = gql`
   query ReloadReplies($id: ID!) {
     comment(comment_id: $id) {
       id
-      user {
-        id
-        username
-        profile {
-          thumbnail
-        }
-      }
-      text
-      replies_count
-      created_at
       replies {
         id
         user {

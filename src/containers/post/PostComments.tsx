@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PostCommentsTemplate from '../../components/post/PostCommentsTemplate';
 import PostCommentsWriteContainer from './PostCommentsWriteContainer';
-import { Comment, WRITE_COMMENT, RELOAD_REPLIES } from '../../lib/graphql/post';
+import { Comment, WRITE_COMMENT } from '../../lib/graphql/post';
 import PostCommentsList from '../../components/post/PostCommentsList';
 import { MutationResult, Mutation } from 'react-apollo';
 
@@ -21,13 +21,13 @@ const PostComments: React.FC<PostCommentsProps> = ({ comments, postId }) => {
             text: string;
           };
           const onLoadReplies = (id: string) => {
-            return client.query({
-              query: RELOAD_REPLIES,
-              variables: {
-                id: id,
-              },
-              fetchPolicy: 'network-only',
-            });
+            // return client.query({
+            //   query: RELOAD_REPLIES,
+            //   variables: {
+            //     id: id,
+            //   },
+            //   fetchPolicy: 'network-only',
+            // });
           };
           const onReply = async ({ commentId, text }: ReplyOptions) => {
             try {
