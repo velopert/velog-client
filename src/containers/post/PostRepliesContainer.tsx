@@ -18,6 +18,7 @@ const PostRepliesContainer: React.FC<PostRepliesProps> = ({ commentId }) => {
         error,
         data,
       }: QueryResult<{ comment: CommentWithReplies }>) => {
+        console.log(loading, error, data);
         if (loading || !data) return null;
         return <PostReplies comments={data.comment.replies} />;
       }}

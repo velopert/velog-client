@@ -7,6 +7,7 @@ import Typography from '../common/Typography';
 import { PlusBoxIcon, MinusBoxIcon } from '../../static/svg';
 import { userThumbnail } from '../../static/images';
 import useBoolean from '../../lib/hooks/useBoolean';
+import PostRepliesContainer from '../../containers/post/PostRepliesContainer';
 
 const PostCommentItemBlock = styled.div`
   padding-top: 1.5rem;
@@ -125,6 +126,7 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({ comment }) => {
       </Typography>
       <CommentFoot>
         <Toggler open={open} onToggle={onToggle} count={replies_count} />
+        {open && <PostRepliesContainer commentId={id} />}
       </CommentFoot>
     </PostCommentItemBlock>
   );

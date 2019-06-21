@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import { Comment } from '../../lib/graphql/post';
 import PostCommentItem from './PostCommentItem';
 
-const PostCommentsListBlock = styled.div`
-  margin-top: 2.5rem;
-`;
+const PostCommentsListBlock = styled.div``;
 
 export interface PostCommentsListProps {
   comments: Comment[];
