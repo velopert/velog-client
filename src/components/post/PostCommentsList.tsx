@@ -9,24 +9,13 @@ const PostCommentsListBlock = styled.div`
 
 export interface PostCommentsListProps {
   comments: Comment[];
-  onLoadReplies: (id: string) => any;
-  onReply: (options: { commentId: string; text: string }) => any;
 }
 
-const PostCommentsList: React.FC<PostCommentsListProps> = ({
-  comments,
-  onLoadReplies,
-  onReply,
-}) => {
+const PostCommentsList: React.FC<PostCommentsListProps> = ({ comments }) => {
   return (
     <PostCommentsListBlock>
       {comments.map(comment => (
-        <PostCommentItem
-          comment={comment}
-          key={comment.id}
-          onLoadReplies={onLoadReplies}
-          onReply={onReply}
-        />
+        <PostCommentItem comment={comment} key={comment.id} />
       ))}
     </PostCommentsListBlock>
   );

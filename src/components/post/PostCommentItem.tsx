@@ -79,8 +79,6 @@ const TogglerBlock = styled.div`
 
 export interface PostCommentItemProps {
   comment: Comment;
-  onLoadReplies: (id: string) => Promise<any>;
-  onReply: (options: { commentId: string; text: string }) => any;
 }
 
 interface TogglerProps {
@@ -100,27 +98,9 @@ const Toggler: React.FC<TogglerProps> = ({ open, onToggle, count }) => {
   );
 };
 
-const PostCommentItem: React.FC<PostCommentItemProps> = ({
-  comment,
-  onLoadReplies,
-  onReply,
-}) => {
-  const { id, user, created_at, text, replies, replies_count } = comment;
+const PostCommentItem: React.FC<PostCommentItemProps> = ({ comment }) => {
+  const { id, user, created_at, text, replies_count } = comment;
   const [open, onToggle] = useBoolean(false);
-
-  console.log(comment);
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        await onLoadReplies(id);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    if (open && !replies) {
-      fetch();
-    }
-  }, [id, onLoadReplies, open, replies]);
 
   return (
     <PostCommentItemBlock>

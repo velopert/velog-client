@@ -4,6 +4,7 @@ import PostViewer, { PostViewerProps } from '../PostViewer';
 import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from 'react-apollo/test-utils';
 import { READ_POST } from '../../../lib/graphql/post';
+import renderWithRedux from '../../../lib/renderWithRedux';
 
 describe('PostViewer', () => {
   const setup = (props: Partial<PostViewerProps> = {}, overrideMocks?: any) => {
@@ -160,7 +161,7 @@ describe('PostViewer', () => {
         },
       },
     ];
-    const utils = render(
+    const utils = renderWithRedux(
       <MockedProvider mocks={overrideMocks || mocks} addTypename={false}>
         <MemoryRouter>
           <PostViewer {...initialProps} {...props} />
