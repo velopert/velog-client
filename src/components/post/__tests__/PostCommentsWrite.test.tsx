@@ -23,10 +23,12 @@ describe('PostCommentsWrite', () => {
       ...utils,
     };
   };
-  it('renders textarea and a button', () => {
-    const { textarea, writeButton } = setup();
+  it('renders textarea and a button, but not cancel button', () => {
+    const { textarea, writeButton, queryByText } = setup();
     expect(textarea).toBeVisible();
     expect(writeButton).toBeVisible();
+    const cancelButton = queryByText('취소');
+    expect(cancelButton).toBeFalsy();
   });
   it('shows value on textarea', () => {
     const { textarea } = setup();
@@ -50,5 +52,15 @@ describe('PostCommentsWrite', () => {
     fireEvent.click(writeButton);
 
     expect(onWrite).toBeCalled();
+  });
+  it('shows cancel button when forReplies is true', () => {
+    const { getByText } = setup({ forReplies: true });
+    getByText('취소');
+  });
+  it('calls onCancel', () => {
+    const onCancel = jest.fn();
+    const { getByText } = setup({ forReplies: true, onCancel });
+    fireEvent.click(getByText('취소'));
+    expect(onCancel).toBeCalled();
   });
 });
