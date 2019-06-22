@@ -63,6 +63,7 @@ describe('PostViewer', () => {
                   text: 'Hey there',
                   replies_count: 0,
                   created_at: '2019-06-13T14:27:25.463Z',
+                  level: 0,
                 },
                 {
                   id: '0f700ebd-0dec-469a-adb8-c47bae2b8f18',
@@ -76,6 +77,7 @@ describe('PostViewer', () => {
                   text: 'Hey there',
                   replies_count: 0,
                   created_at: '2019-06-13T14:27:31.265Z',
+                  level: 0,
                 },
                 {
                   id: '90f3b558-4af3-41bb-95dd-ed9571609f25',
@@ -89,6 +91,7 @@ describe('PostViewer', () => {
                   text: 'Hey there',
                   replies_count: 0,
                   created_at: '2019-06-13T14:27:53.898Z',
+                  level: 0,
                 },
                 {
                   id: 'd4365762-08e8-4928-a387-4255e4392291',
@@ -102,6 +105,7 @@ describe('PostViewer', () => {
                   text: 'Hey there',
                   replies_count: 3,
                   created_at: '2019-06-13T14:42:28.873Z',
+                  level: 0,
                 },
                 {
                   id: '383d590d-d3ed-4f07-994e-cbea3127195d',
@@ -115,6 +119,7 @@ describe('PostViewer', () => {
                   text: 'Hey there',
                   replies_count: 0,
                   created_at: '2019-06-13T14:42:58.100Z',
+                  level: 0,
                 },
                 {
                   id: 'a0bc6974-582a-4eb1-8273-627e1df7c527',
@@ -128,6 +133,7 @@ describe('PostViewer', () => {
                   text: 'aw3b5aw35w35bw3a',
                   replies_count: 0,
                   created_at: '2019-06-14T14:43:22.312Z',
+                  level: 0,
                 },
                 {
                   id: '86fa0b3f-1493-424c-aff4-49e1b059caf6',
@@ -141,6 +147,7 @@ describe('PostViewer', () => {
                   text: '잘된거니?',
                   replies_count: 0,
                   created_at: '2019-06-14T14:43:27.840Z',
+                  level: 0,
                 },
                 {
                   id: '4e76da59-048a-4d2d-b11f-4f6194dff4f5',
@@ -154,6 +161,7 @@ describe('PostViewer', () => {
                   text: 'afasdfsdf',
                   replies_count: 0,
                   created_at: '2019-06-14T14:49:08.871Z',
+                  level: 0,
                 },
               ],
             },
