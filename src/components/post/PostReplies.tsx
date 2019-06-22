@@ -5,6 +5,7 @@ import PostCommentsList from './PostCommentsList';
 import useBoolean from '../../lib/hooks/useBoolean';
 import palette from '../../lib/styles/palette';
 import PostCommentsWrite from './PostCommentsWrite';
+import useInput from '../../lib/hooks/useInput';
 
 const PostRepliesBlock = styled.div`
   border: solid 1px rgba(0, 0, 0, 0.02);
@@ -47,22 +48,43 @@ const StartWritingButton = styled.button`
 
 export interface PostRepliesProps {
   comments: Comment[];
+  onReply: (text: string) => any;
+  onHide: () => void;
 }
 
-const PostReplies: React.FC<PostRepliesProps> = ({ comments }) => {
+const PostReplies: React.FC<PostRepliesProps> = ({
+  comments,
+  onReply,
+  onHide,
+}) => {
   const [writing, onToggle] = useBoolean(false);
+  const [comment, onChangeComment, onResetComment] = useInput('');
   const hasComments = comments.length > 0;
+  const onWrite = () => {
+    onReply(comment);
+    if (writing) {
+      onToggle();
+    }
+    onResetComment();
+  };
+  const onCancel = () => {
+    if (comments.length > 0) {
+      onToggle();
+    } else {
+      onHide();
+    }
+  };
   return (
     <PostRepliesBlock>
-      <PullUp />
+      {comments.length > 0 && <PullUp />}
       <PostCommentsList comments={comments} />
       {hasComments && <Separator />}
       {writing || !hasComments ? (
         <PostCommentsWrite
-          comment=""
-          onWrite={() => {}}
-          onChange={() => {}}
-          onCancel={onToggle}
+          comment={comment}
+          onWrite={onWrite}
+          onChange={onChangeComment}
+          onCancel={onCancel}
           forReplies
         />
       ) : (

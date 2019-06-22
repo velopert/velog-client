@@ -144,7 +144,9 @@ export const READ_POST = gql`
         }
         text
         replies_count
+        level
         created_at
+        level
       }
     }
   }
@@ -165,6 +167,7 @@ export const RELOAD_COMMENTS = gql`
         }
         text
         replies_count
+        level
         created_at
       }
     }
@@ -184,6 +187,7 @@ export const GET_COMMENT = gql`
       }
       text
       replies_count
+      level
       created_at
     }
   }
@@ -205,6 +209,7 @@ export const GET_REPLIES = gql`
         text
         replies_count
         created_at
+        level
       }
     }
   }
