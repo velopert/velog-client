@@ -38,7 +38,7 @@ const RegisterForm: React.SFC<RegisterFormProps> = ({
   defaultEmail,
   error,
 }) => {
-  const [form, onChange] = useInputs<RegisterFormType>({
+  const [form, onChange] = useInputs({
     displayName: '',
     email: '',
     username: '',
