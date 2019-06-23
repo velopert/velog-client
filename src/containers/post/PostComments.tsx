@@ -1,10 +1,10 @@
 import * as React from 'react';
 import PostCommentsTemplate from '../../components/post/PostCommentsTemplate';
 import PostCommentsWriteContainer from './PostCommentsWriteContainer';
-import { Comment, WRITE_COMMENT } from '../../lib/graphql/post';
+import { Comment } from '../../lib/graphql/post';
 import PostCommentsList from '../../components/post/PostCommentsList';
-import { MutationResult, Mutation } from 'react-apollo';
 import styled from 'styled-components';
+import { useUserId } from '../../lib/hooks/useUser';
 
 export interface PostCommentsProps {
   comments: Comment[];
@@ -16,11 +16,13 @@ const MarginTop = styled.div`
 `;
 
 const PostComments: React.FC<PostCommentsProps> = ({ comments, postId }) => {
+  const currentUserId = useUserId();
+
   return (
     <PostCommentsTemplate count={comments.length}>
       <PostCommentsWriteContainer postId={postId} />
       <MarginTop>
-        <PostCommentsList comments={comments} />
+        <PostCommentsList comments={comments} currentUserId={currentUserId} />
       </MarginTop>
     </PostCommentsTemplate>
   );
