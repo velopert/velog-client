@@ -7,13 +7,21 @@ const PostCommentsListBlock = styled.div``;
 
 export interface PostCommentsListProps {
   comments: Comment[];
+  currentUserId: null | string;
 }
 
-const PostCommentsList: React.FC<PostCommentsListProps> = ({ comments }) => {
+const PostCommentsList: React.FC<PostCommentsListProps> = ({
+  comments,
+  currentUserId,
+}) => {
   return (
     <PostCommentsListBlock>
       {comments.map(comment => (
-        <PostCommentItem comment={comment} key={comment.id} />
+        <PostCommentItem
+          comment={comment}
+          key={comment.id}
+          ownComment={currentUserId === comment.user.id}
+        />
       ))}
     </PostCommentsListBlock>
   );

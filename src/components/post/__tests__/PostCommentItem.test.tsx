@@ -22,8 +22,7 @@ describe('PostCommentItem', () => {
   const setup = (props: Partial<PostCommentItemProps> = {}) => {
     const initialProps: PostCommentItemProps = {
       comment: sampleComment,
-      onLoadReplies: () => Promise.resolve(),
-      onReply: () => {},
+      ownComment: false,
     };
     const utils = render(<PostCommentItem {...initialProps} {...props} />);
     return {
@@ -31,7 +30,7 @@ describe('PostCommentItem', () => {
     };
   };
   it('renders properly', () => {
-    const { getByText, getByAltText } = setup();
+    const { getByText, getByAltText, queryByText } = setup();
     getByText(sampleComment.user.username);
     getByText(formatDate(sampleComment.created_at));
     expect(getByAltText('comment-user-thumbnail')).toHaveAttribute(
@@ -39,5 +38,16 @@ describe('PostCommentItem', () => {
       sampleComment.user.profile.thumbnail!,
     );
     getByText(sampleComment.text);
+    const edit = queryByText('수정');
+    const remove = queryByText('삭제');
+    expect(edit).toBeFalsy();
+    expect(remove).toBeFalsy();
+  });
+  it('render action buttons when ownComment is true', () => {
+    const { getByText } = setup({
+      ownComment: true,
+    });
+    getByText('수정');
+    getByText('삭제');
   });
 });

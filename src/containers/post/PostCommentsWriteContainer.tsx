@@ -1,8 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import PostCommentsWrite from '../../components/post/PostCommentsWrite';
 import { Mutation, MutationResult } from 'react-apollo';
 import { WRITE_COMMENT, RELOAD_COMMENTS } from '../../lib/graphql/post';
-import gql from 'graphql-tag';
 
 export interface PostCommentsWriteContainerProps {
   postId: string;
@@ -38,6 +37,11 @@ const PostCommentsWriteContainer: React.FC<PostCommentsWriteContainerProps> = ({
               },
               fetchPolicy: 'network-only',
             });
+            // window.scrollTo({ top: document.body.scrollHeight });
+            const comments = document.querySelectorAll('.comment');
+            if (comments.length === 0) return;
+            const lastComment = comments.item(comments.length - 1);
+            lastComment.scrollIntoView();
           } catch (e) {
             console.log(e);
           }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Comment } from '../../lib/graphql/post';
 import palette from '../../lib/styles/palette';
@@ -80,6 +80,7 @@ const TogglerBlock = styled.div`
 
 export interface PostCommentItemProps {
   comment: Comment;
+  ownComment: boolean;
 }
 
 interface TogglerProps {
@@ -99,12 +100,15 @@ const Toggler: React.FC<TogglerProps> = ({ open, onToggle, count }) => {
   );
 };
 
-const PostCommentItem: React.FC<PostCommentItemProps> = ({ comment }) => {
+const PostCommentItem: React.FC<PostCommentItemProps> = ({
+  comment,
+  ownComment,
+}) => {
   const { id, user, created_at, text, replies_count } = comment;
   const [open, onToggle] = useBoolean(false);
 
   return (
-    <PostCommentItemBlock>
+    <PostCommentItemBlock className="comment">
       <CommentHead>
         <div className="profile">
           <img
@@ -116,10 +120,12 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({ comment }) => {
             <div className="date">{formatDate(created_at)}</div>
           </div>
         </div>
-        <div className="actions">
-          <span>수정</span>
-          <span>삭제</span>
-        </div>
+        {ownComment && (
+          <div className="actions">
+            <span>수정</span>
+            <span>삭제</span>
+          </div>
+        )}
       </CommentHead>
       <Typography>
         <CommentText>{text}</CommentText>
@@ -132,4 +138,4 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({ comment }) => {
   );
 };
 
-export default PostCommentItem;
+export default React.memo(PostCommentItem);

@@ -6,6 +6,7 @@ import useBoolean from '../../lib/hooks/useBoolean';
 import palette from '../../lib/styles/palette';
 import PostCommentsWrite from './PostCommentsWrite';
 import useInput from '../../lib/hooks/useInput';
+import { useUserId } from '../../lib/hooks/useUser';
 
 const PostRepliesBlock = styled.div`
   border: solid 1px rgba(0, 0, 0, 0.02);
@@ -58,6 +59,7 @@ const PostReplies: React.FC<PostRepliesProps> = ({
   onHide,
 }) => {
   const [writing, onToggle] = useBoolean(false);
+  const currentUserId = useUserId();
   const [comment, onChangeComment, onResetComment] = useInput('');
   const hasComments = comments.length > 0;
   const onWrite = () => {
@@ -77,7 +79,7 @@ const PostReplies: React.FC<PostRepliesProps> = ({
   return (
     <PostRepliesBlock>
       {comments.length > 0 && <PullUp />}
-      <PostCommentsList comments={comments} />
+      <PostCommentsList comments={comments} currentUserId={currentUserId} />
       {hasComments && <Separator />}
       {writing || !hasComments ? (
         <PostCommentsWrite

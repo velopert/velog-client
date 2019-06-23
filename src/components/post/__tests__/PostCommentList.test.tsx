@@ -47,8 +47,7 @@ describe('PostCommentsList', () => {
   const setup = (props: Partial<PostCommentsListProps> = {}) => {
     const initialProps: PostCommentsListProps = {
       comments: sampleComments,
-      onReply: () => {},
-      onLoadReplies: () => {},
+      currentUserId: null,
     };
     const utils = render(<PostCommentsList {...initialProps} {...props} />);
     return {

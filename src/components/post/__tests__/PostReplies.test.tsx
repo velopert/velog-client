@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { render, fireEvent } from 'react-testing-library';
 import PostReplies, { PostRepliesProps } from '../PostReplies';
+import renderWithRedux from '../../../lib/renderWithRedux';
 
 const sampleComments = [
   {
@@ -37,7 +38,7 @@ describe('PostReplies', () => {
       onReply: () => {},
       onHide: () => {},
     };
-    const utils = render(<PostReplies {...initialProps} {...props} />);
+    const utils = renderWithRedux(<PostReplies {...initialProps} {...props} />);
     return {
       ...utils,
     };
