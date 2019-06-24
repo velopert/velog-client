@@ -14,6 +14,7 @@ import client from './lib/graphql/client';
 import rootReducer from './modules';
 import storage from './lib/storage';
 import { setUser } from './modules/core';
+import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
 
 const store = createStore(rootReducer, composeWithDevTools());
 
@@ -42,9 +43,11 @@ if (process.env.NODE_ENV === 'production') {
   ReactDOM.render(
     <Provider store={store}>
       <ApolloProvider client={client}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <ApolloHooksProvider client={client}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ApolloHooksProvider>
       </ApolloProvider>
     </Provider>,
     document.getElementById('root'),

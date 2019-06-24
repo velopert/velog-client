@@ -275,3 +275,9 @@ export const WRITE_COMMENT = gql`
     }
   }
 `;
+
+export const REMOVE_COMMENT = gql`
+  mutation RemoveComment($id: ID!) {
+    removeComment(id: $id)
+  }
+`;
