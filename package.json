@@ -40,6 +40,7 @@
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "@typescript-eslint/parser": "^1.9.0",
     "apollo-boost": "^0.1.28",
+    "apollo-link-mock": "^1.0.1",
     "axios": "^0.18.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",

@@ -1,10 +1,11 @@
 import * as React from 'react';
 import PostCommentsTemplate from '../../components/post/PostCommentsTemplate';
 import PostCommentsWriteContainer from './PostCommentsWriteContainer';
-import { Comment } from '../../lib/graphql/post';
+import { Comment, REMOVE_COMMENT } from '../../lib/graphql/post';
 import PostCommentsList from '../../components/post/PostCommentsList';
 import styled from 'styled-components';
 import { useUserId } from '../../lib/hooks/useUser';
+import { useMutation } from 'react-apollo-hooks';
 
 export interface PostCommentsProps {
   comments: Comment[];
@@ -17,6 +18,11 @@ const MarginTop = styled.div`
 
 const PostComments: React.FC<PostCommentsProps> = ({ comments, postId }) => {
   const currentUserId = useUserId();
+  const removeComment = useMutation(REMOVE_COMMENT);
+
+  const onRemove = async (id: string) => {
+    await removeComment({ variables: { id } });
+  };
 
   return (
     <PostCommentsTemplate count={comments.length}>

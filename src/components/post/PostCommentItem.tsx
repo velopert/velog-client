@@ -88,6 +88,7 @@ const TogglerBlock = styled.div`
 export interface PostCommentItemProps {
   comment: Comment;
   ownComment: boolean;
+  onRemove: (id: string) => any;
 }
 
 interface TogglerProps {
@@ -110,6 +111,7 @@ const Toggler: React.FC<TogglerProps> = ({ open, onToggle, count }) => {
 const PostCommentItem: React.FC<PostCommentItemProps> = ({
   comment,
   ownComment,
+  onRemove,
 }) => {
   const { id, user, created_at, text, replies_count, deleted } = comment;
   const [open, onToggle] = useBoolean(false);
@@ -132,7 +134,7 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
         {ownComment && (
           <div className="actions">
             <span>수정</span>
-            <span>삭제</span>
+            <span onClick={() => onRemove(id)}>삭제</span>
           </div>
         )}
       </CommentHead>

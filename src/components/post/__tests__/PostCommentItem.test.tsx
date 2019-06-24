@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import PostCommentItem, { PostCommentItemProps } from '../PostCommentItem';
 import { Comment } from '../../../lib/graphql/post';
 import { formatDate } from '../../../lib/utils';
@@ -32,6 +32,7 @@ describe('PostCommentItem', () => {
     const initialProps: PostCommentItemProps = {
       comment: sampleComment,
       ownComment: false,
+      onRemove: () => {},
     };
     const utils = render(<PostCommentItem {...initialProps} {...props} />);
     return {
@@ -64,5 +65,15 @@ describe('PostCommentItem', () => {
       comment: deletedComment,
     });
     getByText('삭제된 댓글입니다.');
+  });
+  it('calls onRemove with id when remove is clicked', () => {
+    const onRemove = jest.fn();
+    const { getByText } = setup({
+      ownComment: true,
+      onRemove,
+    });
+    const remove = getByText('삭제');
+    fireEvent.click(remove);
+    expect(onRemove).toBeCalledWith(sampleComment.id);
   });
 });

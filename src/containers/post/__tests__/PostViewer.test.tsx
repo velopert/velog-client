@@ -5,6 +5,17 @@ import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from 'react-apollo/test-utils';
 import { READ_POST } from '../../../lib/graphql/post';
 import renderWithRedux from '../../../lib/renderWithRedux';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloClient } from 'apollo-client';
+import { MockLink, MockedResponse } from 'apollo-link-mock';
+import { ApolloProvider } from 'react-apollo-hooks';
+
+function createClient(mocks: MockedResponse[]) {
+  return new ApolloClient({
+    cache: new InMemoryCache({ addTypename: false }),
+    link: new MockLink(mocks),
+  });
+}
 
 describe('PostViewer', () => {
   const setup = (props: Partial<PostViewerProps> = {}, overrideMocks?: any) => {
@@ -177,11 +188,16 @@ describe('PostViewer', () => {
         },
       },
     ];
+
+    const client = createClient([]);
+
     const utils = renderWithRedux(
       <MockedProvider mocks={overrideMocks || mocks} addTypename={false}>
-        <MemoryRouter>
-          <PostViewer {...initialProps} {...props} />
-        </MemoryRouter>
+        <ApolloProvider client={client}>
+          <MemoryRouter>
+            <PostViewer {...initialProps} {...props} />
+          </MemoryRouter>
+        </ApolloProvider>
       </MockedProvider>,
     );
     return {

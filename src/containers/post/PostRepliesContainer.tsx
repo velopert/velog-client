@@ -8,6 +8,7 @@ import {
 import PostReplies from '../../components/post/PostReplies';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../modules';
+import { useQuery, useMutation } from 'react-apollo-hooks';
 
 export interface PostRepliesProps {
   commentId: string;
@@ -19,44 +20,33 @@ const PostRepliesContainer: React.FC<PostRepliesProps> = ({
   onHide,
 }) => {
   const postId = useSelector((state: RootState) => state.post.id);
+  const replies = useQuery<{ comment: CommentWithReplies }>(GET_REPLIES, {
+    variables: {
+      id: commentId,
+    },
+  });
+  const writeComment = useMutation(WRITE_COMMENT);
+  const onReply = async (text: string) => {
+    await writeComment({
+      variables: {
+        post_id: postId,
+        comment_id: commentId,
+        text,
+      },
+    });
+    replies.refetch();
+  };
+
+  if (replies.loading || !replies.data) {
+    return null;
+  }
+
   return (
-    <Query query={GET_REPLIES} variables={{ id: commentId }}>
-      {({
-        loading,
-        error,
-        data,
-        refetch,
-      }: QueryResult<{ comment: CommentWithReplies }>) => {
-        if (loading || !data) return null;
-        return (
-          <Mutation mutation={WRITE_COMMENT}>
-            {writeComment => {
-              const onReply = async (text: string) => {
-                try {
-                  await writeComment({
-                    variables: {
-                      post_id: postId,
-                      comment_id: commentId,
-                      text,
-                    },
-                  });
-                  refetch();
-                } catch (e) {
-                  console.log(e);
-                }
-              };
-              return (
-                <PostReplies
-                  comments={data.comment.replies}
-                  onReply={onReply}
-                  onHide={onHide}
-                />
-              );
-            }}
-          </Mutation>
-        );
-      }}
-    </Query>
+    <PostReplies
+      comments={replies.data.comment.replies}
+      onReply={onReply}
+      onHide={onHide}
+    />
   );
 };
 
