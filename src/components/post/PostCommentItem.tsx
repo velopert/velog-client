@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Comment } from '../../lib/graphql/post';
 import palette from '../../lib/styles/palette';
 import { formatDate } from '../../lib/utils';
@@ -60,7 +60,14 @@ const CommentHead = styled.div`
   }
 `;
 
-const CommentText = styled.p``;
+const CommentText = styled.p<{ deleted: boolean }>`
+  ${props =>
+    props.deleted &&
+    css`
+      color: ${palette.gray6};
+      font-style: italic;
+    `}
+`;
 const CommentFoot = styled.div`
   margin-top: 2rem;
 `;
@@ -104,7 +111,7 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
   comment,
   ownComment,
 }) => {
-  const { id, user, created_at, text, replies_count } = comment;
+  const { id, user, created_at, text, replies_count, deleted } = comment;
   const [open, onToggle] = useBoolean(false);
 
   return (
@@ -112,11 +119,13 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
       <CommentHead>
         <div className="profile">
           <img
-            src={user.profile.thumbnail || userThumbnail}
+            src={(user && user.profile.thumbnail) || userThumbnail}
             alt="comment-user-thumbnail"
           />
           <div className="comment-info">
-            <div className="username">{user.username}</div>
+            <div className="username">
+              {user ? user.username : '알 수 없음'}
+            </div>
             <div className="date">{formatDate(created_at)}</div>
           </div>
         </div>
@@ -128,7 +137,9 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
         )}
       </CommentHead>
       <Typography>
-        <CommentText>{text}</CommentText>
+        <CommentText deleted={deleted}>
+          {text || '삭제된 댓글입니다.'}
+        </CommentText>
       </Typography>
       <CommentFoot>
         <Toggler open={open} onToggle={onToggle} count={replies_count} />

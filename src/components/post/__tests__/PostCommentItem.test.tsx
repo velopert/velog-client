@@ -17,6 +17,15 @@ describe('PostCommentItem', () => {
     text: 'Hey there',
     replies_count: 0,
     created_at: '2019-06-14T14:53:11.979Z',
+    deleted: false,
+  };
+  const deletedComment: Comment = {
+    id: '70d24d3b-a6ce-46a3-86c5-1cba95843841',
+    user: null,
+    text: null,
+    replies_count: 0,
+    created_at: '2019-06-14T14:53:11.979Z',
+    deleted: true,
   };
 
   const setup = (props: Partial<PostCommentItemProps> = {}) => {
@@ -31,13 +40,13 @@ describe('PostCommentItem', () => {
   };
   it('renders properly', () => {
     const { getByText, getByAltText, queryByText } = setup();
-    getByText(sampleComment.user.username);
+    getByText(sampleComment.user!.username);
     getByText(formatDate(sampleComment.created_at));
     expect(getByAltText('comment-user-thumbnail')).toHaveAttribute(
       'src',
-      sampleComment.user.profile.thumbnail!,
+      sampleComment.user!.profile.thumbnail!,
     );
-    getByText(sampleComment.text);
+    getByText(sampleComment.text!);
     const edit = queryByText('수정');
     const remove = queryByText('삭제');
     expect(edit).toBeFalsy();
@@ -49,5 +58,11 @@ describe('PostCommentItem', () => {
     });
     getByText('수정');
     getByText('삭제');
+  });
+  it('renders deleted comment', () => {
+    const { getByText } = setup({
+      comment: deletedComment,
+    });
+    getByText('삭제된 댓글입니다.');
   });
 });

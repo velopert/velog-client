@@ -16,6 +16,7 @@ describe('PostCommentsList', () => {
       text: 'Comment #1',
       replies_count: 0,
       created_at: '2019-06-15T14:22:28.198Z',
+      deleted: false,
     },
     {
       id: '069f8843-44bb-483b-94f7-fca4cf9fcf4a',
@@ -29,6 +30,7 @@ describe('PostCommentsList', () => {
       text: 'Comment #2',
       replies_count: 0,
       created_at: '2019-06-17T14:19:03.263Z',
+      deleted: false,
     },
     {
       id: 'd93d1975-f99e-415f-9d41-594a7ff6921a',
@@ -42,6 +44,7 @@ describe('PostCommentsList', () => {
       text: 'Comment #3',
       replies_count: 0,
       created_at: '2019-06-17T14:24:14.457Z',
+      deleted: false,
     },
   ];
   const setup = (props: Partial<PostCommentsListProps> = {}) => {

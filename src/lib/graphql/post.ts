@@ -31,11 +31,12 @@ export interface Comment {
     profile: {
       thumbnail: string | null;
     };
-  };
-  text: string;
+  } | null;
+  text: string | null;
   replies_count: number;
   replies?: Comment[];
   created_at: string;
+  deleted: boolean;
 }
 
 // Post Type for PostList
@@ -147,6 +148,7 @@ export const READ_POST = gql`
         level
         created_at
         level
+        deleted
       }
     }
   }
@@ -189,6 +191,7 @@ export const GET_COMMENT = gql`
       replies_count
       level
       created_at
+      deleted
     }
   }
 `;
@@ -210,6 +213,7 @@ export const GET_REPLIES = gql`
         replies_count
         created_at
         level
+        deleted
       }
     }
   }

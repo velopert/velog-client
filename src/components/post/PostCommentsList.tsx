@@ -20,7 +20,7 @@ const PostCommentsList: React.FC<PostCommentsListProps> = ({
         <PostCommentItem
           comment={comment}
           key={comment.id}
-          ownComment={currentUserId === comment.user.id}
+          ownComment={currentUserId === (comment.user && comment.user.id)}
         />
       ))}
     </PostCommentsListBlock>
