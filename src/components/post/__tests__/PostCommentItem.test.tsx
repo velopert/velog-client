@@ -62,9 +62,19 @@ describe('PostCommentItem', () => {
   });
   it('renders deleted comment', () => {
     const { getByText } = setup({
-      comment: deletedComment,
+      comment: {
+        ...deletedComment,
+        replies_count: 5,
+      },
     });
     getByText('삭제된 댓글입니다.');
+  });
+  it('hides deleted comment where there is no replies', () => {
+    const { queryByText } = setup({
+      comment: deletedComment,
+    });
+    const description = queryByText('삭제된 댓글입니다.');
+    expect(description).toBeFalsy();
   });
   it('calls onRemove with id when remove is clicked', () => {
     const onRemove = jest.fn();

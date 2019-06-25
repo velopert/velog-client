@@ -116,6 +116,9 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
   const { id, user, created_at, text, replies_count, deleted } = comment;
   const [open, onToggle] = useBoolean(false);
 
+  // hides comment where it is deleted and its every reply is also deleted
+  if (deleted && replies_count === 0) return null;
+
   return (
     <PostCommentItemBlock className="comment">
       <CommentHead>

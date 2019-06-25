@@ -49,9 +49,11 @@ const PopupOKCancel: React.FC<PopupOKCancelProps> = ({
         {title && <h3>{title}</h3>}
         <div className="message">{children}</div>
         <div className="button-area">
-          <Button color="lightGray" onClick={onCancel}>
-            취소
-          </Button>
+          {onCancel && (
+            <Button color="lightGray" onClick={onCancel}>
+              취소
+            </Button>
+          )}
           <Button onClick={onConfirm}>확인</Button>
         </div>
       </PopupOKCancelBlock>

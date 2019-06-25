@@ -79,6 +79,7 @@ export interface SinglePost {
     };
   };
   comments: Comment[];
+  comments_count: number;
 }
 
 export interface CommentWithReplies {
@@ -122,6 +123,7 @@ export const READ_POST = gql`
       is_private
       is_temp
       thumbnail
+      comments_count
       user {
         id
         username
@@ -171,6 +173,7 @@ export const RELOAD_COMMENTS = gql`
         replies_count
         level
         created_at
+        deleted
       }
     }
   }

@@ -51,12 +51,14 @@ export interface PostRepliesProps {
   comments: Comment[];
   onReply: (text: string) => any;
   onHide: () => void;
+  onRemove: (id: string) => any;
 }
 
 const PostReplies: React.FC<PostRepliesProps> = ({
   comments,
   onReply,
   onHide,
+  onRemove,
 }) => {
   const [writing, onToggle] = useBoolean(false);
   const currentUserId = useUserId();
@@ -79,7 +81,11 @@ const PostReplies: React.FC<PostRepliesProps> = ({
   return (
     <PostRepliesBlock>
       {comments.length > 0 && <PullUp />}
-      <PostCommentsList comments={comments} currentUserId={currentUserId} />
+      <PostCommentsList
+        comments={comments}
+        currentUserId={currentUserId}
+        onRemove={onRemove}
+      />
       {hasComments && <Separator />}
       {writing || !hasComments ? (
         <PostCommentsWrite

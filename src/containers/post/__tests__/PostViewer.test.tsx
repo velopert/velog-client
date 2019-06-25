@@ -61,6 +61,7 @@ describe('PostViewer', () => {
                   title: 'VELOPERT.LOG',
                 },
               },
+              comments_count: 10,
               comments: [
                 {
                   id: '70d24d3b-a6ce-46a3-86c5-1cba95843841',
@@ -250,6 +251,7 @@ describe('PostViewer', () => {
                 },
               },
               comments: [],
+              comments_count: 10,
             },
           },
         },

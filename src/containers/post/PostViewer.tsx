@@ -49,7 +49,11 @@ const PostViewer: React.FC<PostViewerProps> = ({ username, urlSlug }) => {
               }
             />
             <PostContent isMarkdown={post.is_markdown} body={post.body} />
-            <PostComments comments={post.comments} postId={post.id} />
+            <PostComments
+              count={post.comments_count}
+              comments={post.comments}
+              postId={post.id}
+            />
           </>
         );
       }}

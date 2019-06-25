@@ -8,11 +8,13 @@ const PostCommentsListBlock = styled.div``;
 export interface PostCommentsListProps {
   comments: Comment[];
   currentUserId: null | string;
+  onRemove: (id: string) => any;
 }
 
 const PostCommentsList: React.FC<PostCommentsListProps> = ({
   comments,
   currentUserId,
+  onRemove,
 }) => {
   return (
     <PostCommentsListBlock>
@@ -21,6 +23,7 @@ const PostCommentsList: React.FC<PostCommentsListProps> = ({
           comment={comment}
           key={comment.id}
           ownComment={currentUserId === (comment.user && comment.user.id)}
+          onRemove={onRemove}
         />
       ))}
     </PostCommentsListBlock>
