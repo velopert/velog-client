@@ -75,3 +75,11 @@ export const escapeForUrl = (text: string): string => {
     .replace(/ /g, '-')
     .replace(/--+/g, '-');
 };
+
+export function safe<T>(callback: () => T) {
+  try {
+    return callback();
+  } catch (e) {
+    return null;
+  }
+}

@@ -37,6 +37,7 @@ export interface Comment {
   replies?: Comment[];
   created_at: string;
   deleted: boolean;
+  level: number;
 }
 
 // Post Type for PostList

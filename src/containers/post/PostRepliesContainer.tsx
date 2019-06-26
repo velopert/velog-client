@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from 'react';
-import { Query, QueryResult, Mutation } from 'react-apollo';
 import {
   GET_REPLIES,
   CommentWithReplies,
