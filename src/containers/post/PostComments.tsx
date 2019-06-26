@@ -42,8 +42,7 @@ const PostComments: React.FC<PostCommentsProps> = ({
 
   const onConfirmRemove = useCallback(async () => {
     onToggleAskRemove();
-    console.log('hello');
-    await removeComment({ variables: { id: removeId } });
+    const result = await removeComment({ variables: { id: removeId } });
     reloadComments.refetch();
   }, [onToggleAskRemove, reloadComments, removeComment, removeId]);
 
