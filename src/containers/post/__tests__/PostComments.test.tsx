@@ -96,6 +96,7 @@ describe('PostComments', () => {
           data: {
             post: {
               id: '6533da20-b351-11e8-9696-f1fffe8a36f1',
+              comments_count: 2,
               comments: sampleComments.slice(1, sampleComments.length - 1),
             },
           },

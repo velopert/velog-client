@@ -17,6 +17,7 @@ describe('PostCommentsList', () => {
       replies_count: 0,
       created_at: '2019-06-15T14:22:28.198Z',
       deleted: false,
+      level: 0,
     },
     {
       id: '069f8843-44bb-483b-94f7-fca4cf9fcf4a',
@@ -31,6 +32,7 @@ describe('PostCommentsList', () => {
       replies_count: 0,
       created_at: '2019-06-17T14:19:03.263Z',
       deleted: false,
+      level: 0,
     },
     {
       id: 'd93d1975-f99e-415f-9d41-594a7ff6921a',
@@ -45,12 +47,14 @@ describe('PostCommentsList', () => {
       replies_count: 0,
       created_at: '2019-06-17T14:24:14.457Z',
       deleted: false,
+      level: 0,
     },
   ];
   const setup = (props: Partial<PostCommentsListProps> = {}) => {
     const initialProps: PostCommentsListProps = {
       comments: sampleComments,
       currentUserId: null,
+      onRemove: () => {},
     };
     const utils = render(<PostCommentsList {...initialProps} {...props} />);
     return {

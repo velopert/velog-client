@@ -33,7 +33,6 @@ export interface PostCommentsWriteProps {
   comment: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onWrite: () => void;
-  forReplies?: boolean;
   onCancel?: () => void;
 }
 
@@ -42,7 +41,6 @@ const PostCommentsWrite: React.FC<PostCommentsWriteProps> = ({
   onChange,
   onWrite,
   onCancel,
-  forReplies,
 }) => {
   return (
     <PostCommentsWriteBlock>
@@ -52,14 +50,14 @@ const PostCommentsWrite: React.FC<PostCommentsWriteProps> = ({
         onChange={onChange}
       />
       <div className="buttons-wrapper">
-        <Button inline onClick={onWrite}>
-          댓글 작성
-        </Button>
-        {forReplies && (
+        {onCancel && (
           <Button onClick={onCancel} inline color="darkGray">
             취소
           </Button>
         )}
+        <Button inline onClick={onWrite}>
+          댓글 작성
+        </Button>
       </div>
     </PostCommentsWriteBlock>
   );

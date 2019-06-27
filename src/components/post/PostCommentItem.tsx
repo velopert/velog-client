@@ -8,6 +8,9 @@ import { PlusBoxIcon, MinusBoxIcon } from '../../static/svg';
 import { userThumbnail } from '../../static/images';
 import useBoolean from '../../lib/hooks/useBoolean';
 import PostRepliesContainer from '../../containers/post/PostRepliesContainer';
+import PostCommentsWrite from './PostCommentsWrite';
+import useInput from '../../lib/hooks/useInput';
+import PostEditComment from '../../containers/post/PostEditComment';
 
 const PostCommentItemBlock = styled.div`
   padding-top: 1.5rem;
@@ -114,7 +117,8 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
   onRemove,
 }) => {
   const { id, user, created_at, text, replies_count, deleted } = comment;
-  const [open, onToggle] = useBoolean(false);
+  const [open, onToggleOpen] = useBoolean(false);
+  const [editing, onToggleEditing] = useBoolean(false);
 
   // hides comment where it is deleted and its every reply is also deleted
   if (deleted && replies_count === 0) return null;
@@ -134,21 +138,29 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
             <div className="date">{formatDate(created_at)}</div>
           </div>
         </div>
-        {ownComment && (
+        {ownComment && !editing && (
           <div className="actions">
-            <span>수정</span>
+            <span onClick={onToggleEditing}>수정</span>
             <span onClick={() => onRemove(id)}>삭제</span>
           </div>
         )}
       </CommentHead>
-      <Typography>
-        <CommentText deleted={deleted}>
-          {text || '삭제된 댓글입니다.'}
-        </CommentText>
-      </Typography>
+      {editing ? (
+        <PostEditComment
+          id={comment.id}
+          defaultText={comment.text || ''}
+          onCancel={onToggleEditing}
+        />
+      ) : (
+        <Typography>
+          <CommentText deleted={deleted}>
+            {text || '삭제된 댓글입니다.'}
+          </CommentText>
+        </Typography>
+      )}
       <CommentFoot>
-        <Toggler open={open} onToggle={onToggle} count={replies_count} />
-        {open && <PostRepliesContainer commentId={id} onHide={onToggle} />}
+        <Toggler open={open} onToggle={onToggleOpen} count={replies_count} />
+        {open && <PostRepliesContainer commentId={id} onHide={onToggleOpen} />}
       </CommentFoot>
     </PostCommentItemBlock>
   );

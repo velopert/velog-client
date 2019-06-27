@@ -157,10 +157,20 @@ export const READ_POST = gql`
   }
 `;
 
+export const GET_COMMENTS_COUNT = gql`
+  query GetCommentsCount($id: ID!) {
+    post(id: $id) {
+      id
+      comments_count
+    }
+  }
+`;
+
 export const RELOAD_COMMENTS = gql`
   query ReloadComments($id: ID!) {
     post(id: $id) {
       id
+      comments_count
       comments {
         id
         user {
@@ -276,6 +286,15 @@ export const WRITE_COMMENT = gql`
       }
       text
       replies_count
+    }
+  }
+`;
+
+export const EDIT_COMMENT = gql`
+  mutation EditComment($id: ID!, $text: String!) {
+    editComment(id: $id, text: $text) {
+      id
+      text
     }
   }
 `;

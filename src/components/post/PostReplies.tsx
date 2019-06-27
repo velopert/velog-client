@@ -93,7 +93,6 @@ const PostReplies: React.FC<PostRepliesProps> = ({
           onWrite={onWrite}
           onChange={onChangeComment}
           onCancel={onCancel}
-          forReplies
         />
       ) : (
         <StartWritingButton onClick={onToggle}>

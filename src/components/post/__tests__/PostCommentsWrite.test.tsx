@@ -53,13 +53,13 @@ describe('PostCommentsWrite', () => {
 
     expect(onWrite).toBeCalled();
   });
-  it('shows cancel button when forReplies is true', () => {
-    const { getByText } = setup({ forReplies: true });
+  it('shows cancel button when onCancel exists', () => {
+    const { getByText } = setup({ onCancel: () => {} });
     getByText('취소');
   });
   it('calls onCancel', () => {
     const onCancel = jest.fn();
-    const { getByText } = setup({ forReplies: true, onCancel });
+    const { getByText } = setup({ onCancel });
     fireEvent.click(getByText('취소'));
     expect(onCancel).toBeCalled();
   });

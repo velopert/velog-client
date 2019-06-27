@@ -4,6 +4,7 @@ import {
   CommentWithReplies,
   WRITE_COMMENT,
   REMOVE_COMMENT,
+  GET_COMMENTS_COUNT,
 } from '../../lib/graphql/post';
 import PostReplies from '../../components/post/PostReplies';
 import { useSelector } from 'react-redux';
@@ -30,6 +31,12 @@ const PostRepliesContainer: React.FC<PostRepliesProps> = ({
       id: commentId,
     },
   });
+  const getCommentsCount = useQuery(GET_COMMENTS_COUNT, {
+    variables: {
+      id: postId,
+    },
+    skip: true,
+  });
   const writeComment = useMutation(WRITE_COMMENT);
   const removeComment = useMutation(REMOVE_COMMENT);
 
@@ -42,13 +49,15 @@ const PostRepliesContainer: React.FC<PostRepliesProps> = ({
       },
     });
     replies.refetch();
+    getCommentsCount.refetch();
   };
 
   const onConfirmRemove = useCallback(async () => {
     onToggleAskRemove();
     await removeComment({ variables: { id: removeId } });
     replies.refetch();
-  }, [onToggleAskRemove, removeComment, removeId, replies]);
+    getCommentsCount.refetch();
+  }, [getCommentsCount, onToggleAskRemove, removeComment, removeId, replies]);
 
   const onRemove = useCallback(
     (id: string) => {

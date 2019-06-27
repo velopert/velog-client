@@ -18,6 +18,7 @@ describe('PostCommentItem', () => {
     replies_count: 0,
     created_at: '2019-06-14T14:53:11.979Z',
     deleted: false,
+    level: 0,
   };
   const deletedComment: Comment = {
     id: '70d24d3b-a6ce-46a3-86c5-1cba95843841',
@@ -26,6 +27,7 @@ describe('PostCommentItem', () => {
     replies_count: 0,
     created_at: '2019-06-14T14:53:11.979Z',
     deleted: true,
+    level: 0,
   };
 
   const setup = (props: Partial<PostCommentItemProps> = {}) => {
