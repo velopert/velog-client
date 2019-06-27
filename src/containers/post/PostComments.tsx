@@ -38,11 +38,12 @@ const PostComments: React.FC<PostCommentsProps> = ({
       id: postId,
     },
     skip: true,
+    fetchPolicy: 'network-only',
   });
 
   const onConfirmRemove = useCallback(async () => {
     onToggleAskRemove();
-    const result = await removeComment({ variables: { id: removeId } });
+    await removeComment({ variables: { id: removeId } });
     reloadComments.refetch();
   }, [onToggleAskRemove, reloadComments, removeComment, removeId]);
 
