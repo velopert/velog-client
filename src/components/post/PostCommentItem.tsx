@@ -8,8 +8,6 @@ import { PlusBoxIcon, MinusBoxIcon } from '../../static/svg';
 import { userThumbnail } from '../../static/images';
 import useBoolean from '../../lib/hooks/useBoolean';
 import PostRepliesContainer from '../../containers/post/PostRepliesContainer';
-import PostCommentsWrite from './PostCommentsWrite';
-import useInput from '../../lib/hooks/useInput';
 import PostEditComment from '../../containers/post/PostEditComment';
 
 const PostCommentItemBlock = styled.div`

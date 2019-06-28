@@ -3,6 +3,7 @@ import { render, fireEvent } from 'react-testing-library';
 import PostCommentItem, { PostCommentItemProps } from '../PostCommentItem';
 import { Comment } from '../../../lib/graphql/post';
 import { formatDate } from '../../../lib/utils';
+import renderWithProviders from '../../../lib/renderWithProviders';
 
 describe('PostCommentItem', () => {
   const sampleComment: Comment = {
@@ -36,7 +37,9 @@ describe('PostCommentItem', () => {
       ownComment: false,
       onRemove: () => {},
     };
-    const utils = render(<PostCommentItem {...initialProps} {...props} />);
+    const utils = renderWithProviders(
+      <PostCommentItem {...initialProps} {...props} />,
+    );
     return {
       ...utils,
     };
@@ -87,5 +90,31 @@ describe('PostCommentItem', () => {
     const remove = getByText('삭제');
     fireEvent.click(remove);
     expect(onRemove).toBeCalledWith(sampleComment.id);
+  });
+  it('shows PostEditComment when edit is clicked', () => {
+    const { getByText } = setup({
+      ownComment: true,
+    });
+    const edit = getByText('수정');
+    fireEvent.click(edit);
+    getByText('댓글 수정');
+  });
+  it('simultates comment edit', () => {
+    const { getByText, getByDisplayValue } = setup({
+      ownComment: true,
+    });
+    const edit = getByText('수정');
+    fireEvent.click(edit);
+    getByText('댓글 수정');
+    const textarea = getByDisplayValue('Hey there') as HTMLTextAreaElement;
+    fireEvent.change(textarea, {
+      target: {
+        value: 'Hello world',
+      },
+    });
+    expect(textarea).toHaveProperty('value', 'Hello world');
+    const cancel = getByText('취소');
+    fireEvent.click(cancel);
+    expect(textarea).not.toBeInTheDocument();
   });
 });

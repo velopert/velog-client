@@ -34,6 +34,7 @@ export interface PostCommentsWriteProps {
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onWrite: () => void;
   onCancel?: () => void;
+  edit?: boolean;
 }
 
 const PostCommentsWrite: React.FC<PostCommentsWriteProps> = ({
@@ -41,6 +42,7 @@ const PostCommentsWrite: React.FC<PostCommentsWriteProps> = ({
   onChange,
   onWrite,
   onCancel,
+  edit,
 }) => {
   return (
     <PostCommentsWriteBlock>
@@ -56,7 +58,7 @@ const PostCommentsWrite: React.FC<PostCommentsWriteProps> = ({
           </Button>
         )}
         <Button inline onClick={onWrite}>
-          댓글 작성
+          댓글 {edit ? '수정' : '작성'}
         </Button>
       </div>
     </PostCommentsWriteBlock>

@@ -16,7 +16,7 @@ describe('PostCommentsWrite', () => {
     const textarea = utils.getByPlaceholderText(
       '댓글을 작성하세요',
     ) as HTMLTextAreaElement;
-    const writeButton = utils.getByText('댓글 작성');
+    const writeButton = utils.getByText(/댓글 (작성|수정)/);
     return {
       textarea,
       writeButton,
@@ -62,5 +62,9 @@ describe('PostCommentsWrite', () => {
     const { getByText } = setup({ onCancel });
     fireEvent.click(getByText('취소'));
     expect(onCancel).toBeCalled();
+  });
+  it('shows edit text when edit is true', () => {
+    const { writeButton } = setup({ edit: true });
+    expect(writeButton.textContent).toBe('댓글 수정');
   });
 });

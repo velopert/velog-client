@@ -1,7 +1,6 @@
 import React from 'react';
 import useInput from '../../lib/hooks/useInput';
 import PostCommentsWrite from '../../components/post/PostCommentsWrite';
-import { useSelector } from 'react-redux';
 import { EDIT_COMMENT } from '../../lib/graphql/post';
 import { useMutation } from 'react-apollo-hooks';
 
@@ -35,6 +34,7 @@ const PostEditComment: React.FC<PostEditCommentProps> = ({
       onChange={onChange}
       onWrite={onWrite}
       onCancel={onCancel}
+      edit
     />
   );
 };

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PostCommentsWrite from '../../components/post/PostCommentsWrite';
-import { Mutation, MutationResult } from 'react-apollo';
 import { WRITE_COMMENT, RELOAD_COMMENTS } from '../../lib/graphql/post';
 import { useMutation, useQuery } from 'react-apollo-hooks';
 
