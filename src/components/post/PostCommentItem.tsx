@@ -114,7 +114,7 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
   ownComment,
   onRemove,
 }) => {
-  const { id, user, created_at, text, replies_count, deleted } = comment;
+  const { id, user, created_at, text, replies_count, deleted, level } = comment;
   const [open, onToggleOpen] = useBoolean(false);
   const [editing, onToggleEditing] = useBoolean(false);
 
@@ -157,7 +157,9 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
         </Typography>
       )}
       <CommentFoot>
-        <Toggler open={open} onToggle={onToggleOpen} count={replies_count} />
+        {level < 3 && (
+          <Toggler open={open} onToggle={onToggleOpen} count={replies_count} />
+        )}
         {open && <PostRepliesContainer commentId={id} onHide={onToggleOpen} />}
       </CommentFoot>
     </PostCommentItemBlock>

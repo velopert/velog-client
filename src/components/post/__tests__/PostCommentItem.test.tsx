@@ -117,4 +117,13 @@ describe('PostCommentItem', () => {
     fireEvent.click(cancel);
     expect(textarea).not.toBeInTheDocument();
   });
+  it('hides reply when level is 4', () => {
+    const { queryByText } = setup({
+      comment: {
+        ...sampleComment,
+        level: 4,
+      },
+    });
+    expect(queryByText('답글 달기')).toBeFalsy();
+  });
 });
