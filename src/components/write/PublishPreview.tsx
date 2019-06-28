@@ -209,7 +209,7 @@ const PublishPreview: React.FC<PublishPreviewProps> = ({
     [],
   );
   return (
-    <PublishPreviewBlock title="포스트 카드 미리보기">
+    <PublishPreviewBlock title="포스트 미리보기">
       <ThumbnailModify
         visible={!!thumbnail}
         onResetThumbnail={onResetThumbnail}
