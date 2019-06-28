@@ -31,14 +31,14 @@ describe('PublishScreen', () => {
   });
   it('handles visibility properly', () => {
     const utils = setup();
-    expect(utils.queryByText('포스트 카드 미리보기')).toBeFalsy();
+    expect(utils.queryByText('포스트 미리보기')).toBeFalsy();
     utils.store.dispatch(openPublish());
-    utils.getByText('포스트 카드 미리보기');
+    utils.getByText('포스트 미리보기');
   });
   it('closes PublishScreen when cancel button is clicked', async () => {
     const utils = setup();
     utils.store.dispatch(openPublish());
-    utils.getByText('포스트 카드 미리보기');
+    utils.getByText('포스트 미리보기');
     const cancelButton = utils.getByText('취소');
     fireEvent.click(cancelButton);
     await wait(() => {
