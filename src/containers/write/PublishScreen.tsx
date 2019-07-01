@@ -8,6 +8,8 @@ import PublishURLSettingContainer from './PublishURLSettingContainer';
 import PublishSeriesSectionContainer from './PublishSeriesSectionContainer';
 
 import PublishActionButtonsContainer from './PublishActionButtonsContainer';
+import PublishSettings from './PublishSettings';
+import useBoolean from '../../lib/hooks/useBoolean';
 
 interface OwnProps {}
 
@@ -21,20 +23,12 @@ type DispatchProps = typeof mapDispatchToProps;
 export type PublishScreenProps = OwnProps & StateProps & DispatchProps;
 
 const PublishScreen: React.FC<PublishScreenProps> = ({ visible }) => {
+  const [editSeries, onToggleEditSeries] = useBoolean(false);
   return (
     <PublishScreenTemplate
       visible={visible}
       left={<PublishPreviewContainer />}
-      right={
-        <>
-          <div>
-            <PublishPrivacySettingContainer />
-            <PublishURLSettingContainer />
-            <PublishSeriesSectionContainer />
-          </div>
-          <PublishActionButtonsContainer />
-        </>
-      }
+      right={<PublishSettings />}
     />
   );
 };

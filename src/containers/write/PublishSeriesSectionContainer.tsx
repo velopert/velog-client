@@ -1,23 +1,19 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { RootState } from '../../modules';
+
 import PublishSeriesSection from '../../components/write/PublishSeriesSection';
+import { useDispatch } from 'react-redux';
+import { toggleEditSeries } from '../../modules/write';
 
-interface OwnProps {}
-type StateProps = ReturnType<typeof mapStateToProps>;
-type DispatchProps = typeof mapDispatchToProps;
-type PublishSeriesSectionContainerProps = OwnProps & StateProps & DispatchProps;
-
-const mapStateToProps = (state: RootState) => ({});
-const mapDispatchToProps = {};
+export interface PublishSeriesSectionContainerProps {}
 
 const PublishSeriesSectionContainer: React.FC<
   PublishSeriesSectionContainerProps
 > = props => {
-  return <PublishSeriesSection />;
+  const dispatch = useDispatch();
+  const onEdit = () => {
+    dispatch(toggleEditSeries());
+  };
+  return <PublishSeriesSection onEdit={onEdit} />;
 };
 
-export default connect<StateProps, DispatchProps, OwnProps, RootState>(
-  mapStateToProps,
-  mapDispatchToProps,
-)(PublishSeriesSectionContainer);
+export default PublishSeriesSectionContainer;

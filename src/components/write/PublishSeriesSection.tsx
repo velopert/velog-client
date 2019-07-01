@@ -26,12 +26,16 @@ const SeriesButton = styled.button`
     background: #fdfdfd;
   }
 `;
-export interface PublishSeriesSectionProps {}
+export interface PublishSeriesSectionProps {
+  onEdit: () => void;
+}
 
-const PublishSeriesSection: React.FC<PublishSeriesSectionProps> = props => {
+const PublishSeriesSection: React.FC<PublishSeriesSectionProps> = ({
+  onEdit,
+}) => {
   return (
     <PublishSeriesSectionBlock title="시리즈 설정">
-      <SeriesButton>
+      <SeriesButton onClick={onEdit}>
         <AddListIcon />
         시리즈에 추가하기
       </SeriesButton>
