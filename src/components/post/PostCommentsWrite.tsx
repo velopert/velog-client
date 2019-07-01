@@ -53,7 +53,7 @@ const PostCommentsWrite: React.FC<PostCommentsWriteProps> = ({
       />
       <div className="buttons-wrapper">
         {onCancel && (
-          <Button onClick={onCancel} inline color="darkGray">
+          <Button onClick={onCancel} inline color="gray">
             취소
           </Button>
         )}

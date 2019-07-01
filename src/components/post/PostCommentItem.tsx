@@ -73,7 +73,7 @@ const CommentFoot = styled.div`
   margin-top: 2rem;
 `;
 const TogglerBlock = styled.div`
-  display: flex;
+  display: inline-flex;
   align-items: center;
   color: ${palette.teal6};
   font-weight: bold;
