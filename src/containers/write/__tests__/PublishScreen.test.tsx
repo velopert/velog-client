@@ -8,6 +8,7 @@ import {
   closePublish,
   openPublish,
   setDefaultDescription,
+  toggleEditSeries,
 } from '../../../modules/write';
 import { MockedProvider } from 'react-apollo/test-utils';
 
@@ -63,5 +64,12 @@ describe('PublishScreen', () => {
     });
     expect(utils.store.getState().write.description).toBe('helloworld');
     expect(textarea.value).toBe('helloworld');
+  });
+  it('hides PublishSettins when editSeries is true', () => {
+    const utils = setup();
+    utils.store.dispatch(openPublish());
+    utils.store.dispatch(toggleEditSeries());
+    const text = utils.queryByText('공개 설정');
+    expect(text).toBeFalsy();
   });
 });
