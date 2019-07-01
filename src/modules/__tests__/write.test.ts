@@ -19,6 +19,7 @@ describe('write redux module', () => {
       isPrivate: false,
       urlSlug: '',
       thumbnail: null,
+      editSeries: false,
     });
   });
   describe('action handlers', () => {
@@ -99,6 +100,13 @@ describe('write redux module', () => {
         write.setThumbnail('https://images.velog.io/sample.jpg'),
       );
       expect(state.thumbnail).toBe('https://images.velog.io/sample.jpg');
+    });
+    it('TOGGLE_EDIT_SERIES', () => {
+      let state = getInitialState();
+      state = reducer(state, write.toggleEditSeries());
+      expect(state.editSeries).toBe(true);
+      state = reducer(state, write.toggleEditSeries());
+      expect(state.editSeries).toBe(false);
     });
   });
 });

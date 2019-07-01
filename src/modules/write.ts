@@ -14,6 +14,7 @@ const CHANGE_DESCRIPTION = 'write/CHANGE_DESCRIPTION';
 const SET_PRIVACY = 'write/SET_PRIVACY';
 const CHANGE_URL_SLUG = 'write/CHANGE_URL';
 const SET_THUMBNAIL = 'write/SET_THUMBNAIL';
+const TOGGLE_EDIT_SERIES = 'write/TOGGLE_EDIT_SERIES';
 
 export const changeMarkdown = createStandardAction(CHANGE_MARKDOWN)<string>();
 export const changeTitle = createStandardAction(CHANGE_TITLE)<string>();
@@ -33,6 +34,9 @@ export const setPrivacy = createStandardAction(SET_PRIVACY)<boolean>();
 export const changeUrlSlug = createStandardAction(CHANGE_URL_SLUG)<string>();
 export const setThumbnail = createStandardAction(SET_THUMBNAIL)<
   string | null
+>();
+export const toggleEditSeries = createStandardAction(TOGGLE_EDIT_SERIES)<
+  undefined
 >();
 
 type ChangeMarkdown = ReturnType<typeof changeMarkdown>;
@@ -66,6 +70,7 @@ export type WriteState = {
   isPrivate: boolean;
   urlSlug: string;
   thumbnail: string | null;
+  editSeries: boolean;
 };
 
 const initialState: WriteState = {
@@ -81,6 +86,7 @@ const initialState: WriteState = {
   isPrivate: false,
   urlSlug: '',
   thumbnail: null,
+  editSeries: false,
 };
 
 const write = createReducer(
@@ -119,6 +125,8 @@ const write = createReducer(
       updateKey(state, 'urlSlug', urlSlug),
     [SET_THUMBNAIL]: (state, { payload: thumbnail }: SetThumbnail) =>
       updateKey(state, 'thumbnail', thumbnail),
+    [TOGGLE_EDIT_SERIES]: state =>
+      updateKey(state, 'editSeries', !state.editSeries),
   },
   initialState,
 );
