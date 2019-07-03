@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import palette from '../../lib/styles/palette';
-import useBoolean from '../../lib/hooks/useBoolean';
 import OutsideClickHandler from 'react-outside-click-handler';
 import Button from '../common/Button';
 import useInputs from '../../lib/hooks/useInputs';
@@ -25,7 +24,7 @@ const fadeOut = keyframes`
   }
 `;
 
-const PublishSeriesCreateBlock = styled.div<{ open: boolean }>`
+const PublishSeriesCreateBlock = styled.form<{ open: boolean }>`
   background: ${palette.gray2};
   padding: 1rem;
   height: 4rem;
@@ -91,10 +90,16 @@ const Buttons = styled.div`
   margin-top: 0.5rem;
 `;
 
-export interface PublishSeriesCreateProps {}
+export interface PublishSeriesCreateProps {
+  onSubmit: (form: { name: string; urlSlug: string }) => void;
+  username: string;
+}
 
-const PublishSeriesCreate: React.FC<PublishSeriesCreateProps> = props => {
-  const [open, toggleOpen, setOpen] = useBoolean(false);
+const PublishSeriesCreate: React.FC<PublishSeriesCreateProps> = ({
+  onSubmit,
+  username,
+}) => {
+  const [open, setOpen] = useState(false);
   const [showOpenBlock, setShowOpenBlock] = useState(false);
   const [disappear, setDisappear] = useState(false);
   const [form, onChange] = useInputs({
@@ -130,9 +135,17 @@ const PublishSeriesCreate: React.FC<PublishSeriesCreateProps> = props => {
     }, 125);
   };
 
+  const submit = (e: FormEvent) => {
+    e.preventDefault();
+    onSubmit({
+      name: form.name,
+      urlSlug: form.urlSlug || defaultUrlSlug,
+    });
+  };
+
   return (
     <OutsideClickHandler onOutsideClick={onHide}>
-      <PublishSeriesCreateBlock open={open}>
+      <PublishSeriesCreateBlock open={open} onSubmit={submit}>
         <Input
           placeholder="새로운 시리즈 이름을 입력하세요"
           onFocus={() => setOpen(true)}
@@ -143,7 +156,7 @@ const PublishSeriesCreate: React.FC<PublishSeriesCreateProps> = props => {
         {showOpenBlock && (
           <OpenBlock disappear={disappear}>
             <URLInput>
-              <span>/@velopert/series/</span>
+              <span>/@{username}/series/</span>
               <input
                 data-testid="urlslug-input"
                 name="urlSlug"
@@ -152,10 +165,10 @@ const PublishSeriesCreate: React.FC<PublishSeriesCreateProps> = props => {
               />
             </URLInput>
             <Buttons>
-              <Button inline color="darkGray">
+              <Button inline color="darkGray" onClick={onHide} type="button">
                 취소
               </Button>
-              <Button inline color="teal">
+              <Button inline color="teal" type="submit">
                 시리즈 추가
               </Button>
             </Buttons>
