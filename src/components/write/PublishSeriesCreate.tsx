@@ -91,7 +91,7 @@ const Buttons = styled.div`
 `;
 
 export interface PublishSeriesCreateProps {
-  onSubmit: (form: { name: string; urlSlug: string }) => void;
+  onSubmit: (form: { name: string; urlSlug: string }) => any;
   username: string;
 }
 
@@ -102,7 +102,7 @@ const PublishSeriesCreate: React.FC<PublishSeriesCreateProps> = ({
   const [open, setOpen] = useState(false);
   const [showOpenBlock, setShowOpenBlock] = useState(false);
   const [disappear, setDisappear] = useState(false);
-  const [form, onChange] = useInputs({
+  const [form, onChange, onReset] = useInputs({
     name: '',
     urlSlug: '',
   });
@@ -141,6 +141,8 @@ const PublishSeriesCreate: React.FC<PublishSeriesCreateProps> = ({
       name: form.name,
       urlSlug: form.urlSlug || defaultUrlSlug,
     });
+    onReset();
+    onHide();
   };
 
   return (

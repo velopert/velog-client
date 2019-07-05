@@ -7,6 +7,7 @@ const SelectableListBlock = styled.ul`
   list-style: none;
   margin: 0;
   background: white;
+  overflow-y: auto;
 `;
 
 const ListItem = styled.li<{ active: boolean }>`
@@ -34,25 +35,28 @@ export interface SelectableListProps {
   onChangeId: (id: any) => void;
 }
 
-const SelectableList: React.FC<SelectableListProps> = ({
-  className,
-  list,
-  selectedId,
-  onChangeId,
-}) => {
-  return (
-    <SelectableListBlock className={className}>
-      {list.map(item => (
-        <ListItem
-          active={item.id === selectedId}
-          key={item.id}
-          onClick={() => onChangeId(item.id)}
-        >
-          {item.text}
-        </ListItem>
-      ))}
-    </SelectableListBlock>
-  );
-};
+const SelectableList: React.ComponentType<
+  SelectableListProps
+> = React.forwardRef(
+  (
+    { list, selectedId, className, onChangeId }: SelectableListProps,
+    ref: React.Ref<HTMLUListElement>,
+  ) => {
+    return (
+      <SelectableListBlock className={className} ref={ref}>
+        {list.map(item => (
+          <ListItem
+            className="list-item"
+            active={item.id === selectedId}
+            key={item.id}
+            onClick={() => onChangeId(item.id)}
+          >
+            {item.text}
+          </ListItem>
+        ))}
+      </SelectableListBlock>
+    );
+  },
+);
 
 export default SelectableList;
