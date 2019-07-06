@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import PublishSeriesCreate from '../../components/write/PublishSeriesCreate';
 import useUser from '../../lib/hooks/useUser';
-import { safe } from '../../lib/utils';
+import { safe, sleep } from '../../lib/utils';
 import PublishSeriesConfigTemplate from '../../components/write/PublishSeriesConfigTemplate';
 import PublishSeriesList from './PublishSeriesList';
 import { useQuery, useMutation } from 'react-apollo-hooks';
@@ -11,12 +11,16 @@ import {
   CREATE_SERIES,
   CreateSeriesResponse,
 } from '../../lib/graphql/series';
+import PublishSeriesConfigButtons from '../../components/write/PublishSeriesConfigButtons';
+import { useDispatch } from 'react-redux';
+import { toggleEditSeries } from '../../modules/write';
 
 export interface PublishSeriesConfigProps {}
 
 const PublishSeriesConfig: React.FC<PublishSeriesConfigProps> = props => {
   const user = useUser();
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const dispatch = useDispatch();
   const seriesList = useQuery<GetSeriesListResponse>(GET_SERIES_LIST, {
     variables: {
       username: safe(() => user!.username),
@@ -62,17 +66,26 @@ const PublishSeriesConfig: React.FC<PublishSeriesConfigProps> = props => {
       },
     });
     if (!result.data) return;
-    await new Promise(resolve => setTimeout(resolve, 150));
+    await sleep(150);
     await seriesList.refetch();
     setSelectedId(result.data.createSeries.id);
     const items = document.querySelectorAll<HTMLLIElement>('.list-item');
     if (items.length === 0) return;
+    await sleep(50);
     const lastItem = items.item(items.length - 1);
     lastItem.scrollIntoView();
   };
 
+  const onCancel = () => {
+    dispatch(toggleEditSeries());
+  };
+
   return (
-    <PublishSeriesConfigTemplate>
+    <PublishSeriesConfigTemplate
+      buttons={
+        <PublishSeriesConfigButtons onConfirm={() => {}} onCancel={onCancel} />
+      }
+    >
       <PublishSeriesCreate
         onSubmit={onCreateSeries}
         username={safe(() => user!.username) || ''}

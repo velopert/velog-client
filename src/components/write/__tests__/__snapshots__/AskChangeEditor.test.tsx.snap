@@ -26,13 +26,13 @@ exports[`AskChangeEditor matches snapshot 1`] = `
           class="button-area"
         >
           <button
-            class="sc-bxivhb bPOdiC"
+            class="sc-bxivhb xGKyc"
             color="lightGray"
           >
             취소
           </button>
           <button
-            class="sc-bxivhb dpXSGu"
+            class="sc-bxivhb inlAyY"
             color="teal"
           >
             확인

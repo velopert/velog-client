@@ -3,14 +3,15 @@ import styled, { css } from 'styled-components';
 import { buttonColorMap } from '../../lib/styles/palette';
 
 type ColorType = 'teal' | 'gray' | 'darkGray' | 'lightGray';
+type ButtonSize = 'medium' | 'large';
 
-const ButtonBlock = styled.button<{ color: ColorType; inline: boolean }>`
+const ButtonBlock = styled.button<{
+  color: ColorType;
+  inline: boolean;
+  size: ButtonSize;
+}>`
   display: inline-flex;
   align-items: center;
-  height: 2rem;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   outline: none;
@@ -32,11 +33,33 @@ const ButtonBlock = styled.button<{ color: ColorType; inline: boolean }>`
         margin-left: 0.5rem;
       }
     `}
+
+  ${props =>
+    props.size === 'medium' &&
+    css`
+      height: 2rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+      font-size: 1rem;
+    `}
+
+    ${props =>
+      props.size === 'large' &&
+      css`
+        height: 2.5rem;
+        padding-left: 1.125rem;
+        padding-right: 1.125rem;
+        & + & {
+          margin-left: 0.875rem;
+        }
+        font-size: 1.125rem;
+      `}
 `;
 
-interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
+interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, 'size'> {
   color?: ColorType;
   inline?: boolean;
+  size?: ButtonSize;
 }
 
 const Button: React.SFC<ButtonProps> = ({
@@ -44,6 +67,7 @@ const Button: React.SFC<ButtonProps> = ({
   ref,
   color = 'teal',
   inline,
+  size = 'medium',
   ...rest
 }) => {
   const htmlProps = rest as any;
@@ -51,6 +75,7 @@ const Button: React.SFC<ButtonProps> = ({
     <ButtonBlock
       color={color}
       inline={inline}
+      size={size}
       {...htmlProps}
       onClick={e => {
         if (htmlProps.onClick) {

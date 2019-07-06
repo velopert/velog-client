@@ -11,11 +11,12 @@ import {
   toggleEditSeries,
 } from '../../../modules/write';
 import { MockedProvider } from 'react-apollo/test-utils';
+import renderWithProviders from '../../../lib/renderWithProviders';
 
 describe('PublishScreen', () => {
   const setup = (props: Partial<PublishScreenProps> = {}) => {
     const store = createStore(rootReducer);
-    const utils = render(
+    const utils = renderWithProviders(
       <MockedProvider>
         <Provider store={store}>
           <PublishScreen {...props} />

@@ -281,13 +281,13 @@ exports[`ActiveEditor matches snapshot 1`] = `
         class="sc-dxgOiQ jULWpa"
       >
         <button
-          class="sc-ckVGcZ bCLYWM sc-VigVT kMJEjy"
+          class="sc-ckVGcZ bCLYWM sc-VigVT cxatKW"
           color="lightGray"
         >
           임시저장
         </button>
         <button
-          class="sc-ckVGcZ bCLYWM sc-VigVT eGnsUD"
+          class="sc-ckVGcZ bCLYWM sc-VigVT fDTaJV"
           color="teal"
         >
           출간하기

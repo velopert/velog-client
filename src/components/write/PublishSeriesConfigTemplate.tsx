@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import PublishSection from './PublishSection';
 
-export interface PublishSeriesConfigTemplateProps {}
+export interface PublishSeriesConfigTemplateProps {
+  buttons: React.ReactNode;
+}
 
 const SeriesBlock = styled.div`
   display: flex;
@@ -16,10 +18,11 @@ const SeriesBlock = styled.div`
 
 const PublishSeriesConfigTemplate: React.FC<
   PublishSeriesConfigTemplateProps
-> = ({ children }) => {
+> = ({ children, buttons }) => {
   return (
     <PublishSection title="시리즈 설정">
       <SeriesBlock>{children}</SeriesBlock>
+      {buttons}
     </PublishSection>
   );
 };

@@ -25,7 +25,6 @@ const PostViewer: React.FC<PostViewerProps> = ({ username, urlSlug }) => {
       }}
     >
       {({ loading, error, data }: QueryResult<{ post: SinglePost }>) => {
-        console.log(data);
         if (error) {
           console.log(error);
           return null; // SHOW ERROR
