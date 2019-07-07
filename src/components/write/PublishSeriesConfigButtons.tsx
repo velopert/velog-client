@@ -12,18 +12,20 @@ const PublishSeriesConfigButtonsBlock = styled.div`
 export interface PublishSeriesConfigButtonsProps {
   onCancel: () => any;
   onConfirm: () => any;
+  disableConfirm: boolean;
 }
 
 const PublishSeriesConfigButtons: React.FC<PublishSeriesConfigButtonsProps> = ({
   onCancel,
   onConfirm,
+  disableConfirm,
 }) => {
   return (
     <PublishSeriesConfigButtonsBlock>
       <Button inline size="large" color="gray" onClick={onCancel}>
         취소
       </Button>
-      <Button inline size="large" onClick={onConfirm}>
+      <Button inline size="large" onClick={onConfirm} disabled={disableConfirm}>
         선택하기
       </Button>
     </PublishSeriesConfigButtonsBlock>

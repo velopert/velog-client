@@ -9,6 +9,7 @@ describe('PublishSeriesConfigButtons', () => {
     const initialProps: PublishSeriesConfigButtonsProps = {
       onCancel: () => {},
       onConfirm: () => {},
+      disableConfirm: false,
     };
     const utils = render(
       <PublishSeriesConfigButtons {...initialProps} {...props} />,
@@ -34,5 +35,13 @@ describe('PublishSeriesConfigButtons', () => {
 
     fireEvent.click(confirmButton);
     expect(onConfirm).toBeCalled();
+  });
+  it('disables confirm button', () => {
+    const { getByText } = setup({
+      disableConfirm: true,
+    });
+
+    const confirmButton = getByText('선택하기') as HTMLButtonElement;
+    expect(confirmButton.disabled).toBe(true);
   });
 });

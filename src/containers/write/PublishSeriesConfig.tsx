@@ -13,7 +13,7 @@ import {
 } from '../../lib/graphql/series';
 import PublishSeriesConfigButtons from '../../components/write/PublishSeriesConfigButtons';
 import { useDispatch } from 'react-redux';
-import { toggleEditSeries } from '../../modules/write';
+import { toggleEditSeries, selectSeries } from '../../modules/write';
 
 export interface PublishSeriesConfigProps {}
 
@@ -80,10 +80,29 @@ const PublishSeriesConfig: React.FC<PublishSeriesConfigProps> = props => {
     dispatch(toggleEditSeries());
   };
 
+  const onConfirm = () => {
+    if (!seriesList.data || !seriesList.data.seriesList) return;
+    const selectedSeries = seriesList.data.seriesList.find(
+      series => series.id === selectedId,
+    );
+    if (!selectedSeries || !selectedId) return;
+    dispatch(
+      selectSeries({
+        id: selectedId,
+        name: selectedSeries.name,
+      }),
+    );
+    dispatch(toggleEditSeries());
+  };
+
   return (
     <PublishSeriesConfigTemplate
       buttons={
-        <PublishSeriesConfigButtons onConfirm={() => {}} onCancel={onCancel} />
+        <PublishSeriesConfigButtons
+          onConfirm={onConfirm}
+          onCancel={onCancel}
+          disableConfirm={!selectedId}
+        />
       }
     >
       <PublishSeriesCreate

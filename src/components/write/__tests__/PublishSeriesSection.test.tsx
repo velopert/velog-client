@@ -8,6 +8,7 @@ describe('PublishSeriesSection', () => {
   const setup = (props: Partial<PublishSeriesSectionProps> = {}) => {
     const initialProps: PublishSeriesSectionProps = {
       onEdit: () => {},
+      selected: null,
     };
     const utils = render(<PublishSeriesSection {...initialProps} {...props} />);
     return {
@@ -19,6 +20,21 @@ describe('PublishSeriesSection', () => {
     const { getByText } = setup({ onEdit });
     const button = getByText('시리즈에 추가하기');
     fireEvent.click(button);
+    expect(onEdit).toBeCalled();
+  });
+  it('shows edit series button when selected', () => {
+    const sample = {
+      id: '03567f36-d01a-43b2-9006-006f7a9a8d8a',
+      name: 'sample series',
+    };
+    const onEdit = jest.fn();
+    const { getByText, getByTestId } = setup({
+      selected: sample,
+    });
+    getByText(sample.name);
+
+    const settingButton = getByTestId('setting-button');
+    fireEvent.click(settingButton);
     expect(onEdit).toBeCalled();
   });
 });

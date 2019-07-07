@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { buttonColorMap } from '../../lib/styles/palette';
+import palette, { buttonColorMap } from '../../lib/styles/palette';
 
 type ColorType = 'teal' | 'gray' | 'darkGray' | 'lightGray';
 type ButtonSize = 'medium' | 'large';
@@ -54,6 +54,16 @@ const ButtonBlock = styled.button<{
         }
         font-size: 1.125rem;
       `}
+
+    &:disabled {
+      cursor: not-allowed;
+      background: ${palette.gray3};
+      color: ${palette.gray5};
+      &:hover {
+        background: ${palette.gray3};
+        color: ${palette.gray5};
+      }
+    }
 `;
 
 interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, 'size'> {

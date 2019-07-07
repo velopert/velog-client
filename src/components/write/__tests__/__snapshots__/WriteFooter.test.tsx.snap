@@ -6,13 +6,13 @@ exports[`WriteFooter matches snapshot 1`] = `
     class="sc-bwzfXH cvCbtW"
   >
     <button
-      class="sc-htpNat bGXGEN sc-bdVaJa eLsWnY"
+      class="sc-htpNat bGXGEN sc-bdVaJa eMRbJu"
       color="lightGray"
     >
       임시저장
     </button>
     <button
-      class="sc-htpNat bGXGEN sc-bdVaJa jejcDj"
+      class="sc-htpNat bGXGEN sc-bdVaJa cugQIG"
       color="teal"
     >
       출간하기
