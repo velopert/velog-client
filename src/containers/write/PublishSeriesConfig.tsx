@@ -12,14 +12,20 @@ import {
   CreateSeriesResponse,
 } from '../../lib/graphql/series';
 import PublishSeriesConfigButtons from '../../components/write/PublishSeriesConfigButtons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleEditSeries, selectSeries } from '../../modules/write';
+import { RootState } from '../../modules';
 
 export interface PublishSeriesConfigProps {}
 
 const PublishSeriesConfig: React.FC<PublishSeriesConfigProps> = props => {
   const user = useUser();
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const selectedSeries = useSelector(
+    (state: RootState) => state.write.selectedSeries,
+  );
+  const [selectedId, setSelectedId] = useState<string | null>(
+    selectedSeries ? selectedSeries.id : null,
+  );
   const dispatch = useDispatch();
   const seriesList = useQuery<GetSeriesListResponse>(GET_SERIES_LIST, {
     variables: {
