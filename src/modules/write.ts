@@ -1,5 +1,6 @@
 import { createStandardAction } from 'typesafe-actions';
 import { createReducer, updateKey } from '../lib/utils';
+import { strict } from 'assert';
 
 const CHANGE_MARKDOWN = 'write/CHANGE_MARKDOWN';
 const CHANGE_TITLE = 'write/CHANGE_TITLE';
@@ -15,6 +16,7 @@ const SET_PRIVACY = 'write/SET_PRIVACY';
 const CHANGE_URL_SLUG = 'write/CHANGE_URL';
 const SET_THUMBNAIL = 'write/SET_THUMBNAIL';
 const TOGGLE_EDIT_SERIES = 'write/TOGGLE_EDIT_SERIES';
+const SELECT_SERIES = 'write/SELECT_SERIES';
 
 export const changeMarkdown = createStandardAction(CHANGE_MARKDOWN)<string>();
 export const changeTitle = createStandardAction(CHANGE_TITLE)<string>();
@@ -38,6 +40,10 @@ export const setThumbnail = createStandardAction(SET_THUMBNAIL)<
 export const toggleEditSeries = createStandardAction(TOGGLE_EDIT_SERIES)<
   undefined
 >();
+export const selectSeries = createStandardAction(SELECT_SERIES)<{
+  id: string;
+  name: string;
+}>();
 
 type ChangeMarkdown = ReturnType<typeof changeMarkdown>;
 type ChangeTitle = ReturnType<typeof changeTitle>;
@@ -51,6 +57,7 @@ type ChangeDescription = ReturnType<typeof changeDescription>;
 type SetPrivacy = ReturnType<typeof setPrivacy>;
 type ChangeUrlSlug = ReturnType<typeof changeUrlSlug>;
 type SetThumbnail = ReturnType<typeof setThumbnail>;
+type SelectSeries = ReturnType<typeof selectSeries>;
 
 export enum WriteMode {
   MARKDOWN = 'MARKDOWN',
@@ -71,6 +78,10 @@ export type WriteState = {
   urlSlug: string;
   thumbnail: string | null;
   editSeries: boolean;
+  selectedSeries: {
+    id: string;
+    name: string;
+  } | null;
 };
 
 const initialState: WriteState = {
@@ -87,6 +98,7 @@ const initialState: WriteState = {
   urlSlug: '',
   thumbnail: null,
   editSeries: false,
+  selectedSeries: null,
 };
 
 const write = createReducer(
@@ -127,6 +139,8 @@ const write = createReducer(
       updateKey(state, 'thumbnail', thumbnail),
     [TOGGLE_EDIT_SERIES]: state =>
       updateKey(state, 'editSeries', !state.editSeries),
+    [SELECT_SERIES]: (state, action: SelectSeries) =>
+      updateKey(state, 'selectedSeries', action.payload),
   },
   initialState,
 );

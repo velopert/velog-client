@@ -20,6 +20,7 @@ describe('write redux module', () => {
       urlSlug: '',
       thumbnail: null,
       editSeries: false,
+      selectedSeries: null,
     });
   });
   describe('action handlers', () => {
@@ -107,6 +108,15 @@ describe('write redux module', () => {
       expect(state.editSeries).toBe(true);
       state = reducer(state, write.toggleEditSeries());
       expect(state.editSeries).toBe(false);
+    });
+    it('SELECT_SERIES', () => {
+      let state = getInitialState();
+      const sample = {
+        id: '03567f36-d01a-43b2-9006-006f7a9a8d8a',
+        name: 'sample series',
+      };
+      state = reducer(state, write.selectSeries(sample));
+      expect(state.selectedSeries).toBe(sample);
     });
   });
 });

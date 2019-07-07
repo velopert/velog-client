@@ -6,6 +6,7 @@ export type Series = {
   name: string;
   created_at: string;
 };
+
 export const GET_SERIES_LIST = gql`
   query GetSeriesList($username: String) {
     seriesList(username: $username) {
