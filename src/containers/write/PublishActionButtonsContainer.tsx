@@ -1,81 +1,81 @@
 import React, { useCallback } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../modules';
 import PublishActionButtons from '../../components/write/PublishActionButtons';
 import { closePublish, WriteMode } from '../../modules/write';
 import { Mutation, MutationResult } from 'react-apollo';
-import { WRITE_POST, Post } from '../../lib/graphql/post';
+import { WRITE_POST, Post, WritePostResponse } from '../../lib/graphql/post';
 import { pick } from 'ramda';
-import { escapeForUrl } from '../../lib/utils';
+import { escapeForUrl, safe } from '../../lib/utils';
+import { useMutation } from 'react-apollo-hooks';
+import {
+  AppendToSeriesResponse,
+  APPEND_TO_SERIES,
+} from '../../lib/graphql/series';
 
-const mapStateToProps = ({ write }: RootState) =>
-  pick(
-    [
-      'mode',
-      'markdown',
-      'title',
-      'html',
-      'tags',
-      'defaultDescription',
-      'description',
-      'isPrivate',
-      'urlSlug',
-      'thumbnail',
-    ],
-    write,
-  );
-const mapDispatchToProps = {
-  closePublish,
-};
-
-interface OwnProps {}
-type StateProps = ReturnType<typeof mapStateToProps>;
-type DispatchProps = typeof mapDispatchToProps;
-type PublishActionButtonsContainerProps = OwnProps & StateProps & DispatchProps;
+type PublishActionButtonsContainerProps = {};
 
 const PublishActionButtonsContainer: React.FC<
   PublishActionButtonsContainerProps
-> = ({ closePublish, ...rest }) => {
-  const onCancel = useCallback(() => {
-    closePublish();
-  }, [closePublish]);
-  return (
-    <Mutation mutation={WRITE_POST}>
-      {(writePost, { data, loading, error }: MutationResult<Partial<Post>>) => {
-        return (
-          <PublishActionButtons
-            onCancel={onCancel}
-            onPublish={async () => {
-              try {
-                const response = await writePost({
-                  variables: {
-                    title: rest.title,
-                    body:
-                      rest.mode === WriteMode.MARKDOWN
-                        ? rest.markdown
-                        : rest.html,
-                    tags: rest.tags,
-                    is_markdown: rest.mode === WriteMode.MARKDOWN,
-                    is_temp: false,
-                    is_private: rest.isPrivate,
-                    url_slug: rest.urlSlug || escapeForUrl(rest.title),
-                    thumbnail: rest.thumbnail,
-                    meta: {},
-                  },
-                });
-                console.log(response);
-              } catch (e) {
-                console.log(e);
-              }
-            }}
-          />
-        );
-      }}
-    </Mutation>
+> = () => {
+  const options = useSelector((state: RootState) =>
+    pick(
+      [
+        'mode',
+        'markdown',
+        'title',
+        'html',
+        'tags',
+        'defaultDescription',
+        'description',
+        'isPrivate',
+        'urlSlug',
+        'thumbnail',
+        'selectedSeries',
+      ],
+      state.write,
+    ),
   );
+  const dispatch = useDispatch();
+
+  const onCancel = useCallback(() => {
+    dispatch(closePublish());
+  }, [dispatch]);
+
+  const writePost = useMutation<WritePostResponse>(WRITE_POST);
+  const appendToSeries = useMutation<AppendToSeriesResponse>(APPEND_TO_SERIES);
+
+  const onPublish = async () => {
+    const response = await writePost({
+      variables: {
+        title: options.title,
+        body:
+          options.mode === WriteMode.MARKDOWN ? options.markdown : options.html,
+        tags: options.tags,
+        is_markdown: options.mode === WriteMode.MARKDOWN,
+        is_temp: false,
+        is_private: options.isPrivate,
+        url_slug: options.urlSlug || escapeForUrl(options.title),
+        thumbnail: options.thumbnail,
+        meta: {},
+      },
+    });
+    if (!response.data) return;
+    const { id, user, url_slug } = response.data.writePost;
+    if (options.selectedSeries) {
+      await appendToSeries({
+        variables: {
+          series_id: options.selectedSeries.id,
+          post_id: id,
+        },
+      });
+    }
+
+    const path = `/@${user.username}/${url_slug}`;
+    console.log(path);
+  };
+
+  return <PublishActionButtons onCancel={onCancel} onPublish={onPublish} />;
 };
 
-export default connect<StateProps, DispatchProps, OwnProps, RootState>(
-  mapStateToProps,
-  mapDispatchToProps,
-)(PublishActionButtonsContainer);
+export default PublishActionButtonsContainer;

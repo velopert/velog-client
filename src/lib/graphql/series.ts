@@ -37,15 +37,12 @@ export type CreateSeriesResponse = {
   createSeries: Series;
 };
 
-/*
-query {
-  auth {
-		id
-    series_list {
-      id
-      name
-      url_slug
-    }
+export const APPEND_TO_SERIES = gql`
+  mutation AppendToSeries($series_id: ID!, $post_id: ID!) {
+    appendToSeries(series_id: $series_id, post_id: $post_id)
   }
-}
-*/
+`;
+
+export type AppendToSeriesResponse = {
+  appendToSeries: number;
+};

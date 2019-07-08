@@ -255,23 +255,25 @@ export const WRITE_POST = gql`
       meta: $meta
     ) {
       id
-      title
-      body
-      thumbnail
-      is_markdown
-      is_temp
       user {
         id
         username
-        profile {
-          thumbnail
-        }
       }
       url_slug
-      meta
     }
   }
 `;
+
+export type WritePostResponse = {
+  writePost: {
+    id: string;
+    user: {
+      id: string;
+      username: string;
+    };
+    url_slug: string;
+  };
+};
 
 export const WRITE_COMMENT = gql`
   mutation WriteComment($post_id: ID!, $text: String!, $comment_id: ID) {
