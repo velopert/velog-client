@@ -1,6 +1,5 @@
 import { createStandardAction } from 'typesafe-actions';
 import { createReducer, updateKey } from '../lib/utils';
-import { strict } from 'assert';
 
 const CHANGE_MARKDOWN = 'write/CHANGE_MARKDOWN';
 const CHANGE_TITLE = 'write/CHANGE_TITLE';

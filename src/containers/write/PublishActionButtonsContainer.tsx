@@ -3,10 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../modules';
 import PublishActionButtons from '../../components/write/PublishActionButtons';
 import { closePublish, WriteMode } from '../../modules/write';
-import { Mutation, MutationResult } from 'react-apollo';
-import { WRITE_POST, Post, WritePostResponse } from '../../lib/graphql/post';
+import { WRITE_POST, WritePostResponse } from '../../lib/graphql/post';
 import { pick } from 'ramda';
-import { escapeForUrl, safe } from '../../lib/utils';
+import { escapeForUrl } from '../../lib/utils';
 import { useMutation } from 'react-apollo-hooks';
 import {
   AppendToSeriesResponse,
