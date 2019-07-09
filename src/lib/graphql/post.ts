@@ -243,6 +243,7 @@ export const WRITE_POST = gql`
     $url_slug: String
     $thumbnail: String
     $meta: JSON
+    $series_id: ID
   ) {
     writePost(
       title: $title
@@ -253,6 +254,7 @@ export const WRITE_POST = gql`
       url_slug: $url_slug
       thumbnail: $thumbnail
       meta: $meta
+      series_id: $series_id
     ) {
       id
       user {

@@ -5,12 +5,8 @@ import PublishActionButtons from '../../components/write/PublishActionButtons';
 import { closePublish, WriteMode } from '../../modules/write';
 import { WRITE_POST, WritePostResponse } from '../../lib/graphql/post';
 import { pick } from 'ramda';
-import { escapeForUrl } from '../../lib/utils';
+import { escapeForUrl, safe } from '../../lib/utils';
 import { useMutation } from 'react-apollo-hooks';
-import {
-  AppendToSeriesResponse,
-  APPEND_TO_SERIES,
-} from '../../lib/graphql/series';
 
 type PublishActionButtonsContainerProps = {};
 
@@ -42,7 +38,6 @@ const PublishActionButtonsContainer: React.FC<
   }, [dispatch]);
 
   const writePost = useMutation<WritePostResponse>(WRITE_POST);
-  const appendToSeries = useMutation<AppendToSeriesResponse>(APPEND_TO_SERIES);
 
   const onPublish = async () => {
     const response = await writePost({
@@ -57,18 +52,11 @@ const PublishActionButtonsContainer: React.FC<
         url_slug: options.urlSlug || escapeForUrl(options.title),
         thumbnail: options.thumbnail,
         meta: {},
+        series_id: safe(() => options.selectedSeries!.id),
       },
     });
     if (!response.data) return;
-    const { id, user, url_slug } = response.data.writePost;
-    if (options.selectedSeries) {
-      await appendToSeries({
-        variables: {
-          series_id: options.selectedSeries.id,
-          post_id: id,
-        },
-      });
-    }
+    const { user, url_slug } = response.data.writePost;
 
     const path = `/@${user.username}/${url_slug}`;
     console.log(path);

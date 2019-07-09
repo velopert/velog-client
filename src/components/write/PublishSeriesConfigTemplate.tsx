@@ -6,10 +6,21 @@ export interface PublishSeriesConfigTemplateProps {
   buttons: React.ReactNode;
 }
 
+const StyledPublishSection = styled(PublishSection)`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  .contents {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+`;
+
 const SeriesBlock = styled.div`
   display: flex;
   width: 100%;
-  height: 329px;
+  flex: 1;
   flex-direction: column;
   border-radius: 2px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.03);
@@ -20,10 +31,10 @@ const PublishSeriesConfigTemplate: React.FC<
   PublishSeriesConfigTemplateProps
 > = ({ children, buttons }) => {
   return (
-    <PublishSection title="시리즈 설정">
+    <StyledPublishSection title="시리즈 설정">
       <SeriesBlock>{children}</SeriesBlock>
       {buttons}
-    </PublishSection>
+    </StyledPublishSection>
   );
 };
 
