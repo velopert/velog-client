@@ -8,3 +8,4 @@ export { ReactComponent as AddListIcon } from './icon-add-list.svg';
 export { ReactComponent as ImageVector } from './vector-image.svg';
 export { ReactComponent as MinusBoxIcon } from './icon-minus-box.svg';
 export { ReactComponent as PlusBoxIcon } from './icon-plus-box.svg';
+export { ReactComponent as SeriesImage } from './image-series.svg';

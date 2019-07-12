@@ -4,6 +4,8 @@ import VelogResponsive from '../velog/VelogResponsive';
 import palette from '../../lib/styles/palette';
 import { formatDate } from '../../lib/utils';
 import PostTags from './PostTags';
+import { SeriesPost } from '../../lib/graphql/post';
+import PostSeriesInfo from './PostSeriesInfo';
 
 const PostHeadBlock = styled(VelogResponsive)`
   margin-top: 5.5rem;
@@ -51,6 +53,12 @@ export interface PostHeadProps {
   date: string;
   thumbnail: string | null;
   hideThumbnail: boolean;
+  series: {
+    id: string;
+    name: string;
+    series_posts: SeriesPost[];
+  } | null;
+  postId: string;
 }
 
 const PostHead: React.FC<PostHeadProps> = ({
@@ -60,6 +68,8 @@ const PostHead: React.FC<PostHeadProps> = ({
   tags,
   hideThumbnail,
   thumbnail,
+  series,
+  postId,
 }) => {
   return (
     <PostHeadBlock>
@@ -70,6 +80,13 @@ const PostHead: React.FC<PostHeadProps> = ({
         <span>{formatDate(date)}</span>
       </SubInfo>
       <PostTags tags={tags} />
+      {series && (
+        <PostSeriesInfo
+          name={series.name}
+          posts={series.series_posts.map(sp => sp.post)}
+          postId={postId}
+        />
+      )}
       {!hideThumbnail && thumbnail && (
         <Thumbnail src={thumbnail} alt="post-thumbnail" />
       )}

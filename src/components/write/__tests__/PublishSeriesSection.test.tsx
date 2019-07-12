@@ -30,6 +30,7 @@ describe('PublishSeriesSection', () => {
     const onEdit = jest.fn();
     const { getByText, getByTestId } = setup({
       selected: sample,
+      onEdit,
     });
     getByText(sample.name);
 

@@ -56,10 +56,9 @@ const PublishActionButtonsContainer: React.FC<
       },
     });
     if (!response.data) return;
-    const { user, url_slug } = response.data.writePost;
+    // const { user, url_slug } = response.data.writePost;
 
-    const path = `/@${user.username}/${url_slug}`;
-    console.log(path);
+    // const path = `/@${user.username}/${url_slug}`;
   };
 
   return <PublishActionButtons onCancel={onCancel} onPublish={onPublish} />;
