@@ -1,12 +1,15 @@
 import * as React from 'react';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import PostSeriesInfo, { PostSeriesInfoProps } from '../PostSeriesInfo';
+import { MemoryRouter } from 'react-router';
+import PostViewerProvider from '../PostViewerProvider';
 
 describe('PostSeriesInfo', () => {
   const setup = (props: Partial<PostSeriesInfoProps> = {}) => {
     const initialProps: PostSeriesInfoProps = {
       name: 'Sample Series Name',
       postId: 'af5b4530-b350-11e8-9696-f1fffe8a36f1',
+      username: 'velopert',
       posts: [
         {
           id: 'af5b4530-b350-11e8-9696-f1fffe8a36f1',
@@ -84,7 +87,13 @@ describe('PostSeriesInfo', () => {
         },
       ],
     };
-    const utils = render(<PostSeriesInfo {...initialProps} {...props} />);
+    const utils = render(
+      <MemoryRouter>
+        <PostViewerProvider>
+          <PostSeriesInfo {...initialProps} {...props} />
+        </PostViewerProvider>
+      </MemoryRouter>,
+    );
     return {
       ...utils,
     };
@@ -95,5 +104,12 @@ describe('PostSeriesInfo', () => {
     getByText('Sample Series Name');
     // series-number
     getByText('1 / 8');
+  });
+  it('opens series list', () => {
+    const { getByText } = setup();
+    const fold = getByText('목록 보기');
+    fireEvent.click(fold);
+    getByText('숨기기');
+    getByText('MobX (1) 시작하기');
   });
 });

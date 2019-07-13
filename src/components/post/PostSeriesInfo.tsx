@@ -1,7 +1,14 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { SeriesImage } from '../../static/svg';
+import { MdArrowDropDown, MdArrowDropUp } from 'react-icons/md';
+import useBoolean from '../../lib/hooks/useBoolean';
+import { Link } from 'react-router-dom';
+import {
+  usePostViewerState,
+  usePostViewerDispatch,
+} from './PostViewerProvider';
 
 const PostSeriesInfoBlock = styled.div`
   margin-top: 2rem;
@@ -30,12 +37,58 @@ const Right = styled.div`
   }
 `;
 
-const Fold = styled.div``;
+const Fold = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: -5px;
+  color: ${palette.gray7};
+  line-height: 1;
+  cursor: pointer;
+  svg {
+    margin-right: 0.25rem;
+    color: ${palette.gray8};
+    font-size: 1.5rem;
+  }
+  &:hover {
+    color: ${palette.gray9};
+    svg {
+      color: ${palette.gray9};
+    }
+  }
+`;
 
 const Footer = styled.div`
   margin-top: 3rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+`;
+
+const PostList = styled.ol`
+  padding-left: 0;
+  line-height: 1.8;
+  font-size: 1rem;
+  font-family: 'Spoqa Han Sans';
+  color: ${palette.gray7};
+  counter-reset: item;
+  li {
+    display: block;
+  }
+  li:before {
+    content: counter(item) '. ';
+    counter-increment: item;
+    color: ${palette.gray5};
+    font-style: italic;
+    margin-right: 0.25rem;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+    &:hover {
+      color: ${palette.gray9};
+      text-decoration: underline;
+    }
+  }
 `;
 
 export interface PostSeriesInfoProps {
@@ -50,23 +103,64 @@ export interface PostSeriesInfoProps {
     };
   }[];
   postId: string;
+  username: string;
 }
 
 const PostSeriesInfo: React.FC<PostSeriesInfoProps> = ({
   name,
   posts,
   postId,
+  username,
 }) => {
   const currentIndex = useMemo(
     () => posts.findIndex(post => post.id === postId),
     [postId, posts],
   );
+  const [open, toggle, setValue] = useBoolean(false);
+
+  // remember open state
+  const dispatch = usePostViewerDispatch();
+  const state = usePostViewerState();
+
+  useEffect(() => {
+    dispatch({
+      type: 'SET_SERIES_OPEN',
+      payload: open,
+    });
+  }, [dispatch, open]);
+
+  useEffect(() => {
+    setValue(state.seriesOpen);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <PostSeriesInfoBlock>
       <h2>{name}</h2>
       <SeriesImage className="series-corner-image" />
+      {open && (
+        <PostList>
+          {posts.map(post => (
+            <li key={post.id}>
+              <Link to={`/@${username}/${post.url_slug}`}>{post.title}</Link>
+            </li>
+          ))}
+        </PostList>
+      )}
       <Footer>
-        <Fold>목록 보기</Fold>
+        <Fold onClick={toggle}>
+          {open ? (
+            <>
+              <MdArrowDropUp />
+              숨기기
+            </>
+          ) : (
+            <>
+              <MdArrowDropDown />
+              목록 보기
+            </>
+          )}
+        </Fold>
         <Right>
           <div className="series-number">
             {currentIndex + 1} / {posts.length}

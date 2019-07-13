@@ -85,6 +85,7 @@ const PostHead: React.FC<PostHeadProps> = ({
           name={series.name}
           posts={series.series_posts.map(sp => sp.post)}
           postId={postId}
+          username={username}
         />
       )}
       {!hideThumbnail && thumbnail && (
