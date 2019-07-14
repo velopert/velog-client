@@ -71,8 +71,8 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
   const onChangeTextBody = (textBody: string) => setTextBody(textBody);
 
   const onPublish = useCallback(() => {
-    window.document.body.style.overflowX = 'hidden';
-    window.document.body.style.overflowY = 'hidden';
+    // window.document.body.style.overflowX = 'hidden';
+    // window.document.body.style.overflowY = 'hidden';
     openPublish();
     setDefaultDescription(textBody.replace(/\n/g, '').slice(0, 150));
   }, [openPublish, setDefaultDescription, textBody]);

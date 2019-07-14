@@ -65,6 +65,12 @@ const OpaqueLayer: React.SFC<OpaqueLayerProps> = ({ visible }) => {
     };
   }, [visible]);
 
+  useEffect(() => {
+    return () => {
+      document.body.style.overflowY = 'initial';
+    };
+  }, []);
+
   if (!animate && !visible && closed) return null;
 
   return <OpaqueLayerBlock animate={animate} visible={visible} />;

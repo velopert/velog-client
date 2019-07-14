@@ -10,7 +10,11 @@ const { useLayoutEffect } = React;
  */
 const HideScroll: React.FC<HideScrollProps> = props => {
   useLayoutEffect(() => {
-    const prevStyles = getComputedStyle(window.document.body);
+    const { overflowX, overflowY } = getComputedStyle(window.document.body);
+    const prevStyles = {
+      overflowX,
+      overflowY,
+    };
     window.document.body.style.overflowX = 'hidden';
     window.document.body.style.overflowY = 'hidden';
     return () => {
