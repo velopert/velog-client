@@ -2,9 +2,14 @@ import React, { useMemo, useEffect } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { SeriesImage } from '../../static/svg';
-import { MdArrowDropDown, MdArrowDropUp } from 'react-icons/md';
+import {
+  MdArrowDropDown,
+  MdArrowDropUp,
+  MdChevronLeft,
+  MdChevronRight,
+} from 'react-icons/md';
 import useBoolean from '../../lib/hooks/useBoolean';
-import { Link } from 'react-router-dom';
+import { NavLink, withRouter, RouteComponentProps } from 'react-router-dom';
 import {
   usePostViewerState,
   usePostViewerDispatch,
@@ -33,7 +38,11 @@ const PostSeriesInfoBlock = styled.div`
 `;
 
 const Right = styled.div`
+  display: flex;
+  align-items: center;
   .series-number {
+    font-size: 0.875rem;
+    color: ${palette.gray5};
   }
 `;
 
@@ -64,6 +73,42 @@ const Footer = styled.div`
   align-items: center;
 `;
 
+const NavigateButtonGroup = styled.div`
+  display: flex;
+  margin-left: 1.125rem;
+`;
+
+const NavigateButton = styled.button`
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: ${palette.teal6};
+  background: white;
+  border: 1px solid ${palette.gray1};
+  padding: 0;
+  cursor: pointer;
+  &:hover {
+    background: ${palette.teal6};
+    color: white;
+  }
+
+  & + & {
+    margin-left: 0.375rem;
+  }
+
+  &:disabled {
+    cursor: default;
+    background: ${palette.gray1};
+    border: 1px solid ${palette.gray2};
+    color: ${palette.gray4};
+  }
+`;
+
 const PostList = styled.ol`
   padding-left: 0;
   line-height: 1.8;
@@ -91,7 +136,7 @@ const PostList = styled.ol`
   }
 `;
 
-export interface PostSeriesInfoProps {
+export interface PostSeriesInfoProps extends RouteComponentProps {
   name: string;
   posts: {
     id: string;
@@ -111,6 +156,7 @@ const PostSeriesInfo: React.FC<PostSeriesInfoProps> = ({
   posts,
   postId,
   username,
+  history,
 }) => {
   const currentIndex = useMemo(
     () => posts.findIndex(post => post.id === postId),
@@ -134,6 +180,18 @@ const PostSeriesInfo: React.FC<PostSeriesInfoProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const navigatePrev = () => {
+    const prevPost = posts[posts.findIndex(post => post.id === postId) - 1];
+    if (!prevPost) return;
+    history.push(`/@${username}/${prevPost.url_slug}`);
+  };
+
+  const navigateNext = () => {
+    const nextPos = posts[posts.findIndex(post => post.id === postId) + 1];
+    if (!nextPos) return;
+    history.push(`/@${username}/${nextPos.url_slug}`);
+  };
+
   return (
     <PostSeriesInfoBlock>
       <h2>{name}</h2>
@@ -142,7 +200,12 @@ const PostSeriesInfo: React.FC<PostSeriesInfoProps> = ({
         <PostList>
           {posts.map(post => (
             <li key={post.id}>
-              <Link to={`/@${username}/${post.url_slug}`}>{post.title}</Link>
+              <NavLink
+                to={`/@${username}/${post.url_slug}`}
+                activeStyle={{ color: palette.teal6, fontWeight: 'bold' }}
+              >
+                {post.title}
+              </NavLink>
             </li>
           ))}
         </PostList>
@@ -163,12 +226,26 @@ const PostSeriesInfo: React.FC<PostSeriesInfoProps> = ({
         </Fold>
         <Right>
           <div className="series-number">
-            {currentIndex + 1} / {posts.length}
+            {currentIndex + 1}/{posts.length}
           </div>
+          <NavigateButtonGroup>
+            <NavigateButton
+              disabled={currentIndex === 0}
+              onClick={navigatePrev}
+            >
+              <MdChevronLeft />
+            </NavigateButton>
+            <NavigateButton
+              disabled={currentIndex === posts.length - 1}
+              onClick={navigateNext}
+            >
+              <MdChevronRight />
+            </NavigateButton>
+          </NavigateButtonGroup>
         </Right>
       </Footer>
     </PostSeriesInfoBlock>
   );
 };
 
-export default PostSeriesInfo;
+export default withRouter(PostSeriesInfo);

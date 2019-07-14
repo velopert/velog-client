@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { render, fireEvent } from 'react-testing-library';
 import PostSeriesInfo, { PostSeriesInfoProps } from '../PostSeriesInfo';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter, RouteComponentProps } from 'react-router';
 import PostViewerProvider from '../PostViewerProvider';
 
 describe('PostSeriesInfo', () => {
   const setup = (props: Partial<PostSeriesInfoProps> = {}) => {
-    const initialProps: PostSeriesInfoProps = {
+    const initialProps: Omit<PostSeriesInfoProps, keyof RouteComponentProps> = {
       name: 'Sample Series Name',
       postId: 'af5b4530-b350-11e8-9696-f1fffe8a36f1',
       username: 'velopert',

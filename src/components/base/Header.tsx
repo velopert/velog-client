@@ -34,6 +34,7 @@ const HeaderBlock = styled.div<{
   ${props =>
     props.floating &&
     css`
+      z-index: 10;
       position: fixed;
       top: 0;
       background: rgba(255, 255, 255, 0.9);
