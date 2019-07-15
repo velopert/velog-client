@@ -25,13 +25,35 @@ const SubInfo = styled.div`
   font-size: 1rem;
   color: ${palette.gray7};
   font-family: 'Spoqa Han Sans';
-  .username {
-    color: ${palette.gray8};
-    font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  .information {
+    .username {
+      color: ${palette.gray8};
+      font-weight: bold;
+    }
+    .separator {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
   }
-  .separator {
+`;
+
+const EditRemoveGroup = styled.div`
+  button {
+    padding: 0;
+    outline: none;
+    border: none;
+    background: none;
+    font-size: inherit;
+    cursor: pointer;
+    color: ${palette.gray6};
+    &:hover {
+      color: ${palette.gray9};
+    }
+  }
+  button + button {
     margin-left: 0.5rem;
-    margin-right: 0.5rem;
   }
 `;
 
@@ -59,6 +81,7 @@ export interface PostHeadProps {
     series_posts: SeriesPost[];
   } | null;
   postId: string;
+  ownPost: boolean;
 }
 
 const PostHead: React.FC<PostHeadProps> = ({
@@ -70,14 +93,23 @@ const PostHead: React.FC<PostHeadProps> = ({
   thumbnail,
   series,
   postId,
+  ownPost,
 }) => {
   return (
     <PostHeadBlock>
       <h1>{title}</h1>
       <SubInfo>
-        <span className="username">{username}</span>
-        <span className="separator">&middot;</span>
-        <span>{formatDate(date)}</span>
+        <div className="information">
+          <span className="username">{username}</span>
+          <span className="separator">&middot;</span>
+          <span>{formatDate(date)}</span>
+        </div>
+        {ownPost && (
+          <EditRemoveGroup>
+            <button>수정</button>
+            <button>삭제</button>
+          </EditRemoveGroup>
+        )}
       </SubInfo>
       <PostTags tags={tags} />
       {series && (

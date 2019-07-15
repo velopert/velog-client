@@ -8,6 +8,7 @@ import PostComments from './PostComments';
 import { RootState } from '../../modules';
 import { postActions } from '../../modules/post';
 import PostViewerProvider from '../../components/post/PostViewerProvider';
+import { useUserId } from '../../lib/hooks/useUser';
 
 export interface PostViewerProps {
   username: string;
@@ -16,6 +17,7 @@ export interface PostViewerProps {
 
 const PostViewer: React.FC<PostViewerProps> = ({ username, urlSlug }) => {
   const postId = useSelector((state: RootState) => state.post.id);
+  const userId = useUserId();
   const dispatch = useDispatch();
   return (
     <PostViewerProvider>
@@ -51,6 +53,7 @@ const PostViewer: React.FC<PostViewerProps> = ({ username, urlSlug }) => {
                   !!post.thumbnail && post.body.includes(post.thumbnail)
                 }
                 postId={post.id}
+                ownPost={post.user.id === userId}
               />
               <PostContent isMarkdown={post.is_markdown} body={post.body} />
               <PostComments
