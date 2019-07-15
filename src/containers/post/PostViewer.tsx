@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Query, QueryResult } from 'react-apollo';
-import { READ_POST, SinglePost } from '../../lib/graphql/post';
+import { READ_POST, SinglePost, REMOVE_POST } from '../../lib/graphql/post';
 import PostHead from '../../components/post/PostHead';
 import PostContent from '../../components/post/PostContent';
 import PostComments from './PostComments';
@@ -15,7 +15,7 @@ import { RootState } from '../../modules';
 import { postActions } from '../../modules/post';
 import PostViewerProvider from '../../components/post/PostViewerProvider';
 import { useUserId } from '../../lib/hooks/useUser';
-import { useQuery } from 'react-apollo-hooks';
+import { useQuery, useMutation } from 'react-apollo-hooks';
 
 export interface PostViewerProps {
   username: string;
@@ -23,7 +23,6 @@ export interface PostViewerProps {
 }
 
 const PostViewer: React.FC<PostViewerProps> = ({ username, urlSlug }) => {
-  const postId = useSelector((state: RootState) => state.post.id);
   const userId = useUserId();
   const dispatch = useDispatch();
   const readPost = useQuery<{ post: SinglePost }>(READ_POST, {
@@ -32,6 +31,7 @@ const PostViewer: React.FC<PostViewerProps> = ({ username, urlSlug }) => {
       url_slug: urlSlug,
     },
   });
+  const removePost = useMutation(REMOVE_POST);
 
   const { loading, error, data } = readPost;
 
@@ -40,6 +40,15 @@ const PostViewer: React.FC<PostViewerProps> = ({ username, urlSlug }) => {
     if (!data.post) return;
     dispatch(postActions.setPostId(data.post.id));
   }, [data, dispatch]);
+
+  const onRemove = () => {
+    if (!data || !data.post) return;
+    removePost({
+      variables: {
+        id: data.post.id,
+      },
+    });
+  };
 
   if (error) {
     console.log(error);
@@ -63,6 +72,7 @@ const PostViewer: React.FC<PostViewerProps> = ({ username, urlSlug }) => {
         hideThumbnail={!!post.thumbnail && post.body.includes(post.thumbnail)}
         postId={post.id}
         ownPost={post.user.id === userId}
+        onRemove={onRemove}
       />
       <PostContent isMarkdown={post.is_markdown} body={post.body} />
       <PostComments

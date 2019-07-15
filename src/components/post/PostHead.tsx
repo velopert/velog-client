@@ -82,6 +82,7 @@ export interface PostHeadProps {
   } | null;
   postId: string;
   ownPost: boolean;
+  onRemove: () => any;
 }
 
 const PostHead: React.FC<PostHeadProps> = ({
@@ -94,6 +95,7 @@ const PostHead: React.FC<PostHeadProps> = ({
   series,
   postId,
   ownPost,
+  onRemove,
 }) => {
   return (
     <PostHeadBlock>
