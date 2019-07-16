@@ -6,4 +6,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache().restore((window as any).__APOLLO_STATE__),
 });
 
+(window as any).client = client;
+
 export default client;
