@@ -6,6 +6,8 @@ import { formatDate } from '../../lib/utils';
 import PostTags from './PostTags';
 import { SeriesPost } from '../../lib/graphql/post';
 import PostSeriesInfo from './PostSeriesInfo';
+import useToggle from '../../lib/hooks/useToggle';
+import PopupOKCancel from '../common/PopupOKCancel';
 
 const PostHeadBlock = styled(VelogResponsive)`
   margin-top: 5.5rem;
@@ -97,6 +99,12 @@ const PostHead: React.FC<PostHeadProps> = ({
   ownPost,
   onRemove,
 }) => {
+  const [askRemove, toggleAskRemove] = useToggle(false);
+
+  const onConfirmRemove = () => {
+    toggleAskRemove();
+    onRemove();
+  };
   return (
     <PostHeadBlock>
       <h1>{title}</h1>
@@ -109,7 +117,7 @@ const PostHead: React.FC<PostHeadProps> = ({
         {ownPost && (
           <EditRemoveGroup>
             <button>수정</button>
-            <button>삭제</button>
+            <button onClick={toggleAskRemove}>삭제</button>
           </EditRemoveGroup>
         )}
       </SubInfo>
@@ -125,6 +133,14 @@ const PostHead: React.FC<PostHeadProps> = ({
       {!hideThumbnail && thumbnail && (
         <Thumbnail src={thumbnail} alt="post-thumbnail" />
       )}
+      <PopupOKCancel
+        visible={askRemove}
+        title="포스트 삭제"
+        onCancel={toggleAskRemove}
+        onConfirm={onConfirmRemove}
+      >
+        정말로 삭제하시겠습니까?
+      </PopupOKCancel>
     </PostHeadBlock>
   );
 };

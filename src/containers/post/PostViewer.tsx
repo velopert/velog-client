@@ -1,28 +1,25 @@
-import React, {
-  createContext,
-  useReducer,
-  Dispatch,
-  useContext,
-  useEffect,
-} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Query, QueryResult } from 'react-apollo';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { READ_POST, SinglePost, REMOVE_POST } from '../../lib/graphql/post';
 import PostHead from '../../components/post/PostHead';
 import PostContent from '../../components/post/PostContent';
 import PostComments from './PostComments';
-import { RootState } from '../../modules';
 import { postActions } from '../../modules/post';
 import PostViewerProvider from '../../components/post/PostViewerProvider';
 import { useUserId } from '../../lib/hooks/useUser';
 import { useQuery, useMutation } from 'react-apollo-hooks';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-export interface PostViewerProps {
+export interface PostViewerProps extends RouteComponentProps {
   username: string;
   urlSlug: string;
 }
 
-const PostViewer: React.FC<PostViewerProps> = ({ username, urlSlug }) => {
+const PostViewer: React.FC<PostViewerProps> = ({
+  username,
+  urlSlug,
+  history,
+}) => {
   const userId = useUserId();
   const dispatch = useDispatch();
   const readPost = useQuery<{ post: SinglePost }>(READ_POST, {
@@ -41,13 +38,16 @@ const PostViewer: React.FC<PostViewerProps> = ({ username, urlSlug }) => {
     dispatch(postActions.setPostId(data.post.id));
   }, [data, dispatch]);
 
-  const onRemove = () => {
+  const onRemove = async () => {
     if (!data || !data.post) return;
-    removePost({
-      variables: {
-        id: data.post.id,
-      },
-    });
+    try {
+      const result = await removePost({
+        variables: {
+          id: data.post.id,
+        },
+      });
+      history.push('/');
+    } catch (e) {}
   };
 
   if (error) {
@@ -84,4 +84,4 @@ const PostViewer: React.FC<PostViewerProps> = ({ username, urlSlug }) => {
   );
 };
 
-export default PostViewer;
+export default withRouter(PostViewer);

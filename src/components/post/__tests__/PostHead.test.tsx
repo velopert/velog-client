@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import PostHead, { PostHeadProps } from '../PostHead';
 import { MemoryRouter } from 'react-router';
 
@@ -16,6 +16,7 @@ describe('PostHead', () => {
       ownPost: false,
       series: null,
       postId: '7ae82a11-f56a-4332-aaef-2202c80d9fdd',
+      onRemove: () => {},
     };
     const utils = render(
       <MemoryRouter>
@@ -71,5 +72,27 @@ describe('PostHead', () => {
       ownPost: true,
     });
     getByText('삭제');
+  });
+
+  it('opens askRemove modal', () => {
+    const { getByText } = setup({
+      ownPost: true,
+    });
+    const removeButton = getByText('삭제');
+    fireEvent.click(removeButton);
+    getByText('정말로 삭제하시겠습니까?');
+  });
+
+  it('calls onRemove', () => {
+    const onRemove = jest.fn();
+    const { getByText } = setup({
+      ownPost: true,
+      onRemove,
+    });
+    const removeButton = getByText('삭제');
+    fireEvent.click(removeButton);
+    const confirm = getByText('확인');
+    fireEvent.click(confirm);
+    expect(onRemove).toBeCalled();
   });
 });

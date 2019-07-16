@@ -20,6 +20,7 @@ const PopupOKCancelBlock = styled.div`
     margin-bottom: 1rem;
   }
   .button-area {
+    margin-top: 2rem;
     display: flex;
     justify-content: flex-end;
     button + button {
