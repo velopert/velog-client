@@ -49,9 +49,27 @@ const PostViewer: React.FC<PostViewerProps> = ({
           id: data.post.id,
         },
       });
-      // TEMP FIX
-      const cache = (client.cache as any).data as NormalizedCache;
-      cache.delete(`Post:${data.post.id}`);
+
+      client.resetStore();
+
+      // UPDATE posts
+      // const recentPosts = client.readQuery<{ posts: PartialPost[] }>({
+      //   query: GET_POST_LIST,
+      // });
+      // if (recentPosts) {
+      //   console.log('writing...');
+      //   const nextPosts = recentPosts.posts.filter(
+      //     post => post.id !== data.post.id,
+      //   );
+      //   console.log(nextPosts);
+      //   client.writeQuery<{ posts: PartialPost[] }>({
+      //     query: GET_POST_LIST,
+      //     data: {
+      //       posts: nextPosts,
+      //     },
+      //   });
+      // }
+
       history.push('/');
     } catch (e) {}
   };
