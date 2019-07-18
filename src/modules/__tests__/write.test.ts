@@ -118,5 +118,15 @@ describe('write redux module', () => {
       state = reducer(state, write.selectSeries(sample));
       expect(state.selectedSeries).toBe(sample);
     });
+    it('CLEAR_EDITOR', () => {
+      let state = getInitialState();
+      state = {
+        ...state,
+        title: 'blabla',
+      };
+      expect(state.title).toBe('blabla');
+      state = reducer(state, write.clearEditor());
+      expect(state.title).toBe('');
+    });
   });
 });

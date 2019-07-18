@@ -1,21 +1,22 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../modules';
-import { WriteMode } from '../../modules/write';
+import { WriteMode, clearEditor } from '../../modules/write';
 import EditorPanesContainer from './EditorPanesContainer';
 import QuillEditorContainer from './QuillEditorContainer';
 
-interface OwnProps {}
-type StateProps = ReturnType<typeof mapStateToProps>;
-type DispatchProps = typeof mapDispatchToProps;
-export type ActiveEditorProps = OwnProps & StateProps & DispatchProps;
+type ActiveEditorProps = {};
 
-const mapStateToProps = ({ write }: RootState) => ({
-  mode: write.mode,
-});
-const mapDispatchToProps = {};
+const ActiveEditor: React.FC<ActiveEditorProps> = () => {
+  const mode = useSelector((state: RootState) => state.write.mode);
+  const dispatch = useDispatch();
 
-const ActiveEditor: React.FC<ActiveEditorProps> = ({ mode }) => {
+  React.useEffect(() => {
+    return () => {
+      dispatch(clearEditor());
+    };
+  }, [dispatch]);
+
   return mode === WriteMode.MARKDOWN ? (
     <>
       <EditorPanesContainer />
@@ -25,7 +26,4 @@ const ActiveEditor: React.FC<ActiveEditorProps> = ({ mode }) => {
   );
 };
 
-export default connect<StateProps, DispatchProps, OwnProps, RootState>(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ActiveEditor);
+export default ActiveEditor;

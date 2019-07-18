@@ -16,6 +16,7 @@ const CHANGE_URL_SLUG = 'write/CHANGE_URL';
 const SET_THUMBNAIL = 'write/SET_THUMBNAIL';
 const TOGGLE_EDIT_SERIES = 'write/TOGGLE_EDIT_SERIES';
 const SELECT_SERIES = 'write/SELECT_SERIES';
+const CLEAR_EDITOR = 'write/CLEAR_EDTIOR';
 
 export const changeMarkdown = createStandardAction(CHANGE_MARKDOWN)<string>();
 export const changeTitle = createStandardAction(CHANGE_TITLE)<string>();
@@ -43,6 +44,7 @@ export const selectSeries = createStandardAction(SELECT_SERIES)<{
   id: string;
   name: string;
 }>();
+export const clearEditor = createStandardAction(CLEAR_EDITOR)<undefined>();
 
 type ChangeMarkdown = ReturnType<typeof changeMarkdown>;
 type ChangeTitle = ReturnType<typeof changeTitle>;
@@ -57,6 +59,7 @@ type SetPrivacy = ReturnType<typeof setPrivacy>;
 type ChangeUrlSlug = ReturnType<typeof changeUrlSlug>;
 type SetThumbnail = ReturnType<typeof setThumbnail>;
 type SelectSeries = ReturnType<typeof selectSeries>;
+type ClearEditor = ReturnType<typeof clearEditor>;
 
 export enum WriteMode {
   MARKDOWN = 'MARKDOWN',
@@ -140,6 +143,7 @@ const write = createReducer(
       updateKey(state, 'editSeries', !state.editSeries),
     [SELECT_SERIES]: (state, action: SelectSeries) =>
       updateKey(state, 'selectedSeries', action.payload),
+    [CLEAR_EDITOR]: () => initialState,
   },
   initialState,
 );
