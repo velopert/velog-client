@@ -1,19 +1,14 @@
 import React, { useCallback } from 'react';
 import PostCardList from '../../components/common/PostCardList';
 import { GET_POST_LIST, PartialPost } from '../../lib/graphql/post';
-import { useQuery, useApolloClient } from 'react-apollo-hooks';
+import { useQuery } from 'react-apollo-hooks';
 import PaginateWithScroll from '../../components/common/PaginateWithScroll';
 
 interface RecentPostsProps {}
 
 const RecentPosts: React.SFC<RecentPostsProps> = props => {
   const getPostList = useQuery<{ posts: PartialPost[] }>(GET_POST_LIST);
-  const client = useApolloClient();
 
-  (window as any).utils = {
-    client,
-    GET_POST_LIST,
-  };
   const { data } = getPostList;
   const onLoadMore = useCallback(
     (cursor: string) => {
