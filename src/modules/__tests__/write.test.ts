@@ -21,6 +21,7 @@ describe('write redux module', () => {
       thumbnail: null,
       editSeries: false,
       selectedSeries: null,
+      postId: null,
     });
   });
   describe('action handlers', () => {
@@ -127,6 +128,29 @@ describe('write redux module', () => {
       expect(state.title).toBe('blabla');
       state = reducer(state, write.clearEditor());
       expect(state.title).toBe('');
+    });
+    it('PREPARE_EDIT', () => {
+      let state = getInitialState();
+      state = reducer(
+        state,
+        write.prepareEdit({
+          id: '12345',
+          body: '# This is markdown\nHello World',
+          description: 'This is markdown',
+          isMarkdown: true,
+          isPrivate: false,
+          series: {
+            name: 'sample-series',
+            id: '12345',
+          },
+          tags: ['tag1', ' ㅅㅁㅎ2'],
+          title: 'title',
+          urlSlug: 'sample-url-slug',
+        }),
+      );
+      expect(state.mode).toBe(write.WriteMode.MARKDOWN);
+      expect(state.postId).toBe('12345');
+      expect(state.title).toBe('title');
     });
   });
 });

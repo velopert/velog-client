@@ -9,7 +9,6 @@ import PostViewerProvider from '../../components/post/PostViewerProvider';
 import { useUserId } from '../../lib/hooks/useUser';
 import { useQuery, useMutation, useApolloClient } from 'react-apollo-hooks';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { NormalizedCache } from 'apollo-boost';
 
 export interface PostViewerProps extends RouteComponentProps {
   username: string;
@@ -44,32 +43,12 @@ const PostViewer: React.FC<PostViewerProps> = ({
   const onRemove = async () => {
     if (!data || !data.post) return;
     try {
-      const result = await removePost({
+      await removePost({
         variables: {
           id: data.post.id,
         },
       });
-
       client.resetStore();
-
-      // UPDATE posts
-      // const recentPosts = client.readQuery<{ posts: PartialPost[] }>({
-      //   query: GET_POST_LIST,
-      // });
-      // if (recentPosts) {
-      //   console.log('writing...');
-      //   const nextPosts = recentPosts.posts.filter(
-      //     post => post.id !== data.post.id,
-      //   );
-      //   console.log(nextPosts);
-      //   client.writeQuery<{ posts: PartialPost[] }>({
-      //     query: GET_POST_LIST,
-      //     data: {
-      //       posts: nextPosts,
-      //     },
-      //   });
-      // }
-
       history.push('/');
     } catch (e) {}
   };

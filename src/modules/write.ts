@@ -17,6 +17,7 @@ const SET_THUMBNAIL = 'write/SET_THUMBNAIL';
 const TOGGLE_EDIT_SERIES = 'write/TOGGLE_EDIT_SERIES';
 const SELECT_SERIES = 'write/SELECT_SERIES';
 const CLEAR_EDITOR = 'write/CLEAR_EDTIOR';
+const PREPARE_EDIT = 'write/PREPARE_EDIT';
 
 export const changeMarkdown = createStandardAction(CHANGE_MARKDOWN)<string>();
 export const changeTitle = createStandardAction(CHANGE_TITLE)<string>();
@@ -46,6 +47,25 @@ export const selectSeries = createStandardAction(SELECT_SERIES)<{
 }>();
 export const clearEditor = createStandardAction(CLEAR_EDITOR)<undefined>();
 
+export type PrepareEditPayload = {
+  id: string;
+  title: string;
+  body: string;
+  tags: string[];
+  description: string;
+  urlSlug: string;
+  series: {
+    name: string;
+    id: string;
+  } | null;
+  isPrivate: boolean;
+  isMarkdown: boolean;
+};
+
+export const prepareEdit = createStandardAction(PREPARE_EDIT)<
+  PrepareEditPayload
+>();
+
 type ChangeMarkdown = ReturnType<typeof changeMarkdown>;
 type ChangeTitle = ReturnType<typeof changeTitle>;
 type SetHtml = ReturnType<typeof setHtml>;
@@ -60,6 +80,7 @@ type ChangeUrlSlug = ReturnType<typeof changeUrlSlug>;
 type SetThumbnail = ReturnType<typeof setThumbnail>;
 type SelectSeries = ReturnType<typeof selectSeries>;
 type ClearEditor = ReturnType<typeof clearEditor>;
+type PrepareEdit = ReturnType<typeof prepareEdit>;
 
 export enum WriteMode {
   MARKDOWN = 'MARKDOWN',
@@ -84,6 +105,7 @@ export type WriteState = {
     id: string;
     name: string;
   } | null;
+  postId: null | string;
 };
 
 const initialState: WriteState = {
@@ -101,6 +123,7 @@ const initialState: WriteState = {
   thumbnail: null,
   editSeries: false,
   selectedSeries: null,
+  postId: null,
 };
 
 const write = createReducer(
@@ -144,6 +167,32 @@ const write = createReducer(
     [SELECT_SERIES]: (state, action: SelectSeries) =>
       updateKey(state, 'selectedSeries', action.payload),
     [CLEAR_EDITOR]: () => initialState,
+    [PREPARE_EDIT]: (state, { payload }: PrepareEdit) => {
+      const {
+        isMarkdown,
+        body,
+        title,
+        tags,
+        description,
+        urlSlug,
+        series,
+        id,
+        isPrivate,
+      } = payload;
+      const key = isMarkdown ? 'markdown' : 'html';
+      return {
+        ...state,
+        title,
+        tags,
+        description,
+        urlSlug,
+        isPrivate,
+        mode: isMarkdown ? WriteMode.MARKDOWN : WriteMode.WYSIWYG,
+        [key]: body,
+        selectedSeries: series,
+        postId: id,
+      };
+    },
   },
   initialState,
 );
