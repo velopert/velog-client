@@ -17,6 +17,7 @@ describe('PostHead', () => {
       series: null,
       postId: '7ae82a11-f56a-4332-aaef-2202c80d9fdd',
       onRemove: () => {},
+      onEdit: () => {},
     };
     const utils = render(
       <MemoryRouter>
@@ -94,5 +95,16 @@ describe('PostHead', () => {
     const confirm = getByText('확인');
     fireEvent.click(confirm);
     expect(onRemove).toBeCalled();
+  });
+
+  it('calls onEdit', () => {
+    const onEdit = jest.fn();
+    const { getByText } = setup({
+      ownPost: true,
+      onEdit,
+    });
+    const editButton = getByText('수정');
+    fireEvent.click(editButton);
+    expect(onEdit).toBeCalled();
   });
 });

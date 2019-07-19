@@ -75,10 +75,12 @@ export interface SinglePost {
   updated_at: string;
   tags: string[];
   body: string;
+  short_description: string;
   is_markdown: boolean;
   is_private: boolean;
   is_temp: boolean;
   thumbnail: string | null;
+  url_slug: string;
   user: {
     id: string;
     username: string;
@@ -137,11 +139,13 @@ export const READ_POST = gql`
       updated_at
       tags
       body
+      short_description
       is_markdown
       is_private
       is_temp
       thumbnail
       comments_count
+      url_slug
       user {
         id
         username

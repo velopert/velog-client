@@ -27,6 +27,8 @@ const samplePost = {
   is_markdown: true,
   is_private: false,
   is_temp: false,
+  short_description: 'blablabla',
+  url_slug: 'jeeemok',
   thumbnail:
     'https://images.velog.io/post-images/velopert/654650b0-b351-11e8-9696-f1fffe8a36f1/redux.png',
   user: {

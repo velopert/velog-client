@@ -85,6 +85,7 @@ export interface PostHeadProps {
   postId: string;
   ownPost: boolean;
   onRemove: () => any;
+  onEdit: () => any;
 }
 
 const PostHead: React.FC<PostHeadProps> = ({
@@ -98,6 +99,7 @@ const PostHead: React.FC<PostHeadProps> = ({
   postId,
   ownPost,
   onRemove,
+  onEdit,
 }) => {
   const [askRemove, toggleAskRemove] = useToggle(false);
 
@@ -116,7 +118,7 @@ const PostHead: React.FC<PostHeadProps> = ({
         </div>
         {ownPost && (
           <EditRemoveGroup>
-            <button>수정</button>
+            <button onClick={onEdit}>수정</button>
             <button onClick={toggleAskRemove}>삭제</button>
           </EditRemoveGroup>
         )}

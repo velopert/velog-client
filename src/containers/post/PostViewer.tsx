@@ -9,6 +9,7 @@ import PostViewerProvider from '../../components/post/PostViewerProvider';
 import { useUserId } from '../../lib/hooks/useUser';
 import { useQuery, useMutation, useApolloClient } from 'react-apollo-hooks';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { prepareEdit } from '../../modules/write';
 
 export interface PostViewerProps extends RouteComponentProps {
   username: string;
@@ -58,6 +59,30 @@ const PostViewer: React.FC<PostViewerProps> = ({
     return null;
   }
 
+  const onEdit = () => {
+    if (!data) return;
+    const { post } = data;
+    dispatch(
+      prepareEdit({
+        id: post.id,
+        body: post.body,
+        description: post.short_description,
+        isMarkdown: post.is_markdown,
+        isPrivate: post.is_private,
+        series: post.series
+          ? {
+              id: post.series.id,
+              name: post.series.name,
+            }
+          : null,
+        tags: post.tags,
+        title: post.title,
+        urlSlug: post.url_slug,
+      }),
+    );
+    history.push('/write');
+  };
+
   if (loading) return null;
   if (!data) return null;
 
@@ -76,6 +101,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         postId={post.id}
         ownPost={post.user.id === userId}
         onRemove={onRemove}
+        onEdit={onEdit}
       />
       <PostContent isMarkdown={post.is_markdown} body={post.body} />
       <PostComments
