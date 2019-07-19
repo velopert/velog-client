@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { render, waitForElement } from 'react-testing-library';
-import PostViewer, { PostViewerProps } from '../PostViewer';
+import PostViewer, { PostViewerProps, PostViewerOwnProps } from '../PostViewer';
 import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from 'react-apollo/test-utils';
 import { READ_POST } from '../../../lib/graphql/post';
@@ -83,7 +83,7 @@ const samplePost = {
 
 describe('PostViewer', () => {
   const setup = (props: Partial<PostViewerProps> = {}, overrideMocks?: any) => {
-    const initialProps: PostViewerProps = {
+    const initialProps: PostViewerOwnProps = {
       username: 'velopert',
       urlSlug: 'sample',
     };

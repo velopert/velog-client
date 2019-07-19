@@ -11,10 +11,13 @@ import { useQuery, useMutation, useApolloClient } from 'react-apollo-hooks';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { prepareEdit } from '../../modules/write';
 
-export interface PostViewerProps extends RouteComponentProps {
+export interface PostViewerOwnProps {
   username: string;
   urlSlug: string;
 }
+export interface PostViewerProps
+  extends PostViewerOwnProps,
+    RouteComponentProps {}
 
 const PostViewer: React.FC<PostViewerProps> = ({
   username,
