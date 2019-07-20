@@ -7,12 +7,15 @@ import { WRITE_POST, WritePostResponse } from '../../lib/graphql/post';
 import { pick } from 'ramda';
 import { escapeForUrl, safe } from '../../lib/utils';
 import { useMutation } from 'react-apollo-hooks';
+import useRouter from 'use-react-router';
 
 type PublishActionButtonsContainerProps = {};
 
 const PublishActionButtonsContainer: React.FC<
   PublishActionButtonsContainerProps
 > = () => {
+  const { history } = useRouter();
+
   const options = useSelector((state: RootState) =>
     pick(
       [
@@ -56,9 +59,8 @@ const PublishActionButtonsContainer: React.FC<
       },
     });
     if (!response.data) return;
-    // const { user, url_slug } = response.data.writePost;
-
-    // const path = `/@${user.username}/${url_slug}`;
+    const { user, url_slug } = response.data.writePost;
+    history.push(`/@${user.username}/${url_slug}`);
   };
 
   return <PublishActionButtons onCancel={onCancel} onPublish={onPublish} />;

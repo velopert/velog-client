@@ -314,6 +314,63 @@ export type WritePostResponse = {
   };
 };
 
+export const EDIT_POST = gql`
+  mutation EditPost(
+    $id: ID!
+    $title: String
+    $body: String
+    $tags: [String]
+    $is_markdown: Boolean
+    $is_temp: Boolean
+    $url_slug: String
+    $thumbnail: String
+    $meta: JSON
+    $series_id: ID
+  ) {
+    editPost(
+      id: $id
+      title: $title
+      body: $body
+      tags: $tags
+      is_markdown: $is_markdown
+      is_temp: $is_temp
+      url_slug: $url_slug
+      thumbnail: $thumbnail
+      meta: $meta
+      series_id: $series_id
+    ) {
+      id
+      title
+      released_at
+      updated_at
+      tags
+      body
+      short_description
+      is_markdown
+      is_private
+      is_temp
+      thumbnail
+      url_slug
+      series {
+        id
+        name
+        series_posts {
+          id
+          post {
+            id
+            title
+            url_slug
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const WRITE_COMMENT = gql`
   mutation WriteComment($post_id: ID!, $text: String!, $comment_id: ID) {
     writeComment(post_id: $post_id, text: $text, comment_id: $comment_id) {
