@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React, { useMemo } from 'react';
 import MarkdownEditor from '../../components/write/MarkdownEditor';
-import { connect } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../modules';
 import {
   changeMarkdown,
@@ -22,50 +22,48 @@ import useUpload from '../../lib/hooks/useUpload';
 import useS3Upload from '../../lib/hooks/useS3Upload';
 import DragDropUpload from '../../components/common/DragDropUpload';
 import PasteUpload from '../../components/common/PasteUpload';
+import { bindActionCreators } from 'redux';
 
-interface OwnProps {}
-interface StateProps {
-  title: string;
-  markdown: string;
-  thumbnail: null | string;
-  publish: boolean;
-}
-interface DispatchProps {
-  changeMarkdown: typeof changeMarkdown;
-  changeTitle: typeof changeTitle;
-  setHtml: typeof setHtml;
-  convertEditorMode: typeof convertEditorMode;
-  openPublish: typeof openPublish;
-  setDefaultDescription: typeof setDefaultDescription;
-  setThumbnail: typeof setThumbnail;
-}
-
-export type MarkdownEditorContainerProps = OwnProps &
-  StateProps &
-  DispatchProps;
+export type MarkdownEditorContainerProps = {};
 
 const { useCallback, useEffect } = React;
 
-const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = ({
-  changeMarkdown,
-  changeTitle,
-  setHtml,
-  convertEditorMode,
-  title,
-  markdown,
-  thumbnail,
-  openPublish,
-  setDefaultDescription,
-  publish,
-}) => {
+const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = () => {
+  const { title, markdown, thumbnail, publish, postId } = useSelector(
+    (state: RootState) => ({
+      title: state.write.title,
+      markdown: state.write.markdown,
+      thumbnail: state.write.thumbnail,
+      publish: state.write.publish,
+      postId: state.write.postId,
+    }),
+  );
+  const dispatch = useDispatch();
+  const actionCreators = useMemo(
+    () =>
+      bindActionCreators(
+        {
+          changeMarkdown,
+          changeTitle,
+          setHtml,
+          convertEditorMode,
+          openPublish,
+          setDefaultDescription,
+          setThumbnail,
+        },
+        dispatch,
+      ),
+    [dispatch],
+  );
+
   const onConvert = (markdown: string) => {
     remark()
       .use(breaks)
       .use(htmlPlugin)
       .process(markdown, (err: any, file: any) => {
         const html = String(file);
-        setHtml(html);
-        convertEditorMode();
+        actionCreators.setHtml(html);
+        actionCreators.convertEditorMode();
       });
   };
 
@@ -76,10 +74,10 @@ const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = ({
       .process(markdown.replace(/#(.*?)\n/g, ''), (err: any, file: any) => {
         const text = String(file);
         const sliced = text.replace(/\n/g, '').slice(0, 150);
-        setDefaultDescription(sliced);
-        openPublish();
+        actionCreators.setDefaultDescription(sliced);
+        actionCreators.openPublish();
       });
-  }, [markdown, openPublish, setDefaultDescription]);
+  }, [actionCreators, markdown]);
 
   const [upload, file] = useUpload();
   const [s3Upload, image] = useS3Upload();
@@ -93,9 +91,9 @@ const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = ({
 
   useEffect(() => {
     if (!thumbnail && image) {
-      setThumbnail(image);
+      actionCreators.setThumbnail(image);
     }
-  }, [image, thumbnail]);
+  }, [actionCreators, image, thumbnail]);
 
   const onDragDropUpload = useCallback(
     (file: File) => {
@@ -112,11 +110,17 @@ const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = ({
         lastUploadedImage={publish ? null : image}
         title={title}
         markdown={markdown}
-        onChangeMarkdown={changeMarkdown}
-        onChangeTitle={changeTitle}
+        onChangeMarkdown={actionCreators.changeMarkdown}
+        onChangeTitle={actionCreators.changeTitle}
         onConvert={onConvert}
         tagInput={<TagInputContainer />}
-        footer={<WriteFooter onPublish={onPublish} onTempSave={() => {}} />}
+        footer={
+          <WriteFooter
+            onPublish={onPublish}
+            onTempSave={() => {}}
+            edit={!!postId}
+          />
+        }
       />
       <DragDropUpload onUpload={onDragDropUpload} />
       <PasteUpload onUpload={onDragDropUpload} />
@@ -124,20 +128,4 @@ const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = ({
   );
 };
 
-export default connect<StateProps, DispatchProps, OwnProps, RootState>(
-  state => ({
-    title: state.write.title,
-    markdown: state.write.markdown,
-    thumbnail: state.write.thumbnail,
-    publish: state.write.publish,
-  }),
-  {
-    changeMarkdown,
-    changeTitle,
-    setHtml,
-    convertEditorMode,
-    openPublish,
-    setDefaultDescription,
-    setThumbnail,
-  },
-)(MarkdownEditorContainer);
+export default MarkdownEditorContainer;

@@ -112,7 +112,13 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = ({
         tagInput={<TagInputContainer />}
         onChangeHtml={onChangeHtml}
         onChangeTextBody={onChangeTextBody}
-        footer={<WriteFooter onPublish={onPublish} onTempSave={() => {}} />}
+        footer={
+          <WriteFooter
+            onPublish={onPublish}
+            onTempSave={() => {}}
+            edit={false}
+          />
+        }
         onUpload={upload}
         lastUploadedImage={publish ? null : image}
       />

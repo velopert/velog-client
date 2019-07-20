@@ -11,7 +11,7 @@ describe('WriteFooter', () => {
     const utils = render(<WriteFooter {...initialProps} {...props} />);
     const buttons = {
       tempSave: utils.getByText('임시저장'),
-      publish: utils.getByText('출간하기'),
+      publish: utils.getByText(/(출간|수정)하기/),
     };
     return {
       ...utils,
@@ -34,5 +34,11 @@ describe('WriteFooter', () => {
     expect(onTempSave).toBeCalled();
     fireEvent.click(publish);
     expect(onPublish).toBeCalled();
+  });
+  it('changes button text when edit is true', () => {
+    const { buttons } = setup({
+      edit: true,
+    });
+    expect(buttons.publish.textContent).toBe('수정하기');
   });
 });

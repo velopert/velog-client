@@ -30,6 +30,7 @@ const PublishActionButtonsContainer: React.FC<
         'urlSlug',
         'thumbnail',
         'selectedSeries',
+        'postId',
       ],
       state.write,
     ),
@@ -63,7 +64,13 @@ const PublishActionButtonsContainer: React.FC<
     history.push(`/@${user.username}/${url_slug}`);
   };
 
-  return <PublishActionButtons onCancel={onCancel} onPublish={onPublish} />;
+  return (
+    <PublishActionButtons
+      onCancel={onCancel}
+      onPublish={onPublish}
+      edit={!!options.postId}
+    />
+  );
 };
 
 export default PublishActionButtonsContainer;

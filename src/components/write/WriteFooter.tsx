@@ -25,16 +25,21 @@ const StyledButton = styled(Button)`
 export interface WriteFooterProps {
   onTempSave: () => void;
   onPublish: () => void;
+  edit: boolean;
 }
 
-const WriteFooter: React.FC<WriteFooterProps> = ({ onTempSave, onPublish }) => {
+const WriteFooter: React.FC<WriteFooterProps> = ({
+  onTempSave,
+  onPublish,
+  edit,
+}) => {
   return (
     <WriteFooterBlock>
       <StyledButton inline color="lightGray" onClick={onTempSave}>
         임시저장
       </StyledButton>
       <StyledButton inline color="teal" onClick={onPublish}>
-        출간하기
+        {edit ? '수정하기' : '출간하기'}
       </StyledButton>
     </WriteFooterBlock>
   );

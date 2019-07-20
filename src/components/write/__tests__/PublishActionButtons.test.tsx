@@ -9,11 +9,12 @@ describe('PublishActionButtons', () => {
     const initialProps: PublishActionButtonsProps = {
       onCancel: () => {},
       onPublish: () => {},
+      edit: false,
     };
     const utils = render(<PublishActionButtons {...initialProps} {...props} />);
     const buttons = {
       cancel: utils.getByText('취소'),
-      publish: utils.getByText('출간하기'),
+      publish: utils.getByText(/(출간|수정)하기/),
     };
     return {
       ...utils,
@@ -38,5 +39,11 @@ describe('PublishActionButtons', () => {
     expect(onPublish).toBeCalled();
     fireEvent.click(utils.buttons.cancel);
     expect(onCancel).toBeCalled();
+  });
+  it('changes button text when edit is true', () => {
+    const { getByText } = setup({
+      edit: true,
+    });
+    getByText('수정하기');
   });
 });
