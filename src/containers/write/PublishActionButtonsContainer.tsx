@@ -3,7 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../modules';
 import PublishActionButtons from '../../components/write/PublishActionButtons';
 import { closePublish, WriteMode } from '../../modules/write';
-import { WRITE_POST, WritePostResponse } from '../../lib/graphql/post';
+import {
+  WRITE_POST,
+  WritePostResponse,
+  EditPostResult,
+  EDIT_POST,
+} from '../../lib/graphql/post';
 import { pick } from 'ramda';
 import { escapeForUrl, safe } from '../../lib/utils';
 import { useMutation } from 'react-apollo-hooks';
@@ -42,32 +47,47 @@ const PublishActionButtonsContainer: React.FC<
   }, [dispatch]);
 
   const writePost = useMutation<WritePostResponse>(WRITE_POST);
+  const editPost = useMutation<EditPostResult>(EDIT_POST);
+
+  const variables = {
+    title: options.title,
+    body: options.mode === WriteMode.MARKDOWN ? options.markdown : options.html,
+    tags: options.tags,
+    is_markdown: options.mode === WriteMode.MARKDOWN,
+    is_temp: false,
+    is_private: options.isPrivate,
+    url_slug: options.urlSlug || escapeForUrl(options.title),
+    thumbnail: options.thumbnail,
+    meta: {},
+    series_id: safe(() => options.selectedSeries!.id),
+  };
 
   const onPublish = async () => {
     const response = await writePost({
-      variables: {
-        title: options.title,
-        body:
-          options.mode === WriteMode.MARKDOWN ? options.markdown : options.html,
-        tags: options.tags,
-        is_markdown: options.mode === WriteMode.MARKDOWN,
-        is_temp: false,
-        is_private: options.isPrivate,
-        url_slug: options.urlSlug || escapeForUrl(options.title),
-        thumbnail: options.thumbnail,
-        meta: {},
-        series_id: safe(() => options.selectedSeries!.id),
-      },
+      variables: variables,
     });
     if (!response.data) return;
     const { user, url_slug } = response.data.writePost;
     history.push(`/@${user.username}/${url_slug}`);
   };
 
+  const onEdit = async () => {
+    const response = await editPost({
+      variables: {
+        id: options.postId,
+        ...variables,
+      },
+    });
+    if (!response.data) return;
+    console.log(response.data);
+    const { user, url_slug } = response.data.editPost;
+    history.push(`/@${user.username}/${url_slug}`);
+  };
+
   return (
     <PublishActionButtons
       onCancel={onCancel}
-      onPublish={onPublish}
+      onPublish={options.postId ? onEdit : onPublish}
       edit={!!options.postId}
     />
   );

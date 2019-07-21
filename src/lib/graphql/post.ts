@@ -350,7 +350,36 @@ export const EDIT_POST = gql`
       is_private
       is_temp
       thumbnail
+      comments_count
       url_slug
+      user {
+        id
+        username
+        profile {
+          display_name
+          thumbnail
+          short_bio
+        }
+        velog_config {
+          title
+        }
+      }
+      comments {
+        id
+        user {
+          id
+          username
+          profile {
+            thumbnail
+          }
+        }
+        text
+        replies_count
+        level
+        created_at
+        level
+        deleted
+      }
       series {
         id
         name
@@ -370,6 +399,10 @@ export const EDIT_POST = gql`
     }
   }
 `;
+
+export type EditPostResult = {
+  editPost: SinglePost;
+};
 
 export const WRITE_COMMENT = gql`
   mutation WriteComment($post_id: ID!, $text: String!, $comment_id: ID) {

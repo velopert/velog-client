@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import MarkdownEditor from '../../components/write/MarkdownEditor';
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../modules';
 import {
   changeMarkdown,
