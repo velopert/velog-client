@@ -44,7 +44,7 @@ export const toggleEditSeries = createStandardAction(TOGGLE_EDIT_SERIES)<
 export const selectSeries = createStandardAction(SELECT_SERIES)<{
   id: string;
   name: string;
-}>();
+} | null>();
 export const clearEditor = createStandardAction(CLEAR_EDITOR)<undefined>();
 
 export type PrepareEditPayload = {

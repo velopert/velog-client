@@ -103,7 +103,7 @@ describe('PostSeriesInfo', () => {
     // title
     getByText('Sample Series Name');
     // series-number
-    getByText('1 / 8');
+    getByText('1/8');
   });
   it('opens series list', () => {
     const { getByText } = setup();

@@ -71,8 +71,28 @@ const EditSeries = styled.div`
   }
 `;
 
+const RemoveFromSeries = styled.div`
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+  button {
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 1rem;
+    color: ${palette.red5};
+    padding: 0;
+    &:hover {
+      color: ${palette.red6};
+      text-decoration: underline;
+    }
+    cursor: pointer;
+  }
+`;
+
 export interface PublishSeriesSectionProps {
   onEdit: () => void;
+  onReset: () => void;
   selected: {
     id: string;
     name: string;
@@ -81,19 +101,25 @@ export interface PublishSeriesSectionProps {
 
 const PublishSeriesSection: React.FC<PublishSeriesSectionProps> = ({
   onEdit,
+  onReset,
   selected,
 }) => {
   return (
     <PublishSeriesSectionBlock title="시리즈 설정">
       {selected ? (
-        <EditSeries>
-          <div className="name-wrapper">
-            <div className="name">{selected.name}</div>
-          </div>
-          <button onClick={onEdit} data-testid="setting-button">
-            <MdSettings />
-          </button>
-        </EditSeries>
+        <>
+          <EditSeries>
+            <div className="name-wrapper">
+              <div className="name">{selected.name}</div>
+            </div>
+            <button onClick={onEdit} data-testid="setting-button">
+              <MdSettings />
+            </button>
+          </EditSeries>
+          <RemoveFromSeries>
+            <button onClick={onReset}>시리즈에서 제거</button>
+          </RemoveFromSeries>
+        </>
       ) : (
         <SeriesButton onClick={onEdit}>
           <AddListIcon />
