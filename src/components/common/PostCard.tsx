@@ -38,6 +38,7 @@ const PostCardBlock = styled.div`
   }
   .post-thumbnail {
     width: 100%;
+    min-height: 369px;
     max-height: 369px;
     margin-bottom: 1rem;
     object-fit: cover;
