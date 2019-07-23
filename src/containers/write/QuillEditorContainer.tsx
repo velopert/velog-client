@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { connect, batch, useSelector, useDispatch } from 'react-redux';
+import { batch, useSelector, useDispatch } from 'react-redux';
 import QuillEditor from '../../components/write/QuillEditor';
 import { RootState } from '../../modules';
 import {
@@ -25,23 +25,17 @@ export type QuillEditorContainerProps = {};
 const { useCallback, useEffect } = React;
 
 const QuillEditorContainer: React.FC<QuillEditorContainerProps> = () => {
-  const {
-    mode,
-    title,
-    html,
-    textBody,
-    thumbnail,
-    publish,
-    postId,
-  } = useSelector(({ write }: RootState) => ({
-    mode: write.mode,
-    title: write.title,
-    html: write.html,
-    textBody: write.textBody,
-    thumbnail: write.thumbnail,
-    publish: write.publish,
-    postId: write.postId,
-  }));
+  const { title, html, textBody, thumbnail, publish, postId } = useSelector(
+    ({ write }: RootState) => ({
+      mode: write.mode,
+      title: write.title,
+      html: write.html,
+      textBody: write.textBody,
+      thumbnail: write.thumbnail,
+      publish: write.publish,
+      postId: write.postId,
+    }),
+  );
   const dispatch = useDispatch();
   const actionCreators = useMemo(
     () =>
