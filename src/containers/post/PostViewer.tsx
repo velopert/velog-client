@@ -41,11 +41,10 @@ const PostViewer: React.FC<PostViewerProps> = ({
     },
   });
   const client = useApolloClient();
-  const [likeInProcess, setLikeInProcess] = useState(false);
 
   const [removePost] = useMutation(REMOVE_POST);
-  const [likePost] = useMutation(LIKE_POST);
-  const [unlikePost] = useMutation(UNLIKE_POST);
+  const [likePost, { loading: loadingLike }] = useMutation(LIKE_POST);
+  const [unlikePost, { loading: loadingUnlike }] = useMutation(UNLIKE_POST);
 
   const { loading, error, data } = readPost;
 
@@ -98,8 +97,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
   };
 
   const onLikeToggle = async () => {
-    if (likeInProcess) return;
-    setLikeInProcess(true);
+    if (loadingLike || loadingUnlike) return;
     const variables = {
       id: post.id,
     };
@@ -124,6 +122,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
           data: {
             liked: false,
             likes: post.likes - 1,
+            __typename: 'Post',
           },
         });
         await unlikePost({
@@ -136,6 +135,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
           data: {
             liked: true,
             likes: post.likes + 1,
+            __typename: 'Post',
           },
         });
         await likePost({
@@ -145,7 +145,6 @@ const PostViewer: React.FC<PostViewerProps> = ({
     } catch (e) {
       console.log(e);
     }
-    setLikeInProcess(false);
   };
 
   if (loading) return null;
