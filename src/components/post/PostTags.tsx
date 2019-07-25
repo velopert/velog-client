@@ -6,6 +6,7 @@ import palette from '../../lib/styles/palette';
 const PostTagsBlock = styled.div`
   margin-top: 0.875rem;
   margin-bottom: -0.875rem;
+  min-height: 0.875rem;
 `;
 
 const Tag = styled(Link)`

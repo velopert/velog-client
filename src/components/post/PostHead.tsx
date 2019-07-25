@@ -8,6 +8,7 @@ import { SeriesPost } from '../../lib/graphql/post';
 import PostSeriesInfo from './PostSeriesInfo';
 import useToggle from '../../lib/hooks/useToggle';
 import PopupOKCancel from '../common/PopupOKCancel';
+import PostLikeShareButtons from './PostLikeShareButtons';
 
 const PostHeadBlock = styled(VelogResponsive)`
   margin-top: 5.5rem;
@@ -124,6 +125,7 @@ const PostHead: React.FC<PostHeadProps> = ({
         )}
       </SubInfo>
       <PostTags tags={tags} />
+      <PostLikeShareButtons />
       {series && (
         <PostSeriesInfo
           name={series.name}
@@ -132,6 +134,7 @@ const PostHead: React.FC<PostHeadProps> = ({
           username={username}
         />
       )}
+
       {!hideThumbnail && thumbnail && (
         <Thumbnail src={thumbnail} alt="post-thumbnail" />
       )}
