@@ -37,8 +37,8 @@ const PostRepliesContainer: React.FC<PostRepliesProps> = ({
     },
     skip: true,
   });
-  const writeComment = useMutation(WRITE_COMMENT);
-  const removeComment = useMutation(REMOVE_COMMENT);
+  const [writeComment] = useMutation(WRITE_COMMENT);
+  const [removeComment] = useMutation(REMOVE_COMMENT);
 
   const onReply = async (text: string) => {
     await writeComment({

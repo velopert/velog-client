@@ -15,7 +15,7 @@ const PostCommentsWriteContainer: React.FC<PostCommentsWriteContainerProps> = ({
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
   };
-  const writeComment = useMutation(WRITE_COMMENT);
+  const [writeComment] = useMutation(WRITE_COMMENT);
   const reloadComments = useQuery(RELOAD_COMMENTS, {
     skip: true,
     fetchPolicy: 'network-only',

@@ -87,6 +87,7 @@ export interface PostHeadProps {
   ownPost: boolean;
   onRemove: () => any;
   onEdit: () => any;
+  shareButtons: React.ReactNode;
 }
 
 const PostHead: React.FC<PostHeadProps> = ({
@@ -101,6 +102,7 @@ const PostHead: React.FC<PostHeadProps> = ({
   ownPost,
   onRemove,
   onEdit,
+  shareButtons,
 }) => {
   const [askRemove, toggleAskRemove] = useToggle(false);
 
@@ -125,7 +127,7 @@ const PostHead: React.FC<PostHeadProps> = ({
         )}
       </SubInfo>
       <PostTags tags={tags} />
-      <PostLikeShareButtons />
+      {shareButtons}
       {series && (
         <PostSeriesInfo
           name={series.name}

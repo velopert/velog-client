@@ -18,6 +18,7 @@ describe('PostHead', () => {
       postId: '7ae82a11-f56a-4332-aaef-2202c80d9fdd',
       onRemove: () => {},
       onEdit: () => {},
+      shareButtons: null,
     };
     const utils = render(
       <MemoryRouter>

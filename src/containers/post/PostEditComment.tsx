@@ -16,7 +16,7 @@ const PostEditComment: React.FC<PostEditCommentProps> = ({
   onCancel,
 }) => {
   const [comment, onChange] = useInput(defaultText);
-  const editComment = useMutation(EDIT_COMMENT);
+  const [editComment] = useMutation(EDIT_COMMENT);
 
   const onWrite = async () => {
     await editComment({

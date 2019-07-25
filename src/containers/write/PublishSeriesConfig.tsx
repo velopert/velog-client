@@ -32,7 +32,7 @@ const PublishSeriesConfig: React.FC<PublishSeriesConfigProps> = props => {
       username: safe(() => user!.username),
     },
   });
-  const createSeries = useMutation<CreateSeriesResponse>(CREATE_SERIES);
+  const [createSeries] = useMutation<CreateSeriesResponse>(CREATE_SERIES);
 
   const serialized = useMemo(() => {
     if (!seriesList.data || !seriesList.data.seriesList) return [];

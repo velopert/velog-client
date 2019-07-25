@@ -32,7 +32,7 @@ const PostComments: React.FC<PostCommentsProps> = ({
   const [removeId, setRemoveId] = useState('');
 
   const currentUserId = useUserId();
-  const removeComment = useMutation(REMOVE_COMMENT);
+  const [removeComment] = useMutation(REMOVE_COMMENT);
   const reloadComments = useQuery(RELOAD_COMMENTS, {
     variables: {
       id: postId,

@@ -100,6 +100,8 @@ export interface SinglePost {
     name: string;
     series_posts: SeriesPost[];
   } | null;
+  liked: boolean;
+  likes: number;
 }
 
 export interface CommentWithReplies {
@@ -146,6 +148,8 @@ export const READ_POST = gql`
       thumbnail
       comments_count
       url_slug
+      likes
+      liked
       user {
         id
         username
@@ -439,5 +443,25 @@ export const REMOVE_COMMENT = gql`
 export const REMOVE_POST = gql`
   mutation RemovePost($id: ID!) {
     removePost(id: $id)
+  }
+`;
+
+export const LIKE_POST = gql`
+  mutation LikePost($id: ID!) {
+    likePost(id: $id) {
+      id
+      likes
+      liked
+    }
+  }
+`;
+
+export const UNLIKE_POST = gql`
+  mutation UnlikePost($id: ID!) {
+    unlikePost(id: $id) {
+      id
+      likes
+      liked
+    }
   }
 `;

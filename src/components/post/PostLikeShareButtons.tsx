@@ -29,7 +29,7 @@ const PostLikeShareButtonsBlock = styled.div<{ fixed: boolean }>`
     `}
 `;
 
-const CircleButton = styled.div`
+const CircleButton = styled.div<{ active?: boolean }>`
   height: 3rem;
   width: 3rem;
   display: flex;
@@ -52,6 +52,18 @@ const CircleButton = styled.div`
     color: ${palette.gray9};
     border-color: ${palette.gray9};
   }
+  ${props =>
+    props.active &&
+    css`
+      background: ${palette.teal5};
+      border-color: ${palette.teal5};
+      color: white;
+      &:hover {
+        background: ${palette.teal4};
+        border-color: ${palette.teal4};
+        color: white;
+      }
+    `}
 `;
 
 const LikeCount = styled.div`
@@ -63,9 +75,17 @@ const LikeCount = styled.div`
   font-weight: bold;
 `;
 
-export interface PostLikeShareButtonsProps {}
+export interface PostLikeShareButtonsProps {
+  onLikeToggle: () => any;
+  likes: number;
+  liked: boolean;
+}
 
-const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = props => {
+const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
+  onLikeToggle,
+  likes,
+  liked,
+}) => {
   const [top, setTop] = useState(0);
   const [fixed, setFixed] = useState(false);
   const element = useRef<HTMLDivElement | null>(null);
@@ -104,10 +124,14 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = props => {
     <Wrapper ref={element}>
       <Positioner>
         <PostLikeShareButtonsBlock fixed={fixed}>
-          <CircleButton>
+          <CircleButton
+            data-testid="like"
+            onClick={onLikeToggle}
+            active={liked}
+          >
             <LikeIcon />
           </CircleButton>
-          <LikeCount>0</LikeCount>
+          <LikeCount>{likes}</LikeCount>
           <CircleButton>
             <ShareIcon className="share" />
           </CircleButton>

@@ -46,8 +46,8 @@ const PublishActionButtonsContainer: React.FC<
     dispatch(closePublish());
   }, [dispatch]);
 
-  const writePost = useMutation<WritePostResponse>(WRITE_POST);
-  const editPost = useMutation<EditPostResult>(EDIT_POST);
+  const [writePost] = useMutation<WritePostResponse>(WRITE_POST);
+  const [editPost] = useMutation<EditPostResult>(EDIT_POST);
 
   const variables = {
     title: options.title,
