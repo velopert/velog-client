@@ -106,6 +106,7 @@
     "react-outside-click-handler": "^1.2.3",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.0",
+    "react-spring": "^8.0.27",
     "react-testing-library": "^7.0.0",
     "react-textarea-autosize": "^7.1.0",
     "redux": "^4.0.1",

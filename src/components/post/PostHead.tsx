@@ -8,7 +8,6 @@ import { SeriesPost } from '../../lib/graphql/post';
 import PostSeriesInfo from './PostSeriesInfo';
 import useToggle from '../../lib/hooks/useToggle';
 import PopupOKCancel from '../common/PopupOKCancel';
-import PostLikeShareButtons from './PostLikeShareButtons';
 
 const PostHeadBlock = styled(VelogResponsive)`
   margin-top: 5.5rem;

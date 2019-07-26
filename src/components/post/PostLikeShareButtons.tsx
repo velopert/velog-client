@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { getScrollTop } from '../../lib/utils';
 import { LikeIcon, ShareIcon } from '../../static/svg';
+import { useSpring, animated, config } from 'react-spring';
+import useBoolean from '../../lib/hooks/useBoolean';
 
 const Wrapper = styled.div`
   position: relative;
@@ -29,7 +31,7 @@ const PostLikeShareButtonsBlock = styled.div<{ fixed: boolean }>`
     `}
 `;
 
-const CircleButton = styled.div<{ active?: boolean }>`
+const CircleButton = styled(animated.div)<{ active?: boolean }>`
   height: 3rem;
   width: 3rem;
   display: flex;
@@ -40,6 +42,7 @@ const CircleButton = styled.div<{ active?: boolean }>`
   border-radius: 1.5rem;
   color: ${palette.gray6};
   cursor: pointer;
+  z-index: 5;
   svg {
     width: 24px;
     height: 24px;
@@ -73,6 +76,22 @@ const LikeCount = styled.div`
   font-size: 0.75rem;
   margin-bottom: 1rem;
   font-weight: bold;
+`;
+
+const ShareButtons = styled.div`
+  position: relative;
+  width: 100%;
+  .positioner {
+    position: absolute;
+  }
+`;
+
+const ShareButton = styled(animated.div)`
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 48px;
+  height: 48px;
 `;
 
 export interface PostLikeShareButtonsProps {
@@ -120,6 +139,36 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
     };
   }, [onScroll]);
 
+  const [animateLike, setAnimateLike] = useState(false);
+  const [prevLiked, setPrevLiked] = useState(liked);
+  const [open, toggle] = useBoolean(false);
+
+  console.log(open);
+
+  useEffect(() => {
+    setPrevLiked(liked);
+    if (!prevLiked && liked) {
+      setAnimateLike(true);
+    }
+  }, [liked, prevLiked]);
+
+  const { x } = useSpring({
+    from: { x: 0 },
+    x: animateLike ? 1 : 0,
+    immediate: !animateLike,
+    config: {
+      duration: 600,
+    },
+    onRest: () => setAnimateLike(false),
+  });
+  const { shareX } = useSpring({
+    from: { shareX: 0 },
+    shareX: open ? 1 : 0,
+    config: config.gentle,
+  });
+
+  console.log(shareX);
+
   return (
     <Wrapper ref={element}>
       <Positioner>
@@ -128,11 +177,67 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
             data-testid="like"
             onClick={onLikeToggle}
             active={liked}
+            style={{
+              transform: x
+                .interpolate({
+                  range: [0, 0.25, 0.5, 0.6, 1],
+                  output: [1, 1.25, 1, 1.25, 1],
+                })
+                .interpolate(x => `scale(${x})`),
+            }}
           >
             <LikeIcon />
           </CircleButton>
           <LikeCount>{likes}</LikeCount>
-          <CircleButton>
+          <ShareButtons>
+            <div className="positioner">
+              <ShareButton
+                style={{
+                  opacity: shareX,
+                  transform: shareX
+                    .interpolate({
+                      range: [0, 1],
+                      output: [0, 1],
+                    })
+                    .interpolate(
+                      shareX =>
+                        `translate(${shareX * 48}px, -${shareX * 52}px)`,
+                    ),
+                }}
+              >
+                <CircleButton />
+              </ShareButton>
+              <ShareButton
+                style={{
+                  opacity: shareX,
+                  transform: shareX
+                    .interpolate({
+                      range: [0, 1],
+                      output: [0, 1],
+                    })
+                    .interpolate(shareX => `translate(${shareX * 72}px)`),
+                }}
+              >
+                <CircleButton />
+              </ShareButton>
+              <ShareButton
+                style={{
+                  opacity: shareX,
+                  transform: shareX
+                    .interpolate({
+                      range: [0, 1],
+                      output: [0, 1],
+                    })
+                    .interpolate(
+                      shareX => `translate(${shareX * 48}px, ${shareX * 52}px)`,
+                    ),
+                }}
+              >
+                <CircleButton />
+              </ShareButton>
+            </div>
+          </ShareButtons>
+          <CircleButton onClick={toggle}>
             <ShareIcon className="share" />
           </CircleButton>
         </PostLikeShareButtonsBlock>
