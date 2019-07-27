@@ -2,9 +2,11 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { getScrollTop } from '../../lib/utils';
-import { LikeIcon, ShareIcon } from '../../static/svg';
+import { LikeIcon, ShareIcon, ClipIcon } from '../../static/svg';
 import { useSpring, animated, config } from 'react-spring';
 import useBoolean from '../../lib/hooks/useBoolean';
+import { FaFacebook, FaTwitter } from 'react-icons/fa';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 const Wrapper = styled.div`
   position: relative;
@@ -96,12 +98,14 @@ const ShareButton = styled(animated.div)`
 
 export interface PostLikeShareButtonsProps {
   onLikeToggle: () => any;
+  onShareClick: (type: 'facebook' | 'twitter' | 'clipboard') => void;
   likes: number;
   liked: boolean;
 }
 
 const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
   onLikeToggle,
+  onShareClick,
   likes,
   liked,
 }) => {
@@ -143,8 +147,6 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
   const [prevLiked, setPrevLiked] = useState(liked);
   const [open, toggle] = useBoolean(false);
 
-  console.log(open);
-
   useEffect(() => {
     setPrevLiked(liked);
     if (!prevLiked && liked) {
@@ -167,8 +169,10 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
     config: config.gentle,
   });
 
-  console.log(shareX);
-
+  const onClickShareOutside = () => {
+    if (!open) return;
+    toggle();
+  };
   return (
     <Wrapper ref={element}>
       <Positioner>
@@ -205,7 +209,9 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
                     ),
                 }}
               >
-                <CircleButton />
+                <CircleButton onClick={() => onShareClick('facebook')}>
+                  <FaFacebook />
+                </CircleButton>
               </ShareButton>
               <ShareButton
                 style={{
@@ -218,7 +224,9 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
                     .interpolate(shareX => `translate(${shareX * 72}px)`),
                 }}
               >
-                <CircleButton />
+                <CircleButton onClick={() => onShareClick('twitter')}>
+                  <FaTwitter />
+                </CircleButton>
               </ShareButton>
               <ShareButton
                 style={{
@@ -233,13 +241,17 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
                     ),
                 }}
               >
-                <CircleButton />
+                <CircleButton onClick={() => onShareClick('clipboard')}>
+                  <ClipIcon />
+                </CircleButton>
               </ShareButton>
             </div>
           </ShareButtons>
-          <CircleButton onClick={toggle}>
-            <ShareIcon className="share" />
-          </CircleButton>
+          <OutsideClickHandler onOutsideClick={onClickShareOutside}>
+            <CircleButton onClick={toggle} style={{ position: 'relative' }}>
+              <ShareIcon className="share" />
+            </CircleButton>
+          </OutsideClickHandler>
         </PostLikeShareButtonsBlock>
       </Positioner>
     </Wrapper>

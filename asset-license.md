@@ -7,3 +7,4 @@ Icons made by [Smashicons](https://www.flaticon.com/authors/smashicons) from [ww
 
 
 Heart Icon: https://iconmonstr.com/favorite-8-svg/
+Clip Icon: https://iconmonstr.com/paperclip-2-svg/

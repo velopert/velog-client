@@ -18,6 +18,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { prepareEdit } from '../../modules/write';
 import PostLikeShareButtons from '../../components/post/PostLikeShareButtons';
 import gql from 'graphql-tag';
+import { shareFacebook, shareTwitter, copyText } from '../../lib/share';
 
 export interface PostViewerOwnProps {
   username: string;
@@ -31,6 +32,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
   username,
   urlSlug,
   history,
+  match,
 }) => {
   const userId = useUserId();
   const dispatch = useDispatch();
@@ -147,6 +149,31 @@ const PostViewer: React.FC<PostViewerProps> = ({
     }
   };
 
+  const onShareClick = (type: 'facebook' | 'twitter' | 'clipboard') => {
+    const { url } = match;
+    const link = `https://velog.io${url}`;
+
+    switch (type) {
+      case 'facebook':
+        shareFacebook(link);
+        break;
+      case 'twitter':
+        const ownPost = post.user.id === userId;
+        const message = ownPost
+          ? `제가 velog 에 게재한 "${post.title}" 포스트를 읽어보세요.`
+          : `${post.user.username}님이 velog 에 게재한 "${
+              post.title
+            }" 포스트를 읽어보세요.`;
+
+        shareTwitter(link, message);
+        break;
+      case 'clipboard':
+        copyText(link);
+        break;
+      default:
+    }
+  };
+
   if (loading) return null;
   if (!data) return null;
 
@@ -169,6 +196,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         shareButtons={
           <PostLikeShareButtons
             onLikeToggle={onLikeToggle}
+            onShareClick={onShareClick}
             likes={post.likes}
             liked={post.liked}
           />
