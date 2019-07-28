@@ -83,6 +83,7 @@ const LikeCount = styled.div`
 const ShareButtons = styled.div`
   position: relative;
   width: 100%;
+  z-index: 5;
   .positioner {
     position: absolute;
   }
