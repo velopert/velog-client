@@ -15,6 +15,7 @@ import rootReducer from './modules';
 import storage from './lib/storage';
 import { setUser } from './modules/core';
 import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
+import sample from './sample';
 
 const store = createStore(rootReducer, composeWithDevTools());
 
@@ -78,3 +79,5 @@ if (process.env.NODE_ENV === 'production') {
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+sample();
