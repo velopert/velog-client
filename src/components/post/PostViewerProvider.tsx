@@ -1,8 +1,16 @@
 import React, { createContext, useReducer, Dispatch, useContext } from 'react';
+import { parseHeadings } from '../../lib/heading';
 
-type Action = { type: 'SET_SERIES_OPEN'; payload: boolean };
+type Toc = ReturnType<typeof parseHeadings>;
+
+type SetSeriesOpen = { type: 'SET_SERIES_OPEN'; payload: boolean };
+type SetToc = { type: 'SET_TOC'; payload: Toc };
+
+type Action = SetSeriesOpen | SetToc;
+
 type PostViewerState = {
   seriesOpen: boolean;
+  toc: null | Toc;
 };
 
 const PostViewerStateContext = createContext<PostViewerState | null>(null);
@@ -15,8 +23,13 @@ function reducer(state: PostViewerState, action: Action): PostViewerState {
         ...state,
         seriesOpen: action.payload,
       };
+    case 'SET_TOC':
+      return {
+        ...state,
+        toc: action.payload,
+      };
     default:
-      throw new Error(`Unhandled action type: ${action.type}`);
+      throw new Error(`Unhandled action type`);
   }
 }
 
@@ -39,6 +52,7 @@ export const usePostViewerDispatch = () => {
 const PostViewerProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     seriesOpen: false,
+    toc: null,
   });
   return (
     <PostViewerStateContext.Provider value={state}>

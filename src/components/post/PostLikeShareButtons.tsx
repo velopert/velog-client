@@ -7,6 +7,7 @@ import { useSpring, animated, config } from 'react-spring';
 import useBoolean from '../../lib/hooks/useBoolean';
 import { FaFacebook, FaTwitter } from 'react-icons/fa';
 import OutsideClickHandler from 'react-outside-click-handler';
+import Sticky from '../common/Sticky';
 
 const Wrapper = styled.div`
   position: relative;
@@ -16,7 +17,7 @@ const Positioner = styled.div`
   position: absolute;
   left: -7rem;
 `;
-const PostLikeShareButtonsBlock = styled.div<{ fixed: boolean }>`
+const PostLikeShareButtonsBlock = styled(Sticky)`
   width: 4rem;
   background: ${palette.gray0};
   border: 1px solid ${palette.gray1};
@@ -25,12 +26,6 @@ const PostLikeShareButtonsBlock = styled.div<{ fixed: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  ${props =>
-    props.fixed &&
-    css`
-      position: fixed;
-      top: 7rem;
-    `}
 `;
 
 const CircleButton = styled(animated.div)<{ active?: boolean }>`
@@ -110,40 +105,6 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
   likes,
   liked,
 }) => {
-  const [top, setTop] = useState(0);
-  const [fixed, setFixed] = useState(false);
-  const element = useRef<HTMLDivElement | null>(null);
-
-  const setup = useCallback(() => {
-    if (!element.current) return;
-    const pos = element.current.getBoundingClientRect();
-    setTop(pos.top + getScrollTop());
-  }, []);
-
-  const onScroll = useCallback(() => {
-    const scrollTop = getScrollTop();
-    console.log({ scrollTop, top });
-    const nextFixed = scrollTop + 112 > top;
-    if (fixed !== nextFixed) {
-      setFixed(nextFixed);
-      console.log('switfh~');
-    }
-  }, [fixed, top]);
-
-  // setup
-  useEffect(() => {
-    if (!element.current) return;
-    setup();
-  }, [setup]);
-
-  // register scroll event
-  useEffect(() => {
-    window.addEventListener('scroll', onScroll);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-    };
-  }, [onScroll]);
-
   const [animateLike, setAnimateLike] = useState(false);
   const [prevLiked, setPrevLiked] = useState(liked);
   const [open, toggle] = useBoolean(false);
@@ -175,9 +136,9 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
     toggle();
   };
   return (
-    <Wrapper ref={element}>
+    <Wrapper>
       <Positioner>
-        <PostLikeShareButtonsBlock fixed={fixed}>
+        <PostLikeShareButtonsBlock top={112}>
           <CircleButton
             data-testid="like"
             onClick={onLikeToggle}

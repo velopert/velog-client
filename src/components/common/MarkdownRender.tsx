@@ -11,6 +11,7 @@ import Typography from './Typography';
 export interface MarkdownRenderProps {
   markdown: string;
   codeTheme?: string;
+  onConvertFinish?: (html: string) => any;
 }
 
 const MarkdownRenderBlock = styled.div`
@@ -54,6 +55,7 @@ const { useState, useEffect } = React;
 const MarkdownRender: React.SFC<MarkdownRenderProps> = ({
   markdown,
   codeTheme = 'atom-one-light',
+  onConvertFinish,
 }) => {
   const [html, setHtml] = useState('');
   useEffect(() => {
@@ -65,8 +67,11 @@ const MarkdownRender: React.SFC<MarkdownRenderProps> = ({
       .process(markdown, (err: any, file: any) => {
         const html = String(file);
         setHtml(html);
+        if (onConvertFinish) {
+          onConvertFinish(html);
+        }
       });
-  }, [markdown]);
+  }, [markdown, onConvertFinish]);
 
   const markup = { __html: html };
   return (

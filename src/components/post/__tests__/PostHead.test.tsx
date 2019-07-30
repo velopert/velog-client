@@ -19,6 +19,7 @@ describe('PostHead', () => {
       onRemove: () => {},
       onEdit: () => {},
       shareButtons: null,
+      toc: null,
     };
     const utils = render(
       <MemoryRouter>

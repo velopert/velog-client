@@ -19,6 +19,7 @@ import { prepareEdit } from '../../modules/write';
 import PostLikeShareButtons from '../../components/post/PostLikeShareButtons';
 import gql from 'graphql-tag';
 import { shareFacebook, shareTwitter, copyText } from '../../lib/share';
+import PostToc from '../../components/post/PostToc';
 
 export interface PostViewerOwnProps {
   username: string;
@@ -201,6 +202,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
             liked={post.liked}
           />
         }
+        toc={<PostToc />}
       />
       <PostContent isMarkdown={post.is_markdown} body={post.body} />
       <PostComments
