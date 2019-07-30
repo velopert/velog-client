@@ -61,6 +61,7 @@ const MarkdownRender: React.SFC<MarkdownRenderProps> = ({
       .use(breaks)
       .use(prismPlugin)
       .use(htmlPlugin)
+      .use(slug)
       .process(markdown, (err: any, file: any) => {
         const html = String(file);
         setHtml(html);

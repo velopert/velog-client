@@ -13,6 +13,7 @@ import { pick } from 'ramda';
 import { escapeForUrl, safe } from '../../lib/utils';
 import { useMutation } from 'react-apollo-hooks';
 import useRouter from 'use-react-router';
+import { setHeadingId } from '../../lib/heading';
 
 type PublishActionButtonsContainerProps = {};
 
@@ -51,7 +52,10 @@ const PublishActionButtonsContainer: React.FC<
 
   const variables = {
     title: options.title,
-    body: options.mode === WriteMode.MARKDOWN ? options.markdown : options.html,
+    body:
+      options.mode === WriteMode.MARKDOWN
+        ? options.markdown
+        : setHeadingId(options.html),
     tags: options.tags,
     is_markdown: options.mode === WriteMode.MARKDOWN,
     is_temp: false,
