@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
-import { getScrollTop } from '../../lib/utils';
 import { LikeIcon, ShareIcon, ClipIcon } from '../../static/svg';
 import { useSpring, animated, config } from 'react-spring';
 import useBoolean from '../../lib/hooks/useBoolean';
@@ -28,7 +27,7 @@ const PostLikeShareButtonsBlock = styled(Sticky)`
   align-items: center;
 `;
 
-const CircleButton = styled(animated.div)<{ active?: boolean }>`
+const CircleButton = styled(animated.div)<{ active?: string }>`
   height: 3rem;
   width: 3rem;
   display: flex;
@@ -53,7 +52,7 @@ const CircleButton = styled(animated.div)<{ active?: boolean }>`
     border-color: ${palette.gray9};
   }
   ${props =>
-    props.active &&
+    props.active === 'true' &&
     css`
       background: ${palette.teal5};
       border-color: ${palette.teal5};
@@ -142,7 +141,7 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
           <CircleButton
             data-testid="like"
             onClick={onLikeToggle}
-            active={liked}
+            active={liked ? 'true' : 'false'}
             style={{
               transform: x
                 .interpolate({

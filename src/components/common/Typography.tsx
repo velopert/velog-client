@@ -5,7 +5,7 @@ import palette from '../../lib/styles/palette';
 const TypographyBlock = styled.div`
   font-size: 1.125rem;
   color: ${palette.gray7};
-  line-height: 1.75;
+  line-height: 1.85;
   letter-spacing: -0.02em;
   word-break: keep-all;
   word-wrap: break-word;
@@ -43,6 +43,32 @@ const TypographyBlock = styled.div`
       margin-top: 3rem;
       margin-bottom: 3rem;
     }
+  }
+
+  h1 {
+    font-size: 2.75em;
+  }
+  h2 {
+    font-size: 2em;
+  }
+  h3 {
+    font-size: 1.5em;
+  }
+  h4 {
+    font-size: 1.25em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin-bottom: 1rem;
+  }
+  p + h1,
+  p + h2,
+  p + h3,
+  p + h4 {
+    margin-top: 2.5rem;
   }
 `;
 
