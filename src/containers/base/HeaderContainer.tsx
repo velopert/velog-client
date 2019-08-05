@@ -2,25 +2,12 @@ import React, { useReducer } from 'react';
 import Header from '../../components/base/Header';
 import { getScrollTop } from '../../lib/utils';
 import { RootState } from '../../modules';
-import { connect } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import { showAuthModal } from '../../modules/core';
 
 const { useEffect, useRef, useCallback } = React;
 
-const mapStateToProps = (state: RootState) => ({
-  user: state.core.user,
-  custom: state.header.custom,
-  userLogo: state.header.userLogo,
-  velogUsername: state.header.velogUsername,
-});
-
-const mapDispatchToProps = {
-  showAuthModal,
-};
-interface OwnProps {}
-type StateProps = ReturnType<typeof mapStateToProps>;
-type DispatchProps = typeof mapDispatchToProps;
-type HeaderContainerProps = OwnProps & StateProps & DispatchProps;
+type HeaderContainerProps = {};
 
 type StartFloating = {
   type: 'START_FLOATING';
@@ -66,14 +53,18 @@ function reducer(state: FloatingState, action: Action) {
   }
 }
 
-const HeaderContainer: React.SFC<HeaderContainerProps> = ({
-  showAuthModal,
-  user,
-  custom,
-  userLogo,
-  velogUsername,
-}) => {
-  const [{ floating, margin }, dispatch] = useReducer(reducer, {
+const HeaderContainer: React.SFC<HeaderContainerProps> = () => {
+  const { user, custom, userLogo, velogUsername } = useSelector(
+    (state: RootState) => ({
+      user: state.core.user,
+      custom: state.header.custom,
+      userLogo: state.header.userLogo,
+      velogUsername: state.header.velogUsername,
+    }),
+  );
+  const dispatch = useDispatch();
+
+  const [{ floating, margin }, localDispatch] = useReducer(reducer, {
     floating: false,
     margin: 0,
   });
@@ -85,10 +76,10 @@ const HeaderContainer: React.SFC<HeaderContainerProps> = ({
     const scrollTop = getScrollTop();
 
     if (scrollTop > 80) {
-      dispatch({ type: 'START_FLOATING' });
+      localDispatch({ type: 'START_FLOATING' });
     }
     if (scrollTop === 0) {
-      dispatch({ type: 'EXIT_FLOATING' });
+      localDispatch({ type: 'EXIT_FLOATING' });
       prevDirection.current = 'DOWN';
       prevScrollTop.current = 0;
       baseY.current = 0;
@@ -122,7 +113,7 @@ const HeaderContainer: React.SFC<HeaderContainerProps> = ({
       baseY.current = prevScrollTop.current + (direction === 'DOWN' ? 80 : 0);
     }
 
-    dispatch({
+    localDispatch({
       type: 'SET_MARGIN',
       margin: margin,
     });
@@ -139,7 +130,7 @@ const HeaderContainer: React.SFC<HeaderContainerProps> = ({
   }, [onScroll]);
 
   const onLoginClick = () => {
-    showAuthModal('LOGIN');
+    dispatch(showAuthModal('LOGIN'));
   };
 
   return (
@@ -155,7 +146,4 @@ const HeaderContainer: React.SFC<HeaderContainerProps> = ({
   );
 };
 
-export default connect<StateProps, DispatchProps, OwnProps, RootState>(
-  mapStateToProps,
-  mapDispatchToProps,
-)(HeaderContainer);
+export default HeaderContainer;

@@ -1,5 +1,9 @@
-import { createReducer, updateKey } from '../lib/utils';
-import { createStandardAction } from 'typesafe-actions';
+import { updateKey } from '../lib/utils';
+import {
+  createStandardAction,
+  createReducer,
+  ActionType,
+} from 'typesafe-actions';
 
 const SET_CUSTOM = 'header/SET_CUSTOM';
 const SET_USER_LOGO = 'header/SET_USER_LOGO';
@@ -22,9 +26,13 @@ export const setVelogUsername = createStandardAction(SET_VELOG_USERNAME)<
   string
 >();
 
-type SetCustom = ReturnType<typeof setCustom>;
-type SetUserLogo = ReturnType<typeof setUserLogo>;
-type SetVelogUsername = ReturnType<typeof setVelogUsername>;
+export const headerActions = {
+  setCustom,
+  setUserLogo,
+  setVelogUsername,
+};
+
+type HeaderAction = ActionType<typeof headerActions>;
 
 const initialState: HeaderState = {
   custom: false,
@@ -32,19 +40,16 @@ const initialState: HeaderState = {
   velogUsername: null,
 };
 
-const header = createReducer(
-  {
-    [SET_CUSTOM]: (state, action: SetCustom) => {
-      return updateKey(state, 'custom', action.payload);
-    },
-    [SET_USER_LOGO]: (state, { payload }: SetUserLogo) => {
-      return updateKey(state, 'userLogo', payload);
-    },
-    [SET_VELOG_USERNAME]: (state, { payload }: SetVelogUsername) => {
-      return updateKey(state, 'velogUsername', payload);
-    },
+const header = createReducer<HeaderState, HeaderAction>(initialState, {
+  [SET_CUSTOM]: (state, action) => {
+    return updateKey(state, 'custom', action.payload);
   },
-  initialState,
-);
+  [SET_USER_LOGO]: (state, { payload }) => {
+    return updateKey(state, 'userLogo', payload);
+  },
+  [SET_VELOG_USERNAME]: (state, { payload }) => {
+    return updateKey(state, 'velogUsername', payload);
+  },
+});
 
 export default header;
