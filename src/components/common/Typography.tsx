@@ -7,6 +7,7 @@ const TypographyBlock = styled.div`
   color: ${palette.gray7};
   line-height: 1.85;
   letter-spacing: -0.02em;
+  text-align: justify;
   word-break: keep-all;
   word-wrap: break-word;
   font-family: 'Spoqa Han Sans', -apple-system, BlinkMacSystemFont,

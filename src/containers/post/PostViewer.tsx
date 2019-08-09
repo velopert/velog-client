@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   READ_POST,
   SinglePost,
@@ -20,6 +20,9 @@ import PostLikeShareButtons from '../../components/post/PostLikeShareButtons';
 import gql from 'graphql-tag';
 import { shareFacebook, shareTwitter, copyText } from '../../lib/share';
 import PostToc from '../../components/post/PostToc';
+import { setMargin, setDirection, setBaseY } from '../../modules/header';
+import { getScrollTop } from '../../lib/utils';
+import { RootState } from '../../modules';
 
 export interface PostViewerOwnProps {
   username: string;
@@ -36,6 +39,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
   match,
 }) => {
   const userId = useUserId();
+  const margin = useSelector((state: RootState) => state.header.margin);
   const dispatch = useDispatch();
   const readPost = useQuery<{ post: SinglePost }>(READ_POST, {
     variables: {
@@ -180,6 +184,15 @@ const PostViewer: React.FC<PostViewerProps> = ({
 
   const { post } = data;
 
+  const hideHeader = () => {
+    // dispatch(setMargin(-80));
+    // dispatch(setDirection('DOWN'));
+    // dispatch(setBaseY(0));
+    // setTimeout(() => {
+    //   dispatch(setMargin(-80));
+    //   dispatch(setDirection('DOWN'));
+    // });
+  };
   return (
     <PostViewerProvider>
       <PostHead
@@ -202,7 +215,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
             liked={post.liked}
           />
         }
-        toc={<PostToc />}
+        toc={<PostToc hideHeader={hideHeader} />}
       />
       <PostContent isMarkdown={post.is_markdown} body={post.body} />
       <PostComments

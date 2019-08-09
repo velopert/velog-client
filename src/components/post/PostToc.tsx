@@ -16,7 +16,7 @@ const Positioner = styled.div`
 
 const PostTocBlock = styled(Sticky)`
   width: 240px;
-  margin-left: 3rem;
+  margin-left: 5rem;
   border-left: 2px solid ${palette.gray2};
   padding-left: 0.75rem;
   padding-top: 0.25rem;
@@ -28,6 +28,7 @@ const PostTocBlock = styled(Sticky)`
 
 const TocItem = styled.div<{ active: boolean }>`
   display: block;
+  transition: 0.125s all ease-in;
   a {
     &:hover {
       color: ${palette.gray9};
@@ -39,15 +40,18 @@ const TocItem = styled.div<{ active: boolean }>`
     props.active &&
     css`
       color: ${palette.gray9};
+      transform: scale(1.05);
     `}
   & + & {
     margin-top: 4px;
   }
 `;
 
-export interface PostTocProps {}
+export interface PostTocProps {
+  hideHeader: () => void;
+}
 
-const PostToc: React.FC<PostTocProps> = props => {
+const PostToc: React.FC<PostTocProps> = ({ hideHeader }) => {
   const { toc } = usePostViewerState();
   const [activeId, setActiveId] = useState<null | string>(null);
   const [headingTops, setHeadingTops] = useState<
@@ -136,7 +140,9 @@ const PostToc: React.FC<PostTocProps> = props => {
               style={{ marginLeft: item.level * 12 }}
               active={activeId === item.id}
             >
-              <a href={`#${item.id}`}>{item.text}</a>
+              <a href={`#${item.id}`} onClick={hideHeader}>
+                {item.text}
+              </a>
             </TocItem>
           ))}
         </PostTocBlock>

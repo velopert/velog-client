@@ -72,7 +72,17 @@ const HeaderContainer: React.SFC<HeaderContainerProps> = () => {
   const prevDirection = useRef<'DOWN' | 'UP'>('DOWN');
   const baseY = useRef(0);
 
+  const scrolling = useRef(false);
+  const scrollingTimeoutId = useRef<null | number>(null);
+
   const onScroll = useCallback(() => {
+    if (scrollingTimeoutId.current) {
+      clearTimeout(scrollingTimeoutId.current);
+    }
+    scrollingTimeoutId.current = setTimeout(() => {
+      scrolling.current = false;
+    }, 500);
+
     const scrollTop = getScrollTop();
 
     if (scrollTop > 80) {
@@ -98,6 +108,17 @@ const HeaderContainer: React.SFC<HeaderContainerProps> = () => {
       margin = 0;
     }
 
+    // Scrolled by TOC
+    if (!scrolling.current && scrollTop - prevScrollTop.current < -80) {
+      localDispatch({
+        type: 'SET_MARGIN',
+        margin: -80,
+      });
+      prevScrollTop.current = scrollTop;
+      prevDirection.current = 'DOWN';
+      baseY.current = 0;
+      return;
+    }
     // hide header when moved by TOC
     // if (
     //   prevDirection.current === 'DOWN' &&
@@ -120,6 +141,7 @@ const HeaderContainer: React.SFC<HeaderContainerProps> = () => {
 
     prevDirection.current = direction;
     prevScrollTop.current = scrollTop;
+    scrolling.current = true;
   }, []);
 
   useEffect(() => {

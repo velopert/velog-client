@@ -1,14 +1,23 @@
-import header, { setCustom, setUserLogo, setVelogUsername } from '../header';
+import header, {
+  setCustom,
+  setUserLogo,
+  setVelogUsername,
+  HeaderState,
+} from '../header';
 
 describe('header redux module', () => {
   describe('reducer', () => {
-    const initialState = {
+    const initialState: HeaderState = {
       custom: false,
       userLogo: null,
       velogUsername: null,
+      floating: false,
+      margin: 0,
+      direction: 'DOWN',
+      baseY: 0,
     };
     it('should have initialState', () => {
-      const state = header(undefined, {});
+      const state = header(undefined, { type: 'INIT' } as any);
       expect(state).toEqual(initialState);
     });
     it('handles SET_CUSTOM action', () => {
