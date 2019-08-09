@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import Header from '../../components/base/Header';
 import { getScrollTop } from '../../lib/utils';
 import { RootState } from '../../modules';
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { showAuthModal } from '../../modules/core';
 
 const { useEffect, useRef, useCallback } = React;

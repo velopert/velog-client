@@ -47,11 +47,9 @@ const TocItem = styled.div<{ active: boolean }>`
   }
 `;
 
-export interface PostTocProps {
-  hideHeader: () => void;
-}
+export interface PostTocProps {}
 
-const PostToc: React.FC<PostTocProps> = ({ hideHeader }) => {
+const PostToc: React.FC<PostTocProps> = () => {
   const { toc } = usePostViewerState();
   const [activeId, setActiveId] = useState<null | string>(null);
   const [headingTops, setHeadingTops] = useState<
@@ -140,9 +138,7 @@ const PostToc: React.FC<PostTocProps> = ({ hideHeader }) => {
               style={{ marginLeft: item.level * 12 }}
               active={activeId === item.id}
             >
-              <a href={`#${item.id}`} onClick={hideHeader}>
-                {item.text}
-              </a>
+              <a href={`#${item.id}`}>{item.text}</a>
             </TocItem>
           ))}
         </PostTocBlock>

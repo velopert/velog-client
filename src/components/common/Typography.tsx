@@ -7,9 +7,11 @@ const TypographyBlock = styled.div`
   color: ${palette.gray7};
   line-height: 1.85;
   letter-spacing: -0.02em;
-  text-align: justify;
   word-break: keep-all;
   word-wrap: break-word;
+  p {
+    text-align: justify;
+  }
   font-family: 'Spoqa Han Sans', -apple-system, BlinkMacSystemFont,
     -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Apple SD Gothic Neo',
     arial, 나눔고딕, 'Nanum Gothic', 돋움;
@@ -47,22 +49,23 @@ const TypographyBlock = styled.div`
   }
 
   h1 {
-    font-size: 2.75em;
+    font-size: 3rem;
   }
   h2 {
-    font-size: 2em;
+    font-size: 2rem;
   }
   h3 {
-    font-size: 1.5em;
+    font-size: 1.5rem;
   }
   h4 {
-    font-size: 1.25em;
+    font-size: 1.125rem;
   }
 
   h1,
   h2,
   h3,
   h4 {
+    line-height: 1.35;
     margin-bottom: 1rem;
   }
   p + h1,

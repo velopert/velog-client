@@ -11,10 +11,6 @@ describe('header redux module', () => {
       custom: false,
       userLogo: null,
       velogUsername: null,
-      floating: false,
-      margin: 0,
-      direction: 'DOWN',
-      baseY: 0,
     };
     it('should have initialState', () => {
       const state = header(undefined, { type: 'INIT' } as any);

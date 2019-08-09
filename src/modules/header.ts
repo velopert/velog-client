@@ -24,10 +24,6 @@ export interface HeaderState {
   custom: boolean;
   userLogo: null | UserLogo;
   velogUsername: string | null;
-  floating: boolean;
-  margin: number;
-  direction: 'UP' | 'DOWN';
-  baseY: number;
 }
 
 export const setCustom = createStandardAction(SET_CUSTOM)<boolean>();
@@ -61,10 +57,6 @@ const initialState: HeaderState = {
   custom: false,
   userLogo: null,
   velogUsername: null,
-  floating: false,
-  margin: 0,
-  direction: 'DOWN',
-  baseY: 0,
 };
 
 const header = createReducer<HeaderState, HeaderAction>(initialState, {
@@ -77,20 +69,6 @@ const header = createReducer<HeaderState, HeaderAction>(initialState, {
   [SET_VELOG_USERNAME]: (state, { payload }) => {
     return updateKey(state, 'velogUsername', payload);
   },
-  [START_FLOATING]: state => ({
-    ...state,
-    margin: -80,
-    floating: true,
-  }),
-  [EXIT_FLOATING]: state => ({
-    ...state,
-    floating: false,
-    margin: -80,
-  }),
-  [SET_MARGIN]: (state, action) => updateKey(state, 'margin', action.payload),
-  [SET_DIRECTION]: (state, action) =>
-    updateKey(state, 'direction', action.payload),
-  [SET_BASE_Y]: (state, action) => updateKey(state, 'baseY', action.payload),
 });
 
 export default header;
