@@ -20,6 +20,7 @@ import PostLikeShareButtons from '../../components/post/PostLikeShareButtons';
 import gql from 'graphql-tag';
 import { shareFacebook, shareTwitter, copyText } from '../../lib/share';
 import PostToc from '../../components/post/PostToc';
+import LinkedPostList from '../../components/post/LinkedPostList';
 
 export interface PostViewerOwnProps {
   username: string;
@@ -205,6 +206,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         toc={<PostToc />}
       />
       <PostContent isMarkdown={post.is_markdown} body={post.body} />
+      <LinkedPostList linkedPosts={post.linked_posts} />
       <PostComments
         count={post.comments_count}
         comments={post.comments}

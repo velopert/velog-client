@@ -77,12 +77,10 @@ export interface LinkedPost {
   id: string;
   title: string;
   url_slug: string;
-  user: User;
-}
-
-export interface User {
-  id: string;
-  username: string;
+  user: {
+    id: string;
+    username: string;
+  };
 }
 
 export interface SinglePost {

@@ -4,7 +4,7 @@ import VelogResponsive from '../velog/VelogResponsive';
 import palette from '../../lib/styles/palette';
 
 const PostCommentsTemplateBlock = styled(VelogResponsive)`
-  margin-top: 7.5rem;
+  margin-top: 3rem;
   color: ${palette.gray8};
   h4 {
     font-size: 1.125rem;
