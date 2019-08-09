@@ -68,6 +68,23 @@ export type SeriesPost = {
   };
 };
 
+export interface LinkedPosts {
+  previous: LinkedPost | null;
+  next: LinkedPost | null;
+}
+
+export interface LinkedPost {
+  id: string;
+  title: string;
+  url_slug: string;
+  user: User;
+}
+
+export interface User {
+  id: string;
+  username: string;
+}
+
 export interface SinglePost {
   id: string;
   title: string;
@@ -102,6 +119,7 @@ export interface SinglePost {
   } | null;
   liked: boolean;
   likes: number;
+  linked_posts: LinkedPosts;
 }
 
 export interface CommentWithReplies {
@@ -191,6 +209,26 @@ export const READ_POST = gql`
               id
               username
             }
+          }
+        }
+      }
+      linked_posts {
+        previous {
+          id
+          title
+          url_slug
+          user {
+            id
+            username
+          }
+        }
+        next {
+          id
+          title
+          url_slug
+          user {
+            id
+            username
           }
         }
       }
