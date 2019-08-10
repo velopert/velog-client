@@ -13,6 +13,7 @@ import { NavLink, withRouter, RouteComponentProps } from 'react-router-dom';
 import {
   usePostViewerState,
   usePostViewerDispatch,
+  usePostViewerPrefetch,
 } from './PostViewerProvider';
 
 const PostSeriesInfoBlock = styled.div`
@@ -168,6 +169,8 @@ const PostSeriesInfo: React.FC<PostSeriesInfoProps> = ({
   const dispatch = usePostViewerDispatch();
   const state = usePostViewerState();
 
+  const prefetch = usePostViewerPrefetch();
+
   useEffect(() => {
     dispatch({
       type: 'SET_SERIES_OPEN',
@@ -192,8 +195,12 @@ const PostSeriesInfo: React.FC<PostSeriesInfoProps> = ({
     history.push(`/@${username}/${nextPos.url_slug}`);
   };
 
+  const onMouseEnter = () => {
+    prefetch();
+  };
+
   return (
-    <PostSeriesInfoBlock>
+    <PostSeriesInfoBlock onMouseEnter={onMouseEnter}>
       <h2>{name}</h2>
       <SeriesImage className="series-corner-image" />
       {open && (

@@ -89,7 +89,7 @@ describe('PostSeriesInfo', () => {
     };
     const utils = render(
       <MemoryRouter>
-        <PostViewerProvider>
+        <PostViewerProvider prefetchLinkedPosts={() => {}}>
           <PostSeriesInfo {...initialProps} {...props} />
         </PostViewerProvider>
       </MemoryRouter>,

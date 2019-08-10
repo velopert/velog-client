@@ -15,6 +15,7 @@ type PostViewerState = {
 
 const PostViewerStateContext = createContext<PostViewerState | null>(null);
 const PostViewerDispatchContext = createContext<Dispatch<Action> | null>(null);
+const PostViewerPrefetchContext = createContext<Function | null>(null);
 
 function reducer(state: PostViewerState, action: Action): PostViewerState {
   switch (action.type) {
@@ -49,18 +50,31 @@ export const usePostViewerDispatch = () => {
   return dispatch;
 };
 
-const PostViewerProvider: React.FC = ({ children }) => {
+export const usePostViewerPrefetch = () => {
+  const prefetch = useContext(PostViewerPrefetchContext);
+  if (!prefetch) {
+    throw new Error('not wrapped with PostViewerProvider');
+  }
+  return prefetch;
+};
+
+const PostViewerProvider: React.FC<{ prefetchLinkedPosts: Function }> = ({
+  children,
+  prefetchLinkedPosts,
+}) => {
   const [state, dispatch] = useReducer(reducer, {
     seriesOpen: false,
     toc: null,
   });
   return (
-    <PostViewerStateContext.Provider value={state}>
-      <PostViewerDispatchContext.Provider
-        value={dispatch}
-        children={children}
-      />
-    </PostViewerStateContext.Provider>
+    <PostViewerPrefetchContext.Provider value={prefetchLinkedPosts}>
+      <PostViewerStateContext.Provider value={state}>
+        <PostViewerDispatchContext.Provider
+          value={dispatch}
+          children={children}
+        />
+      </PostViewerStateContext.Provider>
+    </PostViewerPrefetchContext.Provider>
   );
 };
 

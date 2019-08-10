@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { render } from 'react-testing-library';
 import LinkedPostList, { LinkedPostListProps } from '../LinkedPostList';
+import { MemoryRouter } from 'react-router';
 
 describe('LinkedPostList', () => {
   const setup = (props: Partial<LinkedPostListProps> = {}) => {
@@ -27,7 +28,11 @@ describe('LinkedPostList', () => {
       },
     };
 
-    const utils = render(<LinkedPostList {...initialProps} {...props} />);
+    const utils = render(
+      <MemoryRouter>
+        <LinkedPostList {...initialProps} {...props} />
+      </MemoryRouter>,
+    );
     return {
       ...utils,
     };

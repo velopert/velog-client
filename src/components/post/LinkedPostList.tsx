@@ -9,6 +9,7 @@ const LinkedPostsBlock = styled(VelogResponsive)`
   display: flex;
 `;
 const Wrapper = styled.div`
+  min-width: 0;
   flex: 1;
   & + & {
     margin-left: 3rem;

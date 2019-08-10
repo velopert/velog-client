@@ -81,6 +81,10 @@ const samplePost = {
     },
   ],
   series: null,
+  linked_posts: {
+    previous: null,
+    next: null,
+  },
 };
 
 describe('PostViewer', () => {

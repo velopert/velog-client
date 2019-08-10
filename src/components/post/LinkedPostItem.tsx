@@ -3,6 +3,8 @@ import styled, { css, keyframes } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import { LinkedPost } from '../../lib/graphql/post';
+import { Link } from 'react-router-dom';
+import { ellipsis } from '../../lib/styles/utils';
 
 const bounceLeft = keyframes`
   0% {
@@ -48,7 +50,7 @@ const Circle = styled.div<{ right?: boolean }>`
         `}
 `;
 
-const LinkedPostItemBlock = styled.div<{ right?: boolean }>`
+const LinkedPostItemBlock = styled(Link)<{ right?: boolean }>`
   cursor: pointer;
   background: ${palette.gray0};
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.06);
@@ -58,7 +60,7 @@ const LinkedPostItemBlock = styled.div<{ right?: boolean }>`
   height: 4rem;
   display: flex;
   align-items: center;
-
+  text-decoration: none;
   ${props =>
     props.right &&
     css`
@@ -80,17 +82,25 @@ const Text = styled.div<{ right?: boolean }>`
   flex-direction: column;
   align-items: ${props => (props.right ? 'flex-end' : 'flex-start')};
   line-height: 1;
+  min-width: 0;
   .description {
     font-size: 0.75rem;
     font-weight: bold;
     color: ${palette.gray7};
   }
   h3 {
+    ${props =>
+      props.right &&
+      css`
+        text-align: right;
+      `};
+    width: 100%;
     font-size: 1.125rem;
     color: ${palette.gray7};
     line-height: 1;
     margin: 0;
     margin-top: 0.5rem;
+    ${ellipsis};
   }
 `;
 
@@ -106,8 +116,14 @@ const LinkedPostItem: React.FC<LinkedPostItemProps> = ({
   if (!linkedPost) {
     return null;
   }
+  const to = `/@${linkedPost.user.username}/${linkedPost.url_slug}`;
+
   return (
-    <LinkedPostItemBlock right={right}>
+    <LinkedPostItemBlock
+      right={right}
+      to={to}
+      onClick={() => window.scrollTo(0, 0)}
+    >
       <Circle right={right}>
         {right ? <MdArrowForward /> : <MdArrowBack />}
       </Circle>

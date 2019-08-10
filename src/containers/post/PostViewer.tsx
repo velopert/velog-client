@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   READ_POST,
@@ -6,6 +6,7 @@ import {
   REMOVE_POST,
   LIKE_POST,
   UNLIKE_POST,
+  LinkedPost,
 } from '../../lib/graphql/post';
 import PostHead from '../../components/post/PostHead';
 import PostContent from '../../components/post/PostContent';
@@ -21,6 +22,7 @@ import gql from 'graphql-tag';
 import { shareFacebook, shareTwitter, copyText } from '../../lib/share';
 import PostToc from '../../components/post/PostToc';
 import LinkedPostList from '../../components/post/LinkedPostList';
+import { getScrollTop } from '../../lib/utils';
 
 export interface PostViewerOwnProps {
   username: string;
@@ -45,6 +47,19 @@ const PostViewer: React.FC<PostViewerProps> = ({
     },
   });
   const client = useApolloClient();
+  const prefetchPost = useCallback(
+    ({ username, urlSlug }: { username: string; urlSlug: string }) => {
+      client.query({
+        query: READ_POST,
+        variables: {
+          username,
+          url_slug: urlSlug,
+        },
+      });
+    },
+    [client],
+  );
+  const prefetched = useRef(false);
 
   const [removePost] = useMutation(REMOVE_POST);
   const [likePost, { loading: loadingLike }] = useMutation(LIKE_POST);
@@ -52,11 +67,55 @@ const PostViewer: React.FC<PostViewerProps> = ({
 
   const { loading, error, data } = readPost;
 
+  const prefetchLinkedPosts = useCallback(() => {
+    if (!data || !data.post) return;
+    if (prefetched.current) return;
+    const { linked_posts: linkedPosts } = data.post;
+    const { next, previous } = linkedPosts;
+    const getVariables = (post: LinkedPost) => ({
+      username: post.user.username,
+      urlSlug: post.url_slug,
+    });
+    if (next) {
+      prefetchPost(getVariables(next));
+    }
+    if (previous) {
+      prefetchPost(getVariables(previous));
+    }
+  }, [data, prefetchPost]);
+
+  const onScroll = useCallback(() => {
+    const scrollTop = getScrollTop();
+    const { scrollHeight } = document.body;
+    const { innerHeight } = window;
+    const percentage = ((scrollTop + innerHeight) / scrollHeight) * 100;
+    if (percentage > 50) {
+      prefetchLinkedPosts();
+    }
+  }, [prefetchLinkedPosts]);
+
   useEffect(() => {
     if (!data) return;
     if (!data.post) return;
+
+    // schedule post prefetch
+    const timeoutId = setTimeout(prefetchLinkedPosts, 1000 * 5);
+
     dispatch(postActions.setPostId(data.post.id));
-  }, [data, dispatch]);
+
+    prefetched.current = false;
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [data, dispatch, prefetchLinkedPosts]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [onScroll]);
 
   const onRemove = async () => {
     if (!data || !data.post) return;
@@ -182,7 +241,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
   const { post } = data;
 
   return (
-    <PostViewerProvider>
+    <PostViewerProvider prefetchLinkedPosts={prefetchLinkedPosts}>
       <PostHead
         title={post.title}
         tags={post.tags}
