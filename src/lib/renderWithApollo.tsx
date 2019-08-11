@@ -3,7 +3,7 @@ import { MockedResponse, MockLink } from 'apollo-link-mock';
 import { ApolloClient } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo-hooks';
 import { InMemoryCache } from 'apollo-boost';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 
 export function createClient(mocks: MockedResponse[]) {
   return new ApolloClient({

@@ -3,7 +3,7 @@ import PublishSeriesSectionContainer, {
   PublishSeriesSectionContainerProps,
 } from '../PublishSeriesSectionContainer';
 import renderWithProviders from '../../../lib/renderWithProviders';
-import { fireEvent } from 'react-testing-library';
+import { fireEvent } from '@testing-library/react';
 
 describe('PublishSeriesSectionContainer', () => {
   const setup = (props: Partial<PublishSeriesSectionContainerProps> = {}) => {

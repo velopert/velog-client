@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, waitForElement, fireEvent } from 'react-testing-library';
+import { render, waitForElement, fireEvent } from '@testing-library/react';
 import TagInputContainer, {
   TagInputContainerProps,
 } from '../TagInputContainer';

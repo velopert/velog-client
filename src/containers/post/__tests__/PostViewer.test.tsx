@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, waitForElement } from 'react-testing-library';
+import { render, waitForElement } from '@testing-library/react';
 import PostViewer, { PostViewerProps, PostViewerOwnProps } from '../PostViewer';
 import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from 'react-apollo/test-utils';

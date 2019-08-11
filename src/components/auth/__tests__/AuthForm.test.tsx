@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from 'react-testing-library';
+import { render, fireEvent } from '@testing-library/react';
 import AuthForm, { AuthFormProps } from '../AuthForm';
 import { AuthMode } from '../../../modules/core';
 

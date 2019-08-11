@@ -4,7 +4,7 @@ import {
   fireEvent,
   waitForElement,
   waitForElementToBeRemoved,
-} from 'react-testing-library';
+} from '@testing-library/react';
 import PublishSeriesCreate, {
   PublishSeriesCreateProps,
 } from '../PublishSeriesCreate';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, fireEvent, waitForElement } from 'react-testing-library';
+import { render, fireEvent, waitForElement } from '@testing-library/react';
 import ActiveEditor, { ActiveEditorProps } from '../ActiveEditor';
 import { createStore } from 'redux';
 import rootReducer from '../../../modules';

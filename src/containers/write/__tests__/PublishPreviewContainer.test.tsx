@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, getByText } from 'react-testing-library';
+import { render, getByText } from '@testing-library/react';
 import PublishPreviewContainer, {
   PublishPreviewContainerProps,
 } from '../PublishPreviewContainer';

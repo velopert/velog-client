@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, fireEvent } from 'react-testing-library';
+import { render, fireEvent } from '@testing-library/react';
 import PostSeriesInfo, { PostSeriesInfoProps } from '../PostSeriesInfo';
 import { MemoryRouter, RouteComponentProps } from 'react-router';
 import PostViewerProvider from '../PostViewerProvider';

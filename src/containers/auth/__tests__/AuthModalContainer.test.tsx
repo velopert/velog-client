@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, cleanup } from 'react-testing-library';
+import { render, fireEvent, cleanup } from '@testing-library/react';
 import configureMockStore from 'redux-mock-store';
 import AuthModalContainer from '../AuthModalContainer';
 import rootReducer, { RootState } from '../../../modules';

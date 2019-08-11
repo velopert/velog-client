@@ -4,7 +4,7 @@ import {
   fireEvent,
   waitForElementToBeRemoved,
   queryByText,
-} from 'react-testing-library';
+} from '@testing-library/react';
 import PostComments, { PostCommentsProps } from '../PostComments';
 import {
   Comment,

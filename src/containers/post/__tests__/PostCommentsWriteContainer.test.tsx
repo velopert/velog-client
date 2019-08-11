@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { fireEvent } from 'react-testing-library';
+import { fireEvent } from '@testing-library/react';
 import PostCommentsWriteContainer, {
   PostCommentsWriteContainerProps,
 } from '../PostCommentsWriteContainer';
