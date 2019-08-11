@@ -260,6 +260,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
             onShareClick={onShareClick}
             likes={post.likes}
             liked={post.liked}
+            postId={post.id}
           />
         }
         toc={<PostToc />}

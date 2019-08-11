@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { usePrevious } from 'react-use';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { LikeIcon, ShareIcon, ClipIcon } from '../../static/svg';
@@ -96,6 +97,7 @@ export interface PostLikeShareButtonsProps {
   onShareClick: (type: 'facebook' | 'twitter' | 'clipboard') => void;
   likes: number;
   liked: boolean;
+  postId: string;
 }
 
 const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
@@ -103,17 +105,19 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
   onShareClick,
   likes,
   liked,
+  postId,
 }) => {
   const [animateLike, setAnimateLike] = useState(false);
   const [prevLiked, setPrevLiked] = useState(liked);
   const [open, toggle] = useBoolean(false);
+  const prevPostId = usePrevious(postId);
 
   useEffect(() => {
     setPrevLiked(liked);
-    if (!prevLiked && liked) {
+    if (!prevLiked && liked && prevPostId === postId) {
       setAnimateLike(true);
     }
-  }, [liked, prevLiked]);
+  }, [liked, postId, prevLiked, prevPostId]);
 
   const { x } = useSpring({
     from: { x: 0 },

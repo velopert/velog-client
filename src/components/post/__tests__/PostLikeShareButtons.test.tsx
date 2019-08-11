@@ -8,8 +8,10 @@ describe('PostLikeShareButtons', () => {
   const setup = (props: Partial<PostLikeShareButtonsProps> = {}) => {
     const initialProps: PostLikeShareButtonsProps = {
       onLikeToggle: () => {},
+      onShareClick: () => {},
       likes: 0,
       liked: false,
+      postId: 'id',
     };
     const utils = render(<PostLikeShareButtons {...initialProps} {...props} />);
     return {
