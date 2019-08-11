@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { HTMLProps } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import { LinkedPost } from '../../lib/graphql/post';
 import { Link } from 'react-router-dom';
 import { ellipsis } from '../../lib/styles/utils';
+import PlainLink from '../common/PlainLink';
 
 const bounceLeft = keyframes`
   0% {
@@ -50,7 +51,7 @@ const Circle = styled.div<{ right?: boolean }>`
         `}
 `;
 
-const LinkedPostItemBlock = styled(Link)<{ right?: boolean }>`
+const LinkedPostItemBlock = styled(PlainLink)<{ right?: boolean }>`
   cursor: pointer;
   background: ${palette.gray0};
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.06);
