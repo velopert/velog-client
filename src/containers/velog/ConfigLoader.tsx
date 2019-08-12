@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { Query, QueryResult } from 'react-apollo';
+import { Query } from '@apollo/react-components';
 import { connect } from 'react-redux';
 import { GET_VELOG_CONFIG, VelogConfig } from '../../lib/graphql/user';
 import { setUserLogo, setCustom, setVelogUsername } from '../../modules/header';
 import { RootState } from '../../modules';
+import { QueryResult } from '@apollo/react-common';
 
 interface ConfigEffectProps {
   velogConfig: VelogConfig;

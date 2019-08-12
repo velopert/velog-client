@@ -14,7 +14,7 @@ import PostComments from './PostComments';
 import { postActions } from '../../modules/post';
 import PostViewerProvider from '../../components/post/PostViewerProvider';
 import { useUserId } from '../../lib/hooks/useUser';
-import { useQuery, useMutation, useApolloClient } from 'react-apollo-hooks';
+import { useQuery, useMutation, useApolloClient } from '@apollo/react-hooks';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { prepareEdit } from '../../modules/write';
 import PostLikeShareButtons from '../../components/post/PostLikeShareButtons';

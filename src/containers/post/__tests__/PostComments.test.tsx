@@ -14,7 +14,7 @@ import {
 import renderWithRedux from '../../../lib/renderWithRedux';
 import { ApolloProvider } from 'react-apollo-hooks';
 import { createClient } from '../../../lib/renderWithApollo';
-import { MockedProvider } from 'react-apollo/test-utils';
+import { MockedProvider } from '@apollo/react-testing';
 import { setUser } from '../../../modules/core';
 
 const sampleComments: Comment[] = [

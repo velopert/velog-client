@@ -11,7 +11,7 @@ import {
 } from '../../lib/graphql/post';
 import { pick } from 'ramda';
 import { escapeForUrl, safe } from '../../lib/utils';
-import { useMutation } from 'react-apollo-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import useRouter from 'use-react-router';
 import { setHeadingId } from '../../lib/heading';
 
@@ -70,7 +70,7 @@ const PublishActionButtonsContainer: React.FC<
     const response = await writePost({
       variables: variables,
     });
-    if (!response.data) return;
+    if (!response || !response.data) return;
     const { user, url_slug } = response.data.writePost;
     history.push(`/@${user.username}/${url_slug}`);
   };
@@ -82,7 +82,7 @@ const PublishActionButtonsContainer: React.FC<
         ...variables,
       },
     });
-    if (!response.data) return;
+    if (!response || !response.data) return;
     console.log(response.data);
     const { user, url_slug } = response.data.editPost;
     history.push(`/@${user.username}/${url_slug}`);

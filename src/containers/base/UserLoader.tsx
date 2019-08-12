@@ -1,9 +1,10 @@
 import React, { useEffect, useCallback } from 'react';
-import { Query, QueryResult } from 'react-apollo';
+import { Query } from '@apollo/react-components';
 import { connect } from 'react-redux';
 import { CurrentUser, GET_CURRENT_USER } from '../../lib/graphql/user';
 import { RootState } from '../../modules';
 import { setUser } from '../../modules/core';
+import { QueryResult } from '@apollo/react-common';
 
 const DetectUserChange: React.FC<{
   user: CurrentUser | null;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PostCommentsWrite from '../../components/post/PostCommentsWrite';
 import { WRITE_COMMENT, RELOAD_COMMENTS } from '../../lib/graphql/post';
-import { useMutation, useQuery } from 'react-apollo-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 
 export interface PostCommentsWriteContainerProps {
   postId: string;

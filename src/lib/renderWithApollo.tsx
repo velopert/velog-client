@@ -1,7 +1,7 @@
 import React from 'react';
 import { MockedResponse, MockLink } from 'apollo-link-mock';
 import { ApolloClient } from 'apollo-client';
-import { ApolloProvider } from 'react-apollo-hooks';
+import { ApolloProvider } from '@apollo/react-hooks';
 import { InMemoryCache } from 'apollo-boost';
 import { render } from '@testing-library/react';
 

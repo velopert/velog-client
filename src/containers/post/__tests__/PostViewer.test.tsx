@@ -1,14 +1,13 @@
 import * as React from 'react';
-import { render, waitForElement } from '@testing-library/react';
+import { waitForElement } from '@testing-library/react';
 import PostViewer, { PostViewerProps, PostViewerOwnProps } from '../PostViewer';
 import { MemoryRouter } from 'react-router-dom';
-import { MockedProvider } from 'react-apollo/test-utils';
 import { READ_POST } from '../../../lib/graphql/post';
 import renderWithRedux from '../../../lib/renderWithRedux';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient } from 'apollo-client';
 import { MockLink, MockedResponse } from 'apollo-link-mock';
-import { ApolloProvider } from 'react-apollo-hooks';
+import { ApolloProvider } from '@apollo/react-hooks';
 
 function createClient(mocks: MockedResponse[]) {
   return new ApolloClient({

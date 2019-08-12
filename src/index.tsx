@@ -6,7 +6,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import { loadableReady } from '@loadable/component';
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider } from '@apollo/react-hooks';
+
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -14,7 +15,6 @@ import client from './lib/graphql/client';
 import rootReducer from './modules';
 import storage from './lib/storage';
 import { setUser } from './modules/core';
-import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
 
 const store = createStore(rootReducer, composeWithDevTools());
 
@@ -43,11 +43,9 @@ if (process.env.NODE_ENV === 'production') {
   ReactDOM.render(
     <Provider store={store}>
       <ApolloProvider client={client}>
-        <ApolloHooksProvider client={client}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </ApolloHooksProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </ApolloProvider>
     </Provider>,
     document.getElementById('root'),

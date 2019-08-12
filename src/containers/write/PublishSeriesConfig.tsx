@@ -4,7 +4,7 @@ import useUser from '../../lib/hooks/useUser';
 import { safe, sleep } from '../../lib/utils';
 import PublishSeriesConfigTemplate from '../../components/write/PublishSeriesConfigTemplate';
 import PublishSeriesList from './PublishSeriesList';
-import { useQuery, useMutation } from 'react-apollo-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import {
   GetSeriesListResponse,
   GET_SERIES_LIST,
@@ -71,7 +71,7 @@ const PublishSeriesConfig: React.FC<PublishSeriesConfigProps> = props => {
         url_slug: urlSlug,
       },
     });
-    if (!result.data) return;
+    if (!result || !result.data) return;
     await sleep(150);
     await seriesList.refetch();
     setSelectedId(result.data.createSeries.id);

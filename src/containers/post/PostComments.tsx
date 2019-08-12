@@ -9,7 +9,7 @@ import {
 import PostCommentsList from '../../components/post/PostCommentsList';
 import styled from 'styled-components';
 import { useUserId } from '../../lib/hooks/useUser';
-import { useMutation, useQuery } from 'react-apollo-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import useBoolean from '../../lib/hooks/useBoolean';
 import PopupOKCancel from '../../components/common/PopupOKCancel';
 

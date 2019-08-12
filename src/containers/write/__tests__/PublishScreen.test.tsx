@@ -10,7 +10,7 @@ import {
   setDefaultDescription,
   toggleEditSeries,
 } from '../../../modules/write';
-import { MockedProvider } from 'react-apollo/test-utils';
+import { MockedProvider } from '@apollo/react-testing';
 import renderWithProviders from '../../../lib/renderWithProviders';
 
 describe('PublishScreen', () => {

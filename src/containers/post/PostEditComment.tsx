@@ -2,7 +2,7 @@ import React from 'react';
 import useInput from '../../lib/hooks/useInput';
 import PostCommentsWrite from '../../components/post/PostCommentsWrite';
 import { EDIT_COMMENT } from '../../lib/graphql/post';
-import { useMutation } from 'react-apollo-hooks';
+import { useMutation } from '@apollo/react-hooks';
 
 export interface PostEditCommentProps {
   id: string;

@@ -1,9 +1,8 @@
-import React, { HTMLProps } from 'react';
+import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import { LinkedPost } from '../../lib/graphql/post';
-import { Link } from 'react-router-dom';
 import { ellipsis } from '../../lib/styles/utils';
 import PlainLink from '../common/PlainLink';
 

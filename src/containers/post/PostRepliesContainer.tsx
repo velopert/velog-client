@@ -9,7 +9,7 @@ import {
 import PostReplies from '../../components/post/PostReplies';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../modules';
-import { useQuery, useMutation } from 'react-apollo-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import useBoolean from '../../lib/hooks/useBoolean';
 import PopupOKCancel from '../../components/common/PopupOKCancel';
 
