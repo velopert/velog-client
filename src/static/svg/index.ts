@@ -1,5 +1,8 @@
 export { ReactComponent as Logo } from './logo.svg';
 export { ReactComponent as FacebookIcon } from './icon-facebook.svg';
+export {
+  ReactComponent as FacebookSquareIcon,
+} from './icon-facebook-square.svg';
 export { ReactComponent as GoogleIcon } from './icon-google.svg';
 export { ReactComponent as GithubIcon } from './icon-github.svg';
 export { ReactComponent as GlobeIcon } from './icon-globe.svg';
@@ -12,3 +15,6 @@ export { ReactComponent as SeriesImage } from './image-series.svg';
 export { ReactComponent as LikeIcon } from './icon-like.svg';
 export { ReactComponent as ShareIcon } from './icon-share.svg';
 export { ReactComponent as ClipIcon } from './icon-clip.svg';
+export { ReactComponent as EmailIcon } from './icon-email.svg';
+export { ReactComponent as TwitterIcon } from './icon-twitter.svg';
+export { ReactComponent as ShareIcon2 } from './icon-share-2.svg';

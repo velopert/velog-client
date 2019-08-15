@@ -13,6 +13,7 @@ const AuthSocialButtonBlock = styled.button<{ border: boolean }>`
   outline: none;
   border: none;
   transition: 0.125s all ease-in;
+  color: white;
   ${props =>
     props.border &&
     css`
