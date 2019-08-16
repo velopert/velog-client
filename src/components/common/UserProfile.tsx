@@ -8,6 +8,7 @@ import {
   EmailIcon,
 } from '../../static/svg';
 import { userThumbnail } from '../../static/images';
+import { ProfileLinks } from '../../lib/graphql/user';
 
 const UserProfileBlock = styled.div``;
 
@@ -59,6 +60,7 @@ const Separator = styled.div`
 
 const ProfileIcons = styled.div`
   color: ${palette.gray5};
+  display: flex;
   svg {
     cursor: pointer;
     width: 2rem;
@@ -67,7 +69,12 @@ const ProfileIcons = styled.div`
       color: ${palette.gray8};
     }
   }
-  svg + svg {
+  a {
+    color: inherit;
+    display: block;
+  }
+  a + a,
+  a + svg {
     margin-left: 1rem;
   }
 `;
@@ -78,6 +85,7 @@ export interface UserProfileProps {
   thumbnail: string | null;
   displayName: string;
   description: string;
+  profileLinks: ProfileLinks;
 }
 
 const UserProfile: React.FC<UserProfileProps> = ({
@@ -86,7 +94,10 @@ const UserProfile: React.FC<UserProfileProps> = ({
   thumbnail,
   displayName,
   description,
+  profileLinks,
 }) => {
+  const { email, facebook, github, twitter, url } = profileLinks;
+
   return (
     <UserProfileBlock className={className} style={style}>
       <Section>
@@ -98,10 +109,37 @@ const UserProfile: React.FC<UserProfileProps> = ({
       </Section>
       <Separator />
       <ProfileIcons>
-        <GithubIcon />
-        <TwitterIcon />
-        <FacebookSquareIcon />
-        <EmailIcon />
+        {github && (
+          <a
+            href={`https://github.com/${github}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="github"
+          >
+            <GithubIcon />
+          </a>
+        )}
+        {twitter && (
+          <a
+            href={`https://twitter.com/${twitter}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="twitter"
+          >
+            <TwitterIcon />
+          </a>
+        )}
+        {facebook && (
+          <a
+            href={`https://facebook.com/${facebook}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="facebook"
+          >
+            <FacebookSquareIcon />
+          </a>
+        )}
+        <EmailIcon data-testid="email" />
       </ProfileIcons>
     </UserProfileBlock>
   );
