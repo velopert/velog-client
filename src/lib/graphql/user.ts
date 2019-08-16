@@ -60,3 +60,27 @@ export type CurrentUser = {
     display_name: string;
   };
 };
+
+export const GET_USER_PROFILE = gql`
+  query UserProfile($username: String!) {
+    user(username: $username) {
+      id
+      username
+      profile {
+        id
+        display_name
+        short_bio
+        thumbnail
+        profile_links
+      }
+    }
+  }
+`;
+
+export type GetUserProfileResponse = {
+  user: {
+    id: string;
+    username: string;
+    profile: Omit<UserProfile, 'about'>;
+  };
+};
