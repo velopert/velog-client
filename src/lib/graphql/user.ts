@@ -1,12 +1,20 @@
 import gql from 'graphql-tag';
 
+export type ProfileLinks = {
+  url?: string;
+  email?: string;
+  github?: string;
+  twitter?: string;
+  facebook?: string;
+};
+
 export type UserProfile = {
   id: string;
   display_name: string;
   short_bio: string;
   thumbnail: string | null;
   about: string;
-  profile_links: any;
+  profile_links: ProfileLinks;
 };
 export type VelogConfig = {
   id: string;

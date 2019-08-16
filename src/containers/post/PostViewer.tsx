@@ -25,6 +25,12 @@ import LinkedPostList from '../../components/post/LinkedPostList';
 import { getScrollTop } from '../../lib/utils';
 import UserProfile from '../../components/common/UserProfile';
 import VelogResponsive from '../../components/velog/VelogResponsive';
+import styled from 'styled-components';
+
+const UserProfileWrapper = styled(VelogResponsive)`
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+`;
 
 export interface PostViewerOwnProps {
   username: string;
@@ -268,9 +274,13 @@ const PostViewer: React.FC<PostViewerProps> = ({
         toc={<PostToc />}
       />
       <PostContent isMarkdown={post.is_markdown} body={post.body} />
-      <VelogResponsive>
-        <UserProfile gray />
-      </VelogResponsive>
+      <UserProfileWrapper>
+        <UserProfile
+          thumbnail={post.user.profile.thumbnail}
+          displayName={post.user.profile.display_name}
+          description={post.user.profile.short_bio}
+        />
+      </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />
       <PostComments
         count={post.comments_count}

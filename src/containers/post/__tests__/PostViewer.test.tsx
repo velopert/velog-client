@@ -40,6 +40,9 @@ const samplePost = {
       thumbnail:
         'https://images.velog.io/profiles/velopert/thumbnails/1536400727.98.png',
       short_bio: 'velopert@Laftel Inc. 재미있는것만 골라서 하는 개발자입니다.',
+      profile_links: {
+        github: 'velopert',
+      },
     },
     velog_config: {
       id: '5ad9f60b-4b95-42e9-a32c-eae222c79bf1',

@@ -84,7 +84,7 @@ exports[`AuthForm renders correctly 1`] = `
                   class="sc-bxivhb hYrwtB"
                 >
                   <button
-                    class="sc-htpNat gXfUJF"
+                    class="sc-htpNat hXWOcG"
                     style="background: rgb(39, 46, 51);"
                     tabindex="4"
                   >
@@ -93,7 +93,7 @@ exports[`AuthForm renders correctly 1`] = `
                     </svg>
                   </button>
                   <button
-                    class="sc-htpNat fNmQUF"
+                    class="sc-htpNat esnjrO"
                     style="background: white;"
                     tabindex="5"
                   >
@@ -102,7 +102,7 @@ exports[`AuthForm renders correctly 1`] = `
                     </svg>
                   </button>
                   <button
-                    class="sc-htpNat gXfUJF"
+                    class="sc-htpNat hXWOcG"
                     style="background: rgb(59, 89, 152);"
                     tabindex="6"
                   >

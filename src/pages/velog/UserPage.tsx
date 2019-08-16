@@ -11,11 +11,7 @@ const StyledUserProfile = styled(UserProfile)`
 export interface UserPageProps {}
 
 const UserPage: React.FC<UserPageProps> = props => {
-  return (
-    <UserPageBlock>
-      <StyledUserProfile />
-    </UserPageBlock>
-  );
+  return <UserPageBlock>{/* <StyledUserProfile /> */}</UserPageBlock>;
 };
 
 export default UserPage;

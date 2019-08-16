@@ -5,7 +5,7 @@ import { WriteMode, clearEditor } from '../../modules/write';
 import EditorPanesContainer from './EditorPanesContainer';
 import QuillEditorContainer from './QuillEditorContainer';
 
-type ActiveEditorProps = {};
+export type ActiveEditorProps = {};
 
 const ActiveEditor: React.FC<ActiveEditorProps> = () => {
   const mode = useSelector((state: RootState) => state.write.mode);

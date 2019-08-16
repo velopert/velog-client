@@ -7,17 +7,9 @@ import {
   FacebookSquareIcon,
   EmailIcon,
 } from '../../static/svg';
+import { userThumbnail } from '../../static/images';
 
-const UserProfileBlock = styled.div<{ gray?: boolean }>`
-  ${props =>
-    props.gray &&
-    css`
-      background: ${palette.gray0};
-      border-radius: 8px;
-      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.06);
-      padding: 2rem 1.5rem;
-    `}
-`;
+const UserProfileBlock = styled.div``;
 
 const Section = styled.div`
   display: flex;
@@ -82,28 +74,26 @@ const ProfileIcons = styled.div`
 
 export interface UserProfileProps {
   className?: string;
-  gray?: boolean;
   style?: CSSProperties;
+  thumbnail: string | null;
+  displayName: string;
+  description: string;
 }
 
 const UserProfile: React.FC<UserProfileProps> = ({
-  gray,
   className,
   style,
+  thumbnail,
+  displayName,
+  description,
 }) => {
   return (
-    <UserProfileBlock gray={gray} className={className} style={style}>
+    <UserProfileBlock className={className} style={style}>
       <Section>
-        <img
-          src="https://thumb.velog.io/resize?url=https://images.velog.io/images/velopert/profile/ca385170-77e7-11e9-ba3a-fb3a8e4f1096/1536400727.98.png&width=256"
-          alt="profile"
-        />
+        <img src={thumbnail || userThumbnail} alt="profile" />
         <UserInfo>
-          <div className="name">Minjun Kim</div>
-          <div className="description">
-            Frontend Engineer@RIDI Corp. 개발을 재미있게 이것 저것 하는
-            개발자입니다.
-          </div>
+          <div className="name">{displayName}</div>
+          <div className="description">{description}</div>
         </UserInfo>
       </Section>
       <Separator />

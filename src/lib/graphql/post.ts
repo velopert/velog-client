@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { User } from './user';
+import { User, ProfileLinks } from './user';
 
 export type Post = {
   id: string;
@@ -103,6 +103,7 @@ export interface SinglePost {
       display_name: string;
       thumbnail: string;
       short_bio: string;
+      profile_links: ProfileLinks;
     };
     velog_config: {
       title: string;
@@ -173,6 +174,7 @@ export const READ_POST = gql`
           display_name
           thumbnail
           short_bio
+          profile_links
         }
         velog_config {
           title

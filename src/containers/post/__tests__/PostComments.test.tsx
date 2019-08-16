@@ -12,7 +12,7 @@ import {
   RELOAD_COMMENTS,
 } from '../../../lib/graphql/post';
 import renderWithRedux from '../../../lib/renderWithRedux';
-import { ApolloProvider } from 'react-apollo-hooks';
+import { ApolloProvider } from '@apollo/react-hooks';
 import { createClient } from '../../../lib/renderWithApollo';
 import { MockedProvider } from '@apollo/react-testing';
 import { setUser } from '../../../modules/core';
