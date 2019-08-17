@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  render,
-  fireEvent,
-  waitForElementToBeRemoved,
-  queryByText,
-} from '@testing-library/react';
+import { fireEvent, waitForElementToBeRemoved } from '@testing-library/react';
 import PostComments, { PostCommentsProps } from '../PostComments';
 import {
   Comment,
@@ -13,9 +8,8 @@ import {
 } from '../../../lib/graphql/post';
 import renderWithRedux from '../../../lib/renderWithRedux';
 import { ApolloProvider } from '@apollo/react-hooks';
-import { createClient } from '../../../lib/renderWithApollo';
-import { MockedProvider } from '@apollo/react-testing';
 import { setUser } from '../../../modules/core';
+import renderWithProviders from '../../../lib/renderWithProviders';
 
 const sampleComments: Comment[] = [
   {
@@ -71,7 +65,8 @@ describe('PostComments', () => {
       count: 3,
       postId: '6533da20-b351-11e8-9696-f1fffe8a36f1',
     };
-    const client = createClient([
+
+    const mocks = [
       {
         request: {
           query: REMOVE_COMMENT,
@@ -102,12 +97,13 @@ describe('PostComments', () => {
           },
         },
       },
-    ]);
+    ];
 
-    const utils = renderWithRedux(
-      <ApolloProvider client={client}>
-        <PostComments {...initialProps} {...props} />
-      </ApolloProvider>,
+    const utils = renderWithProviders(
+      <PostComments {...initialProps} {...props} />,
+      {
+        mocks,
+      },
     );
 
     utils.store.dispatch(

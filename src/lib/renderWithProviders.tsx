@@ -1,8 +1,5 @@
 import React from 'react';
-import { MockedResponse, MockLink } from 'apollo-link-mock';
-import { ApolloClient } from 'apollo-client';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { InMemoryCache } from 'apollo-boost';
+import { MockedProvider, MockedResponse } from '@apollo/react-testing';
 import { render } from '@testing-library/react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -20,19 +17,11 @@ type Options = {
   };
 };
 
-export function createClient(mocks: MockedResponse[]) {
-  return new ApolloClient({
-    cache: new InMemoryCache({ addTypename: false }),
-    link: new MockLink(mocks),
-  });
-}
-
 export default function renderWithProviders(
   ui: React.ReactNode,
   { initialState, mocks, routeOptions }: Options = {},
 ) {
   const store = createStore(rootReducer, initialState);
-  const client = createClient(mocks || []);
   const history =
     safe(() => routeOptions!.history) ||
     createMemoryHistory({
@@ -42,12 +31,11 @@ export default function renderWithProviders(
   return {
     ...render(
       <Router history={history}>
-        <ApolloProvider client={client}>
+        <MockedProvider mocks={mocks} addTypename={false}>
           <Provider store={store}>{ui}</Provider>
-        </ApolloProvider>
+        </MockedProvider>
       </Router>,
     ),
     store,
-    client,
   };
 }

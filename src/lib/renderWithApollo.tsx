@@ -1,25 +1,13 @@
 import React from 'react';
-import { MockedResponse, MockLink } from 'apollo-link-mock';
-import { ApolloClient } from 'apollo-client';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { InMemoryCache } from 'apollo-boost';
 import { render } from '@testing-library/react';
-
-export function createClient(mocks: MockedResponse[]) {
-  return new ApolloClient({
-    cache: new InMemoryCache({ addTypename: false }),
-    link: new MockLink(mocks),
-  });
-}
+import { MockedProvider, MockedResponse } from '@apollo/react-testing';
 
 export default function renderWithApollo(
   ui: React.ReactNode,
   mocks: MockedResponse[],
 ) {
-  const client = createClient(mocks);
-  const utils = render(<ApolloProvider client={client}>{ui}</ApolloProvider>);
+  const utils = render(<MockedProvider mocks={mocks}>{ui}</MockedProvider>);
   return {
     ...utils,
-    client,
   };
 }
