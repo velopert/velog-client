@@ -7,13 +7,14 @@ const PostCardListBlock = styled.div``;
 
 interface PostCardListProps {
   posts: PartialPost[];
+  hideUser?: boolean;
 }
 
-const PostCardList: React.SFC<PostCardListProps> = ({ posts }) => {
+const PostCardList: React.SFC<PostCardListProps> = ({ posts, hideUser }) => {
   return (
     <PostCardListBlock>
       {posts.map(post => (
-        <PostCard key={post.id} post={post} />
+        <PostCard key={post.id} post={post} hideUser={hideUser} />
       ))}
     </PostCardListBlock>
   );

@@ -4,17 +4,27 @@ import { GET_POST_LIST, PartialPost } from '../../lib/graphql/post';
 import { useQuery } from '@apollo/react-hooks';
 import PaginateWithScroll from '../../components/common/PaginateWithScroll';
 
-interface RecentPostsProps {}
+interface UserPostsProps {
+  username: string;
+}
 
-const RecentPosts: React.SFC<RecentPostsProps> = props => {
-  const getPostList = useQuery<{ posts: PartialPost[] }>(GET_POST_LIST);
+const UserPosts: React.SFC<UserPostsProps> = ({ username }) => {
+  const getPostList = useQuery<{ posts: PartialPost[] }>(GET_POST_LIST, {
+    variables: {
+      username,
+    },
+  });
 
-  const { data } = getPostList;
+  const { data, error } = getPostList;
+
+  console.log(error);
+
   const onLoadMore = useCallback(
     (cursor: string) => {
       getPostList.fetchMore({
         variables: {
           cursor,
+          username,
         },
         updateQuery: (prev, { fetchMoreResult }) => {
           if (!fetchMoreResult) return prev;
@@ -24,7 +34,7 @@ const RecentPosts: React.SFC<RecentPostsProps> = props => {
         },
       });
     },
-    [getPostList],
+    [getPostList, username],
   );
 
   if (!data || !data.posts) return null;
@@ -33,10 +43,10 @@ const RecentPosts: React.SFC<RecentPostsProps> = props => {
 
   return (
     <>
-      <PostCardList posts={data.posts} />
+      <PostCardList posts={data.posts} hideUser />
       <PaginateWithScroll cursor={cursor} onLoadMore={onLoadMore} />
     </>
   );
 };
 
-export default RecentPosts;
+export default UserPosts;

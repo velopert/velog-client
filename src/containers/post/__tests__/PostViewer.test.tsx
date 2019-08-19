@@ -36,6 +36,7 @@ const samplePost = {
     id: 'c76ccc50-b34d-11e8-b01f-598f1220d1c8',
     username: 'velopert',
     profile: {
+      id: 'mockid',
       display_name: 'Minjun Kim',
       thumbnail:
         'https://images.velog.io/profiles/velopert/thumbnails/1536400727.98.png',

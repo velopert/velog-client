@@ -1,6 +1,6 @@
 import * as React from 'react';
 import VelogPageTemplate from '../../components/velog/VelogPageTemplate';
-import { RouteComponentProps, Route } from 'react-router';
+import { RouteComponentProps, Route, Switch } from 'react-router';
 import ConfigLoader from '../../containers/velog/ConfigLoader';
 import PostPage from './PostPage';
 import UserPage from './UserPage';
@@ -15,8 +15,14 @@ const VelogPage: React.FC<VelogPageProps> = ({ match }) => {
   return (
     <VelogPageTemplate>
       <ConfigLoader username={username} />
-      <Route path="/@:username" component={UserPage} exact />
-      <Route path="/@:username/:urlSlug" component={PostPage} />
+      <Switch>
+        <Route
+          path={['/@:username', '/@:username/:tab(series|about)']}
+          component={UserPage}
+          exact
+        />
+        <Route path="/@:username/:urlSlug" component={PostPage} />
+      </Switch>
     </VelogPageTemplate>
   );
 };

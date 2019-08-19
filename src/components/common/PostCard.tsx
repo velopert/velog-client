@@ -76,19 +76,22 @@ const PostCardBlock = styled.div`
 
 interface PostCardProps {
   post: PartialPost;
+  hideUser?: boolean;
 }
 
-const PostCard: React.SFC<PostCardProps> = React.memo(({ post }) => {
+const PostCard: React.SFC<PostCardProps> = React.memo(({ post, hideUser }) => {
   const url = `/@${post.user.username}/${post.url_slug}`;
   return (
     <PostCardBlock>
-      <div className="user-info">
-        <img
-          src={post.user.profile.thumbnail || userThumbnail}
-          alt="thumbnail"
-        />
-        <div className="username">{post.user.username}</div>
-      </div>
+      {!hideUser && (
+        <div className="user-info">
+          <img
+            src={post.user.profile.thumbnail || userThumbnail}
+            alt="thumbnail"
+          />
+          <div className="username">{post.user.username}</div>
+        </div>
+      )}
       {post.thumbnail && (
         <img
           className="post-thumbnail"

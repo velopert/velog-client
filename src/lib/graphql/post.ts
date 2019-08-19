@@ -127,8 +127,8 @@ export interface CommentWithReplies {
 }
 
 export const GET_POST_LIST = gql`
-  query Posts($cursor: ID) {
-    posts(cursor: $cursor) {
+  query Posts($cursor: ID, $username: String) {
+    posts(cursor: $cursor, username: $username) {
       id
       title
       short_description
@@ -137,6 +137,7 @@ export const GET_POST_LIST = gql`
         id
         username
         profile {
+          id
           thumbnail
         }
       }
@@ -171,6 +172,7 @@ export const READ_POST = gql`
         id
         username
         profile {
+          id
           display_name
           thumbnail
           short_bio
@@ -398,6 +400,7 @@ export const EDIT_POST = gql`
         id
         username
         profile {
+          id
           display_name
           thumbnail
           short_bio
