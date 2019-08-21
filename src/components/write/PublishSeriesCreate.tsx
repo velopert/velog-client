@@ -106,6 +106,8 @@ const PublishSeriesCreate: React.FC<PublishSeriesCreateProps> = ({
     name: '',
     urlSlug: '',
   });
+  const [editing, setEditing] = useState<boolean>(false);
+
   const [defaultUrlSlug, setDefaultUrlSlug] = useState('');
 
   useEffect(() => {
@@ -125,6 +127,12 @@ const PublishSeriesCreate: React.FC<PublishSeriesCreateProps> = ({
   useEffect(() => {
     setDefaultUrlSlug(escapeForUrl(form.name));
   }, [form.name]);
+
+  // set editing to true when form.urlSlug gets changed
+  useEffect(() => {
+    if (form.urlSlug === '') return;
+    setEditing(true);
+  }, [form.urlSlug]);
 
   const onHide = () => {
     setDisappear(true);
@@ -163,7 +171,7 @@ const PublishSeriesCreate: React.FC<PublishSeriesCreateProps> = ({
                 data-testid="urlslug-input"
                 name="urlSlug"
                 onChange={onChange}
-                value={form.urlSlug || defaultUrlSlug}
+                value={editing ? form.urlSlug : defaultUrlSlug}
               />
             </URLInput>
             <Buttons>
