@@ -13,9 +13,10 @@ const SeriesListBlock = styled.div`
 
 export interface SeriesListProps {
   list: PartialSeries[];
+  username: string;
 }
 
-const SeriesList: React.FC<SeriesListProps> = ({ list }) => {
+const SeriesList: React.FC<SeriesListProps> = ({ list, username }) => {
   return (
     <SeriesListBlock>
       {list.map(series => (
@@ -25,6 +26,8 @@ const SeriesList: React.FC<SeriesListProps> = ({ list }) => {
           postsCount={series.posts_count}
           thumbnail={series.thumbnail || ''}
           lastUpdate={series.updated_at}
+          username={username}
+          urlSlug={series.url_slug}
         />
       ))}
     </SeriesListBlock>

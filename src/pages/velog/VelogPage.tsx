@@ -21,6 +21,10 @@ const VelogPage: React.FC<VelogPageProps> = ({ match }) => {
           component={UserPage}
           exact
         />
+        <Route
+          path="/@:username/series/:urlSlug"
+          render={() => <div>시리즈다시리즈 시리리리즈</div>}
+        />
         <Route path="/@:username/:urlSlug" component={PostPage} />
       </Switch>
     </VelogPageTemplate>

@@ -29,7 +29,7 @@ const SeriesListContainer: React.FC<SeriesListContainerProps> = ({
 
   if (loading || !data || !data.user) return null;
 
-  return <SeriesList list={data.user.series_list} />;
+  return <SeriesList list={data.user.series_list} username={username} />;
 };
 
 export default SeriesListContainer;

@@ -5,7 +5,13 @@ import palette from '../../lib/styles/palette';
 import { ellipsis } from '../../lib/styles/utils';
 import { formatDate } from '../../lib/utils';
 import { seriesThumbnail } from '../../static/images';
+import PlainLink from '../common/PlainLink';
 
+const StyledLink = styled(PlainLink)`
+  display: block;
+  text-decoration: none;
+  color: initial;
+`;
 const SeriesItemBlock = styled.div`
   width: 50%;
   padding-left: 1rem;
@@ -37,10 +43,12 @@ const SeriesItemBlock = styled.div`
 `;
 
 export interface SeriesItemProps {
-  thumbnail: string;
+  thumbnail: string | null;
   name: string;
   postsCount: number;
   lastUpdate: string;
+  username: string;
+  urlSlug: string;
 }
 
 const SeriesItem: React.FC<SeriesItemProps> = ({
@@ -48,15 +56,23 @@ const SeriesItem: React.FC<SeriesItemProps> = ({
   name,
   postsCount,
   lastUpdate,
+  urlSlug,
+  username,
 }) => {
+  const url = `/@${username}/series/${urlSlug}`;
+
   return (
     <SeriesItemBlock>
-      <RatioImage
-        src={thumbnail || seriesThumbnail}
-        widthRatio={1.9}
-        heightRatio={1}
-      />
-      <h4>{name}</h4>
+      <StyledLink to={url}>
+        <RatioImage
+          src={thumbnail || seriesThumbnail}
+          widthRatio={1.9}
+          heightRatio={1}
+        />
+      </StyledLink>
+      <h4>
+        <StyledLink to={url}>{name}</StyledLink>
+      </h4>
       <div className="info">
         <b>{postsCount}개의 포스트</b>
         <span className="dot">·</span>
