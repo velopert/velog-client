@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, waitForElement } from '@testing-library/react';
+import { waitForElement } from '@testing-library/react';
 import UserProfileContainer, {
   UserProfileContainerProps,
 } from '../UserProfileContainer';
