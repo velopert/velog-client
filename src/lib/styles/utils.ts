@@ -4,6 +4,7 @@ export const ellipsis = css`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow-x: hidden;
+  overflow-y: hidden;
 `;
 
 export const customFont = css`

@@ -10,6 +10,8 @@ const RatioImageBlock = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
+    display: block;
+    object-fit: cover;
   }
 `;
 
