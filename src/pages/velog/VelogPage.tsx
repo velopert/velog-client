@@ -4,6 +4,7 @@ import { RouteComponentProps, Route, Switch } from 'react-router';
 import ConfigLoader from '../../containers/velog/ConfigLoader';
 import PostPage from './PostPage';
 import UserPage from './UserPage';
+import SeriesPage from './SeriesPage';
 
 export interface VelogPageProps
   extends RouteComponentProps<{
@@ -21,10 +22,7 @@ const VelogPage: React.FC<VelogPageProps> = ({ match }) => {
           component={UserPage}
           exact
         />
-        <Route
-          path="/@:username/series/:urlSlug"
-          render={() => <div>시리즈다시리즈 시리리리즈</div>}
-        />
+        <Route path="/@:username/series/:urlSlug" component={SeriesPage} />
         <Route path="/@:username/:urlSlug" component={PostPage} />
       </Switch>
     </VelogPageTemplate>
