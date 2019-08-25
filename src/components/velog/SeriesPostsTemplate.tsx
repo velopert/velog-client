@@ -21,6 +21,7 @@ const SeriesPostsTemplateBlock = styled.div`
     padding-bottom: 1.5rem;
     border-bottom: 1px solid ${palette.gray3};
     font-size: 2.5rem;
+    color: ${palette.gray9};
   }
 `;
 

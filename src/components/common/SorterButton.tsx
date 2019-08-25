@@ -50,7 +50,10 @@ const SorterButton: React.FC<SorterButtonProps> = ({
 }) => {
   return (
     <StyledButton onClick={onToggle}>
-      <MdKeyboardArrowUp />
+      <MdKeyboardArrowUp
+        data-testid="arrow"
+        className={value === -1 ? 'rotate' : ''}
+      />
       <span>{value === 1 ? texts[0] : texts[1]}</span>
     </StyledButton>
   );
