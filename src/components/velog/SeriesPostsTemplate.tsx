@@ -25,15 +25,18 @@ const SeriesPostsTemplateBlock = styled.div`
   }
 `;
 
-export interface SeriesPostsTemplateProps {}
+export interface SeriesPostsTemplateProps {
+  name: string;
+}
 
 const SeriesPostsTemplate: React.FC<SeriesPostsTemplateProps> = ({
   children,
+  name,
 }) => {
   return (
     <SeriesPostsTemplateBlock>
       <label>시리즈</label>
-      <h1>벨로퍼트와 함께하는 리액트 테스팅</h1>
+      <h1>{name}</h1>
       <section>{children}</section>
     </SeriesPostsTemplateBlock>
   );

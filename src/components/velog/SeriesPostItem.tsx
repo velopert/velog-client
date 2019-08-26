@@ -9,45 +9,56 @@ const SeriesPostItemBlock = styled.div`
     -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Apple SD Gothic Neo',
     arial, 나눔고딕, 'Nanum Gothic', 돋움;
 
+  h2 {
+    margin: 0;
+    line-height: 1.5;
+    font-size: 1.325rem;
+    color: ${palette.gray8};
+    .number {
+      color: ${palette.gray5};
+      margin-right: 0.25rem;
+      font-style: italic;
+    }
+  }
+
   & + & {
     margin-top: 4rem;
   }
-  display: flex;
   section {
+    margin-top: 1rem;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    align-items: flex-start;
     flex: 1;
     min-width: 0;
     letter-spacing: -0.02em;
-    h2 {
-      margin: 0;
-      line-height: 1.5;
-      font-size: 1.325rem;
-      color: ${palette.gray8};
-      .number {
-        color: ${palette.gray5};
-        margin-right: 0.25rem;
-        font-style: italic;
+    height: 6.25rem;
+    .post-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      p {
+        color: ${palette.gray7};
+        font-size: 1rem;
+        line-height: 1.5rem;
+        margin: 0;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
       }
-    }
-    .date {
-      color: ${palette.gray5};
-      font-size: 0.875rem;
-    }
-    p {
-      color: ${palette.gray7};
-      font-size: 1rem;
-      line-height: 1.5rem;
-      margin-top: 0.5rem;
     }
   }
   img {
-    margin-left: 2.25rem;
-    width: 11.25rem;
-    height: 11.25rem;
+    margin-right: 1rem;
+    width: 12rem;
+    height: 6.25rem;
     object-fit: cover;
-    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.15);
+  }
+  .date {
+    color: ${palette.gray5};
+    font-size: 0.875rem;
   }
 `;
 
@@ -68,18 +79,17 @@ const SeriesPostItem: React.FC<SeriesPostItemProps> = ({
 }) => {
   return (
     <SeriesPostItemBlock>
+      <h2>
+        <span className="number">{index}.</span>
+        {title}
+      </h2>
       <section>
-        <div>
-          <h2>
-            <span className="number">1.</span>
-            {title}
-          </h2>
+        <img src={thumbnail || emptyThumbnail} alt="post-thumbnail" />
+        <div className="post-info">
           <p>{description}</p>
+          <div className="date">{formatDate(date)}</div>
         </div>
-
-        <div className="date">{formatDate(date)}</div>
       </section>
-      <img src={thumbnail || emptyThumbnail} alt="post-thumbnail" />
     </SeriesPostItemBlock>
   );
 };

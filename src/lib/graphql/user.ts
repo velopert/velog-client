@@ -13,7 +13,7 @@ export type UserProfile = {
   display_name: string;
   short_bio: string;
   thumbnail: string | null;
-  about: string;
+  about?: string;
   profile_links: ProfileLinks;
 };
 export type VelogConfig = {

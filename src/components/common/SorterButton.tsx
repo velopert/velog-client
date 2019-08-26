@@ -25,8 +25,8 @@ const StyledButton = styled.button`
     color: ${palette.teal5};
     font-size: 1.5rem;
     transition: 0.125s all ease-in;
-    .rotate {
-      transform: rotate(180);
+    &.rotate {
+      transform: rotate(180deg);
     }
   }
   span {
