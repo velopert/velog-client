@@ -188,6 +188,7 @@ export const READ_POST = gql`
           id
           username
           profile {
+            id
             thumbnail
           }
         }

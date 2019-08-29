@@ -13,9 +13,17 @@ const PlainLink: React.FC<PlainLinkProps> = ({
   className,
   children,
   onClick,
+  onMouseOver,
+  onMouseEnter,
 }) => {
   return (
-    <Link to={to} className={className} onClick={onClick}>
+    <Link
+      to={to}
+      className={className}
+      onClick={onClick}
+      onMouseOver={onMouseOver}
+      onMouseEnter={onMouseEnter}
+    >
       {children}
     </Link>
   );

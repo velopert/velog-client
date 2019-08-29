@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from 'react';
+import React, { useEffect, useCallback, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   READ_POST,
@@ -26,6 +26,7 @@ import { getScrollTop } from '../../lib/utils';
 import UserProfile from '../../components/common/UserProfile';
 import VelogResponsive from '../../components/velog/VelogResponsive';
 import styled from 'styled-components';
+import { useMount } from 'react-use';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 6rem;
@@ -46,6 +47,10 @@ const PostViewer: React.FC<PostViewerProps> = ({
   history,
   match,
 }) => {
+  useMount(() => {
+    if (!window.scrollTo) return;
+    window.scrollTo(0, 0);
+  });
   const userId = useUserId();
   const dispatch = useDispatch();
   const readPost = useQuery<{ post: SinglePost }>(READ_POST, {
@@ -78,6 +83,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
   const prefetchLinkedPosts = useCallback(() => {
     if (!data || !data.post) return;
     if (prefetched.current) return;
+    prefetched.current = true;
     const { linked_posts: linkedPosts } = data.post;
     const { next, previous } = linkedPosts;
     const getVariables = (post: LinkedPost) => ({

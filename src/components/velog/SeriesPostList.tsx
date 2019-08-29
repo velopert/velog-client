@@ -10,11 +10,13 @@ const SeriesPostListBlock = styled.div`
 export interface SeriesPostListProps {
   seriesPosts: SeriesPostPreview[];
   reversed: boolean;
+  username: string;
 }
 
 const SeriesPostList: React.FC<SeriesPostListProps> = ({
   seriesPosts,
   reversed,
+  username,
 }) => {
   const ordered = useMemo(() => {
     if (reversed) {
@@ -32,7 +34,9 @@ const SeriesPostList: React.FC<SeriesPostListProps> = ({
           description={seriesPost.post.short_description}
           thumbnail={seriesPost.post.thumbnail}
           index={reversed ? seriesPosts.length - i : i + 1}
+          urlSlug={seriesPost.post.url_slug}
           key={seriesPost.id}
+          username={username}
         />
       ))}
     </SeriesPostListBlock>

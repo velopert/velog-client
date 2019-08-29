@@ -58,6 +58,7 @@ const samplePost = {
         id: '0bcdf3e5-a228-42c3-8b52-3f0dc118dfd8',
         username: 'blablabla',
         profile: {
+          id: '0bcdf3e5-a228-42c3-8b52-3f0dc118dfd8-profile',
           thumbnail: null,
         },
       },
@@ -73,6 +74,7 @@ const samplePost = {
         id: '0bcdf3e5-a228-42c3-8b52-3f0dc118dfd8',
         username: 'blablabla',
         profile: {
+          id: '0bcdf3e5-a228-42c3-8b52-3f0dc118dfd8-profile',
           thumbnail: null,
         },
       },

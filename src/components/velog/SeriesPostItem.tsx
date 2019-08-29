@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { emptyThumbnail } from '../../static/images';
 import { formatDate } from '../../lib/utils';
+import PostLink from '../common/PostLink';
 
 const SeriesPostItemBlock = styled.div`
   font-family: 'Spoqa Han Sans', -apple-system, BlinkMacSystemFont,
@@ -13,11 +14,20 @@ const SeriesPostItemBlock = styled.div`
     margin: 0;
     line-height: 1.5;
     font-size: 1.325rem;
-    color: ${palette.gray8};
+    color: ${palette.gray7};
     .number {
       color: ${palette.gray5};
       margin-right: 0.25rem;
       font-style: italic;
+    }
+    a {
+      transition: 0.125s ease-in color;
+      color: inherit;
+      text-decoration: none;
+      &:hover {
+        color: ${palette.gray9};
+        text-decoration: underline;
+      }
     }
   }
 
@@ -33,6 +43,8 @@ const SeriesPostItemBlock = styled.div`
     letter-spacing: -0.02em;
     height: 6.25rem;
     .post-info {
+      flex: 1;
+      min-width: 0;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -68,6 +80,8 @@ export interface SeriesPostItemProps {
   description: string;
   date: string;
   thumbnail: string | null;
+  urlSlug: string;
+  username: string;
 }
 
 const SeriesPostItem: React.FC<SeriesPostItemProps> = ({
@@ -76,15 +90,21 @@ const SeriesPostItem: React.FC<SeriesPostItemProps> = ({
   description,
   date,
   thumbnail,
+  username,
+  urlSlug,
 }) => {
   return (
     <SeriesPostItemBlock>
       <h2>
         <span className="number">{index}.</span>
-        {title}
+        <PostLink username={username} urlSlug={urlSlug}>
+          {title}
+        </PostLink>
       </h2>
       <section>
-        <img src={thumbnail || emptyThumbnail} alt="post-thumbnail" />
+        <PostLink username={username} urlSlug={urlSlug}>
+          <img src={thumbnail || emptyThumbnail} alt="post-thumbnail" />
+        </PostLink>
         <div className="post-info">
           <p>{description}</p>
           <div className="date">{formatDate(date)}</div>

@@ -33,6 +33,7 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
         <SeriesPostList
           seriesPosts={data.series.series_posts}
           reversed={!asc}
+          username={username}
         />
       }
     </SeriesPostsTemplate>
