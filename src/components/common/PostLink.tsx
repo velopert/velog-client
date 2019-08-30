@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, ReactNode } from 'react';
 import styled from 'styled-components';
 import PlainLink from './PlainLink';
 import { useApolloClient } from '@apollo/react-hooks';
@@ -11,6 +11,7 @@ export interface PostLinkProps {
   username: string;
   urlSlug: string;
   prefetch?: boolean;
+  children?: ReactNode;
 }
 
 const PostLink: React.FC<PostLinkProps> = ({

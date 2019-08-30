@@ -29,6 +29,7 @@ export interface Comment {
     id: string;
     username: string;
     profile: {
+      id: string;
       thumbnail: string | null;
     };
   } | null;
@@ -100,6 +101,7 @@ export interface SinglePost {
     id: string;
     username: string;
     profile: {
+      id: string;
       display_name: string;
       thumbnail: string;
       short_bio: string;
