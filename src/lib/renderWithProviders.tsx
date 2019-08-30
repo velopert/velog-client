@@ -37,5 +37,6 @@ export default function renderWithProviders(
       </Router>,
     ),
     store,
+    history,
   };
 }

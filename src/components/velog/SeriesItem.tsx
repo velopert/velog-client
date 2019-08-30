@@ -32,7 +32,7 @@ const SeriesItemBlock = styled.div`
   .info {
     font-size: 0.875rem;
     color: ${palette.gray6};
-    b {
+    .count {
       color: ${palette.gray8};
     }
     .dot {
@@ -74,7 +74,7 @@ const SeriesItem: React.FC<SeriesItemProps> = ({
         <StyledLink to={url}>{name}</StyledLink>
       </h4>
       <div className="info">
-        <b>{postsCount}개의 포스트</b>
+        <span className="count">{postsCount}개의 포스트</span>
         <span className="dot">·</span>
         마지막 업데이트 {formatDate(lastUpdate)}
       </div>
