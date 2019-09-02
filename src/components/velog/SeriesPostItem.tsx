@@ -1,11 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { emptyThumbnail } from '../../static/images';
 import { formatDate } from '../../lib/utils';
 import PostLink from '../common/PostLink';
 
-const SeriesPostItemBlock = styled.div`
+const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
   font-family: 'Spoqa Han Sans', -apple-system, BlinkMacSystemFont,
     -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Apple SD Gothic Neo',
     arial, 나눔고딕, 'Nanum Gothic', 돋움;
@@ -72,6 +72,15 @@ const SeriesPostItemBlock = styled.div`
     color: ${palette.gray5};
     font-size: 0.875rem;
   }
+
+  ${props =>
+    props.edit &&
+    css`
+      padding: 1rem;
+      background: white;
+      border-radius: 4px;
+      box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.06);
+    `}
 `;
 
 export interface SeriesPostItemProps {
@@ -82,6 +91,7 @@ export interface SeriesPostItemProps {
   thumbnail: string | null;
   urlSlug: string;
   username: string;
+  edit?: boolean;
 }
 
 const SeriesPostItem: React.FC<SeriesPostItemProps> = ({
@@ -92,9 +102,10 @@ const SeriesPostItem: React.FC<SeriesPostItemProps> = ({
   thumbnail,
   username,
   urlSlug,
+  edit,
 }) => {
   return (
-    <SeriesPostItemBlock>
+    <SeriesPostItemBlock edit={edit}>
       <h2>
         <span className="number">{index}.</span>
         <PostLink username={username} urlSlug={urlSlug}>

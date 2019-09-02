@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef, useState } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   READ_POST,
@@ -29,7 +29,7 @@ import styled from 'styled-components';
 import { useMount } from 'react-use';
 
 const UserProfileWrapper = styled(VelogResponsive)`
-  margin-top: 6rem;
+  margin-top: 16rem;
   margin-bottom: 6rem;
 `;
 
@@ -48,7 +48,8 @@ const PostViewer: React.FC<PostViewerProps> = ({
   match,
 }) => {
   useMount(() => {
-    if (!window.scrollTo) return;
+    if (!window.scrollTo || process.env.NODE_ENV === 'test') return;
+    console.log(window.scrollTo);
     window.scrollTo(0, 0);
   });
   const userId = useUserId();

@@ -7,7 +7,7 @@ const TypographyBlock = styled.div`
   color: ${palette.gray7};
   line-height: 1.85;
   letter-spacing: -0.02em;
-  word-break: keep-all;
+  word-break: normal;
   word-wrap: break-word;
   p {
     text-align: justify;
