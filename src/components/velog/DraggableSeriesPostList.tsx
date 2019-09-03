@@ -20,6 +20,7 @@ const DroppableBlock = styled.div<{ isDraggingOver: boolean }>`
     props.isDraggingOver ? palette.gray1 : palette.gray0};
   border-radius: 4px;
   padding: 1.5rem;
+  padding-bottom: 0.5rem;
 `;
 
 const DraggableBlock = styled.div<{ isDragging: boolean }>`
@@ -32,20 +33,30 @@ const DraggableBlock = styled.div<{ isDragging: boolean }>`
       : css`
           opacity: 1;
         `}
-
-  & + & {
-    margin-top: 1rem;
-  }
+  margin-bottom: 1rem;
 `;
 
 export interface DraggableSeriesListProps {
   seriesPosts: SeriesPostPreview[];
 }
 
+function reorder<T>(list: T[], startIndex: number, endIndex: number) {
+  const nextList = [...list];
+  const [removed] = nextList.splice(startIndex, 1);
+  nextList.splice(endIndex, 0, removed);
+  return nextList;
+}
+
 const DraggableSeriesList = ({ seriesPosts }: DraggableSeriesListProps) => {
   const [tempPosts, setTempPosts] = useState(seriesPosts);
 
-  const onDragEnd = (result: DropResult, provided: ResponderProvided) => {};
+  const onDragEnd = (result: DropResult, provided: ResponderProvided) => {
+    if (!result.destination) return;
+    if (result.destination.index === result.source.index) return;
+    setTempPosts(prevTempPosts =>
+      reorder(prevTempPosts, result.source.index, result.destination!.index),
+    );
+  };
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <DraggableSeriesPostList>
@@ -81,6 +92,7 @@ const DraggableSeriesList = ({ seriesPosts }: DraggableSeriesListProps) => {
                     )}
                   </Draggable>
                 ))}
+                {provided.placeholder}
               </DroppableBlock>
             );
           }}
