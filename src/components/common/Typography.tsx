@@ -65,7 +65,7 @@ const TypographyBlock = styled.div`
   h2,
   h3,
   h4 {
-    line-height: 1.35;
+    line-height: 1.5;
     margin-bottom: 1rem;
   }
   p + h1,

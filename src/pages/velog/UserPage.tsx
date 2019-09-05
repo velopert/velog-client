@@ -6,6 +6,7 @@ import { RouteComponentProps, Route } from 'react-router';
 import VelogTab from '../../components/velog/VelogTab';
 import UserPostsTab from './tabs/UserPostsTab';
 import SeriesTab from './tabs/SeriesTab';
+import AboutTab from './tabs/AboutTab';
 
 const UserPageBlock = styled(VelogResponsive)``;
 
@@ -21,6 +22,7 @@ const UserPage: React.FC<UserPageProps> = ({ match }) => {
       <VelogTab username={username} tab={tab || 'posts'} />
       <Route path="/@:username" exact component={UserPostsTab} />
       <Route path="/@:username/series" component={SeriesTab} />
+      <Route path="/@:username/about" component={AboutTab} />
     </UserPageBlock>
   );
 };

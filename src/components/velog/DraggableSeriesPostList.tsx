@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { SeriesPostPreview } from '../../lib/graphql/series';
@@ -38,6 +38,7 @@ const DraggableBlock = styled.div<{ isDragging: boolean }>`
 
 export interface DraggableSeriesListProps {
   seriesPosts: SeriesPostPreview[];
+  onChangeSeriesOrder: (order: string[]) => void;
 }
 
 function reorder<T>(list: T[], startIndex: number, endIndex: number) {
@@ -47,7 +48,10 @@ function reorder<T>(list: T[], startIndex: number, endIndex: number) {
   return nextList;
 }
 
-const DraggableSeriesList = ({ seriesPosts }: DraggableSeriesListProps) => {
+const DraggableSeriesList = ({
+  seriesPosts,
+  onChangeSeriesOrder,
+}: DraggableSeriesListProps) => {
   const [tempPosts, setTempPosts] = useState(seriesPosts);
 
   const onDragEnd = (result: DropResult, provided: ResponderProvided) => {
@@ -57,6 +61,11 @@ const DraggableSeriesList = ({ seriesPosts }: DraggableSeriesListProps) => {
       reorder(prevTempPosts, result.source.index, result.destination!.index),
     );
   };
+
+  useEffect(() => {
+    onChangeSeriesOrder(tempPosts.map(tp => tp.id));
+  }, [onChangeSeriesOrder, tempPosts]);
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <DraggableSeriesPostList>

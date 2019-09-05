@@ -3,7 +3,7 @@
 exports[`MarkdownEditor matches snapshot 1`] = `
 <div>
   <div
-    class="sc-VigVT fyvRHB"
+    class="sc-VigVT hJSbUd"
     data-testid="codemirror"
   >
     <div

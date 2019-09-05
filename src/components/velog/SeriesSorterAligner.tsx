@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const SeriesSorterAlignerBlock = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-top: 2.25rem;
+  margin-top: 1rem;
 `;
 
 export interface SeriesSorterAlignerProps {}

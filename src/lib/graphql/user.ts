@@ -85,6 +85,28 @@ export type GetUserProfileResponse = {
   };
 };
 
+export const GET_USER_ABOUT = gql`
+  query UserAbout($username: String!) {
+    user(username: $username) {
+      id
+      profile {
+        id
+        about
+      }
+    }
+  }
+`;
+
+export type GetUserAboutResponse = {
+  user: {
+    id: string;
+    profile: {
+      id: string;
+      about: string;
+    };
+  };
+};
+
 export const GET_USER_SERIES_LIST = gql`
   query UserSeriesList($username: String!) {
     user(username: $username) {

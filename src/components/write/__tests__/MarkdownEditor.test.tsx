@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import MarkdownEditor, { MarkdownEditorProps } from '../MarkdownEditor';
+import MarkdownEditor, { MarkdownEditorProps } from '../WriteMarkdownEditor';
 
 describe('MarkdownEditor', () => {
   const setup = (props: Partial<MarkdownEditorProps> = {}) => {

@@ -261,6 +261,7 @@ export const RELOAD_COMMENTS = gql`
           id
           username
           profile {
+            id
             thumbnail
           }
         }
@@ -418,6 +419,7 @@ export const EDIT_POST = gql`
           id
           username
           profile {
+            id
             thumbnail
           }
         }
@@ -460,6 +462,7 @@ export const WRITE_COMMENT = gql`
         id
         username
         profile {
+          id
           thumbnail
         }
       }

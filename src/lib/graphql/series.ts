@@ -81,7 +81,7 @@ export const GET_SERIES = gql`
 `;
 
 export const EDIT_SERIES = gql`
-  mutation EditSeries($id: String, $name: String, $series_order: [ID]) {
+  mutation EditSeries($id: ID!, $name: String!, $series_order: [ID]) {
     editSeries(id: $id, name: $name, series_order: $series_order) {
       id
       name

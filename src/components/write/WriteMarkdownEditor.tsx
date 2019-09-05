@@ -28,6 +28,7 @@ export interface MarkdownEditorProps {
   onUpload: () => void;
   lastUploadedImage: string | null;
 }
+
 type MarkdownEditorState = {
   shadow: boolean;
   addLink: {
@@ -71,7 +72,6 @@ const MarkdownEditorBlock = styled.div`
     color: ${palette.gray8};
     font-family: 'Fira Mono', 'Spoqa Han Sans', monospace;
     /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', */
-      monospace;
     .cm-header {
       line-height: 2;
       color: ${palette.gray9};
@@ -121,7 +121,7 @@ const FooterWrapper = styled.div`
   width: 100%;
   z-index: ${zIndexes.WriteFooter};
 `;
-export default class MarkdownEditor extends React.Component<
+export default class WriteMarkdownEditor extends React.Component<
   MarkdownEditorProps,
   MarkdownEditorState
 > {

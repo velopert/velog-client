@@ -108,14 +108,22 @@ const SeriesPostItem: React.FC<SeriesPostItemProps> = ({
     <SeriesPostItemBlock edit={edit}>
       <h2>
         <span className="number">{index}.</span>
-        <PostLink username={username} urlSlug={urlSlug}>
-          {title}
-        </PostLink>
+        {edit ? (
+          <span>{title}</span>
+        ) : (
+          <PostLink username={username} urlSlug={urlSlug}>
+            {title}
+          </PostLink>
+        )}
       </h2>
       <section>
-        <PostLink username={username} urlSlug={urlSlug}>
+        {edit ? (
           <img src={thumbnail || emptyThumbnail} alt="post-thumbnail" />
-        </PostLink>
+        ) : (
+          <PostLink username={username} urlSlug={urlSlug}>
+            <img src={thumbnail || emptyThumbnail} alt="post-thumbnail" />
+          </PostLink>
+        )}
         <div className="post-info">
           <p>{description}</p>
           <div className="date">{formatDate(date)}</div>
