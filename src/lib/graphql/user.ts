@@ -142,3 +142,12 @@ export interface PartialSeries {
   updated_at: string;
   posts_count: number;
 }
+
+export const UPDATE_ABOUT = gql`
+  mutation UpdateAbout($about: String!) {
+    update_about(about: $about) {
+      id
+      about
+    }
+  }
+`;

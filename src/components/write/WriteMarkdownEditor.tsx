@@ -8,7 +8,7 @@ require('codemirror/mode/markdown/markdown');
 require('codemirror/mode/javascript/javascript');
 require('codemirror/mode/jsx/jsx');
 require('codemirror/addon/display/placeholder');
-import './atom-one-light.css';
+import '../common/atom-one-light.css';
 import palette from '../../lib/styles/palette';
 import Toolbar from './Toolbar';
 import AddLink from './AddLink';
@@ -681,7 +681,7 @@ ${selected}
                 onClose={this.handleCancelAddLink}
               />
             )}
-            <textarea id="bla" ref={this.editorElement} />
+            <textarea ref={this.editorElement} />
           </PaddingWrapper>
         </div>
         <AskChangeEditor

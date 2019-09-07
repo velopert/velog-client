@@ -236,7 +236,6 @@ exports[`MarkdownEditor matches snapshot 1`] = `
         class="sc-fjdhpX eFQAsj"
       >
         <textarea
-          id="bla"
           style="display: none;"
         />
         <div
