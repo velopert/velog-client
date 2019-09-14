@@ -18,3 +18,4 @@ export { ReactComponent as ClipIcon } from './icon-clip.svg';
 export { ReactComponent as EmailIcon } from './icon-email.svg';
 export { ReactComponent as TwitterIcon } from './icon-twitter.svg';
 export { ReactComponent as ShareIcon2 } from './icon-share-2.svg';
+export { ReactComponent as SearchIcon } from './icon-search.svg'; // iconmonstr-magnifier-3

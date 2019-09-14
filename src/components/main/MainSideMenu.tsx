@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 import { MdTrendingUp, MdAccessTime, MdRssFeed } from 'react-icons/md';
+import SearchInput from '../search/SearchInput';
 
 const MainSideMenuBlock = styled.div`
   position: sticky;
@@ -32,11 +33,16 @@ const MenuItem = styled(NavLink)`
   }
 `;
 
+const StyledSearchInput = styled(SearchInput)`
+  margin-bottom: 1.5rem;
+`;
+
 interface MainSideMenuProps {}
 
 const MainSideMenu: React.SFC<MainSideMenuProps> = props => {
   return (
     <MainSideMenuBlock>
+      <StyledSearchInput onSearch={() => {}} />
       <MenuItem
         to="/trending"
         activeClassName="active"
