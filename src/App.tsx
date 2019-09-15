@@ -11,6 +11,7 @@ const MainPage = loadable(() => import('./pages/main/MainPage'));
 const EmailLoginPage = loadable(() => import('./pages/EmailLoginPage'));
 const WritePage = loadable(() => import('./pages/WritePage'));
 const VelogPage = loadable(() => import('./pages/velog/VelogPage'));
+const SearchPage = loadable(() => import('./pages/SearchPage'));
 
 interface AppProps {}
 
@@ -25,6 +26,7 @@ const App: React.SFC<AppProps> = props => {
         {/* <Route path="/@:username/:urlSlug" component={PostPage} /> */}
         <Route path="/email-login" component={EmailLoginPage} />
         <Route path="/write" component={WritePage} />
+        <Route path="/search" component={SearchPage} />
       </Switch>
       <Core />
     </JazzbarProvider>

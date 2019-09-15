@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { NavLink, RouteComponentProps, withRouter } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 import { MdTrendingUp, MdAccessTime, MdRssFeed } from 'react-icons/md';
 import SearchInput from '../search/SearchInput';
@@ -37,12 +37,16 @@ const StyledSearchInput = styled(SearchInput)`
   margin-bottom: 1.5rem;
 `;
 
-interface MainSideMenuProps {}
+interface MainSideMenuProps extends RouteComponentProps {}
 
-const MainSideMenu: React.SFC<MainSideMenuProps> = props => {
+const MainSideMenu: React.SFC<MainSideMenuProps> = ({ history }) => {
+  const onSearch = (keyword: string) => {
+    history.push(`/search/?q=${keyword}`);
+  };
+
   return (
     <MainSideMenuBlock>
-      <StyledSearchInput onSearch={() => {}} />
+      <StyledSearchInput onSearch={onSearch} />
       <MenuItem
         to="/trending"
         activeClassName="active"
@@ -65,4 +69,4 @@ const MainSideMenu: React.SFC<MainSideMenuProps> = props => {
   );
 };
 
-export default MainSideMenu;
+export default withRouter(MainSideMenu);
