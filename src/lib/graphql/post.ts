@@ -512,3 +512,30 @@ export const UNLIKE_POST = gql`
     }
   }
 `;
+
+export const SEARCH_POSTS = gql`
+  query SearchPost(keyword: String!, offset: Int) {
+    searchPost(keyword: $keyword, offset: $offset) {
+      count
+      posts {
+        id
+        title
+        short_description
+        thumbnail
+        user {
+          id
+          username
+          profile {
+            id
+            thumbnail
+          }
+        }
+        url_slug
+        released_at
+        tags
+        is_private
+        comments_count
+      }
+    }
+  }
+`;

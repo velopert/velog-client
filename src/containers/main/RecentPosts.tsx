@@ -3,6 +3,8 @@ import PostCardList from '../../components/common/PostCardList';
 import { GET_POST_LIST, PartialPost } from '../../lib/graphql/post';
 import { useQuery } from '@apollo/react-hooks';
 import PaginateWithScroll from '../../components/common/PaginateWithScroll';
+import useScrollPagination from '../../lib/hooks/useScrollPagination';
+import { safe } from '../../lib/utils';
 
 interface RecentPostsProps {}
 
@@ -27,16 +29,16 @@ const RecentPosts: React.SFC<RecentPostsProps> = props => {
     [getPostList],
   );
 
+  const cursor = safe(() => data!.posts[data!.posts.length - 1].id);
+
+  useScrollPagination({
+    cursor,
+    onLoadMore,
+  });
+
   if (!data || !data.posts) return null;
 
-  const cursor = data.posts[data.posts.length - 1].id;
-
-  return (
-    <>
-      <PostCardList posts={data.posts} />
-      <PaginateWithScroll cursor={cursor} onLoadMore={onLoadMore} />
-    </>
-  );
+  return <PostCardList posts={data.posts} />;
 };
 
 export default RecentPosts;
