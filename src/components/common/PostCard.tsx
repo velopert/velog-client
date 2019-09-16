@@ -5,6 +5,7 @@ import palette from '../../lib/styles/palette';
 import { userThumbnail } from '../../static/images';
 import Tag from './Tag';
 import { PartialPost } from '../../lib/graphql/post';
+import { formatDate } from '../../lib/utils';
 
 const PostCardBlock = styled.div`
   padding-top: 4rem;
@@ -104,7 +105,7 @@ const PostCard: React.SFC<PostCardProps> = React.memo(({ post, hideUser }) => {
       </Link>
       <p>{post.short_description}</p>
       <div className="subinfo">
-        <span>2019년 3월 23일</span>
+        <span>{formatDate(post.released_at)}</span>
         <span>{post.comments_count}개의 댓글</span>
       </div>
       <div className="tags-wrapper">
@@ -116,4 +117,4 @@ const PostCard: React.SFC<PostCardProps> = React.memo(({ post, hideUser }) => {
   );
 });
 
-export default PostCard;
+export default React.memo(PostCard);

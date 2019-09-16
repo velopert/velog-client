@@ -514,7 +514,7 @@ export const UNLIKE_POST = gql`
 `;
 
 export const SEARCH_POSTS = gql`
-  query SearchPost(keyword: String!, offset: Int) {
+  query SearchPost($keyword: String!, $offset: Int) {
     searchPost(keyword: $keyword, offset: $offset) {
       count
       posts {
@@ -539,3 +539,10 @@ export const SEARCH_POSTS = gql`
     }
   }
 `;
+
+export type SearchPostsResponse = {
+  searchPost: {
+    posts: PartialPost[];
+    count: number;
+  };
+};

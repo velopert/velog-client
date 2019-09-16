@@ -8,19 +8,16 @@ const StyledSearchInput = styled(SearchInput)`
   margin-bottom: 1.5rem;
 `;
 
-export interface LargeSearchInputProps extends RouteComponentProps {}
+export interface LargeSearchInputProps extends RouteComponentProps {
+  initialKeyword: string;
+}
 
-function LargeSearchInput({ history, location }: LargeSearchInputProps) {
+function LargeSearchInput({ history, initialKeyword }: LargeSearchInputProps) {
   const onSearch = useCallback(
     (keyword: string) => history.replace(`/search?q=${keyword}`),
     [history],
   );
-  const initialKeyword = useMemo(() => {
-    const { q } = qs.parse(location.search, {
-      ignoreQueryPrefix: true,
-    });
-    return q;
-  }, [location.search]);
+
   return (
     <StyledSearchInput
       onSearch={onSearch}
