@@ -8,14 +8,16 @@ import { safe } from '../../lib/utils';
 
 export interface SearchResultProps {
   keyword: string;
+  username?: string;
 }
 
-function SearchResult({ keyword }: SearchResultProps) {
+function SearchResult({ keyword, username }: SearchResultProps) {
   const { data, loading, error, fetchMore } = useQuery<SearchPostsResponse>(
     SEARCH_POSTS,
     {
       variables: {
         keyword,
+        username,
       },
       skip: keyword === '',
     },
@@ -31,10 +33,10 @@ function SearchResult({ keyword }: SearchResultProps) {
         updateQuery: (prev, { fetchMoreResult }) => {
           if (!fetchMoreResult) return prev;
           return {
-            searchPost: {
-              ...prev.searchPost,
-              posts: prev.searchPost.posts.concat(
-                fetchMoreResult.searchPost.posts,
+            searchPosts: {
+              ...prev.searchPosts,
+              posts: prev.searchPosts.posts.concat(
+                fetchMoreResult.searchPosts.posts,
               ),
             },
           };
@@ -44,18 +46,18 @@ function SearchResult({ keyword }: SearchResultProps) {
     [fetchMore, keyword],
   );
 
-  const offset = safe(() => data!.searchPost!.posts!.length) || 0;
+  const offset = safe(() => data!.searchPosts!.posts!.length) || 0;
   useScrollPagination({
     offset,
     onLoadMoreByOffset,
   });
 
-  if (!data || !data.searchPost) return null;
+  if (!data || !data.searchPosts) return null;
 
   return (
     <>
-      <SearchResultInfo count={data.searchPost.count} />
-      <PostCardList posts={data.searchPost.posts} />
+      <SearchResultInfo count={data.searchPosts.count} />
+      <PostCardList posts={data.searchPosts.posts} hideUser={!!username} />
     </>
   );
 }

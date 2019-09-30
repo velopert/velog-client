@@ -13,15 +13,16 @@ const Info = styled.p`
 `;
 export interface SearchResultInfoProps {
   count: number;
+  className?: string;
 }
 
-function SearchResultInfo({ count }: SearchResultInfoProps) {
+function SearchResultInfo({ count, className }: SearchResultInfoProps) {
   if (count === 0) {
     return <Info>검색 결과가 없습니다.</Info>;
   }
   return (
     <Info>
-      총 <b>{count}개의 포스트를 찾았습니다.</b>
+      총 <b>{count}개</b>의 포스트를 찾았습니다.
     </Info>
   );
 }

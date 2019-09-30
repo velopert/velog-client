@@ -39,7 +39,8 @@ const UserPosts: React.SFC<UserPostsProps> = ({ username }) => {
 
   if (!data || !data.posts) return null;
 
-  const cursor = data.posts[data.posts.length - 1].id;
+  const cursor =
+    data.posts.length > 0 ? data.posts[data.posts.length - 1].id : null;
 
   return (
     <>
