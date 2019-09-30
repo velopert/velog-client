@@ -29,19 +29,24 @@ export type RegisterFormType = {
 
 export interface RegisterFormProps {
   onSubmit: (form: RegisterFormType) => any;
-  defaultEmail: string | null | undefined;
+  fixedEmail: string | null | undefined;
   error: string | null;
+  defaultInfo: {
+    displayName: string;
+    username: string;
+  } | null;
 }
 
 const RegisterForm: React.SFC<RegisterFormProps> = ({
   onSubmit,
-  defaultEmail,
+  fixedEmail,
   error,
+  defaultInfo,
 }) => {
   const [form, onChange] = useInputs({
-    displayName: '',
+    displayName: defaultInfo ? defaultInfo.displayName : '',
     email: '',
-    username: '',
+    username: defaultInfo ? defaultInfo.username : '',
     shortBio: '',
   });
   return (
@@ -54,15 +59,17 @@ const RegisterForm: React.SFC<RegisterFormProps> = ({
         value={form.displayName}
         size={20}
       />
-      <LabelInput
-        name="email"
-        onChange={onChange}
-        label="이메일"
-        placeholder="이메일을 입력하세요"
-        value={defaultEmail || form.email}
-        disabled={!!defaultEmail}
-        size={25}
-      />
+      {fixedEmail && (
+        <LabelInput
+          name="email"
+          onChange={onChange}
+          label="이메일"
+          placeholder="이메일을 입력하세요"
+          value={fixedEmail || form.email}
+          disabled={!!fixedEmail}
+          size={25}
+        />
+      )}
       <LabelInput
         name="username"
         onChange={onChange}
@@ -89,7 +96,7 @@ const RegisterForm: React.SFC<RegisterFormProps> = ({
             inline
             type="submit"
             onClick={() =>
-              onSubmit({ ...form, email: defaultEmail || form.email })
+              onSubmit({ ...form, email: fixedEmail || form.email })
             }
             size="LARGE"
           >

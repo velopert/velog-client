@@ -7,8 +7,9 @@ describe('RegisterForm', () => {
   const setup = (props: Partial<RegisterFormProps> = {}) => {
     const initialProps: RegisterFormProps = {
       onSubmit: () => {},
-      defaultEmail: null,
+      fixedEmail: null,
       error: null,
+      defaultInfo: null,
     };
     const utils = render(
       <MemoryRouter>
@@ -17,7 +18,7 @@ describe('RegisterForm', () => {
     );
     const form = {
       name: utils.getByPlaceholderText(/이름을/) as HTMLInputElement,
-      email: utils.getByPlaceholderText(/이메일을/) as HTMLInputElement,
+      email: utils.queryByPlaceholderText(/이메일을/) as HTMLInputElement,
       username: utils.getByPlaceholderText(/아이디를/) as HTMLInputElement,
       shortBio: utils.getByPlaceholderText(/당신을/) as HTMLInputElement,
     };
@@ -29,11 +30,11 @@ describe('RegisterForm', () => {
         },
       });
 
-      fireEvent.change(form.email, {
-        target: {
-          value: 'public.velopert@gmail.com',
-        },
-      });
+      // fireEvent.change(form.email, {
+      //   target: {
+      //     value: 'public.velopert@gmail.com',
+      //   },
+      // });
 
       fireEvent.change(form.username, {
         target: {
@@ -68,7 +69,6 @@ describe('RegisterForm', () => {
     const { form, getByDisplayValue, changeInputs } = utils;
     changeInputs();
     getByDisplayValue('벨로퍼트');
-    getByDisplayValue('public.velopert@gmail.com');
     getByDisplayValue('velopert');
     getByDisplayValue('안녕하세요');
   });
@@ -84,7 +84,7 @@ describe('RegisterForm', () => {
     fireEvent.click(button);
     expect(onSubmit).toBeCalledWith({
       displayName: '벨로퍼트',
-      email: 'public.velopert@gmail.com',
+      email: '',
       username: 'velopert',
       shortBio: '안녕하세요',
     });
@@ -92,7 +92,7 @@ describe('RegisterForm', () => {
 
   it('should show default email and lock', () => {
     const utils = setup({
-      defaultEmail: 'public.velopert@gmail.com',
+      fixedEmail: 'public.velopert@gmail.com',
     });
     expect(utils.form.email.value).toBe('public.velopert@gmail.com');
     expect(utils.form.email.disabled).toBeTruthy();

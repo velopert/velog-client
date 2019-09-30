@@ -30,13 +30,13 @@ export const localEmailRegister = ({
   form,
 }: {
   registerToken: string;
-  form: LocalEmailRegisterForm;
+  form: RegisterFormData;
 }) =>
   apiClient.post<AuthResponse>(
     '/api/v2/auth/register/local',
     snakeCaseKeys({ registerToken, form }),
   );
-type LocalEmailRegisterForm = {
+type RegisterFormData = {
   displayName: string;
   username: string;
   shortBio: string;
@@ -73,3 +73,30 @@ export const emailCodeLogin = (code: string) =>
   apiClient.get<AuthResponse>(`/api/v2/auth/code/${code}`);
 
 export const logout = () => apiClient.post<void>('/api/v2/auth/logout');
+
+export interface SocialProfile {
+  uid: number;
+  email: string;
+  name: string;
+  thumbnail: string;
+  username: string;
+}
+
+export const getSocialProfile = async () => {
+  const response = await apiClient.get<SocialProfile>(
+    '/api/v2/auth/social/profile',
+  );
+  return response.data;
+};
+
+export const socialRegister = async (form: RegisterFormData) => {
+  const response = await apiClient.post<AuthResponse>(
+    '/api/v2/auth/social/register',
+    {
+      display_name: form.displayName,
+      short_bio: form.shortBio,
+      username: form.username,
+    },
+  );
+  return response.data;
+};

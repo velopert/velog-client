@@ -325,6 +325,7 @@ export const WRITE_POST = gql`
     $tags: [String]
     $is_markdown: Boolean
     $is_temp: Boolean
+    $is_private: Boolean
     $url_slug: String
     $thumbnail: String
     $meta: JSON
@@ -336,6 +337,7 @@ export const WRITE_POST = gql`
       tags: $tags
       is_markdown: $is_markdown
       is_temp: $is_temp
+      is_private: $is_private
       url_slug: $url_slug
       thumbnail: $thumbnail
       meta: $meta
@@ -370,6 +372,7 @@ export const EDIT_POST = gql`
     $tags: [String]
     $is_markdown: Boolean
     $is_temp: Boolean
+    $is_private: Boolean
     $url_slug: String
     $thumbnail: String
     $meta: JSON
@@ -382,6 +385,7 @@ export const EDIT_POST = gql`
       tags: $tags
       is_markdown: $is_markdown
       is_temp: $is_temp
+      is_private: $is_private
       url_slug: $url_slug
       thumbnail: $thumbnail
       meta: $meta
@@ -514,8 +518,8 @@ export const UNLIKE_POST = gql`
 `;
 
 export const SEARCH_POSTS = gql`
-  query SearchPost($keyword: String!, $offset: Int) {
-    searchPost(keyword: $keyword, offset: $offset) {
+  query SearchPosts($keyword: String!, $offset: Int, $username: String) {
+    searchPosts(keyword: $keyword, offset: $offset, username: $username) {
       count
       posts {
         id
@@ -541,7 +545,7 @@ export const SEARCH_POSTS = gql`
 `;
 
 export type SearchPostsResponse = {
-  searchPost: {
+  searchPosts: {
     posts: PartialPost[];
     count: number;
   };

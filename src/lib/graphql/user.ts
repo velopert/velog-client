@@ -36,6 +36,7 @@ export const GET_CURRENT_USER = gql`
       id
       username
       profile {
+        id
         thumbnail
         display_name
       }
@@ -56,6 +57,7 @@ export type CurrentUser = {
   id: string;
   username: string;
   profile: {
+    id: string;
     thumbnail: string | null;
     display_name: string;
   };

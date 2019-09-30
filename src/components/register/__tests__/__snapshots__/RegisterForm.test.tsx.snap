@@ -35,32 +35,6 @@ exports[`RegisterForm matches snapshot 1`] = `
       class="sc-bdVaJa hDAwbH"
     >
       <label>
-        이메일
-      </label>
-      <div
-        class="group"
-      >
-        <div
-          class="input-wrapper"
-        >
-          <input
-            name="email"
-            placeholder="이메일을 입력하세요"
-            size="25"
-            value=""
-          />
-        </div>
-        <div
-          class="width-maker"
-        >
-          이메일을 입력하세요
-        </div>
-      </div>
-    </div>
-    <div
-      class="sc-bdVaJa hDAwbH"
-    >
-      <label>
         아이디
       </label>
       <div

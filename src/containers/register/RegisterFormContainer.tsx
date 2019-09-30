@@ -8,9 +8,14 @@ import {
   GetRegisterTokenResponse,
   localEmailRegister,
   AuthResponse,
+  getSocialProfile,
+  SocialProfile,
+  socialRegister,
 } from '../../lib/api/auth';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import qs from 'qs';
+import { useApolloClient } from '@apollo/react-hooks';
+import { GET_CURRENT_USER } from '../../lib/graphql/user';
 
 interface RegisterFormContainerProps extends RouteComponentProps<{}> {}
 
@@ -19,16 +24,41 @@ const RegisterFormContainer: React.SFC<RegisterFormContainerProps> = ({
   location,
   history,
 }) => {
-  const query: { code?: string } = qs.parse(location.search, {
+  const query: { code?: string; social?: string } = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
+  const client = useApolloClient();
 
   const [error, setError] = useState<null | string>(null);
-  const [onGetRegisterToken, , registerToken] = useRequest<
+  const [socialProfile, setSocialProfile] = useState<SocialProfile | null>(
+    null,
+  );
+
+  const [onGetRegisterToken, loadingRegister, registerToken] = useRequest<
     GetRegisterTokenResponse
   >((code: string) => getRegisterToken(code));
 
-  const [onLocalRegister, ,] = useRequest<AuthResponse>(localEmailRegister);
+  const [onLocalRegister] = useRequest<AuthResponse>(localEmailRegister);
+
+  const onGetSocialProfile = async () => {
+    const profile = await getSocialProfile();
+    setSocialProfile(profile);
+  };
+
+  // get register token on mount
+  useEffect(() => {
+    if (!query.code) {
+      // TODO: show error page
+      return;
+    }
+    onGetRegisterToken(query.code);
+  }, [onGetRegisterToken, query.code]);
+
+  // get social info on mount
+  useEffect(() => {
+    if (!query.social) return;
+    onGetSocialProfile();
+  }, [query.social]);
 
   const onSubmit = async (form: RegisterFormType) => {
     setError(null);
@@ -67,39 +97,62 @@ const RegisterFormContainer: React.SFC<RegisterFormContainerProps> = ({
       return;
     }
 
-    if (query.code) {
-      const formWithoutEmail = { ...form };
-      delete formWithoutEmail.email;
-
-      try {
+    try {
+      if (query.code) {
+        // local email register
+        const formWithoutEmail = { ...form };
+        delete formWithoutEmail.email;
         await onLocalRegister({
           registerToken: registerToken && registerToken.register_token,
           form: formWithoutEmail,
         });
-        history.push('/');
-      } catch (e) {
-        if (e.response.status === 409) {
-          setError('이미 존재하는 아이디입니다.');
-          return;
-        }
-        setError('에러 발생!');
+      } else if (query.social) {
+        // social register
+        await socialRegister({
+          displayName: form.displayName,
+          shortBio: form.shortBio,
+          username: form.username,
+        });
       }
+    } catch (e) {
+      if (e.response.status === 409) {
+        setError('이미 존재하는 아이디입니다.');
+        return;
+      }
+      setError('에러 발생!');
+      return;
+    }
+
+    // check login status and redirect to home
+    try {
+      await client.query({
+        query: GET_CURRENT_USER,
+        fetchPolicy: 'network-only',
+      });
+      history.push('/');
+    } catch (e) {
+      setError('에러 발생!');
+      return;
     }
   };
 
-  // get register token on mount
-  useEffect(() => {
-    if (!query.code) {
-      // TODO: show error page
-      return;
-    }
-    onGetRegisterToken(query.code);
-  }, [onGetRegisterToken, query.code]);
+  if (query.social && !socialProfile) return null;
+
   return (
     <RegisterForm
       onSubmit={onSubmit}
-      defaultEmail={registerToken && registerToken.email}
+      fixedEmail={
+        (registerToken && registerToken.email) ||
+        (socialProfile && socialProfile.email)
+      }
+      hideEmail={!!(socialProfile && !socialProfile.email)}
       error={error}
+      defaultInfo={
+        socialProfile && {
+          displayName: socialProfile.name,
+          username: socialProfile.username,
+        }
+      }
     />
   );
 };

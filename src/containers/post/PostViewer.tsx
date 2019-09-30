@@ -254,7 +254,6 @@ const PostViewer: React.FC<PostViewerProps> = ({
   if (!data) return null;
 
   const { post } = data;
-  console.log(post);
   if (!post) return null;
 
   return (
