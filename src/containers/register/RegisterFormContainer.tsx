@@ -145,7 +145,6 @@ const RegisterFormContainer: React.SFC<RegisterFormContainerProps> = ({
         (registerToken && registerToken.email) ||
         (socialProfile && socialProfile.email)
       }
-      hideEmail={!!(socialProfile && !socialProfile.email)}
       error={error}
       defaultInfo={
         socialProfile && {
