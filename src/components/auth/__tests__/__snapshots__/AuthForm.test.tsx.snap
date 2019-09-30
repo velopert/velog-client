@@ -39,33 +39,36 @@ exports[`AuthForm renders correctly 1`] = `
         <div
           class="sc-htpNat jVlyIb"
         >
-          <button
-            class="sc-bwzfXH kYFpdu"
+          <a
+            class="sc-bwzfXH dOnywA"
+            href="http://localhost:5000/api/v2/auth/social/redirect/github"
             style="background: rgb(39, 46, 51);"
             tabindex="4"
           >
             <svg>
               icon-github.svg
             </svg>
-          </button>
-          <button
-            class="sc-bwzfXH grAJBf"
+          </a>
+          <a
+            class="sc-bwzfXH fVlvjo"
+            href="http://localhost:5000/api/v2/auth/social/redirect/google"
             style="background: white;"
             tabindex="5"
           >
             <svg>
               icon-google.svg
             </svg>
-          </button>
-          <button
-            class="sc-bwzfXH kYFpdu"
+          </a>
+          <a
+            class="sc-bwzfXH dOnywA"
+            href="http://localhost:5000/api/v2/auth/social/redirect/facebook"
             style="background: rgb(59, 89, 152);"
             tabindex="6"
           >
             <svg>
               icon-facebook.svg
             </svg>
-          </button>
+          </a>
         </div>
       </section>
     </div>

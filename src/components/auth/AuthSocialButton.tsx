@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { FacebookIcon, GoogleIcon, GithubIcon } from '../../static/svg';
 import palette from '../../lib/styles/palette';
 
-const AuthSocialButtonBlock = styled.button<{ border: boolean }>`
+const AuthSocialButtonBlock = styled.a<{ border: boolean }>`
   width: 3rem;
   height: 3rem;
   border-radius: 1.5rem;
@@ -11,7 +11,6 @@ const AuthSocialButtonBlock = styled.button<{ border: boolean }>`
   align-items: center;
   justify-content: center;
   outline: none;
-  border: none;
   transition: 0.125s all ease-in;
   color: white;
   ${props =>
@@ -53,6 +52,14 @@ const AuthSocialButton: React.FC<AuthSocialButtonProps> = ({
 }) => {
   const info = providerMap[provider];
   const { icon: Icon, color, border } = info;
+
+  const host =
+    process.env.NODE_ENV === 'production'
+      ? 'https://velog.io'
+      : 'http://localhost:5000';
+
+  const redirectTo = `${host}/api/v2/auth/social/redirect/${provider}`;
+
   return (
     <AuthSocialButtonBlock
       style={{
@@ -60,6 +67,7 @@ const AuthSocialButton: React.FC<AuthSocialButtonProps> = ({
       }}
       border={border}
       tabIndex={tabIndex}
+      href={redirectTo}
     >
       <Icon />
     </AuthSocialButtonBlock>
