@@ -27,7 +27,7 @@ const { useEffect, useCallback } = React;
 /**
  * Login with email code
  */
-const EmailLogin: React.SFC<EmailLoginProps> = ({ location, history }) => {
+const EmailLogin: React.FC<EmailLoginProps> = ({ location, history }) => {
   const query = qs.parse(location.search, { ignoreQueryPrefix: true });
   const processLogin = useCallback(async () => {
     try {

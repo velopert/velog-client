@@ -11,7 +11,7 @@ const WritePageBlock = styled.div`
 
 interface WritePageProps {}
 
-const WritePage: React.SFC<WritePageProps> = () => {
+const WritePage: React.FC<WritePageProps> = () => {
   return (
     <WritePageBlock>
       <ActiveEditor />

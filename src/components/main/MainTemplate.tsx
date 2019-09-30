@@ -31,7 +31,7 @@ type MainTemplateNamespace = {
 };
 
 interface MainTemplateProps {}
-const MainTemplate: React.SFC<MainTemplateProps> & MainTemplateNamespace = ({
+const MainTemplate: React.FC<MainTemplateProps> & MainTemplateNamespace = ({
   children,
 }) => {
   return (

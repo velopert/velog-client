@@ -99,7 +99,7 @@ export interface ToolbarProps {
   innerRef?: React.RefObject<HTMLDivElement>;
 }
 
-const Toolbar: React.SFC<ToolbarProps> = ({
+const Toolbar: React.FC<ToolbarProps> = ({
   shadow,
   mode,
   onClick = () => {},

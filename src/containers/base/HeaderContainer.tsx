@@ -53,7 +53,7 @@ function reducer(state: FloatingState, action: Action) {
   }
 }
 
-const HeaderContainer: React.SFC<HeaderContainerProps> = () => {
+const HeaderContainer: React.FC<HeaderContainerProps> = () => {
   const { user, custom, userLogo, velogUsername } = useSelector(
     (state: RootState) => ({
       user: state.core.user,

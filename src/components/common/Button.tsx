@@ -72,7 +72,7 @@ interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, 'size'> {
   size?: ButtonSize;
 }
 
-const Button: React.SFC<ButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
   children,
   ref,
   color = 'teal',

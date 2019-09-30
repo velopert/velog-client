@@ -26,7 +26,7 @@ export interface AuthEmailSuccessProps {
   registered: boolean;
 }
 
-const AuthEmailSuccess: React.SFC<AuthEmailSuccessProps> = ({ registered }) => {
+const AuthEmailSuccess: React.FC<AuthEmailSuccessProps> = ({ registered }) => {
   const text = registered ? '로그인' : '회원가입';
   return (
     <AuthEmailSuccessBlock>

@@ -6,7 +6,7 @@ const PostTemplateBlock = styled(PageTemplate)``;
 
 interface PostTemplateProps {}
 
-const PostTemplate: React.SFC<PostTemplateProps> = ({ children }) => {
+const PostTemplate: React.FC<PostTemplateProps> = ({ children }) => {
   return <PostTemplateBlock>{children}</PostTemplateBlock>;
 };
 

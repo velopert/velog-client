@@ -8,7 +8,7 @@ import { safe } from '../../lib/utils';
 
 interface RecentPostsProps {}
 
-const RecentPosts: React.SFC<RecentPostsProps> = props => {
+const RecentPosts: React.FC<RecentPostsProps> = props => {
   const getPostList = useQuery<{ posts: PartialPost[] }>(GET_POST_LIST);
 
   const { data } = getPostList;

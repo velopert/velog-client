@@ -22,7 +22,7 @@ interface HeaderUserMenuProps {
   visible: boolean;
 }
 
-const HeaderUserMenu: React.SFC<HeaderUserMenuProps> = ({
+const HeaderUserMenu: React.FC<HeaderUserMenuProps> = ({
   onClose,
   onLogout,
   username,

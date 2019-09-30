@@ -11,7 +11,7 @@ interface StateProps {
 interface DispatchProps {}
 type MarkdownPreviewContainerProps = OwnProps & StateProps & DispatchProps;
 
-const MarkdownPreviewContainer: React.SFC<MarkdownPreviewContainerProps> = ({
+const MarkdownPreviewContainer: React.FC<MarkdownPreviewContainerProps> = ({
   markdown,
   title,
 }) => {

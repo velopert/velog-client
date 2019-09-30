@@ -91,7 +91,7 @@ interface RoundButtonProps extends ButtonProps {
   border?: boolean;
 }
 
-const RoundButton: React.SFC<RoundButtonProps> = ({
+const RoundButton: React.FC<RoundButtonProps> = ({
   ref,
   to,
   color = 'teal',

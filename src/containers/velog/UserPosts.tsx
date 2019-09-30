@@ -8,7 +8,7 @@ interface UserPostsProps {
   username: string;
 }
 
-const UserPosts: React.SFC<UserPostsProps> = ({ username }) => {
+const UserPosts: React.FC<UserPostsProps> = ({ username }) => {
   const getPostList = useQuery<{ posts: PartialPost[] }>(GET_POST_LIST, {
     variables: {
       username,

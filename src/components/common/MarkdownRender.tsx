@@ -52,7 +52,7 @@ const MarkdownRenderBlock = styled.div`
 `;
 
 const { useState, useEffect } = React;
-const MarkdownRender: React.SFC<MarkdownRenderProps> = ({
+const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   markdown,
   codeTheme = 'atom-one-light',
   onConvertFinish,

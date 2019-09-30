@@ -39,7 +39,7 @@ const StyledSearchInput = styled(SearchInput)`
 
 interface MainSideMenuProps extends RouteComponentProps {}
 
-const MainSideMenu: React.SFC<MainSideMenuProps> = ({ history }) => {
+const MainSideMenu: React.FC<MainSideMenuProps> = ({ history }) => {
   const onSearch = (keyword: string) => {
     history.push(`/search/?q=${keyword}`);
   };

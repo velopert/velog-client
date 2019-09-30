@@ -59,7 +59,7 @@ interface HeaderProps {
 
 const { useCallback } = React;
 
-const Header: React.SFC<HeaderProps> = ({
+const Header: React.FC<HeaderProps> = ({
   floating,
   floatingMargin,
   onLoginClick,

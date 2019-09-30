@@ -10,7 +10,7 @@ interface PostCardListProps {
   hideUser?: boolean;
 }
 
-const PostCardList: React.SFC<PostCardListProps> = ({ posts, hideUser }) => {
+const PostCardList: React.FC<PostCardListProps> = ({ posts, hideUser }) => {
   return (
     <PostCardListBlock>
       {posts.map(post => (

@@ -28,7 +28,7 @@ export type MarkdownEditorContainerProps = {};
 
 const { useCallback, useEffect } = React;
 
-const MarkdownEditorContainer: React.SFC<MarkdownEditorContainerProps> = () => {
+const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
   const { title, markdown, thumbnail, publish, postId } = useSelector(
     (state: RootState) => ({
       title: state.write.title,

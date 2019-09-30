@@ -18,7 +18,7 @@ const TagBlock = styled.div`
 
 interface TagProps {}
 
-const Tag: React.SFC<TagProps> = ({ children }) => {
+const Tag: React.FC<TagProps> = ({ children }) => {
   return <TagBlock>{children}</TagBlock>;
 };
 

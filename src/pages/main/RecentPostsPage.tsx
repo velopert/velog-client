@@ -7,7 +7,7 @@ const RecentPostsPageBlock = styled.div``;
 
 interface RecentPostsPageProps {}
 
-const RecentPostsPage: React.SFC<RecentPostsPageProps> = props => {
+const RecentPostsPage: React.FC<RecentPostsPageProps> = props => {
   return (
     <RecentPostsPageBlock>
       <RecentPosts />

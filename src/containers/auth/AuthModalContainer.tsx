@@ -23,7 +23,7 @@ interface DispatchProps {
 type AuthModalContainerProps = OwnProps & StateProps & DispatchProps;
 
 const { useCallback } = React;
-const AuthModalContainer: React.SFC<AuthModalContainerProps> = ({
+const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
   visible,
   mode,
   closeAuthModal,

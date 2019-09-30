@@ -54,7 +54,7 @@ export interface AuthFormProps {
   registered: boolean | null;
 }
 
-const AuthForm: React.SFC<AuthFormProps> = ({
+const AuthForm: React.FC<AuthFormProps> = ({
   mode,
   onToggleMode,
   onSendAuthEmail,

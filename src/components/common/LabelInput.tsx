@@ -87,7 +87,7 @@ export interface LabelInputProps extends InputProps {
 }
 
 const { useState, useCallback } = React;
-const LabelInput: React.SFC<LabelInputProps> = ({
+const LabelInput: React.FC<LabelInputProps> = ({
   label,
   name,
   value,

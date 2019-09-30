@@ -38,7 +38,7 @@ interface PopupBaseProps {
 
 const { useState, useEffect } = React;
 
-const PopupBase: React.SFC<PopupBaseProps> = ({ visible, children }) => {
+const PopupBase: React.FC<PopupBaseProps> = ({ visible, children }) => {
   const [closed, setClosed] = useState(true);
   useEffect(() => {
     let timeoutId: number | null = null;

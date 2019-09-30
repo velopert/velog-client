@@ -12,7 +12,7 @@ interface StateProps {
 interface DispatchProps {}
 type CoreProps = OwnProps & StateProps & DispatchProps;
 
-const Core: React.SFC<CoreProps> = ({ layer }) => {
+const Core: React.FC<CoreProps> = ({ layer }) => {
   return (
     <>
       <OpaqueLayer visible={layer} />

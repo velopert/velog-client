@@ -80,7 +80,7 @@ interface PostCardProps {
   hideUser?: boolean;
 }
 
-const PostCard: React.SFC<PostCardProps> = React.memo(({ post, hideUser }) => {
+const PostCard: React.FC<PostCardProps> = React.memo(({ post, hideUser }) => {
   const url = `/@${post.user.username}/${post.url_slug}`;
   return (
     <PostCardBlock>

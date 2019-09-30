@@ -4,7 +4,7 @@ import RegisterFormContainer from '../containers/register/RegisterFormContainer'
 
 interface RegisterPageProps {}
 
-const RegisterPage: React.SFC<RegisterPageProps> = () => {
+const RegisterPage: React.FC<RegisterPageProps> = () => {
   return (
     <RegisterTemplate>
       <RegisterFormContainer />

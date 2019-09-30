@@ -24,7 +24,7 @@ interface HeaderUserMenuItemProps {
   onClick?: () => void;
 }
 
-const HeaderUserMenuItem: React.SFC<HeaderUserMenuItemProps> = ({
+const HeaderUserMenuItem: React.FC<HeaderUserMenuItemProps> = ({
   children,
   to,
   onClick,

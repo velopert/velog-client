@@ -15,7 +15,7 @@ const SearchPage = loadable(() => import('./pages/SearchPage'));
 
 interface AppProps {}
 
-const App: React.SFC<AppProps> = props => {
+const App: React.FC<AppProps> = props => {
   return (
     <JazzbarProvider>
       <Switch>

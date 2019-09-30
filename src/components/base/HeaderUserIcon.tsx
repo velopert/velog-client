@@ -40,7 +40,7 @@ export interface HeaderUserIconProps {
 }
 
 // TODO: show user thumbnail
-const HeaderUserIcon: React.SFC<HeaderUserIconProps> = ({ onClick, user }) => {
+const HeaderUserIcon: React.FC<HeaderUserIconProps> = ({ onClick, user }) => {
   return (
     <HeaderUserIconBlock onClick={onClick}>
       <img src={user.profile.thumbnail || userThumbnail} alt="thumbnail" />

@@ -20,7 +20,7 @@ import { GET_CURRENT_USER } from '../../lib/graphql/user';
 interface RegisterFormContainerProps extends RouteComponentProps<{}> {}
 
 const { useEffect, useState } = React;
-const RegisterFormContainer: React.SFC<RegisterFormContainerProps> = ({
+const RegisterFormContainer: React.FC<RegisterFormContainerProps> = ({
   location,
   history,
 }) => {

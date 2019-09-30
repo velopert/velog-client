@@ -47,7 +47,7 @@ const providerMap = {
   },
 };
 
-const AuthSocialButton: React.SFC<AuthSocialButtonProps> = ({
+const AuthSocialButton: React.FC<AuthSocialButtonProps> = ({
   provider,
   tabIndex,
 }) => {

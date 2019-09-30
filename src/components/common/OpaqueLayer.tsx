@@ -31,7 +31,7 @@ interface OpaqueLayerProps {
 
 const { useState, useEffect, useRef } = React;
 
-const OpaqueLayer: React.SFC<OpaqueLayerProps> = ({ visible }) => {
+const OpaqueLayer: React.FC<OpaqueLayerProps> = ({ visible }) => {
   const [animate, setAnimate] = useState(false);
   const timeoutId = useRef<number | null>(null);
   const mounted = useRef(false);

@@ -36,7 +36,7 @@ export interface MarkdownPreviewProps {
   title: string;
 }
 
-const MarkdownPreview: React.SFC<MarkdownPreviewProps> = ({
+const MarkdownPreview: React.FC<MarkdownPreviewProps> = ({
   markdown,
   title,
 }) => {

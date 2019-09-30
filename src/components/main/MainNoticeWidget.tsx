@@ -24,7 +24,7 @@ const MainNoticeWidgetBlock = styled.div`
 
 interface MainNoticeWidgetProps {}
 
-const MainNoticeWidget: React.SFC<MainNoticeWidgetProps> = props => {
+const MainNoticeWidget: React.FC<MainNoticeWidgetProps> = props => {
   return (
     <MainNoticeWidgetBlock>
       <div className="title-bar">공지사항</div>
