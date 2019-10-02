@@ -7,19 +7,25 @@ export const dummy: CurrentUser = {
   id: 'dummy_id',
   username: 'dummy',
   profile: {
+    id: 'dummy_profile_id',
     display_name: 'dummy',
     thumbnail: null,
   },
 };
 
 describe('core reducer', () => {
-  const getInitialState = () => reducer(undefined, {});
+  const getInitialState = () => reducer(undefined, {} as any);
   it('should return the initial state', () => {
     const state = getInitialState();
     expect(state).toEqual({
       layer: false,
       auth: { visible: false, mode: 'LOGIN' },
       user: null,
+      popup: {
+        visible: false,
+        title: '',
+        message: '',
+      },
     });
   });
 
@@ -72,6 +78,30 @@ describe('core reducer', () => {
       let state = getInitialState();
       state = reducer(state, core.setUser(dummy));
       expect(state.user).toBe(dummy);
+    });
+
+    it('OPEN_POPUP', () => {
+      let state = getInitialState();
+      state = reducer(
+        state,
+        core.openPopup({ title: '제목', message: '메시지' }),
+      );
+      expect(state.popup.visible).toBe(true);
+      expect(state.popup.message).toBe('메시지');
+      expect(state.popup.title).toBe('제목');
+    });
+
+    it('CLOSE_POPUP', () => {
+      let state = getInitialState();
+      Object.assign(state, {
+        popup: {
+          title: '제목',
+          message: '메시지',
+          visible: true,
+        },
+      });
+      state = reducer(state, core.closePopup());
+      expect(state.popup.visible).toBe(false);
     });
   });
 });
