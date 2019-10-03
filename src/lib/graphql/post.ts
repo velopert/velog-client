@@ -550,3 +550,38 @@ export type SearchPostsResponse = {
     count: number;
   };
 };
+
+export const CREATE_POST_HISTORY = gql`
+  mutation CreatePostHistory(
+    $post_id: ID!
+    $title: String!
+    $body: String!
+    $is_markdown: Boolean!
+  ) {
+    createPostHistory(
+      post_id: $post_id
+      title: $title
+      body: $body
+      is_markdown: $is_markdown
+    ) {
+      id
+    }
+  }
+`;
+
+export type CreatePostHistoryResponse = {
+  createPostHistory: {
+    id: string;
+    user: {
+      id: string;
+      username: string;
+    };
+    url_slug: string;
+  };
+};
+
+// mutation {
+//   createPostHistory(post_id: "41f19ed8-bc7e-4af3-86e9-4c5e482cb8e4", title: "안녕하세요", body: "내용입니다.", is_markdown:true) {
+//     id
+//   }
+// }

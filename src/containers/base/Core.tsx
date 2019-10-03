@@ -4,6 +4,7 @@ import OpaqueLayer from '../../components/common/OpaqueLayer';
 import AuthModalContainer from '../auth/AuthModalContainer';
 import { RootState } from '../../modules';
 import UserLoader from './UserLoader';
+import CommonPopup from './CommonPopup';
 
 interface OwnProps {}
 interface StateProps {
@@ -18,6 +19,7 @@ const Core: React.FC<CoreProps> = ({ layer }) => {
       <OpaqueLayer visible={layer} />
       <AuthModalContainer />
       <UserLoader />
+      <CommonPopup />
     </>
   );
 };

@@ -37,6 +37,7 @@ const PublishActionButtonsContainer: React.FC<
         'thumbnail',
         'selectedSeries',
         'postId',
+        'isTemp',
       ],
       state.write,
     ),
@@ -92,7 +93,7 @@ const PublishActionButtonsContainer: React.FC<
     <PublishActionButtons
       onCancel={onCancel}
       onPublish={options.postId ? onEdit : onPublish}
-      edit={!!options.postId}
+      edit={!!options.postId && !options.isTemp}
     />
   );
 };

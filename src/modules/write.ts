@@ -18,6 +18,7 @@ const TOGGLE_EDIT_SERIES = 'write/TOGGLE_EDIT_SERIES';
 const SELECT_SERIES = 'write/SELECT_SERIES';
 const CLEAR_EDITOR = 'write/CLEAR_EDTIOR';
 const PREPARE_EDIT = 'write/PREPARE_EDIT';
+const SET_WRITE_POST_ID = 'write/SET_WRITE_POST_ID';
 
 export const changeMarkdown = createStandardAction(CHANGE_MARKDOWN)<string>();
 export const changeTitle = createStandardAction(CHANGE_TITLE)<string>();
@@ -46,6 +47,7 @@ export const selectSeries = createStandardAction(SELECT_SERIES)<{
   name: string;
 } | null>();
 export const clearEditor = createStandardAction(CLEAR_EDITOR)<undefined>();
+export const setWritePostId = createStandardAction(SET_WRITE_POST_ID)<string>();
 
 export type PrepareEditPayload = {
   id: string;
@@ -81,6 +83,7 @@ type SetThumbnail = ReturnType<typeof setThumbnail>;
 type SelectSeries = ReturnType<typeof selectSeries>;
 type ClearEditor = ReturnType<typeof clearEditor>;
 type PrepareEdit = ReturnType<typeof prepareEdit>;
+type SetWritePostId = ReturnType<typeof setWritePostId>;
 
 export enum WriteMode {
   MARKDOWN = 'MARKDOWN',
@@ -106,6 +109,7 @@ export type WriteState = {
     name: string;
   } | null;
   postId: null | string;
+  isTemp: boolean;
 };
 
 const initialState: WriteState = {
@@ -124,6 +128,7 @@ const initialState: WriteState = {
   editSeries: false,
   selectedSeries: null,
   postId: null,
+  isTemp: false,
 };
 
 const write = createReducer(
@@ -193,6 +198,11 @@ const write = createReducer(
         postId: id,
       };
     },
+    [SET_WRITE_POST_ID]: (state, action: SetWritePostId) => ({
+      ...state,
+      postId: action.payload,
+      isTemp: true,
+    }),
   },
   initialState,
 );

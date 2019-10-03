@@ -22,6 +22,7 @@ describe('write redux module', () => {
       editSeries: false,
       selectedSeries: null,
       postId: null,
+      isTemp: false,
     });
   });
   describe('action handlers', () => {

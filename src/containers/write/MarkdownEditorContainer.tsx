@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import MarkdownEditor from '../../components/write/WriteMarkdownEditor';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { RootState } from '../../modules';
 import {
   changeMarkdown,
@@ -10,6 +10,7 @@ import {
   openPublish,
   setDefaultDescription,
   setThumbnail,
+  setWritePostId,
 } from '../../modules/write';
 
 import remark from 'remark';
@@ -23,21 +24,33 @@ import useS3Upload from '../../lib/hooks/useS3Upload';
 import DragDropUpload from '../../components/common/DragDropUpload';
 import PasteUpload from '../../components/common/PasteUpload';
 import { bindActionCreators } from 'redux';
+import { useMutation } from '@apollo/react-hooks';
+import {
+  WritePostResponse,
+  WRITE_POST,
+  CreatePostHistoryResponse,
+  CREATE_POST_HISTORY,
+} from '../../lib/graphql/post';
+import { openPopup } from '../../modules/core';
+import { escapeForUrl } from '../../lib/utils';
 
 export type MarkdownEditorContainerProps = {};
 
 const { useCallback, useEffect } = React;
 
 const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
-  const { title, markdown, thumbnail, publish, postId } = useSelector(
-    (state: RootState) => ({
-      title: state.write.title,
-      markdown: state.write.markdown,
-      thumbnail: state.write.thumbnail,
-      publish: state.write.publish,
-      postId: state.write.postId,
-    }),
+  const { title, markdown, thumbnail, publish, postId, isTemp } = useSelector(
+    (state: RootState) => state.write,
   );
+  const [writePost] = useMutation<WritePostResponse>(WRITE_POST);
+  const [createPostHistory] = useMutation<CreatePostHistoryResponse>(
+    CREATE_POST_HISTORY,
+  );
+  const [lastSavedData, setLastSavedData] = useState({
+    title: '',
+    body: '',
+  });
+
   const dispatch = useDispatch();
   const actionCreators = useMemo(
     () =>
@@ -103,6 +116,53 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     },
     [s3Upload],
   );
+
+  const onTempSave = async () => {
+    if (!title || !markdown) {
+      dispatch(
+        openPopup({
+          title: '임시저장 실패',
+          message: '제목 또는 내용이 비어있습니다.',
+        }),
+      );
+      return;
+    }
+
+    if (!postId) {
+      const response = await writePost({
+        variables: {
+          title,
+          body: markdown,
+          tags: [],
+          is_markdown: false,
+          is_temp: true,
+          is_private: false,
+          url_slug: escapeForUrl(title),
+          thumbnail: null,
+          meta: {},
+          series_id: null,
+        },
+      });
+      if (!response || !response.data) return;
+      dispatch(setWritePostId(response.data.writePost.id));
+    } else {
+      // save only if something has been changed
+      if (shallowEqual(lastSavedData, { title, body: markdown })) return;
+      await createPostHistory({
+        variables: {
+          post_id: postId,
+          title,
+          body: markdown,
+          is_markdown: true,
+        },
+      });
+      setLastSavedData({
+        title,
+        body: markdown,
+      });
+    }
+  };
+
   return (
     <>
       <MarkdownEditor
@@ -117,8 +177,8 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
         footer={
           <WriteFooter
             onPublish={onPublish}
-            onTempSave={() => {}}
-            edit={!!postId}
+            onTempSave={onTempSave}
+            edit={!!postId && !isTemp}
           />
         }
       />
