@@ -129,8 +129,8 @@ export interface CommentWithReplies {
 }
 
 export const GET_POST_LIST = gql`
-  query Posts($cursor: ID, $username: String) {
-    posts(cursor: $cursor, username: $username) {
+  query Posts($cursor: ID, $username: String, $temp_only: Boolean) {
+    posts(cursor: $cursor, username: $username, temp_only: $temp_only) {
       id
       title
       short_description

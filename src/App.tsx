@@ -12,6 +12,7 @@ const EmailLoginPage = loadable(() => import('./pages/EmailLoginPage'));
 const WritePage = loadable(() => import('./pages/WritePage'));
 const VelogPage = loadable(() => import('./pages/velog/VelogPage'));
 const SearchPage = loadable(() => import('./pages/SearchPage'));
+const SavesPage = loadable(() => import('./pages/SavesPage'));
 
 interface AppProps {}
 
@@ -27,6 +28,7 @@ const App: React.FC<AppProps> = props => {
         <Route path="/email-login" component={EmailLoginPage} />
         <Route path="/write" component={WritePage} />
         <Route path="/search" component={SearchPage} />
+        <Route path="/saves" component={SavesPage} />
       </Switch>
       <Core />
     </JazzbarProvider>
