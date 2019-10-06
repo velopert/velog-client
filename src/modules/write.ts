@@ -16,7 +16,7 @@ const CHANGE_URL_SLUG = 'write/CHANGE_URL';
 const SET_THUMBNAIL = 'write/SET_THUMBNAIL';
 const TOGGLE_EDIT_SERIES = 'write/TOGGLE_EDIT_SERIES';
 const SELECT_SERIES = 'write/SELECT_SERIES';
-const CLEAR_EDITOR = 'write/CLEAR_EDTIOR';
+const CLEAR_EDITOR = 'write/CLEAR_EDITOR';
 const PREPARE_EDIT = 'write/PREPARE_EDIT';
 const SET_WRITE_POST_ID = 'write/SET_WRITE_POST_ID';
 
@@ -62,6 +62,7 @@ export type PrepareEditPayload = {
   } | null;
   isPrivate: boolean;
   isMarkdown: boolean;
+  isTemp?: boolean;
 };
 
 export const prepareEdit = createStandardAction(PREPARE_EDIT)<
@@ -183,6 +184,7 @@ const write = createReducer(
         series,
         id,
         isPrivate,
+        isTemp,
       } = payload;
       const key = isMarkdown ? 'markdown' : 'html';
       return {
@@ -192,6 +194,7 @@ const write = createReducer(
         description,
         urlSlug,
         isPrivate,
+        isTemp: isTemp || false,
         mode: isMarkdown ? WriteMode.MARKDOWN : WriteMode.WYSIWYG,
         [key]: body,
         selectedSeries: series,

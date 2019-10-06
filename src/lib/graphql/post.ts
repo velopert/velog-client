@@ -51,6 +51,7 @@ export type PartialPost = {
   url_slug: string;
   is_private: boolean;
   released_at: string;
+  updated_at: string;
   tags: string[];
   comments_count: number;
 };
@@ -145,6 +146,7 @@ export const GET_POST_LIST = gql`
       }
       url_slug
       released_at
+      updated_at
       comments_count
       tags
       is_private
@@ -240,6 +242,46 @@ export const READ_POST = gql`
     }
   }
 `;
+
+export const READ_POST_FOR_EDIT = gql`
+  query ReadPostForEdit($id: ID) {
+    post(id: $id) {
+      id
+      title
+      tags
+      body
+      short_description
+      is_markdown
+      is_private
+      is_temp
+      thumbnail
+      url_slug
+      series {
+        id
+        name
+      }
+    }
+  }
+`;
+
+export type ReadPostForEditResponse = {
+  post: {
+    id: string;
+    title: string;
+    tags: string[];
+    body: string;
+    short_description: string;
+    is_markdown: boolean;
+    is_private: boolean;
+    is_temp: boolean;
+    thumbnail: string | null;
+    url_slug: string;
+    series: {
+      id: string;
+      name: string;
+    } | null;
+  };
+};
 
 export const GET_COMMENTS_COUNT = gql`
   query GetCommentsCount($id: ID!) {

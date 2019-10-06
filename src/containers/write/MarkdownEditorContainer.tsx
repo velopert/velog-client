@@ -134,7 +134,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
           title,
           body: markdown,
           tags: [],
-          is_markdown: false,
+          is_markdown: true,
           is_temp: true,
           is_private: false,
           url_slug: escapeForUrl(title),

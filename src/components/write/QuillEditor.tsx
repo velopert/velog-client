@@ -234,12 +234,20 @@ export default class QuillEditor extends React.Component<
     this.quill.focus();
   };
   componentDidUpdate(prevProps: QuillEditorProps) {
-    const { lastUploadedImage } = this.props;
+    const { lastUploadedImage, initialHtml } = this.props;
     if (
       lastUploadedImage &&
       prevProps.lastUploadedImage !== lastUploadedImage
     ) {
       this.addImageToEditor(lastUploadedImage);
+    }
+
+    if (!this.quill) return;
+    if (
+      initialHtml !== prevProps.initialHtml &&
+      this.quill.getText() === '\n'
+    ) {
+      this.quill.clipboard.dangerouslyPasteHTML(initialHtml);
     }
   }
 

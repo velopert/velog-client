@@ -171,7 +171,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         urlSlug: post.url_slug,
       }),
     );
-    history.push('/write');
+    history.push(`/write?id=${post.id}`);
   };
 
   const onLikeToggle = async () => {

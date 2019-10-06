@@ -11,6 +11,7 @@ export interface SavesTemplateProps {
 const StyledVelogResponsive = styled(VelogResponsive)`
   margin-top: 5rem;
   & > h1 {
+    line-height: 1.5;
     font-size: 3rem;
     margin-top: 0;
     margin-bottom: 3rem;
