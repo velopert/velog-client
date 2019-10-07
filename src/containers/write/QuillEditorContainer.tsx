@@ -30,12 +30,14 @@ import {
 } from '../../lib/graphql/post';
 import { escapeForUrl } from '../../lib/utils';
 import { postActions } from '../../modules/post';
+import { useHistory } from 'react-router';
 
 export type QuillEditorContainerProps = {};
 
 const { useCallback, useEffect } = React;
 
 const QuillEditorContainer: React.FC<QuillEditorContainerProps> = () => {
+  const history = useHistory();
   const {
     title,
     html,
@@ -145,7 +147,9 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = () => {
         },
       });
       if (!response || !response.data) return;
-      dispatch(setWritePostId(response.data.writePost.id));
+      const { id } = response.data.writePost;
+      dispatch(setWritePostId(id));
+      history.replace(`/write?id=${id}`);
     } else {
       // save only if something has been changed
       if (shallowEqual(lastSavedData, { title, body: html })) return;

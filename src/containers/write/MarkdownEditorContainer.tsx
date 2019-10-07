@@ -33,12 +33,14 @@ import {
 } from '../../lib/graphql/post';
 import { openPopup } from '../../modules/core';
 import { escapeForUrl } from '../../lib/utils';
+import { useHistory } from 'react-router';
 
 export type MarkdownEditorContainerProps = {};
 
 const { useCallback, useEffect } = React;
 
 const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
+  const history = useHistory();
   const { title, markdown, thumbnail, publish, postId, isTemp } = useSelector(
     (state: RootState) => state.write,
   );
@@ -144,7 +146,9 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
         },
       });
       if (!response || !response.data) return;
-      dispatch(setWritePostId(response.data.writePost.id));
+      const { id } = response.data.writePost;
+      dispatch(setWritePostId(id));
+      history.replace(`/write?id=${id}`);
     } else {
       // save only if something has been changed
       if (shallowEqual(lastSavedData, { title, body: markdown })) return;

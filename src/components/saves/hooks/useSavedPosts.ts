@@ -1,7 +1,6 @@
 import useUser from '../../../lib/hooks/useUser';
 import { useHistory } from 'react-router';
 import { useEffect, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import usePopup from '../../../lib/hooks/usePopup';
 import { GET_POST_LIST, PartialPost } from '../../../lib/graphql/post';
 import { useQuery } from '@apollo/react-hooks';
