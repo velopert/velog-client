@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import OpaqueLayer from '../../components/common/OpaqueLayer';
 import AuthModalContainer from '../auth/AuthModalContainer';
 import { RootState } from '../../modules';
-import UserLoader from './UserLoader';
+import UserLoader from './hooks/useUserLoader';
 import CommonPopup from './CommonPopup';
+import useUserLoader from './hooks/useUserLoader';
 
 interface OwnProps {}
 interface StateProps {
@@ -14,11 +15,12 @@ interface DispatchProps {}
 type CoreProps = OwnProps & StateProps & DispatchProps;
 
 const Core: React.FC<CoreProps> = ({ layer }) => {
+  useUserLoader();
+
   return (
     <>
       <OpaqueLayer visible={layer} />
       <AuthModalContainer />
-      <UserLoader />
       <CommonPopup />
     </>
   );
