@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useRef } from 'react';
 import { batch, useSelector, useDispatch, shallowEqual } from 'react-redux';
 import QuillEditor from '../../components/write/QuillEditor';
 import { RootState } from '../../modules';
@@ -27,10 +27,13 @@ import {
   WRITE_POST,
   CreatePostHistoryResponse,
   CREATE_POST_HISTORY,
+  EditPostResult,
+  EDIT_POST,
 } from '../../lib/graphql/post';
 import { escapeForUrl } from '../../lib/utils';
 import { postActions } from '../../modules/post';
 import { useHistory } from 'react-router';
+import { debounce } from 'throttle-debounce';
 
 export type QuillEditorContainerProps = {};
 
@@ -66,6 +69,7 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = () => {
     [dispatch],
   );
   const [writePost] = useMutation<WritePostResponse>(WRITE_POST);
+  const [editPost] = useMutation<EditPostResult>(EDIT_POST);
   const [createPostHistory] = useMutation<CreatePostHistoryResponse>(
     CREATE_POST_HISTORY,
   );
@@ -119,7 +123,7 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = () => {
     [s3Upload],
   );
 
-  const onTempSave = async () => {
+  const onTempSave = useCallback(async () => {
     if (!title || !html) {
       dispatch(
         openPopup({
@@ -130,21 +134,23 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = () => {
       return;
     }
 
+    const variables = {
+      title,
+      body: html,
+      tags: [],
+      is_markdown: false,
+      is_temp: true,
+      is_private: false,
+      url_slug: escapeForUrl(title),
+      thumbnail: null,
+      meta: {},
+      series_id: null,
+    };
+
     if (!postId) {
       // make writePost mutation
       const response = await writePost({
-        variables: {
-          title,
-          body: html,
-          tags: [],
-          is_markdown: false,
-          is_temp: true,
-          is_private: false,
-          url_slug: escapeForUrl(title),
-          thumbnail: null,
-          meta: {},
-          series_id: null,
-        },
+        variables,
       });
       if (!response || !response.data) return;
       const { id } = response.data.writePost;
@@ -166,8 +172,41 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = () => {
         title,
         body: html,
       });
+      if (isTemp) {
+        await editPost({
+          variables: {
+            id: postId,
+            ...variables,
+          },
+        });
+      }
     }
-  };
+  }, [
+    createPostHistory,
+    dispatch,
+    editPost,
+    history,
+    html,
+    isTemp,
+    lastSavedData,
+    postId,
+    title,
+    writePost,
+  ]);
+
+  useEffect(() => {
+    const changed = !shallowEqual(lastSavedData, { title, body: html });
+    if (changed) {
+      const timeoutId = setTimeout(() => {
+        if (!postId) return;
+        onTempSave();
+      }, 10 * 1000);
+
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [title, html, postId, onTempSave, lastSavedData]);
 
   return (
     <>
