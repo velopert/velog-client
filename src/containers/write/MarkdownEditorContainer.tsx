@@ -119,7 +119,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     [s3Upload],
   );
 
-  const onTempSave = async () => {
+  const onTempSave = useCallback(async () => {
     if (!title || !markdown) {
       dispatch(
         openPopup({
@@ -165,7 +165,30 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
         body: markdown,
       });
     }
-  };
+  }, [
+    createPostHistory,
+    dispatch,
+    history,
+    lastSavedData,
+    markdown,
+    postId,
+    title,
+    writePost,
+  ]);
+
+  useEffect(() => {
+    const changed = !shallowEqual(lastSavedData, { title, body: markdown });
+    if (changed) {
+      const timeoutId = setTimeout(() => {
+        if (!postId) return;
+        onTempSave();
+      }, 10 * 1000);
+
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [title, postId, onTempSave, lastSavedData, markdown]);
 
   return (
     <>

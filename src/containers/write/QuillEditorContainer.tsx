@@ -21,7 +21,7 @@ import DragDropUpload from '../../components/common/DragDropUpload';
 import PasteUpload from '../../components/common/PasteUpload';
 import { bindActionCreators } from 'redux';
 import { openPopup } from '../../modules/core';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import {
   WritePostResponse,
   WRITE_POST,
@@ -29,6 +29,7 @@ import {
   CREATE_POST_HISTORY,
   EditPostResult,
   EDIT_POST,
+  GET_LAST_POST_HISTORY,
 } from '../../lib/graphql/post';
 import { escapeForUrl } from '../../lib/utils';
 import { postActions } from '../../modules/post';
@@ -50,6 +51,7 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = () => {
     postId,
     isTemp,
   } = useSelector(({ write }: RootState) => write, shallowEqual);
+
   const dispatch = useDispatch();
   const actionCreators = useMemo(
     () =>
@@ -207,6 +209,8 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = () => {
       };
     }
   }, [title, html, postId, onTempSave, lastSavedData]);
+
+  useEffect(() => {}, []);
 
   return (
     <>

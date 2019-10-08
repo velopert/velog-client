@@ -360,6 +360,28 @@ export const GET_REPLIES = gql`
   }
 `;
 
+export const GET_LAST_POST_HISTORY = gql`
+  query GetLastPostHistory($post_id: ID!) {
+    lastPostHistory(post_id: $post_id) {
+      id
+      title
+      body
+      created_at
+      is_markdown
+    }
+  }
+`;
+
+export type GetLastPostHistoryResult = {
+  lastPostHistory: {
+    id: string;
+    title: string;
+    body: string;
+    created_at: string;
+    is_markdown: boolean;
+  };
+};
+
 export const WRITE_POST = gql`
   mutation WritePost(
     $title: String
