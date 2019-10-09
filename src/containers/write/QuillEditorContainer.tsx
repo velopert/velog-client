@@ -12,6 +12,7 @@ import {
   setDefaultDescription,
   setThumbnail,
   setWritePostId,
+  setInitialBody,
 } from '../../modules/write';
 import TagInputContainer from './TagInputContainer';
 import WriteFooter from '../../components/write/WriteFooter';
@@ -35,6 +36,7 @@ import { escapeForUrl } from '../../lib/utils';
 import { postActions } from '../../modules/post';
 import { useHistory } from 'react-router';
 import { debounce } from 'throttle-debounce';
+import useSaveHotKey from './hooks/useSaveHotkey';
 
 export type QuillEditorContainerProps = {};
 
@@ -50,6 +52,7 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = () => {
     publish,
     postId,
     isTemp,
+    initialBody,
   } = useSelector(({ write }: RootState) => write, shallowEqual);
 
   const dispatch = useDispatch();
@@ -65,6 +68,7 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = () => {
           setTextBody,
           setDefaultDescription,
           setThumbnail,
+          setInitialBody,
         },
         dispatch,
       ),
@@ -83,6 +87,7 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = () => {
   const onConvertEditorMode = (markdown: string) => {
     batch(() => {
       actionCreators.changeMarkdown(markdown);
+      actionCreators.setInitialBody(markdown);
       actionCreators.convertEditorMode();
     });
   }; // after transition
@@ -210,7 +215,7 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = () => {
     }
   }, [title, html, postId, onTempSave, lastSavedData]);
 
-  useEffect(() => {}, []);
+  useSaveHotKey(onTempSave);
 
   return (
     <>
@@ -218,7 +223,7 @@ const QuillEditorContainer: React.FC<QuillEditorContainerProps> = () => {
         title={title}
         onConvertEditorMode={onConvertEditorMode}
         onChangeTitle={onChangeTitle}
-        initialHtml={html}
+        initialHtml={initialBody}
         tagInput={<TagInputContainer />}
         onChangeHtml={onChangeHtml}
         onChangeTextBody={onChangeTextBody}

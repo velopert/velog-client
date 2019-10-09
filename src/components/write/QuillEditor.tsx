@@ -243,11 +243,11 @@ export default class QuillEditor extends React.Component<
     }
 
     if (!this.quill) return;
-    if (
-      initialHtml !== prevProps.initialHtml &&
-      this.quill.getText() === '\n'
-    ) {
+    if (initialHtml !== prevProps.initialHtml) {
+      this.quill.setContents([] as any);
+      this.quill.setText('');
       this.quill.clipboard.dangerouslyPasteHTML(initialHtml);
+      console.log('hello world');
     }
   }
 

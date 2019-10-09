@@ -49,7 +49,6 @@ const PostViewer: React.FC<PostViewerProps> = ({
 }) => {
   useMount(() => {
     if (!window.scrollTo || process.env.NODE_ENV === 'test') return;
-    console.log(window.scrollTo);
     window.scrollTo(0, 0);
   });
   const userId = useUserId();

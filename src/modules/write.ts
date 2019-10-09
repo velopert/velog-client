@@ -19,6 +19,7 @@ const SELECT_SERIES = 'write/SELECT_SERIES';
 const CLEAR_EDITOR = 'write/CLEAR_EDITOR';
 const PREPARE_EDIT = 'write/PREPARE_EDIT';
 const SET_WRITE_POST_ID = 'write/SET_WRITE_POST_ID';
+const SET_INITIAL_BODY = 'write/SET_INITIAL_BODY';
 
 export const changeMarkdown = createStandardAction(CHANGE_MARKDOWN)<string>();
 export const changeTitle = createStandardAction(CHANGE_TITLE)<string>();
@@ -48,6 +49,7 @@ export const selectSeries = createStandardAction(SELECT_SERIES)<{
 } | null>();
 export const clearEditor = createStandardAction(CLEAR_EDITOR)<undefined>();
 export const setWritePostId = createStandardAction(SET_WRITE_POST_ID)<string>();
+export const setInitialBody = createStandardAction(SET_INITIAL_BODY)<string>();
 
 export type PrepareEditPayload = {
   id: string;
@@ -85,6 +87,7 @@ type SelectSeries = ReturnType<typeof selectSeries>;
 type ClearEditor = ReturnType<typeof clearEditor>;
 type PrepareEdit = ReturnType<typeof prepareEdit>;
 type SetWritePostId = ReturnType<typeof setWritePostId>;
+type SetInitialBody = ReturnType<typeof setInitialBody>;
 
 export enum WriteMode {
   MARKDOWN = 'MARKDOWN',
@@ -111,6 +114,7 @@ export type WriteState = {
   } | null;
   postId: null | string;
   isTemp: boolean;
+  initialBody: string;
 };
 
 const initialState: WriteState = {
@@ -130,6 +134,7 @@ const initialState: WriteState = {
   selectedSeries: null,
   postId: null,
   isTemp: false,
+  initialBody: '',
 };
 
 const write = createReducer(
@@ -206,6 +211,8 @@ const write = createReducer(
       postId: action.payload,
       isTemp: true,
     }),
+    [SET_INITIAL_BODY]: (state, action: SetInitialBody) =>
+      updateKey(state, 'initialBody', action.payload),
   },
   initialState,
 );

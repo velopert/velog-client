@@ -11,6 +11,7 @@ import {
   setDefaultDescription,
   setThumbnail,
   setWritePostId,
+  setInitialBody,
 } from '../../modules/write';
 
 import remark from 'remark';
@@ -34,6 +35,7 @@ import {
 import { openPopup } from '../../modules/core';
 import { escapeForUrl } from '../../lib/utils';
 import { useHistory } from 'react-router';
+import useSaveHotKey from './hooks/useSaveHotkey';
 
 export type MarkdownEditorContainerProps = {};
 
@@ -41,9 +43,15 @@ const { useCallback, useEffect } = React;
 
 const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
   const history = useHistory();
-  const { title, markdown, thumbnail, publish, postId, isTemp } = useSelector(
-    (state: RootState) => state.write,
-  );
+  const {
+    title,
+    markdown,
+    thumbnail,
+    publish,
+    postId,
+    isTemp,
+    initialBody,
+  } = useSelector((state: RootState) => state.write);
   const [writePost] = useMutation<WritePostResponse>(WRITE_POST);
   const [createPostHistory] = useMutation<CreatePostHistoryResponse>(
     CREATE_POST_HISTORY,
@@ -65,6 +73,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
           openPublish,
           setDefaultDescription,
           setThumbnail,
+          setInitialBody,
         },
         dispatch,
       ),
@@ -78,6 +87,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       .process(markdown, (err: any, file: any) => {
         const html = String(file);
         actionCreators.setHtml(html);
+        actionCreators.setInitialBody(html);
         actionCreators.convertEditorMode();
       });
   };
@@ -190,11 +200,14 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     }
   }, [title, postId, onTempSave, lastSavedData, markdown]);
 
+  useSaveHotKey(onTempSave);
+
   return (
     <>
       <MarkdownEditor
         onUpload={upload}
         lastUploadedImage={publish ? null : image}
+        initialBody={initialBody}
         title={title}
         markdown={markdown}
         onChangeMarkdown={actionCreators.changeMarkdown}

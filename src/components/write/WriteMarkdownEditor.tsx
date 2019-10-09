@@ -27,6 +27,7 @@ export interface MarkdownEditorProps {
   footer: React.ReactNode;
   onUpload: () => void;
   lastUploadedImage: string | null;
+  initialBody: string;
 }
 
 type MarkdownEditorState = {
@@ -154,7 +155,7 @@ export default class WriteMarkdownEditor extends React.Component<
     });
     (window as any).codemirror = this.codemirror;
     if (detectJSDOM()) return;
-    this.codemirror.setValue(this.props.markdown);
+    this.codemirror.setValue(this.props.initialBody);
     this.codemirror.on('change', cm => {
       this.props.onChangeMarkdown(cm.getValue());
       this.stickToBottomIfNeeded();
@@ -211,7 +212,11 @@ export default class WriteMarkdownEditor extends React.Component<
   };
 
   componentDidUpdate(prevProps: MarkdownEditorProps) {
-    const { lastUploadedImage } = this.props;
+    const { lastUploadedImage, initialBody } = this.props;
+    if (initialBody !== prevProps.initialBody) {
+      if (!this.codemirror) return;
+      this.codemirror.setValue(this.props.initialBody);
+    }
     if (
       lastUploadedImage &&
       prevProps.lastUploadedImage !== lastUploadedImage
