@@ -7,6 +7,7 @@ import prismPlugin from '../../lib/remark/prismPlugin';
 import prismThemes from '../../lib/styles/prismThemes';
 import breaks from 'remark-breaks';
 import Typography from './Typography';
+import embedPlugin from '../../lib/remark/embedPlugin';
 
 export interface MarkdownRenderProps {
   markdown: string;
@@ -63,6 +64,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
       .use(breaks)
       .use(prismPlugin)
       .use(htmlPlugin)
+      .use(embedPlugin)
       .use(slug)
       .process(markdown, (err: any, file: any) => {
         const html = String(file);
