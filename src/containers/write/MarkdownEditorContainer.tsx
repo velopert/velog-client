@@ -36,6 +36,7 @@ import { openPopup } from '../../modules/core';
 import { escapeForUrl } from '../../lib/utils';
 import { useHistory } from 'react-router';
 import useSaveHotKey from './hooks/useSaveHotkey';
+import embedPlugin from '../../lib/remark/embedPlugin';
 
 export type MarkdownEditorContainerProps = {};
 
@@ -84,8 +85,10 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     remark()
       .use(breaks)
       .use(htmlPlugin)
+      .use(embedPlugin)
       .process(markdown, (err: any, file: any) => {
         const html = String(file);
+        console.log(html);
         actionCreators.setHtml(html);
         actionCreators.setInitialBody(html);
         actionCreators.convertEditorMode();

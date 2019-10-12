@@ -168,6 +168,25 @@ const Editor = styled.div`
     blockquote + p {
       margin-bottom: 1rem;
     }
+
+    .youtube {
+      width: 768px;
+      height: 430px;
+      max-width: 100%;
+      background: black;
+      display: block;
+      margin: auto;
+    }
+
+    .twitter-wrapper {
+      display: flex;
+      justify-content: center;
+      height: 580px;
+      align-items: center;
+      blockquote {
+        border-left: none;
+      }
+    }
   }
   .ql-editor.ql-blank::before {
     left: 0px;
@@ -244,10 +263,11 @@ export default class QuillEditor extends React.Component<
 
     if (!this.quill) return;
     if (initialHtml !== prevProps.initialHtml) {
-      this.quill.setContents([] as any);
-      this.quill.setText('');
-      this.quill.clipboard.dangerouslyPasteHTML(initialHtml);
-      console.log('hello world');
+      this.quill.root.innerHTML = initialHtml;
+      // this.quill.setContents([] as any);
+      // this.quill.setText('');
+      // this.quill.clipboard.dangerouslyPasteHTML(initialHtml);
+      // console.log('hello world');
     }
   }
 
@@ -433,7 +453,9 @@ export default class QuillEditor extends React.Component<
 
     const { initialHtml } = this.props;
     if (initialHtml) {
-      quill.clipboard.dangerouslyPasteHTML(initialHtml);
+      this.quill.root.innerHTML = initialHtml;
+      // console.log('pasted ', initialHtml);
+      // quill.clipboard.dangerouslyPasteHTML(initialHtml);
     }
 
     // quill.keyboard.addBinding(

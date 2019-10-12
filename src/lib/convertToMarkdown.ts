@@ -1,6 +1,36 @@
 import TurndownService from 'turndown';
+import pipe from 'ramda/es/pipe';
 
 let turndownService: TurndownService | null = null;
+
+const EMBED_OPEN = `@@VELOG-EMBED-OPEN@@`;
+const EMBED_CLOSE = `@@VELOG-EMBED-CLOSE@@`;
+
+function convertEmbedded(html: string) {
+  let _html = html;
+
+  const youtubeRegex = /<iframe class="youtube" (.*?)<\/iframe>/g;
+  const youtubeCodeRegex = /embed\/(.*?)"/;
+
+  const matches = html.match(youtubeRegex);
+  if (matches) {
+    matches.forEach(tag => {
+      const code = tag.match(youtubeCodeRegex)![1];
+      _html = _html.replace(
+        tag,
+        `!youtube${EMBED_OPEN}${code}${EMBED_CLOSE}\n\n`,
+      );
+    });
+  }
+
+  return _html;
+}
+
+function unescapeEmbedded(text: string) {
+  const openRegex = new RegExp(EMBED_OPEN, 'g');
+  const closeRegex = new RegExp(EMBED_CLOSE, 'g');
+  return text.replace(openRegex, '[').replace(closeRegex, ']\n\n');
+}
 
 export default function convertToMarkdown(html: string): string {
   // initialize turndownService
@@ -47,5 +77,11 @@ ${content}
     },
   });
 
-  return turndownService.turndown(html);
+  const convert = pipe(
+    convertEmbedded,
+    (text: string) => turndownService!.turndown(text),
+    unescapeEmbedded,
+  );
+
+  return convert(html);
 }

@@ -122,6 +122,50 @@ const FooterWrapper = styled.div`
   width: 100%;
   z-index: ${zIndexes.WriteFooter};
 `;
+
+const checker = {
+  youtube: (text: string) => {
+    const regex = /^<iframe.*src="https:\/\/www.youtube.com\/embed\/(.*?)".*<\/iframe>$/;
+    const result = regex.exec(text);
+    if (!result) return null;
+    return result[1];
+  },
+  twitter: (text: string) => {
+    if (!/^<blockquote class="twitter-tweet/.test(text)) return null;
+    const regex = /href="(.*?)"/g;
+    const links = [];
+    let match = regex.exec(text);
+    while (match) {
+      links.push(match[1]);
+      match = regex.exec(text);
+    }
+    const pathMatch = /twitter.com\/(.*?)\?/.exec(links[links.length - 1]);
+    if (!pathMatch) return null;
+    return pathMatch[1];
+  },
+  codesandbox: (text: string) => {
+    const regex = /^<iframe src="https:\/\/codesandbox.io\/embed\/(.*?)".*<\/iframe>$/;
+    const result = regex.exec(text);
+    if (!result) return null;
+    return result[1];
+  },
+};
+
+type CheckerKey = keyof typeof checker;
+
+const checkEmbed = (text: string) => {
+  const keys = Object.keys(checker) as CheckerKey[];
+  for (let i = 0; i < keys.length; i += 1) {
+    const key = keys[i];
+    const fn = checker[keys[i]];
+    const code = fn(text);
+    if (code) {
+      return `!${key}[${code}]`;
+    }
+  }
+  return null;
+};
+
 export default class WriteMarkdownEditor extends React.Component<
   MarkdownEditorProps,
   MarkdownEditorState
@@ -161,8 +205,31 @@ export default class WriteMarkdownEditor extends React.Component<
       this.stickToBottomIfNeeded();
     });
     this.codemirror.on('paste', (editor: any, e: any) => {
-      const { items } = e.clipboardData || e.originalEvent.clipboardData;
-      console.log(items);
+      const clipboardData = e.clipboardData || e.originalEvent.clipboardData;
+      if (!clipboardData) return;
+
+      // replace text for embedding youtube, twitte, etc
+      const text = clipboardData.getData('Text');
+      const check = checkEmbed(text);
+      if (check) {
+        const selection = editor.getSelection();
+        e.preventDefault();
+        if (selection.length > 0) {
+          editor.replaceSelection(check);
+        } else {
+          const doc = editor.getDoc();
+          const cursor = doc.getCursor();
+          const pos = {
+            line: cursor.line,
+            ch: cursor.ch,
+          };
+          doc.replaceRange(check, pos);
+        }
+        return;
+      }
+
+      const { items } = clipboardData;
+      if (!items) return;
       if (items.length !== 2) return;
       if (items[1].kind === 'file') {
         e.preventDefault();

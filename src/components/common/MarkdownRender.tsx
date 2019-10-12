@@ -8,6 +8,8 @@ import prismThemes from '../../lib/styles/prismThemes';
 import breaks from 'remark-breaks';
 import Typography from './Typography';
 import embedPlugin from '../../lib/remark/embedPlugin';
+import palette from '../../lib/styles/palette';
+import { loadScript } from '../../lib/utils';
 
 export interface MarkdownRenderProps {
   markdown: string;
@@ -50,6 +52,25 @@ const MarkdownRenderBlock = styled.div`
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
   }
+
+  .youtube {
+    width: 768px;
+    height: 430px;
+    max-width: 100%;
+    background: black;
+    display: block;
+    margin: auto;
+  }
+
+  .twitter-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 580px;
+    align-items: center;
+    blockquote {
+      border-left: none;
+    }
+  }
 `;
 
 const { useState, useEffect } = React;
@@ -71,6 +92,12 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
         setHtml(html);
         if (onConvertFinish) {
           onConvertFinish(html);
+        }
+
+        // load twitter script if needed
+        if (html.indexOf('class="twitter-tweet"') !== -1) {
+          // if (window && (window as any).twttr) return;
+          loadScript('https://platform.twitter.com/widgets.js');
         }
       });
   }, [markdown, onConvertFinish]);

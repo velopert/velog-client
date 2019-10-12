@@ -3,36 +3,43 @@ import visit from 'unist-util-visit';
 const regex = /!(youtube|twitter|codesandbox)\[(.*?)\]/;
 
 const embedTypeRegex = /^!(youtube|twitter|codesandbox)$/;
+const converters = {
+  youtube: (code: string) =>
+    `<iframe class="youtube" src="https://www.youtube.com/embed/${code}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`,
+  twitter: (code: string) =>
+    `<div class="twitter-wrapper"><blockquote class="twitter-tweet" data-lang="ko"><a href="https://twitter.com/${code}"></a></blockquote></div><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>`,
+  codesandbox: (code: string) =>
+    `<iframe src="https://codesandbox.io/embed/${code}" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>`,
+};
+
+type ConverterKey = keyof typeof converters;
 
 export default function embedPlugin() {
-  console.log('embed');
   function transformer(tree: any, file: any) {
     function visitor(node: any) {
-      const { children }: { children: any[] } = node;
-      if (children.length < 2) return;
-      const index = children.findIndex(childNode => {
-        return childNode.value.match(embedTypeRegex);
-      });
-      if (index === -1) return;
-      const childNode = children[index];
-      const siblingNode = children[index + 1];
-      if (!siblingNode || siblingNode.type !== 'linkReference') return;
-      const { label } = siblingNode;
-      const match = embedTypeRegex.exec(children[index].value);
-      if (!match) return;
-      const type = match[1];
+      try {
+        const { children }: { children: any[] } = node;
+        if (children.length < 2) return;
+        const index = children.findIndex(childNode => {
+          if (!childNode.value) return false;
+          return childNode.value.match(embedTypeRegex);
+        });
+        if (index === -1) return;
+        const childNode = children[index];
+        const siblingNode = children[index + 1];
+        if (!siblingNode || siblingNode.type !== 'linkReference') return;
+        const { label } = siblingNode;
+        const match = embedTypeRegex.exec(children[index].value);
+        if (!match) return;
+        const type = match[1] as ConverterKey;
 
-      console.log(type, label);
-
-      childNode.type = 'html';
-      childNode.value = `<iframe class="youtube" src="https://www.youtube.com/embed/${label}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-      children.splice(index + 1, 1);
-
-      // const match = regex.exec(node.value);
-      // console.log(node.value);
-      // console.log(match);
+        childNode.type = 'html';
+        childNode.value = converters[type](label);
+        children.splice(index + 1, 1);
+      } catch (e) {
+        console.log(e);
+      }
     }
-    console.log(tree);
 
     visit(tree, 'paragraph', visitor);
   }
