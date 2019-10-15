@@ -7,6 +7,7 @@ import {
   LIKE_POST,
   UNLIKE_POST,
   LinkedPost,
+  POST_VIEW,
 } from '../../lib/graphql/post';
 import PostHead from '../../components/post/PostHead';
 import PostContent from '../../components/post/PostContent';
@@ -75,10 +76,20 @@ const PostViewer: React.FC<PostViewerProps> = ({
   const prefetched = useRef(false);
 
   const [removePost] = useMutation(REMOVE_POST);
+  const [postView] = useMutation(POST_VIEW);
   const [likePost, { loading: loadingLike }] = useMutation(LIKE_POST);
   const [unlikePost, { loading: loadingUnlike }] = useMutation(UNLIKE_POST);
 
   const { loading, error, data } = readPost;
+
+  useEffect(() => {
+    if (!data || !data.post) return;
+    postView({
+      variables: {
+        id: data.post.id,
+      },
+    });
+  }, [data, postView]);
 
   const prefetchLinkedPosts = useCallback(() => {
     if (!data || !data.post) return;

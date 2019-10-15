@@ -118,7 +118,7 @@ export type WriteState = {
 };
 
 const initialState: WriteState = {
-  mode: WriteMode.WYSIWYG,
+  mode: WriteMode.MARKDOWN,
   markdown: '',
   title: '',
   html: '',

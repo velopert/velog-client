@@ -644,6 +644,16 @@ export type CreatePostHistoryResponse = {
   };
 };
 
+export const POST_VIEW = gql`
+  mutation PostView($id: ID!) {
+    postView(id: $id)
+  }
+`;
+
+export type PostViewResponse = {
+  postView: boolean;
+};
+
 // mutation {
 //   createPostHistory(post_id: "41f19ed8-bc7e-4af3-86e9-4c5e482cb8e4", title: "안녕하세요", body: "내용입니다.", is_markdown:true) {
 //     id

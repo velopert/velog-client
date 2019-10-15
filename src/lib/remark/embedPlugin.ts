@@ -7,7 +7,7 @@ const converters = {
   youtube: (code: string) =>
     `<iframe class="youtube" src="https://www.youtube.com/embed/${code}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`,
   twitter: (code: string) =>
-    `<div class="twitter-wrapper"><blockquote class="twitter-tweet" data-lang="ko"><a href="https://twitter.com/${code}"></a></blockquote></div><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>`,
+    `<blockquote class="twitter-wrapper"><blockquote class="twitter-tweet" data-lang="ko"><a href="https://twitter.com/${code}"></a></blockquote></blockquote>`,
   codesandbox: (code: string) =>
     `<iframe src="https://codesandbox.io/embed/${code}" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>`,
 };
