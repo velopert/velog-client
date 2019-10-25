@@ -154,6 +154,35 @@ export const GET_POST_LIST = gql`
   }
 `;
 
+export const GET_TRENDING_POSTS = gql`
+  query TrendingPosts($limit: Int, $offset: Int, $timeframe: String) {
+    trendingPosts(limit: $limit, offset: $offset, timeframe: $timeframe) {
+      id
+      title
+      short_description
+      thumbnail
+      user {
+        id
+        username
+        profile {
+          id
+          thumbnail
+        }
+      }
+      url_slug
+      released_at
+      updated_at
+      comments_count
+      tags
+      is_private
+    }
+  }
+`;
+
+export type GetTrendingPostsResponse = {
+  trendingPosts: PartialPost[];
+};
+
 export const READ_POST = gql`
   query ReadPost($username: String, $url_slug: String) {
     post(username: $username, url_slug: $url_slug) {

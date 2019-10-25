@@ -5,6 +5,7 @@ import MainSideMenu from '../../components/main/MainSideMenu';
 import MainNoticeWidget from '../../components/main/MainNoticeWidget';
 import MainRightFooter from '../../components/main/MainRightFooter';
 import RecentPostsPage from './RecentPostsPage';
+import TrendingPostsPage from './TrendingPostsPage';
 
 interface MainPageProps {}
 
@@ -15,6 +16,7 @@ const MainPage: React.FC<MainPageProps> = () => {
         <MainSideMenu />
       </MainTemplate.Left>
       <MainTemplate.Main>
+        <Route path={['/', '/trending']} component={TrendingPostsPage} exact />
         <Route path="/recent" component={RecentPostsPage} />
       </MainTemplate.Main>
       <MainTemplate.Right>
