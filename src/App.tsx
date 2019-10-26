@@ -13,6 +13,7 @@ const WritePage = loadable(() => import('./pages/WritePage'));
 const VelogPage = loadable(() => import('./pages/velog/VelogPage'));
 const SearchPage = loadable(() => import('./pages/SearchPage'));
 const SavesPage = loadable(() => import('./pages/SavesPage'));
+const TagsPage = loadable(() => import('./pages/tags/TagsPage'));
 
 interface AppProps {}
 
@@ -29,6 +30,7 @@ const App: React.FC<AppProps> = props => {
         <Route path="/write" component={WritePage} />
         <Route path="/search" component={SearchPage} />
         <Route path="/saves" component={SavesPage} />
+        <Route path="/tags" component={TagsPage} />
       </Switch>
       <Core />
     </JazzbarProvider>
