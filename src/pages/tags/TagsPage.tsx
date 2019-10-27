@@ -4,6 +4,7 @@ import PageTemplate from '../../components/base/PageTemplate';
 import HorizontalTab from '../../components/common/HorizontalTab';
 import { useLocation } from 'react-router';
 import qs from 'qs';
+import DetailedTagList from '../../components/tags/DetailedTagList';
 
 const { TabItem } = HorizontalTab;
 
@@ -31,8 +32,8 @@ function TagsPage(props: TagsPageProps) {
             name="alphabetical"
             text="이름순"
           />
-          <TabItem to="/tags?sort=blabla" name="blabla" text="블라블라순" />
         </HorizontalTab>
+        <DetailedTagList />
       </main>
     </TagsTemplate>
   );

@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { userThumbnail } from '../../static/images';
-import Tag from './Tag';
+import Tag from './TagItem';
 import { PartialPost } from '../../lib/graphql/post';
 import { formatDate } from '../../lib/utils';
 
 const PostCardBlock = styled.div`
   padding-top: 4rem;
   padding-bottom: 4rem;
-  a {
+  & > a {
     color: inherit;
     text-decoration: none;
   }
@@ -66,8 +66,8 @@ const PostCardBlock = styled.div`
     }
   }
   .tags-wrapper {
-    margin-top: 0.5rem;
-    margin-bottom: -0.5rem;
+    margin-top: 0.875rem;
+    margin-bottom: -0.875rem;
   }
 
   & + & {
@@ -110,7 +110,7 @@ const PostCard: React.FC<PostCardProps> = React.memo(({ post, hideUser }) => {
       </div>
       <div className="tags-wrapper">
         {post.tags.map(tag => (
-          <Tag key={tag}>{tag}</Tag>
+          <Tag key={tag} name={tag} link />
         ))}
       </div>
     </PostCardBlock>
