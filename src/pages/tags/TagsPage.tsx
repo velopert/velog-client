@@ -2,9 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import PageTemplate from '../../components/base/PageTemplate';
 import HorizontalTab from '../../components/common/HorizontalTab';
-import { useLocation } from 'react-router';
+import { useLocation, useHistory, Route } from 'react-router';
 import qs from 'qs';
 import DetailedTagList from '../../components/tags/DetailedTagList';
+import DetailedTagListContainer from '../../containers/tags/DetailedTagListContainer';
+import TagListPage from './TagListPage';
+import TagDetailPage from './TagDetailPage';
 
 const { TabItem } = HorizontalTab;
 
@@ -17,23 +20,11 @@ const TagsTemplate = styled(PageTemplate)`
 `;
 
 function TagsPage(props: TagsPageProps) {
-  const location = useLocation();
-  const { sort = 'popular' } = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
-
   return (
     <TagsTemplate>
       <main>
-        <HorizontalTab activeTab={sort}>
-          <TabItem to="/tags?sort=popular" name="popular" text="인기순" />
-          <TabItem
-            to="/tags?sort=alphabetical"
-            name="alphabetical"
-            text="이름순"
-          />
-        </HorizontalTab>
-        <DetailedTagList />
+        <Route path="/tags" exact component={TagListPage} />
+        <Route path="/tags/:tag" component={TagDetailPage} />
       </main>
     </TagsTemplate>
   );

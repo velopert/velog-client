@@ -20,6 +20,22 @@ export const GET_TAGS = gql`
   }
 `;
 
+export const GET_TAG = gql`
+  query Tag($name: String!) {
+    tag(name: $name) {
+      id
+      name
+      description
+      posts_count
+      thumbnail
+    }
+  }
+`;
+
 export type GetTagsResponse = {
   tags: Tag[];
+};
+
+export type GetTagResponse = {
+  tag: Tag;
 };

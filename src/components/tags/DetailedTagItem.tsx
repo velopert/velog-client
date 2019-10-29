@@ -18,7 +18,7 @@ function DetailedTagItem({
     <Block hasDescription={!!description}>
       <div>
         <TagItem name={name} link />
-        <p>{description}</p>
+        {description && <p>{description}</p>}
       </div>
       <div className="count">총 {postsCount}개의 포스트</div>
     </Block>
@@ -56,4 +56,4 @@ const Block = styled.div<{ hasDescription: boolean }>`
   }
 `;
 
-export default DetailedTagItem;
+export default React.memo(DetailedTagItem);
