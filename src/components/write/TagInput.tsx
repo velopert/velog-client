@@ -77,23 +77,19 @@ const Help = styled.div<{ visible: boolean }>`
 `;
 
 const { useState, useCallback, useEffect, useRef } = React;
-const TagInput: React.FC<TagInputProps> = props => {
-  const [tags, setTags] = useState<string[]>([]);
+const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
+  const [tags, setTags] = useState<string[]>(initialTags);
   const [value, setValue] = useState('');
   const [focus, setFocus] = useState(false);
   const ignore = useRef(false);
   const editableDiv = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setTags(props.tags);
-  }, [props.tags]);
-
-  useEffect(() => {
     if (tags.length === 0) return;
-    props.onChange(tags);
-  });
+    onChange(tags);
+  }, [tags, onChange]);
 
-  const onChange = useCallback((e: React.ChangeEvent<HTMLDivElement>) => {
+  const onChangeDiv = useCallback((e: React.ChangeEvent<HTMLDivElement>) => {
     if (ignore.current) {
       ignore.current = false;
       return;
@@ -167,7 +163,7 @@ const TagInput: React.FC<TagInputProps> = props => {
         placeholder="태그를 입력하세요"
         tabIndex={2}
         onKeyDown={onKeyDown}
-        onInput={onChange}
+        onInput={onChangeDiv}
         ref={editableDiv}
         onPaste={onPaste}
         onFocus={onFocus}
