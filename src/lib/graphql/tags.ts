@@ -9,7 +9,7 @@ export type Tag = {
 };
 
 export const GET_TAGS = gql`
-  query Tags($sort: String!, $cursor: ID, limit: Int) {
+  query Tags($sort: String!, $cursor: ID, $limit: Int) {
     tags(sort: $sort, cursor: $cursor, limit: $limit) {
       id
       name

@@ -8,7 +8,6 @@ import prismThemes from '../../lib/styles/prismThemes';
 import breaks from 'remark-breaks';
 import Typography from './Typography';
 import embedPlugin from '../../lib/remark/embedPlugin';
-import palette from '../../lib/styles/palette';
 import { loadScript } from '../../lib/utils';
 
 export interface MarkdownRenderProps {

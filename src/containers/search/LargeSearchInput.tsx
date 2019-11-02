@@ -1,8 +1,7 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import SearchInput from '../../components/search/SearchInput';
 import styled from 'styled-components';
 import { RouteComponentProps, withRouter } from 'react-router';
-import qs from 'qs';
 
 const StyledSearchInput = styled(SearchInput)`
   margin-bottom: 1.5rem;

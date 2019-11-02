@@ -12,7 +12,6 @@ import {
 import useToggle from '../../lib/hooks/useToggle';
 import SeriesActionButtons from '../../components/velog/SeriesActionButtons';
 import DraggableSeriesPostList from '../../components/velog/DraggableSeriesPostList';
-import useInput from '../../lib/hooks/useInput';
 import useUser from '../../lib/hooks/useUser';
 
 export interface SeriesPostsProps {

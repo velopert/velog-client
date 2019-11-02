@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import OpaqueLayer from '../../components/common/OpaqueLayer';
 import AuthModalContainer from '../auth/AuthModalContainer';
 import { RootState } from '../../modules';
-import UserLoader from './hooks/useUserLoader';
 import CommonPopup from './CommonPopup';
 import useUserLoader from './hooks/useUserLoader';
 

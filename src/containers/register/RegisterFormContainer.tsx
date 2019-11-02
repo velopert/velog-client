@@ -34,7 +34,7 @@ const RegisterFormContainer: React.FC<RegisterFormContainerProps> = ({
     null,
   );
 
-  const [onGetRegisterToken, loadingRegister, registerToken] = useRequest<
+  const [onGetRegisterToken, , registerToken] = useRequest<
     GetRegisterTokenResponse
   >((code: string) => getRegisterToken(code));
 

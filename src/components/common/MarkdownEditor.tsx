@@ -1,10 +1,4 @@
-import React, {
-  CSSProperties,
-  useRef,
-  useEffect,
-  useState,
-  useCallback,
-} from 'react';
+import React, { CSSProperties, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import CodeMirror, { EditorFromTextArea, Editor } from 'codemirror';
 

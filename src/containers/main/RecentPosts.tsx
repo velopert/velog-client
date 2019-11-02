@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import PostCardList from '../../components/common/PostCardList';
 import { GET_POST_LIST, PartialPost } from '../../lib/graphql/post';
 import { useQuery } from '@apollo/react-hooks';
-import PaginateWithScroll from '../../components/common/PaginateWithScroll';
 import useScrollPagination from '../../lib/hooks/useScrollPagination';
 import { safe } from '../../lib/utils';
 

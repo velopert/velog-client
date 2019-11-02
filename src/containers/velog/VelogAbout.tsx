@@ -16,11 +16,10 @@ export interface VelogAboutProps {
 }
 
 const VelogAbout = ({ username }: VelogAboutProps) => {
-  const { data, loading, error } = useQuery<GetUserAboutResponse>(
-    GET_USER_ABOUT,
-    { variables: { username } },
-  );
-  const [updateAbout, result] = useMutation(UPDATE_ABOUT);
+  const { data } = useQuery<GetUserAboutResponse>(GET_USER_ABOUT, {
+    variables: { username },
+  });
+  const [updateAbout] = useMutation(UPDATE_ABOUT);
   const [tempAbout, setTempAbout] = useState('');
 
   const user = useUser();

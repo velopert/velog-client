@@ -1,15 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import PageTemplate from '../../components/base/PageTemplate';
-import HorizontalTab from '../../components/common/HorizontalTab';
-import { useLocation, useHistory, Route } from 'react-router';
-import qs from 'qs';
-import DetailedTagList from '../../components/tags/DetailedTagList';
-import DetailedTagListContainer from '../../containers/tags/DetailedTagListContainer';
+import { Route } from 'react-router';
 import TagListPage from './TagListPage';
 import TagDetailPage from './TagDetailPage';
-
-const { TabItem } = HorizontalTab;
 
 export type TagsPageProps = {};
 

@@ -10,7 +10,7 @@ export type DetailedTagListContainerProps = {
 };
 
 function DetailedTagListContainer({ sort }: DetailedTagListContainerProps) {
-  const { data, loading, fetchMore } = useQuery<GetTagsResponse>(GET_TAGS, {
+  const { data, fetchMore } = useQuery<GetTagsResponse>(GET_TAGS, {
     variables: {
       sort,
     },

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import VelogPageTemplate from '../../components/velog/VelogPageTemplate';
-import { RouteComponentProps, Route, Switch, Router } from 'react-router';
+import { RouteComponentProps, Route, Switch } from 'react-router';
 import ConfigLoader from '../../containers/velog/ConfigLoader';
 import PostPage from './PostPage';
 import UserPage from './UserPage';

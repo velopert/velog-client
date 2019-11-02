@@ -12,16 +12,13 @@ export interface SearchResultProps {
 }
 
 function SearchResult({ keyword, username }: SearchResultProps) {
-  const { data, loading, error, fetchMore } = useQuery<SearchPostsResponse>(
-    SEARCH_POSTS,
-    {
-      variables: {
-        keyword,
-        username,
-      },
-      skip: keyword === '',
+  const { data, fetchMore } = useQuery<SearchPostsResponse>(SEARCH_POSTS, {
+    variables: {
+      keyword,
+      username,
     },
-  );
+    skip: keyword === '',
+  });
 
   const onLoadMoreByOffset = useCallback(
     (offset: number) => {

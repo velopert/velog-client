@@ -96,7 +96,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
   description,
   profileLinks,
 }) => {
-  const { email, facebook, github, twitter, url } = profileLinks;
+  const { /*email,*/ facebook, github, twitter /*url*/ } = profileLinks;
 
   return (
     <UserProfileBlock className={className} style={style}>

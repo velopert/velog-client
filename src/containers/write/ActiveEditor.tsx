@@ -5,9 +5,7 @@ import {
   WriteMode,
   clearEditor,
   prepareEdit,
-  changeMarkdown,
   convertEditorMode,
-  setHtml,
   setInitialBody,
 } from '../../modules/write';
 import EditorPanesContainer from './EditorPanesContainer';
@@ -22,7 +20,6 @@ import {
   GetLastPostHistoryResult,
 } from '../../lib/graphql/post';
 import { safe } from '../../lib/utils';
-import { useMount } from 'react-use';
 
 export type ActiveEditorProps = {};
 

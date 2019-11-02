@@ -16,7 +16,7 @@ const Empty = styled.div`
 `;
 
 function SavedPosts(props: SavedPostsProps) {
-  const { posts, loading } = useSavedPosts();
+  const { posts } = useSavedPosts();
 
   if (!posts) return null;
 

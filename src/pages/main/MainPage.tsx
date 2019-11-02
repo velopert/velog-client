@@ -2,10 +2,11 @@ import * as React from 'react';
 import { Route } from 'react-router-dom';
 import MainTemplate from '../../components/main/MainTemplate';
 import MainSideMenu from '../../components/main/MainSideMenu';
-import MainNoticeWidget from '../../components/main/MainNoticeWidget';
 import MainRightFooter from '../../components/main/MainRightFooter';
 import RecentPostsPage from './RecentPostsPage';
 import TrendingPostsPage from './TrendingPostsPage';
+import MainTagWidgetContainer from '../../containers/main/MainTagWidgetContainer';
+import MainNoticeWidgetContainer from '../../containers/main/MainNoticeWidgetContainer';
 
 interface MainPageProps {}
 
@@ -20,7 +21,8 @@ const MainPage: React.FC<MainPageProps> = () => {
         <Route path="/recent" component={RecentPostsPage} />
       </MainTemplate.Main>
       <MainTemplate.Right>
-        <MainNoticeWidget />
+        <MainNoticeWidgetContainer />
+        <MainTagWidgetContainer />
         <MainRightFooter />
       </MainTemplate.Right>
     </MainTemplate>

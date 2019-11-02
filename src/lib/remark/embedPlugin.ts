@@ -1,6 +1,6 @@
 import visit from 'unist-util-visit';
 
-const regex = /!(youtube|twitter|codesandbox)\[(.*?)\]/;
+// const regex = /!(youtube|twitter|codesandbox)\[(.*?)\]/;
 
 const embedTypeRegex = /^!(youtube|twitter|codesandbox)$/;
 const converters = {

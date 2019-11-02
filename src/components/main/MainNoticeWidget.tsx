@@ -1,38 +1,88 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
+import MainWidget from './MainWidget';
+import { Link } from 'react-router-dom';
+import { PartialPost } from '../../lib/graphql/post';
+import { formatDate } from '../../lib/utils';
 
-const MainNoticeWidgetBlock = styled.div`
-  .title-bar {
-    line-height: 1.5;
+interface MainNoticeWidgetProps {
+  posts: PartialPost[];
+}
+
+const MainNoticeWidget: React.FC<MainNoticeWidgetProps> = ({ posts }) => {
+  const sliced = posts.slice(0, 5);
+
+  return (
+    <StyledWidget title="공지사항">
+      {posts.length === 0 && <div className="empty">공지사항이 없습니다.</div>}
+      {posts.length > 0 && (
+        <ul>
+          {sliced.map(post => (
+            <li key={post.id}>
+              <h5>
+                <Link to={`/@velog/${post.url_slug}`}>{post.title}</Link>
+              </h5>
+              <div className="date">{formatDate(post.released_at)}</div>
+            </li>
+          ))}
+
+          {posts.length === 6 && (
+            <li className="more">
+              <Link to="/@velog">더보기</Link>
+            </li>
+          )}
+        </ul>
+      )}
+    </StyledWidget>
+  );
+};
+
+const StyledWidget = styled(MainWidget)`
+  .empty {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    color: ${palette.gray5};
+    text-align: center;
     font-size: 0.875rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid ${palette.gray2};
-    margin-bottom: 1rem;
-    font-weight: bold;
   }
-  .content {
-    .empty {
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-      color: ${palette.gray5};
-      text-align: center;
-      font-size: 0.875rem;
+  ul {
+    list-style: none;
+    padding: 0;
+    li {
+      h5 {
+        margin: 0;
+        font-size: 1.125rem;
+        line-height: 1.5;
+        color: ${palette.gray8};
+        a {
+          text-decoration: none;
+          color: inherit;
+          &:hover {
+            color: ${palette.gray7};
+            text-decoration: underline;
+          }
+        }
+      }
+      .date {
+        color: ${palette.gray6};
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+      }
+    }
+    li.more {
+      color: ${palette.gray6};
+      a {
+        &:hover {
+          color: ${palette.gray5};
+        }
+        text-decoration: underline;
+      }
+    }
+    li + li {
+      margin-top: 1rem;
     }
   }
 `;
-
-interface MainNoticeWidgetProps {}
-
-const MainNoticeWidget: React.FC<MainNoticeWidgetProps> = props => {
-  return (
-    <MainNoticeWidgetBlock>
-      <div className="title-bar">공지사항</div>
-      <div className="content">
-        <div className="empty">공지사항이 없습니다.</div>
-      </div>
-    </MainNoticeWidgetBlock>
-  );
-};
 
 export default MainNoticeWidget;
