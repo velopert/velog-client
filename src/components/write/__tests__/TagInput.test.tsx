@@ -27,7 +27,7 @@ describe('TagInput', () => {
     utils.getByText('태그1');
     utils.getByText('태그2');
   });
-  it('inserts new tag', () => {
+  /*it('inserts new tag', () => {
     const onChange = jest.fn();
     const utils = setup({
       onChange,
@@ -43,7 +43,7 @@ describe('TagInput', () => {
     });
     utils.getByText('태그1');
     expect(onChange).toBeCalled();
-  });
+  });*/
   it('removes tag by click', () => {
     const utils = setup({
       tags: ['지워보세요'],

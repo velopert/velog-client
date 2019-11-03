@@ -15,7 +15,7 @@ const TagInputBlock = styled.div`
     color: ${palette.gray5};
   }
 `;
-const EditableContent = styled.div`
+const StyledInput = styled.input`
   display: inline-flex;
   outline: none;
   cursor: text;
@@ -23,6 +23,7 @@ const EditableContent = styled.div`
   line-height: 2rem;
   margin-bottom: 0.75rem;
   min-width: 8rem;
+  border: none;
 `;
 
 const Tag = styled.div`
@@ -89,14 +90,21 @@ const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
     onChange(tags);
   }, [tags, onChange]);
 
-  const onChangeDiv = useCallback((e: React.ChangeEvent<HTMLDivElement>) => {
-    if (ignore.current) {
-      ignore.current = false;
-      return;
-    }
+  useEffect(() => {
+    setTags(initialTags);
+  }, [initialTags]);
 
-    setValue(e.target.innerText);
-  }, []);
+  // const onChangeDiv = useCallback((e: React.ChangeEvent<HTMLDivElement>) => {
+  //   if (ignore.current) {
+  //     ignore.current = false;
+  //     return;
+  //   }
+
+  //   setValue(e.target.innerText);
+  // }, []);
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
 
   const onPaste = useCallback((e: React.ClipboardEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -123,7 +131,7 @@ const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
   );
 
   const onKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLDivElement>) => {
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === 'Backspace' && value === '') {
         setTags(tags.slice(0, tags.length - 1));
         return;
@@ -132,19 +140,11 @@ const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
       if (keys.includes(e.key)) {
         // 등록
         e.preventDefault();
-        insertTag(e.currentTarget.innerText);
+        insertTag(value);
       }
     },
     [insertTag, tags, value],
   );
-
-  const onFocus = () => {
-    setFocus(true);
-  };
-
-  const onBlur = () => {
-    setFocus(false);
-  };
 
   const onRemove = (tag: string) => {
     const nextTags = tags.filter(t => t !== tag);
@@ -158,16 +158,14 @@ const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
           {tag}
         </TagItem>
       ))}
-      <EditableContent
-        contentEditable={true}
+      <StyledInput
         placeholder="태그를 입력하세요"
         tabIndex={2}
         onKeyDown={onKeyDown}
-        onInput={onChangeDiv}
-        ref={editableDiv}
-        onPaste={onPaste}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        onChange={onChangeInput}
+        value={value}
+        onFocus={() => setFocus(true)}
+        onBlur={() => setFocus(false)}
       />
       <Help visible={focus}>
         <div className="inside">

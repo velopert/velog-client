@@ -2,7 +2,7 @@ import * as React from 'react';
 import { waitForElement } from '@testing-library/react';
 import PostViewer, { PostViewerProps, PostViewerOwnProps } from '../PostViewer';
 import { MemoryRouter } from 'react-router-dom';
-import { READ_POST } from '../../../lib/graphql/post';
+import { READ_POST, POST_VIEW } from '../../../lib/graphql/post';
 import renderWithRedux from '../../../lib/renderWithRedux';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient } from 'apollo-client';
@@ -128,6 +128,17 @@ describe('PostViewer', () => {
           },
         },
       },
+      {
+        request: {
+          query: POST_VIEW,
+          variables: {
+            id: '6533da20-b351-11e8-9696-f1fffe8a36f1',
+          },
+        },
+        result: {
+          data: true,
+        },
+      },
     ]);
     await waitForElement(() => getByText('제목입니다'));
     waitForElement(() => getByAltText('post-thumbnail'));
@@ -150,6 +161,17 @@ describe('PostViewer', () => {
                 '내용입니다 ![](https://images.velog.io/post-images/velopert/654650b0-b351-11e8-9696-f1fffe8a36f1/redux.png)',
             },
           },
+        },
+      },
+      {
+        request: {
+          query: POST_VIEW,
+          variables: {
+            id: '6533da20-b351-11e8-9696-f1fffe8a36f1',
+          },
+        },
+        result: {
+          data: true,
         },
       },
     ]);

@@ -7,14 +7,17 @@ import { Provider } from 'react-redux';
 import rootReducer from '../../../modules';
 import { createStore } from 'redux';
 import { setTextBody } from '../../../modules/write';
+import { MemoryRouter } from 'react-router';
 
 describe('QuillEditorContainer', () => {
   const setup = (props: Partial<QuillEditorContainerProps> = {}) => {
     const store = createStore(rootReducer);
     const utils = render(
-      <Provider store={store}>
-        <QuillEditorContainer {...props} />
-      </Provider>,
+      <MemoryRouter>
+        <Provider store={store}>
+          <QuillEditorContainer {...props} />
+        </Provider>
+      </MemoryRouter>,
     );
     return {
       store,

@@ -7,14 +7,17 @@ import { Provider } from 'react-redux';
 import rootReducer from '../../../modules';
 import { createStore } from 'redux';
 import { changeMarkdown } from '../../../modules/write';
+import { MemoryRouter } from 'react-router';
 
 describe('MarkdownEditorContainer', () => {
   const setup = (props: Partial<MarkdownEditorContainerProps> = {}) => {
     const store = createStore(rootReducer);
     const utils = render(
-      <Provider store={store}>
-        <MarkdownEditorContainer {...props} />
-      </Provider>,
+      <MemoryRouter>
+        <Provider store={store}>
+          <MarkdownEditorContainer {...props} />
+        </Provider>
+      </MemoryRouter>,
     );
     return {
       store,

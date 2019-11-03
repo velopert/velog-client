@@ -29,9 +29,9 @@ const MainRightFooter: React.FC<MainRightFooterProps> = props => {
   return (
     <MainRightFooterBlock>
       <div className="links">
-        <Link to="/">소개</Link>
-        <Link to="/">서비스 정책</Link>
-        <Link to="/">FAQ</Link>
+        {/* <Link to="/">소개</Link> */}
+        <Link to="/policy/terms">서비스 정책</Link>
+        {/* <Link to="/">FAQ</Link> */}
       </div>
       <div className="copyright">© 2019 · velog</div>
     </MainRightFooterBlock>

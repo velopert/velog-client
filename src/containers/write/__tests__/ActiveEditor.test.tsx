@@ -4,38 +4,30 @@ import ActiveEditor, { ActiveEditorProps } from '../ActiveEditor';
 import { createStore } from 'redux';
 import rootReducer from '../../../modules';
 import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router';
+import renderWithProviders from '../../../lib/renderWithProviders';
 
 describe('ActiveEditor', () => {
   const setup = (props: Partial<ActiveEditorProps> = {}) => {
-    const setupStore = () => {
-      const store = createStore(rootReducer);
-      return store;
-    };
-    const store = setupStore();
-    const utils = render(
-      <Provider store={store}>
-        <ActiveEditor {...props} />
-      </Provider>,
-    );
+    const utils = renderWithProviders(<ActiveEditor {...props} />);
     return {
       ...utils,
     };
   };
   it('renders properly', () => {
     const utils = setup();
-    utils.getByTestId('quill'); // initial mode: WYSIWYG
+    utils.getByTestId('codemirror'); // initial mode: WYSIWYG
   });
   it('matches snapshot', () => {
     const { container } = setup();
     expect(container).toMatchSnapshot();
   });
   it('converts editor properly', async () => {
-    const { getByTestId, getByText, queryByTestId } = setup({});
-    const convertButton = getByTestId('mdconvert');
+    const { getByTestId, getByText } = setup({});
+    const convertButton = getByTestId('quillconvert');
     fireEvent.click(convertButton);
     const confirmButton = getByText('확인');
     fireEvent.click(confirmButton);
-
-    getByTestId('codemirror');
+    getByTestId('quill');
   });
 });

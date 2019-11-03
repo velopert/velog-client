@@ -5,11 +5,11 @@ exports[`TagInput matches snapshot 1`] = `
   <div
     class="sc-bdVaJa boasyp"
   >
-    <div
-      class="sc-bwzfXH igqpWL"
-      contenteditable="true"
+    <input
+      class="sc-bwzfXH eNiLls"
       placeholder="태그를 입력하세요"
       tabindex="2"
+      value=""
     />
     <div
       class="sc-bxivhb eEhKMx"

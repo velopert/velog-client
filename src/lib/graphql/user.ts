@@ -35,6 +35,7 @@ export const GET_CURRENT_USER = gql`
     auth {
       id
       username
+      email
       profile {
         id
         thumbnail

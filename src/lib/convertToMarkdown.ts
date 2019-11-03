@@ -1,5 +1,5 @@
 import TurndownService from 'turndown';
-import pipe from 'ramda/es/pipe';
+import pipe from 'ramda/src/pipe';
 
 let turndownService: TurndownService | null = null;
 

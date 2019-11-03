@@ -8,9 +8,15 @@ export type HorizontalTabProps = {
   className?: string;
   children: React.ReactElement<TabItemProps>[];
   activeTab: string;
+  tabWidth: number;
 };
 
-function HorizontalTab({ className, children, activeTab }: HorizontalTabProps) {
+function HorizontalTab({
+  className,
+  children,
+  activeTab,
+  tabWidth,
+}: HorizontalTabProps) {
   const activeIndex = React.Children.toArray(children).findIndex(
     tab => tab.props.name === activeTab,
   );
@@ -18,7 +24,7 @@ function HorizontalTab({ className, children, activeTab }: HorizontalTabProps) {
   const ratio = 100 / children.length;
 
   const springStyle = useSpring({
-    transform: `translateX(${8 * activeIndex}rem)`,
+    transform: `translateX(${tabWidth * activeIndex}rem)`,
     width: `${ratio}%`,
     config: {
       friction: 16,
@@ -32,6 +38,7 @@ function HorizontalTab({ className, children, activeTab }: HorizontalTabProps) {
         {React.Children.map(children, tab => {
           return React.cloneElement(tab, {
             active: tab.props.name === activeTab,
+            width: `${tabWidth}rem`,
           });
         })}
         <Indicator style={springStyle} />
@@ -40,16 +47,21 @@ function HorizontalTab({ className, children, activeTab }: HorizontalTabProps) {
   );
 }
 
+HorizontalTab.defaultProps = {
+  tabWidth: 8,
+};
+
 export type TabItemProps = {
   name: string;
   text: string;
   to: string;
   active?: boolean;
+  width?: string;
 };
 
-function TabItem({ name, text, to, active }: TabItemProps) {
+function TabItem({ name, text, to, active, width }: TabItemProps) {
   return (
-    <StyledLink to={to} className={active ? 'active' : ''}>
+    <StyledLink to={to} className={active ? 'active' : ''} style={{ width }}>
       {text}
     </StyledLink>
   );
