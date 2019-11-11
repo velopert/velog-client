@@ -15,6 +15,7 @@ import client from './lib/graphql/client';
 import rootReducer from './modules';
 import storage from './lib/storage';
 import { setUser } from './modules/core';
+import initializeCrisp from './lib/crisp';
 
 const store = createStore(rootReducer, composeWithDevTools());
 
@@ -71,6 +72,8 @@ if (process.env.NODE_ENV === 'production') {
   js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0';
   fjs.parentNode.insertBefore(js, fjs);
 })(document, 'script', 'facebook-jssdk');
+
+initializeCrisp();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

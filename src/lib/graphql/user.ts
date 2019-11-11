@@ -62,6 +62,7 @@ export type CurrentUser = {
     thumbnail: string | null;
     display_name: string;
   };
+  email: string;
 };
 
 export const GET_USER_PROFILE = gql`

@@ -5,6 +5,7 @@ import { setUser } from '../../../modules/core';
 import { useQuery } from '@apollo/react-hooks';
 import { RootState } from '../../../modules';
 import storage from '../../../lib/storage';
+import { setCrispUser } from '../../../lib/crisp';
 
 const useUserLoader = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,17 @@ const useUserLoader = () => {
       dispatch(setUser(user));
     }
   }, [dispatch, prevUser, user]);
+
+  useEffect(() => {
+    if (user === undefined) return;
+    if (user === null) return; // not logged in
+    //
+    setCrispUser({
+      email: user.email,
+      nickname: user.username,
+      avatar: user.profile.thumbnail,
+    });
+  }, [user]);
 };
 
 export default useUserLoader;
