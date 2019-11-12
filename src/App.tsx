@@ -15,6 +15,7 @@ const SearchPage = loadable(() => import('./pages/SearchPage'));
 const SavesPage = loadable(() => import('./pages/SavesPage'));
 const TagsPage = loadable(() => import('./pages/tags/TagsPage'));
 const PolicyPage = loadable(() => import('./pages/PolicyPage'));
+const SettingPage = loadable(() => import('./pages/SettingPage'));
 
 interface AppProps {}
 
@@ -33,6 +34,7 @@ const App: React.FC<AppProps> = props => {
         <Route path="/saves" component={SavesPage} />
         <Route path="/tags" component={TagsPage} />
         <Route path={['/policy/:type?']} component={PolicyPage} />
+        <Route path="/setting" component={SettingPage} />
       </Switch>
       <Core />
     </JazzbarProvider>

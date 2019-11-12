@@ -2,7 +2,13 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import palette, { buttonColorMap } from '../../lib/styles/palette';
 
-type ColorType = 'teal' | 'gray' | 'darkGray' | 'lightGray';
+type ColorType =
+  | 'teal'
+  | 'gray'
+  | 'darkGray'
+  | 'lightGray'
+  | 'transparent'
+  | 'red';
 type ButtonSize = 'medium' | 'large';
 
 const ButtonBlock = styled.button<{
@@ -12,6 +18,7 @@ const ButtonBlock = styled.button<{
 }>`
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   font-weight: bold;
   cursor: pointer;
   outline: none;

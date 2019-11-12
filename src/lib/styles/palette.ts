@@ -61,6 +61,16 @@ export const buttonColorMap: {
     color: 'white',
     hoverBackground: palette.gray6,
   },
+  transparent: {
+    background: 'none',
+    color: palette.teal6,
+    hoverBackground: palette.teal1,
+  },
+  red: {
+    background: palette.red5,
+    color: 'white',
+    hoverBackground: palette.red4,
+  },
 };
 
 export default palette;
