@@ -43,6 +43,7 @@ const useS3Upload = () => {
           },
         });
         setImage(image_path);
+        return image_path;
       } catch (e) {
         setError(e);
       }

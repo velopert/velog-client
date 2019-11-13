@@ -1,0 +1,36 @@
+import * as React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import SettingUserProfile, {
+  SettingUserProfileProps,
+} from '../SettingUserProfile';
+
+describe('SettingUserProfile', () => {
+  const setup = (props: Partial<SettingUserProfileProps> = {}) => {
+    const initialProps: SettingUserProfileProps = {
+      onUpload: () => {},
+      thumbnail:
+        'https://images.velog.io/images/velopert/profile/ca385170-77e7-11e9-ba3a-fb3a8e4f1096/1536400727.98.png',
+      displayName: 'Minjun Kim',
+      shortBio: 'Hello World',
+    };
+    const utils = render(<SettingUserProfile {...initialProps} {...props} />);
+    return {
+      ...utils,
+    };
+  };
+  it('renders properly', () => {
+    const utils = setup();
+    const img = utils.getByAltText('profile') as HTMLImageElement;
+    expect(img.src).toBe(
+      'https://images.velog.io/images/velopert/profile/ca385170-77e7-11e9-ba3a-fb3a8e4f1096/1536400727.98.png',
+    );
+    utils.getByText('Minjun Kim');
+    utils.getByText('Hello World');
+  });
+  it('calls onUpload', () => {
+    const onUpload = jest.fn();
+    const { getByText } = setup({ onUpload });
+    fireEvent.click(getByText('이미지 업로드'));
+    expect(onUpload).toBeCalled();
+  });
+});
