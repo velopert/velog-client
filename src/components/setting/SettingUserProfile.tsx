@@ -1,25 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import Button from '../common/Button';
 import SettingEditButton from './SettingEditButton';
 import { userThumbnail } from '../../static/images';
+import useToggle from '../../lib/hooks/useToggle';
+import SettingInput from './SettingInput';
+import useInputs from '../../lib/hooks/useInputs';
 
 export type SettingUserProfileProps = {
   onUpload: () => void;
   onClearThumbnail: () => void;
+  onUpdate: (params: { shortBio: string; displayName: string }) => Promise<any>;
   thumbnail: string | null;
-  displayName: string | null;
+  displayName: string;
   shortBio: string;
 };
 
 function SettingUserProfile({
+  onUpdate,
   onUpload,
   onClearThumbnail,
   thumbnail,
   displayName,
   shortBio,
 }: SettingUserProfileProps) {
+  const [edit, onToggleEdit] = useToggle(false);
+  const [inputs, onChange] = useInputs({
+    displayName,
+    shortBio,
+  });
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await onUpdate(inputs);
+    onToggleEdit();
+  };
+
   return (
     <Section>
       <div className="thumbnail-area">
@@ -30,9 +46,35 @@ function SettingUserProfile({
         </Button>
       </div>
       <div className="info-area">
-        <h2>{displayName}</h2>
-        <p>{shortBio}</p>
-        <SettingEditButton />
+        {edit ? (
+          <Form onSubmit={onSubmit}>
+            <SettingInput
+              placeholder="이름"
+              fullWidth
+              className="display-name"
+              name="displayName"
+              value={inputs.displayName}
+              onChange={onChange}
+            />
+            <SettingInput
+              placeholder="한 줄 소개"
+              fullWidth
+              name="shortBio"
+              value={inputs.shortBio}
+              onChange={onChange}
+              autoFocus
+            />
+            <div className="button-wrapper">
+              <Button>저장</Button>
+            </div>
+          </Form>
+        ) : (
+          <>
+            <h2>{displayName}</h2>
+            <p>{shortBio}</p>
+            <SettingEditButton onClick={onToggleEdit} />
+          </>
+        )}
       </div>
     </Section>
   );
@@ -57,6 +99,7 @@ const Section = styled.section`
     }
   }
   .info-area {
+    flex: 1;
     padding-left: 1.5rem;
     border-left: 1px solid ${palette.gray2};
     h2 {
@@ -72,6 +115,21 @@ const Section = styled.section`
       line-height: 1.5;
       color: ${palette.gray6};
     }
+  }
+`;
+
+const Form = styled.form`
+  input + input {
+    margin-top: 1rem;
+  }
+  .display-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  .button-wrapper {
+    display: flex;
+    margin-top: 1.5rem;
+    justify-content: flex-end;
   }
 `;
 

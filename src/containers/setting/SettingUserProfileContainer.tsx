@@ -9,7 +9,7 @@ import useUpdateThumbnail from './hooks/useUpdateThumbnail';
 export type SettingUserProfileContainerProps = {};
 
 function SettingUserProfileContainer(props: SettingUserProfileContainerProps) {
-  const { profile, loading } = useUserProfile();
+  const { profile, loading, update } = useUserProfile();
   const [upload] = useUpload();
   const [s3Upload, image, error] = useS3Upload();
   const updateThumbnail = useUpdateThumbnail();
@@ -26,11 +26,16 @@ function SettingUserProfileContainer(props: SettingUserProfileContainerProps) {
     updateThumbnail(null);
   };
 
+  const onUpdate = (params: { displayName: string; shortBio: string }) => {
+    return update(params);
+  };
+
   if (!profile) return null;
 
   return (
     <SettingUserProfile
       onUpload={uploadThumbnail}
+      onUpdate={onUpdate}
       onClearThumbnail={clearThumbnail}
       displayName={profile.display_name}
       shortBio={profile.short_bio}
