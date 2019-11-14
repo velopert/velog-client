@@ -7,6 +7,7 @@ import { userThumbnail } from '../../static/images';
 
 export type SettingUserProfileProps = {
   onUpload: () => void;
+  onClearThumbnail: () => void;
   thumbnail: string | null;
   displayName: string | null;
   shortBio: string;
@@ -14,6 +15,7 @@ export type SettingUserProfileProps = {
 
 function SettingUserProfile({
   onUpload,
+  onClearThumbnail,
   thumbnail,
   displayName,
   shortBio,
@@ -23,7 +25,9 @@ function SettingUserProfile({
       <div className="thumbnail-area">
         <img src={thumbnail || userThumbnail} alt="profile" />
         <Button onClick={onUpload}>이미지 업로드</Button>
-        <Button color="transparent">이미지 제거</Button>
+        <Button color="transparent" onClick={onClearThumbnail}>
+          이미지 제거
+        </Button>
       </div>
       <div className="info-area">
         <h2>{displayName}</h2>

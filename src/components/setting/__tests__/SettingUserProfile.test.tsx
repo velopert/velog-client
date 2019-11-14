@@ -8,6 +8,7 @@ describe('SettingUserProfile', () => {
   const setup = (props: Partial<SettingUserProfileProps> = {}) => {
     const initialProps: SettingUserProfileProps = {
       onUpload: () => {},
+      onClearThumbnail: () => {},
       thumbnail:
         'https://images.velog.io/images/velopert/profile/ca385170-77e7-11e9-ba3a-fb3a8e4f1096/1536400727.98.png',
       displayName: 'Minjun Kim',
@@ -32,5 +33,11 @@ describe('SettingUserProfile', () => {
     const { getByText } = setup({ onUpload });
     fireEvent.click(getByText('이미지 업로드'));
     expect(onUpload).toBeCalled();
+  });
+  it('calls onClearThumbnail', () => {
+    const onClearThumbnail = jest.fn();
+    const { getByText } = setup({ onClearThumbnail });
+    fireEvent.click(getByText('이미지 제거'));
+    expect(onClearThumbnail).toBeCalled();
   });
 });
