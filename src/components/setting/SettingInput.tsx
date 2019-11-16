@@ -4,7 +4,8 @@ import palette from '../../lib/styles/palette';
 
 export type SettingInputProps = {
   fullWidth?: boolean;
-} & Omit<HTMLProps<HTMLInputElement>, 'ref' | 'as'>;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+} & Omit<HTMLProps<HTMLInputElement>, 'ref' | 'as' | 'onChange'>;
 
 function SettingInput(props: SettingInputProps) {
   return <StyledInput {...props} />;
@@ -19,6 +20,7 @@ const StyledInput = styled.input<{ fullWidth?: boolean }>`
   font-size: 1rem;
   line-height: 1rem;
   outline: none;
+  border-radius: 4px;
   &:focus {
     border: 1px solid ${palette.gray9};
   }

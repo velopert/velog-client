@@ -11,6 +11,7 @@ const GET_MY_PROFILE = gql`
         display_name
         short_bio
         thumbnail
+        profile_links
       }
     }
   }
@@ -35,6 +36,13 @@ export default function useUserProfile() {
         display_name: string;
         short_bio: string;
         thumbnail: string | null;
+        profile_links: {
+          url?: string;
+          github?: string;
+          facebook?: string;
+          twitter?: string;
+          email?: string;
+        };
       };
     };
   }>(GET_MY_PROFILE);

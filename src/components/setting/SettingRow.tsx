@@ -6,6 +6,7 @@ import SettingEditButton from './SettingEditButton';
 export type SettingRowProps = {
   title: string;
   children: React.ReactNode;
+  onClickEdit?: () => void;
   editButton?: boolean;
   description?: string;
 };
@@ -15,6 +16,7 @@ function SettingRow({
   children,
   editButton,
   description,
+  onClickEdit,
 }: SettingRowProps) {
   return (
     <Row>
@@ -25,7 +27,7 @@ function SettingRow({
         <div className="contents">{children}</div>
         {editButton && (
           <div className="edit-wrapper">
-            <SettingEditButton />
+            <SettingEditButton onClick={onClickEdit} />
           </div>
         )}
       </div>

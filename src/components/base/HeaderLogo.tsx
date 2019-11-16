@@ -4,15 +4,7 @@ import { Link } from 'react-router-dom';
 import { Logo } from '../../static/svg';
 import { UserLogo } from '../../modules/header';
 import palette from '../../lib/styles/palette';
-
-const createFallbackTitle = (username: string | null) => {
-  if (!username) return null;
-  const lastChar = username.slice(-1).toLowerCase();
-  if (lastChar === 's') {
-    return `${username}' velog`;
-  }
-  return `${username}'s velog`;
-};
+import { createFallbackTitle } from '../../lib/utils';
 
 const HeaderLogoBlock = styled(Link)`
   display: flex;
