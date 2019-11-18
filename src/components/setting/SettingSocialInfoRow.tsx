@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import SettingRow from './SettingRow';
 import {
   GithubIcon,
@@ -7,11 +7,13 @@ import {
   EmailIcon,
 } from '../../static/svg';
 import { MdHome } from 'react-icons/md';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Button from '../common/Button';
 import SettingInput from './SettingInput';
 import useInputs from '../../lib/hooks/useInputs';
 import palette from '../../lib/styles/palette';
+import { ProfileLinks } from '../../lib/graphql/user';
+import SettingEditButton from './SettingEditButton';
 
 export type SettingSocialInfoRowProps = {
   email?: string;
@@ -19,6 +21,7 @@ export type SettingSocialInfoRowProps = {
   twitter?: string;
   facebook?: string;
   url?: string;
+  onUpdate: (profileLinks: ProfileLinks) => Promise<any>;
 };
 
 const iconArray = [
@@ -35,14 +38,21 @@ function SettingSocialInfoRow({
   twitter,
   facebook,
   url,
+  onUpdate,
 }: SettingSocialInfoRowProps) {
   const infoArray = [email, github, twitter, facebook, url];
   const empty = infoArray.every(value => !value);
   const [edit, setEdit] = useState(false);
   const [form, onChange] = useInputs({ email, github, twitter, facebook, url });
+  const [facebookInputFocus, setFacebookInputFocus] = useState(false);
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    await onUpdate(form);
+    setEdit(false);
+  };
 
   const infoInputsList = edit && (
-    <Form>
+    <Form onSubmit={onSubmit}>
       <InfoList>
         <li>
           <EmailIcon />
@@ -74,9 +84,24 @@ function SettingSocialInfoRow({
         </li>
         <li>
           <FacebookSquareIcon />
-          <FacebookInputBox tabIndex={0}>
+          <FacebookInputBox
+            tabIndex={0}
+            focus={facebookInputFocus}
+            onFocus={e => {
+              const el = e.currentTarget.querySelector('input');
+              if (!el) return;
+              el.focus();
+            }}
+          >
             <span>https://www.facebook.com/</span>
-            <input />
+            <input
+              size={0}
+              value={form.facebook}
+              name="facebook"
+              onChange={onChange}
+              onFocus={() => setFacebookInputFocus(true)}
+              onBlur={() => setFacebookInputFocus(false)}
+            />
           </FacebookInputBox>
         </li>
         <li>
@@ -115,10 +140,13 @@ function SettingSocialInfoRow({
     <SettingRow
       title="소셜 정보"
       description="포스트 및 블로그에서 보여지는 프로필에 공개되는 소셜 정보입니다."
-      editButton={!edit}
+      editButton={!edit && !empty}
       onClickEdit={onClickEdit}
     >
       {edit ? infoInputsList : infoValueList}
+      {!edit && empty && (
+        <SettingEditButton customText="정보 추가" onClick={onClickEdit} />
+      )}
     </SettingRow>
   );
 }
@@ -146,7 +174,7 @@ const InfoList = styled.ul`
   }
 `;
 
-const FacebookInputBox = styled.div`
+const FacebookInputBox = styled.div<{ focus: boolean }>`
   flex: 1;
   display: flex;
   border: 1px solid ${palette.gray3};
@@ -158,6 +186,7 @@ const FacebookInputBox = styled.div`
   outline: none;
   border-radius: 4px;
   height: 2.25rem;
+  align-items: center;
   span {
     color: ${palette.gray5};
     margin-right: 0.25rem;
@@ -169,10 +198,13 @@ const FacebookInputBox = styled.div`
     font-size: 1rem;
     line-height: 1;
     flex: 1;
+    width: 100%;
   }
-  &:has(input) {
-    border: 1px solid ${palette.gray9};
-  }
+  ${props =>
+    props.focus &&
+    css`
+      border: 1px solid ${palette.gray9};
+    `}
 `;
 
 const Form = styled.form`

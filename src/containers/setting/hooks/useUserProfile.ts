@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { useCallback } from 'react';
+import { safe } from '../../../lib/utils';
 
 const GET_MY_PROFILE = gql`
   query {
@@ -12,6 +13,11 @@ const GET_MY_PROFILE = gql`
         short_bio
         thumbnail
         profile_links
+      }
+      user_meta {
+        id
+        email_notification
+        email_promotion
       }
     }
   }
@@ -44,6 +50,11 @@ export default function useUserProfile() {
           email?: string;
         };
       };
+      user_meta: {
+        id: string;
+        email_notification: boolean;
+        email_promotion: boolean;
+      };
     };
   }>(GET_MY_PROFILE);
   const [updateProfile] = useMutation(UPDATE_PROFILE);
@@ -61,6 +72,7 @@ export default function useUserProfile() {
 
   return {
     profile: data && data.auth && data.auth.profile,
+    meta: safe(() => data!.auth!.user_meta),
     loading,
     update,
   };

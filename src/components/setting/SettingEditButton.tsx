@@ -4,11 +4,16 @@ import palette from '../../lib/styles/palette';
 
 export type SettingEditButtonProps = {
   onClick?: () => void;
+  customText: string;
 };
 
-function SettingEditButton({ onClick }: SettingEditButtonProps) {
-  return <StyledButton onClick={onClick}>수정</StyledButton>;
+function SettingEditButton({ onClick, customText }: SettingEditButtonProps) {
+  return <StyledButton onClick={onClick}>{customText}</StyledButton>;
 }
+
+SettingEditButton.defaultProps = {
+  customText: '수정',
+};
 
 const StyledButton = styled.button`
   outline: none;
