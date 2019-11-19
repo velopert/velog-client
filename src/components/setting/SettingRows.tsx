@@ -7,6 +7,7 @@ import SettingEmailRulesRow from './SettingEmailRulesRow';
 import Button from '../common/Button';
 import { createFallbackTitle } from '../../lib/utils';
 import { ProfileLinks } from '../../lib/graphql/user';
+import SettingUnregisterRow from './SettingUnregisterRow';
 
 export type SettingRowsProps = {
   title: string | null;
@@ -14,8 +15,8 @@ export type SettingRowsProps = {
   onUpdateTitle: (title: string) => Promise<any>;
   onUpdateSocialInfo: (profileLinks: ProfileLinks) => Promise<any>;
   onUpdateEmailRules: (params: {
-    field: 'promotion' | 'notification';
-    value: boolean;
+    promotion: boolean;
+    notification: boolean;
   }) => Promise<any>;
   profileLinks: {
     url?: string;
@@ -61,12 +62,7 @@ function SettingRows({
           onUpdate={onUpdateEmailRules}
         />
       )}
-      <SettingRow
-        title="회원 탈퇴"
-        description="탈퇴 시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다."
-      >
-        <Button color="red">회원 탈퇴</Button>
-      </SettingRow>
+      <SettingUnregisterRow onUnregister={() => console.log('unregister')} />
     </Rows>
   );
 }

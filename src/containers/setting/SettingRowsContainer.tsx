@@ -14,27 +14,25 @@ function SettingRowsContainer(props: SettingRowsContainerProps) {
   const { profile, meta } = useUserProfile();
   const user = useSelector((state: RootState) => state.core.user);
   const updateSocialInfo = useUpdateSocialInfo();
-  const updateEmailRules = useUpdateEmailRules();
+  const { update: updateEmailRules } = useUpdateEmailRules();
 
   const onUpdateEmailRules = useCallback(
-    (params: { field: 'promotion' | 'notification'; value: boolean }) => {
-      if (!meta) return Promise.resolve();
-      const oldRules = {
-        email_notification: meta.email_notification,
-        email_promotion: meta.email_promotion,
-      };
-      const key = `email_${params.field}`;
-      const nextRules = Object.assign({}, oldRules, { [key]: params.value });
-      console.log('calling..');
-      return Promise.resolve();
-      // return updateEmailRules.update(nextRules);
+    ({
+      promotion,
+      notification,
+    }: {
+      promotion: boolean;
+      notification: boolean;
+    }) => {
+      return updateEmailRules({
+        notification,
+        promotion,
+      });
     },
-    [meta],
+    [updateEmailRules],
   );
 
   if (!velogConfig || !user || !profile || !meta) return null;
-
-  console.log(profile);
 
   return (
     <SettingRows

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { useSpring, animated } from 'react-spring';
-import useMounted from '../../lib/hooks/useMounted';
+import useDidMount from '../../lib/hooks/useDidMount';
 
 export type ToggleSwitchProps = {
   name?: string;
@@ -11,8 +11,8 @@ export type ToggleSwitchProps = {
 };
 
 function ToggleSwitch({ value, name, onChange }: ToggleSwitchProps) {
+  const mounted = useRef(false);
   const [localValue, setLocalValue] = useState(value);
-  const mounted = useMounted();
 
   const style = useSpring({
     transform: localValue ? 'translate(1.375rem)' : 'translate(0rem)',
@@ -40,7 +40,11 @@ function ToggleSwitch({ value, name, onChange }: ToggleSwitchProps) {
       name: name || '',
       value: localValue,
     });
-  }, [localValue, mounted, name, onChange]);
+  }, [localValue, name, onChange]);
+
+  useEffect(() => {
+    mounted.current = true;
+  }, []);
 
   return (
     <Block active={localValue} onClick={toggle}>

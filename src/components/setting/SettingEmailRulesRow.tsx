@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect, useRef } from 'react';
 import SettingRow from './SettingRow';
 import ToggleSwitch from '../common/ToggleSwitch';
 import styled from 'styled-components';
@@ -7,8 +7,8 @@ export type SettingEmailRulesRowProps = {
   notification: boolean;
   promotion: boolean;
   onUpdate: (params: {
-    field: 'promotion' | 'notification';
-    value: boolean;
+    promotion: boolean;
+    notification: boolean;
   }) => Promise<any>;
 };
 
@@ -17,22 +17,32 @@ function SettingEmailRulesRow({
   promotion,
   onUpdate,
 }: SettingEmailRulesRowProps) {
+  const mounted = useRef(false);
+  const [values, setValues] = useState({ promotion, notification });
+
   const onChange = useCallback(
-    (params: { name: string; value: boolean }) => {
-      onUpdate({
-        field: params.name as 'promotion' | 'notification',
-        value: params.value,
-      });
+    ({ name, value }: { name: string; value: boolean }) => {
+      setValues(prev => ({ ...prev, [name]: value }));
     },
-    [onUpdate],
+    [],
   );
+
+  useEffect(() => {
+    if (!mounted.current) return;
+    onUpdate(values);
+  }, [values, onUpdate]);
+
+  useEffect(() => {
+    mounted.current = true;
+  }, []);
+
   return (
     <SettingRow title="이메일 수신 설정">
       <Rules>
         <li>
           <span>댓글 알림</span>
           <ToggleSwitch
-            value={notification}
+            value={values.notification}
             name="notification"
             onChange={onChange}
           />
@@ -40,7 +50,7 @@ function SettingEmailRulesRow({
         <li>
           <span>벨로그 업데이트 소식</span>
           <ToggleSwitch
-            value={promotion}
+            value={values.promotion}
             name="promotion"
             onChange={onChange}
           />

@@ -12,8 +12,8 @@ const UPDATE_EMAIL_RULES = gql`
 `;
 
 type UpdateEmailRulesParams = {
-  email_notification: boolean;
-  email_promotion: boolean;
+  notification: boolean;
+  promotion: boolean;
 };
 
 export default function useUpdateEmailRules() {
