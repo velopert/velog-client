@@ -6,6 +6,7 @@ import { RootState } from '../../modules';
 import useUserProfile from './hooks/useUserProfile';
 import useUpdateSocialInfo from './hooks/useUpdateSocialInfo';
 import useUpdateEmailRules from './hooks/useUpdateEmailRules';
+import useUnregister from './hooks/useUnregister';
 
 export type SettingRowsContainerProps = {};
 
@@ -15,6 +16,7 @@ function SettingRowsContainer(props: SettingRowsContainerProps) {
   const user = useSelector((state: RootState) => state.core.user);
   const updateSocialInfo = useUpdateSocialInfo();
   const { update: updateEmailRules } = useUpdateEmailRules();
+  const unregister = useUnregister();
 
   const onUpdateEmailRules = useCallback(
     ({
@@ -42,6 +44,7 @@ function SettingRowsContainer(props: SettingRowsContainerProps) {
       profileLinks={profile.profile_links}
       onUpdateSocialInfo={updateSocialInfo.update}
       onUpdateEmailRules={onUpdateEmailRules}
+      onUnregister={unregister}
       userMeta={meta}
     />
   );

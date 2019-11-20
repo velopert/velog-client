@@ -24,7 +24,7 @@ export default function useUnregister() {
 
   const [unregister] = useMutation<{ unregister: boolean }>(UNREGISTER);
 
-  const fn = useCallback(async () => {
+  return useCallback(async () => {
     const { data } = await refetch();
     const { unregister_token: token } = data;
     await unregister({
@@ -32,6 +32,7 @@ export default function useUnregister() {
         token,
       },
     });
-    // TODO: clear localStorage, refresh page
+    localStorage.clear();
+    window.location.href = '/'; // LATER: redirect to link asking unregister reason
   }, [refetch, unregister]);
 }

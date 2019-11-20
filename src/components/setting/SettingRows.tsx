@@ -18,6 +18,7 @@ export type SettingRowsProps = {
     promotion: boolean;
     notification: boolean;
   }) => Promise<any>;
+  onUnregister: () => void;
   profileLinks: {
     url?: string;
     github?: string;
@@ -40,8 +41,8 @@ function SettingRows({
   onUpdateTitle,
   onUpdateSocialInfo,
   onUpdateEmailRules,
+  onUnregister,
 }: SettingRowsProps) {
-  console.log(userMeta);
   return (
     <Rows>
       <SettingTitleRow
@@ -62,7 +63,7 @@ function SettingRows({
           onUpdate={onUpdateEmailRules}
         />
       )}
-      <SettingUnregisterRow onUnregister={() => console.log('unregister')} />
+      <SettingUnregisterRow onUnregister={onUnregister} />
     </Rows>
   );
 }
