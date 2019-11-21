@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useState, useRef } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import {
@@ -9,6 +9,7 @@ import {
 } from '../../static/svg';
 import { userThumbnail } from '../../static/images';
 import { ProfileLinks } from '../../lib/graphql/user';
+import { MdHome } from 'react-icons/md';
 
 const UserProfileBlock = styled.div``;
 
@@ -96,7 +97,17 @@ const UserProfile: React.FC<UserProfileProps> = ({
   description,
   profileLinks,
 }) => {
-  const { /*email,*/ facebook, github, twitter /*url*/ } = profileLinks;
+  const { email, facebook, github, twitter, url } = profileLinks;
+  const [hoverEmail, setHoverEmail] = useState(false);
+  const emailBlockRef = useRef<HTMLDivElement>(null);
+
+  const onMouseEnterEmail = () => {
+    setHoverEmail(true);
+  };
+  const onMouseLeaveEmail = (e: React.MouseEvent) => {
+    if (e.relatedTarget === emailBlockRef.current) return;
+    setHoverEmail(false);
+  };
 
   return (
     <UserProfileBlock className={className} style={style}>
@@ -139,10 +150,46 @@ const UserProfile: React.FC<UserProfileProps> = ({
             <FacebookSquareIcon />
           </a>
         )}
-        <EmailIcon data-testid="email" />
+        {url && (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="facebook"
+          >
+            <MdHome />
+          </a>
+        )}
+        {email && (
+          <a href={`mailto:${email}`}>
+            <EmailIcon
+              data-testid="email"
+              onMouseEnter={onMouseEnterEmail}
+              onMouseLeave={onMouseLeaveEmail}
+            />
+          </a>
+        )}
+        {hoverEmail && (
+          <EmailBlock ref={emailBlockRef} onMouseLeave={onMouseLeaveEmail}>
+            <div>{email}</div>
+          </EmailBlock>
+        )}
       </ProfileIcons>
     </UserProfileBlock>
   );
 };
+
+const EmailBlock = styled.div`
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  div {
+    background: ${palette.gray7};
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.05);
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    color: white;
+    border-radius: 4px;
+  }
+`;
 
 export default UserProfile;
