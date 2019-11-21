@@ -35,8 +35,10 @@ const TrendingPosts: React.FC<TrendingPostsProps> = props => {
           );
 
           const uniquePosts = fetchMoreResult.trendingPosts.filter(
-            post => idMap[post.id],
+            post => !idMap[post.id],
           );
+
+          console.log(uniquePosts);
 
           return {
             trendingPosts: [...prev.trendingPosts, ...uniquePosts],
