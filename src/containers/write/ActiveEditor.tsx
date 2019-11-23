@@ -9,7 +9,7 @@ import {
   setInitialBody,
 } from '../../modules/write';
 import EditorPanesContainer from './EditorPanesContainer';
-import QuillEditorContainer from './QuillEditorContainer';
+// import QuillEditorContainer from './QuillEditorContainer';
 import { useLocation } from 'react-router';
 import qs from 'qs';
 import { useQuery } from '@apollo/react-hooks';
@@ -117,9 +117,9 @@ const ActiveEditor: React.FC<ActiveEditorProps> = () => {
     <>
       <EditorPanesContainer />
     </>
-  ) : (
+  ) : null; /*
     <QuillEditorContainer />
-  );
+  );*/
 };
 
 export default ActiveEditor;

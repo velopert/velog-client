@@ -28,6 +28,7 @@ import UserProfile from '../../components/common/UserProfile';
 import VelogResponsive from '../../components/velog/VelogResponsive';
 import styled from 'styled-components';
 import { useMount } from 'react-use';
+import PostSkeleton from '../../components/post/PostSkeleton';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -260,11 +261,9 @@ const PostViewer: React.FC<PostViewerProps> = ({
     }
   };
 
-  if (loading) return null;
-  if (!data) return null;
+  if (!data || !data.post) return <PostSkeleton />;
 
   const { post } = data;
-  if (!post) return null;
 
   return (
     <PostViewerProvider prefetchLinkedPosts={prefetchLinkedPosts}>

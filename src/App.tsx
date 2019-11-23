@@ -6,11 +6,12 @@ import { Route, Switch } from 'react-router';
 import loadable from '@loadable/component';
 import Core from './containers/base/Core';
 import RegisterPage from './pages/RegisterPage';
+import VelogPage from './pages/velog/VelogPage';
 import { JazzbarProvider } from './lib/jazzbar';
+
 const MainPage = loadable(() => import('./pages/main/MainPage'));
 const EmailLoginPage = loadable(() => import('./pages/EmailLoginPage'));
 const WritePage = loadable(() => import('./pages/WritePage'));
-const VelogPage = loadable(() => import('./pages/velog/VelogPage'));
 const SearchPage = loadable(() => import('./pages/SearchPage'));
 const SavesPage = loadable(() => import('./pages/SavesPage'));
 const TagsPage = loadable(() => import('./pages/tags/TagsPage'));

@@ -190,9 +190,9 @@ const Toolbar: React.FC<ToolbarProps> = ({
           <MdCode />
         </ToolbarItem>
       </ToolbarGroup>
-      <Separator />
+      {/* <Separator /> */}
       <ToolbarGroup>
-        {forMarkdown ? (
+        {/* forMarkdown ? (
           <ToolbarItem data-testid="quillconvert" onClick={onConvert}>
             <MdRemoveRedEye />
           </ToolbarItem>
@@ -200,7 +200,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
           <ToolbarItem data-testid="mdconvert" onClick={onConvert}>
             <FaMarkdown />
           </ToolbarItem>
-        )}
+        ) */}
       </ToolbarGroup>
     </ToolbarBlock>
   );
