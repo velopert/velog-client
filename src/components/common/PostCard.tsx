@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
@@ -6,6 +6,10 @@ import { userThumbnail } from '../../static/images';
 import Tag from './TagItem';
 import { PartialPost } from '../../lib/graphql/post';
 import { formatDate } from '../../lib/utils';
+import usePrefetchPost from '../../lib/hooks/usePrefetchPost';
+import { usePostViewerPrefetch } from '../post/PostViewerProvider';
+import Skeleton from './Skeleton';
+import SkeletonTexts from './SkeletonTexts';
 
 const PostCardBlock = styled.div`
   padding-top: 4rem;
@@ -39,8 +43,7 @@ const PostCardBlock = styled.div`
   }
   .post-thumbnail {
     width: 100%;
-    min-height: 369px;
-    max-height: 369px;
+    max-height: 23rem;
     margin-bottom: 1rem;
     object-fit: cover;
   }
@@ -80,10 +83,23 @@ interface PostCardProps {
   hideUser?: boolean;
 }
 
-const PostCard: React.FC<PostCardProps> = React.memo(({ post, hideUser }) => {
+const PostCard = ({ post, hideUser }: PostCardProps) => {
+  const prefetch = usePrefetchPost(post.user.username, post.url_slug);
+  const prefetchTimeoutId = useRef<number | null>(null);
+
+  const onMouseEnter = () => {
+    prefetchTimeoutId.current = setTimeout(prefetch, 2000);
+  };
+
+  const onMouseLeave = () => {
+    if (prefetchTimeoutId.current) {
+      clearTimeout(prefetchTimeoutId.current);
+    }
+  };
+
   const url = `/@${post.user.username}/${post.url_slug}`;
   return (
-    <PostCardBlock>
+    <PostCardBlock onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       {!hideUser && (
         <div className="user-info">
           <img
@@ -115,6 +131,75 @@ const PostCard: React.FC<PostCardProps> = React.memo(({ post, hideUser }) => {
       </div>
     </PostCardBlock>
   );
-});
+};
+
+export type PostCardSkeletonProps = {
+  hideUser?: boolean;
+};
+
+export function PostCardSkeleton(props: PostCardSkeletonProps) {
+  return (
+    <SkeletonBlock>
+      <div className="user-info">
+        <Skeleton width="3rem" height="3rem" circle marginRight="1rem" />
+        <div className="username">
+          <Skeleton width="5rem" />
+        </div>
+      </div>
+      <div className="post-thumbnail">
+        <Skeleton width="100%" height="100%" />
+      </div>
+      <h2>
+        <SkeletonTexts wordLengths={[4, 3, 2, 5, 3, 6]} useFlex />
+      </h2>
+      <div className="short-description">
+        <div className="line">
+          <SkeletonTexts wordLengths={[2, 4, 3, 6, 2, 7]} useFlex />
+        </div>
+        <div className="line">
+          <SkeletonTexts wordLengths={[3, 2, 3, 4, 7, 3]} useFlex />
+        </div>
+        <div className="line">
+          <SkeletonTexts wordLengths={[4, 3, 3]} />
+        </div>
+      </div>
+      <div className="subinfo">
+        <Skeleton width="3em" marginRight="1rem" />
+        <Skeleton width="6em" noSpacing />
+      </div>
+      <div className="tags-skeleton">
+        <Skeleton width="6rem" marginRight="0.875rem" />
+        <Skeleton width="4rem" marginRight="0.875rem" />
+        <Skeleton width="5rem" noSpacing />
+      </div>
+    </SkeletonBlock>
+  );
+}
+
+const SkeletonBlock = styled(PostCardBlock)`
+  .post-thumbnail {
+    height: 23rem;
+  }
+  h2 {
+    display: flex;
+    margin-top: 1.375rem;
+    margin-bottom: 0.375rem;
+  }
+  .short-description {
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    font-size: 1rem;
+    .line {
+      display: flex;
+    }
+    .line + .line {
+      margin-top: 0.5rem;
+    }
+  }
+  .tags-skeleton {
+    margin-top: 0.875rem;
+    font-size: 2rem;
+  }
+`;
 
 export default React.memo(PostCard);

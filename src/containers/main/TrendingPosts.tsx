@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react';
-import PostCardList from '../../components/common/PostCardList';
+import PostCardList, {
+  PostCardListSkeleton,
+} from '../../components/common/PostCardList';
 import {
   GET_TRENDING_POSTS,
   GetTrendingPostsResponse,
@@ -56,7 +58,7 @@ const TrendingPosts: React.FC<TrendingPostsProps> = props => {
     onLoadMoreByOffset,
   });
 
-  if (!data || !data.trendingPosts) return null;
+  if (!data || !data.trendingPosts) return <PostCardListSkeleton />;
 
   return <PostCardList posts={data.trendingPosts} />;
 };

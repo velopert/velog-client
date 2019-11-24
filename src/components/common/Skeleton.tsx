@@ -8,6 +8,7 @@ export type SkeletonProps = {
   flex?: number;
   marginRight?: number | string;
   noSpacing?: boolean;
+  circle?: boolean;
 };
 
 function Skeleton({
@@ -16,9 +17,14 @@ function Skeleton({
   flex,
   marginRight,
   noSpacing,
+  circle,
 }: SkeletonProps) {
   return (
-    <Block style={{ width, height, flex, marginRight }} noSpacing={noSpacing} />
+    <Block
+      style={{ width, height, flex, marginRight }}
+      noSpacing={noSpacing || !!marginRight}
+      circle={circle}
+    />
   );
 }
 
@@ -34,7 +40,7 @@ const shining = keyframes`
   }
 `;
 
-const Block = styled.div<{ noSpacing?: boolean }>`
+const Block = styled.div<{ noSpacing?: boolean; circle?: boolean }>`
   background: ${palette.gray1};
   animation: ${shining} 1s ease-in-out infinite;
   display: inline-block;
@@ -47,6 +53,12 @@ const Block = styled.div<{ noSpacing?: boolean }>`
       & + & {
         margin-left: 0.5rem;
       }
+    `}
+
+  ${props =>
+    props.circle &&
+    css`
+      border-radius: 50%;
     `}
 `;
 

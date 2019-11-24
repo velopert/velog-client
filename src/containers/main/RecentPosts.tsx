@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react';
-import PostCardList from '../../components/common/PostCardList';
+import PostCardList, {
+  PostCardListSkeleton,
+} from '../../components/common/PostCardList';
 import { GET_POST_LIST, PartialPost } from '../../lib/graphql/post';
 import { useQuery } from '@apollo/react-hooks';
 import useScrollPagination from '../../lib/hooks/useScrollPagination';
@@ -35,7 +37,7 @@ const RecentPosts: React.FC<RecentPostsProps> = props => {
     onLoadMore,
   });
 
-  if (!data || !data.posts) return null;
+  if (!data || !data.posts) return <PostCardListSkeleton />;
 
   return <PostCardList posts={data.posts} />;
 };

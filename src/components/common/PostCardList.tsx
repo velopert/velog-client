@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import PostCard from './PostCard';
+import PostCard, { PostCardSkeleton } from './PostCard';
 import { PartialPost } from '../../lib/graphql/post';
 
 const PostCardListBlock = styled.div``;
@@ -19,5 +19,19 @@ const PostCardList: React.FC<PostCardListProps> = ({ posts, hideUser }) => {
     </PostCardListBlock>
   );
 };
+
+export type PostCardListSkeletonProps = {
+  hideUser?: boolean;
+};
+
+export function PostCardListSkeleton({ hideUser }: PostCardListSkeletonProps) {
+  return (
+    <PostCardListBlock>
+      {Array.from({ length: 3 }).map((_, i) => (
+        <PostCardSkeleton hideUser={hideUser} key={i} />
+      ))}
+    </PostCardListBlock>
+  );
+}
 
 export default PostCardList;
