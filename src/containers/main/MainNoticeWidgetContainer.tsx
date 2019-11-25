@@ -1,5 +1,7 @@
 import React from 'react';
-import MainNoticeWidget from '../../components/main/MainNoticeWidget';
+import MainNoticeWidget, {
+  MainNoticeWidgetSkeleton,
+} from '../../components/main/MainNoticeWidget';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_POST_LIST, PartialPost } from '../../lib/graphql/post';
 
@@ -13,7 +15,7 @@ function MainNoticeWidgetContainer(props: MainNoticeWidgetContainerProps) {
     },
   });
 
-  if (!data || !data.posts) return null;
+  if (!data || !data.posts) return <MainNoticeWidgetSkeleton />;
 
   return <MainNoticeWidget posts={data.posts} />;
 }

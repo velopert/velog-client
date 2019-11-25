@@ -5,6 +5,7 @@ import MainWidget from './MainWidget';
 import { Link } from 'react-router-dom';
 import { PartialPost } from '../../lib/graphql/post';
 import { formatDate } from '../../lib/utils';
+import Skeleton from '../common/Skeleton';
 
 interface MainNoticeWidgetProps {
   posts: PartialPost[];
@@ -37,6 +38,25 @@ const MainNoticeWidget: React.FC<MainNoticeWidgetProps> = ({ posts }) => {
     </StyledWidget>
   );
 };
+
+export function MainNoticeWidgetSkeleton() {
+  return (
+    <StyledWidget title="공지사항">
+      <ul>
+        {Array.from({ length: 3 }).map((_, index) => (
+          <li key={index}>
+            <h5>
+              <Skeleton width="60%" />
+            </h5>
+            <div className="date">
+              <Skeleton width="5rem" />
+            </div>
+          </li>
+        ))}
+      </ul>
+    </StyledWidget>
+  );
+}
 
 const StyledWidget = styled(MainWidget)`
   .empty {

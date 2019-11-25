@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react';
-import PostCardList from '../../components/common/PostCardList';
+import PostCardList, {
+  PostCardListSkeleton,
+} from '../../components/common/PostCardList';
 import { GET_POST_LIST, PartialPost } from '../../lib/graphql/post';
 import { useQuery } from '@apollo/react-hooks';
 import PaginateWithScroll from '../../components/common/PaginateWithScroll';
@@ -16,8 +18,6 @@ const UserPosts: React.FC<UserPostsProps> = ({ username }) => {
   });
 
   const { data, error } = getPostList;
-
-  console.log(error);
 
   const onLoadMore = useCallback(
     (cursor: string) => {
@@ -37,7 +37,7 @@ const UserPosts: React.FC<UserPostsProps> = ({ username }) => {
     [getPostList, username],
   );
 
-  if (!data || !data.posts) return null;
+  if (!data || !data.posts) return <PostCardListSkeleton hideUser={true} />;
 
   const cursor =
     data.posts.length > 0 ? data.posts[data.posts.length - 1].id : null;

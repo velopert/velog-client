@@ -9,6 +9,7 @@ export type SkeletonProps = {
   marginRight?: number | string;
   noSpacing?: boolean;
   circle?: boolean;
+  className?: string;
 };
 
 function Skeleton({
@@ -18,12 +19,14 @@ function Skeleton({
   marginRight,
   noSpacing,
   circle,
+  className,
 }: SkeletonProps) {
   return (
     <Block
       style={{ width, height, flex, marginRight }}
       noSpacing={noSpacing || !!marginRight}
       circle={circle}
+      className={className}
     />
   );
 }

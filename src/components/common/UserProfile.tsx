@@ -10,6 +10,8 @@ import {
 import { userThumbnail } from '../../static/images';
 import { ProfileLinks } from '../../lib/graphql/user';
 import { MdHome } from 'react-icons/md';
+import Skeleton from './Skeleton';
+import SkeletonTexts from './SkeletonTexts';
 
 const UserProfileBlock = styled.div``;
 
@@ -178,6 +180,45 @@ const UserProfile: React.FC<UserProfileProps> = ({
     </UserProfileBlock>
   );
 };
+
+type UserProfileSkeletonProps = {
+  className?: string;
+};
+
+export function UserProfileSkeleton({ className }: UserProfileSkeletonProps) {
+  return (
+    <UserProfileBlock className={className}>
+      <Section>
+        <ThumbnailSkeleton circle />
+        <UserInfo>
+          <div className="name">
+            <Skeleton width="5rem" />
+          </div>
+          <div className="description">
+            <SkeletonTexts wordLengths={[5, 2, 3, 4, 5]} />
+          </div>
+        </UserInfo>
+      </Section>
+      <Separator />
+      <ProfileIcons>
+        {Array.from({ length: 3 }).map((_, index) => (
+          <Skeleton
+            marginRight="1rem"
+            width="2rem"
+            height="2rem"
+            circle
+            key={index}
+          />
+        ))}
+      </ProfileIcons>
+    </UserProfileBlock>
+  );
+}
+
+const ThumbnailSkeleton = styled(Skeleton)`
+  width: 8rem;
+  height: 8rem;
+`;
 
 const EmailBlock = styled.div`
   padding-left: 0.5rem;

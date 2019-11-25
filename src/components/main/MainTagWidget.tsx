@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import MainWidget from './MainWidget';
 import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
+import Skeleton from '../common/Skeleton';
 
 export type MainTagWidgetProps = {
   tags: string[];
@@ -20,6 +21,20 @@ function MainTagWidget({ tags }: MainTagWidgetProps) {
         <li className="more">
           <Link to="/tags">더보기</Link>
         </li>
+      </ul>
+    </StyledWidget>
+  );
+}
+
+export function MainTagWidgetSkeleton() {
+  return (
+    <StyledWidget title="인기 태그">
+      <ul>
+        {[3, 7, 4, 6, 4, 3, 7, 5, 6, 3].map((width, index) => (
+          <li>
+            <Skeleton width={`${width}rem`} />
+          </li>
+        ))}
       </ul>
     </StyledWidget>
   );

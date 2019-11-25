@@ -5,9 +5,15 @@ import {
   GET_USER_PROFILE,
   GetUserProfileResponse,
 } from '../../lib/graphql/user';
-import UserProfile from '../../components/common/UserProfile';
+import UserProfile, {
+  UserProfileSkeleton,
+} from '../../components/common/UserProfile';
 
 const StyledUserProfile = styled(UserProfile)`
+  margin-top: 90px;
+`;
+
+const StyledUserProfileSkeleton = styled(UserProfileSkeleton)`
   margin-top: 90px;
 `;
 
@@ -27,7 +33,8 @@ const UserProfileContainer: React.FC<UserProfileContainerProps> = ({
     },
   );
 
-  if (loading || error || !data || !data.user) return null;
+  if (loading || error || !data || !data.user)
+    return <StyledUserProfileSkeleton />;
 
   const {
     display_name,

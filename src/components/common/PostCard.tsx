@@ -38,6 +38,13 @@ const PostCardBlock = styled.div`
       font-size: 0.875rem;
       color: ${palette.gray9};
       font-weight: bold;
+      a {
+        color: inherit;
+        text-decoration: none;
+        &:hover {
+          color: ${palette.gray8};
+        }
+      }
     }
     margin-bottom: 1.5rem;
   }
@@ -98,15 +105,21 @@ const PostCard = ({ post, hideUser }: PostCardProps) => {
   };
 
   const url = `/@${post.user.username}/${post.url_slug}`;
+  const velogUrl = `/@${post.user.username}`;
+
   return (
     <PostCardBlock onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       {!hideUser && (
         <div className="user-info">
-          <img
-            src={post.user.profile.thumbnail || userThumbnail}
-            alt="thumbnail"
-          />
-          <div className="username">{post.user.username}</div>
+          <Link to={velogUrl}>
+            <img
+              src={post.user.profile.thumbnail || userThumbnail}
+              alt="thumbnail"
+            />
+          </Link>
+          <div className="username">
+            <Link to={`/@${post.user.username}`}>{post.user.username}</Link>
+          </div>
         </div>
       )}
       {post.thumbnail && (
@@ -137,15 +150,17 @@ export type PostCardSkeletonProps = {
   hideUser?: boolean;
 };
 
-export function PostCardSkeleton(props: PostCardSkeletonProps) {
+export function PostCardSkeleton({ hideUser }: PostCardSkeletonProps) {
   return (
     <SkeletonBlock>
-      <div className="user-info">
-        <Skeleton width="3rem" height="3rem" circle marginRight="1rem" />
-        <div className="username">
-          <Skeleton width="5rem" />
+      {!hideUser && (
+        <div className="user-info">
+          <Skeleton width="3rem" height="3rem" circle marginRight="1rem" />
+          <div className="username">
+            <Skeleton width="5rem" />
+          </div>
         </div>
-      </div>
+      )}
       <div className="post-thumbnail">
         <Skeleton width="100%" height="100%" />
       </div>
