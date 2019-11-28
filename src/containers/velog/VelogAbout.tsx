@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import VelogAboutContent from '../../components/velog/VelogAboutContent';
+import VelogAboutContent, {
+  VelogAboutContentSkeleton,
+} from '../../components/velog/VelogAboutContent';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import {
   GET_USER_ABOUT,
@@ -36,7 +38,8 @@ const VelogAbout = ({ username }: VelogAboutProps) => {
     }
     onToggleEdit();
   };
-  if (!data || !data.user) return null;
+
+  if (!data || !data.user) return <VelogAboutContentSkeleton />;
 
   return (
     <>

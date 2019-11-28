@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { MdClose } from 'react-icons/md';
 import zIndexes from '../../lib/styles/zIndexes';
 import palette from '../../lib/styles/palette';
-import { plutoWelcome } from '../../static/images';
+import { undrawJoyride } from '../../static/images';
 import transitions from '../../lib/styles/transitions';
 
 const { useState, useEffect } = React;
@@ -113,7 +113,7 @@ const AuthModal: React.FC<AuthModalProps> = ({
       <div className="wrapper">
         <div className="gray-block">
           <div>
-            <img src={plutoWelcome} alt="pluto-welcome" />
+            <img src={undrawJoyride} alt="welcome" />
             <div className="welcome">환영합니다!</div>
           </div>
         </div>

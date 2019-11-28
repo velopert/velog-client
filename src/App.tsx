@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Suspense } from 'react';
 import { Route, Switch } from 'react-router';
 // import MainPage from './pages/main/MainPage';
 // import PostPage from './pages/PostPage';
@@ -6,17 +6,37 @@ import { Route, Switch } from 'react-router';
 import loadable from '@loadable/component';
 import Core from './containers/base/Core';
 import RegisterPage from './pages/RegisterPage';
-import VelogPage from './pages/velog/VelogPage';
 import { JazzbarProvider } from './lib/jazzbar';
+import PageTemplate from './components/base/PageTemplate';
+import VelogPageFallback from './containers/velog/VelogPageFallback';
 
-const MainPage = loadable(() => import('./pages/main/MainPage'));
-const EmailLoginPage = loadable(() => import('./pages/EmailLoginPage'));
-const WritePage = loadable(() => import('./pages/WritePage'));
-const SearchPage = loadable(() => import('./pages/SearchPage'));
-const SavesPage = loadable(() => import('./pages/SavesPage'));
-const TagsPage = loadable(() => import('./pages/tags/TagsPage'));
-const PolicyPage = loadable(() => import('./pages/PolicyPage'));
-const SettingPage = loadable(() => import('./pages/SettingPage'));
+const loadableConfig = {
+  fallback: <PageTemplate />,
+};
+
+const VelogPage = loadable(() => import('./pages/velog/VelogPage'), {
+  fallback: <VelogPageFallback />,
+});
+const MainPage = loadable(
+  () => import('./pages/main/MainPage'),
+  loadableConfig,
+);
+const EmailLoginPage = loadable(
+  () => import('./pages/EmailLoginPage'),
+  loadableConfig,
+);
+const WritePage = loadable(() => import('./pages/WritePage'), loadableConfig);
+const SearchPage = loadable(() => import('./pages/SearchPage'), loadableConfig);
+const SavesPage = loadable(() => import('./pages/SavesPage'), loadableConfig);
+const TagsPage = loadable(
+  () => import('./pages/tags/TagsPage'),
+  loadableConfig,
+);
+const PolicyPage = loadable(() => import('./pages/PolicyPage'), loadableConfig);
+const SettingPage = loadable(
+  () => import('./pages/SettingPage'),
+  loadableConfig,
+);
 
 interface AppProps {}
 

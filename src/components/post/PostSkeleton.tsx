@@ -7,7 +7,7 @@ export type PostSkeletonProps = {};
 
 function PostSkeleton(props: PostSkeletonProps) {
   const skeletonParagraph = (
-    <p>
+    <div className="lines">
       <div className="line">
         {[3, 5, 2, 7, 6, 5, 4].map((flex, index) => (
           <Skeleton flex={flex} key={index} />
@@ -28,7 +28,7 @@ function PostSkeleton(props: PostSkeletonProps) {
           <Skeleton flex={flex} key={index} />
         ))}
       </div>
-    </p>
+    </div>
   );
   return (
     <Block>
@@ -92,7 +92,7 @@ const Block = styled(VelogResponsive)`
       display: flex;
       font-size: 1.125rem;
     }
-    p + p {
+    .lines + .lines {
       margin-top: 3rem;
     }
   }

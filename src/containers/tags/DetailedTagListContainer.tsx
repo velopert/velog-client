@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react';
-import DetailedTagList from '../../components/tags/DetailedTagList';
+import DetailedTagList, {
+  DetailedTagListSkeleton,
+} from '../../components/tags/DetailedTagList';
 import { useQuery } from '@apollo/react-hooks';
 import { GetTagsResponse, GET_TAGS } from '../../lib/graphql/tags';
 import useScrollPagination from '../../lib/hooks/useScrollPagination';
@@ -10,10 +12,11 @@ export type DetailedTagListContainerProps = {
 };
 
 function DetailedTagListContainer({ sort }: DetailedTagListContainerProps) {
-  const { data, fetchMore } = useQuery<GetTagsResponse>(GET_TAGS, {
+  const { data, fetchMore, loading } = useQuery<GetTagsResponse>(GET_TAGS, {
     variables: {
       sort,
     },
+    notifyOnNetworkStatusChange: true,
   });
 
   const onLoadMore = useCallback(
@@ -40,9 +43,14 @@ function DetailedTagListContainer({ sort }: DetailedTagListContainerProps) {
     onLoadMore,
   });
 
-  if (!data || !data.tags) return null;
+  if (!data || !data.tags) return <DetailedTagListSkeleton />;
 
-  return <DetailedTagList tags={data.tags} />;
+  return (
+    <>
+      <DetailedTagList tags={data.tags} />
+      {data.tags && loading && <DetailedTagListSkeleton forLoading />}
+    </>
+  );
 }
 
 export default DetailedTagListContainer;

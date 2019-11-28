@@ -15,9 +15,10 @@ const UserPosts: React.FC<UserPostsProps> = ({ username }) => {
     variables: {
       username,
     },
+    notifyOnNetworkStatusChange: true,
   });
 
-  const { data, error } = getPostList;
+  const { data, error, loading } = getPostList;
 
   const onLoadMore = useCallback(
     (cursor: string) => {
@@ -45,6 +46,7 @@ const UserPosts: React.FC<UserPostsProps> = ({ username }) => {
   return (
     <>
       <PostCardList posts={data.posts} hideUser />
+      {loading && <PostCardListSkeleton forLoading hideUser={true} />}
       <PaginateWithScroll cursor={cursor} onLoadMore={onLoadMore} />
     </>
   );

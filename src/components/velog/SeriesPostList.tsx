@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
-import SeriesPostItem from './SeriesPostItem';
+import SeriesPostItem, { SeriesPostItemSkeleton } from './SeriesPostItem';
 import { SeriesPostPreview } from '../../lib/graphql/series';
 
 const SeriesPostListBlock = styled.div`
@@ -42,5 +42,19 @@ const SeriesPostList: React.FC<SeriesPostListProps> = ({
     </SeriesPostListBlock>
   );
 };
+
+export function SeriesPostListSkeleton() {
+  return (
+    <SkeletonBlock>
+      {Array.from({ length: 4 }).map((_, index) => (
+        <SeriesPostItemSkeleton key={index} />
+      ))}
+    </SkeletonBlock>
+  );
+}
+
+const SkeletonBlock = styled(SeriesPostListBlock)`
+  margin-top: 7rem;
+`;
 
 export default SeriesPostList;

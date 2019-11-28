@@ -2,6 +2,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import TagItem from '../common/TagItem';
 import palette from '../../lib/styles/palette';
+import Skeleton from '../common/Skeleton';
+import SkeletonTexts from '../common/SkeletonTexts';
 
 export type DetailedTagItemProps = {
   name: string;
@@ -22,6 +24,31 @@ function DetailedTagItem({
       </div>
       <div className="count">총 {postsCount}개의 포스트</div>
     </Block>
+  );
+}
+
+export function DetailedTagItemSkeleton() {
+  return (
+    <SkeletonBlock hasDescription>
+      <div>
+        <div className="tag-skeleton">
+          <Skeleton width="6rem" height="2rem" borderRadius="1rem" />
+        </div>
+        <div>
+          <div className="lines">
+            <div className="line">
+              <SkeletonTexts wordLengths={[3, 5, 2, 4, 5]} useFlex />
+            </div>
+            <div className="line">
+              <SkeletonTexts wordLengths={[2, 4, 3, 5, 4]} useFlex />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="count">
+        <Skeleton width="8rem" />
+      </div>
+    </SkeletonBlock>
   );
 }
 
@@ -48,11 +75,28 @@ const Block = styled.div<{ hasDescription: boolean }>`
     -webkit-box-orient: vertical;
     font-size: 0.875rem;
     color: ${palette.gray7};
+    line-height: 1.5;
   }
 
   .count {
     font-size: 0.875rem;
     color: ${palette.gray5};
+  }
+`;
+
+const SkeletonBlock = styled(Block)`
+  .tag-skeleton {
+    margin-bottom: 1rem;
+  }
+  .lines {
+    margin-top: 0.125rem;
+    .line {
+      width: 100%;
+      height: 1.3125rem;
+      font-size: 0.875rem;
+      align-items: center;
+      display: flex;
+    }
   }
 `;
 

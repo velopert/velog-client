@@ -31,7 +31,7 @@ export function MainTagWidgetSkeleton() {
     <StyledWidget title="인기 태그">
       <ul>
         {[3, 7, 4, 6, 4, 3, 7, 5, 6, 3].map((width, index) => (
-          <li>
+          <li key={index}>
             <Skeleton width={`${width}rem`} />
           </li>
         ))}

@@ -4,6 +4,8 @@ import palette from '../../lib/styles/palette';
 import { emptyThumbnail } from '../../static/images';
 import { formatDate } from '../../lib/utils';
 import PostLink from '../common/PostLink';
+import SkeletonTexts from '../common/SkeletonTexts';
+import Skeleton from '../common/Skeleton';
 
 const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
   font-family: 'Spoqa Han Sans', -apple-system, BlinkMacSystemFont,
@@ -132,5 +134,42 @@ const SeriesPostItem: React.FC<SeriesPostItemProps> = ({
     </SeriesPostItemBlock>
   );
 };
+
+export function SeriesPostItemSkeleton() {
+  return (
+    <SkeletonBlock>
+      <h2>
+        <SkeletonTexts wordLengths={[3, 2, 4, 3]} />
+      </h2>
+      <section>
+        <div className="img-placeholder">
+          <Skeleton width="100%" height="100%" />
+        </div>
+        <div className="post-info">
+          <p>
+            <SkeletonTexts wordLengths={[4, 4, 7, 3, 4, 2, 4, 6, 3]} />
+          </p>
+        </div>
+      </section>
+    </SkeletonBlock>
+  );
+}
+
+const SkeletonBlock = styled(SeriesPostItemBlock)`
+  h2 {
+    height: 1.9875rem;
+    display: flex;
+    align-items: center;
+  }
+  .img-placeholder {
+    width: 12rem;
+    height: 6.25rem;
+    margin-right: 1rem;
+  }
+  .post-info {
+    p {
+    }
+  }
+`;
 
 export default SeriesPostItem;

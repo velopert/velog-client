@@ -6,6 +6,8 @@ import { ellipsis } from '../../lib/styles/utils';
 import { formatDate } from '../../lib/utils';
 import { seriesThumbnail } from '../../static/images';
 import PlainLink from '../common/PlainLink';
+import Skeleton from '../common/Skeleton';
+import SkeletonTexts from '../common/SkeletonTexts';
 
 const StyledLink = styled(PlainLink)`
   display: block;
@@ -81,5 +83,36 @@ const SeriesItem: React.FC<SeriesItemProps> = ({
     </SeriesItemBlock>
   );
 };
+
+export function SeriesItemSkeleton() {
+  return (
+    <SkeletonBlock>
+      <div className="image-skeleton-wrapper">
+        <Skeleton className="skeleton" />
+      </div>
+      <h4>
+        <SkeletonTexts wordLengths={[5, 3, 2, 2]} />
+      </h4>
+      <div className="info">
+        <Skeleton width="5rem" marginRight="1.5rem" />
+        <Skeleton width="8rem" noSpacing />
+      </div>
+    </SkeletonBlock>
+  );
+}
+
+const SkeletonBlock = styled(SeriesItemBlock)`
+  .image-skeleton-wrapper {
+    padding-top: 52.35%;
+    position: relative;
+    .skeleton {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+  }
+`;
 
 export default SeriesItem;

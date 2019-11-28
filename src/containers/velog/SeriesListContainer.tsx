@@ -1,5 +1,7 @@
 import React from 'react';
-import SeriesList from '../../components/velog/SeriesList';
+import SeriesList, {
+  SeriesListSkeleton,
+} from '../../components/velog/SeriesList';
 import { useQuery } from '@apollo/react-hooks';
 import {
   GET_USER_SERIES_LIST,
@@ -27,8 +29,7 @@ const SeriesListContainer: React.FC<SeriesListContainerProps> = ({
     return null;
   }
 
-  if (loading || !data || !data.user) return null;
-
+  if (loading || !data || !data.user) return <SeriesListSkeleton />;
   return <SeriesList list={data.user.series_list} username={username} />;
 };
 

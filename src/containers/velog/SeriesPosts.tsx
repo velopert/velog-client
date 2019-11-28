@@ -1,8 +1,12 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import SeriesPostsTemplate from '../../components/velog/SeriesPostsTemplate';
+import SeriesPostsTemplate, {
+  SeriesPostsTemplateSkeleton,
+} from '../../components/velog/SeriesPostsTemplate';
 import SeriesSorterAligner from '../../components/velog/SeriesSorterAligner';
 import SorterButton from '../../components/common/SorterButton';
-import SeriesPostList from '../../components/velog/SeriesPostList';
+import SeriesPostList, {
+  SeriesPostListSkeleton,
+} from '../../components/velog/SeriesPostList';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import {
   GetSeriesResponse,
@@ -60,7 +64,12 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
     [],
   );
 
-  if (!data || !data.series) return null;
+  if (!data || !data.series)
+    return (
+      <SeriesPostsTemplateSkeleton>
+        <SeriesPostListSkeleton />
+      </SeriesPostsTemplateSkeleton>
+    );
 
   return (
     <SeriesPostsTemplate

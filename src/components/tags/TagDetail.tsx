@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
+import Skeleton from '../common/Skeleton';
+import SkeletonTexts from '../common/SkeletonTexts';
 
 export type TagDetailProps = {
   thumbnail: string | null;
@@ -26,6 +28,28 @@ function TagDetail({ thumbnail, name, description, count }: TagDetailProps) {
   );
 }
 
+export function TagDetailSkeleton() {
+  return (
+    <SkeletonBlock>
+      <Skeleton className="tag-thumbnail" />
+      <h1>
+        <Skeleton width="6em" />
+      </h1>
+      <div className="lines">
+        <div className="line">
+          <SkeletonTexts wordLengths={[3, 5, 7, 5, 2, 3, 5, 4, 5]} useFlex />
+        </div>
+        <div className="line">
+          <SkeletonTexts wordLengths={[4, 3, 6]} />
+        </div>
+      </div>
+      <div className="count">
+        <Skeleton width="6rem" />
+      </div>
+    </SkeletonBlock>
+  );
+}
+
 const Block = styled.div`
   padding-bottom: 4rem;
 
@@ -40,12 +64,13 @@ const Block = styled.div`
 
   h1 {
     font-size: 3rem;
-    margin-top: 0;
-    margin-bottom: 0.5rem;
+    margin: 0;
     line-height: 1.5;
     color: ${palette.gray8};
   }
   p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     font-size: 1.125rem;
     line-height: 1.5;
     color: ${palette.gray7};
@@ -54,6 +79,24 @@ const Block = styled.div`
     margin-top: 1rem;
     color: ${palette.gray6};
     font-size: 1rem;
+  }
+`;
+
+const SkeletonBlock = styled(Block)`
+  h1 {
+    height: 4.5rem;
+    display: flex;
+    align-items: center;
+  }
+  .lines {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    .line {
+      height: 1.6875rem;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
   }
 `;
 

@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import PostCard, { PostCardSkeleton } from './PostCard';
 import { PartialPost } from '../../lib/graphql/post';
+import palette from '../../lib/styles/palette';
 
 const PostCardListBlock = styled.div``;
 
@@ -22,16 +23,25 @@ const PostCardList: React.FC<PostCardListProps> = ({ posts, hideUser }) => {
 
 export type PostCardListSkeletonProps = {
   hideUser?: boolean;
+  forLoading?: boolean;
 };
 
-export function PostCardListSkeleton({ hideUser }: PostCardListSkeletonProps) {
+export function PostCardListSkeleton({
+  hideUser,
+  forLoading,
+}: PostCardListSkeletonProps) {
   return (
     <PostCardListBlock>
-      {Array.from({ length: 3 }).map((_, i) => (
+      {forLoading && <Separator />}
+      {Array.from({ length: forLoading ? 1 : 3 }).map((_, i) => (
         <PostCardSkeleton hideUser={hideUser} key={i} />
       ))}
     </PostCardListBlock>
   );
 }
+
+const Separator = styled.div`
+  border-top: 1px solid ${palette.gray2};
+`;
 
 export default PostCardList;

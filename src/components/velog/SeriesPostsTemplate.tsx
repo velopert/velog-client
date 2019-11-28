@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
+import SkeletonTexts from '../common/SkeletonTexts';
 
 const SeriesPostsTemplateBlock = styled.div`
   & > label {
@@ -67,5 +68,33 @@ const SeriesPostsTemplate: React.FC<SeriesPostsTemplateProps> = ({
     </SeriesPostsTemplateBlock>
   );
 };
+
+export type SeriesPostsTemplateSkeletonProps = {
+  children: React.ReactNode;
+};
+
+export function SeriesPostsTemplateSkeleton({
+  children,
+}: SeriesPostsTemplateSkeletonProps) {
+  return (
+    <SkeletonBlock>
+      <label>시리즈</label>
+      <h1>
+        <SkeletonTexts wordLengths={[5, 3, 4]} />
+      </h1>
+      <Separator />
+      <section>{children}</section>
+    </SkeletonBlock>
+  );
+}
+
+const SkeletonBlock = styled(SeriesPostsTemplateBlock)`
+  h1 {
+    padding-right: 4rem;
+    display: flex;
+    height: 3.75rem;
+    align-items: center;
+  }
+`;
 
 export default SeriesPostsTemplate;

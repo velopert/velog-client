@@ -10,7 +10,9 @@ import { safe } from '../../lib/utils';
 interface RecentPostsProps {}
 
 const RecentPosts: React.FC<RecentPostsProps> = props => {
-  const getPostList = useQuery<{ posts: PartialPost[] }>(GET_POST_LIST);
+  const getPostList = useQuery<{ posts: PartialPost[] }>(GET_POST_LIST, {
+    notifyOnNetworkStatusChange: true,
+  });
 
   const { data } = getPostList;
   const onLoadMore = useCallback(
@@ -39,7 +41,12 @@ const RecentPosts: React.FC<RecentPostsProps> = props => {
 
   if (!data || !data.posts) return <PostCardListSkeleton />;
 
-  return <PostCardList posts={data.posts} />;
+  return (
+    <>
+      <PostCardList posts={data.posts} />
+      {getPostList.loading && <PostCardListSkeleton forLoading />}
+    </>
+  );
 };
 
 export default RecentPosts;

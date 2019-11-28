@@ -15,9 +15,10 @@ interface TrendingPostsProps {}
 const TrendingPosts: React.FC<TrendingPostsProps> = props => {
   const getTrendingPosts = useQuery<GetTrendingPostsResponse>(
     GET_TRENDING_POSTS,
+    { notifyOnNetworkStatusChange: true },
   );
 
-  const { data } = getTrendingPosts;
+  const { data, loading } = getTrendingPosts;
   const onLoadMoreByOffset = useCallback(
     (offset: number) => {
       getTrendingPosts.fetchMore({
@@ -60,7 +61,12 @@ const TrendingPosts: React.FC<TrendingPostsProps> = props => {
 
   if (!data || !data.trendingPosts) return <PostCardListSkeleton />;
 
-  return <PostCardList posts={data.trendingPosts} />;
+  return (
+    <>
+      <PostCardList posts={data.trendingPosts} />
+      {loading && <PostCardListSkeleton forLoading />}
+    </>
+  );
 };
 
 export default TrendingPosts;

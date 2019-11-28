@@ -40,7 +40,7 @@ export default function useSavedPosts() {
   );
   const { data } = getPostList;
   const posts = safe(() => data!.posts);
-  const cursor = posts ? posts[posts.length - 1].id : null;
+  const cursor = safe(() => (posts ? posts[posts.length - 1].id : null));
 
   useScrollPagination({
     cursor,

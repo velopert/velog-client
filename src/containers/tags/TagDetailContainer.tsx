@@ -1,11 +1,13 @@
 import React, { useCallback } from 'react';
-import TagDetail from '../../components/tags/TagDetail';
+import TagDetail, { TagDetailSkeleton } from '../../components/tags/TagDetail';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_TAG, GetTagResponse } from '../../lib/graphql/tags';
 import { GET_POST_LIST, PartialPost } from '../../lib/graphql/post';
 import { safe } from '../../lib/utils';
 import useScrollPagination from '../../lib/hooks/useScrollPagination';
-import PostCardList from '../../components/common/PostCardList';
+import PostCardList, {
+  PostCardListSkeleton,
+} from '../../components/common/PostCardList';
 
 export type TagDetailContainerProps = {
   tag: string;
@@ -21,6 +23,7 @@ function TagDetailContainer({ tag }: TagDetailContainerProps) {
     variables: {
       tag,
     },
+    notifyOnNetworkStatusChange: true,
   });
 
   const onLoadMore = useCallback(
@@ -50,8 +53,18 @@ function TagDetailContainer({ tag }: TagDetailContainerProps) {
     onLoadMore,
   });
 
-  if (!tagDetail.data || !tagDetail.data.tag) return null;
-  if (!getPostList.data || !getPostList.data.posts) return null;
+  if (
+    !tagDetail.data ||
+    !tagDetail.data.tag ||
+    !getPostList.data ||
+    !getPostList.data.posts
+  )
+    return (
+      <>
+        <TagDetailSkeleton />
+        <PostCardListSkeleton />
+      </>
+    );
 
   return (
     <>
@@ -62,6 +75,7 @@ function TagDetailContainer({ tag }: TagDetailContainerProps) {
         count={tagDetail.data.tag.posts_count}
       />
       <PostCardList posts={getPostList.data.posts} />
+      {getPostList.loading && <PostCardListSkeleton forLoading />}
     </>
   );
 }

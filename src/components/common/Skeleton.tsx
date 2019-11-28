@@ -10,6 +10,7 @@ export type SkeletonProps = {
   noSpacing?: boolean;
   circle?: boolean;
   className?: string;
+  borderRadius?: string;
 };
 
 function Skeleton({
@@ -20,10 +21,11 @@ function Skeleton({
   noSpacing,
   circle,
   className,
+  borderRadius,
 }: SkeletonProps) {
   return (
     <Block
-      style={{ width, height, flex, marginRight }}
+      style={{ width, height, flex, marginRight, borderRadius }}
       noSpacing={noSpacing || !!marginRight}
       circle={circle}
       className={className}
@@ -43,7 +45,7 @@ const shining = keyframes`
   }
 `;
 
-const Block = styled.div<{ noSpacing?: boolean; circle?: boolean }>`
+const Block = styled.span<{ noSpacing?: boolean; circle?: boolean }>`
   background: ${palette.gray1};
   animation: ${shining} 1s ease-in-out infinite;
   display: inline-block;
