@@ -157,7 +157,7 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
         </Typography>
       )}
       <CommentFoot>
-        {level < 3 && (
+        {level < 2 && (
           <Toggler open={open} onToggle={onToggleOpen} count={replies_count} />
         )}
         {open && <PostRepliesContainer commentId={id} onHide={onToggleOpen} />}

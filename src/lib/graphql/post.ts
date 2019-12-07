@@ -386,6 +386,7 @@ export const GET_REPLIES = gql`
           id
           username
           profile {
+            id
             thumbnail
           }
         }

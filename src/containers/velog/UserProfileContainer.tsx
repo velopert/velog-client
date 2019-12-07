@@ -49,6 +49,7 @@ const UserProfileContainer: React.FC<UserProfileContainerProps> = ({
       description={short_bio}
       profileLinks={profile_links}
       thumbnail={thumbnail}
+      username={username}
     />
   );
 };

@@ -9,10 +9,10 @@ const HeaderUserIconBlock = styled.div`
   cursor: pointer;
   img {
     display: block;
-    height: 3rem;
-    width: 3rem;
+    height: 2.5rem;
+    width: 2.5rem;
     box-shadow: 0px 0 8px rgba(0, 0, 0, 0.085);
-    border-radius: 1.5rem;
+    border-radius: 50%;
     object-fit: cover;
     transition: 0.125s all ease-in;
   }
@@ -21,6 +21,7 @@ const HeaderUserIconBlock = styled.div`
     margin-left: 0.25rem;
     color: ${palette.gray6};
     transition: 0.125s all ease-in;
+    margin-right: -0.4375rem;
   }
   display: flex;
   align-items: center;

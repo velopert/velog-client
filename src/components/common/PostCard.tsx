@@ -10,10 +10,17 @@ import usePrefetchPost from '../../lib/hooks/usePrefetchPost';
 import { usePostViewerPrefetch } from '../post/PostViewerProvider';
 import Skeleton from './Skeleton';
 import SkeletonTexts from './SkeletonTexts';
+import RatioImage from './RatioImage';
+import media from '../../lib/styles/media';
 
 const PostCardBlock = styled.div`
   padding-top: 4rem;
   padding-bottom: 4rem;
+  ${media.small} {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
   & > a {
     color: inherit;
     text-decoration: none;
@@ -33,6 +40,11 @@ const PostCardBlock = styled.div`
       object-fit: cover;
       border-radius: 1.5rem;
       box-shadow: 0px 0 8px rgba(0, 0, 0, 0.1);
+      ${media.small} {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 1rem;
+      }
     }
     .username {
       font-size: 0.875rem;
@@ -47,28 +59,42 @@ const PostCardBlock = styled.div`
       }
     }
     margin-bottom: 1.5rem;
+    ${media.small} {
+      margin-bottom: 0.75rem;
+    }
   }
   .post-thumbnail {
-    width: 100%;
-    max-height: 23rem;
     margin-bottom: 1rem;
-    object-fit: cover;
+    ${media.small} {
+      margin-bottom: 0.5rem;
+    }
   }
   line-height: 1.5;
   h2 {
     font-size: 1.5rem;
     margin: 0;
     color: ${palette.gray9};
+    ${media.small} {
+      font-size: 1rem;
+    }
   }
   p {
     margin-bottom: 2rem;
     margin-top: 0.5rem;
     font-size: 1rem;
     color: ${palette.gray7};
+    ${media.small} {
+      font-size: 0.875rem;
+      margin-bottom: 1.5rem;
+    }
   }
   .subinfo {
+    margin-top: 1rem;
     color: ${palette.gray6};
     font-size: 0.875rem;
+    ${media.small} {
+      font-size: 0.75rem;
+    }
     span {
     }
     span + span:before {
@@ -76,8 +102,10 @@ const PostCardBlock = styled.div`
     }
   }
   .tags-wrapper {
-    margin-top: 0.875rem;
     margin-bottom: -0.875rem;
+    ${media.small} {
+      margin-bottom: -0.5rem;
+    }
   }
 
   & + & {
@@ -107,6 +135,9 @@ const PostCard = ({ post, hideUser }: PostCardProps) => {
   const url = `/@${post.user.username}/${post.url_slug}`;
   const velogUrl = `/@${post.user.username}`;
 
+  if (!post.user.profile) {
+    console.log(post);
+  }
   return (
     <PostCardBlock onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       {!hideUser && (
@@ -123,24 +154,26 @@ const PostCard = ({ post, hideUser }: PostCardProps) => {
         </div>
       )}
       {post.thumbnail && (
-        <img
-          className="post-thumbnail"
+        <RatioImage
           src={post.thumbnail}
           alt="post-thumbnail"
+          widthRatio={1.91}
+          heightRatio={1}
+          className="post-thumbnail"
         />
       )}
       <Link to={url}>
         <h2>{post.title}</h2>
       </Link>
       <p>{post.short_description}</p>
-      <div className="subinfo">
-        <span>{formatDate(post.released_at)}</span>
-        <span>{post.comments_count}개의 댓글</span>
-      </div>
       <div className="tags-wrapper">
         {post.tags.map(tag => (
           <Tag key={tag} name={tag} link />
         ))}
+      </div>
+      <div className="subinfo">
+        <span>{formatDate(post.released_at)}</span>
+        <span>{post.comments_count}개의 댓글</span>
       </div>
     </PostCardBlock>
   );
@@ -155,14 +188,20 @@ export function PostCardSkeleton({ hideUser }: PostCardSkeletonProps) {
     <SkeletonBlock>
       {!hideUser && (
         <div className="user-info">
-          <Skeleton width="3rem" height="3rem" circle marginRight="1rem" />
+          <Skeleton
+            className="user-thumbnail-skeleton"
+            circle
+            marginRight="1rem"
+          />
           <div className="username">
             <Skeleton width="5rem" />
           </div>
         </div>
       )}
       <div className="post-thumbnail">
-        <Skeleton width="100%" height="100%" />
+        <div className="thumbnail-skeleton-wrapper">
+          <Skeleton className="skeleton" />
+        </div>
       </div>
       <h2>
         <SkeletonTexts wordLengths={[4, 3, 2, 5, 3, 6]} useFlex />
@@ -178,27 +217,44 @@ export function PostCardSkeleton({ hideUser }: PostCardSkeletonProps) {
           <SkeletonTexts wordLengths={[4, 3, 3]} />
         </div>
       </div>
-      <div className="subinfo">
-        <Skeleton width="3em" marginRight="1rem" />
-        <Skeleton width="6em" noSpacing />
-      </div>
       <div className="tags-skeleton">
         <Skeleton width="6rem" marginRight="0.875rem" />
         <Skeleton width="4rem" marginRight="0.875rem" />
         <Skeleton width="5rem" noSpacing />
+      </div>
+      <div className="subinfo">
+        <Skeleton width="3em" marginRight="1rem" />
+        <Skeleton width="6em" noSpacing />
       </div>
     </SkeletonBlock>
   );
 }
 
 const SkeletonBlock = styled(PostCardBlock)`
-  .post-thumbnail {
-    height: 23rem;
-  }
   h2 {
     display: flex;
     margin-top: 1.375rem;
     margin-bottom: 0.375rem;
+  }
+  .user-thumbnail-skeleton {
+    width: 3rem;
+    height: 3rem;
+    ${media.small} {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+  .thumbnail-skeleton-wrapper {
+    width: 100%;
+    padding-top: 52.35%;
+    position: relative;
+    .skeleton {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
   .short-description {
     margin-bottom: 2rem;
@@ -212,8 +268,11 @@ const SkeletonBlock = styled(PostCardBlock)`
     }
   }
   .tags-skeleton {
-    margin-top: 0.875rem;
+    line-height: 1;
     font-size: 2rem;
+    ${media.small} {
+      font-size: 1.25rem;
+    }
   }
 `;
 

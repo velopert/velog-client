@@ -72,7 +72,7 @@ if (process.env.NODE_ENV === 'production') {
   fjs.parentNode.insertBefore(js, fjs);
 })(document, 'script', 'facebook-jssdk');
 
-initializeCrisp();
+// initializeCrisp();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

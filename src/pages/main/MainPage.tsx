@@ -7,6 +7,7 @@ import RecentPostsPage from './RecentPostsPage';
 import TrendingPostsPage from './TrendingPostsPage';
 import MainTagWidgetContainer from '../../containers/main/MainTagWidgetContainer';
 import MainNoticeWidgetContainer from '../../containers/main/MainNoticeWidgetContainer';
+import MainMobileHead from '../../components/main/MainMobileHead';
 
 interface MainPageProps {}
 
@@ -17,6 +18,7 @@ const MainPage: React.FC<MainPageProps> = () => {
         <MainSideMenu />
       </MainTemplate.Left>
       <MainTemplate.Main>
+        <MainMobileHead />
         <Route path={['/', '/trending']} component={TrendingPostsPage} exact />
         <Route path="/recent" component={RecentPostsPage} />
       </MainTemplate.Main>

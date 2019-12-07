@@ -20,6 +20,7 @@ export interface RatioImageProps {
   heightRatio: number;
   src: string;
   alt?: string;
+  className?: string;
 }
 
 const RatioImage: React.FC<RatioImageProps> = ({
@@ -27,6 +28,7 @@ const RatioImage: React.FC<RatioImageProps> = ({
   heightRatio,
   src,
   alt,
+  className,
 }) => {
   const paddingTop = `${(heightRatio / widthRatio) * 100}%`;
 
@@ -35,6 +37,7 @@ const RatioImage: React.FC<RatioImageProps> = ({
       style={{
         paddingTop,
       }}
+      className={className}
     >
       <img src={src} alt={alt} />
     </RatioImageBlock>

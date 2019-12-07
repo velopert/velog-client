@@ -12,6 +12,7 @@ import { ProfileLinks } from '../../lib/graphql/user';
 import { MdHome } from 'react-icons/md';
 import Skeleton from './Skeleton';
 import SkeletonTexts from './SkeletonTexts';
+import { Link } from 'react-router-dom';
 
 const UserProfileBlock = styled.div``;
 
@@ -42,6 +43,14 @@ const UserInfo = styled.div`
     line-height: 1.5;
     font-weight: bold;
     color: ${palette.gray9};
+    a {
+      color: inherit;
+      text-decoration: none;
+      &:hover {
+        color: ${palette.gray8};
+        text-decoration: underline;
+      }
+    }
   }
   .description {
     white-space: pre-wrap;
@@ -89,6 +98,7 @@ export interface UserProfileProps {
   displayName: string;
   description: string;
   profileLinks: ProfileLinks;
+  username: string;
 }
 
 const UserProfile: React.FC<UserProfileProps> = ({
@@ -98,6 +108,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
   displayName,
   description,
   profileLinks,
+  username,
 }) => {
   const { email, facebook, github, twitter, url } = profileLinks;
   const [hoverEmail, setHoverEmail] = useState(false);
@@ -111,12 +122,18 @@ const UserProfile: React.FC<UserProfileProps> = ({
     setHoverEmail(false);
   };
 
+  const velogUrl = `/@${username}`;
+
   return (
     <UserProfileBlock className={className} style={style}>
       <Section>
-        <img src={thumbnail || userThumbnail} alt="profile" />
+        <Link to={velogUrl}>
+          <img src={thumbnail || userThumbnail} alt="profile" />
+        </Link>
         <UserInfo>
-          <div className="name">{displayName}</div>
+          <div className="name">
+            <Link to={velogUrl}>{displayName}</Link>
+          </div>
           <div className="description">{description}</div>
         </UserInfo>
       </Section>

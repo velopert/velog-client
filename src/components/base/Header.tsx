@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { breakpoints } from '../../lib/styles/responsive';
 import RoundButton from '../common/RoundButton';
 import { CurrentUser } from '../../lib/graphql/user';
 import HeaderUserIcon from './HeaderUserIcon';
@@ -10,20 +9,53 @@ import { logout } from '../../lib/api/auth';
 import storage from '../../lib/storage';
 import { UserLogo } from '../../modules/header';
 import HeaderLogo from './HeaderLogo';
+import media from '../../lib/styles/media';
+import { SearchIcon2 } from '../../static/svg';
 
-const HeaderBlock = styled.div<{
-  floating: boolean;
-}>`
+const HeaderBlock = styled.div<{ floating: boolean }>`
   width: 100%;
   > .wrapper {
-    width: ${breakpoints.xlarge};
-    height: 5rem;
+    width: 1200px;
+    height: 4rem;
     margin: 0 auto;
     padding-left: 1rem;
     padding-right: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    .search {
+      display: none;
+      margin-right: 1rem;
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+    }
+
+    ${media.large} {
+      width: 1024px;
+    }
+    ${media.medium} {
+      width: 100%;
+      .write-button {
+        display: none;
+      }
+      .search {
+        display: block;
+      }
+    }
+    ${media.small} {
+      height: 3.5rem;
+
+      .login-button {
+        font-size: 0.875rem;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+      }
+    }
+
     .logged-in {
       position: relative;
       display: flex;
@@ -37,7 +69,7 @@ const HeaderBlock = styled.div<{
       z-index: 10;
       position: fixed;
       top: 0;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 1);
       box-shadow: 0px 0 8px rgba(0, 0, 0, 0.08);
     `}
 `;
@@ -93,6 +125,7 @@ const Header: React.FC<HeaderProps> = ({
             />
           </div>
           <div className="right">
+            <SearchIcon2 className="search" />
             {user ? (
               <div className="logged-in">
                 <RoundButton
@@ -100,6 +133,7 @@ const Header: React.FC<HeaderProps> = ({
                   color="darkGray"
                   style={{ marginRight: '1.25rem' }}
                   to="/write"
+                  className="write-button"
                 >
                   새 글 작성
                 </RoundButton>
@@ -112,7 +146,11 @@ const Header: React.FC<HeaderProps> = ({
                 />
               </div>
             ) : (
-              <RoundButton color="darkGray" onClick={onLoginClick}>
+              <RoundButton
+                color="darkGray"
+                onClick={onLoginClick}
+                className="login-button"
+              >
                 로그인
               </RoundButton>
             )}

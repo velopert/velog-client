@@ -297,6 +297,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
           displayName={post.user.profile.display_name}
           description={post.user.profile.short_bio}
           profileLinks={post.user.profile.profile_links}
+          username={post.user.username}
         />
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />

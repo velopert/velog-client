@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { NavLink, RouteComponentProps, withRouter } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
-import { MdTrendingUp, MdAccessTime, MdRssFeed } from 'react-icons/md';
+import { MdTrendingUp, MdAccessTime /*, MdRssFeed */ } from 'react-icons/md';
 import SearchInput from '../search/SearchInput';
 
 const MainSideMenuBlock = styled.div`
@@ -61,10 +61,10 @@ const MainSideMenu: React.FC<MainSideMenuProps> = ({ history }) => {
         <MdAccessTime />
         최신
       </MenuItem>
-      <MenuItem to="/following" activeClassName="active">
+      {/* <MenuItem to="/following" activeClassName="active">
         <MdRssFeed />
         팔로잉
-      </MenuItem>
+      </MenuItem> */}
     </MainSideMenuBlock>
   );
 };

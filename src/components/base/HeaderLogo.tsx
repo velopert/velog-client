@@ -5,6 +5,7 @@ import { Logo } from '../../static/svg';
 import { UserLogo } from '../../modules/header';
 import palette from '../../lib/styles/palette';
 import { createFallbackTitle } from '../../lib/utils';
+import media from '../../lib/styles/media';
 
 const HeaderLogoBlock = styled(Link)`
   display: flex;
@@ -14,6 +15,11 @@ const HeaderLogoBlock = styled(Link)`
   color: ${palette.gray8};
   font-size: 1.3125rem;
   text-decoration: none;
+  ${media.medium} {
+    .velog-logo {
+      height: 1.25rem;
+    }
+  }
 `;
 
 export interface HeaderLogoProps {
@@ -30,7 +36,7 @@ const HeaderLogo: React.FC<HeaderLogoProps> = ({
   if (!custom) {
     return (
       <HeaderLogoBlock to="/">
-        <Logo data-testid="velog-logo" />
+        <Logo data-testid="velog-logo" className="velog-logo" />
       </HeaderLogoBlock>
     );
   }

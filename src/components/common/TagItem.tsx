@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
 import { escapeForUrl } from '../../lib/utils';
+import media from '../../lib/styles/media';
 
 type TagItemProps = {
   name: string;
@@ -29,8 +30,16 @@ const tagStyle = css`
   color: ${palette.teal7};
   text-decoration: none;
   font-weight: 500;
-
   font-size: 1rem;
+  ${media.small} {
+    height: 1.25rem;
+    font-size: 0.75rem;
+    border-radius: 0.625rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
 `;
 
 const TagDiv = styled.div`
