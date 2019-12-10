@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useQuery } from '@apollo/react-hooks';
 import {
   GET_USER_PROFILE,
@@ -8,14 +8,7 @@ import {
 import UserProfile, {
   UserProfileSkeleton,
 } from '../../components/common/UserProfile';
-
-const StyledUserProfile = styled(UserProfile)`
-  margin-top: 90px;
-`;
-
-const StyledUserProfileSkeleton = styled(UserProfileSkeleton)`
-  margin-top: 90px;
-`;
+import media from '../../lib/styles/media';
 
 export interface UserProfileContainerProps {
   username: string;
@@ -53,5 +46,20 @@ const UserProfileContainer: React.FC<UserProfileContainerProps> = ({
     />
   );
 };
+
+const sharedStyle = css`
+  margin-top: 5.625rem;
+  ${media.small} {
+    margin-top: 3rem;
+  }
+`;
+
+const StyledUserProfile = styled(UserProfile)`
+  ${sharedStyle};
+`;
+
+const StyledUserProfileSkeleton = styled(UserProfileSkeleton)`
+  ${sharedStyle};
+`;
 
 export default UserProfileContainer;

@@ -2,30 +2,62 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
+import { useTransition, animated } from 'react-spring';
+import OutsideClickHandler from 'react-outside-click-handler';
 
-export type MainMobileHeadExtraProps = {};
+export type MainMobileHeadExtraProps = {
+  visible: boolean;
+  onClose: (e: React.MouseEvent<HTMLElement>) => void;
+};
 
-function MainMobileHeadExtra(props: MainMobileHeadExtraProps) {
+function MainMobileHeadExtra({ visible, onClose }: MainMobileHeadExtraProps) {
+  const transition = useTransition(visible, null, {
+    from: {
+      opacity: 0,
+      transform: 'scale(0.8)',
+    },
+    enter: {
+      opacity: 1,
+      transform: 'scale(1)',
+    },
+    leave: {
+      opacity: 0,
+      transform: 'scale(0.8)',
+    },
+    config: {
+      tension: 350,
+      friction: 26,
+    },
+  });
+
   return (
-    <Aligner>
-      <Block>
-        <ul>
-          <li>
-            <Link to="/@velog">공지사항</Link>
-          </li>
-          <li>
-            <Link to="/tags">태그 목록</Link>
-          </li>
-          <li>
-            <Link to="/policy/terms">서비스 정책</Link>
-          </li>
-        </ul>
-        <div className="contact">
-          <h5>문의</h5>
-          <div className="email">contact@velog.io</div>
-        </div>
-      </Block>
-    </Aligner>
+    <>
+      {transition.map(({ item, key, props }) =>
+        item ? (
+          <Aligner key={key}>
+            <OutsideClickHandler onOutsideClick={onClose} key={key}>
+              <Block style={props}>
+                <ul>
+                  <li>
+                    <Link to="/@velog">공지사항</Link>
+                  </li>
+                  <li>
+                    <Link to="/tags">태그 목록</Link>
+                  </li>
+                  <li>
+                    <Link to="/policy/terms">서비스 정책</Link>
+                  </li>
+                </ul>
+                <div className="contact">
+                  <h5>문의</h5>
+                  <div className="email">contact@velog.io</div>
+                </div>
+              </Block>
+            </OutsideClickHandler>
+          </Aligner>
+        ) : null,
+      )}
+    </>
   );
 }
 
@@ -35,12 +67,13 @@ const Aligner = styled.div`
   top: 100%;
   z-index: 5;
 `;
-const Block = styled.div`
+const Block = styled(animated.div)`
   margin-top: 0.5rem;
   width: 12rem;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
   background: white;
   color: ${palette.gray9};
+  transform-origin: top right;
   ul {
     list-style: none;
     padding-left: 0;

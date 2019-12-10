@@ -8,6 +8,7 @@ import { seriesThumbnail } from '../../static/images';
 import PlainLink from '../common/PlainLink';
 import Skeleton from '../common/Skeleton';
 import SkeletonTexts from '../common/SkeletonTexts';
+import media from '../../lib/styles/media';
 
 const StyledLink = styled(PlainLink)`
   display: block;
@@ -19,6 +20,14 @@ const SeriesItemBlock = styled.div`
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 3rem;
+  ${media.small} {
+    padding: 0;
+    width: 100%;
+    & + & {
+      margin-top: 3rem;
+    }
+  }
+
   font-family: 'Spoqa Han Sans', -apple-system, BlinkMacSystemFont,
     -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Apple SD Gothic Neo',
     arial, 나눔고딕, 'Nanum Gothic', 돋움;
@@ -28,10 +37,18 @@ const SeriesItemBlock = styled.div`
     margin-top: 1rem;
     margin-bottom: 0.5rem;
     line-height: 1.5;
+    ${media.small} {
+      line-height: 1;
+    }
     color: ${palette.gray8};
-    ${ellipsis};
+    a {
+      ${ellipsis};
+    }
   }
   .info {
+    ${media.small} {
+      line-height: 1;
+    }
     font-size: 0.875rem;
     color: ${palette.gray6};
     .count {

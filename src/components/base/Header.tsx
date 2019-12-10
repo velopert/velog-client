@@ -77,6 +77,9 @@ const HeaderBlock = styled.div<{ floating: boolean }>`
 const Placeholder = styled.div`
   width: 100%;
   height: 5rem;
+  ${media.small} {
+    height: 3.5rem;
+  }
 `;
 
 interface HeaderProps {

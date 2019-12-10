@@ -13,12 +13,22 @@ import { MdHome } from 'react-icons/md';
 import Skeleton from './Skeleton';
 import SkeletonTexts from './SkeletonTexts';
 import { Link } from 'react-router-dom';
+import media from '../../lib/styles/media';
 
-const UserProfileBlock = styled.div``;
+const UserProfileBlock = styled.div`
+  ${media.medium} {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+`;
 
 const Section = styled.div`
   display: flex;
   align-items: center;
+  ${media.small} {
+    flex-direction: column;
+    align-items: flex-start;
+  }
   img {
     display: block;
     width: 8rem;
@@ -26,6 +36,10 @@ const Section = styled.div`
     border-radius: 50%;
     object-fit: cover;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.06);
+    ${media.small} {
+      width: 5rem;
+      height: 5rem;
+    }
   }
 `;
 
@@ -60,6 +74,20 @@ const UserInfo = styled.div`
     color: ${palette.gray7};
     letter-spacing: -0.02em;
   }
+
+  ${media.small} {
+    margin-left: 0;
+    margin-top: 1rem;
+
+    .name {
+      font-size: 1.125rem;
+    }
+    .description {
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      letter-spacing: -0.02em;
+    }
+  }
 `;
 
 const Separator = styled.div`
@@ -68,6 +96,10 @@ const Separator = styled.div`
   height: 1px;
   margin-top: 2rem;
   margin-bottom: 1.5rem;
+  ${media.small} {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const ProfileIcons = styled.div`
@@ -79,6 +111,10 @@ const ProfileIcons = styled.div`
     height: 2rem;
     &:hover {
       color: ${palette.gray8};
+    }
+    ${media.small} {
+      width: 1.5rem;
+      height: 1.5rem;
     }
   }
   a {
@@ -247,6 +283,10 @@ const EmailBlock = styled.div`
     font-size: 0.875rem;
     color: white;
     border-radius: 4px;
+    ${media.small} {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
+    }
   }
 `;
 

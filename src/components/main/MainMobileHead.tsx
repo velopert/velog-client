@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import {
   MdTrendingUp,
   MdAccessTime /*, MdRssFeed */,
@@ -9,10 +9,25 @@ import { NavLink } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 import media from '../../lib/styles/media';
 import MainMobileHeadExtra from './MainMobileHeadExtra';
+import useToggle from '../../lib/hooks/useToggle';
 
 export type MainMobileHeadProps = {};
 
 function MainMobileHead(props: MainMobileHeadProps) {
+  const [extra, toggle] = useToggle(false);
+  const moreButtonRef = useRef<HTMLDivElement | null>(null);
+
+  const onClose = (e: React.MouseEvent<HTMLElement>) => {
+    if (!moreButtonRef.current) return;
+    if (
+      e.target === moreButtonRef.current ||
+      moreButtonRef.current.contains(e.target as Node)
+    ) {
+      return;
+    }
+    toggle();
+  };
+
   return (
     <Section>
       <div className="menu">
@@ -31,8 +46,10 @@ function MainMobileHead(props: MainMobileHeadProps) {
           최신
         </MenuItem>
       </div>
-      <MdMoreVert className="more" />
-      <MainMobileHeadExtra />
+      <div ref={moreButtonRef}>
+        <MdMoreVert className="more" onClick={toggle} />
+      </div>
+      <MainMobileHeadExtra visible={extra} onClose={onClose} />
     </Section>
   );
 }

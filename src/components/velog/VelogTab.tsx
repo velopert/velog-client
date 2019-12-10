@@ -2,17 +2,25 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import PlainNavLink from '../common/PlainNavLink';
+import media from '../../lib/styles/media';
 
 const VelogTabBlock = styled.div`
   margin-top: 6rem;
   margin-bottom: 4.5rem;
   display: flex;
   justify-content: center;
+  ${media.small} {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const TabWrapper = styled.div`
   display: flex;
   position: relative;
+  ${media.small} {
+    width: 100%;
+  }
 `;
 
 const TabItem = styled(PlainNavLink)`
@@ -25,10 +33,15 @@ const TabItem = styled(PlainNavLink)`
   color: ${palette.gray7};
   text-decoration: none;
   transition: 0.25s color ease-in-out;
-
+  font-weight: 600;
   &.active {
     color: ${palette.teal5};
     /* font-weight: bold; */
+  }
+  ${media.small} {
+    flex: 1;
+    font-size: 1rem;
+    height: 2.5rem;
   }
 `;
 
@@ -39,6 +52,9 @@ const Indicator = styled.div`
   position: absolute;
   bottom: -2px;
   transition: 0.25s left ease-in-out;
+  ${media.small} {
+    width: 33.3333%;
+  }
 `;
 
 export interface VelogTabProps {
@@ -71,7 +87,7 @@ const VelogTab: React.FC<VelogTabProps> = ({ username, tab }) => {
         </TabItem>
         <Indicator
           style={{
-            left: `${tabIndex * 8}rem`,
+            left: `${tabIndex * 33.3333}%`,
           }}
         />
       </TabWrapper>

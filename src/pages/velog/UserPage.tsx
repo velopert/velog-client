@@ -7,6 +7,8 @@ import VelogTab from '../../components/velog/VelogTab';
 import UserPostsTab from './tabs/UserPostsTab';
 import SeriesTab from './tabs/SeriesTab';
 import AboutTab from './tabs/AboutTab';
+import palette from '../../lib/styles/palette';
+import media from '../../lib/styles/media';
 
 const UserPageBlock = styled(VelogResponsive)``;
 
@@ -19,6 +21,7 @@ const UserPage: React.FC<UserPageProps> = ({ match }) => {
   return (
     <UserPageBlock>
       <UserProfileContainer username={username} />
+      <MobileSeparator />
       <VelogTab username={username} tab={tab || 'posts'} />
       <Route path="/@:username" exact component={UserPostsTab} />
       <Route path="/@:username/series" component={SeriesTab} />
@@ -26,5 +29,18 @@ const UserPage: React.FC<UserPageProps> = ({ match }) => {
     </UserPageBlock>
   );
 };
+
+const MobileSeparator = styled.div`
+  background: ${palette.gray1};
+  height: 1rem;
+  margin-top: 2rem;
+
+  box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.04),
+    inset 0 -8px 8px -8px rgba(0, 0, 0, 0.04);
+  display: none;
+  ${media.small} {
+    display: block;
+  }
+`;
 
 export default UserPage;

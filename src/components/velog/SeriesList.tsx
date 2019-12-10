@@ -4,6 +4,7 @@ import SeriesItem, { SeriesItemSkeleton } from './SeriesItem';
 import { PartialSeries } from '../../lib/graphql/user';
 import { undrawBlankCanvas } from '../../static/images';
 import palette from '../../lib/styles/palette';
+import media from '../../lib/styles/media';
 
 const SeriesListBlock = styled.div`
   display: flex;
@@ -11,6 +12,11 @@ const SeriesListBlock = styled.div`
   margin-left: -1rem;
   margin-right: -1rem;
   margin-top: -3rem;
+  ${media.small} {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: 0;
+  }
 
   .empty {
     width: 100%;

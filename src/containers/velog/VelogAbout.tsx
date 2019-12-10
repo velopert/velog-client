@@ -12,6 +12,8 @@ import useUser from '../../lib/hooks/useUser';
 import useToggle from '../../lib/hooks/useToggle';
 import VelogAboutEdit from '../../components/velog/VelogAboutEdit';
 import VelogAboutRightButton from '../../components/velog/VelogAboutRightButton';
+import styled from 'styled-components';
+import media from '../../lib/styles/media';
 
 export interface VelogAboutProps {
   username: string;
@@ -42,7 +44,7 @@ const VelogAbout = ({ username }: VelogAboutProps) => {
   if (!data || !data.user) return <VelogAboutContentSkeleton />;
 
   return (
-    <>
+    <Block>
       {own && (data.user.profile.about || edit) && (
         <VelogAboutRightButton edit={edit} onClick={onClick} />
       )}
@@ -58,8 +60,14 @@ const VelogAbout = ({ username }: VelogAboutProps) => {
           onClickWrite={onToggleEdit}
         />
       )}
-    </>
+    </Block>
   );
 };
 
+const Block = styled.div`
+  ${media.small} {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+`;
 export default VelogAbout;
