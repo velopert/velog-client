@@ -4,10 +4,14 @@ import palette from '../../lib/styles/palette';
 import Sticky from '../common/Sticky';
 import { usePostViewerState } from './PostViewerProvider';
 import { getScrollTop } from '../../lib/utils';
+import media from '../../lib/styles/media';
 
 const Wrapper = styled.div`
   position: relative;
   margin-top: 2rem;
+  ${media.xlarge} {
+    display: none;
+  }
 `;
 const Positioner = styled.div`
   position: absolute;

@@ -8,22 +8,39 @@ import { SeriesPost } from '../../lib/graphql/post';
 import PostSeriesInfo from './PostSeriesInfo';
 import useToggle from '../../lib/hooks/useToggle';
 import PopupOKCancel from '../common/PopupOKCancel';
+import media from '../../lib/styles/media';
+import TagList from '../common/TagList';
 
 const PostHeadBlock = styled(VelogResponsive)`
   margin-top: 5.5rem;
+
+  .head-wrapper {
+    ${media.medium} {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
   h1 {
     font-family: 'Spoqa Han Sans';
     font-size: 3rem;
-    line-height: 1.25;
-    letter-spacing: -0.02rem;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
     margin-top: 0;
     font-weight: 800;
     color: ${palette.gray8};
     margin-bottom: 2rem;
   }
+
+  ${media.medium} {
+    margin-top: 2rem;
+    h1 {
+      font-size: 2.25rem;
+    }
+  }
 `;
 
 const SubInfo = styled.div`
+  align-items: center;
   font-size: 1rem;
   color: ${palette.gray7};
   font-family: 'Spoqa Han Sans';
@@ -38,6 +55,12 @@ const SubInfo = styled.div`
       margin-left: 0.5rem;
       margin-right: 0.5rem;
     }
+    ${media.small} {
+      font-size: 0.875rem;
+    }
+  }
+  ${media.small} {
+    margin-bottom: 0.75rem;
   }
 `;
 
@@ -52,6 +75,9 @@ const EditRemoveGroup = styled.div`
     color: ${palette.gray6};
     &:hover {
       color: ${palette.gray9};
+    }
+    ${media.small} {
+      font-size: 0.875rem;
     }
   }
   button + button {
@@ -68,6 +94,9 @@ const Thumbnail = styled.img`
   object-fit: contain;
   display: block;
   margin-top: 2rem;
+  ${media.small} {
+    margin-top: 1.5rem;
+  }
 `;
 
 export interface PostHeadProps {
@@ -113,32 +142,33 @@ const PostHead: React.FC<PostHeadProps> = ({
   };
   return (
     <PostHeadBlock>
-      <h1>{title}</h1>
-      <SubInfo>
-        <div className="information">
-          <span className="username">{username}</span>
-          <span className="separator">&middot;</span>
-          <span>{formatDate(date)}</span>
-        </div>
-        {ownPost && (
-          <EditRemoveGroup>
-            <button onClick={onEdit}>수정</button>
-            <button onClick={toggleAskRemove}>삭제</button>
-          </EditRemoveGroup>
+      <div className="head-wrapper">
+        <h1>{title}</h1>
+        <SubInfo>
+          <div className="information">
+            <span className="username">{username}</span>
+            <span className="separator">&middot;</span>
+            <span>{formatDate(date)}</span>
+          </div>
+          {ownPost && (
+            <EditRemoveGroup>
+              <button onClick={onEdit}>수정</button>
+              <button onClick={toggleAskRemove}>삭제</button>
+            </EditRemoveGroup>
+          )}
+        </SubInfo>
+        <TagList tags={tags} link />
+        {shareButtons}
+        {toc}
+        {series && (
+          <PostSeriesInfo
+            name={series.name}
+            posts={series.series_posts.map(sp => sp.post)}
+            postId={postId}
+            username={username}
+          />
         )}
-      </SubInfo>
-      <PostTags tags={tags} />
-      {shareButtons}
-      {toc}
-      {series && (
-        <PostSeriesInfo
-          name={series.name}
-          posts={series.series_posts.map(sp => sp.post)}
-          postId={postId}
-          username={username}
-        />
-      )}
-
+      </div>
       {!hideThumbnail && thumbnail && (
         <Thumbnail src={thumbnail} alt="post-thumbnail" />
       )}

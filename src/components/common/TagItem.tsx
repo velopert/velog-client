@@ -32,7 +32,7 @@ const tagStyle = css`
   font-weight: 500;
   font-size: 1rem;
   ${media.small} {
-    height: 1.25rem;
+    height: 1.5rem;
     font-size: 0.75rem;
     border-radius: 0.625rem;
     padding-left: 0.75rem;

@@ -29,10 +29,18 @@ import VelogResponsive from '../../components/velog/VelogResponsive';
 import styled from 'styled-components';
 import { useMount } from 'react-use';
 import PostSkeleton from '../../components/post/PostSkeleton';
+import media from '../../lib/styles/media';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
   margin-bottom: 6rem;
+  ${media.medium} {
+    margin-top: 8rem;
+    margin-bottom: 3rem;
+  }
+  ${media.small} {
+    margin-top: 2rem;
+  }
 `;
 
 export interface PostViewerOwnProps {

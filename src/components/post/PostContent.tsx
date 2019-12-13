@@ -4,11 +4,19 @@ import MarkdownRender from '../common/MarkdownRender';
 import PostHtmlContent from './PostHtmlContent';
 import { parseHeadings } from '../../lib/heading';
 import { usePostViewerDispatch } from './PostViewerProvider';
+import media from '../../lib/styles/media';
 
 const PostContentBlock = styled.div`
   width: 768px;
   margin: 0 auto;
   margin-top: 5rem;
+  ${media.medium} {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  ${media.small} {
+    width: 100%;
+  }
 `;
 
 export interface PostContentProps {

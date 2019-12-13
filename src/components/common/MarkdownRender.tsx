@@ -9,6 +9,7 @@ import breaks from 'remark-breaks';
 import Typography from './Typography';
 import embedPlugin from '../../lib/remark/embedPlugin';
 import { loadScript } from '../../lib/utils';
+import media from '../../lib/styles/media';
 
 export interface MarkdownRenderProps {
   markdown: string;
@@ -42,6 +43,10 @@ const MarkdownRenderBlock = styled.div`
     line-height: 1.5;
     overflow-x: auto;
     letter-spacing: 0px;
+    ${media.small} {
+      font-size: 0.75rem;
+      padding: 0.75rem;
+    }
   }
 
   img {

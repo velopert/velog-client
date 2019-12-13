@@ -7,11 +7,15 @@ import palette from '../../lib/styles/palette';
 import PostCommentsWrite from './PostCommentsWrite';
 import useInput from '../../lib/hooks/useInput';
 import { useUserId } from '../../lib/hooks/useUser';
+import media from '../../lib/styles/media';
 
 const PostRepliesBlock = styled.div`
   border: solid 1px rgba(0, 0, 0, 0.02);
   background-color: rgba(0, 0, 0, 0.015);
   padding: 1.5rem;
+  ${media.small} {
+    padding: 1rem;
+  }
   border-radius: 4px;
   margin-top: 1.3125rem;
 `;

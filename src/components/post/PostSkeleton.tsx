@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Skeleton from '../common/Skeleton';
 import VelogResponsive from '../velog/VelogResponsive';
+import media from '../../lib/styles/media';
 
 export type PostSkeletonProps = {};
 
@@ -32,39 +33,44 @@ function PostSkeleton(props: PostSkeletonProps) {
   );
   return (
     <Block>
-      <h1>
-        <Skeleton flex={6} />
-        <Skeleton flex={2} />
-        <Skeleton flex={5} />
-        <Skeleton flex={2} />
-        <Skeleton flex={3} />
-      </h1>
-      <div className="subinfo">
-        <Skeleton width="5rem" marginRight="1.5rem" noSpacing />
-        <Skeleton width="7.5rem" noSpacing />
-      </div>
-      <div className="tags">
-        <Skeleton width="4rem" marginRight="0.875rem" noSpacing />
-        <Skeleton width="6rem" noSpacing marginRight="0.875rem" />
-        <Skeleton width="5rem" noSpacing />
-      </div>
-      <div className="series">
-        <Skeleton width="100%" height="10.75rem" />
-      </div>
+      <Padding>
+        <h1>
+          <Skeleton flex={6} />
+          <Skeleton flex={2} />
+          <Skeleton flex={5} />
+          <Skeleton flex={2} />
+          <Skeleton flex={3} />
+        </h1>
+        <div className="subinfo">
+          <Skeleton width="5rem" marginRight="1.5rem" noSpacing />
+          <Skeleton width="7.5rem" noSpacing />
+        </div>
+        <div className="tags">
+          <Skeleton width="4rem" className="tag-skeleton" noSpacing />
+          <Skeleton width="6rem" noSpacing className="tag-skeleton" />
+          <Skeleton width="5rem" noSpacing className="tag-skeleton" />
+        </div>
+        {/* <div className="series">
+          <Skeleton width="100%" height="10.75rem" />
+        </div> */}
+      </Padding>
       <div className="thumbnail">
-        <Skeleton width="100%" height="27rem" />
+        <Skeleton className="thumbnail-skeleton" />
       </div>
-      <div className="contents">
-        {skeletonParagraph}
-        {skeletonParagraph}
-        {skeletonParagraph}
-      </div>
+      <Padding>
+        <div className="contents">
+          {skeletonParagraph}
+          {skeletonParagraph}
+          {skeletonParagraph}
+        </div>
+      </Padding>
     </Block>
   );
 }
 
 const Block = styled(VelogResponsive)`
   margin-top: 5.5rem;
+
   h1 {
     padding-right: 2rem;
     font-size: 3.75rem;
@@ -78,12 +84,24 @@ const Block = styled(VelogResponsive)`
   .tags {
     font-size: 2rem;
     margin-top: 0.875rem;
+    .tag-skeleton + .tag-skeleton {
+      margin-left: 0.5rem;
+    }
   }
   .series {
     margin-top: 2rem;
   }
   .thumbnail {
     margin-top: 2rem;
+    padding-top: 52.35%;
+    position: relative;
+    .thumbnail-skeleton {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
   .contents {
     margin-top: 5rem;
@@ -95,6 +113,26 @@ const Block = styled(VelogResponsive)`
     .lines + .lines {
       margin-top: 3rem;
     }
+  }
+
+  ${media.medium} {
+    margin-top: 2rem;
+    h1 {
+      font-size: 2.25rem;
+    }
+    .subinfo {
+      font-size: 0.875rem;
+    }
+    .tags {
+      font-size: 1.5rem;
+    }
+  }
+`;
+
+const Padding = styled.div`
+  ${media.small} {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 `;
 

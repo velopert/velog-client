@@ -5,6 +5,7 @@ import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import { LinkedPost } from '../../lib/graphql/post';
 import { ellipsis } from '../../lib/styles/utils';
 import PlainLink from '../common/PlainLink';
+import media from '../../lib/styles/media';
 
 const bounceLeft = keyframes`
   0% {
@@ -97,9 +98,12 @@ const Text = styled.div<{ right?: boolean }>`
     width: 100%;
     font-size: 1.125rem;
     color: ${palette.gray7};
-    line-height: 1;
+    line-height: 1.15;
     margin: 0;
     margin-top: 0.5rem;
+    ${media.small} {
+      font-size: 1rem;
+    }
     ${ellipsis};
   }
 `;

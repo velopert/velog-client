@@ -9,6 +9,7 @@ import { userThumbnail } from '../../static/images';
 import useBoolean from '../../lib/hooks/useBoolean';
 import PostRepliesContainer from '../../containers/post/PostRepliesContainer';
 import PostEditComment from '../../containers/post/PostEditComment';
+import media from '../../lib/styles/media';
 
 const PostCommentItemBlock = styled.div`
   padding-top: 1.5rem;
@@ -21,6 +22,7 @@ const CommentHead = styled.div`
   margin-bottom: 1.5rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   .profile {
     display: flex;
     align-items: center;
@@ -29,24 +31,41 @@ const CommentHead = styled.div`
       height: 3.375rem;
       display: block;
       border-radius: 50%;
+      ${media.small} {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
     }
     .comment-info {
       margin-left: 1rem;
+      ${media.small} {
+        margin-left: 0.5rem;
+      }
       line-height: 1;
       .username {
         font-size: 1rem;
         font-weight: bold;
         color: ${palette.gray8};
+        ${media.small} {
+          font-size: 0.875rem;
+        }
       }
       .date {
-        margin-top: 0.5rem;
+        margin-top: 0.25rem;
         color: ${palette.gray6};
         font-size: 0.875rem;
+        ${media.small} {
+          font-size: 0.75rem;
+        }
       }
     }
   }
   .actions {
     font-size: 0.875rem;
+    ${media.small} {
+      font-size: 0.75rem;
+    }
+
     color: ${palette.gray6};
     span {
       cursor: pointer;

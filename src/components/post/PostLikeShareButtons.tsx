@@ -8,10 +8,14 @@ import useBoolean from '../../lib/hooks/useBoolean';
 import { FaFacebook, FaTwitter } from 'react-icons/fa';
 import OutsideClickHandler from 'react-outside-click-handler';
 import Sticky from '../common/Sticky';
+import media from '../../lib/styles/media';
 
 const Wrapper = styled.div`
   position: relative;
   margin-top: 2rem;
+  ${media.medium} {
+    display: none;
+  }
 `;
 const Positioner = styled.div`
   position: absolute;

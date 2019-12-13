@@ -11,7 +11,27 @@ const TypographyBlock = styled.div`
   word-break: normal;
   word-wrap: break-word;
   p {
+    /* ${media.xxlarge} {
+      color: ${palette.gray8};
+      font-weight: 300;
+    } */
     text-align: justify;
+    ${media.small} {
+      text-align: unset;
+    }
+    b {
+      font-weight: 400;
+    }
+    code {
+      background: #e3fff6;
+      padding-left: 0.25em;
+      padding-right: 0.25em;
+    }
+    a {
+      code {
+        color: ${palette.teal6};
+      }
+    }
   }
   font-family: 'Spoqa Han Sans', -apple-system, BlinkMacSystemFont,
     -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Apple SD Gothic Neo',
@@ -50,7 +70,7 @@ const TypographyBlock = styled.div`
   }
 
   h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
   h2 {
     font-size: 2rem;

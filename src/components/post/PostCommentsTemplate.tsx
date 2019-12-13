@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import VelogResponsive from '../velog/VelogResponsive';
 import palette from '../../lib/styles/palette';
+import media from '../../lib/styles/media';
 
 const PostCommentsTemplateBlock = styled(VelogResponsive)`
   margin-top: 3rem;
@@ -11,6 +12,10 @@ const PostCommentsTemplateBlock = styled(VelogResponsive)`
     line-height: 1.5;
     font-weight: 600;
     margin-bottom: 1rem;
+  }
+  ${media.small} {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 `;
 

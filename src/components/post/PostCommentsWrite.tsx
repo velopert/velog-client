@@ -4,6 +4,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import Button from '../common/Button';
 import palette from '../../lib/styles/palette';
 import { customFont } from '../../lib/styles/utils';
+import media from '../../lib/styles/media';
 
 const PostCommentsWriteBlock = styled.div`
   > .buttons-wrapper {
@@ -14,12 +15,13 @@ const PostCommentsWriteBlock = styled.div`
 const StyledTextarea = styled(TextareaAutosize)`
   resize: none;
   padding: 1rem;
+  padding-bottom: 1.5rem;
   outline: none;
   border: 1px solid ${palette.gray2};
   margin-bottom: 1.5rem;
   width: 100%;
   border-radius: 4px;
-  min-height: 5.625rem;
+  min-height: 6.125rem;
   font-size: 1rem;
   ${customFont};
   color: ${palette.gray9};
@@ -27,6 +29,9 @@ const StyledTextarea = styled(TextareaAutosize)`
     color: ${palette.gray5};
   }
   line-height: 1.75;
+  ${media.small} {
+    margin-bottom: 1rem;
+  }
 `;
 
 export interface PostCommentsWriteProps {

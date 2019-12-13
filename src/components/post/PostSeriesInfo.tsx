@@ -15,10 +15,14 @@ import {
   usePostViewerDispatch,
   usePostViewerPrefetch,
 } from './PostViewerProvider';
+import media from '../../lib/styles/media';
 
 const PostSeriesInfoBlock = styled.div`
   margin-top: 2rem;
   padding: 2rem 1.5rem;
+  ${media.small} {
+    padding: 1rem;
+  }
   background: ${palette.gray0};
   border-radius: 8px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.06);
@@ -30,11 +34,21 @@ const PostSeriesInfoBlock = styled.div`
     font-weight: bold;
     padding-right: 2rem;
     font-size: 1.5rem;
+    ${media.small} {
+      font-size: 1.125rem;
+      padding-right: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
   }
   .series-corner-image {
     position: absolute;
     right: 1.5rem;
     top: 0px;
+    ${media.small} {
+      right: 1rem;
+      width: 1.5rem;
+      height: auto;
+    }
   }
 `;
 
@@ -117,6 +131,10 @@ const PostList = styled.ol`
   font-family: 'Spoqa Han Sans';
   color: ${palette.gray7};
   counter-reset: item;
+  ${media.small} {
+    font-size: 0.875rem;
+    margin-bottom: -1rem;
+  }
   li {
     display: block;
   }
