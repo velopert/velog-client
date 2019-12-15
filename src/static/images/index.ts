@@ -4,3 +4,4 @@ export { default as emptyThumbnail } from './empty-thumbnail.svg';
 export { default as undrawEmpty } from './undraw_empty.svg';
 export { default as undrawJoyride } from './undraw_joyride_hnno.svg';
 export { default as undrawBlankCanvas } from './undraw_blank_canvas_3rbb.svg';
+// export { default as undrawSearching } from './undraw_searching.svg';

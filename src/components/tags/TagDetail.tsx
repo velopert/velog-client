@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import Skeleton from '../common/Skeleton';
 import SkeletonTexts from '../common/SkeletonTexts';
+import media from '../../lib/styles/media';
 
 export type TagDetailProps = {
   thumbnail: string | null;
@@ -60,6 +61,12 @@ const Block = styled.div`
     border-radius: 6rem;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.125);
     margin-bottom: 2rem;
+    ${media.small} {
+      margin-top: 2rem;
+      width: 8rem;
+      height: 8rem;
+      margin-bottom: 1rem;
+    }
   }
 
   h1 {
@@ -67,6 +74,9 @@ const Block = styled.div`
     margin: 0;
     line-height: 1.5;
     color: ${palette.gray8};
+    ${media.small} {
+      font-size: 2rem;
+    }
   }
   p {
     margin-top: 1rem;
@@ -74,6 +84,11 @@ const Block = styled.div`
     font-size: 1.125rem;
     line-height: 1.5;
     color: ${palette.gray7};
+    ${media.small} {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
   }
   .count {
     margin-top: 1rem;
@@ -87,6 +102,10 @@ const SkeletonBlock = styled(Block)`
     height: 4.5rem;
     display: flex;
     align-items: center;
+    margin: 0;
+    ${media.small} {
+      height: 3rem;
+    }
   }
   .lines {
     margin-top: 1rem;
@@ -96,6 +115,14 @@ const SkeletonBlock = styled(Block)`
       display: flex;
       align-items: center;
       width: 100%;
+    }
+    ${media.small} {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      .line {
+        height: 1.5rem;
+      }
     }
   }
 `;

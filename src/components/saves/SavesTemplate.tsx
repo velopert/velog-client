@@ -3,6 +3,7 @@ import VelogResponsive from '../velog/VelogResponsive';
 import styled from 'styled-components';
 import PageTemplate from '../base/PageTemplate';
 import palette from '../../lib/styles/palette';
+import media from '../../lib/styles/media';
 
 export interface SavesTemplateProps {
   children: React.ReactNode;
@@ -16,6 +17,19 @@ const StyledVelogResponsive = styled(VelogResponsive)`
     margin-top: 0;
     margin-bottom: 3rem;
     color: ${palette.gray8};
+  }
+
+  ${media.medium} {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  ${media.small} {
+    width: 100%;
+    margin-top: 2rem;
+    & > h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
   }
 `;
 

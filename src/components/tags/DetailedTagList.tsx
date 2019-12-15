@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import DetailedTagItem, { DetailedTagItemSkeleton } from './DetailedTagItem';
 import { Tag } from '../../lib/graphql/tags';
+import media from '../../lib/styles/media';
 
 export type DetailedTagListProps = {
   tags: Tag[];
@@ -43,6 +44,17 @@ const Block = styled.section`
   width: 1200px;
   display: flex;
   flex-wrap: wrap;
+  ${media.large} {
+    width: 1024px;
+  }
+  ${media.medium} {
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  ${media.small} {
+    margin-top: 1rem;
+  }
 `;
 
 const SkeletonBlock = styled(Block)<{

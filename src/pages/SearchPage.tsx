@@ -8,16 +8,17 @@ import qs from 'qs';
 export interface SearchPageProps extends RouteComponentProps {}
 
 function SearchPage({ location }: SearchPageProps) {
-  const keyword = useMemo(() => {
-    const { q } = qs.parse(location.search, {
+  const query = useMemo(() => {
+    const parsed = qs.parse(location.search, {
       ignoreQueryPrefix: true,
-    });
-    return q;
+    }) as { q: string; username: string | undefined };
+    return parsed;
   }, [location.search]);
+
   return (
     <SearchTemplate>
-      <LargeSearchInput initialKeyword={keyword} />
-      <SearchResult keyword={keyword} />
+      <LargeSearchInput initialKeyword={query.q} />
+      <SearchResult keyword={query.q} username={query.username} />
     </SearchTemplate>
   );
 }

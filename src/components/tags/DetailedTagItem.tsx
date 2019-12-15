@@ -4,6 +4,7 @@ import TagItem from '../common/TagItem';
 import palette from '../../lib/styles/palette';
 import Skeleton from '../common/Skeleton';
 import SkeletonTexts from '../common/SkeletonTexts';
+import media from '../../lib/styles/media';
 
 export type DetailedTagItemProps = {
   name: string;
@@ -58,11 +59,26 @@ const Block = styled.div<{ hasDescription: boolean }>`
   flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
+
   width: 25%;
+  ${media.large} {
+    width: 33.333%;
+  }
+  ${media.medium} {
+    width: 50%;
+    margin-bottom: 1rem;
+  }
+  ${media.custom(470)} {
+    width: 100%;
+    margin-bottom: 0;
+  }
   ${props =>
     props.hasDescription &&
     css`
       height: 12rem;
+      ${media.medium} {
+        height: auto;
+      }
     `}
 
   p {
@@ -76,11 +92,20 @@ const Block = styled.div<{ hasDescription: boolean }>`
     font-size: 0.875rem;
     color: ${palette.gray7};
     line-height: 1.5;
+    ${media.small} {
+      font-size: 0.75rem;
+    }
   }
 
   .count {
     font-size: 0.875rem;
     color: ${palette.gray5};
+    ${media.medium} {
+      margin-top: 0.5rem;
+    }
+    ${media.small} {
+      font-size: 0.75rem;
+    }
   }
 `;
 

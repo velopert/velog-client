@@ -4,6 +4,8 @@ import { getScrollTop } from '../../lib/utils';
 import { RootState } from '../../modules';
 import { useSelector, useDispatch } from 'react-redux';
 import { showAuthModal } from '../../modules/core';
+import { useRouteMatch } from 'react-router';
+import useRouter from 'use-react-router';
 
 const { useEffect, useRef, useCallback } = React;
 
@@ -54,6 +56,9 @@ function reducer(state: FloatingState, action: Action) {
 }
 
 const HeaderContainer: React.FC<HeaderContainerProps> = () => {
+  const router = useRouter();
+  const isSearch = router.match.path === '/search';
+
   const { user, custom, userLogo, velogUsername } = useSelector(
     (state: RootState) => ({
       user: state.core.user,
@@ -164,6 +169,7 @@ const HeaderContainer: React.FC<HeaderContainerProps> = () => {
       custom={custom}
       userLogo={userLogo}
       velogUsername={velogUsername}
+      isSearch={isSearch}
     />
   );
 };

@@ -66,7 +66,6 @@ const PostCardBlock = styled.div`
   .post-thumbnail {
     margin-bottom: 1rem;
     ${media.small} {
-      margin-bottom: 0.5rem;
     }
   }
   line-height: 1.5;

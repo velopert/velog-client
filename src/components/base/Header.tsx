@@ -11,6 +11,7 @@ import { UserLogo } from '../../modules/header';
 import HeaderLogo from './HeaderLogo';
 import media from '../../lib/styles/media';
 import { SearchIcon2 } from '../../static/svg';
+import { Link } from 'react-router-dom';
 
 const HeaderBlock = styled.div<{ floating: boolean }>`
   width: 100%;
@@ -90,6 +91,7 @@ interface HeaderProps {
   custom: boolean;
   userLogo: UserLogo | null;
   velogUsername: string | null;
+  isSearch: boolean;
 }
 
 const { useCallback } = React;
@@ -102,6 +104,7 @@ const Header: React.FC<HeaderProps> = ({
   custom,
   userLogo,
   velogUsername,
+  isSearch,
 }) => {
   const [userMenu, toggleUserMenu] = useToggle(false);
 
@@ -128,7 +131,24 @@ const Header: React.FC<HeaderProps> = ({
             />
           </div>
           <div className="right">
-            <SearchIcon2 className="search" />
+            {/* {velogUsername ? (
+              <SearchIcon2 className="search" />
+            ) : (
+              <Link to="/search">
+                <SearchIcon2 className="search" />
+              </Link>
+            )} */}
+            {!isSearch && (
+              <Link
+                to={
+                  velogUsername
+                    ? `/search?username=${velogUsername}`
+                    : '/search'
+                }
+              >
+                <SearchIcon2 className="search" />
+              </Link>
+            )}
             {user ? (
               <div className="logged-in">
                 <RoundButton

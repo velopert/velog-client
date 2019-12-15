@@ -1,11 +1,16 @@
 import React from 'react';
 import palette from '../../lib/styles/palette';
 import styled from 'styled-components';
+import media from '../../lib/styles/media';
 
 const Info = styled.p`
   margin-bottom: 4rem;
   font-size: 1.125rem;
   line-height: 1.5;
+  ${media.small} {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
   color: ${palette.gray7};
   b {
     color: ${palette.gray9};

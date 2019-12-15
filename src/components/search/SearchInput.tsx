@@ -1,10 +1,11 @@
 import React, { useRef, useMemo, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
-import { SearchIcon } from '../../static/svg';
+import { SearchIcon2 } from '../../static/svg';
 import useToggle from '../../lib/hooks/useToggle';
 import useInput from '../../lib/hooks/useInput';
 import { debounce } from 'throttle-debounce';
+import media from '../../lib/styles/media';
 
 const SearchInputBlock = styled.div<{ focus: boolean; large?: boolean }>`
   display: flex;
@@ -20,7 +21,7 @@ const SearchInputBlock = styled.div<{ focus: boolean; large?: boolean }>`
     margin-right: 0.5rem;
     width: 1rem;
     height: 1rem;
-    color: ${palette.gray5};
+    fill: ${palette.gray5};
   }
   input {
     transition: all 0.125s ease-in;
@@ -43,7 +44,7 @@ const SearchInputBlock = styled.div<{ focus: boolean; large?: boolean }>`
     css`
       border: 1px solid ${palette.gray8};
       svg {
-        color: ${palette.gray9};
+        fill: ${palette.gray9};
       }
       input {
         color: ${palette.gray9};
@@ -54,7 +55,7 @@ const SearchInputBlock = styled.div<{ focus: boolean; large?: boolean }>`
     props.large &&
     css`
       height: 4rem;
-      padding: 1.25rem 1.5rem;
+      padding: 0 1.5rem;
       svg {
         width: 1.5rem;
         height: 1.5rem;
@@ -64,6 +65,22 @@ const SearchInputBlock = styled.div<{ focus: boolean; large?: boolean }>`
         font-size: 1.5rem;
         line-height: 2rem;
         height: 2rem;
+      }
+      ${media.small} {
+        height: 2.25rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        svg {
+          width: 1rem;
+          height: 1rem;
+          margin-right: 0.75rem;
+        }
+        input {
+          flex: 1;
+          font-size: 1.125rem;
+          line-height: 1.5;
+          height: auto;
+        }
       }
     `}
 `;
@@ -117,7 +134,7 @@ function SearchInput({
       onClick={onClick}
       large={large}
     >
-      <SearchIcon />
+      <SearchIcon2 />
       <input
         placeholder="검색어를 입력하세요"
         onFocus={toggleFocus}
@@ -126,6 +143,7 @@ function SearchInput({
         ref={inputRef}
         onChange={onChange}
         value={value}
+        autoFocus
       />
     </SearchInputBlock>
   );

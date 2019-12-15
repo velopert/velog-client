@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 import { useSpring, animated } from 'react-spring';
+import media from '../../lib/styles/media';
 
 export type HorizontalTabProps = {
   className?: string;
@@ -88,6 +89,10 @@ const StyledLink = styled(Link)`
   width: 8rem;
   height: 3rem;
   font-size: 1.3125rem;
+  ${media.small} {
+    height: 2.5rem;
+    font-size: 1rem;
+  }
   color: ${palette.gray7};
   display: flex;
   align-items: center;

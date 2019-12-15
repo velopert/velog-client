@@ -21,12 +21,12 @@ const UserPostsTab: React.FC<UserPostsTabProps> = ({ match, location }) => {
 
   return (
     <>
-      <OnlyOnMobile>
+      <HideOnMobile>
         <VelogSearchInputContainer
           initial={q || ''}
           username={match.params.username}
         />
-      </OnlyOnMobile>
+      </HideOnMobile>
       <Block>
         {q ? (
           <SearchResult username={username} keyword={q} />
@@ -38,8 +38,7 @@ const UserPostsTab: React.FC<UserPostsTabProps> = ({ match, location }) => {
   );
 };
 
-const OnlyOnMobile = styled.div`
-  display: none;
+const HideOnMobile = styled.div`
   ${media.medium} {
     display: none;
   }

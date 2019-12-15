@@ -4,12 +4,19 @@ import PageTemplate from '../../components/base/PageTemplate';
 import { Route } from 'react-router';
 import TagListPage from './TagListPage';
 import TagDetailPage from './TagDetailPage';
+import media from '../../lib/styles/media';
 
 export type TagsPageProps = {};
 
 const TagsTemplate = styled(PageTemplate)`
   main {
     margin-top: 3rem;
+    ${media.medium} {
+      margin-top: 1rem;
+    }
+    ${media.small} {
+      margin-top: 0rem;
+    }
   }
 `;
 
