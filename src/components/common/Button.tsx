@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import palette, { buttonColorMap } from '../../lib/styles/palette';
+import media from '../../lib/styles/media';
 
 type ColorType =
   | 'teal'
@@ -15,6 +16,7 @@ const ButtonBlock = styled.button<{
   color: ColorType;
   inline: boolean;
   size: ButtonSize;
+  responsive?: boolean;
 }>`
   display: inline-flex;
   align-items: center;
@@ -38,6 +40,17 @@ const ButtonBlock = styled.button<{
     css`
       & + & {
         margin-left: 0.5rem;
+      }
+    `}
+
+  ${props =>
+    props.responsive &&
+    css`
+      ${media.small} {
+        height: 1.5rem;
+        padding-left: 0.9375rem;
+        padding-right: 0.9375rem;
+        font-size: 0.75rem;
       }
     `}
 
@@ -77,6 +90,7 @@ interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement>, 'size'> {
   color?: ColorType;
   inline?: boolean;
   size?: ButtonSize;
+  responsive?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -85,6 +99,7 @@ const Button: React.FC<ButtonProps> = ({
   color = 'teal',
   inline,
   size = 'medium',
+  responsive = false,
   ...rest
 }) => {
   const htmlProps = rest as any;
@@ -93,6 +108,7 @@ const Button: React.FC<ButtonProps> = ({
       color={color}
       inline={inline}
       size={size}
+      responsive={responsive}
       {...htmlProps}
       onClick={e => {
         if (htmlProps.onClick) {

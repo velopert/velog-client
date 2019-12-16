@@ -5,6 +5,7 @@ import zIndexes from '../../lib/styles/zIndexes';
 import palette from '../../lib/styles/palette';
 import { undrawJoyride } from '../../static/images';
 import transitions from '../../lib/styles/transitions';
+import media from '../../lib/styles/media';
 
 const { useState, useEffect } = React;
 
@@ -21,6 +22,11 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
   .wrapper {
     width: 606px;
     height: 480px;
+    ${media.small} {
+      flex: 1;
+      width: auto;
+      height: 100%;
+    }
 
     ${props =>
       props.visible
@@ -34,6 +40,9 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.09);
     display: flex;
     .gray-block {
+      ${media.small} {
+        display: none;
+      }
       width: 216px;
       background: ${palette.gray1};
       padding: 1.5rem;
@@ -48,10 +57,11 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
       }
       .welcome {
         font-size: 2.25rem;
-        font-weight: bold;
         margin-top: 1.5rem;
         color: ${palette.gray7};
         text-align: center;
+        font-weight: 400;
+        font-size: 2rem;
       }
     }
     .white-block {
@@ -60,6 +70,9 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
+      ${media.small} {
+        overflow-y: auto;
+      }
       .exit-wrapper {
         display: flex;
         justify-content: flex-end;
@@ -68,6 +81,9 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
         margin-bottom: 2.25rem;
         svg {
           cursor: pointer;
+        }
+        ${media.small} {
+          margin-bottom: 0;
         }
       }
       .block-content {

@@ -14,6 +14,7 @@ import useInputs from '../../lib/hooks/useInputs';
 import palette from '../../lib/styles/palette';
 import { ProfileLinks } from '../../lib/graphql/user';
 import SettingEditButton from './SettingEditButton';
+import media from '../../lib/styles/media';
 
 export type SettingSocialInfoRowProps = {
   email?: string;
@@ -209,6 +210,9 @@ const FacebookInputBox = styled.div<{ focus: boolean }>`
 
 const Form = styled.form`
   width: 25rem;
+  ${media.small} {
+    width: 100%;
+  }
   li + li {
     margin-top: 1rem;
   }

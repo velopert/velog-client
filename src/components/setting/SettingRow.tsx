@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import SettingEditButton from './SettingEditButton';
+import media from '../../lib/styles/media';
 
 export type SettingRowProps = {
   title: string;
@@ -24,12 +25,14 @@ function SettingRow({
         <div className="title-wrapper">
           <h3>{title}</h3>
         </div>
-        <div className="contents">{children}</div>
-        {editButton && (
-          <div className="edit-wrapper">
-            <SettingEditButton onClick={onClickEdit} />
-          </div>
-        )}
+        <div className="block-for-mobile">
+          <div className="contents">{children}</div>
+          {editButton && (
+            <div className="edit-wrapper">
+              <SettingEditButton onClick={onClickEdit} />
+            </div>
+          )}
+        </div>
       </div>
       {description && <div className="description">{description}</div>}
     </Row>
@@ -41,6 +44,9 @@ const Row = styled.div`
   padding-bottom: 1rem;
   & > .wrapper {
     display: flex;
+    ${media.small} {
+      flex-direction: column;
+    }
   }
   .title-wrapper {
     width: 9.5rem;
@@ -50,7 +56,15 @@ const Row = styled.div`
       color: ${palette.gray8};
       margin: 0;
       font-size: 1.125rem;
+      ${media.small} {
+        margin-bottom: 0.5rem;
+      }
     }
+  }
+  .block-for-mobile {
+    flex: 1;
+    display: flex;
+    align-items: center;
   }
   .contents {
     flex: 1;

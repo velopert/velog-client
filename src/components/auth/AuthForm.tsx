@@ -6,6 +6,7 @@ import { AuthMode } from '../../modules/core';
 import palette from '../../lib/styles/palette';
 import AuthSocialButtonGroup from './AuthSocialButtonGroup';
 import AuthEmailSuccess from './AuthEmailSuccess';
+import media from '../../lib/styles/media';
 
 const AuthFormBlock = styled.div`
   display: flex;
@@ -13,6 +14,11 @@ const AuthFormBlock = styled.div`
   flex-direction: column;
   justify-content: space-between;
   line-height: 1.5;
+  .upper-wrapper {
+    ${media.small} {
+      margin-top: 2rem;
+    }
+  }
   h2,
   h4 {
     margin: 0;
@@ -30,6 +36,10 @@ const AuthFormBlock = styled.div`
     margin-top: 2.5rem;
   }
   .foot {
+    ${media.small} {
+      margin-top: 2rem;
+    }
+
     text-align: right;
     span {
       margin-right: 0.25rem;
@@ -70,7 +80,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
 
   return (
     <AuthFormBlock>
-      <div>
+      <div className="upper-wrapper">
         <h2 data-testid="title">{modeText}</h2>
         <section>
           <h4>이메일로 {modeText}</h4>

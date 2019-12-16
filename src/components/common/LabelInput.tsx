@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { MdLockOutline } from 'react-icons/md';
+import media from '../../lib/styles/media';
 const LabelInputBlock = styled.div<{ focus: boolean }>`
   label,
   input {
@@ -25,6 +26,9 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
     font-size: 1.5rem;
     border: none;
     outline: none;
+    ${media.small} {
+      font-size: 1.125rem;
+    }
 
     width: 100%;
     color: ${palette.gray7};

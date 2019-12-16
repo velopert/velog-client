@@ -8,6 +8,7 @@ import Button from '../common/Button';
 import { createFallbackTitle } from '../../lib/utils';
 import { ProfileLinks } from '../../lib/graphql/user';
 import SettingUnregisterRow from './SettingUnregisterRow';
+import media from '../../lib/styles/media';
 
 export type SettingRowsProps = {
   title: string | null;
@@ -70,6 +71,9 @@ function SettingRows({
 
 const Rows = styled.section`
   margin-top: 4rem;
+  ${media.small} {
+    margin-top: 0rem;
+  }
 `;
 
 export default SettingRows;

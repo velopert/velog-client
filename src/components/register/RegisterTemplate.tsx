@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
+import media from '../../lib/styles/media';
 
 const RegisterTemplateBlock = styled.div`
   width: 768px;
@@ -16,6 +17,19 @@ const RegisterTemplateBlock = styled.div`
   .description {
     font-size: 1.5rem;
     color: ${palette.gray9};
+  }
+
+  ${media.small} {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-top: 4rem;
+    h1 {
+      font-size: 3rem;
+    }
+    .description {
+      font-size: 1rem;
+    }
   }
 `;
 

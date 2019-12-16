@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import OpaqueLayer from './OpaqueLayer';
 import zIndexes from '../../lib/styles/zIndexes';
 import transitions from '../../lib/styles/transitions';
+import media from '../../lib/styles/media';
 
 const PopupBaseBlock = styled.div`
   position: fixed;
@@ -22,6 +23,9 @@ const PopupWrapper = styled.div<{ visible: boolean }>`
   background: white;
   padding: 2rem 1.5rem;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.09);
+  ${media.small} {
+    width: calc(100% - 2rem);
+  }
   ${props =>
     props.visible
       ? css`

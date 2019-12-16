@@ -24,6 +24,7 @@ const StyledButton = styled.button`
   line-height: 1.5;
   color: ${palette.teal6};
   text-decoration: underline;
+  background: none;
   cursor: pointer;
   &:hover,
   &:focus {

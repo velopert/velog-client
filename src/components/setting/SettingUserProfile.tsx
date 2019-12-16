@@ -7,6 +7,7 @@ import { userThumbnail } from '../../static/images';
 import useToggle from '../../lib/hooks/useToggle';
 import SettingInput from './SettingInput';
 import useInputs from '../../lib/hooks/useInputs';
+import media from '../../lib/styles/media';
 
 export type SettingUserProfileProps = {
   onUpload: () => void;
@@ -83,6 +84,10 @@ function SettingUserProfile({
 const Section = styled.section`
   display: flex;
   height: 13.75rem;
+  ${media.small} {
+    height: auto;
+    flex-direction: column;
+  }
   .thumbnail-area {
     padding-right: 1.5rem;
     display: flex;
@@ -97,10 +102,25 @@ const Section = styled.section`
     button + button {
       margin-top: 0.5rem;
     }
+    ${media.small} {
+      img {
+        width: 6rem;
+        height: 6rem;
+        margin-bottom: 1rem;
+      }
+      button {
+        width: 8rem;
+      }
+      align-items: center;
+      padding-bottom: 1.5rem;
+      /* padding-right: 1rem; */
+      padding-right: 0;
+    }
   }
   .info-area {
     flex: 1;
     padding-left: 1.5rem;
+
     border-left: 1px solid ${palette.gray2};
     h2 {
       font-size: 2.25rem;
@@ -115,6 +135,21 @@ const Section = styled.section`
       line-height: 1.5;
       color: ${palette.gray6};
     }
+    ${media.small} {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+      /* padding-left: 1rem; */
+      border-top: 1px solid ${palette.gray1};
+      border-bottom: 1px solid ${palette.gray1};
+      border-left: none;
+      padding-left: 0;
+      h2 {
+        font-size: 1.25rem;
+      }
+      p {
+        font-size: 0.875rem;
+      }
+    }
   }
 `;
 
@@ -122,6 +157,7 @@ const Form = styled.form`
   input + input {
     margin-top: 1rem;
   }
+
   .display-name {
     font-size: 1.5rem;
     font-weight: 600;
@@ -130,6 +166,20 @@ const Form = styled.form`
     display: flex;
     margin-top: 1.5rem;
     justify-content: flex-end;
+  }
+  ${media.small} {
+    .display-name {
+      font-size: 1.25rem;
+    }
+    input {
+      font-size: 0.875rem;
+    }
+    input + input {
+      margin-top: 0.5rem;
+    }
+    .button-wrapper {
+      margin-top: 0.5rem;
+    }
   }
 `;
 
