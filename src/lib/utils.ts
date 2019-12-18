@@ -1,8 +1,9 @@
-import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
+import distanceInWordsToNow from 'date-fns/formatDistanceToNow';
 import format from 'date-fns/format';
 import koLocale from 'date-fns/locale/ko';
 
 export const formatDate = (date: string): string => {
+  const d = new Date(date);
   const now = Date.now();
   const diff = now - new Date(date).getTime();
   // less than 5 minutes
@@ -10,15 +11,15 @@ export const formatDate = (date: string): string => {
     return '방금 전';
   }
   if (diff < 1000 * 60 * 60 * 24) {
-    return distanceInWordsToNow(date, { addSuffix: true, locale: koLocale });
+    return distanceInWordsToNow(d, { addSuffix: true, locale: koLocale });
   }
   if (diff < 1000 * 60 * 60 * 36) {
     return '어제';
   }
   if (diff < 1000 * 60 * 60 * 24 * 7) {
-    return distanceInWordsToNow(date, { addSuffix: true, locale: koLocale });
+    return distanceInWordsToNow(d, { addSuffix: true, locale: koLocale });
   }
-  return format(date, 'YYYY년 M월 D일');
+  return format(d, 'yyyy년 M월 d일');
 };
 
 export const getScrollTop = () => {
@@ -52,11 +53,11 @@ export function createReducer<S>(handlers: Handlers<S>, initialState: S) {
 export function updateKey<S, K extends keyof S>(
   state: S,
   key: K,
-  value: S[K],
+  value: S[K]
 ): S {
   return {
     ...state,
-    [key]: value,
+    [key]: value
   };
 }
 
@@ -69,7 +70,7 @@ export const escapeForUrl = (text: string): string => {
   return text
     .replace(
       /[^0-9a-zA-Zㄱ-힣.\u3000-\u303f\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf -]/g,
-      '',
+      ''
     )
     .trim()
     .replace(/ /g, '-')

@@ -1,6 +1,8 @@
-import { createStandardAction } from 'typesafe-actions';
+import { deprecated } from 'typesafe-actions';
 import { AuthMode } from './types';
 import { CurrentUser } from '../../lib/graphql/user';
+
+const { createStandardAction } = deprecated;
 
 export const SET_LAYER = 'core/SET_LAYER';
 export const SHOW_AUTH_MODAL = 'core/SHOW_AUTH_MODAL';

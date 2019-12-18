@@ -9,8 +9,9 @@ describe('write redux module', () => {
     expect(state).toEqual({
       markdown: '',
       title: '',
-      mode: 'WYSIWYG',
+      mode: 'MARKDOWN',
       html: '',
+      initialBody: '',
       tags: [],
       publish: false,
       textBody: '',
@@ -39,9 +40,9 @@ describe('write redux module', () => {
     it('CONVERT_EDITOR_MODE', () => {
       let state = getInitialState();
       state = reducer(state, write.convertEditorMode());
-      expect(state.mode).toBe('MARKDOWN');
-      state = reducer(state, write.convertEditorMode());
       expect(state.mode).toBe('WYSIWYG');
+      state = reducer(state, write.convertEditorMode());
+      expect(state.mode).toBe('MARKDOWN');
     });
     it('SET_HTML', () => {
       let state = getInitialState();

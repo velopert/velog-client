@@ -3,7 +3,7 @@
 exports[`AuthForm renders correctly 1`] = `
 <div>
   <div
-    class="sc-bdVaJa gCfJmX"
+    class="sc-bdVaJa dsOzMd"
   >
     <div
       class="wrapper"
@@ -13,8 +13,8 @@ exports[`AuthForm renders correctly 1`] = `
       >
         <div>
           <img
-            alt="pluto-welcome"
-            src="pluto-welcome.png"
+            alt="welcome"
+            src="undraw_joyride_hnno.svg"
           />
           <div
             class="welcome"
@@ -37,6 +37,7 @@ exports[`AuthForm renders correctly 1`] = `
             tabindex="1"
             viewBox="0 0 24 24"
             width="1em"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
@@ -47,9 +48,11 @@ exports[`AuthForm renders correctly 1`] = `
           class="block-content"
         >
           <div
-            class="sc-EHOje gSRKdC"
+            class="sc-EHOje eYRLqA"
           >
-            <div>
+            <div
+              class="upper-wrapper"
+            >
               <h2
                 data-testid="title"
               >

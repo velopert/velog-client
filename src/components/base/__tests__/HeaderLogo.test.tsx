@@ -53,17 +53,6 @@ describe('HeaderLogo', () => {
       },
       velogUsername: 'velopert',
     });
-    getByText(`velopert's velog`);
-  });
-  it('shows fallback velog title with username ends with s', () => {
-    const { getByText } = setup({
-      custom: true,
-      userLogo: {
-        logo_image: null,
-        title: null,
-      },
-      velogUsername: 'usernames',
-    });
-    getByText(`usernames' velog`);
+    getByText(`velopert.log`);
   });
 });

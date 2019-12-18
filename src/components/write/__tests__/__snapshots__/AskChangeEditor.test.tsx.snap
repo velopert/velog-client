@@ -9,7 +9,7 @@ exports[`AskChangeEditor matches snapshot 1`] = `
     class="sc-bwzfXH fIoYbF"
   >
     <div
-      class="sc-htpNat rpSHm"
+      class="sc-htpNat gFFQdP"
     >
       <div
         class="sc-ifAKCX bGAbDV"
@@ -26,13 +26,13 @@ exports[`AskChangeEditor matches snapshot 1`] = `
           class="button-area"
         >
           <button
-            class="sc-bxivhb gqmNUh"
+            class="sc-bxivhb lhCsgH"
             color="lightGray"
           >
             취소
           </button>
           <button
-            class="sc-bxivhb buMOhr"
+            class="sc-bxivhb jvTLUf"
             color="teal"
           >
             확인

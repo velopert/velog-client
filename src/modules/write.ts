@@ -1,5 +1,7 @@
-import { createStandardAction } from 'typesafe-actions';
+import { deprecated } from 'typesafe-actions';
 import { createReducer, updateKey } from '../lib/utils';
+
+const { createStandardAction } = deprecated;
 
 const CHANGE_MARKDOWN = 'write/CHANGE_MARKDOWN';
 const CHANGE_TITLE = 'write/CHANGE_TITLE';
@@ -30,7 +32,7 @@ export const openPublish = createStandardAction(OPEN_PUBLISH)<void>();
 export const closePublish = createStandardAction(CLOSE_PUBLISH)<void>();
 export const setTextBody = createStandardAction(SET_TEXT_BODY)<string>();
 export const setDefaultDescription = createStandardAction(
-  SET_DEFAULT_DESCRIPTION,
+  SET_DEFAULT_DESCRIPTION
 )<string>();
 export const changeDescription = createStandardAction(CHANGE_DESCRIPTION)<
   string
@@ -91,7 +93,7 @@ type SetInitialBody = ReturnType<typeof setInitialBody>;
 
 export enum WriteMode {
   MARKDOWN = 'MARKDOWN',
-  WYSIWYG = 'WYSIWYG',
+  WYSIWYG = 'WYSIWYG'
 }
 
 export type WriteState = {
@@ -134,7 +136,7 @@ const initialState: WriteState = {
   selectedSeries: null,
   postId: null,
   isTemp: false,
-  initialBody: '',
+  initialBody: ''
 };
 
 const write = createReducer(
@@ -149,7 +151,7 @@ const write = createReducer(
         'mode',
         state.mode === WriteMode.MARKDOWN
           ? WriteMode.WYSIWYG
-          : WriteMode.MARKDOWN,
+          : WriteMode.MARKDOWN
       ),
     [SET_HTML]: (state, action: SetHtml) =>
       updateKey(state, 'html', action.payload),
@@ -161,11 +163,11 @@ const write = createReducer(
       updateKey(state, 'textBody', textBody),
     [SET_DEFAULT_DESCRIPTION]: (
       state,
-      { payload: defaultDescription }: SetDefaultDescription,
+      { payload: defaultDescription }: SetDefaultDescription
     ) => updateKey(state, 'defaultDescription', defaultDescription),
     [CHANGE_DESCRIPTION]: (
       state,
-      { payload: description }: ChangeDescription,
+      { payload: description }: ChangeDescription
     ) => updateKey(state, 'description', description.slice(0, 150)),
     [SET_PRIVACY]: (state, { payload: isPrivate }: SetPrivacy) =>
       updateKey(state, 'isPrivate', isPrivate),
@@ -189,7 +191,7 @@ const write = createReducer(
         series,
         id,
         isPrivate,
-        isTemp,
+        isTemp
       } = payload;
       const key = isMarkdown ? 'markdown' : 'html';
       return {
@@ -203,18 +205,18 @@ const write = createReducer(
         mode: isMarkdown ? WriteMode.MARKDOWN : WriteMode.WYSIWYG,
         [key]: body,
         selectedSeries: series,
-        postId: id,
+        postId: id
       };
     },
     [SET_WRITE_POST_ID]: (state, action: SetWritePostId) => ({
       ...state,
       postId: action.payload,
-      isTemp: true,
+      isTemp: true
     }),
     [SET_INITIAL_BODY]: (state, action: SetInitialBody) =>
-      updateKey(state, 'initialBody', action.payload),
+      updateKey(state, 'initialBody', action.payload)
   },
-  initialState,
+  initialState
 );
 
 export default write;

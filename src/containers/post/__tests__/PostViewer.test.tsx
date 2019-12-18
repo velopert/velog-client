@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { waitForElement } from '@testing-library/react';
 import PostViewer, { PostViewerProps, PostViewerOwnProps } from '../PostViewer';
 import { MemoryRouter } from 'react-router-dom';
@@ -6,15 +6,8 @@ import { READ_POST, POST_VIEW } from '../../../lib/graphql/post';
 import renderWithRedux from '../../../lib/renderWithRedux';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient } from 'apollo-client';
-import { MockLink, MockedResponse } from 'apollo-link-mock';
 import { ApolloProvider } from '@apollo/react-hooks';
-
-function createClient(mocks: MockedResponse[]) {
-  return new ApolloClient({
-    cache: new InMemoryCache({ addTypename: false }),
-    link: new MockLink(mocks),
-  });
-}
+import renderWithProviders from '../../../lib/renderWithProviders';
 
 const samplePost = {
   id: '6533da20-b351-11e8-9696-f1fffe8a36f1',
@@ -99,14 +92,11 @@ describe('PostViewer', () => {
       urlSlug: 'sample',
     };
 
-    const client = createClient(overrideMocks || []);
-
-    const utils = renderWithRedux(
-      <ApolloProvider client={client}>
-        <MemoryRouter>
-          <PostViewer {...initialProps} {...props} />
-        </MemoryRouter>
-      </ApolloProvider>,
+    const utils = renderWithProviders(
+      <PostViewer {...initialProps} {...props} />,
+      {
+        mocks: overrideMocks,
+      },
     );
     return {
       ...utils,

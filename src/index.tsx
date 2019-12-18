@@ -14,7 +14,6 @@ import client from './lib/graphql/client';
 import rootReducer from './modules';
 import storage from './lib/storage';
 import { setUser } from './modules/core';
-import initializeCrisp from './lib/crisp';
 
 const store = createStore(rootReducer, composeWithDevTools());
 
@@ -36,7 +35,7 @@ if (process.env.NODE_ENV === 'production') {
           </BrowserRouter>
         </ApolloProvider>
       </Provider>,
-      document.getElementById('root'),
+      document.getElementById('root')
     );
   });
 } else {
@@ -48,7 +47,7 @@ if (process.env.NODE_ENV === 'production') {
         </BrowserRouter>
       </ApolloProvider>
     </Provider>,
-    document.getElementById('root'),
+    document.getElementById('root')
   );
 }
 
@@ -57,7 +56,7 @@ if (process.env.NODE_ENV === 'production') {
     appId: '203040656938507',
     autoLogAppEvents: true,
     xfbml: true,
-    version: 'v3.0',
+    version: 'v3.0'
   });
 };
 
@@ -72,9 +71,7 @@ if (process.env.NODE_ENV === 'production') {
   fjs.parentNode.insertBefore(js, fjs);
 })(document, 'script', 'facebook-jssdk');
 
-// initializeCrisp();
-
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
+// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();

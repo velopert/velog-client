@@ -3,9 +3,11 @@
 exports[`AuthForm renders correctly 1`] = `
 <div>
   <div
-    class="sc-ifAKCX fMkYnB"
+    class="sc-ifAKCX kIBOZW"
   >
-    <div>
+    <div
+      class="upper-wrapper"
+    >
       <h2
         data-testid="title"
       >

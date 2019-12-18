@@ -1,9 +1,7 @@
 import { updateKey } from '../lib/utils';
-import {
-  createStandardAction,
-  createReducer,
-  ActionType,
-} from 'typesafe-actions';
+import { deprecated, createReducer, ActionType } from 'typesafe-actions';
+
+const { createStandardAction } = deprecated;
 
 const SET_CUSTOM = 'header/SET_CUSTOM';
 const SET_USER_LOGO = 'header/SET_USER_LOGO';
@@ -48,7 +46,7 @@ export const headerActions = {
   exitFloating,
   setMargin,
   setDirection,
-  setBaseY,
+  setBaseY
 };
 
 type HeaderAction = ActionType<typeof headerActions>;
@@ -56,7 +54,7 @@ type HeaderAction = ActionType<typeof headerActions>;
 const initialState: HeaderState = {
   custom: false,
   userLogo: null,
-  velogUsername: null,
+  velogUsername: null
 };
 
 const header = createReducer<HeaderState, HeaderAction>(initialState, {
@@ -68,7 +66,7 @@ const header = createReducer<HeaderState, HeaderAction>(initialState, {
   },
   [SET_VELOG_USERNAME]: (state, { payload }) => {
     return updateKey(state, 'velogUsername', payload);
-  },
+  }
 });
 
 export default header;
