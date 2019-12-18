@@ -12,15 +12,16 @@ import {
 import { pick } from 'ramda';
 import { escapeForUrl, safe } from '../../lib/utils';
 import { useMutation } from '@apollo/react-hooks';
-import useRouter from 'use-react-router';
+
 import { setHeadingId } from '../../lib/heading';
+import { useHistory } from 'react-router';
 
 type PublishActionButtonsContainerProps = {};
 
 const PublishActionButtonsContainer: React.FC<
   PublishActionButtonsContainerProps
 > = () => {
-  const { history } = useRouter();
+  const history = useHistory();
 
   const options = useSelector((state: RootState) =>
     pick(
