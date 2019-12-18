@@ -49,6 +49,7 @@
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
     "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.7.0",
     "eslint-config-react-app": "^5.1.0",
     "eslint-loader": "3.0.2",
     "eslint-plugin-flowtype": "3.13.0",
@@ -122,7 +123,7 @@
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": ["react-app", "prettier"]
   },
   "browserslist": {
     "production": [
