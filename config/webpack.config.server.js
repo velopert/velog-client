@@ -1,3 +1,4 @@
+const nodeExternals = require('webpack-node-externals');
 const paths = require('./paths');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const webpack = require('webpack');
@@ -128,6 +129,13 @@ module.exports = {
   },
   resolve: {
     modules: ['node_modules'],
+    extensions: paths.moduleFileExtensions
+      .map(ext => `.${ext}`)
+      .filter(ext => true || !ext.includes('ts')),
   },
   plugins: [new webpack.DefinePlugin(env.stringified)],
+  optimization: {
+    minimize: false,
+  },
+  externals: [nodeExternals()],
 };
