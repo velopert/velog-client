@@ -7,6 +7,7 @@ const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+const path = require('path');
 
 const imageInlineSizeLimit = parseInt(
   process.env.IMAGE_INLINE_SIZE_LIMIT || '10000',
@@ -22,7 +23,7 @@ module.exports = {
   output: {
     path: paths.ssrBuild,
     filename: 'server.js',
-    chunkFilename: 'js/[name].chuk.js',
+    chunkFilename: 'js/[name].chunk.js',
     publicPath: paths.servedPath,
   },
   module: {
@@ -133,9 +134,22 @@ module.exports = {
       .map(ext => `.${ext}`)
       .filter(ext => true || !ext.includes('ts')),
   },
-  plugins: [new webpack.DefinePlugin(env.stringified)],
+  plugins: [
+    new webpack.DefinePlugin(env.stringified),
+    new webpack.NormalModuleReplacementPlugin(
+      /codemirror/,
+      path.resolve(paths.appSrc, 'lib/replacedModule.ts'),
+    ),
+  ],
   optimization: {
     minimize: false,
   },
-  externals: [nodeExternals()],
+  externals: [
+    nodeExternals({
+      whitelist: [/codemirror/, /\.css$/],
+    }),
+  ],
+  node: {
+    __dirname: false,
+  },
 };

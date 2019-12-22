@@ -8,7 +8,7 @@ import prismThemes from '../../lib/styles/prismThemes';
 import breaks from 'remark-breaks';
 import Typography from './Typography';
 import embedPlugin from '../../lib/remark/embedPlugin';
-import { loadScript } from '../../lib/utils';
+import { loadScript, ssrEnabled } from '../../lib/utils';
 import media from '../../lib/styles/media';
 
 export interface MarkdownRenderProps {
@@ -83,11 +83,22 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   codeTheme = 'atom-one-light',
   onConvertFinish,
 }) => {
-  const [html, setHtml] = useState('');
+  const initialHtml = ssrEnabled
+    ? remark()
+        .use(breaks)
+        .use(prismPlugin)
+        .use(htmlPlugin)
+        .use(embedPlugin)
+        .use(slug)
+        .processSync(markdown)
+        .toString()
+    : '';
+
+  const [html, setHtml] = useState(initialHtml);
   useEffect(() => {
     remark()
       .use(breaks)
-      .use(prismPlugin)
+      // .use(prismPlugin)
       .use(htmlPlugin)
       .use(embedPlugin)
       .use(slug)

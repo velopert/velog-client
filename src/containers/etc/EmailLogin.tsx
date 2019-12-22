@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router';
 import qs from 'qs';
 import { emailCodeLogin } from '../../lib/api/auth';
-import client from '../../lib/graphql/client';
 import { GET_CURRENT_USER, CurrentUser } from '../../lib/graphql/user';
 import storage from '../../lib/storage';
 import { RootState } from '../../modules';
 import { setUser } from '../../modules/core';
+import { useApolloClient } from '@apollo/react-hooks';
 
 const mapStateToProps = (state: RootState) => ({});
 const mapDispatchToProps = {
@@ -29,6 +29,7 @@ const { useEffect, useCallback } = React;
  */
 const EmailLogin: React.FC<EmailLoginProps> = ({ location, history }) => {
   const query = qs.parse(location.search, { ignoreQueryPrefix: true });
+  const client = useApolloClient();
   const processLogin = useCallback(async () => {
     try {
       await emailCodeLogin(query.code);
@@ -43,7 +44,7 @@ const EmailLogin: React.FC<EmailLoginProps> = ({ location, history }) => {
       // TODO: show 401
       history.replace('/');
     }
-  }, [history, query.code]);
+  }, [client, history, query.code]);
   useEffect(() => {
     if (!query.code) {
       // TODO: show 404

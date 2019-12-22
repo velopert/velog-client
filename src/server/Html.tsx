@@ -21,8 +21,8 @@ function Html({
       {/* <head dangerouslySetInnerHTML={{ __html: head }}></head> */}
       <head>
         {styledElement}
-        {extractor.getLinkElements}
-        {extractor.getStyleElements}
+        {extractor.getLinkElements()}
+        {extractor.getStyleElements()}
       </head>
       <body>
         <div id="root" dangerouslySetInnerHTML={{ __html: content }}></div>
@@ -40,7 +40,7 @@ function Html({
             ).replace(/</g, '\\u003c')};`,
           }}
         />
-        {extractor.getScriptElements}
+        {extractor.getScriptElements()}
       </body>
     </html>
   );

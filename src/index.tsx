@@ -9,13 +9,17 @@ import { ApolloProvider } from '@apollo/react-hooks';
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import client from './lib/graphql/client';
 import rootReducer from './modules';
 import storage from './lib/storage';
 import { setUser } from './modules/core';
 
-const store = createStore(rootReducer, composeWithDevTools());
+const store = createStore(
+  rootReducer,
+  (window as any).__REDUX_STATE__,
+  composeWithDevTools(),
+);
 
 const loadUser = () => {
   const user = storage.getItem('CURRENT_USER');
@@ -35,7 +39,7 @@ if (process.env.NODE_ENV === 'production') {
           </BrowserRouter>
         </ApolloProvider>
       </Provider>,
-      document.getElementById('root')
+      document.getElementById('root'),
     );
   });
 } else {
@@ -47,7 +51,7 @@ if (process.env.NODE_ENV === 'production') {
         </BrowserRouter>
       </ApolloProvider>
     </Provider>,
-    document.getElementById('root')
+    document.getElementById('root'),
   );
 }
 
@@ -56,7 +60,7 @@ if (process.env.NODE_ENV === 'production') {
     appId: '203040656938507',
     autoLogAppEvents: true,
     xfbml: true,
-    version: 'v3.0'
+    version: 'v3.0',
   });
 };
 

@@ -1,14 +1,11 @@
 import React, { CSSProperties, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import CodeMirror, { EditorFromTextArea, Editor } from 'codemirror';
-
-import 'codemirror/lib/codemirror.css';
 import './atom-one-light.css';
+import 'codemirror/lib/codemirror.css';
 import palette from '../../lib/styles/palette';
-
-// conditional require later on
-require('codemirror/mode/markdown/markdown');
-require('codemirror/addon/display/placeholder');
+import 'codemirror/mode/markdown/markdown';
+import 'codemirror/addon/display/placeholder';
 
 const MarkdownEditorBlock = styled.div`
   .CodeMirror {

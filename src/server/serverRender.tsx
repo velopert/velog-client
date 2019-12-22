@@ -1,5 +1,6 @@
 import path from 'path';
 import React from 'react';
+import fetch from 'node-fetch';
 import ReactDOMServer from 'react-dom/server';
 import { ApolloProvider } from '@apollo/react-common';
 import { ApolloClient } from 'apollo-client';
@@ -16,10 +17,13 @@ import App from '../App';
 import Html from './Html';
 import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 
-const statsFile = path.resolve('../build/loadable-stats.json');
+const statsFile = path.resolve(__dirname, '../build/loadable-stats.json');
 
-const serverRender: Middleware = async ctx => {
-  // const html = ReactDOMServer.renderToString(<div>Hello Koa!</div>);
+const serverRender: Middleware = async (ctx, next) => {
+  // enable proxy to backend server in development mode
+  if (/^\/(api|graphql)/.test(ctx.path)) {
+    return next();
+  }
 
   // prepare redux store
   const store = createStore(rootReducer);
@@ -28,6 +32,7 @@ const serverRender: Middleware = async ctx => {
     ssrMode: true,
     link: createHttpLink({
       uri: 'http://localhost:5000/graphql',
+      fetch: fetch as any,
     }),
     cache: new InMemoryCache(),
   });
@@ -38,7 +43,7 @@ const serverRender: Middleware = async ctx => {
 
   const Root = (
     <ChunkExtractorManager extractor={extractor}>
-      <StyleSheetManager sheet={sheet}>
+      <StyleSheetManager sheet={sheet.instance}>
         <Provider store={store}>
           <ApolloProvider client={client}>
             <StaticRouter location={ctx.url} context={context}>
@@ -53,6 +58,7 @@ const serverRender: Middleware = async ctx => {
   try {
     await getDataFromTree(Root);
   } catch (e) {
+    console.log(e);
     ctx.throw(500);
     return;
   }

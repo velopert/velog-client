@@ -53,11 +53,11 @@ export function createReducer<S>(handlers: Handlers<S>, initialState: S) {
 export function updateKey<S, K extends keyof S>(
   state: S,
   key: K,
-  value: S[K]
+  value: S[K],
 ): S {
   return {
     ...state,
-    [key]: value
+    [key]: value,
   };
 }
 
@@ -70,7 +70,7 @@ export const escapeForUrl = (text: string): string => {
   return text
     .replace(
       /[^0-9a-zA-Zㄱ-힣.\u3000-\u303f\u3040-\u309f\u30a0-\u30ff\uff00-\uff9f\u4e00-\u9faf\u3400-\u4dbf -]/g,
-      ''
+      '',
     )
     .trim()
     .replace(/ /g, '-')
@@ -113,3 +113,5 @@ export const createFallbackTitle = (username: string | null) => {
   // return `${username}'s velog`;
   return `${username}.log`;
 };
+
+export const ssrEnabled = process.env.REACT_APP_SSR === 'enabled';

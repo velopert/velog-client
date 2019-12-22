@@ -11,31 +11,31 @@ import PageTemplate from './components/base/PageTemplate';
 import VelogPageFallback from './containers/velog/VelogPageFallback';
 
 const loadableConfig = {
-  fallback: <PageTemplate />
+  fallback: <PageTemplate />,
 };
 
 const VelogPage = loadable(() => import('./pages/velog/VelogPage'), {
-  fallback: <VelogPageFallback />
+  fallback: <VelogPageFallback />,
 });
 const MainPage = loadable(
   () => import('./pages/main/MainPage'),
-  loadableConfig
+  loadableConfig,
 );
 const EmailLoginPage = loadable(
   () => import('./pages/EmailLoginPage'),
-  loadableConfig
+  loadableConfig,
 );
 const WritePage = loadable(() => import('./pages/WritePage'), loadableConfig);
 const SearchPage = loadable(() => import('./pages/SearchPage'), loadableConfig);
 const SavesPage = loadable(() => import('./pages/SavesPage'), loadableConfig);
 const TagsPage = loadable(
   () => import('./pages/tags/TagsPage'),
-  loadableConfig
+  loadableConfig,
 );
 const PolicyPage = loadable(() => import('./pages/PolicyPage'), loadableConfig);
 const SettingPage = loadable(
   () => import('./pages/SettingPage'),
-  loadableConfig
+  loadableConfig,
 );
 
 interface AppProps {}
