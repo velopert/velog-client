@@ -25,7 +25,7 @@ const EmailLoginPage = loadable(
   () => import('./pages/EmailLoginPage'),
   loadableConfig,
 );
-const WritePage = loadable(() => import('./pages/WritePage'), loadableConfig);
+const WritePage = loadable(() => import('./pages/WritePage'));
 const SearchPage = loadable(() => import('./pages/SearchPage'), loadableConfig);
 const SavesPage = loadable(() => import('./pages/SavesPage'), loadableConfig);
 const TagsPage = loadable(

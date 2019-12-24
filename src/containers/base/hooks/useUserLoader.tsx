@@ -6,6 +6,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { RootState } from '../../../modules';
 import storage from '../../../lib/storage';
 import { setCrispUser } from '../../../lib/crisp';
+import { ssrEnabled } from '../../../lib/utils';
 
 const useUserLoader = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,10 @@ const useUserLoader = () => {
   const prevUser = useSelector((state: RootState) => state.core.user);
 
   const user = getCurrentUser.data ? getCurrentUser.data.auth : undefined;
+
+  if (ssrEnabled && user) {
+    dispatch(setUser(user));
+  }
 
   useEffect(() => {
     if (user === undefined) return () => {};

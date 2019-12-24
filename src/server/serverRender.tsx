@@ -16,8 +16,10 @@ import rootReducer from '../modules';
 import App from '../App';
 import Html from './Html';
 import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
+import CacheManager from './CacheManager';
 
 const statsFile = path.resolve(__dirname, '../build/loadable-stats.json');
+const cacheManager = new CacheManager();
 
 const serverRender: Middleware = async (ctx, next) => {
   // enable proxy to backend server in development mode
@@ -28,11 +30,27 @@ const serverRender: Middleware = async (ctx, next) => {
   // prepare redux store
   const store = createStore(rootReducer);
   // prepare apollo client
+
+  const loggedIn = !!(
+    ctx.cookies.get('refresh_token') || ctx.cookies.get('access_token')
+  );
+
+  if (!loggedIn) {
+    const cachedPage = await cacheManager.get(ctx.url);
+    if (cachedPage) {
+      ctx.body = cachedPage;
+      return;
+    }
+  }
+
   const client = new ApolloClient({
     ssrMode: true,
     link: createHttpLink({
       uri: 'http://localhost:5000/graphql',
       fetch: fetch as any,
+      headers: {
+        cookie: ctx.headers.cookie,
+      },
     }),
     cache: new InMemoryCache(),
   });
@@ -77,7 +95,17 @@ const serverRender: Middleware = async (ctx, next) => {
     />
   );
 
-  ctx.body = `<!doctype html>\n${ReactDOMServer.renderToStaticMarkup(html)}`;
+  const pageHtml = `<!doctype html>\n${ReactDOMServer.renderToStaticMarkup(
+    html,
+  )}`;
+
+  ctx.body = pageHtml;
+
+  setImmediate(() => {
+    if (!loggedIn) {
+      cacheManager.set(ctx.url, pageHtml);
+    }
+  });
 };
 
 export default serverRender;

@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import TextareaAutosize from 'react-textarea-autosize';
 import palette from '../../lib/styles/palette';
 
-const TitleTextarea = styled(TextareaAutosize)`
+const style = css`
   display: block;
   padding: 0;
   font-size: 2.75rem;
@@ -16,6 +16,14 @@ const TitleTextarea = styled(TextareaAutosize)`
   &::placeholder {
     color: ${palette.gray5};
   }
+`;
+
+export const TitleTextareaForSSR = styled.textarea`
+  ${style}
+`;
+
+const TitleTextarea = styled(TextareaAutosize)`
+  ${style}
 `;
 
 export default TitleTextarea;

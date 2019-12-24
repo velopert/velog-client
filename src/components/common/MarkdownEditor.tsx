@@ -91,7 +91,7 @@ const MarkdownEditor = ({
 
   return (
     <MarkdownEditorBlock style={style} className={className}>
-      <textarea ref={textArea} style={{ border: 'none' }} />
+      <textarea ref={textArea} style={{ border: 'none', display: 'none' }} />
     </MarkdownEditorBlock>
   );
 };

@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import 'codemirror/lib/codemirror.css';
 // import 'codemirror/theme/dracula.css';
 import CodeMirror, { EditorFromTextArea } from 'codemirror';
-import TitleTextarea from './TitleTextarea';
+import TitleTextarea, { TitleTextareaForSSR } from './TitleTextarea';
 import '../common/atom-one-light.css';
 import palette from '../../lib/styles/palette';
 import Toolbar from './Toolbar';
 import AddLink from './AddLink';
-import { detectJSDOM } from '../../lib/utils';
+import { detectJSDOM, ssrEnabled } from '../../lib/utils';
 import AskChangeEditor from './AskChangeEditor';
 import { WriteMode } from '../../modules/write';
 import zIndexes from '../../lib/styles/zIndexes';
@@ -42,7 +42,6 @@ type MarkdownEditorState = {
   clientWidth: number;
 };
 
-(window as any).CodeMirror = CodeMirror;
 const MarkdownEditorBlock = styled.div`
   height: 100%;
   overflow-y: auto;
@@ -148,7 +147,7 @@ const checker = {
     const result = regex.exec(text);
     if (!result) return null;
     return result[1];
-  }
+  },
 };
 
 type CheckerKey = keyof typeof checker;
@@ -180,10 +179,10 @@ export default class WriteMarkdownEditor extends React.Component<
       top: 0,
       left: 0,
       visible: false,
-      stickToRight: false
+      stickToRight: false,
     },
     askChangeEditor: false,
-    clientWidth: 0
+    clientWidth: 0,
   };
   codemirror: EditorFromTextArea | null = null;
 
@@ -195,15 +194,16 @@ export default class WriteMarkdownEditor extends React.Component<
       theme: 'one-light',
       placeholder: '당신의 이야기를 적어보세요...',
       viewportMargin: Infinity,
-      lineWrapping: true
+      lineWrapping: true,
     });
-    (window as any).codemirror = this.codemirror;
+
     if (detectJSDOM()) return;
     this.codemirror.setValue(this.props.initialBody);
     this.codemirror.on('change', cm => {
       this.props.onChangeMarkdown(cm.getValue());
       this.stickToBottomIfNeeded();
     });
+
     this.codemirror.on('paste', ((editor: any, e: any) => {
       const clipboardData = e.clipboardData || e.originalEvent.clipboardData;
       if (!clipboardData) return;
@@ -221,7 +221,7 @@ export default class WriteMarkdownEditor extends React.Component<
           const cursor = doc.getCursor();
           const pos = {
             line: cursor.line,
-            ch: cursor.ch
+            ch: cursor.ch,
           };
           doc.replaceRange(check, pos);
         }
@@ -252,14 +252,14 @@ export default class WriteMarkdownEditor extends React.Component<
     console.log(e.currentTarget.scrollTop, this.toolbarTop);
     if (shadow !== nextShadow) {
       this.setState({
-        shadow: nextShadow
+        shadow: nextShadow,
       });
     }
     if (this.block.current) {
       const { clientWidth } = this.block.current;
       if (clientWidth !== this.state.clientWidth) {
         this.setState({
-          clientWidth
+          clientWidth,
         });
       }
     }
@@ -268,7 +268,7 @@ export default class WriteMarkdownEditor extends React.Component<
   handleResize = () => {
     if (this.block.current) {
       this.setState({
-        clientWidth: this.block.current.clientWidth
+        clientWidth: this.block.current.clientWidth,
       });
     }
   };
@@ -301,7 +301,7 @@ export default class WriteMarkdownEditor extends React.Component<
     });
     if (this.block.current) {
       this.setState({
-        clientWidth: this.block.current.clientWidth
+        clientWidth: this.block.current.clientWidth,
       });
     }
     window.addEventListener('resize', this.handleResize);
@@ -328,8 +328,8 @@ export default class WriteMarkdownEditor extends React.Component<
           this.codemirror.defaultTextHeight() / 2 +
           1,
         left: cursorPos.left,
-        stickToRight
-      }
+        stickToRight,
+      },
     });
   };
 
@@ -338,8 +338,8 @@ export default class WriteMarkdownEditor extends React.Component<
     this.setState({
       addLink: {
         ...this.state.addLink,
-        visible: false
-      }
+        visible: false,
+      },
     });
     if (!this.codemirror) return;
     const doc = this.codemirror.getDoc();
@@ -351,19 +351,19 @@ export default class WriteMarkdownEditor extends React.Component<
       doc.setSelection(
         {
           line: cursor.line,
-          ch: cursor.ch + 1
+          ch: cursor.ch + 1,
         },
         {
           line: cursor.line,
-          ch: cursor.ch + 6
-        }
+          ch: cursor.ch + 6,
+        },
       );
       return;
     }
     doc.replaceSelection(`[${selection}](${link})`);
     doc.setCursor({
       line: cursor.line,
-      ch: cursor.ch + link.length + 4
+      ch: cursor.ch + link.length + 4,
     });
   };
 
@@ -371,8 +371,8 @@ export default class WriteMarkdownEditor extends React.Component<
     this.setState({
       addLink: {
         ...this.state.addLink,
-        visible: false
-      }
+        visible: false,
+      },
     });
   };
 
@@ -385,7 +385,7 @@ export default class WriteMarkdownEditor extends React.Component<
     const cursor = doc.getCursor();
     const selection = {
       start: doc.getCursor('start'),
-      end: doc.getCursor('end')
+      end: doc.getCursor('end'),
     };
 
     const line = doc.getLine(cursor.line);
@@ -394,12 +394,12 @@ export default class WriteMarkdownEditor extends React.Component<
       doc.setSelection(
         {
           line: cursor.line,
-          ch: 0
+          ch: 0,
         },
         {
           line: cursor.line,
-          ch: line.length
-        }
+          ch: line.length,
+        },
       );
     };
 
@@ -421,7 +421,7 @@ export default class WriteMarkdownEditor extends React.Component<
         .reduce((headingHandlers, handler, index) => {
           // reduce into handlers object
           return Object.assign(headingHandlers, {
-            [`heading${index + 1}`]: handler
+            [`heading${index + 1}`]: handler,
           });
         }, {}),
       bold: () => {
@@ -430,19 +430,19 @@ export default class WriteMarkdownEditor extends React.Component<
           const isBold = /\*\*(.*)\*\*/.test(
             doc.getRange(
               { line: selection.start.line, ch: selection.start.ch - 2 },
-              { line: selection.end.line, ch: selection.end.ch + 2 }
-            )
+              { line: selection.end.line, ch: selection.end.ch + 2 },
+            ),
           );
 
           if (isBold) {
             doc.setSelection(
               { line: selection.start.line, ch: selection.start.ch - 2 },
-              { line: selection.end.line, ch: selection.end.ch + 2 }
+              { line: selection.end.line, ch: selection.end.ch + 2 },
             );
             doc.replaceSelection('텍스트');
             doc.setSelection(
               { line: selection.start.line, ch: selection.start.ch - 2 },
-              { line: selection.end.line, ch: selection.end.ch - 2 }
+              { line: selection.end.line, ch: selection.end.ch - 2 },
             );
             return;
           }
@@ -453,9 +453,9 @@ export default class WriteMarkdownEditor extends React.Component<
           doc.setSelection(
             {
               line: selection.start.line,
-              ch: selection.start.ch
+              ch: selection.start.ch,
             },
-            { line: selection.end.line, ch: selection.end.ch - 4 }
+            { line: selection.end.line, ch: selection.end.ch - 4 },
           );
           return;
         }
@@ -464,9 +464,9 @@ export default class WriteMarkdownEditor extends React.Component<
           doc.setSelection(
             {
               line: selection.start.line,
-              ch: selection.start.ch
+              ch: selection.start.ch,
             },
-            { line: selection.end.line, ch: selection.end.ch + 4 }
+            { line: selection.end.line, ch: selection.end.ch + 4 },
           );
           return;
         }
@@ -474,12 +474,12 @@ export default class WriteMarkdownEditor extends React.Component<
         doc.setSelection(
           {
             line: cursor.line,
-            ch: cursor.ch + 2
+            ch: cursor.ch + 2,
           },
           {
             line: cursor.line,
-            ch: cursor.ch + 5
-          }
+            ch: cursor.ch + 5,
+          },
         );
       },
       italic: () => {
@@ -490,12 +490,12 @@ export default class WriteMarkdownEditor extends React.Component<
           doc.setSelection(
             {
               line: cursor.line,
-              ch: cursor.ch + 1
+              ch: cursor.ch + 1,
             },
             {
               line: cursor.line,
-              ch: cursor.ch + 4
-            }
+              ch: cursor.ch + 4,
+            },
           );
           return;
         }
@@ -504,32 +504,32 @@ export default class WriteMarkdownEditor extends React.Component<
           const selectLeftAndRight = doc.getRange(
             {
               line: selection.start.line,
-              ch: selection.start.ch - 1
+              ch: selection.start.ch - 1,
             },
             {
               line: selection.end.line,
-              ch: selection.end.ch + 1
-            }
+              ch: selection.end.ch + 1,
+            },
           );
           if (/_(.*)_/.test(selectLeftAndRight)) {
             selected = selectLeftAndRight;
             doc.setSelection(
               {
                 line: selection.start.line,
-                ch: selection.start.ch - 1
+                ch: selection.start.ch - 1,
               },
               {
                 line: selection.end.line,
-                ch: selection.end.ch + 1
-              }
+                ch: selection.end.ch + 1,
+              },
             );
             selection.start = {
               line: selection.start.line,
-              ch: selection.start.ch - 1
+              ch: selection.start.ch - 1,
             };
             selection.end = {
               line: selection.end.line,
-              ch: selection.end.ch + 1
+              ch: selection.end.ch + 1,
             };
           }
         }
@@ -542,9 +542,9 @@ export default class WriteMarkdownEditor extends React.Component<
           doc.setSelection(
             {
               line: selection.start.line,
-              ch: selection.start.ch
+              ch: selection.start.ch,
             },
-            { line: selection.end.line, ch: selection.end.ch - 2 }
+            { line: selection.end.line, ch: selection.end.ch - 2 },
           );
           return;
         }
@@ -553,9 +553,9 @@ export default class WriteMarkdownEditor extends React.Component<
           doc.setSelection(
             {
               line: selection.start.line,
-              ch: selection.start.ch
+              ch: selection.start.ch,
             },
-            { line: selection.end.line, ch: selection.end.ch + 2 }
+            { line: selection.end.line, ch: selection.end.ch + 2 },
           );
         }
       },
@@ -567,12 +567,12 @@ export default class WriteMarkdownEditor extends React.Component<
           doc.setSelection(
             {
               line: cursor.line,
-              ch: cursor.ch + 2
+              ch: cursor.ch + 2,
             },
             {
               line: cursor.line,
-              ch: cursor.ch + 5
-            }
+              ch: cursor.ch + 5,
+            },
           );
           return;
         }
@@ -581,32 +581,32 @@ export default class WriteMarkdownEditor extends React.Component<
           const selectLeftAndRight = doc.getRange(
             {
               line: selection.start.line,
-              ch: selection.start.ch - 2
+              ch: selection.start.ch - 2,
             },
             {
               line: selection.end.line,
-              ch: selection.end.ch + 2
-            }
+              ch: selection.end.ch + 2,
+            },
           );
           if (/~~(.*)~~/.test(selectLeftAndRight)) {
             selected = selectLeftAndRight;
             doc.setSelection(
               {
                 line: selection.start.line,
-                ch: selection.start.ch - 2
+                ch: selection.start.ch - 2,
               },
               {
                 line: selection.end.line,
-                ch: selection.end.ch + 2
-              }
+                ch: selection.end.ch + 2,
+              },
             );
             selection.start = {
               line: selection.start.line,
-              ch: selection.start.ch - 2
+              ch: selection.start.ch - 2,
             };
             selection.end = {
               line: selection.end.line,
-              ch: selection.end.ch + 2
+              ch: selection.end.ch + 2,
             };
           }
         }
@@ -619,9 +619,9 @@ export default class WriteMarkdownEditor extends React.Component<
           doc.setSelection(
             {
               line: selection.start.line,
-              ch: selection.start.ch
+              ch: selection.start.ch,
             },
-            { line: selection.end.line, ch: selection.end.ch - 4 }
+            { line: selection.end.line, ch: selection.end.ch - 4 },
           );
           return;
         }
@@ -630,9 +630,9 @@ export default class WriteMarkdownEditor extends React.Component<
           doc.setSelection(
             {
               line: selection.start.line,
-              ch: selection.start.ch
+              ch: selection.start.ch,
             },
-            { line: selection.end.line, ch: selection.end.ch + 4 }
+            { line: selection.end.line, ch: selection.end.ch + 4 },
           );
         }
       },
@@ -640,19 +640,19 @@ export default class WriteMarkdownEditor extends React.Component<
         const matches = /^> /.test(line);
         doc.setSelection(
           { line: cursor.line, ch: 0 },
-          { line: cursor.line, ch: line.length }
+          { line: cursor.line, ch: line.length },
         );
         if (matches) {
           doc.replaceSelection(line.replace(/^> /, ''));
           doc.setCursor({
             line: cursor.line,
-            ch: cursor.ch - 2
+            ch: cursor.ch - 2,
           });
         } else {
           doc.replaceSelection(`> ${line}`);
           doc.setCursor({
             line: cursor.line,
-            ch: cursor.ch + 2
+            ch: cursor.ch + 2,
           });
         }
       },
@@ -669,19 +669,19 @@ export default class WriteMarkdownEditor extends React.Component<
           doc.setSelection(
             {
               line: cursor.line + 1,
-              ch: 0
+              ch: 0,
             },
             {
               line: cursor.line + 1,
-              ch: 9
-            }
+              ch: 9,
+            },
           );
           return;
         }
         doc.replaceSelection(`\`\`\`
 ${selected}
 \`\`\``);
-      }
+      },
     };
 
     const handler = handlers[mode];
@@ -697,13 +697,13 @@ ${selected}
 
   handleAskConvert = () => {
     this.setState({
-      askChangeEditor: true
+      askChangeEditor: true,
     });
   };
 
   handleConfirmConvert = () => {
     this.setState({
-      askChangeEditor: false
+      askChangeEditor: false,
     });
     if (!this.codemirror) return;
     const markdown = this.codemirror.getValue();
@@ -712,7 +712,7 @@ ${selected}
 
   handleCancelConvert = () => {
     this.setState({
-      askChangeEditor: false
+      askChangeEditor: false,
     });
   };
 
@@ -727,11 +727,15 @@ ${selected}
       >
         <div className="wrapper">
           <PaddingWrapper>
-            <TitleTextarea
-              placeholder="제목을 입력하세요"
-              onChange={this.handleTitleChange}
-              value={title}
-            />
+            {ssrEnabled ? (
+              <TitleTextareaForSSR placeholder="제목을 입력하세요" rows={1} />
+            ) : (
+              <TitleTextarea
+                placeholder="제목을 입력하세요"
+                onChange={this.handleTitleChange}
+                value={title}
+              />
+            )}
             <HorizontalBar />
             {tagInput}
           </PaddingWrapper>
@@ -753,7 +757,7 @@ ${selected}
                 onClose={this.handleCancelAddLink}
               />
             )}
-            <textarea ref={this.editorElement} />
+            <textarea ref={this.editorElement} style={{ display: 'none' }} />
           </PaddingWrapper>
         </div>
         <AskChangeEditor
@@ -762,7 +766,9 @@ ${selected}
           onCancel={this.handleCancelConvert}
           convertTo={WriteMode.WYSIWYG}
         />
-        <FooterWrapper style={{ width: clientWidth }}>{footer}</FooterWrapper>
+        <FooterWrapper style={{ width: clientWidth || '50%' }}>
+          {footer}
+        </FooterWrapper>
       </MarkdownEditorBlock>
     );
   }

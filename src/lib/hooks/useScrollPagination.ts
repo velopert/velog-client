@@ -41,10 +41,8 @@ export default function useScrollPagination({
   }, [loadMore, loadMoreUsingOffset]);
 
   useEffect(() => {
-    console.log('register scroll event');
     window.addEventListener('scroll', onScroll);
     return () => {
-      console.log('unregister scroll event');
       window.removeEventListener('scroll', onScroll);
     };
   }, [onScroll]);
