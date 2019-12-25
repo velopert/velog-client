@@ -1,5 +1,11 @@
 import axios from 'axios';
 
-const apiClient = axios.create();
+const host =
+  process.env.NODE_ENV === 'development'
+    ? '/'
+    : process.env.REACT_APP_API_HOST || '/';
+const apiClient = axios.create({
+  baseURL: host,
+});
 
 export default apiClient;
