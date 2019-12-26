@@ -21,25 +21,26 @@ import CacheManager from './CacheManager';
 const statsFile = path.resolve(__dirname, '../build/loadable-stats.json');
 const cacheManager = new CacheManager();
 
-const serverRender: Middleware = async (ctx, next) => {
+type SSROption = {
+  url: string;
+  loggedIn: boolean;
+  cookie: string;
+};
+
+const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
   // enable proxy to backend server in development mode
-  if (/^\/(api|graphql)/.test(ctx.path)) {
-    return next();
+  if (/^\/(api|graphql)/.test(url)) {
+    return null;
   }
 
   // prepare redux store
   const store = createStore(rootReducer);
   // prepare apollo client
 
-  const loggedIn = !!(
-    ctx.cookies.get('refresh_token') || ctx.cookies.get('access_token')
-  );
-
   if (!loggedIn) {
-    const cachedPage = await cacheManager.get(ctx.url);
+    const cachedPage = await cacheManager.get(url);
     if (cachedPage) {
-      ctx.body = cachedPage;
-      return;
+      return cachedPage;
     }
   }
 
@@ -49,7 +50,7 @@ const serverRender: Middleware = async (ctx, next) => {
       uri: 'http://localhost:5000/graphql',
       fetch: fetch as any,
       headers: {
-        cookie: ctx.headers.cookie,
+        cookie,
       },
     }),
     cache: new InMemoryCache(),
@@ -64,7 +65,7 @@ const serverRender: Middleware = async (ctx, next) => {
       <StyleSheetManager sheet={sheet.instance}>
         <Provider store={store}>
           <ApolloProvider client={client}>
-            <StaticRouter location={ctx.url} context={context}>
+            <StaticRouter location={url} context={context}>
               <App />
             </StaticRouter>
           </ApolloProvider>
@@ -76,9 +77,7 @@ const serverRender: Middleware = async (ctx, next) => {
   try {
     await getDataFromTree(Root);
   } catch (e) {
-    console.log(e);
-    ctx.throw(500);
-    return;
+    throw e;
   }
 
   const content = ReactDOMServer.renderToString(Root);
@@ -99,13 +98,13 @@ const serverRender: Middleware = async (ctx, next) => {
     html,
   )}`;
 
-  ctx.body = pageHtml;
-
   setImmediate(() => {
     if (!loggedIn) {
-      cacheManager.set(ctx.url, pageHtml);
+      cacheManager.set(url, pageHtml);
     }
   });
+
+  return pageHtml;
 };
 
 export default serverRender;
