@@ -1,0 +1,2 @@
+FROM bitnami/redis:5.0
+ENV ALLOW_EMPTY_PASSWORD=yes

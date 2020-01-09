@@ -1,7 +1,9 @@
 import Redis from 'ioredis';
 import checkCacheRule from './checkCacheRule';
 
-const redis = new Redis();
+const redis = new Redis({
+  host: process.env.REDIS_HOST || 'locahost',
+});
 
 function createCacheKey(url: string) {
   return `ssr:${url}`;

@@ -23,3 +23,9 @@ yarn-debug.log*
 yarn-error.log*
 
 /dist
+
+# package directories
+jspm_packages
+
+# Serverless directories
+.serverless

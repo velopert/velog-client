@@ -47,7 +47,7 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
   const client = new ApolloClient({
     ssrMode: true,
     link: createHttpLink({
-      uri: 'http://localhost:5000/graphql',
+      uri: 'https://v2dev.velog.io/graphql',
       fetch: fetch as any,
       headers: {
         cookie,
@@ -58,7 +58,10 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
 
   const context = {};
   const sheet = new ServerStyleSheet();
-  const extractor = new ChunkExtractor({ statsFile });
+  const extractor = new ChunkExtractor({
+    statsFile,
+    publicPath: 'https://static.velog.io',
+  });
 
   const Root = (
     <ChunkExtractorManager extractor={extractor}>

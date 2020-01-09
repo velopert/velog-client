@@ -82,7 +82,9 @@ module.exports = {
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
   ssrIndexJs: resolveApp('src/index.server.ts'),
+  ssrServerlessEntry: resolveApp('src/serverless.ts'),
   ssrBuild: resolveApp('dist'),
+  ssrServerlessBuild: resolveApp('.webpack'),
 };
 
 module.exports.moduleFileExtensions = moduleFileExtensions;

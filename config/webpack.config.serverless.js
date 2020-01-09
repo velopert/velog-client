@@ -1,3 +1,8 @@
+process.env.BABEL_ENV = 'production';
+process.env.NODE_ENV = 'production';
+process.env.REACT_APP_SSR = 'enabled';
+
+const CopyPlugin = require('copy-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 const paths = require('./paths');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
@@ -8,6 +13,7 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 const path = require('path');
+const serverlessWebpack = require('serverless-webpack');
 
 const imageInlineSizeLimit = parseInt(
   process.env.IMAGE_INLINE_SIZE_LIMIT || '10000',
@@ -17,12 +23,13 @@ const publicUrl = paths.servedPath.slice(0, -1);
 const env = getClientEnvironment(publicUrl);
 
 module.exports = {
-  mode: 'production',
-  entry: paths.ssrIndexJs,
+  mode: serverlessWebpack.lib.webpack.isLocal ? 'development' : 'production',
+  entry: serverlessWebpack.lib.entries,
   target: 'node',
   output: {
-    path: paths.ssrBuild,
-    filename: 'server.js',
+    libraryTarget: 'commonjs2',
+    path: paths.ssrServerlessBuild,
+    filename: '[name].js',
     publicPath: paths.servedPath,
   },
   module: {
@@ -134,12 +141,18 @@ module.exports = {
       .filter(ext => true || !ext.includes('ts')),
   },
   plugins: [
-    new webpack.DefinePlugin(env.stringified),
+    new webpack.DefinePlugin(env.stringifiedForServerless),
     new webpack.NormalModuleReplacementPlugin(
       /codemirror/,
       path.resolve(paths.appSrc, 'lib/replacedModule.ts'),
     ),
     new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
+    new CopyPlugin([
+      {
+        from: path.resolve(paths.appBuild, 'loadable-stats.json'),
+        to: 'build',
+      },
+    ]),
   ],
   optimization: {
     minimize: false,
