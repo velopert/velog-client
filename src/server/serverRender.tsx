@@ -40,7 +40,8 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
   if (!loggedIn) {
     const cachedPage = await cacheManager.get(url);
     if (cachedPage) {
-      return cachedPage;
+      // Temp disable cache
+      // return cachedPage;
     }
   }
 

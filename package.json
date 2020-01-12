@@ -44,6 +44,7 @@
     "@typescript-eslint/eslint-plugin": "^2.8.0",
     "@typescript-eslint/parser": "^2.8.0",
     "apollo-boost": "^0.4.7",
+    "apollo-link": "^1.2.13",
     "aws-lambda": "^1.0.4",
     "axios": "^0.19.0",
     "babel-eslint": "10.0.3",
