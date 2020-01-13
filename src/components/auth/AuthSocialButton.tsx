@@ -55,10 +55,10 @@ const AuthSocialButton: React.FC<AuthSocialButtonProps> = ({
 
   const host =
     process.env.NODE_ENV === 'production'
-      ? 'https://velog.io'
-      : 'http://localhost:5000';
+      ? process.env.REACT_APP_API_HOST
+      : 'http://localhost:5000/';
 
-  const redirectTo = `${host}/api/v2/auth/social/redirect/${provider}`;
+  const redirectTo = `${host}api/v2/auth/social/redirect/${provider}`;
 
   return (
     <AuthSocialButtonBlock
