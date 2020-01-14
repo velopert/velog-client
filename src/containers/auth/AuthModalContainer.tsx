@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { RootState } from '../../modules';
 import { sendAuthEmail, SendAuthEmailResponse } from '../../lib/api/auth';
 import useRequest from '../../lib/hooks/useRequest';
+import { useLocation } from 'react-router-dom';
 
 interface OwnProps {}
 interface StateProps {
@@ -29,6 +30,7 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
   closeAuthModal,
   changeAuthModalMode,
 }) => {
+  const location = useLocation();
   const [_sendAuthEmail, loading, data, , resetSendAuthEmail] = useRequest<
     SendAuthEmailResponse
   >(sendAuthEmail);
@@ -60,6 +62,7 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
         onSendAuthEmail={onSendAuthEmail}
         loading={loading}
         registered={registered}
+        currentPath={`${location.pathname}${location.search}`}
       />
     </AuthModal>
   );

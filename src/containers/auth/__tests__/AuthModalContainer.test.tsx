@@ -5,6 +5,7 @@ import rootReducer, { RootState } from '../../../modules';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { showAuthModal } from '../../../modules/core';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('AuthForm', () => {
   const setupStore = () => {
@@ -16,9 +17,11 @@ describe('AuthForm', () => {
     const store = setupStore();
     store.dispatch(showAuthModal('REGISTER'));
     const { container } = render(
-      <Provider store={store}>
-        <AuthModalContainer />
-      </Provider>,
+      <MemoryRouter>
+        <Provider store={store}>
+          <AuthModalContainer />
+        </Provider>
+      </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();
   });
@@ -27,9 +30,11 @@ describe('AuthForm', () => {
     const store = setupStore();
     store.dispatch(showAuthModal('REGISTER'));
     const { getByTestId } = render(
-      <Provider store={store}>
-        <AuthModalContainer />
-      </Provider>,
+      <MemoryRouter>
+        <Provider store={store}>
+          <AuthModalContainer />
+        </Provider>
+      </MemoryRouter>,
     );
     expect(getByTestId('title')).toHaveTextContent('회원가입');
     fireEvent.click(getByTestId('switchmode'));

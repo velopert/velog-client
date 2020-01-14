@@ -88,7 +88,7 @@ exports[`AuthForm renders correctly 1`] = `
                 >
                   <a
                     class="sc-htpNat bNCvmd"
-                    href="http://localhost:5000/api/v2/auth/social/redirect/github"
+                    href="http://localhost:5000/api/v2/auth/social/redirect/github?next=/"
                     style="background: rgb(39, 46, 51);"
                     tabindex="4"
                   >
@@ -98,7 +98,7 @@ exports[`AuthForm renders correctly 1`] = `
                   </a>
                   <a
                     class="sc-htpNat bUuZiL"
-                    href="http://localhost:5000/api/v2/auth/social/redirect/google"
+                    href="http://localhost:5000/api/v2/auth/social/redirect/google?next=/"
                     style="background: white;"
                     tabindex="5"
                   >
@@ -108,7 +108,7 @@ exports[`AuthForm renders correctly 1`] = `
                   </a>
                   <a
                     class="sc-htpNat bNCvmd"
-                    href="http://localhost:5000/api/v2/auth/social/redirect/facebook"
+                    href="http://localhost:5000/api/v2/auth/social/redirect/facebook?next=/"
                     style="background: rgb(59, 89, 152);"
                     tabindex="6"
                   >

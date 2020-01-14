@@ -11,6 +11,7 @@ describe('AuthForm', () => {
       onSendAuthEmail: (email: string) => {},
       loading: false,
       registered: null,
+      currentPath: '/',
     };
     return render(<AuthForm {...initialProps} {...props} />);
   };

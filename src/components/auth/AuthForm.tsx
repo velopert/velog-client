@@ -62,6 +62,7 @@ export interface AuthFormProps {
   onToggleMode: () => void;
   onSendAuthEmail: (email: string) => void;
   registered: boolean | null;
+  currentPath: string;
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({
@@ -70,6 +71,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
   onSendAuthEmail,
   loading,
   registered,
+  currentPath,
 }) => {
   const [email, onChangeEmail] = useInput('');
   const onSubmit = (email: string) => {
@@ -98,7 +100,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
         </section>
         <section>
           <h4>소셜 계정으로 {modeText}</h4>
-          <AuthSocialButtonGroup />
+          <AuthSocialButtonGroup currentPath={currentPath} />
         </section>
       </div>
       <div className="foot">
