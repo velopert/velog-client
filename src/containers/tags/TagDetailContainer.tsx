@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import TagDetail, { TagDetailSkeleton } from '../../components/tags/TagDetail';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_TAG, GetTagResponse } from '../../lib/graphql/tags';
@@ -8,6 +8,7 @@ import useScrollPagination from '../../lib/hooks/useScrollPagination';
 import PostCardList, {
   PostCardListSkeleton,
 } from '../../components/common/PostCardList';
+import useNotFound from '../../lib/hooks/useNotFound';
 
 export type TagDetailContainerProps = {
   tag: string;
@@ -25,6 +26,14 @@ function TagDetailContainer({ tag }: TagDetailContainerProps) {
     },
     notifyOnNetworkStatusChange: true,
   });
+
+  const { showNotFound } = useNotFound();
+
+  useEffect(() => {
+    if (tagDetail.data && !tagDetail.data.tag) {
+      showNotFound();
+    }
+  }, [showNotFound, tagDetail.data]);
 
   const onLoadMore = useCallback(
     (cursor: string) => {

@@ -17,6 +17,7 @@ import useToggle from '../../lib/hooks/useToggle';
 import SeriesActionButtons from '../../components/velog/SeriesActionButtons';
 import DraggableSeriesPostList from '../../components/velog/DraggableSeriesPostList';
 import useUser from '../../lib/hooks/useUser';
+import useNotFound from '../../lib/hooks/useNotFound';
 
 export interface SeriesPostsProps {
   username: string;
@@ -51,11 +52,16 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
     toggleEditing();
   }, [data, editSeries, nextName, order, toggleEditing]);
 
+  const { showNotFound } = useNotFound();
+
   useEffect(() => {
+    if (data && !data.series) {
+      showNotFound();
+    }
     if (!data || !data.series) return;
     setNextName(data.series.name);
     setOrder(data.series.series_posts.map(sp => sp.id));
-  }, [data]);
+  }, [data, showNotFound]);
 
   const onChangeNextName = useCallback(
     (e: React.FormEvent<HTMLHeadingElement>) => {

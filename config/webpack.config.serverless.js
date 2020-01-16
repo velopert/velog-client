@@ -1,6 +1,7 @@
 process.env.BABEL_ENV = 'production';
 process.env.NODE_ENV = 'production';
 process.env.REACT_APP_SSR = 'enabled';
+process.env.PUBLIC_URL = process.env.PUBLIC_URL || 'https://static.velog.io';
 
 const CopyPlugin = require('copy-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
@@ -19,7 +20,9 @@ const imageInlineSizeLimit = parseInt(
   process.env.IMAGE_INLINE_SIZE_LIMIT || '10000',
 );
 
-const publicUrl = paths.servedPath.slice(0, -1);
+console.log(process.env.PUBLIC_URL);
+const publicUrl = (paths.servedPath || process.env.PUBLIC_URL).slice(0, -1);
+console.log({ publicUrl });
 const env = getClientEnvironment(publicUrl);
 
 module.exports = {

@@ -8,8 +8,10 @@ import {
   setUserLogo,
 } from '../../../modules/header';
 import { ssrEnabled } from '../../../lib/utils';
+import useNotFound from '../../../lib/hooks/useNotFound';
 
 export default function useApplyVelogConfig(username: string) {
+  const { showNotFound } = useNotFound();
   const dispatch = useDispatch();
   const { data, error } = useQuery<{ velog_config: VelogConfig }>(
     GET_VELOG_CONFIG,
@@ -36,14 +38,18 @@ export default function useApplyVelogConfig(username: string) {
   }, [dispatch, username]);
 
   useEffect(() => {
-    if (!data) return;
+    if (data && data.velog_config === null) {
+      showNotFound();
+      return;
+    }
+    if (!data || !data.velog_config) return;
     dispatch(
       setUserLogo({
         title: data.velog_config.title,
         logo_image: data.velog_config.logo_image,
       }),
     );
-  }, [data, dispatch]);
+  }, [data, dispatch, showNotFound]);
 
   if (data && ssrEnabled) {
     dispatch(setCustom(true));

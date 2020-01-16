@@ -9,6 +9,8 @@ import RegisterPage from './pages/RegisterPage';
 import { JazzbarProvider } from './lib/jazzbar';
 import PageTemplate from './components/base/PageTemplate';
 import VelogPageFallback from './containers/velog/VelogPageFallback';
+import ErrorBoundary from './components/error/ErrorBoundary';
+import NotFoundPage from './pages/NotFoundPage';
 
 const loadableConfig = {
   fallback: <PageTemplate />,
@@ -43,20 +45,26 @@ interface AppProps {}
 const App: React.FC<AppProps> = props => {
   return (
     <JazzbarProvider>
-      <Switch>
-        <Route path="/" component={MainPage} exact />
-        <Route path="/register" component={RegisterPage} />
-        <Route path="/:mode(trending|recent|following)" component={MainPage} />
-        <Route path="/@:username" component={VelogPage} />
-        {/* <Route path="/@:username/:urlSlug" component={PostPage} /> */}
-        <Route path="/email-login" component={EmailLoginPage} />
-        <Route path="/write" component={WritePage} />
-        <Route path="/search" component={SearchPage} />
-        <Route path="/saves" component={SavesPage} />
-        <Route path="/tags" component={TagsPage} />
-        <Route path={['/policy/:type?']} component={PolicyPage} />
-        <Route path="/setting" component={SettingPage} />
-      </Switch>
+      <ErrorBoundary>
+        <Switch>
+          <Route path="/" component={MainPage} exact />
+          <Route path="/register" component={RegisterPage} />
+          <Route
+            path="/:mode(trending|recent|following)"
+            component={MainPage}
+          />
+          <Route path="/@:username" component={VelogPage} />
+          {/* <Route path="/@:username/:urlSlug" component={PostPage} /> */}
+          <Route path="/email-login" component={EmailLoginPage} />
+          <Route path="/write" component={WritePage} />
+          <Route path="/search" component={SearchPage} />
+          <Route path="/saves" component={SavesPage} />
+          <Route path="/tags" component={TagsPage} />
+          <Route path={['/policy/:type?']} component={PolicyPage} />
+          <Route path="/setting" component={SettingPage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </ErrorBoundary>
       <Core />
     </JazzbarProvider>
   );

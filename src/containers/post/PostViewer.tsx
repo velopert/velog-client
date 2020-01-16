@@ -30,6 +30,7 @@ import styled from 'styled-components';
 import { useMount } from 'react-use';
 import PostSkeleton from '../../components/post/PostSkeleton';
 import media from '../../lib/styles/media';
+import useNotFound from '../../lib/hooks/useNotFound';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -88,17 +89,22 @@ const PostViewer: React.FC<PostViewerProps> = ({
   const [postView] = useMutation(POST_VIEW);
   const [likePost, { loading: loadingLike }] = useMutation(LIKE_POST);
   const [unlikePost, { loading: loadingUnlike }] = useMutation(UNLIKE_POST);
+  const { showNotFound } = useNotFound();
 
   const { loading, error, data } = readPost;
 
   useEffect(() => {
+    if (data && data.post === null) {
+      showNotFound();
+      return;
+    }
     if (!data || !data.post) return;
     postView({
       variables: {
         id: data.post.id,
       },
     });
-  }, [data, postView]);
+  }, [data, postView, showNotFound]);
 
   const prefetchLinkedPosts = useCallback(() => {
     if (!data || !data.post) return;
@@ -256,9 +262,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         const ownPost = post.user.id === userId;
         const message = ownPost
           ? `제가 velog 에 게재한 "${post.title}" 포스트를 읽어보세요.`
-          : `${post.user.username}님이 velog 에 게재한 "${
-              post.title
-            }" 포스트를 읽어보세요.`;
+          : `${post.user.username}님이 velog 에 게재한 "${post.title}" 포스트를 읽어보세요.`;
 
         shareTwitter(link, message);
         break;
