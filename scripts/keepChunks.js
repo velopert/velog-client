@@ -1,3 +1,5 @@
+const { promisify } = require('util');
+require('core-js/features/object/from-entries');
 const axios = require('axios');
 const client = axios.default;
 const fs = require('fs');
@@ -7,6 +9,9 @@ const buildDir = path.join(__dirname, '../build/');
 
 const assetManifestDir = path.join(buildDir, 'asset-manifest.json');
 const assetHistoryDir = path.join(buildDir, 'asset-history.json');
+
+const readFileAsync = promisify(fs.readFile);
+const writeFileAsync = promisify(fs.writeFile);
 
 async function getAssetHistory() {
   try {
@@ -22,13 +27,13 @@ async function getAssetHistory() {
 }
 
 async function readAssetManifest() {
-  const data = await fs.promises.readFile(assetManifestDir, 'utf-8');
+  const data = await readFileAsync(assetManifestDir, 'utf-8');
   return JSON.parse(data);
 }
 
 async function writeAssetHistory(data) {
   const stringified = JSON.stringify(data, null, 2);
-  return fs.promises.writeFile(assetHistoryDir, stringified, 'utf-8');
+  return writeFileAsync(assetHistoryDir, stringified, 'utf-8');
 }
 
 function filterOutMapFiles(files) {

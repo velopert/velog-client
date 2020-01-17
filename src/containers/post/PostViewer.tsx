@@ -91,7 +91,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
   const [unlikePost, { loading: loadingUnlike }] = useMutation(UNLIKE_POST);
   const { showNotFound } = useNotFound();
 
-  const { loading, error, data } = readPost;
+  const { error, data } = readPost;
 
   useEffect(() => {
     if (data && data.post === null) {
