@@ -18,6 +18,7 @@ import SeriesActionButtons from '../../components/velog/SeriesActionButtons';
 import DraggableSeriesPostList from '../../components/velog/DraggableSeriesPostList';
 import useUser from '../../lib/hooks/useUser';
 import useNotFound from '../../lib/hooks/useNotFound';
+import { ssrEnabled } from '../../lib/utils';
 
 export interface SeriesPostsProps {
   username: string;
@@ -62,6 +63,10 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
     setNextName(data.series.name);
     setOrder(data.series.series_posts.map(sp => sp.id));
   }, [data, showNotFound]);
+
+  if (ssrEnabled && data && !data.series) {
+    showNotFound();
+  }
 
   const onChangeNextName = useCallback(
     (e: React.FormEvent<HTMLHeadingElement>) => {

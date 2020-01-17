@@ -12,13 +12,17 @@ export const handler = async (event: APIGatewayEvent) => {
     cookie.includes('refresh_token') || cookie.includes('access_token');
 
   try {
-    const html = await serverRender({
+    const result = await serverRender({
       url,
       cookie,
       loggedIn,
     });
+    if (!result) throw new Error('Result is null');
+
+    const { html, statusCode } = result;
+
     return {
-      statusCode: 200,
+      statusCode: statusCode,
       headers: {
         'content-type': 'text/html; charset=utf-8;',
       },

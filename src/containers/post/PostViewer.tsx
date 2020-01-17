@@ -23,7 +23,7 @@ import gql from 'graphql-tag';
 import { shareFacebook, shareTwitter, copyText } from '../../lib/share';
 import PostToc from '../../components/post/PostToc';
 import LinkedPostList from '../../components/post/LinkedPostList';
-import { getScrollTop } from '../../lib/utils';
+import { getScrollTop, ssrEnabled } from '../../lib/utils';
 import UserProfile from '../../components/common/UserProfile';
 import VelogResponsive from '../../components/velog/VelogResponsive';
 import styled from 'styled-components';
@@ -105,6 +105,10 @@ const PostViewer: React.FC<PostViewerProps> = ({
       },
     });
   }, [data, postView, showNotFound]);
+
+  if (ssrEnabled && data && data.post === null) {
+    showNotFound();
+  }
 
   const prefetchLinkedPosts = useCallback(() => {
     if (!data || !data.post) return;

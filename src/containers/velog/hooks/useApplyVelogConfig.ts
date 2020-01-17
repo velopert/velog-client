@@ -61,4 +61,8 @@ export default function useApplyVelogConfig(username: string) {
       }),
     );
   }
+
+  if (ssrEnabled && data && data.velog_config === null) {
+    showNotFound();
+  }
 }

@@ -3,7 +3,7 @@ import TagDetail, { TagDetailSkeleton } from '../../components/tags/TagDetail';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_TAG, GetTagResponse } from '../../lib/graphql/tags';
 import { GET_POST_LIST, PartialPost } from '../../lib/graphql/post';
-import { safe } from '../../lib/utils';
+import { safe, ssrEnabled } from '../../lib/utils';
 import useScrollPagination from '../../lib/hooks/useScrollPagination';
 import PostCardList, {
   PostCardListSkeleton,
@@ -34,6 +34,10 @@ function TagDetailContainer({ tag }: TagDetailContainerProps) {
       showNotFound();
     }
   }, [showNotFound, tagDetail.data]);
+
+  if (ssrEnabled && tagDetail.data && !tagDetail.data.tag) {
+    showNotFound();
+  }
 
   const onLoadMore = useCallback(
     (cursor: string) => {

@@ -57,7 +57,9 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
     cache: new InMemoryCache(),
   });
 
-  const context = {};
+  const context = {
+    statusCode: 200,
+  };
   const sheet = new ServerStyleSheet();
   const extractor = new ChunkExtractor({
     statsFile,
@@ -108,7 +110,7 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
     }
   });
 
-  return pageHtml;
+  return { html: pageHtml, statusCode: context.statusCode };
 };
 
 export default serverRender;

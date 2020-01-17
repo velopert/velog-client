@@ -20,9 +20,7 @@ const imageInlineSizeLimit = parseInt(
   process.env.IMAGE_INLINE_SIZE_LIMIT || '10000',
 );
 
-console.log(process.env.PUBLIC_URL);
 const publicUrl = (paths.servedPath || process.env.PUBLIC_URL).slice(0, -1);
-console.log({ publicUrl });
 const env = getClientEnvironment(publicUrl);
 
 module.exports = {
