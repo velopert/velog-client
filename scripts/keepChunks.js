@@ -4,6 +4,7 @@ const axios = require('axios');
 const client = axios.default;
 const fs = require('fs');
 const path = require('path');
+const download = require('download');
 
 const buildDir = path.join(__dirname, '../build/');
 
@@ -13,6 +14,9 @@ const assetHistoryDir = path.join(buildDir, 'asset-history.json');
 const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
 
+/**
+ * Loads current asset-history from CDN
+ */
 async function getAssetHistory() {
   try {
     const response = await client.get(
@@ -26,16 +30,27 @@ async function getAssetHistory() {
   }
 }
 
+/**
+ * reads asset-manifest.json of current build
+ */
 async function readAssetManifest() {
   const data = await readFileAsync(assetManifestDir, 'utf-8');
   return JSON.parse(data);
 }
 
+/**
+ * Saves asset-history.json with given data
+ * @param data
+ */
 async function writeAssetHistory(data) {
   const stringified = JSON.stringify(data, null, 2);
   return writeFileAsync(assetHistoryDir, stringified, 'utf-8');
 }
 
+/**
+ * Filters out files that end with .map
+ * @param {string[]} files
+ */
 function filterOutMapFiles(files) {
   return Object.fromEntries(
     Object.entries(files).filter(
@@ -44,12 +59,44 @@ function filterOutMapFiles(files) {
   );
 }
 
+/**
+ * Downloads file at the corresponding path
+ * @param {string[]} urls
+ */
+function downloadUrls(urls) {
+  return Promise.all(
+    urls.map(url => {
+      const downloadPath = url
+        .slice(0, url.lastIndexOf('/'))
+        .replace('https://static.velog.io', '');
+
+      return download(url, path.join(buildDir, downloadPath));
+    }),
+  );
+}
+
 async function keepChunks() {
   const assetHistory = await getAssetHistory();
   const assetManifest = await readAssetManifest();
 
-  // TODO: filter out old data
-  // TODO: download if exists...
+  // filter out old data (always keep the latest one)
+  const cacheDuration = 1000 * 60 * 60 * 24 * 3;
+  const filteredHistory = assetHistory.history.filter(
+    (item, index, array) =>
+      index === array.length - 1 || Date.now() - item.date < cacheDuration,
+  );
+
+  const urls = filteredHistory
+    .reduce((acc, current) => {
+      return acc.concat(Object.values(current.files));
+    }, [])
+    .filter(url =>
+      ['index.html', 'loadable-stats.json', 'service-worker.js'].every(
+        ignored => !url.includes(ignored),
+      ),
+    );
+
+  await downloadUrls(urls);
 
   // update assetHistory
   assetHistory.history.push({
@@ -61,35 +108,3 @@ async function keepChunks() {
 }
 
 keepChunks();
-
-// const assetHistory = {
-//   history: [
-//     {
-//       date: '2020-01-17T14:30:00.251Z',
-//       files: {
-//         'static/js/0.98b2d894.chunk.js':
-//           'https://static.velog.io/static/js/0.98b2d894.chunk.js',
-//         'static/js/0.98b2d894.chunk.js.map':
-//           'https://static.velog.io/static/js/0.98b2d894.chunk.js.map',
-//       },
-//     },
-//     {
-//       date: '2020-01-17T14:30:00.251Z',
-//       files: {
-//         'static/js/0.98b2d894.chunk.js':
-//           'https://static.velog.io/static/js/0.98b2d894.chunk.js',
-//         'static/js/0.98b2d894.chunk.js.map':
-//           'https://static.velog.io/static/js/0.98b2d894.chunk.js.map',
-//       },
-//     },
-//   ],
-// };
-
-// https://static.velog.io/manifest-history.json을 다운로드 (axios로 요청하는것 만으로도 충분)
-// 3일 이상된 객체들을 filter out
-// 남아있는 것들 모두 다운로드를 하고
-// 현재 asset-manifest 열어서
-// files의 .map으로 끝나는 것들 filter out 한다음에
-// 배열에 push
-
-// 이걸 manifest-history.json으로 build 디렉터리에 저장

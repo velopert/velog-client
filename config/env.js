@@ -85,8 +85,6 @@ function getClientEnvironment(publicUrl) {
     }, {}),
   };
 
-  console.log(stringified);
-
   const stringifiedForServerless = Object.keys(raw).reduce((env, key) => {
     env[`process.env.${key}`] = JSON.stringify(raw[key]);
     return env;
