@@ -1,16 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import ErrorScreenTemplate from './ErrorScreenTemplate';
+import { undrawBugFixing } from '../../static/images';
+import { useHistory } from 'react-router-dom';
 
 export type CrashErrorScreenProps = {};
 
 function CrashErrorScreen(props: CrashErrorScreenProps) {
-  return <div></div>;
+  const history = useHistory();
+  return (
+    <ErrorScreenTemplate
+      image={undrawBugFixing}
+      message="엇! 오류가 발생했습니다."
+      buttonText="홈으로"
+      onButtonClick={() => history.push('/')}
+    />
+  );
 }
-
-const Screen = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-`;
 
 export default CrashErrorScreen;

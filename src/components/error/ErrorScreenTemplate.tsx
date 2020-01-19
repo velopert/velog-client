@@ -49,11 +49,14 @@ const Screen = styled.div`
   .message {
     padding-left: 1rem;
     padding-right: 1rem;
-
+    white-space: pre;
+    text-align: center;
+    line-height: 1.5;
     font-size: 2.5rem;
     color: ${palette.gray8};
     margin-top: 2rem;
     ${media.small} {
+      font-size: 1.5rem;
       margin-top: 1rem;
     }
   }

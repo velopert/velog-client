@@ -14,6 +14,11 @@ import client from './lib/graphql/client';
 import rootReducer from './modules';
 import storage from './lib/storage';
 import { setUser } from './modules/core';
+import * as Sentry from '@sentry/browser';
+
+Sentry.init({
+  dsn: 'https://99d0ac3ca0f64b4d8709e385e7692893@sentry.io/1886813',
+});
 
 const store = createStore(
   rootReducer,

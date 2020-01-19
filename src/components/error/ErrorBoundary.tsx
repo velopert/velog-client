@@ -1,22 +1,35 @@
 import React from 'react';
 import useNotFound from '../../lib/hooks/useNotFound';
 import NotFoundPage from '../../pages/NotFoundPage';
+import * as Sentry from '@sentry/browser';
+import CrashErrorScreen from './CrashErrorScreen';
+import ChunkErrorScreen from './ChunkErrorScreen';
 
 class ErrorBoundary extends React.Component {
   state = {
     hasError: false,
+    chunkError: false,
   };
   static getDerivedStateFromError(error: Error) {
+    if (error.name === 'ChunkLoadError') {
+      return {
+        chunkError: true,
+      };
+    }
     return { hasError: true };
   }
   componentDidCatch(error: Error, errorInfo: any) {
-    console.log({
-      error,
-      errorInfo,
-      stringifiedError: JSON.stringify(error || {}),
-    });
+    if (process.env.NODE_ENV === 'production') {
+      Sentry.captureException(error);
+    }
   }
   render() {
+    if (this.state.chunkError) {
+      return <ChunkErrorScreen />;
+    }
+    if (this.state.hasError) {
+      return <CrashErrorScreen />;
+    }
     return (
       <ErrorBoundaryWrapper hasError={this.state.hasError}>
         {this.props.children}
