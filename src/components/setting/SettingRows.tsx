@@ -4,7 +4,6 @@ import SettingRow from './SettingRow';
 import SettingTitleRow from './SettingTitleRow';
 import SettingSocialInfoRow from './SettingSocialInfoRow';
 import SettingEmailRulesRow from './SettingEmailRulesRow';
-import Button from '../common/Button';
 import { createFallbackTitle } from '../../lib/utils';
 import { ProfileLinks } from '../../lib/graphql/user';
 import SettingUnregisterRow from './SettingUnregisterRow';

@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import SettingUserProfile from '../../components/setting/SettingUserProfile';
 import useUpload from '../../lib/hooks/useUpload';
 import useS3Upload from '../../lib/hooks/useS3Upload';
 import useUserProfile from './hooks/useUserProfile';
-import { FaUnlockAlt } from 'react-icons/fa';
 import useUpdateThumbnail from './hooks/useUpdateThumbnail';
 
 export type SettingUserProfileContainerProps = {};
