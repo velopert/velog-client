@@ -1,18 +1,28 @@
-name: CI
+name: Deploy Serverless SSR
 
 on: 
   repository_dispatch: 
     types: netlify-complete
 
 jobs:
-  build:
+  deploy:
+    name: deploy
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+    - uses: actions/checkout@master
+    - name: yarn install
+      uses: borales/actions-yarn@v2.0.0
+      with:
+        cmd install
+    - name: yarn download:stats
+      uses: borales/actions-yarn@v2.0.0
+      with:
+        cmd download:stats
+    - name: serverless deploy
+      uses: serverless/github-action@master
+      with:
+        args: deploy
+      env:
+        # or if using AWS creds directly
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
