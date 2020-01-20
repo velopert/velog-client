@@ -1,0 +1,19 @@
+service: velog-v2-netlify-completion-hook
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: ap-northeast-2
+  stage: prod
+
+  environment:
+    GITHUB_TOKEN: ${ssm:/velog-v2/github-token}
+    SSR_DEPLOY_TOKEN: ${ssm:/velog-v2/ssr-deploy-token}
+
+functions:
+  webhook:
+    handler: handler.webhook
+    events:
+      - http:
+          path: /
+          method: POST
