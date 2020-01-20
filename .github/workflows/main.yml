@@ -13,11 +13,11 @@ jobs:
     - name: yarn install
       uses: borales/actions-yarn@v2.0.0
       with:
-        cmd install
+        cmd: install
     - name: yarn download:stats
       uses: borales/actions-yarn@v2.0.0
       with:
-        cmd download:stats
+        cmd: download:stats
     - name: serverless deploy
       uses: serverless/github-action@master
       with:
