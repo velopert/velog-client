@@ -16,10 +16,6 @@ service: velog-v2-ssr
 plugins:
   - serverless-webpack
 
-# app and org for use with dashboard.serverless.com
-app: velog-v2-ssr
-org: velopert
-
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
