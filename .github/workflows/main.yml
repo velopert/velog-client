@@ -14,10 +14,10 @@ jobs:
       uses: borales/actions-yarn@v2.0.0
       with:
         cmd: install
-    - name: yarn download:stats
-      uses: borales/actions-yarn@v2.0.0
+    - name: curl
+      uses: wei/curl@master
       with:
-        cmd: download:stats
+        args: -o ./build/loadable-stats.json https://static.velog.io/loadable-stats.json
     - name: serverless deploy
       uses: serverless/github-action@master
       with:
