@@ -149,7 +149,7 @@
     "build:server": "node scripts/build.server.js",
     "start:server:local": "node ./dist/server.js",
     "test": "node scripts/test.js",
-    "download:stats": "curl -o ./build/loadable-stats.json https://static.velog.io/loadable-stats.json"
+    "download:stats": "curl -o ./build/loadable-stats.json \"https://static.velog.io/loadable-stats.json\" --create-dirs"
   },
   "eslintConfig": {
     "extends": [
