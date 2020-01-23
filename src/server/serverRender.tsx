@@ -17,6 +17,7 @@ import App from '../App';
 import Html from './Html';
 import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 import CacheManager from './CacheManager';
+import { HelmetProvider, FilledContext } from 'react-helmet-async';
 
 const statsFile = path.resolve(__dirname, '../build/loadable-stats.json');
 const cacheManager = new CacheManager();
@@ -66,17 +67,21 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
     publicPath: 'https://static.velog.io',
   });
 
+  const helmetContext = {} as FilledContext;
+
   const Root = (
     <ChunkExtractorManager extractor={extractor}>
-      <StyleSheetManager sheet={sheet.instance}>
-        <Provider store={store}>
-          <ApolloProvider client={client}>
-            <StaticRouter location={url} context={context}>
-              <App />
-            </StaticRouter>
-          </ApolloProvider>
-        </Provider>
-      </StyleSheetManager>
+      <HelmetProvider context={helmetContext}>
+        <StyleSheetManager sheet={sheet.instance}>
+          <Provider store={store}>
+            <ApolloProvider client={client}>
+              <StaticRouter location={url} context={context}>
+                <App />
+              </StaticRouter>
+            </ApolloProvider>
+          </Provider>
+        </StyleSheetManager>
+      </HelmetProvider>
     </ChunkExtractorManager>
   );
 
@@ -97,6 +102,7 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
       reduxState={store.getState()}
       styledElement={styledElement}
       extractor={extractor}
+      helmet={helmetContext.helmet}
     />
   );
 

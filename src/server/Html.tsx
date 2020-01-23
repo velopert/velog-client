@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChunkExtractor } from '@loadable/server';
+import { HelmetData } from 'react-helmet';
 
 export type HtmlProps = {
   content: string;
@@ -7,6 +8,7 @@ export type HtmlProps = {
   extractor: ChunkExtractor;
   apolloState: any;
   reduxState: any;
+  helmet: HelmetData;
 };
 
 /*
@@ -63,11 +65,15 @@ function Html({
   extractor,
   apolloState,
   reduxState,
+  helmet,
 }: HtmlProps) {
   return (
     <html>
       {/* <head dangerouslySetInnerHTML={{ __html: head }}></head> */}
       <head>
+        {helmet.title.toComponent()}
+        {helmet.link.toComponent()}
+        {helmet.meta.toComponent()}
         {styledElement}
         {extractor.getLinkElements()}
         {extractor.getStyleElements()}
