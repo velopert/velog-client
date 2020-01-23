@@ -4,6 +4,7 @@ import renderWithProviders from '../../../lib/renderWithProviders';
 import { GET_SERIES } from '../../../lib/graphql/series';
 import { seriesData } from '../../../lib/graphql/__data__/series.data';
 import { waitForElement } from '@testing-library/react';
+import { HelmetProvider } from 'react-helmet-async';
 
 describe('SeriesPosts', () => {
   const setup = (props: Partial<SeriesPostsProps> = {}) => {
@@ -12,7 +13,9 @@ describe('SeriesPosts', () => {
       urlSlug: 'redux-or-mobx',
     };
     const utils = renderWithProviders(
-      <SeriesPosts {...initialProps} {...props} />,
+      <HelmetProvider>
+        <SeriesPosts {...initialProps} {...props} />
+      </HelmetProvider>,
       {
         mocks: [
           {

@@ -4,6 +4,7 @@ import { undrawPageNotFound } from '../../static/images';
 import { useHistory } from 'react-router-dom';
 import StatusCode from '../common/StatusCode';
 import useNotFound from '../../lib/hooks/useNotFound';
+import { Helmet } from 'react-helmet-async';
 
 export type NotFoundErrorProps = {};
 
@@ -13,6 +14,10 @@ function NotFoundError(props: NotFoundErrorProps) {
 
   return (
     <>
+      <Helmet>
+        <title>404 - velog</title>
+        <meta name="robots" content="noindex" />
+      </Helmet>
       <ErrorScreenTemplate
         image={undrawPageNotFound}
         message="아무것도 없네요!"

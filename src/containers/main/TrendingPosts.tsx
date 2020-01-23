@@ -9,6 +9,7 @@ import {
 import { useQuery } from '@apollo/react-hooks';
 import useScrollPagination from '../../lib/hooks/useScrollPagination';
 import { safe } from '../../lib/utils';
+import { Helmet } from 'react-helmet-async';
 
 interface TrendingPostsProps {}
 
@@ -63,6 +64,9 @@ const TrendingPosts: React.FC<TrendingPostsProps> = props => {
 
   return (
     <>
+      <Helmet>
+        <link rel="canonical" href="https://velog.io/" />
+      </Helmet>
       <PostCardList posts={data.trendingPosts} />
       {loading && <PostCardListSkeleton forLoading />}
     </>

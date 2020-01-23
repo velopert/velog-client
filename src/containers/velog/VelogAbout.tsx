@@ -49,7 +49,7 @@ const VelogAbout = ({ username }: VelogAboutProps) => {
     <Block>
       <Helmet>
         <title>
-          About {username} ({data.user.profile.display_name}) - velog
+          {username} ({data.user.profile.display_name}) / 소개 - velog
         </title>
         <meta
           name="description"

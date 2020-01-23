@@ -9,6 +9,7 @@ import PostCardList, {
   PostCardListSkeleton,
 } from '../../components/common/PostCardList';
 import useNotFound from '../../lib/hooks/useNotFound';
+import { Helmet } from 'react-helmet-async';
 
 export type TagDetailContainerProps = {
   tag: string;
@@ -81,6 +82,16 @@ function TagDetailContainer({ tag }: TagDetailContainerProps) {
 
   return (
     <>
+      <Helmet>
+        <title>#{tagDetail.data.tag.name} - velog</title>
+        <meta
+          name="description"
+          content={
+            tagDetail.data.tag.description ||
+            `벨로그에 작성된 포스트들 중 "${tagDetail.data.tag.name}" 태그가 사용된 포스트들의 리스트들을 확인해보세요.`
+          }
+        />
+      </Helmet>
       <TagDetail
         name={tagDetail.data.tag.name}
         thumbnail={tagDetail.data.tag.thumbnail}

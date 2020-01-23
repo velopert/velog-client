@@ -7,12 +7,17 @@ import { Provider } from 'react-redux';
 import rootReducer from '../../../modules';
 import { createStore } from 'redux';
 import { changeMarkdown } from '../../../modules/write';
-import { MemoryRouter } from 'react-router';
+
 import renderWithProviders from '../../../lib/renderWithProviders';
+import { HelmetProvider } from 'react-helmet-async';
 
 describe('MarkdownEditorContainer', () => {
   const setup = (props: Partial<MarkdownEditorContainerProps> = {}) => {
-    const utils = renderWithProviders(<MarkdownEditorContainer {...props} />);
+    const utils = renderWithProviders(
+      <HelmetProvider>
+        <MarkdownEditorContainer {...props} />
+      </HelmetProvider>,
+    );
     return {
       ...utils,
     };

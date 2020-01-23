@@ -37,6 +37,7 @@ import { escapeForUrl } from '../../lib/utils';
 import { useHistory } from 'react-router';
 import useSaveHotKey from './hooks/useSaveHotkey';
 import embedPlugin from '../../lib/remark/embedPlugin';
+import { Helmet } from 'react-helmet-async';
 
 export type MarkdownEditorContainerProps = {};
 
@@ -207,6 +208,9 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{title ? `(작성중) ${title}` : '새 글 작성'}</title>
+      </Helmet>
       <MarkdownEditor
         onUpload={upload}
         lastUploadedImage={publish ? null : image}

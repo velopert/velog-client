@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect, useMemo } from 'react';
 import SeriesPostsTemplate, {
   SeriesPostsTemplateSkeleton,
 } from '../../components/velog/SeriesPostsTemplate';
@@ -19,6 +19,9 @@ import DraggableSeriesPostList from '../../components/velog/DraggableSeriesPostL
 import useUser from '../../lib/hooks/useUser';
 import useNotFound from '../../lib/hooks/useNotFound';
 import { ssrEnabled } from '../../lib/utils';
+import { Helmet } from 'react-helmet-async';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../modules';
 
 export interface SeriesPostsProps {
   username: string;
@@ -33,6 +36,12 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
   const [editSeries] = useMutation(EDIT_SERIES);
   const user = useUser();
   const isOwnSeries = user && user.username === username;
+
+  const userLogo = useSelector((state: RootState) => state.header.userLogo);
+  const velogTitle = useMemo(() => {
+    if (!userLogo || !userLogo.title) return `${username}.log`;
+    return userLogo.title;
+  }, [userLogo, username]);
 
   const { data } = useQuery<GetSeriesResponse>(GET_SERIES, {
     variables: {
@@ -89,6 +98,11 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
       editing={editing}
       onInput={onChangeNextName}
     >
+      <Helmet>
+        <title>
+          시리즈 | {data.series.name} - {velogTitle}
+        </title>
+      </Helmet>
       {isOwnSeries && (
         <SeriesActionButtons
           onEdit={toggleEditing}

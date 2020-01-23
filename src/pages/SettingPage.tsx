@@ -4,12 +4,17 @@ import PageTemplate from '../components/base/PageTemplate';
 import SettingUserProfileContainer from '../containers/setting/SettingUserProfileContainer';
 import SettingRowsContainer from '../containers/setting/SettingRowsContainer';
 import media from '../lib/styles/media';
+import { Helmet } from 'react-helmet-async';
 
 export type SettingPageProps = {};
 
 function SettingPage(props: SettingPageProps) {
   return (
     <SettingTemplate>
+      <Helmet>
+        <title>설정 - velog</title>
+        <meta name="robots" content="noindex" />
+      </Helmet>
       <main>
         <SettingUserProfileContainer />
         <SettingRowsContainer />

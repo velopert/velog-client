@@ -1,10 +1,15 @@
 import * as React from 'react';
 import ActiveEditor, { ActiveEditorProps } from '../ActiveEditor';
 import renderWithProviders from '../../../lib/renderWithProviders';
+import { HelmetProvider } from 'react-helmet-async';
 
 describe('ActiveEditor', () => {
   const setup = (props: Partial<ActiveEditorProps> = {}) => {
-    const utils = renderWithProviders(<ActiveEditor {...props} />);
+    const utils = renderWithProviders(
+      <HelmetProvider>
+        <ActiveEditor {...props} />
+      </HelmetProvider>,
+    );
     return {
       ...utils,
     };

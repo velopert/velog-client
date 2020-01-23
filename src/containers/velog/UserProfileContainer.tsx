@@ -10,6 +10,7 @@ import UserProfile, {
 } from '../../components/common/UserProfile';
 import media from '../../lib/styles/media';
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 
 export interface UserProfileContainerProps {
   username: string;
@@ -18,6 +19,7 @@ export interface UserProfileContainerProps {
 const UserProfileContainer: React.FC<UserProfileContainerProps> = ({
   username,
 }) => {
+  const location = useLocation();
   const { data, loading, error } = useQuery<GetUserProfileResponse>(
     GET_USER_PROFILE,
     {
@@ -37,11 +39,22 @@ const UserProfileContainer: React.FC<UserProfileContainerProps> = ({
     thumbnail,
   } = data.user.profile;
 
+  const isSeries = location.pathname.includes('/series');
+
   return (
     <>
       <Helmet>
-        <title>{`${username} (${display_name}) - velog`}</title>
-        <meta name="description" content={short_bio} />
+        <title>{`${username} (${display_name}) ${
+          isSeries ? '/ 시리즈' : ''
+        }- velog`}</title>
+        <meta
+          name="description"
+          content={
+            isSeries
+              ? `${username}님이 작성한 포스트 시리즈들을 확인해보세요.`
+              : short_bio
+          }
+        />
       </Helmet>
       <StyledUserProfile
         displayName={display_name}
