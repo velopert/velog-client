@@ -6,6 +6,7 @@ import UserProfileContainer, {
 import { MockedResponse } from '@apollo/react-testing';
 import { GET_USER_PROFILE } from '../../../lib/graphql/user';
 import renderWithProviders from '../../../lib/renderWithProviders';
+import { HelmetProvider } from 'react-helmet-async';
 
 describe('UserProfileContainer', () => {
   const setup = (props: Partial<UserProfileContainerProps> = {}) => {
@@ -45,7 +46,9 @@ describe('UserProfileContainer', () => {
     ];
 
     const utils = renderWithProviders(
-      <UserProfileContainer {...initialProps} {...props} />,
+      <HelmetProvider>
+        <UserProfileContainer {...initialProps} {...props} />
+      </HelmetProvider>,
       { mocks },
     );
     return {

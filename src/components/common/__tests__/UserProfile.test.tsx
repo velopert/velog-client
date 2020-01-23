@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
 import UserProfile, { UserProfileProps } from '../UserProfile';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('UserProfile', () => {
   const setup = (props: Partial<UserProfileProps> = {}) => {
@@ -14,8 +15,13 @@ describe('UserProfile', () => {
         email: 'public.velopert@gmail.com',
       },
       thumbnail: 'https://via.placeholder.com/150',
+      username: 'velopert',
     };
-    const utils = render(<UserProfile {...initialProps} {...props} />);
+    const utils = render(
+      <MemoryRouter>
+        <UserProfile {...initialProps} {...props} />
+      </MemoryRouter>,
+    );
     return {
       ...utils,
     };

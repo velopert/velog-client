@@ -15,6 +15,7 @@ import rootReducer from './modules';
 import storage from './lib/storage';
 import { setUser } from './modules/core';
 import * as Sentry from '@sentry/browser';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 Sentry.init({
   dsn: 'https://99d0ac3ca0f64b4d8709e385e7692893@sentry.io/1886813',
@@ -37,25 +38,29 @@ loadUser();
 if (process.env.NODE_ENV === 'production') {
   loadableReady(() => {
     ReactDOM.hydrate(
+      <HelmetProvider>
+        <Provider store={store}>
+          <ApolloProvider client={client}>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </ApolloProvider>
+        </Provider>
+      </HelmetProvider>,
+      document.getElementById('root'),
+    );
+  });
+} else {
+  ReactDOM.render(
+    <HelmetProvider>
       <Provider store={store}>
         <ApolloProvider client={client}>
           <BrowserRouter>
             <App />
           </BrowserRouter>
         </ApolloProvider>
-      </Provider>,
-      document.getElementById('root'),
-    );
-  });
-} else {
-  ReactDOM.render(
-    <Provider store={store}>
-      <ApolloProvider client={client}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ApolloProvider>
-    </Provider>,
+      </Provider>
+    </HelmetProvider>,
     document.getElementById('root'),
   );
 }

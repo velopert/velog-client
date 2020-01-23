@@ -11,6 +11,7 @@ export const dummy: CurrentUser = {
     display_name: 'dummy',
     thumbnail: null,
   },
+  email: 'support@velog.io',
 };
 
 describe('core reducer', () => {
@@ -93,7 +94,7 @@ describe('core reducer', () => {
 
     it('CLOSE_POPUP', () => {
       let state = getInitialState();
-      Object.assign(state, {
+      Object.assign({}, state, {
         popup: {
           title: '제목',
           message: '메시지',

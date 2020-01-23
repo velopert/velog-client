@@ -3,7 +3,7 @@
 exports[`HeaderUserIcon matches snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa dKjqSX"
+    class="sc-bdVaJa gdqjx"
   >
     <img
       alt="thumbnail"
@@ -16,6 +16,7 @@ exports[`HeaderUserIcon matches snapshot 1`] = `
       stroke-width="0"
       viewBox="0 0 24 24"
       width="1em"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M7 10l5 5 5-5z"

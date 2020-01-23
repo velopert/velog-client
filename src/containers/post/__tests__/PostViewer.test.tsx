@@ -8,6 +8,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient } from 'apollo-client';
 import { ApolloProvider } from '@apollo/react-hooks';
 import renderWithProviders from '../../../lib/renderWithProviders';
+import { HelmetProvider } from 'react-helmet-async';
 
 const samplePost = {
   id: '6533da20-b351-11e8-9696-f1fffe8a36f1',
@@ -93,7 +94,9 @@ describe('PostViewer', () => {
     };
 
     const utils = renderWithProviders(
-      <PostViewer {...initialProps} {...props} />,
+      <HelmetProvider>
+        <PostViewer {...initialProps} {...props} />
+      </HelmetProvider>,
       {
         mocks: overrideMocks,
       },

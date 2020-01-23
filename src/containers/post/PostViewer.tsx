@@ -1,5 +1,5 @@
-import React, { useEffect, useCallback, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useCallback, useRef, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   READ_POST,
   SinglePost,
@@ -31,6 +31,8 @@ import { useMount } from 'react-use';
 import PostSkeleton from '../../components/post/PostSkeleton';
 import media from '../../lib/styles/media';
 import useNotFound from '../../lib/hooks/useNotFound';
+import { Helmet } from 'react-helmet-async';
+import { RootState } from '../../modules';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -90,6 +92,11 @@ const PostViewer: React.FC<PostViewerProps> = ({
   const [likePost, { loading: loadingLike }] = useMutation(LIKE_POST);
   const [unlikePost, { loading: loadingUnlike }] = useMutation(UNLIKE_POST);
   const { showNotFound } = useNotFound();
+  const userLogo = useSelector((state: RootState) => state.header.userLogo);
+  const velogTitle = useMemo(() => {
+    if (!userLogo || !userLogo.title) return `${username}.log`;
+    return userLogo.title;
+  }, [userLogo, username]);
 
   const { error, data } = readPost;
 
@@ -281,8 +288,32 @@ const PostViewer: React.FC<PostViewerProps> = ({
 
   const { post } = data;
 
+  const url = `https://velog.io/@${username}/${post.url_slug}`;
+
   return (
     <PostViewerProvider prefetchLinkedPosts={prefetchLinkedPosts}>
+      <Helmet>
+        <title>
+          {post.title} - {velogTitle}
+        </title>
+        {post.short_description && (
+          <meta name="description" content={post.short_description} />
+        )}
+        <link rel="canonical" href={url} />
+        <meta property="og:url" content={url} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.short_description} />
+        {post.thumbnail && (
+          <meta property="og:image" content={post.thumbnail} />
+        )}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={post.short_description} />
+        {post.thumbnail && (
+          <meta name="twitter:image" content={post.thumbnail} />
+        )}
+      </Helmet>
       <PostHead
         title={post.title}
         tags={post.tags}

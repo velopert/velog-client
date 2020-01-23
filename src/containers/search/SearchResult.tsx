@@ -6,6 +6,7 @@ import { SearchPostsResponse, SEARCH_POSTS } from '../../lib/graphql/post';
 import useScrollPagination from '../../lib/hooks/useScrollPagination';
 import { safe } from '../../lib/utils';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet-async';
 // import { undrawSearching } from '../../static/images';
 
 export interface SearchResultProps {
@@ -63,6 +64,9 @@ function SearchResult({ keyword, username }: SearchResultProps) {
 
   return (
     <>
+      <Helmet>
+        <title>{`"${keyword}" 검색 결과 - velog`}</title>
+      </Helmet>
       <SearchResultInfo count={data.searchPosts.count} />
       <PostCardList posts={data.searchPosts.posts} hideUser={!!username} />
     </>

@@ -9,6 +9,7 @@ import UserProfile, {
   UserProfileSkeleton,
 } from '../../components/common/UserProfile';
 import media from '../../lib/styles/media';
+import { Helmet } from 'react-helmet-async';
 
 export interface UserProfileContainerProps {
   username: string;
@@ -37,13 +38,19 @@ const UserProfileContainer: React.FC<UserProfileContainerProps> = ({
   } = data.user.profile;
 
   return (
-    <StyledUserProfile
-      displayName={display_name}
-      description={short_bio}
-      profileLinks={profile_links}
-      thumbnail={thumbnail}
-      username={username}
-    />
+    <>
+      <Helmet>
+        <title>{`${username} (${display_name}) - velog`}</title>
+        <meta name="description" content={short_bio} />
+      </Helmet>
+      <StyledUserProfile
+        displayName={display_name}
+        description={short_bio}
+        profileLinks={profile_links}
+        thumbnail={thumbnail}
+        username={username}
+      />
+    </>
   );
 };
 

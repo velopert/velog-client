@@ -11,34 +11,34 @@ exports[`ActiveEditor matches snapshot 1`] = `
       style="background-color: white;"
     >
       <div
-        class="sc-fjdhpX fFuGoB"
+        class="sc-jzJRlG itrBwj"
         data-testid="codemirror"
       >
         <div
           class="wrapper"
         >
           <div
-            class="sc-cSHVUG hTnABg"
+            class="sc-kAzzGY eyVaMi"
           >
             <textarea
-              class="sc-htpNat iCHviA"
+              class="sc-bxivhb hTFJFh"
               placeholder="제목을 입력하세요"
               style="height: 0px;"
             />
             <div
-              class="sc-jzJRlG bcnBQv"
+              class="sc-cSHVUG byCPaA"
             />
             <div
-              class="sc-chPdSV drnliS"
+              class="sc-kgoBCf koOGss"
             >
               <input
-                class="sc-kgoBCf hOnPFa"
+                class="sc-kGXeez phBMh"
                 placeholder="태그를 입력하세요"
                 tabindex="2"
                 value=""
               />
               <div
-                class="sc-kpOJdX kEzcZB"
+                class="sc-dxgOiQ IaJXk"
               >
                 <div
                   class="inside"
@@ -51,18 +51,18 @@ exports[`ActiveEditor matches snapshot 1`] = `
             </div>
           </div>
           <div
-            class="sc-bxivhb dKeQhQ"
+            class="sc-ifAKCX gpJgCO"
             id="toolbar"
           >
             <div
-              class="sc-ifAKCX llZOEm"
+              class="sc-EHOje hTEDzz"
             >
               <button
-                class="sc-bZQynM fkpewe ql-header"
+                class="sc-gzVnrw kpnNXQ ql-header"
                 value="1"
               >
                 <div
-                  class="sc-EHOje gffsLS"
+                  class="sc-bZQynM jKnqZE"
                 >
                   H
                   <span>
@@ -71,11 +71,11 @@ exports[`ActiveEditor matches snapshot 1`] = `
                 </div>
               </button>
               <button
-                class="sc-bZQynM fkpewe ql-header"
+                class="sc-gzVnrw kpnNXQ ql-header"
                 value="2"
               >
                 <div
-                  class="sc-EHOje gffsLS"
+                  class="sc-bZQynM jKnqZE"
                 >
                   H
                   <span>
@@ -84,11 +84,11 @@ exports[`ActiveEditor matches snapshot 1`] = `
                 </div>
               </button>
               <button
-                class="sc-bZQynM fkpewe ql-header"
+                class="sc-gzVnrw kpnNXQ ql-header"
                 value="3"
               >
                 <div
-                  class="sc-EHOje gffsLS"
+                  class="sc-bZQynM jKnqZE"
                 >
                   H
                   <span>
@@ -97,11 +97,11 @@ exports[`ActiveEditor matches snapshot 1`] = `
                 </div>
               </button>
               <button
-                class="sc-bZQynM fkpewe ql-header"
+                class="sc-gzVnrw kpnNXQ ql-header"
                 value="4"
               >
                 <div
-                  class="sc-EHOje gffsLS"
+                  class="sc-bZQynM jKnqZE"
                 >
                   H
                   <span>
@@ -111,13 +111,13 @@ exports[`ActiveEditor matches snapshot 1`] = `
               </button>
             </div>
             <div
-              class="sc-gzVnrw bHtWFf"
+              class="sc-htoDjs iUvFMG"
             />
             <div
-              class="sc-ifAKCX llZOEm"
+              class="sc-EHOje hTEDzz"
             >
               <button
-                class="sc-bZQynM fkpewe ql-bold"
+                class="sc-gzVnrw kpnNXQ ql-bold"
               >
                 <svg
                   fill="currentColor"
@@ -134,7 +134,7 @@ exports[`ActiveEditor matches snapshot 1`] = `
                 </svg>
               </button>
               <button
-                class="sc-bZQynM fkpewe ql-italic"
+                class="sc-gzVnrw kpnNXQ ql-italic"
               >
                 <svg
                   fill="currentColor"
@@ -151,7 +151,7 @@ exports[`ActiveEditor matches snapshot 1`] = `
                 </svg>
               </button>
               <button
-                class="sc-bZQynM fkpewe ql-strike"
+                class="sc-gzVnrw kpnNXQ ql-strike"
               >
                 <svg
                   fill="currentColor"
@@ -169,13 +169,13 @@ exports[`ActiveEditor matches snapshot 1`] = `
               </button>
             </div>
             <div
-              class="sc-gzVnrw bHtWFf"
+              class="sc-htoDjs iUvFMG"
             />
             <div
-              class="sc-ifAKCX llZOEm"
+              class="sc-EHOje hTEDzz"
             >
               <button
-                class="sc-bZQynM fkpewe ql-blockquote"
+                class="sc-gzVnrw kpnNXQ ql-blockquote"
               >
                 <svg
                   fill="currentColor"
@@ -192,7 +192,7 @@ exports[`ActiveEditor matches snapshot 1`] = `
                 </svg>
               </button>
               <button
-                class="sc-bZQynM fkpewe ql-link"
+                class="sc-gzVnrw kpnNXQ ql-link"
               >
                 <svg
                   fill="currentColor"
@@ -209,7 +209,7 @@ exports[`ActiveEditor matches snapshot 1`] = `
                 </svg>
               </button>
               <button
-                class="sc-bZQynM fkpewe ql-image"
+                class="sc-gzVnrw kpnNXQ ql-image"
               >
                 <svg
                   fill="currentColor"
@@ -226,7 +226,7 @@ exports[`ActiveEditor matches snapshot 1`] = `
                 </svg>
               </button>
               <button
-                class="sc-bZQynM fkpewe ql-code-block"
+                class="sc-gzVnrw kpnNXQ ql-code-block"
               >
                 <svg
                   fill="currentColor"
@@ -244,11 +244,11 @@ exports[`ActiveEditor matches snapshot 1`] = `
               </button>
             </div>
             <div
-              class="sc-ifAKCX llZOEm"
+              class="sc-EHOje hTEDzz"
             />
           </div>
           <div
-            class="sc-cSHVUG hTnABg"
+            class="sc-kAzzGY eyVaMi"
           >
             <textarea
               style="display: none;"
@@ -358,20 +358,20 @@ exports[`ActiveEditor matches snapshot 1`] = `
           </div>
         </div>
         <div
-          class="sc-kAzzGY wRxqq"
-          style="width: 0px;"
+          class="sc-chPdSV jrBnWs"
+          style="width: 50%;"
         >
           <div
-            class="sc-dxgOiQ jULWpa"
+            class="sc-ckVGcZ fxFKyJ"
           >
             <button
-              class="sc-VigVT gXJEWC sc-ckVGcZ bCLYWM"
+              class="sc-jTzLTM dFCrMS sc-jKJlTe HPPIJ"
               color="lightGray"
             >
               임시저장
             </button>
             <button
-              class="sc-VigVT dRzjhw sc-ckVGcZ bCLYWM"
+              class="sc-jTzLTM ggRJzJ sc-jKJlTe HPPIJ"
               color="teal"
             >
               출간하기
@@ -386,16 +386,16 @@ exports[`ActiveEditor matches snapshot 1`] = `
       style="background-color: rgb(251, 253, 252);"
     >
       <div
-        class="sc-kkGfuU hrmdY"
+        class="sc-iAyFgw Keuli"
       >
         <h1
-          class="sc-iAyFgw dWxJHF"
+          class="sc-hSdWYo ZQpdL"
         />
         <div
-          class="sc-hMqMXs qxbLY"
+          class="sc-kEYyzF eMgGzU"
         >
           <div
-            class="sc-kEYyzF LjInP atom-one-light"
+            class="sc-kkGfuU jCfIjC atom-one-light"
           >
             
 

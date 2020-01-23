@@ -5,7 +5,7 @@ import PlainNavLink from '../common/PlainNavLink';
 import media from '../../lib/styles/media';
 
 const VelogTabBlock = styled.div`
-  margin-top: 6rem;
+  margin-top: 4.5rem;
   margin-bottom: 4.5rem;
   display: flex;
   justify-content: center;

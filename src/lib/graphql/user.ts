@@ -96,6 +96,7 @@ export const GET_USER_ABOUT = gql`
       profile {
         id
         about
+        display_name
       }
     }
   }
@@ -107,6 +108,7 @@ export type GetUserAboutResponse = {
     profile: {
       id: string;
       about: string;
+      display_name: string;
     };
   };
 };

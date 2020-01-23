@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 // import MainPage from './pages/main/MainPage';
 // import PostPage from './pages/PostPage';
@@ -11,6 +11,7 @@ import PageTemplate from './components/base/PageTemplate';
 import VelogPageFallback from './containers/velog/VelogPageFallback';
 import ErrorBoundary from './components/error/ErrorBoundary';
 import NotFoundPage from './pages/NotFoundPage';
+import { Helmet } from 'react-helmet-async';
 
 const loadableConfig = {
   fallback: <PageTemplate />,
@@ -45,6 +46,15 @@ interface AppProps {}
 const App: React.FC<AppProps> = props => {
   return (
     <JazzbarProvider>
+      <Helmet>
+        <title>velog</title>
+        <meta
+          name="description"
+          content="개발자들을 위한 블로그 서비스. 어디서 글 쓸지 고민하지 말고 벨로그에서 시작하세요."
+        />
+        <meta property="fb:app_id" content="203040656938507" />
+        <meta property="og:image" content="https://images.velog.io/velog.png" />
+      </Helmet>
       <ErrorBoundary>
         <Switch>
           <Route path="/" component={MainPage} exact />
