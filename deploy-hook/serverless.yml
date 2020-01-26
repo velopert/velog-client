@@ -1,4 +1,4 @@
-service: velog-v2-netlify-completion-hook
+service: velog-v2-frontend-deploy-hook
 
 provider:
   name: aws
