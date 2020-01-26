@@ -41,8 +41,10 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
   if (!loggedIn) {
     const cachedPage = await cacheManager.get(url);
     if (cachedPage) {
-      // Temp disable cache
-      // return cachedPage;
+      return {
+        html: cachedPage,
+        statusCode: 200,
+      };
     }
   }
 
@@ -68,6 +70,8 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
   });
 
   const helmetContext = {} as FilledContext;
+
+  console.log('URL: ', url);
 
   const Root = (
     <ChunkExtractorManager extractor={extractor}>

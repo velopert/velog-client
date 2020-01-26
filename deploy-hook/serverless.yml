@@ -9,6 +9,16 @@ provider:
   environment:
     GITHUB_TOKEN: ${ssm:/velog-v2/github-token}
     SSR_DEPLOY_TOKEN: ${ssm:/velog-v2/ssr-deploy-token}
+    REDIS_HOST: ${ssm:/velog-v2/redis-host}
+    
+  vpc:
+    securityGroupIds:
+      - sg-007a5a395dbdcef1f
+      - sg-f588c99d
+      - sg-0fd14591289bb3212
+    subnetIds:
+      - subnet-02c6112f71f5148c7
+      - subnet-0ebc43e6ab298c646
 
 functions:
   webhook:
@@ -17,3 +27,4 @@ functions:
       - http:
           path: /
           method: POST
+

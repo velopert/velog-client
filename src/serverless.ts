@@ -6,7 +6,7 @@ export const handler = async (event: APIGatewayEvent) => {
   const query = event.queryStringParameters
     ? qs.stringify(event.queryStringParameters)
     : '';
-  const url = event.path.concat(query);
+  const url = query ? event.path.concat('?', query) : event.path;
   const cookie = event.headers.Cookie || '';
   const loggedIn =
     cookie.includes('refresh_token') || cookie.includes('access_token');
