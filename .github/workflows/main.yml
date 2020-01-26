@@ -40,3 +40,8 @@ jobs:
       run: |
         sudo chmod -R 777 ./build
         rm -rf ./build
+    - name: Deploy Completion Webhook
+      uses: joelwmale/webhook-action@master
+      env:
+        WEBHOOK_URL: ${{ secrets.SSR_COMPLETE_WEBHOOK }}
+        data: "{'deployment': 'finished'}"

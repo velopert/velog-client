@@ -1,7 +1,7 @@
 const axios = require('axios');
 const Redis = require('ioredis');
 
-async function initiateGithubAction(body: any) {
+async function initiateGithubAction(body) {
   if (!body) {
     return {
       statusCode: 400,
