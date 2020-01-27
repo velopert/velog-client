@@ -148,7 +148,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "build:netlify": "node scripts/build.js && node scripts/keepChunks.js",
+    "build:ci": "node scripts/build.js && node scripts/keepChunks.js",
     "build:server": "node scripts/build.server.js",
     "start:server:local": "node ./dist/server.js",
     "test": "node scripts/test.js",

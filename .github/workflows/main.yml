@@ -1,8 +1,9 @@
 name: Deploy Serverless SSR
 
-on: 
-  repository_dispatch: 
-    types: netlify-complete
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   deploy:
@@ -24,10 +25,19 @@ jobs:
       uses: borales/actions-yarn@v2.0.0
       with:
         cmd: install
-    - name: curl
-      uses: wei/curl@master
+    - name: npm run build:ci
+      run: npm run build:ci
+    - name: s3 sync
+      uses: jakejarvis/s3-sync-action@master
       with:
-        args: -o ./build/loadable-stats.json "https://static.velog.io/loadable-stats.json" --create-dirs
+        args: --acl public-read --follow-symlinks --delete
+      env:
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+        AWS_REGION: 'ap-northeast-2'
+        SOURCE_DIR: 'build'
+
     - name: serverless deploy
       uses: serverless/github-action@master
       with:
@@ -36,10 +46,6 @@ jobs:
         # or if using AWS creds directly
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
-    - name: clear build
-      run: |
-        sudo chmod -R 777 ./build
-        rm -rf ./build
     - name: Deploy Completion Webhook
       uses: joelwmale/webhook-action@master
       env:
