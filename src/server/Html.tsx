@@ -29,17 +29,6 @@ const favicons = [
     path: '/favicons/apple-icon-152x152.png',
   },
   {
-    rel: 'apple-touch-icon',
-    sizes: '180x180',
-    path: '/favicons/apple-icon-180x180.png',
-  },
-  {
-    rel: 'icon',
-    type: 'image/png',
-    sizes: '192x192',
-    path: '/favicons/favicon-192x192.png',
-  },
-  {
     rel: 'icon',
     type: 'image/png',
     sizes: '32x32',
