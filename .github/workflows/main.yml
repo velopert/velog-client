@@ -51,3 +51,9 @@ jobs:
       env:
         WEBHOOK_URL: ${{ secrets.SSR_COMPLETE_WEBHOOK }}
         data: "{'deployment': 'finished'}"
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2.0.0
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_USERNAME: 'Github Actions'
+        SLACK_ICON: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
