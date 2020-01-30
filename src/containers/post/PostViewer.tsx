@@ -60,10 +60,9 @@ const PostViewer: React.FC<PostViewerProps> = ({
   history,
   match,
 }) => {
-  useMount(() => {
-    if (!window.scrollTo || process.env.NODE_ENV === 'test') return;
+  useEffect(() => {
     window.scrollTo(0, 0);
-  });
+  }, [username, urlSlug]);
   const userId = useUserId();
   const dispatch = useDispatch();
   const readPost = useQuery<{ post: SinglePost }>(READ_POST, {

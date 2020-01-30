@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { RouteComponentProps } from 'react-router';
 import styled from 'styled-components';
 import TagDetailContainer from '../../containers/tags/TagDetailContainer';
@@ -8,6 +8,10 @@ export type TagDetailPageProps = {} & RouteComponentProps<{ tag: string }>;
 
 function TagDetailPage({ match }: TagDetailPageProps) {
   const { tag } = match.params;
+  useEffect(() => {
+    console.log('hello?');
+    window.scrollTo(0, 0);
+  }, [tag]);
   return (
     <Block>
       <TagDetailContainer tag={tag} />

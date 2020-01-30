@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Route, useLocation } from 'react-router-dom';
 import MainTemplate from '../../components/main/MainTemplate';
 import MainSideMenu from '../../components/main/MainSideMenu';
 import MainRightFooter from '../../components/main/MainRightFooter';
@@ -12,6 +12,13 @@ import MainMobileHead from '../../components/main/MainMobileHead';
 interface MainPageProps {}
 
 const MainPage: React.FC<MainPageProps> = () => {
+  const { pathname } = useLocation();
+
+  // scroll to top when path changes
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [pathname]);
+
   return (
     <MainTemplate>
       <MainTemplate.Left>
