@@ -23,7 +23,6 @@ const ToolbarBlock = styled.div<{
   width: 100%;
   position: sticky;
   top: 0;
-  height: 3rem;
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
@@ -32,6 +31,7 @@ const ToolbarBlock = styled.div<{
   background: white;
   z-index: ${zIndexes.Toolbar};
   transition: all 0.125s ease-in;
+  flex-wrap: wrap;
   ${props =>
     props.shadow &&
     css`
@@ -63,7 +63,7 @@ const Heading = styled.div`
 `;
 const ToolbarItem = styled.button`
   width: 3rem;
-  height: 100%;
+  height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -114,85 +114,79 @@ const Toolbar: React.FC<ToolbarProps> = ({
       forMarkdown={forMarkdown}
       ref={innerRef}
     >
-      <ToolbarGroup>
-        <ToolbarItem
-          className="ql-header"
-          value={1}
-          onClick={() => onClick('heading1')}
-        >
-          <Heading>
-            H<span>1</span>
-          </Heading>
-        </ToolbarItem>
-        <ToolbarItem
-          className="ql-header"
-          value={2}
-          onClick={() => onClick('heading2')}
-        >
-          <Heading>
-            H<span>2</span>
-          </Heading>
-        </ToolbarItem>
-        <ToolbarItem
-          className="ql-header"
-          value={3}
-          onClick={() => onClick('heading3')}
-        >
-          <Heading>
-            H<span>3</span>
-          </Heading>
-        </ToolbarItem>
-        <ToolbarItem
-          className="ql-header"
-          value={4}
-          onClick={() => onClick('heading4')}
-        >
-          <Heading>
-            H<span>4</span>
-          </Heading>
-        </ToolbarItem>
-      </ToolbarGroup>
+      <ToolbarItem
+        className="ql-header"
+        value={1}
+        onClick={() => onClick('heading1')}
+      >
+        <Heading>
+          H<span>1</span>
+        </Heading>
+      </ToolbarItem>
+      <ToolbarItem
+        className="ql-header"
+        value={2}
+        onClick={() => onClick('heading2')}
+      >
+        <Heading>
+          H<span>2</span>
+        </Heading>
+      </ToolbarItem>
+      <ToolbarItem
+        className="ql-header"
+        value={3}
+        onClick={() => onClick('heading3')}
+      >
+        <Heading>
+          H<span>3</span>
+        </Heading>
+      </ToolbarItem>
+      <ToolbarItem
+        className="ql-header"
+        value={4}
+        onClick={() => onClick('heading4')}
+      >
+        <Heading>
+          H<span>4</span>
+        </Heading>
+      </ToolbarItem>
       <Separator />
-      <ToolbarGroup>
-        <ToolbarItem className="ql-bold" onClick={() => onClick('bold')}>
-          <MdFormatBold />
+      <ToolbarItem className="ql-bold" onClick={() => onClick('bold')}>
+        <MdFormatBold />
+      </ToolbarItem>
+      <ToolbarItem className="ql-italic" onClick={() => onClick('italic')}>
+        <MdFormatItalic />
+      </ToolbarItem>
+      {!forMarkdown && (
+        <ToolbarItem className="ql-underline">
+          <MdFormatUnderlined />
         </ToolbarItem>
-        <ToolbarItem className="ql-italic" onClick={() => onClick('italic')}>
-          <MdFormatItalic />
-        </ToolbarItem>
-        {!forMarkdown && (
-          <ToolbarItem className="ql-underline">
-            <MdFormatUnderlined />
-          </ToolbarItem>
-        )}
-        <ToolbarItem className="ql-strike" onClick={() => onClick('strike')}>
-          <MdFormatStrikethrough />
-        </ToolbarItem>
-      </ToolbarGroup>
+      )}
+      <ToolbarItem className="ql-strike" onClick={() => onClick('strike')}>
+        <MdFormatStrikethrough />
+      </ToolbarItem>
       <Separator />
-      <ToolbarGroup>
-        <ToolbarItem
-          className="ql-blockquote"
-          onClick={() => onClick('blockquote')}
-        >
-          <MdFormatQuote />
-        </ToolbarItem>
-        <ToolbarItem className="ql-link" onClick={() => onClick('link')}>
-          <MdInsertLink />
-        </ToolbarItem>
-        <ToolbarItem className="ql-image" onClick={() => onClick('image')}>
-          <MdImage />
-        </ToolbarItem>
-        <ToolbarItem
-          className="ql-code-block"
-          onClick={() => onClick('codeblock')}
-        >
-          <MdCode />
-        </ToolbarItem>
-      </ToolbarGroup>
+      <ToolbarItem
+        className="ql-blockquote"
+        onClick={() => onClick('blockquote')}
+      >
+        <MdFormatQuote />
+      </ToolbarItem>
+      <ToolbarItem className="ql-link" onClick={() => onClick('link')}>
+        <MdInsertLink />
+      </ToolbarItem>
+      <ToolbarItem className="ql-image" onClick={() => onClick('image')}>
+        <MdImage />
+      </ToolbarItem>
+      <ToolbarItem
+        className="ql-code-block"
+        onClick={() => onClick('codeblock')}
+      >
+        <MdCode />
+      </ToolbarItem>
       {/* <Separator /> */}
-      <ToolbarGroup>
-        {/* forMarkdown ? (
+      {/* <ToolbarGroup> */}
+      {/* forMarkdown ? (
           <ToolbarItem data-testid="quillconvert" onClick={onConvert}>
             <MdRemoveRedEye />
           </ToolbarItem>
@@ -201,7 +195,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
             <FaMarkdown />
           </ToolbarItem>
         ) */}
-      </ToolbarGroup>
+      {/* </ToolbarGroup> */}
     </ToolbarBlock>
   );
 };
