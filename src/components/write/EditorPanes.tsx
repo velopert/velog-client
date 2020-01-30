@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 
 import transitions from '../../lib/styles/transitions';
+import media from '../../lib/styles/media';
 const EditorPanesBlock = styled.div`
   width: 100%;
   height: 100%;
@@ -20,6 +21,12 @@ const EditorPane = styled.div<{ shadow?: boolean }>`
       z-index: 1;
       box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.015);
     `}
+`;
+
+const RightPane = styled(EditorPane)`
+  ${media.medium} {
+    display: none;
+  }
 `;
 
 export interface EditorPanesProps {
@@ -44,14 +51,14 @@ const EditorPanes: React.FC<EditorPanesProps> = ({
       >
         {left}
       </EditorPane>
-      <EditorPane
+      <RightPane
         data-testid="right"
         style={{
           backgroundColor: theme === 'DARK' ? 'white' : '#fbfdfc',
         }}
       >
         {right}
-      </EditorPane>
+      </RightPane>
     </EditorPanesBlock>
   );
 };

@@ -34,11 +34,13 @@ const Title = styled.h1`
 export interface MarkdownPreviewProps {
   markdown: string;
   title: string;
+  className?: string;
 }
 
 const MarkdownPreview: React.FC<MarkdownPreviewProps> = ({
   markdown,
   title,
+  className,
 }) => {
   return (
     <MarkdownPreviewBlock>

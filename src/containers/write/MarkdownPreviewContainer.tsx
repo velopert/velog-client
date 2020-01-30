@@ -2,6 +2,7 @@ import * as React from 'react';
 import MarkdownPreview from '../../components/write/MarkdownPreview';
 import { connect } from 'react-redux';
 import { RootState } from '../../modules';
+import styled from 'styled-components';
 
 interface OwnProps {}
 interface StateProps {
