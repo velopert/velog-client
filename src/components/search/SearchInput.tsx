@@ -22,6 +22,7 @@ const SearchInputBlock = styled.div<{ focus: boolean; large?: boolean }>`
     width: 1rem;
     height: 1rem;
     fill: ${palette.gray5};
+    flex-shrink: 0;
   }
   input {
     transition: all 0.125s ease-in;
@@ -34,6 +35,7 @@ const SearchInputBlock = styled.div<{ focus: boolean; large?: boolean }>`
     border: none;
     outline: 0;
     color: ${palette.gray7};
+    min-width: 0;
     &::placeholder {
       color: ${palette.gray5};
     }
