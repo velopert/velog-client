@@ -123,11 +123,7 @@ const LinkedPostItem: React.FC<LinkedPostItemProps> = ({
   const to = `/@${linkedPost.user.username}/${linkedPost.url_slug}`;
 
   return (
-    <LinkedPostItemBlock
-      right={right}
-      to={to}
-      onClick={() => window.scrollTo(0, 0)}
-    >
+    <LinkedPostItemBlock right={right} to={to}>
       <Circle right={right}>
         {right ? <MdArrowForward /> : <MdArrowBack />}
       </Circle>
