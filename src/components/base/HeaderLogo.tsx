@@ -20,8 +20,10 @@ const HeaderLogo: React.FC<HeaderLogoProps> = ({
 }) => {
   if (!custom) {
     return (
-      <HeaderLogoBlock to="/">
-        <Logo data-testid="velog-logo" className="velog-logo" />
+      <HeaderLogoBlock>
+        <Link to="/">
+          <Logo data-testid="velog-logo" className="velog-logo" />
+        </Link>
       </HeaderLogoBlock>
     );
   }
@@ -29,16 +31,18 @@ const HeaderLogo: React.FC<HeaderLogoProps> = ({
   if (!velogUsername) return null;
   const velogPath = `/@${velogUsername}`;
   return (
-    <HeaderLogoBlock to={velogPath}>
+    <HeaderLogoBlock>
       <VelogLogoLink to="/">
         <VelogIcon />
       </VelogLogoLink>
-      {userLogo.title || createFallbackTitle(velogUsername)}
+      <Link to={velogPath}>
+        {userLogo.title || createFallbackTitle(velogUsername)}
+      </Link>
     </HeaderLogoBlock>
   );
 };
 
-const HeaderLogoBlock = styled(Link)`
+const HeaderLogoBlock = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,6 +57,13 @@ const HeaderLogoBlock = styled(Link)`
     .velog-logo {
       height: 1.25rem;
     }
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
   }
 `;
 
