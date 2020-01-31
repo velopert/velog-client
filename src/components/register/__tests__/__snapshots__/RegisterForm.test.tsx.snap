@@ -6,7 +6,7 @@ exports[`RegisterForm matches snapshot 1`] = `
     class="sc-htpNat cSOxAO"
   >
     <div
-      class="sc-bdVaJa hDAwbH"
+      class="sc-bdVaJa bHUvJo"
     >
       <label>
         이름
@@ -32,7 +32,7 @@ exports[`RegisterForm matches snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-bdVaJa hDAwbH"
+      class="sc-bdVaJa bHUvJo"
     >
       <label>
         아이디
@@ -58,7 +58,7 @@ exports[`RegisterForm matches snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-bdVaJa hDAwbH"
+      class="sc-bdVaJa bHUvJo"
     >
       <label>
         한 줄 소개

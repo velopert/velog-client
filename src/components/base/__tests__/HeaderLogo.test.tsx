@@ -9,6 +9,7 @@ describe('HeaderLogo', () => {
       custom: false,
       userLogo: null,
       velogUsername: null,
+      onVelogLogoClick: () => {},
     };
     const utils = render(
       <MemoryRouter>

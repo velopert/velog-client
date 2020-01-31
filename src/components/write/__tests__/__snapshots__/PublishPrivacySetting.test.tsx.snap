@@ -3,7 +3,7 @@
 exports[`PublishPrivacySetting matches snapshot 1`] = `
 <div>
   <section
-    class="sc-bwzfXH difkFg sc-bdVaJa ezdyV"
+    class="sc-bdVaJa ezdyV sc-bwzfXH difkFg"
   >
     <h3>
       공개 설정
