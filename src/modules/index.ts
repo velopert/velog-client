@@ -4,6 +4,7 @@ import write, { WriteState } from './write';
 import header, { HeaderState } from './header';
 import post, { PostState } from './post';
 import error, { ErrorState } from './error';
+import scroll, { ScrollState } from './scroll';
 
 export type RootState = {
   core: CoreState;
@@ -11,6 +12,7 @@ export type RootState = {
   header: HeaderState;
   post: PostState;
   error: ErrorState;
+  scroll: ScrollState;
 };
 
 const rootReducer = combineReducers({
@@ -19,6 +21,7 @@ const rootReducer = combineReducers({
   header,
   post,
   error: error.reducer,
+  scroll: scroll.reducer,
 });
 
 export default rootReducer;

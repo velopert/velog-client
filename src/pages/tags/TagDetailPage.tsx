@@ -9,7 +9,6 @@ export type TagDetailPageProps = {} & RouteComponentProps<{ tag: string }>;
 function TagDetailPage({ match }: TagDetailPageProps) {
   const { tag } = match.params;
   useEffect(() => {
-    console.log('hello?');
     window.scrollTo(0, 0);
   }, [tag]);
   return (

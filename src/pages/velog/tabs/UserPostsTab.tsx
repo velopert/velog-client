@@ -6,18 +6,24 @@ import VelogSearchInputContainer from '../../../containers/velog/VelogSearchInpu
 import SearchResult from '../../../containers/search/SearchResult';
 import styled from 'styled-components';
 import media from '../../../lib/styles/media';
+import usePreserveScroll from '../../../lib/hooks/usePreserveScroll';
 
 export interface UserPostsTabProps
   extends RouteComponentProps<{ username: string }> {
   username: string;
 }
 
-const UserPostsTab: React.FC<UserPostsTabProps> = ({ match, location }) => {
+const UserPostsTab: React.FC<UserPostsTabProps> = ({
+  match,
+  location,
+  history,
+}) => {
   const { q }: { q: string | undefined } = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
 
   const { username } = match.params;
+  usePreserveScroll('user/posts');
 
   return (
     <>

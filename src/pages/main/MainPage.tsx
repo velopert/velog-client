@@ -8,6 +8,7 @@ import TrendingPostsPage from './TrendingPostsPage';
 import MainTagWidgetContainer from '../../containers/main/MainTagWidgetContainer';
 import MainNoticeWidgetContainer from '../../containers/main/MainNoticeWidgetContainer';
 import MainMobileHead from '../../components/main/MainMobileHead';
+import usePreserveScroll from '../../lib/hooks/usePreserveScroll';
 
 interface MainPageProps {}
 
@@ -15,9 +16,11 @@ const MainPage: React.FC<MainPageProps> = () => {
   const { pathname } = useLocation();
 
   // scroll to top when path changes
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, [pathname]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  usePreserveScroll('main');
 
   return (
     <MainTemplate>
