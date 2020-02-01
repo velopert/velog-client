@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ErrorScreenTemplate from './ErrorScreenTemplate';
 import { undrawPageNotFound } from '../../static/images';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import StatusCode from '../common/StatusCode';
 import useNotFound from '../../lib/hooks/useNotFound';
 import { Helmet } from 'react-helmet-async';
+import { usePrevious } from 'react-use';
 
 export type NotFoundErrorProps = {};
 
 function NotFoundError(props: NotFoundErrorProps) {
   const history = useHistory();
   const { reset } = useNotFound();
+  const location = useLocation();
+
+  const prevPathname = usePrevious(location.pathname);
+
+  useEffect(() => {
+    if (prevPathname && prevPathname !== location.pathname) {
+      reset();
+    }
+  }, [location.pathname, prevPathname, reset]);
 
   return (
     <>
