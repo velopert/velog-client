@@ -98,7 +98,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   useEffect(() => {
     remark()
       .use(breaks)
-      // .use(prismPlugin)
+      .use(prismPlugin)
       .use(htmlPlugin)
       .use(embedPlugin)
       .use(slug)
