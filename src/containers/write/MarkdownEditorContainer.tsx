@@ -38,6 +38,7 @@ import { useHistory } from 'react-router';
 import useSaveHotKey from './hooks/useSaveHotkey';
 import embedPlugin from '../../lib/remark/embedPlugin';
 import { Helmet } from 'react-helmet-async';
+import { toast } from 'react-toastify';
 
 export type MarkdownEditorContainerProps = {};
 
@@ -179,6 +180,12 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
         body: markdown,
       });
     }
+    toast.success('포스트가 임시저장되었습니다.', {
+      position: 'top-right',
+      autoClose: 2000,
+      closeOnClick: true,
+      pauseOnHover: true,
+    });
   }, [
     createPostHistory,
     dispatch,

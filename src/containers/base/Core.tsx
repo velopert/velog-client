@@ -6,6 +6,8 @@ import { RootState } from '../../modules';
 import CommonPopup from './CommonPopup';
 import useUserLoader from './hooks/useUserLoader';
 import GlobalStyles from '../../GlobalStyles';
+import { ToastContainer, Flip } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface OwnProps {}
 interface StateProps {
@@ -23,6 +25,7 @@ const Core: React.FC<CoreProps> = ({ layer }) => {
       <AuthModalContainer />
       <CommonPopup />
       <GlobalStyles />
+      <ToastContainer transition={Flip} />
     </>
   );
 };
