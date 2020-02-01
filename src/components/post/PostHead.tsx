@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import VelogResponsive from '../velog/VelogResponsive';
 import palette from '../../lib/styles/palette';
 import { formatDate } from '../../lib/utils';
-import PostTags from './PostTags';
 import { SeriesPost } from '../../lib/graphql/post';
 import PostSeriesInfo from './PostSeriesInfo';
 import useToggle from '../../lib/hooks/useToggle';
 import PopupOKCancel from '../common/PopupOKCancel';
 import media from '../../lib/styles/media';
 import TagList from '../common/TagList';
+import { Link } from 'react-router-dom';
 
 const PostHeadBlock = styled(VelogResponsive)`
   margin-top: 5.5rem;
@@ -50,6 +50,14 @@ const SubInfo = styled.div`
     .username {
       color: ${palette.gray8};
       font-weight: bold;
+      a {
+        color: inherit;
+        text-decoration: none;
+        &:hover {
+          color: ${palette.gray7};
+          text-decoration: underline;
+        }
+      }
     }
     .separator {
       margin-left: 0.5rem;
@@ -146,7 +154,9 @@ const PostHead: React.FC<PostHeadProps> = ({
         <h1>{title}</h1>
         <SubInfo>
           <div className="information">
-            <span className="username">{username}</span>
+            <span className="username">
+              <Link to={`/@${username}`}>{username}</Link>
+            </span>
             <span className="separator">&middot;</span>
             <span>{formatDate(date)}</span>
           </div>
