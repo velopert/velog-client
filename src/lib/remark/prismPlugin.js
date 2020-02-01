@@ -23,6 +23,9 @@ import 'prismjs/components/prism-swift.min';
 import 'prismjs/components/prism-kotlin.min';
 import 'prismjs/components/prism-erlang.min';
 import 'prismjs/components/prism-elixir.min';
+import 'prismjs/components/prism-ruby.min';
+import 'prismjs/components/prism-rust.min';
+
 import { ssrEnabled } from '../utils';
 
 export default function attacher({ include, exclude } = {}) {
