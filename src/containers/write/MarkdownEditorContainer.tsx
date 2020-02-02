@@ -34,7 +34,6 @@ import {
   EditPostResult,
   EDIT_POST,
 } from '../../lib/graphql/post';
-import { openPopup } from '../../modules/core';
 import { escapeForUrl } from '../../lib/utils';
 import { useHistory } from 'react-router';
 import useSaveHotKey from './hooks/useSaveHotkey';
@@ -148,22 +147,12 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
 
   const onTempSave = useCallback(async () => {
     if (!title || !markdown) {
-      dispatch(
-        openPopup({
-          title: '임시저장 실패',
-          message: '제목 또는 내용이 비어있습니다.',
-        }),
-      );
+      toast.error('제목 또는 내용이 비어있습니다.');
       return;
     }
 
     const notifySuccess = () => {
-      toast.success('포스트가 임시저장되었습니다.', {
-        position: 'top-right',
-        autoClose: 2000,
-        closeOnClick: true,
-        pauseOnHover: true,
-      });
+      toast.success('포스트가 임시저장되었습니다.');
     };
 
     if (!postId) {
