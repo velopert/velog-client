@@ -11,7 +11,7 @@ import {
 } from '../../lib/graphql/post';
 import { pick } from 'ramda';
 import { escapeForUrl, safe } from '../../lib/utils';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useApolloClient } from '@apollo/react-hooks';
 
 import { setHeadingId } from '../../lib/heading';
 import { useHistory } from 'react-router';
@@ -20,6 +20,7 @@ type PublishActionButtonsContainerProps = {};
 
 const PublishActionButtonsContainer: React.FC<PublishActionButtonsContainerProps> = () => {
   const history = useHistory();
+  const client = useApolloClient();
 
   const options = useSelector((state: RootState) =>
     pick(
@@ -72,6 +73,7 @@ const PublishActionButtonsContainer: React.FC<PublishActionButtonsContainerProps
     });
     if (!response || !response.data) return;
     const { user, url_slug } = response.data.writePost;
+    client.resetStore();
     history.push(`/@${user.username}/${url_slug}`);
   };
 
