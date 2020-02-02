@@ -11,16 +11,6 @@ export type HtmlProps = {
   helmet: HelmetData;
 };
 
-/*
-<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-<link rel="apple-touch-icon" sizes="152x152" href="%PUBLIC_URL%/favicons/apple-icon-152x152.png"/>
-<link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/favicons/apple-icon-180x180.png"/>
-<link rel="icon" type="image/png" sizes="192x192" href="%PUBLIC_URL%/favicons/android-icon-192x192.png"/>
-<link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicons/favicon-32x32.png"/>
-<link rel="icon" type="image/png" sizes="96x96" href="%PUBLIC_URL%/favicons/favicon-96x96.png"/>
-<link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicons/favicon-16x16.png"/>
-*/
-
 const favicons = [
   { rel: 'shortcut icon', path: '/favicon.ico' },
   {
@@ -74,6 +64,7 @@ function Html({
             href={process.env.PUBLIC_URL.concat(favicon.path)}
           />
         ))}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body>
         <div id="root" dangerouslySetInnerHTML={{ __html: content }}></div>
