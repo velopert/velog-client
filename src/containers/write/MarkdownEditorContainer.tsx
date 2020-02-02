@@ -31,6 +31,8 @@ import {
   WRITE_POST,
   CreatePostHistoryResponse,
   CREATE_POST_HISTORY,
+  EditPostResult,
+  EDIT_POST,
 } from '../../lib/graphql/post';
 import { openPopup } from '../../modules/core';
 import { escapeForUrl } from '../../lib/utils';
@@ -60,6 +62,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
   const [createPostHistory] = useMutation<CreatePostHistoryResponse>(
     CREATE_POST_HISTORY,
   );
+  const [editPost] = useMutation<EditPostResult>(EDIT_POST);
 
   const [lastSavedData, setLastSavedData] = useState({
     title: initialTitle,
@@ -154,6 +157,15 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       return;
     }
 
+    const notifySuccess = () => {
+      toast.success('포스트가 임시저장되었습니다.', {
+        position: 'top-right',
+        autoClose: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+    };
+
     if (!postId) {
       const response = await writePost({
         variables: {
@@ -173,40 +185,54 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       const { id } = response.data.writePost;
       dispatch(setWritePostId(id));
       history.replace(`/write?id=${id}`);
-    } else {
-      // save only if something has been changed
-      if (shallowEqual(lastSavedData, { title, body: markdown })) {
-        toast.success('포스트가 임시저장되었습니다.', {
-          position: 'top-right',
-          autoClose: 2000,
-          closeOnClick: true,
-          pauseOnHover: true,
-        });
-        return;
-      }
-      await createPostHistory({
+      notifySuccess();
+      return;
+    }
+    // tempsaving unreleased post:
+    if (isTemp) {
+      await editPost({
         variables: {
-          post_id: postId,
+          id: postId,
           title,
           body: markdown,
           is_markdown: true,
+          is_temp: true,
+          is_private: false,
+          url_slug: escapeForUrl(title),
+          thumbnail: null,
+          meta: {},
+          series_id: null,
+          tags: [],
         },
       });
-      setLastSavedData({
+      notifySuccess();
+      return;
+    }
+
+    // tempsaving released post:
+    // save only if something has been changed
+    if (shallowEqual(lastSavedData, { title, body: markdown })) {
+      return;
+    }
+    await createPostHistory({
+      variables: {
+        post_id: postId,
         title,
         body: markdown,
-      });
-    }
-    toast.success('포스트가 임시저장되었습니다.', {
-      position: 'top-right',
-      autoClose: 2000,
-      closeOnClick: true,
-      pauseOnHover: true,
+        is_markdown: true,
+      },
     });
+    setLastSavedData({
+      title,
+      body: markdown,
+    });
+    notifySuccess();
   }, [
     createPostHistory,
     dispatch,
+    editPost,
     history,
+    isTemp,
     lastSavedData,
     markdown,
     postId,

@@ -18,9 +18,7 @@ import { useHistory } from 'react-router';
 
 type PublishActionButtonsContainerProps = {};
 
-const PublishActionButtonsContainer: React.FC<
-  PublishActionButtonsContainerProps
-> = () => {
+const PublishActionButtonsContainer: React.FC<PublishActionButtonsContainerProps> = () => {
   const history = useHistory();
 
   const options = useSelector((state: RootState) =>
@@ -85,7 +83,6 @@ const PublishActionButtonsContainer: React.FC<
       },
     });
     if (!response || !response.data) return;
-    console.log(response.data);
     const { user, url_slug } = response.data.editPost;
     history.push(`/@${user.username}/${url_slug}`);
   };
