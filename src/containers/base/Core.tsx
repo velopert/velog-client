@@ -25,7 +25,13 @@ const Core: React.FC<CoreProps> = ({ layer }) => {
       <AuthModalContainer />
       <CommonPopup />
       <GlobalStyles />
-      <ToastContainer transition={Flip} />
+      <ToastContainer
+        transition={Flip}
+        position="top-right"
+        autoClose={2000}
+        closeOnClick
+        pauseOnHover
+      />
     </>
   );
 };
