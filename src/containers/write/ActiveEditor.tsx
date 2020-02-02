@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { RootState } from '../../modules';
 import {
@@ -7,6 +7,8 @@ import {
   prepareEdit,
   convertEditorMode,
   setInitialBody,
+  changeTitle,
+  setInitialTitle,
 } from '../../modules/write';
 import EditorPanesContainer from './EditorPanesContainer';
 // import QuillEditorContainer from './QuillEditorContainer';
@@ -20,6 +22,7 @@ import {
   GetLastPostHistoryResult,
 } from '../../lib/graphql/post';
 import { safe } from '../../lib/utils';
+import PopupOKCancel from '../../components/common/PopupOKCancel';
 
 export type ActiveEditorProps = {};
 
@@ -27,6 +30,7 @@ const ActiveEditor: React.FC<ActiveEditorProps> = () => {
   const [newPost, setNewPost] = useState(false);
   const mode = useSelector((state: RootState) => state.write.mode);
   const postId = useSelector((state: RootState) => state.write.postId);
+  const [askLoadTemp, setAskLoadTemp] = useState(false);
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -58,6 +62,7 @@ const ActiveEditor: React.FC<ActiveEditorProps> = () => {
         post_id: id,
       },
       skip: !id,
+      fetchPolicy: 'network-only',
     },
   );
 
@@ -89,6 +94,13 @@ const ActiveEditor: React.FC<ActiveEditorProps> = () => {
 
   const lastPostHistory = safe(() => getLastPostHistory.data!.lastPostHistory);
 
+  const onApplyTempSave = useCallback(() => {
+    if (!lastPostHistory) return;
+    dispatch(setInitialTitle(lastPostHistory.title));
+    dispatch(setInitialBody(lastPostHistory.body));
+    setAskLoadTemp(false);
+  }, [dispatch, lastPostHistory]);
+
   useEffect(() => {
     if (!lastPostHistory) return;
     if (!post) return;
@@ -103,23 +115,36 @@ const ActiveEditor: React.FC<ActiveEditorProps> = () => {
       },
     );
     if (equals) return;
-
-    if (lastPostHistory.is_markdown !== post.is_markdown) {
-      dispatch(convertEditorMode());
+    if (new Date(post.updated_at) < new Date(lastPostHistory.created_at)) {
+      setAskLoadTemp(true);
     }
+    // if (lastPostHistory.is_markdown !== post.is_markdown) {
+    //   dispatch(convertEditorMode());
+    // }
 
-    dispatch(setInitialBody(lastPostHistory.body));
+    // dispatch(changeTitle(lastPostHistory.title));
+    // dispatch(setInitialBody(lastPostHistory.body));
   }, [dispatch, lastPostHistory, post]);
 
   if (id && !post && !postId) return null;
 
-  return mode === WriteMode.MARKDOWN ? (
+  return (
     <>
       <EditorPanesContainer />
+      <PopupOKCancel
+        visible={askLoadTemp}
+        title="임시 포스트 불러오기"
+        onCancel={() => setAskLoadTemp(false)}
+        onConfirm={onApplyTempSave}
+      >
+        임시저장된 포스트를 불러오시겠습니까?
+      </PopupOKCancel>
     </>
-  ) : null; /*
-    <QuillEditorContainer />
-  );*/
+  );
+
+  // return mode === WriteMode.MARKDOWN ? (
+  //   <></>
+  // ) : <QuillEditorContainer />
 };
 
 export default ActiveEditor;

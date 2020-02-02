@@ -33,7 +33,7 @@ const HeaderUserMenu: React.FC<HeaderUserMenuProps> = ({
   if (!visible) return null;
   return (
     <OutsideClickHandler onOutsideClick={onClose}>
-      <HeaderUserMenuBlock>
+      <HeaderUserMenuBlock onClick={onClose}>
         <div className="menu-wrapper">
           <HeaderUserMenuItem to={`/@${username}`}>
             내 벨로그

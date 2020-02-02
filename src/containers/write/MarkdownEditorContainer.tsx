@@ -54,15 +54,24 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     postId,
     isTemp,
     initialBody,
+    initialTitle,
   } = useSelector((state: RootState) => state.write);
   const [writePost] = useMutation<WritePostResponse>(WRITE_POST);
   const [createPostHistory] = useMutation<CreatePostHistoryResponse>(
     CREATE_POST_HISTORY,
   );
+
   const [lastSavedData, setLastSavedData] = useState({
-    title: '',
-    body: '',
+    title: initialTitle,
+    body: initialBody,
   });
+
+  useEffect(() => {
+    setLastSavedData({
+      title: initialTitle,
+      body: initialBody,
+    });
+  }, [initialTitle, initialBody]);
 
   const dispatch = useDispatch();
   const actionCreators = useMemo(
@@ -166,7 +175,15 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       history.replace(`/write?id=${id}`);
     } else {
       // save only if something has been changed
-      if (shallowEqual(lastSavedData, { title, body: markdown })) return;
+      if (shallowEqual(lastSavedData, { title, body: markdown })) {
+        toast.success('포스트가 임시저장되었습니다.', {
+          position: 'top-right',
+          autoClose: 2000,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
+        return;
+      }
       await createPostHistory({
         variables: {
           post_id: postId,

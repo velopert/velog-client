@@ -22,6 +22,7 @@ const CLEAR_EDITOR = 'write/CLEAR_EDITOR';
 const PREPARE_EDIT = 'write/PREPARE_EDIT';
 const SET_WRITE_POST_ID = 'write/SET_WRITE_POST_ID';
 const SET_INITIAL_BODY = 'write/SET_INITIAL_BODY';
+const SET_INITIAL_TITLE = 'write/SET_INITIAL_TITLE';
 
 export const changeMarkdown = createStandardAction(CHANGE_MARKDOWN)<string>();
 export const changeTitle = createStandardAction(CHANGE_TITLE)<string>();
@@ -32,7 +33,7 @@ export const openPublish = createStandardAction(OPEN_PUBLISH)<void>();
 export const closePublish = createStandardAction(CLOSE_PUBLISH)<void>();
 export const setTextBody = createStandardAction(SET_TEXT_BODY)<string>();
 export const setDefaultDescription = createStandardAction(
-  SET_DEFAULT_DESCRIPTION
+  SET_DEFAULT_DESCRIPTION,
 )<string>();
 export const changeDescription = createStandardAction(CHANGE_DESCRIPTION)<
   string
@@ -51,6 +52,9 @@ export const selectSeries = createStandardAction(SELECT_SERIES)<{
 } | null>();
 export const clearEditor = createStandardAction(CLEAR_EDITOR)<undefined>();
 export const setWritePostId = createStandardAction(SET_WRITE_POST_ID)<string>();
+export const setInitialTitle = createStandardAction(SET_INITIAL_TITLE)<
+  string
+>();
 export const setInitialBody = createStandardAction(SET_INITIAL_BODY)<string>();
 
 export type PrepareEditPayload = {
@@ -90,10 +94,11 @@ type ClearEditor = ReturnType<typeof clearEditor>;
 type PrepareEdit = ReturnType<typeof prepareEdit>;
 type SetWritePostId = ReturnType<typeof setWritePostId>;
 type SetInitialBody = ReturnType<typeof setInitialBody>;
+type SetInitialTitle = ReturnType<typeof setInitialTitle>;
 
 export enum WriteMode {
   MARKDOWN = 'MARKDOWN',
-  WYSIWYG = 'WYSIWYG'
+  WYSIWYG = 'WYSIWYG',
 }
 
 export type WriteState = {
@@ -116,6 +121,7 @@ export type WriteState = {
   } | null;
   postId: null | string;
   isTemp: boolean;
+  initialTitle: string;
   initialBody: string;
 };
 
@@ -136,7 +142,8 @@ const initialState: WriteState = {
   selectedSeries: null,
   postId: null,
   isTemp: false,
-  initialBody: ''
+  initialTitle: '',
+  initialBody: '',
 };
 
 const write = createReducer(
@@ -151,7 +158,7 @@ const write = createReducer(
         'mode',
         state.mode === WriteMode.MARKDOWN
           ? WriteMode.WYSIWYG
-          : WriteMode.MARKDOWN
+          : WriteMode.MARKDOWN,
       ),
     [SET_HTML]: (state, action: SetHtml) =>
       updateKey(state, 'html', action.payload),
@@ -163,11 +170,11 @@ const write = createReducer(
       updateKey(state, 'textBody', textBody),
     [SET_DEFAULT_DESCRIPTION]: (
       state,
-      { payload: defaultDescription }: SetDefaultDescription
+      { payload: defaultDescription }: SetDefaultDescription,
     ) => updateKey(state, 'defaultDescription', defaultDescription),
     [CHANGE_DESCRIPTION]: (
       state,
-      { payload: description }: ChangeDescription
+      { payload: description }: ChangeDescription,
     ) => updateKey(state, 'description', description.slice(0, 150)),
     [SET_PRIVACY]: (state, { payload: isPrivate }: SetPrivacy) =>
       updateKey(state, 'isPrivate', isPrivate),
@@ -191,7 +198,7 @@ const write = createReducer(
         series,
         id,
         isPrivate,
-        isTemp
+        isTemp,
       } = payload;
       const key = isMarkdown ? 'markdown' : 'html';
       return {
@@ -205,18 +212,25 @@ const write = createReducer(
         mode: isMarkdown ? WriteMode.MARKDOWN : WriteMode.WYSIWYG,
         [key]: body,
         selectedSeries: series,
-        postId: id
+        postId: id,
+        initialBody: body,
+        initialTitle: title,
       };
     },
     [SET_WRITE_POST_ID]: (state, action: SetWritePostId) => ({
       ...state,
       postId: action.payload,
-      isTemp: true
+      isTemp: true,
     }),
     [SET_INITIAL_BODY]: (state, action: SetInitialBody) =>
-      updateKey(state, 'initialBody', action.payload)
+      updateKey(state, 'initialBody', action.payload),
+    [SET_INITIAL_TITLE]: (state, action: SetInitialTitle) => ({
+      ...state,
+      title: action.payload,
+      initialTitle: action.payload,
+    }),
   },
-  initialState
+  initialState,
 );
 
 export default write;

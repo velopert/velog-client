@@ -295,6 +295,7 @@ export const READ_POST_FOR_EDIT = gql`
       is_temp
       thumbnail
       url_slug
+      updated_at
       series {
         id
         name
@@ -319,6 +320,7 @@ export type ReadPostForEditResponse = {
       id: string;
       name: string;
     } | null;
+    updated_at: string;
   };
 };
 
