@@ -18,6 +18,7 @@ const PopupOKCancelBlock = styled.div`
     color: ${palette.gray7};
     margin-top: 1rem;
     margin-bottom: 1rem;
+    white-space: pre-wrap;
   }
   .button-area {
     margin-top: 2rem;

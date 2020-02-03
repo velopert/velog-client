@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 export interface SavedPostItemProps {
   post: PartialPost;
+  onRemove: (id: string) => void;
 }
 
 const SavedItemBlock = styled.div`
@@ -54,7 +55,7 @@ const SavedItemBlock = styled.div`
     border-top: 1px solid ${palette.gray3};
   }
 `;
-function SavedPostItem({ post }: SavedPostItemProps) {
+function SavedPostItem({ post, onRemove }: SavedPostItemProps) {
   const editUrl = `/write?id=${post.id}`;
   return (
     <SavedItemBlock>
@@ -66,7 +67,9 @@ function SavedPostItem({ post }: SavedPostItemProps) {
       </p>
       <section>
         <div className="time">{formatDate(post.updated_at)}</div>
-        <button className="remove">삭제</button>
+        <button className="remove" onClick={() => onRemove(post.id)}>
+          삭제
+        </button>
       </section>
     </SavedItemBlock>
   );

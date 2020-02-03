@@ -3,6 +3,7 @@ import useSavedPosts from './hooks/useSavedPosts';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import SavedPostItem from './SavedPostItem';
+import PopupOKCancel from '../common/PopupOKCancel';
 
 export interface SavedPostsProps {}
 
@@ -16,7 +17,13 @@ const Empty = styled.div`
 `;
 
 function SavedPosts(props: SavedPostsProps) {
-  const { posts } = useSavedPosts();
+  const {
+    posts,
+    askRemove,
+    onAskRemove,
+    onConfirmRemove,
+    onCancelRemove,
+  } = useSavedPosts();
 
   if (!posts) return null;
 
@@ -27,12 +34,24 @@ function SavedPosts(props: SavedPostsProps) {
       </SavedPostsBlock>
     );
   }
+
   return (
-    <SavedPostsBlock>
-      {posts.map(post => (
-        <SavedPostItem post={post} key={post.id} />
-      ))}
-    </SavedPostsBlock>
+    <>
+      <SavedPostsBlock>
+        {posts.map(post => (
+          <SavedPostItem post={post} key={post.id} onRemove={onAskRemove} />
+        ))}
+      </SavedPostsBlock>
+      <PopupOKCancel
+        title="임시 글 삭제"
+        visible={askRemove}
+        onConfirm={onConfirmRemove}
+        onCancel={onCancelRemove}
+      >
+        {`임시 저장한 글을 삭제하시겠습니까?
+삭제한 글은 복구할 수 없습니다.`}
+      </PopupOKCancel>
+    </>
   );
 }
 
