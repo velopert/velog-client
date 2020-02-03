@@ -117,6 +117,7 @@ export interface SinglePost {
   series: {
     id: string;
     name: string;
+    url_slug: string;
     series_posts: SeriesPost[];
   } | null;
   liked: boolean;
@@ -245,6 +246,7 @@ export const READ_POST = gql`
       series {
         id
         name
+        url_slug
         series_posts {
           id
           post {
@@ -543,6 +545,7 @@ export const EDIT_POST = gql`
       series {
         id
         name
+        url_slug
         series_posts {
           id
           post {

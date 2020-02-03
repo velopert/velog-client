@@ -117,6 +117,7 @@ export interface PostHeadProps {
   series: {
     id: string;
     name: string;
+    url_slug: string;
     series_posts: SeriesPost[];
   } | null;
   postId: string;
@@ -176,6 +177,7 @@ const PostHead: React.FC<PostHeadProps> = ({
             posts={series.series_posts.map(sp => sp.post)}
             postId={postId}
             username={username}
+            urlSlug={series.url_slug}
           />
         )}
       </div>

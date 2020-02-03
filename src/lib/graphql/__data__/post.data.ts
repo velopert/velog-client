@@ -64,6 +64,7 @@ export const postData: { post: SinglePost } = {
     series: {
       id: '96ffa520-1b2f-11e9-abae-cb5137f530ec',
       name: 'Redux 또는 MobX 를 통한 상태 관리',
+      url_slug: 'reduxormobx',
       series_posts: [
         {
           id: '994eec50-1b2f-11e9-abae-cb5137f530ec',

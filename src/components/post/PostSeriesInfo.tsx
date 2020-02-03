@@ -9,7 +9,12 @@ import {
   MdChevronRight,
 } from 'react-icons/md';
 import useBoolean from '../../lib/hooks/useBoolean';
-import { NavLink, withRouter, RouteComponentProps } from 'react-router-dom';
+import {
+  NavLink,
+  withRouter,
+  RouteComponentProps,
+  Link,
+} from 'react-router-dom';
 import {
   usePostViewerState,
   usePostViewerDispatch,
@@ -28,6 +33,14 @@ const PostSeriesInfoBlock = styled.div`
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.06);
   position: relative;
   h2 {
+    a {
+      text-decoration: none;
+      color: inherit;
+      &:hover {
+        color: ${palette.gray6};
+        text-decoration: underline;
+      }
+    }
     margin-top: 0;
     font-family: 'Spoqa Han Sans';
     color: ${palette.gray7};
@@ -168,6 +181,7 @@ export interface PostSeriesInfoProps extends RouteComponentProps {
   }[];
   postId: string;
   username: string;
+  urlSlug: string;
 }
 
 const PostSeriesInfo: React.FC<PostSeriesInfoProps> = ({
@@ -176,6 +190,7 @@ const PostSeriesInfo: React.FC<PostSeriesInfoProps> = ({
   postId,
   username,
   history,
+  urlSlug,
 }) => {
   const currentIndex = useMemo(
     () => posts.findIndex(post => post.id === postId),
@@ -219,7 +234,9 @@ const PostSeriesInfo: React.FC<PostSeriesInfoProps> = ({
 
   return (
     <PostSeriesInfoBlock onMouseEnter={onMouseEnter}>
-      <h2>{name}</h2>
+      <h2>
+        <Link to={`/@${username}/series/${urlSlug}`}>{name}</Link>
+      </h2>
       <SeriesImage className="series-corner-image" />
       {open && (
         <PostList>
