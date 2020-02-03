@@ -15,6 +15,7 @@ import PublishSeriesConfigButtons from '../../components/write/PublishSeriesConf
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleEditSeries, selectSeries } from '../../modules/write';
 import { RootState } from '../../modules';
+import { toast } from 'react-toastify';
 
 export interface PublishSeriesConfigProps {}
 
@@ -65,21 +66,29 @@ const PublishSeriesConfig: React.FC<PublishSeriesConfigProps> = props => {
     name: string;
     urlSlug: string;
   }) => {
-    const result = await createSeries({
-      variables: {
-        name,
-        url_slug: urlSlug,
-      },
-    });
-    if (!result || !result.data) return;
-    await sleep(150);
-    await seriesList.refetch();
-    setSelectedId(result.data.createSeries.id);
-    const items = document.querySelectorAll<HTMLLIElement>('.list-item');
-    if (items.length === 0) return;
-    await sleep(50);
-    const lastItem = items.item(items.length - 1);
-    lastItem.scrollIntoView();
+    try {
+      const result = await createSeries({
+        variables: {
+          name,
+          url_slug: urlSlug,
+        },
+      });
+      if (!result || !result.data) return;
+      await sleep(150);
+      await seriesList.refetch();
+      setSelectedId(result.data.createSeries.id);
+      const items = document.querySelectorAll<HTMLLIElement>('.list-item');
+      if (items.length === 0) return;
+      await sleep(50);
+      const lastItem = items.item(items.length - 1);
+      lastItem.scrollIntoView();
+    } catch (e) {
+      if ((e?.message as string).includes('URL Slug already exists')) {
+        toast.error('이미 존재하는 URL입니다.');
+        return;
+      }
+      toast.error('시리즈 생성 실패');
+    }
   };
 
   const onCancel = () => {

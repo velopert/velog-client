@@ -7,11 +7,12 @@ import SorterButton from '../../components/common/SorterButton';
 import SeriesPostList, {
   SeriesPostListSkeleton,
 } from '../../components/velog/SeriesPostList';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation, useApolloClient } from '@apollo/react-hooks';
 import {
   GetSeriesResponse,
   GET_SERIES,
   EDIT_SERIES,
+  REMOVE_SERIES,
 } from '../../lib/graphql/series';
 import useToggle from '../../lib/hooks/useToggle';
 import SeriesActionButtons from '../../components/velog/SeriesActionButtons';
@@ -22,6 +23,9 @@ import { ssrEnabled } from '../../lib/utils';
 import { Helmet } from 'react-helmet-async';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../modules';
+import PopupOKCancel from '../../components/common/PopupOKCancel';
+import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 
 export interface SeriesPostsProps {
   username: string;
@@ -36,13 +40,8 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
   const [editSeries] = useMutation(EDIT_SERIES);
   const user = useUser();
   const isOwnSeries = user && user.username === username;
-
-  const userLogo = useSelector((state: RootState) => state.header.userLogo);
-  const velogTitle = useMemo(() => {
-    if (!userLogo || !userLogo.title) return `${username}.log`;
-    return userLogo.title;
-  }, [userLogo, username]);
-
+  const [askRemove, setAskRemove] = useState(false);
+  const [removeSeries] = useMutation(REMOVE_SERIES);
   const { data } = useQuery<GetSeriesResponse>(GET_SERIES, {
     variables: {
       username,
@@ -50,6 +49,34 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
     },
     fetchPolicy: 'cache-and-network',
   });
+  const history = useHistory();
+
+  const client = useApolloClient();
+
+  const onAskRemove = () => setAskRemove(true);
+  const onConfirmRemove = async () => {
+    try {
+      await removeSeries({
+        variables: {
+          id: data?.series?.id,
+        },
+      });
+      client.resetStore();
+      toast.success('시리즈가 삭제되었습니다.');
+      history.replace(`/@${username}/series/`);
+    } catch (e) {
+      toast.error('시리즈 삭제 실패');
+    }
+  };
+  const onCancelRemove = () => {
+    setAskRemove(false);
+  };
+
+  const userLogo = useSelector((state: RootState) => state.header.userLogo);
+  const velogTitle = useMemo(() => {
+    if (!userLogo || !userLogo.title) return `${username}.log`;
+    return userLogo.title;
+  }, [userLogo, username]);
 
   const onApply = useCallback(async () => {
     await editSeries({
@@ -108,6 +135,7 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
           onEdit={toggleEditing}
           editing={editing}
           onApply={onApply}
+          onRemove={onAskRemove}
         />
       )}
       {!editing && (
@@ -127,6 +155,15 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
           username={username}
         />
       )}
+      <PopupOKCancel
+        onConfirm={onConfirmRemove}
+        onCancel={onCancelRemove}
+        visible={askRemove}
+        title="시리즈 삭제"
+      >
+        {`시리즈를 정말 삭제하시겠습니까?
+시리즈 안에 들어있는 포스트들은 삭제되지 않습니다.`}
+      </PopupOKCancel>
     </SeriesPostsTemplate>
   );
 };

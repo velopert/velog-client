@@ -14,12 +14,13 @@ export interface SeriesActionButtonsProps {
   onEdit: () => void;
   onApply: () => void;
   editing: boolean;
-  // onRemove: () => void;
+  onRemove: () => void;
 }
 
 const SeriesActionButtons = ({
   onEdit,
   onApply,
+  onRemove,
   editing,
 }: SeriesActionButtonsProps) => {
   return (
@@ -29,7 +30,7 @@ const SeriesActionButtons = ({
       ) : (
         <EditRemoveGroup>
           <button onClick={onEdit}>수정</button>
-          <button>삭제</button>
+          <button onClick={onRemove}>삭제</button>
         </EditRemoveGroup>
       )}
     </SeriesActionButtonsBlock>

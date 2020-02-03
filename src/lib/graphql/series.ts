@@ -140,3 +140,13 @@ export interface SeriesPostPreview {
 }
 
 export type EditSeriesResponse = GetSeriesResponse;
+
+export const REMOVE_SERIES = gql`
+  mutation RemoveSeries($id: ID!) {
+    removeSeries(id: $id)
+  }
+`;
+
+export type RemoveSeriesResponse = {
+  removeSeries: boolean;
+};

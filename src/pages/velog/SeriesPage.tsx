@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import VelogResponsive from '../../components/velog/VelogResponsive';
 import SeriesPosts from '../../containers/velog/SeriesPosts';
@@ -16,6 +16,9 @@ export interface SeriesPageProps
 
 const SeriesPage: React.FC<SeriesPageProps> = ({ match }) => {
   const { username, urlSlug } = match.params;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <SeriesPageBlock>
       <SeriesPosts username={username} urlSlug={urlSlug} />
