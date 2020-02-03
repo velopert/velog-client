@@ -73,7 +73,7 @@ const PublishActionButtonsContainer: React.FC<PublishActionButtonsContainerProps
     });
     if (!response || !response.data) return;
     const { user, url_slug } = response.data.writePost;
-    client.resetStore();
+    await client.resetStore();
     history.push(`/@${user.username}/${url_slug}`);
   };
 
@@ -86,6 +86,7 @@ const PublishActionButtonsContainer: React.FC<PublishActionButtonsContainerProps
     });
     if (!response || !response.data) return;
     const { user, url_slug } = response.data.editPost;
+    await client.resetStore();
     history.push(`/@${user.username}/${url_slug}`);
   };
 

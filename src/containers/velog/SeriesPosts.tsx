@@ -61,7 +61,7 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
           id: data?.series?.id,
         },
       });
-      client.resetStore();
+      await client.resetStore();
       toast.success('시리즈가 삭제되었습니다.');
       history.replace(`/@${username}/series/`);
     } catch (e) {
