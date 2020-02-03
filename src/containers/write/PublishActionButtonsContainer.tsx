@@ -15,6 +15,7 @@ import { useMutation, useApolloClient } from '@apollo/react-hooks';
 
 import { setHeadingId } from '../../lib/heading';
 import { useHistory } from 'react-router';
+import { toast } from 'react-toastify';
 
 type PublishActionButtonsContainerProps = {};
 
@@ -68,13 +69,21 @@ const PublishActionButtonsContainer: React.FC<PublishActionButtonsContainerProps
   };
 
   const onPublish = async () => {
-    const response = await writePost({
-      variables: variables,
-    });
-    if (!response || !response.data) return;
-    const { user, url_slug } = response.data.writePost;
-    await client.resetStore();
-    history.push(`/@${user.username}/${url_slug}`);
+    if (options.title.trim() === '') {
+      toast.error('제목이 비어있습니다.');
+      return;
+    }
+    try {
+      const response = await writePost({
+        variables: variables,
+      });
+      if (!response || !response.data) return;
+      const { user, url_slug } = response.data.writePost;
+      await client.resetStore();
+      history.push(`/@${user.username}/${url_slug}`);
+    } catch (e) {
+      toast.error('포스트 작성 실패');
+    }
   };
 
   const onEdit = async () => {
