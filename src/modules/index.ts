@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
   core,
   write,
   header: header.reducer,
-  post,
+  post: post.reducer,
   error: error.reducer,
   scroll: scroll.reducer,
 });
