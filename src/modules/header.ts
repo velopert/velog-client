@@ -7,12 +7,6 @@ const SET_CUSTOM = 'header/SET_CUSTOM';
 const SET_USER_LOGO = 'header/SET_USER_LOGO';
 const SET_VELOG_USERNAME = 'header/SET_VELOG_USERNAME';
 
-const START_FLOATING = 'header/START_FLOATING';
-const EXIT_FLOATING = 'header/EXIT_FLOATING';
-const SET_MARGIN = 'header/SET_MARGIN';
-const SET_DIRECTION = 'header/SET_DIRECTION';
-const SET_BASE_Y = 'header/SET_BASE_Y';
-
 export type UserLogo = {
   title: string | null;
   logo_image: string | null;
@@ -30,23 +24,10 @@ export const setVelogUsername = createStandardAction(SET_VELOG_USERNAME)<
   string
 >();
 
-export const startFloating = createStandardAction(START_FLOATING)<undefined>();
-export const exitFloating = createStandardAction(EXIT_FLOATING)<undefined>();
-export const setMargin = createStandardAction(SET_MARGIN)<number>();
-export const setDirection = createStandardAction(SET_DIRECTION)<
-  'UP' | 'DOWN'
->();
-export const setBaseY = createStandardAction(SET_BASE_Y)<number>();
-
 export const headerActions = {
   setCustom,
   setUserLogo,
   setVelogUsername,
-  startFloating,
-  exitFloating,
-  setMargin,
-  setDirection,
-  setBaseY
 };
 
 type HeaderAction = ActionType<typeof headerActions>;
@@ -54,7 +35,7 @@ type HeaderAction = ActionType<typeof headerActions>;
 const initialState: HeaderState = {
   custom: false,
   userLogo: null,
-  velogUsername: null
+  velogUsername: null,
 };
 
 const header = createReducer<HeaderState, HeaderAction>(initialState, {
@@ -66,7 +47,7 @@ const header = createReducer<HeaderState, HeaderAction>(initialState, {
   },
   [SET_VELOG_USERNAME]: (state, { payload }) => {
     return updateKey(state, 'velogUsername', payload);
-  }
+  },
 });
 
 export default header;
