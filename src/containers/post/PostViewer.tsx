@@ -12,7 +12,7 @@ import {
 import PostHead from '../../components/post/PostHead';
 import PostContent from '../../components/post/PostContent';
 import PostComments from './PostComments';
-import { postActions } from '../../modules/post';
+import postSlice from '../../modules/post';
 import PostViewerProvider from '../../components/post/PostViewerProvider';
 import { useUserId } from '../../lib/hooks/useUser';
 import { useQuery, useMutation, useApolloClient } from '@apollo/react-hooks';
@@ -151,7 +151,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
     // schedule post prefetch
     const timeoutId = setTimeout(prefetchLinkedPosts, 1000 * 5);
 
-    dispatch(postActions.setPostId(data.post.id));
+    dispatch(postSlice.actions.setPostId(data.post.id));
 
     prefetched.current = false;
 
