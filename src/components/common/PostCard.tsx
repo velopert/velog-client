@@ -7,7 +7,6 @@ import Tag from './TagItem';
 import { PartialPost } from '../../lib/graphql/post';
 import { formatDate } from '../../lib/utils';
 import usePrefetchPost from '../../lib/hooks/usePrefetchPost';
-import { usePostViewerPrefetch } from '../post/PostViewerProvider';
 import Skeleton from './Skeleton';
 import SkeletonTexts from './SkeletonTexts';
 import RatioImage from './RatioImage';

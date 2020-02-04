@@ -94,23 +94,9 @@ const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
     setTags(initialTags);
   }, [initialTags]);
 
-  // const onChangeDiv = useCallback((e: React.ChangeEvent<HTMLDivElement>) => {
-  //   if (ignore.current) {
-  //     ignore.current = false;
-  //     return;
-  //   }
-
-  //   setValue(e.target.innerText);
-  // }, []);
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
-
-  const onPaste = useCallback((e: React.ClipboardEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const text = e.clipboardData.getData('text');
-    document.execCommand('insertText', false, text);
-  }, []);
 
   useEffect(() => {
     if (editableDiv.current) {
