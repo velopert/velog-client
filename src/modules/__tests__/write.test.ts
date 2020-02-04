@@ -12,6 +12,7 @@ describe('write redux module', () => {
       mode: 'MARKDOWN',
       html: '',
       initialBody: '',
+      initialTitle: '',
       tags: [],
       publish: false,
       textBody: '',
