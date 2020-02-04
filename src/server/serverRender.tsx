@@ -92,7 +92,8 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
   try {
     await getDataFromTree(Root);
   } catch (e) {
-    throw e;
+    console.log('Apollo Error! Rendering result anyways');
+    console.log(e);
   }
 
   const content = ReactDOMServer.renderToString(Root);
