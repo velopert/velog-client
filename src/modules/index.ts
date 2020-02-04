@@ -18,7 +18,7 @@ export type RootState = {
 const rootReducer = combineReducers({
   core,
   write,
-  header,
+  header: header.reducer,
   post,
   error: error.reducer,
   scroll: scroll.reducer,

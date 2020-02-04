@@ -58,12 +58,12 @@ const HeaderContainer: React.FC<HeaderContainerProps> = () => {
   const location = useLocation();
   const isSearch = location.pathname === '/search';
 
-  const { user, custom, userLogo, velogUsername } = useSelector(
+  const { user, custom, userLogo, username } = useSelector(
     (state: RootState) => ({
       user: state.core.user,
       custom: state.header.custom,
       userLogo: state.header.userLogo,
-      velogUsername: state.header.velogUsername,
+      username: state.header.username,
     }),
   );
   const dispatch = useDispatch();
@@ -167,7 +167,7 @@ const HeaderContainer: React.FC<HeaderContainerProps> = () => {
       user={user}
       custom={custom}
       userLogo={userLogo}
-      velogUsername={velogUsername}
+      velogUsername={username}
       isSearch={isSearch}
     />
   );

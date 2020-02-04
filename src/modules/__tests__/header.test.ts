@@ -1,37 +1,50 @@
-import header, {
-  setCustom,
-  setUserLogo,
-  setVelogUsername,
-  HeaderState,
-} from '../header';
+import header, { HeaderState } from '../header';
 
 describe('header redux module', () => {
   describe('reducer', () => {
     const initialState: HeaderState = {
       custom: false,
       userLogo: null,
-      velogUsername: null,
+      username: null,
     };
+    const { reducer, actions } = header;
     it('should have initialState', () => {
-      const state = header(undefined, { type: 'INIT' } as any);
+      const state = reducer(undefined, { type: 'INIT' });
       expect(state).toEqual(initialState);
     });
-    it('handles SET_CUSTOM action', () => {
-      let state = header(initialState, setCustom(true));
-      expect(state.custom).toBe(true);
-      state = header(initialState, setCustom(false));
-      expect(state.custom).toBe(false);
-    });
-    it('handles SET_USER_LOGO action', () => {
-      let state = header(
+    it('handles enterUserVelog action', () => {
+      let state = reducer(
         initialState,
-        setUserLogo({ title: 'SAMPLE', logo_image: null }),
+        actions.enterUserVelog({
+          username: 'velopert',
+          userLogo: {
+            title: 'velopert.log',
+            logo_image: null,
+          },
+        }),
       );
-      expect(state.userLogo).toHaveProperty('title', 'SAMPLE');
+      expect(state.custom).toBe(true);
+      expect(state.username).toBe('velopert');
+      expect(state.userLogo).toEqual({
+        title: 'velopert.log',
+        logo_image: null,
+      });
     });
-    it('handles SET_VELOG_USER', () => {
-      let state = header(initialState, setVelogUsername('velopert'));
-      expect(state.velogUsername).toBe('velopert');
+    it('handles leaveUserVelog', () => {
+      let state: HeaderState = {
+        custom: true,
+        username: 'velopert',
+        userLogo: {
+          title: 'velopert.log',
+          logo_image: null,
+        },
+      };
+      state = reducer(state, actions.leaveUserVelog);
+      expect(state).toEqual({
+        custom: false,
+        username: null,
+        userLogo: null,
+      });
     });
   });
 });

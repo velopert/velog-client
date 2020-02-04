@@ -2,11 +2,7 @@ import { useDispatch } from 'react-redux';
 import { GET_VELOG_CONFIG, VelogConfig } from '../../../lib/graphql/user';
 import { useQuery } from '@apollo/react-hooks';
 import { useEffect } from 'react';
-import {
-  setCustom,
-  setVelogUsername,
-  setUserLogo,
-} from '../../../modules/header';
+import header from '../../../modules/header';
 import { ssrEnabled } from '../../../lib/utils';
 import useNotFound from '../../../lib/hooks/useNotFound';
 
@@ -26,16 +22,17 @@ export default function useApplyVelogConfig(username: string) {
     console.log(error);
   }
 
+  // enter user velog
   useEffect(() => {
-    dispatch(setCustom(true));
+    dispatch(header.actions.enterUserVelog({ username }));
+  }, [dispatch, username]);
+
+  // leaving user velog
+  useEffect(() => {
     return () => {
-      dispatch(setCustom(false));
+      dispatch(header.actions.leaveUserVelog());
     };
   }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(setVelogUsername(username));
-  }, [dispatch, username]);
 
   useEffect(() => {
     if (data && data.velog_config === null) {
@@ -43,21 +40,27 @@ export default function useApplyVelogConfig(username: string) {
       return;
     }
     if (!data || !data.velog_config) return;
+    const { title, logo_image } = data.velog_config;
+
     dispatch(
-      setUserLogo({
-        title: data.velog_config.title,
-        logo_image: data.velog_config.logo_image,
+      header.actions.enterUserVelog({
+        username,
+        userLogo: {
+          title,
+          logo_image,
+        },
       }),
     );
-  }, [data, dispatch, showNotFound]);
+  }, [data, dispatch, showNotFound, username]);
 
   if (data && ssrEnabled) {
-    dispatch(setCustom(true));
-    dispatch(setVelogUsername(username));
     dispatch(
-      setUserLogo({
-        title: data.velog_config.title,
-        logo_image: data.velog_config.logo_image,
+      header.actions.enterUserVelog({
+        username,
+        userLogo: {
+          title: data.velog_config.title,
+          logo_image: data.velog_config.logo_image,
+        },
       }),
     );
   }
