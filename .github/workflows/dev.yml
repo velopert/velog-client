@@ -64,4 +64,4 @@ jobs:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_USERNAME: 'Github Actions'
         SLACK_ICON: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-        SLACK_MESSAGE: '벨로그 웹 클라이언트 배포가 끝났어요! :rocket:'
+        SLACK_MESSAGE: '*stage: dev* - 벨로그 웹 클라이언트 배포가 끝났어요! :rocket:'
