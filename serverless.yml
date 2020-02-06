@@ -48,6 +48,7 @@ provider:
   environment:
     REDIS_HOST: ${ssm:/velog-v2/redis-host}
     DEBUG: ioredis:*
+    STAGE: ${env:STAGE}
 
   vpc:
     securityGroupIds:

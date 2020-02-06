@@ -1,9 +1,9 @@
-name: Deploy Serverless SSR
+name: Deploy Serverless SSR (Dev)
 
 on:
   push:
     branches:
-      - master
+      - develop
 
 jobs:
   deploy:
@@ -29,13 +29,14 @@ jobs:
       run: npm run build:ci
       env:
         REACT_APP_API_HOST: 'https://v2dev.velog.io/'
-        PUBLIC_URL: 'https://static.velog.io/'
+        PUBLIC_URL: 'https://d3v0gm8v6v8olv.cloudfront.net/'
+        STAGE: true
     - name: s3 sync
       uses: jakejarvis/s3-sync-action@master
       with:
         args: --follow-symlinks --delete
       env:
-        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET_DEV }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
         AWS_REGION: 'ap-northeast-2'
@@ -50,7 +51,8 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
         REACT_APP_API_HOST: 'https://v2dev.velog.io/'
-        PUBLIC_URL: 'https://static.velog.io/'
+        PUBLIC_URL: 'https://d3v0gm8v6v8olv.cloudfront.net/'
+        STAGE: true
     - name: Deploy Completion Webhook
       uses: joelwmale/webhook-action@master
       env:

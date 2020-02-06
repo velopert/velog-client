@@ -1,0 +1,5 @@
+#!/bin/bash
+export PUBLIC_URL=https://d3v0gm8v6v8olv.cloudfront.net/
+export REACT_APP_API_HOST=https://v2dev.velog.io/
+export STAGE=true
+export S3_BUCKET=dev.static.velog.io

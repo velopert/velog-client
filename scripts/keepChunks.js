@@ -14,14 +14,20 @@ const assetHistoryDir = path.join(buildDir, 'asset-history.json');
 const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
 
+function replaceLastSlash(url) {
+  if (url.charAt(url.length - 1) === '/') {
+    return url.slice(0, url.length - 1);
+  }
+  return url;
+}
+const PUBLIC_URL = replaceLastSlash(process.env.PUBLIC_URL);
+
 /**
  * Loads current asset-history from CDN
  */
 async function getAssetHistory() {
   try {
-    const response = await client.get(
-      'https://static.velog.io/asset-history.json',
-    );
+    const response = await client.get(`${PUBLIC_URL}/asset-history.json`);
     return response.data;
   } catch (e) {
     return {
@@ -68,8 +74,7 @@ function downloadUrls(urls) {
     urls.map(url => {
       const downloadPath = url
         .slice(0, url.lastIndexOf('/'))
-        .replace('https://static.velog.io', '');
-
+        .replace(PUBLIC_URL, '');
       return download(url, path.join(buildDir, downloadPath));
     }),
   );

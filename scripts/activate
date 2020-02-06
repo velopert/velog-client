@@ -1,0 +1,4 @@
+#!/bin/bash
+export PUBLIC_URL=https://static.velog.io/
+export REACT_APP_API_HOST=https://v2.velog.io/
+export S3_BUCKET=static.velog.io
