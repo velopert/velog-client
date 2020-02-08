@@ -7,6 +7,7 @@ import SearchResult from '../../../containers/search/SearchResult';
 import styled from 'styled-components';
 import media from '../../../lib/styles/media';
 import usePreserveScroll from '../../../lib/hooks/usePreserveScroll';
+import { Helmet } from 'react-helmet-async';
 
 export interface UserPostsTabProps
   extends RouteComponentProps<{ username: string }> {
@@ -28,6 +29,15 @@ const UserPostsTab: React.FC<UserPostsTabProps> = ({
   return (
     <>
       <HideOnMobile>
+        <Helmet>
+          <link
+            data-rh="true"
+            rel="alternate"
+            type="application/rss+xml"
+            title="RSS"
+            href={`https://v2.velog.io/api/v2/rss/${username}`}
+          />
+        </Helmet>
         <VelogSearchInputContainer
           initial={q || ''}
           username={match.params.username}

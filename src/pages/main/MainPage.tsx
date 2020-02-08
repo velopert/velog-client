@@ -9,6 +9,7 @@ import MainTagWidgetContainer from '../../containers/main/MainTagWidgetContainer
 import MainNoticeWidgetContainer from '../../containers/main/MainNoticeWidgetContainer';
 import MainMobileHead from '../../components/main/MainMobileHead';
 import usePreserveScroll from '../../lib/hooks/usePreserveScroll';
+import { Helmet } from 'react-helmet-async';
 
 interface MainPageProps {}
 
@@ -24,6 +25,15 @@ const MainPage: React.FC<MainPageProps> = () => {
 
   return (
     <MainTemplate>
+      <Helmet>
+        <link
+          data-rh="true"
+          rel="alternate"
+          type="application/rss+xml"
+          title="RSS"
+          href="https://v2.velog.io/api/v2/rss"
+        />
+      </Helmet>
       <MainTemplate.Left>
         <MainSideMenu />
       </MainTemplate.Left>
