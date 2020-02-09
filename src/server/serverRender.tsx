@@ -7,7 +7,6 @@ import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-boost';
 import { getDataFromTree } from '@apollo/react-ssr';
-import { Middleware } from 'koa';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router';

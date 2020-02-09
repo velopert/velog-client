@@ -33,7 +33,7 @@ const MainRightFooter: React.FC<MainRightFooterProps> = props => {
         <Link to="/policy/terms">서비스 정책</Link>
         {/* <Link to="/">FAQ</Link> */}
       </div>
-      <div className="copyright">© 2019 · velog</div>
+      <div className="copyright">© 2020 · velog</div>
     </MainRightFooterBlock>
   );
 };
