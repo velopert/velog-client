@@ -30,7 +30,7 @@ const SeriesListBlock = styled.div`
     }
     .message {
       font-size: 2rem;
-      color: #ced4da;
+      color: ${palette.gray6};
       margin-top: 3rem;
       margin-bottom: 2rem;
     }
