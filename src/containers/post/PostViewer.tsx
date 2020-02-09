@@ -14,7 +14,7 @@ import PostContent from '../../components/post/PostContent';
 import PostComments from './PostComments';
 import postSlice from '../../modules/post';
 import PostViewerProvider from '../../components/post/PostViewerProvider';
-import { useUserId } from '../../lib/hooks/useUser';
+import useUser, { useUserId } from '../../lib/hooks/useUser';
 import { useQuery, useMutation, useApolloClient } from '@apollo/react-hooks';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { prepareEdit } from '../../modules/write';
@@ -97,6 +97,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
     if (!userLogo || !userLogo.title) return `${username}.log`;
     return userLogo.title;
   }, [userLogo, username]);
+  const user = useUser();
 
   const { error, data } = readPost;
 
@@ -213,6 +214,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
 
   const onLikeToggle = async () => {
     if (loadingLike || loadingUnlike) return;
+
     const variables = {
       id: post.id,
     };
@@ -230,6 +232,10 @@ const PostViewer: React.FC<PostViewerProps> = ({
     // });
 
     try {
+      if (!user) {
+        toast.error('로그인 후 이용해주세요.');
+        return;
+      }
       if (post.liked) {
         client.writeFragment({
           id: `Post:${post.id}`,
