@@ -175,8 +175,8 @@ const PostViewer: React.FC<PostViewerProps> = ({
           id: data.post.id,
         },
       });
-      await client.resetStore();
       history.push('/');
+      await client.resetStore();
     } catch (e) {}
   };
 
