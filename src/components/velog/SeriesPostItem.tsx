@@ -6,6 +6,7 @@ import { formatDate } from '../../lib/utils';
 import PostLink from '../common/PostLink';
 import SkeletonTexts from '../common/SkeletonTexts';
 import Skeleton from '../common/Skeleton';
+import media from '../../lib/styles/media';
 
 const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
   font-family: 'Spoqa Han Sans', -apple-system, BlinkMacSystemFont,
@@ -35,6 +36,9 @@ const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
 
   & + & {
     margin-top: 4rem;
+    ${media.small} {
+      margin-top: 6rem;
+    }
   }
   section {
     margin-top: 1rem;
@@ -44,6 +48,12 @@ const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
     min-width: 0;
     letter-spacing: -0.02em;
     height: 6.25rem;
+
+    ${media.small} {
+      flex-direction: column;
+      height: auto;
+    }
+
     .post-info {
       flex: 1;
       min-width: 0;
@@ -69,10 +79,22 @@ const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
     height: 6.25rem;
     object-fit: cover;
     box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.15);
+    ${media.small} {
+      width: 100%;
+      height: auto;
+    }
+    &.empty-thumbnail {
+      ${media.small} {
+        display: none;
+      }
+    }
   }
   .date {
     color: ${palette.gray5};
     font-size: 0.875rem;
+    ${media.small} {
+      margin-top: 1rem;
+    }
   }
 
   ${props =>
@@ -123,7 +145,11 @@ const SeriesPostItem: React.FC<SeriesPostItemProps> = ({
           <img src={thumbnail || emptyThumbnail} alt="post-thumbnail" />
         ) : (
           <PostLink username={username} urlSlug={urlSlug}>
-            <img src={thumbnail || emptyThumbnail} alt="post-thumbnail" />
+            <img
+              src={thumbnail || emptyThumbnail}
+              alt="post-thumbnail"
+              className={thumbnail ? '' : 'empty-thumbnail'}
+            />
           </PostLink>
         )}
         <div className="post-info">
@@ -165,6 +191,10 @@ const SkeletonBlock = styled(SeriesPostItemBlock)`
     width: 12rem;
     height: 6.25rem;
     margin-right: 1rem;
+    ${media.small} {
+      width: 100%;
+      height: 320px;
+    }
   }
   .post-info {
     p {
