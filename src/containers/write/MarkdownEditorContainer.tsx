@@ -40,6 +40,7 @@ import useSaveHotKey from './hooks/useSaveHotkey';
 import embedPlugin from '../../lib/remark/embedPlugin';
 import { Helmet } from 'react-helmet-async';
 import { toast } from 'react-toastify';
+import { usePrevious } from 'react-use';
 
 export type MarkdownEditorContainerProps = {};
 
@@ -122,6 +123,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
 
   const [upload, file] = useUpload();
   const [s3Upload, image] = useS3Upload();
+  const prevImage = usePrevious(image);
 
   useEffect(() => {
     if (!file) return;
@@ -131,10 +133,10 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
   }, [file, s3Upload]);
 
   useEffect(() => {
-    if (!thumbnail && image) {
+    if (image !== prevImage && !thumbnail && image) {
       actionCreators.setThumbnail(image);
     }
-  }, [actionCreators, image, thumbnail]);
+  }, [actionCreators, image, prevImage, thumbnail]);
 
   const onDragDropUpload = useCallback(
     (file: File) => {
@@ -252,7 +254,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       </Helmet>
       <MarkdownEditor
         onUpload={upload}
-        lastUploadedImage={publish ? null : image}
+        lastUploadedImage={image}
         initialBody={initialBody}
         title={title}
         markdown={markdown}
