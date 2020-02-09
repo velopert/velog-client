@@ -156,13 +156,15 @@ const PostCard = ({ post, hideUser }: PostCardProps) => {
         </div>
       )}
       {post.thumbnail && (
-        <RatioImage
-          src={post.thumbnail}
-          alt="post-thumbnail"
-          widthRatio={1.91}
-          heightRatio={1}
-          className="post-thumbnail"
-        />
+        <Link to={url}>
+          <RatioImage
+            src={post.thumbnail}
+            alt="post-thumbnail"
+            widthRatio={1.91}
+            heightRatio={1}
+            className="post-thumbnail"
+          />
+        </Link>
       )}
       <Link to={url}>
         <h2>{post.title}</h2>
