@@ -33,6 +33,7 @@ import media from '../../lib/styles/media';
 import useNotFound from '../../lib/hooks/useNotFound';
 import { Helmet } from 'react-helmet-async';
 import { RootState } from '../../modules';
+import { toast } from 'react-toastify';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -278,6 +279,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         break;
       case 'clipboard':
         copyText(link);
+        toast.success('링크가 복사되었습니다.');
         break;
       default:
     }
