@@ -29,9 +29,18 @@ const MainRightFooter: React.FC<MainRightFooterProps> = props => {
   return (
     <MainRightFooterBlock>
       <div className="links">
-        {/* <Link to="/">소개</Link> */}
+        <a href="mailto:contact@velog.io">문의</a>
+        <a
+          href="https://bit.ly/velog-slack"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Slack 채널
+        </a>
         <Link to="/policy/terms">서비스 정책</Link>
-        {/* <Link to="/">FAQ</Link> */}
+        {/* <div className="contact">
+          <div className="email">문의 - contact@velog.io</div>
+        </div> */}
       </div>
       <div className="copyright">© 2020 · velog</div>
     </MainRightFooterBlock>
