@@ -88,6 +88,8 @@ const PostCardBlock = styled.div`
     }
   }
   .subinfo {
+    display: flex;
+    align-items: center;
     margin-top: 1rem;
     color: ${palette.gray6};
     font-size: 0.875rem;
@@ -96,8 +98,9 @@ const PostCardBlock = styled.div`
     }
     span {
     }
-    span + span:before {
-      content: ' · ';
+    .separator {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
     }
   }
   .tags-wrapper {
@@ -172,11 +175,15 @@ const PostCard = ({ post, hideUser }: PostCardProps) => {
       </div>
       <div className="subinfo">
         <span>{formatDate(post.released_at)}</span>
+        <div className="separator">·</div>
         <span>{post.comments_count}개의 댓글</span>
         {post.is_private && (
-          <span>
-            <PrivatePostLabel />
-          </span>
+          <>
+            <div className="separator">·</div>
+            <span>
+              <PrivatePostLabel />
+            </span>
+          </>
         )}
       </div>
     </PostCardBlock>
