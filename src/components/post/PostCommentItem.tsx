@@ -10,6 +10,7 @@ import useBoolean from '../../lib/hooks/useBoolean';
 import PostRepliesContainer from '../../containers/post/PostRepliesContainer';
 import PostEditComment from '../../containers/post/PostEditComment';
 import media from '../../lib/styles/media';
+import { Link } from 'react-router-dom';
 
 const PostCommentItemBlock = styled.div`
   padding-top: 1.5rem;
@@ -49,9 +50,17 @@ const CommentHead = styled.div`
         ${media.small} {
           font-size: 0.875rem;
         }
+        a {
+          color: inherit;
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+            color: ${palette.gray7};
+          }
+        }
       }
       .date {
-        margin-top: 0.25rem;
+        margin-top: 0.5rem;
         color: ${palette.gray6};
         font-size: 0.875rem;
         ${media.small} {
@@ -140,17 +149,25 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
   // hides comment where it is deleted and its every reply is also deleted
   if (deleted && replies_count === 0) return null;
 
+  const velogLink = `/@${user && user.username}`;
+
   return (
     <PostCommentItemBlock className="comment">
       <CommentHead>
         <div className="profile">
-          <img
-            src={(user && user.profile.thumbnail) || userThumbnail}
-            alt="comment-user-thumbnail"
-          />
+          <Link to={velogLink}>
+            <img
+              src={(user && user.profile.thumbnail) || userThumbnail}
+              alt="comment-user-thumbnail"
+            />
+          </Link>
           <div className="comment-info">
             <div className="username">
-              {user ? user.username : '알 수 없음'}
+              {user ? (
+                <Link to={velogLink}>{user.username}</Link>
+              ) : (
+                '알 수 없음'
+              )}
             </div>
             <div className="date">{formatDate(created_at)}</div>
           </div>
