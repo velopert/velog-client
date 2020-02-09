@@ -34,6 +34,7 @@ const Main = styled.div`
     width: 526px;
   }
   ${media.medium} {
+    width: 768px;
   }
   ${media.small} {
     width: 100%;
