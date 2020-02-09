@@ -114,11 +114,13 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
     html,
   )}`;
 
-  setImmediate(() => {
-    if (!loggedIn) {
-      cacheManager.set(url, pageHtml);
+  try {
+    if (!loggedIn && process.env.STAGE !== 'true') {
+      await cacheManager.set(url, pageHtml);
     }
-  });
+  } catch (e) {
+    console.log('Failed to cache...');
+  }
 
   return { html: pageHtml, statusCode: context.statusCode };
 };
