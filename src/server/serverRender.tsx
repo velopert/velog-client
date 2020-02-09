@@ -37,7 +37,7 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
   const store = createStore(rootReducer);
   // prepare apollo client
 
-  if (!loggedIn) {
+  if (!loggedIn && process.env.STAGE !== 'true') {
     const cachedPage = await cacheManager.get(url);
     if (cachedPage) {
       return {
