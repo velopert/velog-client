@@ -47,6 +47,15 @@ function MainMobileHeadExtra({ visible, onClose }: MainMobileHeadExtraProps) {
                   <li>
                     <Link to="/policy/terms">서비스 정책</Link>
                   </li>
+                  <li>
+                    <a
+                      href="https://bit.ly/velog-slack"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Slack
+                    </a>
+                  </li>
                 </ul>
                 <div className="contact">
                   <h5>문의</h5>
