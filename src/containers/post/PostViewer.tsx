@@ -321,7 +321,12 @@ const PostViewer: React.FC<PostViewerProps> = ({
         tags={post.tags}
         username={username}
         date={post.released_at}
-        thumbnail={post.thumbnail}
+        thumbnail={
+          post.thumbnail &&
+          (post.body.includes(encodeURI(post.thumbnail))
+            ? null
+            : post.thumbnail)
+        }
         series={post.series}
         hideThumbnail={!!post.thumbnail && post.body.includes(post.thumbnail)}
         postId={post.id}
