@@ -35,7 +35,7 @@ const UserPostsTab: React.FC<UserPostsTabProps> = ({
             rel="alternate"
             type="application/rss+xml"
             title="RSS"
-            href={`https://v2.velog.io/api/v2/rss/${username}`}
+            href={`https://v2.velog.io/rss/${username}`}
           />
         </Helmet>
         <VelogSearchInputContainer
