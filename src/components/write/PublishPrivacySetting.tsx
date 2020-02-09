@@ -72,7 +72,7 @@ const PublishPrivacySetting: React.FC<PublishPrivacySettingProps> = ({
       </Button>
       <Button active={isPrivate} onClick={onClickPrivate}>
         <LockIcon />
-        나만 보기
+        비공개
       </Button>
     </PublishPrivacySettingBlock>
   );

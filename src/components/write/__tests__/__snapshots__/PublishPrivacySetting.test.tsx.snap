@@ -25,7 +25,7 @@ exports[`PublishPrivacySetting matches snapshot 1`] = `
         <svg>
           icon-lock.svg
         </svg>
-        나만 보기
+        비공개
       </button>
     </div>
   </section>

@@ -335,6 +335,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
           />
         }
         toc={<PostToc />}
+        isPrivate={post.is_private}
       />
       <PostContent isMarkdown={post.is_markdown} body={post.body} />
       <UserProfileWrapper>

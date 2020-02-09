@@ -18,7 +18,7 @@ describe('PublishPrivacySettingContainer', () => {
     );
     const buttons = {
       public: utils.getByText('전체 공개'),
-      private: utils.getByText('나만 보기'),
+      private: utils.getByText('비공개'),
     };
     return {
       ...utils,

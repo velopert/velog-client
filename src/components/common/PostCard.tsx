@@ -11,6 +11,7 @@ import Skeleton from './Skeleton';
 import SkeletonTexts from './SkeletonTexts';
 import RatioImage from './RatioImage';
 import media from '../../lib/styles/media';
+import PrivatePostLabel from './PrivatePostLabel';
 
 const PostCardBlock = styled.div`
   padding-top: 4rem;
@@ -172,6 +173,11 @@ const PostCard = ({ post, hideUser }: PostCardProps) => {
       <div className="subinfo">
         <span>{formatDate(post.released_at)}</span>
         <span>{post.comments_count}개의 댓글</span>
+        {post.is_private && (
+          <span>
+            <PrivatePostLabel />
+          </span>
+        )}
       </div>
     </PostCardBlock>
   );

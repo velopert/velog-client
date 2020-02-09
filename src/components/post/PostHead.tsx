@@ -10,6 +10,8 @@ import PopupOKCancel from '../common/PopupOKCancel';
 import media from '../../lib/styles/media';
 import TagList from '../common/TagList';
 import { Link } from 'react-router-dom';
+import { LockIcon } from '../../static/svg';
+import PrivatePostLabel from '../common/PrivatePostLabel';
 
 const PostHeadBlock = styled(VelogResponsive)`
   margin-top: 5.5rem;
@@ -63,6 +65,7 @@ const SubInfo = styled.div`
       margin-left: 0.5rem;
       margin-right: 0.5rem;
     }
+
     ${media.small} {
       font-size: 0.875rem;
     }
@@ -126,6 +129,7 @@ export interface PostHeadProps {
   onEdit: () => any;
   shareButtons: React.ReactNode;
   toc: React.ReactNode;
+  isPrivate?: boolean;
 }
 
 const PostHead: React.FC<PostHeadProps> = ({
@@ -142,6 +146,7 @@ const PostHead: React.FC<PostHeadProps> = ({
   onEdit,
   shareButtons,
   toc,
+  isPrivate,
 }) => {
   const [askRemove, toggleAskRemove] = useToggle(false);
 
@@ -160,6 +165,12 @@ const PostHead: React.FC<PostHeadProps> = ({
             </span>
             <span className="separator">&middot;</span>
             <span>{formatDate(date)}</span>
+            {isPrivate && (
+              <>
+                <span className="separator">&middot;</span>
+                <PrivatePostLabel />
+              </>
+            )}
           </div>
           {ownPost && (
             <EditRemoveGroup>
