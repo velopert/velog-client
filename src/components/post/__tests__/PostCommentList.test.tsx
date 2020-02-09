@@ -1,15 +1,18 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
 import PostCommentsList, { PostCommentsListProps } from '../PostCommentsList';
+import { Comment } from '../../../lib/graphql/post';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('PostCommentsList', () => {
-  const sampleComments = [
+  const sampleComments: Comment[] = [
     {
       id: 'a38d0552-d2a4-4079-96ca-09aef72f00e1',
       user: {
         id: '0bcdf3e5-a228-42c3-8b52-3f0dc118dfd8',
         username: 'blablabla',
         profile: {
+          id: '',
           thumbnail: null,
         },
       },
@@ -25,6 +28,7 @@ describe('PostCommentsList', () => {
         id: '0bcdf3e5-a228-42c3-8b52-3f0dc118dfd8',
         username: 'blablabla',
         profile: {
+          id: '',
           thumbnail: null,
         },
       },
@@ -40,6 +44,7 @@ describe('PostCommentsList', () => {
         id: '0bcdf3e5-a228-42c3-8b52-3f0dc118dfd8',
         username: 'blablabla',
         profile: {
+          id: '',
           thumbnail: null,
         },
       },
@@ -56,7 +61,11 @@ describe('PostCommentsList', () => {
       currentUserId: null,
       onRemove: () => {},
     };
-    const utils = render(<PostCommentsList {...initialProps} {...props} />);
+    const utils = render(
+      <MemoryRouter>
+        <PostCommentsList {...initialProps} {...props} />
+      </MemoryRouter>,
+    );
     return {
       ...utils,
     };
