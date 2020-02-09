@@ -53,7 +53,12 @@ export default function useApplyVelogConfig(username: string) {
     );
   }, [data, dispatch, showNotFound, username]);
 
-  if (data && ssrEnabled) {
+  if (ssrEnabled && data && data.velog_config === null) {
+    showNotFound();
+    return;
+  }
+
+  if (data && ssrEnabled && data.velog_config) {
     dispatch(
       header.actions.enterUserVelog({
         username,
@@ -63,9 +68,5 @@ export default function useApplyVelogConfig(username: string) {
         },
       }),
     );
-  }
-
-  if (ssrEnabled && data && data.velog_config === null) {
-    showNotFound();
   }
 }
