@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 import { connect } from 'react-redux';
 import { RootState } from '../../modules';
 import PublishPreview from '../../components/write/PublishPreview';
@@ -33,6 +33,7 @@ const PublishPreviewContainer: React.FC<PublishPreviewContainerProps> = ({
   thumbnail,
   setThumbnail,
 }) => {
+  const mounted = useRef(false);
   const onChangeDescription = useCallback(
     (description: string) => changeDescription(description),
     [changeDescription],
@@ -40,6 +41,17 @@ const PublishPreviewContainer: React.FC<PublishPreviewContainerProps> = ({
 
   const [upload, file] = useUpload();
   const [s3Upload, image] = useS3Upload();
+
+  // fills description with defaultDescription when it is empty
+  useEffect(() => {
+    if (mounted.current) return;
+
+    if (!description) {
+      changeDescription(defaultDescription);
+    }
+
+    mounted.current = true;
+  }, [changeDescription, defaultDescription, description]);
 
   const onUpload = () => {
     upload();
@@ -64,7 +76,6 @@ const PublishPreviewContainer: React.FC<PublishPreviewContainerProps> = ({
   return (
     <PublishPreview
       title={title}
-      defaultDescription={defaultDescription}
       description={description}
       onChangeDescription={onChangeDescription}
       onUpload={onUpload}

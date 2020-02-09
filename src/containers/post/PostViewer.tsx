@@ -205,6 +205,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         tags: post.tags,
         title: post.title,
         urlSlug: post.url_slug,
+        thumbnail: post.thumbnail,
       }),
     );
     history.push(`/write?id=${post.id}`);

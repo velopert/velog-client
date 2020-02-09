@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import PublishSection from './PublishSection';
 import palette from '../../lib/styles/palette';
@@ -179,7 +179,6 @@ const { useCallback } = React;
 export interface PublishPreviewProps {
   title: string;
   description: string;
-  defaultDescription: string;
   thumbnail: string | null;
   onChangeDescription: (description: string) => void;
   onResetThumbnail: () => void;
@@ -190,12 +189,11 @@ const PublishPreview: React.FC<PublishPreviewProps> = ({
   title,
   thumbnail,
   description,
-  defaultDescription,
   onChangeDescription,
   onUpload,
   onResetThumbnail,
 }) => {
-  const descriptionToShow: string = description || defaultDescription;
+  // const descriptionToShow: string = description || defaultDescription;
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     onChangeDescription(e.target.value);
   };
@@ -220,17 +218,12 @@ const PublishPreview: React.FC<PublishPreviewProps> = ({
         <h4>{title}</h4>
         <ShortDescriptionTextarea
           placeholder="당신의 포스트를 짧게 소개해보세요."
-          value={descriptionToShow}
+          value={description}
           onChange={onChange}
           onKeyDown={onKeyDown}
         />
-        <TextLimit
-          limit={
-            descriptionToShow !== defaultDescription &&
-            descriptionToShow.length === 150
-          }
-        >
-          {descriptionToShow.length}/150
+        <TextLimit limit={description.length === 150}>
+          {description.length}/150
         </TextLimit>
       </PostInfo>
     </PublishPreviewBlock>

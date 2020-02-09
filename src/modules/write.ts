@@ -71,6 +71,7 @@ export type PrepareEditPayload = {
   isPrivate: boolean;
   isMarkdown: boolean;
   isTemp?: boolean;
+  thumbnail: string | null;
 };
 
 export const prepareEdit = createStandardAction(PREPARE_EDIT)<
@@ -199,13 +200,14 @@ const write = createReducer(
         id,
         isPrivate,
         isTemp,
+        thumbnail,
       } = payload;
       const key = isMarkdown ? 'markdown' : 'html';
       return {
         ...state,
         title,
         tags,
-        description,
+        description: description.slice(0, 150),
         urlSlug,
         isPrivate,
         isTemp: isTemp || false,
@@ -215,6 +217,7 @@ const write = createReducer(
         postId: id,
         initialBody: body,
         initialTitle: title,
+        thumbnail,
       };
     },
     [SET_WRITE_POST_ID]: (state, action: SetWritePostId) => ({

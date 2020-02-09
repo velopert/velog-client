@@ -64,7 +64,9 @@ const PublishActionButtonsContainer: React.FC<PublishActionButtonsContainerProps
     is_private: options.isPrivate,
     url_slug: options.urlSlug || escapeForUrl(options.title),
     thumbnail: options.thumbnail,
-    meta: {},
+    meta: {
+      short_description: options.description,
+    },
     series_id: safe(() => options.selectedSeries!.id),
   };
 

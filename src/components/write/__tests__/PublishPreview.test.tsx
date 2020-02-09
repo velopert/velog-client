@@ -7,7 +7,6 @@ describe('PublishPreview', () => {
     const initialProps: PublishPreviewProps = {
       title: '타이틀',
       description: '',
-      defaultDescription: '',
       onChangeDescription: () => {},
       onResetThumbnail: () => {},
       onUpload: () => {},
@@ -33,19 +32,7 @@ describe('PublishPreview', () => {
     const utils = setup({ title: '타이틀 입니다.' });
     utils.getByText('타이틀 입니다.');
   });
-  it('shows default description', () => {
-    const utils = setup({
-      defaultDescription: 'default',
-    });
-    expect(utils.textarea.value).toBe('default');
-  });
-  it('shows description', () => {
-    const utils = setup({
-      description: 'hello',
-      defaultDescription: 'default',
-    });
-    expect(utils.textarea.value).toBe('hello');
-  });
+
   it('calls onChangeDescription', () => {
     const onChangeDescription = jest.fn();
     const utils = setup({

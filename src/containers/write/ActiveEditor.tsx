@@ -87,6 +87,7 @@ const ActiveEditor: React.FC<ActiveEditorProps> = () => {
         isPrivate: post.is_private,
         isMarkdown: post.is_markdown,
         isTemp: post.is_temp,
+        thumbnail: post.thumbnail,
       }),
     );
     dispatch(setInitialBody(post.body));
