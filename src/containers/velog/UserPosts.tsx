@@ -5,6 +5,9 @@ import PostCardList, {
 import { GET_POST_LIST, PartialPost } from '../../lib/graphql/post';
 import { useQuery } from '@apollo/react-hooks';
 import PaginateWithScroll from '../../components/common/PaginateWithScroll';
+import { undrawBlankCanvas } from '../../static/images';
+import palette from '../../lib/styles/palette';
+import styled from 'styled-components';
 
 interface UserPostsProps {
   username: string;
@@ -45,11 +48,37 @@ const UserPosts: React.FC<UserPostsProps> = ({ username }) => {
 
   return (
     <>
-      <PostCardList posts={data.posts} hideUser />
+      {data.posts.length > 0 ? (
+        <PostCardList posts={data.posts} hideUser />
+      ) : (
+        <EmptyBlock>
+          <img src={undrawBlankCanvas} alt="list is empty" />
+          <div className="message">포스트가 없습니다.</div>
+        </EmptyBlock>
+      )}
+
       {loading && <PostCardListSkeleton forLoading hideUser={true} />}
       <PaginateWithScroll cursor={cursor} onLoadMore={onLoadMore} />
     </>
   );
 };
+
+const EmptyBlock = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 6rem;
+  margin-bottom: 3rem;
+  img {
+    width: 20rem;
+  }
+  .message {
+    font-size: 2rem;
+    color: ${palette.gray6};
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+  }
+`;
 
 export default UserPosts;
