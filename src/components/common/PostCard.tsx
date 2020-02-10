@@ -73,6 +73,7 @@ const PostCardBlock = styled.div`
     font-size: 1.5rem;
     margin: 0;
     color: ${palette.gray9};
+    word-break: keep-all;
     ${media.small} {
       font-size: 1rem;
     }
