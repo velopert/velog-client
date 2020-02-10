@@ -232,7 +232,7 @@
       "@loadable/babel-plugin"
     ]
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "https://v2.velog.io/",
   "devDependencies": {
     "@loadable/webpack-plugin": "^5.7.1"
   }

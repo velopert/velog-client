@@ -23,11 +23,30 @@ const PostTocBlock = styled(Sticky)`
   margin-left: 5rem;
   border-left: 2px solid ${palette.gray2};
   padding-left: 0.75rem;
+  padding-right: 0.75rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   color: ${palette.gray6};
   line-height: 1.5;
   font-size: 0.875rem;
+  max-height: calc(100vh - 128px);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    border-radius: 1px;
+    width: 2px;
+    &:hover {
+      width: 16px;
+    }
+    background: ${palette.gray1};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    z-index: 100;
+    background: ${palette.gray8};
+    /* -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75); */
+  }
 `;
 
 const TocItem = styled.div<{ active: boolean }>`
