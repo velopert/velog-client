@@ -11,6 +11,7 @@ import PostRepliesContainer from '../../containers/post/PostRepliesContainer';
 import PostEditComment from '../../containers/post/PostEditComment';
 import media from '../../lib/styles/media';
 import { Link } from 'react-router-dom';
+import MarkdownRender from '../common/MarkdownRender';
 
 const PostCommentItemBlock = styled.div`
   padding-top: 1.5rem;
@@ -90,6 +91,14 @@ const CommentHead = styled.div`
 `;
 
 const CommentText = styled.p<{ deleted: boolean }>`
+  h1,
+  h2 {
+    font-size: 1.75rem;
+    ${media.small} {
+      font-size: 1.5rem;
+    }
+  }
+
   ${props =>
     props.deleted &&
     css`
@@ -188,7 +197,7 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
       ) : (
         <Typography>
           <CommentText deleted={deleted}>
-            {text || '삭제된 댓글입니다.'}
+            <MarkdownRender markdown={text || '삭제된 댓글입니다.'} />
           </CommentText>
         </Typography>
       )}
