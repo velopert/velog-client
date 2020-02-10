@@ -15,10 +15,7 @@ const TypographyBlock = styled.div`
       color: ${palette.gray8};
       font-weight: 300;
     } */
-    text-align: justify;
-    ${media.small} {
-      text-align: unset;
-    }
+
     b {
       font-weight: 400;
     }
