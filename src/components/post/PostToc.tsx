@@ -19,15 +19,21 @@ const Positioner = styled.div`
 `;
 
 const PostTocBlock = styled(Sticky)`
+  overflow-x: hidden;
+  overflow-y: auto;
+  bottom: 0;
   width: 240px;
   margin-left: 5rem;
-  border-left: 2px solid ${palette.gray2};
-  padding-left: 0.75rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   color: ${palette.gray6};
   line-height: 1.5;
   font-size: 0.875rem;
+
+  > div {
+    padding-left: 0.75rem;
+    border-left: 2px solid ${palette.gray2};
+  }
 `;
 
 const TocItem = styled.div<{ active: boolean }>`

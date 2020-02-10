@@ -49,7 +49,7 @@ const Sticky: React.FC<StickyProps> = ({ className, top, children }) => {
         top: fixed ? top : undefined,
       }}
     >
-      {children}
+      <div>{children}</div>
     </StickyBlock>
   );
 };
