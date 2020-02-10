@@ -53,6 +53,7 @@ const RoundButtonBlock = styled.button<RoundButtonBlockProps>`
   border: none;
   outline: none;
   font-weight: bold;
+  word-break: keep-all;
   background: ${props => buttonColorMap[props.color].background};
   color: ${props => buttonColorMap[props.color].color};
   &:hover {

@@ -31,6 +31,7 @@ const PostHeadBlock = styled(VelogResponsive)`
     font-weight: 800;
     color: ${palette.gray8};
     margin-bottom: 2rem;
+    word-break: keep-all;
   }
 
   ${media.medium} {

@@ -8,7 +8,7 @@ const TypographyBlock = styled.div`
   color: ${palette.gray7};
   line-height: 1.85;
   letter-spacing: -0.02em;
-  word-break: normal;
+  word-break: keep-all;
   word-wrap: break-word;
   p {
     /* ${media.xxlarge} {

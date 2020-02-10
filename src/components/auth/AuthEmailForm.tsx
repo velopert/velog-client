@@ -33,6 +33,7 @@ const AuthEmailFormBlock = styled.form`
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
     width: 5rem;
+    word-break: keep-all;
     cursor: pointer;
     &:hover,
     &:focus {
