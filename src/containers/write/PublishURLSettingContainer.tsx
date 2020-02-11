@@ -4,6 +4,7 @@ import { RootState } from '../../modules';
 import PublishURLSetting from '../../components/write/PublishURLSetting';
 import { escapeForUrl } from '../../lib/utils';
 import { changeUrlSlug } from '../../modules/write';
+import { useMount } from 'react-use';
 
 interface OwnProps {}
 type StateProps = ReturnType<typeof mapStateToProps>;
@@ -28,16 +29,21 @@ const PublishURLSettingContainer: React.FC<PublishURLSettingContainerProps> = ({
   changeUrlSlug,
 }) => {
   const defaultUrlSlug = escapeForUrl(title);
-  const urlSlugToShow = urlSlug || defaultUrlSlug;
   const onChangeUrlSlug = useCallback(
     (urlSlug: string) => changeUrlSlug(urlSlug),
     [changeUrlSlug],
   );
+
+  useMount(() => {
+    if (!urlSlug) {
+      changeUrlSlug(defaultUrlSlug);
+    }
+  });
   if (!username) return null;
   return (
     <PublishURLSetting
       username={username}
-      urlSlug={urlSlugToShow}
+      urlSlug={urlSlug}
       onChangeUrlSlug={onChangeUrlSlug}
     />
   );
