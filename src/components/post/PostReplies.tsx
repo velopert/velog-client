@@ -44,6 +44,7 @@ const StartWritingButton = styled.button`
   align-items: center;
   justify-content: center;
   font-weight: 600;
+  background: white;
   &:hover,
   &:focus {
     background: ${palette.teal6};
