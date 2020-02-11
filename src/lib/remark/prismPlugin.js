@@ -26,6 +26,7 @@ import 'prismjs/components/prism-elixir.min';
 import 'prismjs/components/prism-ruby.min';
 import 'prismjs/components/prism-rust.min';
 import 'prismjs/components/prism-yaml.min';
+import 'prismjs/components/prism-dart';
 
 import { ssrEnabled } from '../utils';
 
