@@ -42,7 +42,7 @@ const PostSeriesInfoBlock = styled.div`
       }
     }
     margin-top: 0;
-    font-family: 'Spoqa Han Sans';
+    /* font-family: 'Spoqa Han Sans'; */
     color: ${palette.gray7};
     font-weight: bold;
     padding-right: 2rem;
@@ -141,7 +141,7 @@ const PostList = styled.ol`
   padding-left: 0;
   line-height: 1.8;
   font-size: 1rem;
-  font-family: 'Spoqa Han Sans';
+  /* font-family: 'Spoqa Han Sans'; */
   color: ${palette.gray7};
   counter-reset: item;
   ${media.small} {

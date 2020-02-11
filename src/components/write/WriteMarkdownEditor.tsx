@@ -70,7 +70,7 @@ const MarkdownEditorBlock = styled.div`
     font-size: 1.125rem;
     line-height: 1.5;
     color: ${palette.gray8};
-    font-family: 'Fira Mono', 'Spoqa Han Sans', monospace;
+    font-family: 'Fira Mono', monospace;
     /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', */
     .cm-header {
       line-height: 2;

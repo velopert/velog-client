@@ -14,9 +14,9 @@ const SeriesPostsTemplateBlock = styled.div`
   }
   h1 {
     letter-spacing: -0.02em;
-    font-family: 'Spoqa Han Sans', -apple-system, BlinkMacSystemFont,
+    /* font-family: 'Spoqa Han Sans', -apple-system, BlinkMacSystemFont,
       -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Apple SD Gothic Neo',
-      arial, 나눔고딕, 'Nanum Gothic', 돋움;
+      arial, 나눔고딕, 'Nanum Gothic', 돋움; */
     margin-top: 1rem;
     line-height: 1.5;
     margin-bottom: 1.5rem;

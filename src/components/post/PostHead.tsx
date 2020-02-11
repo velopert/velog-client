@@ -23,7 +23,7 @@ const PostHeadBlock = styled(VelogResponsive)`
     }
   }
   h1 {
-    font-family: 'Spoqa Han Sans';
+    /* font-family: 'Spoqa Han Sans'; */
     font-size: 3rem;
     line-height: 1.5;
     letter-spacing: -0.02em;
@@ -46,7 +46,7 @@ const SubInfo = styled.div`
   align-items: center;
   font-size: 1rem;
   color: ${palette.gray7};
-  font-family: 'Spoqa Han Sans';
+  /* font-family: 'Spoqa Han Sans'; */
   display: flex;
   justify-content: space-between;
   .information {

@@ -48,9 +48,9 @@ const UserInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-left: 1rem;
-  font-family: 'Spoqa Han Sans', -apple-system, BlinkMacSystemFont,
+  /* font-family: 'Spoqa Han Sans', -apple-system, BlinkMacSystemFont,
     -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Apple SD Gothic Neo',
-    arial, 나눔고딕, 'Nanum Gothic', 돋움;
+    arial, 나눔고딕, 'Nanum Gothic', 돋움; */
 
   .name {
     font-size: 1.5rem;

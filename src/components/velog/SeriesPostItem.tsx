@@ -9,9 +9,9 @@ import Skeleton from '../common/Skeleton';
 import media from '../../lib/styles/media';
 
 const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
-  font-family: 'Spoqa Han Sans', -apple-system, BlinkMacSystemFont,
+  /* font-family: 'Spoqa Han Sans', -apple-system, BlinkMacSystemFont,
     -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Apple SD Gothic Neo',
-    arial, 나눔고딕, 'Nanum Gothic', 돋움;
+    arial, 나눔고딕, 'Nanum Gothic', 돋움; */
 
   h2 {
     margin: 0;
