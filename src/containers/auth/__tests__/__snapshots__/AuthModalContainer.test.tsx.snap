@@ -64,7 +64,7 @@ exports[`AuthForm renders correctly 1`] = `
                   회원가입
                 </h4>
                 <form
-                  class="sc-bwzfXH iIIcuY"
+                  class="sc-bwzfXH cYqiPl"
                 >
                   <input
                     placeholder="이메일을 입력하세요."

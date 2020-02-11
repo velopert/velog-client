@@ -22,8 +22,6 @@ const AuthEmailFormBlock = styled.form`
     }
   }
   button {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
     background: ${palette.teal6};
     color: white;
     font-size: 1rem;
@@ -32,7 +30,7 @@ const AuthEmailFormBlock = styled.form`
     border: none;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
-    width: 5rem;
+    width: 6rem;
     word-break: keep-all;
     cursor: pointer;
     &:hover,
