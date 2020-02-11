@@ -12,6 +12,7 @@ import media from '../../lib/styles/media';
 export type SettingRowsProps = {
   title: string | null;
   username: string;
+  email: string;
   onUpdateTitle: (title: string) => Promise<any>;
   onUpdateSocialInfo: (profileLinks: ProfileLinks) => Promise<any>;
   onUpdateEmailRules: (params: {
@@ -38,6 +39,7 @@ function SettingRows({
   username,
   profileLinks,
   userMeta,
+  email,
   onUpdateTitle,
   onUpdateSocialInfo,
   onUpdateEmailRules,
@@ -54,7 +56,7 @@ function SettingRows({
         title="이메일 주소"
         description="회원 인증 또는 시스템에서 발송하는 이메일을 수신하는 주소입니다."
       >
-        public.velopert@gmail.com
+        {email}
       </SettingRow>
       {userMeta && (
         <SettingEmailRulesRow

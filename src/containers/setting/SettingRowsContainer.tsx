@@ -40,6 +40,7 @@ function SettingRowsContainer(props: SettingRowsContainerProps) {
     <SettingRows
       title={velogConfig.title}
       username={user.username}
+      email={user.email}
       onUpdateTitle={updateTitle}
       profileLinks={profile.profile_links}
       onUpdateSocialInfo={updateSocialInfo.update}
