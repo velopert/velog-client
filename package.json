@@ -79,6 +79,7 @@
     "file-loader": "4.3.0",
     "fs-extra": "^8.1.0",
     "graphql": "^14.5.8",
+    "html-react-parser": "^0.10.1",
     "html-webpack-plugin": "4.0.0-beta.5",
     "identity-obj-proxy": "3.0.0",
     "immer": "^5.0.1",
@@ -232,7 +233,7 @@
       "@loadable/babel-plugin"
     ]
   },
-  "proxy": "https://v2.velog.io/",
+  "proxy": "http://localhost:5000",
   "devDependencies": {
     "@loadable/webpack-plugin": "^5.7.1"
   }

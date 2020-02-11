@@ -10,6 +10,7 @@ import Typography from './Typography';
 import embedPlugin from '../../lib/remark/embedPlugin';
 import { loadScript, ssrEnabled } from '../../lib/utils';
 import media from '../../lib/styles/media';
+import parse from 'html-react-parser';
 
 export interface MarkdownRenderProps {
   markdown: string;
@@ -117,13 +118,11 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
       });
   }, [markdown, onConvertFinish]);
 
-  const markup = { __html: html };
+  const element = parse(html);
+
   return (
     <Typography>
-      <MarkdownRenderBlock
-        dangerouslySetInnerHTML={markup}
-        className={codeTheme}
-      />
+      <MarkdownRenderBlock className={codeTheme}>{element}</MarkdownRenderBlock>
     </Typography>
   );
 };
@@ -162,4 +161,4 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
 //   }
 // }
 
-export default MarkdownRender;
+export default React.memo(MarkdownRender);
