@@ -23,7 +23,7 @@ const StyledButton = styled(Button)`
 `;
 
 export interface WriteFooterProps {
-  onTempSave: () => void;
+  onTempSave: (notify?: boolean) => void;
   onPublish: () => void;
   edit: boolean;
 }
@@ -35,7 +35,7 @@ const WriteFooter: React.FC<WriteFooterProps> = ({
 }) => {
   return (
     <WriteFooterBlock>
-      <StyledButton inline color="lightGray" onClick={onTempSave}>
+      <StyledButton inline color="lightGray" onClick={() => onTempSave(true)}>
         임시저장
       </StyledButton>
       <StyledButton inline color="teal" onClick={onPublish}>

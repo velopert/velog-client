@@ -147,89 +147,93 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     [s3Upload],
   );
 
-  const onTempSave = useCallback(async () => {
-    if (!title || !markdown) {
-      toast.error('제목 또는 내용이 비어있습니다.');
-      return;
-    }
+  const onTempSave = useCallback(
+    async (notify?: boolean) => {
+      if (!title || !markdown) {
+        toast.error('제목 또는 내용이 비어있습니다.');
+        return;
+      }
 
-    const notifySuccess = () => {
-      toast.success('포스트가 임시저장되었습니다.');
-    };
+      const notifySuccess = () => {
+        if (!notify) return;
+        toast.success('포스트가 임시저장되었습니다.');
+      };
 
-    if (!postId) {
-      const response = await writePost({
+      if (!postId) {
+        const response = await writePost({
+          variables: {
+            title,
+            body: markdown,
+            tags: [],
+            is_markdown: true,
+            is_temp: true,
+            is_private: false,
+            url_slug: escapeForUrl(title),
+            thumbnail: null,
+            meta: {},
+            series_id: null,
+          },
+        });
+        if (!response || !response.data) return;
+        const { id } = response.data.writePost;
+        dispatch(setWritePostId(id));
+        history.replace(`/write?id=${id}`);
+        notifySuccess();
+        return;
+      }
+      // tempsaving unreleased post:
+      if (isTemp) {
+        await editPost({
+          variables: {
+            id: postId,
+            title,
+            body: markdown,
+            is_markdown: true,
+            is_temp: true,
+            is_private: false,
+            url_slug: escapeForUrl(title),
+            thumbnail: null,
+            meta: {},
+            series_id: null,
+            tags: [],
+          },
+        });
+        notifySuccess();
+        return;
+      }
+
+      // tempsaving released post:
+      // save only if something has been changed
+      if (shallowEqual(lastSavedData, { title, body: markdown })) {
+        return;
+      }
+      await createPostHistory({
         variables: {
+          post_id: postId,
           title,
           body: markdown,
-          tags: [],
           is_markdown: true,
-          is_temp: true,
-          is_private: false,
-          url_slug: escapeForUrl(title),
-          thumbnail: null,
-          meta: {},
-          series_id: null,
         },
       });
-      if (!response || !response.data) return;
-      const { id } = response.data.writePost;
-      dispatch(setWritePostId(id));
-      history.replace(`/write?id=${id}`);
-      notifySuccess();
-      return;
-    }
-    // tempsaving unreleased post:
-    if (isTemp) {
-      await editPost({
-        variables: {
-          id: postId,
-          title,
-          body: markdown,
-          is_markdown: true,
-          is_temp: true,
-          is_private: false,
-          url_slug: escapeForUrl(title),
-          thumbnail: null,
-          meta: {},
-          series_id: null,
-          tags: [],
-        },
-      });
-      notifySuccess();
-      return;
-    }
-
-    // tempsaving released post:
-    // save only if something has been changed
-    if (shallowEqual(lastSavedData, { title, body: markdown })) {
-      return;
-    }
-    await createPostHistory({
-      variables: {
-        post_id: postId,
+      setLastSavedData({
         title,
         body: markdown,
-        is_markdown: true,
-      },
-    });
-    setLastSavedData({
+      });
+      notifySuccess();
+    },
+    [
+      createPostHistory,
+      dispatch,
+      editPost,
+      history,
+      isTemp,
+      lastSavedData,
+      markdown,
+      postId,
       title,
-      body: markdown,
-    });
-    notifySuccess();
-  }, [
-    createPostHistory,
-    dispatch,
-    editPost,
-    history,
-    isTemp,
-    lastSavedData,
-    markdown,
-    postId,
-    title,
-    writePost,
-  ]);
+      writePost,
+    ],
+  );
 
   useEffect(() => {
     const changed = !shallowEqual(lastSavedData, { title, body: markdown });
