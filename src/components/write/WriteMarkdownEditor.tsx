@@ -44,6 +44,8 @@ type MarkdownEditorState = {
 
 const MarkdownEditorBlock = styled.div`
   height: 100%;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
   position: relative;
   &::-webkit-scrollbar {
@@ -63,10 +65,13 @@ const MarkdownEditorBlock = styled.div`
 
   & > .wrapper {
     padding-top: 3rem;
-    padding-bottom: 10rem;
+    padding-bottom: 4rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
   .CodeMirror {
-    height: auto;
+    flex: 1;
     font-size: 1.125rem;
     line-height: 1.5;
     color: ${palette.gray8};
@@ -113,6 +118,12 @@ const HorizontalBar = styled.div`
 const PaddingWrapper = styled.div`
   padding-left: 3rem;
   padding-right: 3rem;
+`;
+
+const MarkdownWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 `;
 
 const FooterWrapper = styled.div`
@@ -193,7 +204,7 @@ export default class WriteMarkdownEditor extends React.Component<
       mode: 'markdown',
       theme: 'one-light',
       placeholder: '당신의 이야기를 적어보세요...',
-      viewportMargin: Infinity,
+      // viewportMargin: Infinity,
       lineWrapping: true,
     });
 
@@ -746,7 +757,7 @@ ${selected}
             onConvert={this.handleAskConvert}
             innerRef={this.toolbarElement}
           />
-          <PaddingWrapper>
+          <MarkdownWrapper>
             {addLink.visible && (
               <AddLink
                 defaultValue=""
@@ -758,7 +769,7 @@ ${selected}
               />
             )}
             <textarea ref={this.editorElement} style={{ display: 'none' }} />
-          </PaddingWrapper>
+          </MarkdownWrapper>
         </div>
         <AskChangeEditor
           visible={this.state.askChangeEditor}
