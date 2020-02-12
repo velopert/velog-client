@@ -12,6 +12,7 @@ import PostEditComment from '../../containers/post/PostEditComment';
 import media from '../../lib/styles/media';
 import { Link } from 'react-router-dom';
 import MarkdownRender from '../common/MarkdownRender';
+import optimizeImage from '../../lib/optimizeImage';
 
 const PostCommentItemBlock = styled.div`
   padding-top: 1.5rem;
@@ -166,7 +167,10 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
         <div className="profile">
           <Link to={velogLink}>
             <img
-              src={(user && user.profile.thumbnail) || userThumbnail}
+              src={optimizeImage(
+                (user && user.profile.thumbnail) || userThumbnail,
+                120,
+              )}
               alt="comment-user-thumbnail"
             />
           </Link>

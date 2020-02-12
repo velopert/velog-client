@@ -4,6 +4,7 @@ import { CurrentUser } from '../../lib/graphql/user';
 import { MdArrowDropDown } from 'react-icons/md';
 import { userThumbnail } from '../../static/images';
 import palette from '../../lib/styles/palette';
+import optimizeImage from '../../lib/optimizeImage';
 
 const HeaderUserIconBlock = styled.div`
   cursor: pointer;
@@ -44,7 +45,10 @@ export interface HeaderUserIconProps {
 const HeaderUserIcon: React.FC<HeaderUserIconProps> = ({ onClick, user }) => {
   return (
     <HeaderUserIconBlock onClick={onClick}>
-      <img src={user.profile.thumbnail || userThumbnail} alt="thumbnail" />
+      <img
+        src={optimizeImage(user.profile.thumbnail || userThumbnail, 120)}
+        alt="thumbnail"
+      />
       <MdArrowDropDown />
     </HeaderUserIconBlock>
   );

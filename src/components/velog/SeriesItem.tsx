@@ -9,6 +9,7 @@ import PlainLink from '../common/PlainLink';
 import Skeleton from '../common/Skeleton';
 import SkeletonTexts from '../common/SkeletonTexts';
 import media from '../../lib/styles/media';
+import optimizeImage from '../../lib/optimizeImage';
 
 const StyledLink = styled(PlainLink)`
   display: block;
@@ -84,7 +85,7 @@ const SeriesItem: React.FC<SeriesItemProps> = ({
     <SeriesItemBlock>
       <StyledLink to={url}>
         <RatioImage
-          src={thumbnail || seriesThumbnail}
+          src={optimizeImage(thumbnail || seriesThumbnail, 768)}
           widthRatio={1.9}
           heightRatio={1}
         />
