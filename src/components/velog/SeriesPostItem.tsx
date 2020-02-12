@@ -7,6 +7,7 @@ import PostLink from '../common/PostLink';
 import SkeletonTexts from '../common/SkeletonTexts';
 import Skeleton from '../common/Skeleton';
 import media from '../../lib/styles/media';
+import optimizeImage from '../../lib/optimizeImage';
 
 const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
   /* font-family: 'Spoqa Han Sans', -apple-system, BlinkMacSystemFont,
@@ -142,11 +143,14 @@ const SeriesPostItem: React.FC<SeriesPostItemProps> = ({
       </h2>
       <section>
         {edit ? (
-          <img src={thumbnail || emptyThumbnail} alt="post-thumbnail" />
+          <img
+            src={optimizeImage(thumbnail || emptyThumbnail, 768)}
+            alt="post-thumbnail"
+          />
         ) : (
           <PostLink username={username} urlSlug={urlSlug}>
             <img
-              src={thumbnail || emptyThumbnail}
+              src={optimizeImage(thumbnail || emptyThumbnail, 768)}
               alt="post-thumbnail"
               className={thumbnail ? '' : 'empty-thumbnail'}
             />

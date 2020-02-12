@@ -42,8 +42,6 @@ const TrendingPosts: React.FC<TrendingPostsProps> = props => {
             post => !idMap[post.id],
           );
 
-          console.log(uniquePosts);
-
           return {
             trendingPosts: [...prev.trendingPosts, ...uniquePosts],
           };

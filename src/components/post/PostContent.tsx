@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import MarkdownRender from '../common/MarkdownRender';
 import PostHtmlContent from './PostHtmlContent';
@@ -24,19 +24,40 @@ export interface PostContentProps {
   body: string;
 }
 
+function optimizeImagesFromPost(markdown: string) {
+  const matches = markdown.match(
+    /(?:!\[(.*?)\]\(https:\/\/images.velog.io\/(.*?)\))/g,
+  );
+  if (!matches) return markdown;
+  const replacers = matches.map(match => [
+    match,
+    match.replace('https://images.', 'https://img.').replace(/\)$/, '?w=1024)'),
+  ]);
+  return replacers.reduce((acc, [original, optimized]) => {
+    return acc.replace(original, optimized);
+  }, markdown);
+}
+
 const PostContent: React.FC<PostContentProps> = ({ isMarkdown, body }) => {
   const [html, setHtml] = useState(isMarkdown ? null : body);
   const dispatch = usePostViewerDispatch();
+  const imageOptimizedPost = useMemo(() => optimizeImagesFromPost(body), [
+    body,
+  ]);
 
   useEffect(() => {
     if (!html) return;
     const toc = parseHeadings(html);
     dispatch({ type: 'SET_TOC', payload: toc });
   }, [dispatch, html]);
+
   return (
     <PostContentBlock>
       {isMarkdown ? (
-        <MarkdownRender markdown={body} onConvertFinish={setHtml} />
+        <MarkdownRender
+          markdown={imageOptimizedPost}
+          onConvertFinish={setHtml}
+        />
       ) : (
         <PostHtmlContent html={body} />
       )}
