@@ -199,14 +199,16 @@ function WriterHead({
   hide: boolean;
   children: React.ReactNode;
 }) {
+  const screenHeight =
+    (typeof window !== 'undefined' && window.screen.height) || 0;
+
   const springStyle = useSpring({
-    maxHeight: hide ? 0 : window.screen.height * 0.5,
+    maxHeight: hide ? 0 : screenHeight * 0.5,
     opacity: hide ? 0 : 1,
     config: {
       duration: 300,
     },
   });
-
   return (
     <animated.div style={springStyle}>
       <PaddingWrapper>{children}</PaddingWrapper>
