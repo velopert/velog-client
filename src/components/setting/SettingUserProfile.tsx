@@ -8,6 +8,7 @@ import useToggle from '../../lib/hooks/useToggle';
 import SettingInput from './SettingInput';
 import useInputs from '../../lib/hooks/useInputs';
 import media from '../../lib/styles/media';
+import optimizeImage from '../../lib/optimizeImage';
 
 export type SettingUserProfileProps = {
   onUpload: () => void;
@@ -40,7 +41,10 @@ function SettingUserProfile({
   return (
     <Section>
       <div className="thumbnail-area">
-        <img src={thumbnail || userThumbnail} alt="profile" />
+        <img
+          src={optimizeImage(thumbnail || userThumbnail, 400)}
+          alt="profile"
+        />
         <Button onClick={onUpload}>이미지 업로드</Button>
         <Button color="transparent" onClick={onClearThumbnail}>
           이미지 제거

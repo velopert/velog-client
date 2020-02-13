@@ -14,6 +14,7 @@ import Skeleton from './Skeleton';
 import SkeletonTexts from './SkeletonTexts';
 import { Link } from 'react-router-dom';
 import media from '../../lib/styles/media';
+import optimizeImage from '../../lib/optimizeImage';
 
 const UserProfileBlock = styled.div`
   ${media.medium} {
@@ -164,7 +165,10 @@ const UserProfile: React.FC<UserProfileProps> = ({
     <UserProfileBlock className={className} style={style}>
       <Section>
         <Link to={velogUrl}>
-          <img src={thumbnail || userThumbnail} alt="profile" />
+          <img
+            src={optimizeImage(thumbnail || userThumbnail, 240)}
+            alt="profile"
+          />
         </Link>
         <UserInfo>
           <div className="name">

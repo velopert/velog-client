@@ -12,6 +12,7 @@ import SkeletonTexts from './SkeletonTexts';
 import RatioImage from './RatioImage';
 import media from '../../lib/styles/media';
 import PrivatePostLabel from './PrivatePostLabel';
+import optimizeImage from '../../lib/optimizeImage';
 
 const PostCardBlock = styled.div`
   padding-top: 4rem;
@@ -149,7 +150,10 @@ const PostCard = ({ post, hideUser }: PostCardProps) => {
         <div className="user-info">
           <Link to={velogUrl}>
             <img
-              src={post.user.profile.thumbnail || userThumbnail}
+              src={optimizeImage(
+                post.user.profile.thumbnail || userThumbnail,
+                120,
+              )}
               alt="thumbnail"
             />
           </Link>
@@ -161,7 +165,7 @@ const PostCard = ({ post, hideUser }: PostCardProps) => {
       {post.thumbnail && (
         <Link to={url}>
           <RatioImage
-            src={post.thumbnail}
+            src={optimizeImage(post.thumbnail, 768)}
             alt="post-thumbnail"
             widthRatio={1.91}
             heightRatio={1}

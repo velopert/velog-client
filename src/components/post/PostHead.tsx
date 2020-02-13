@@ -12,6 +12,7 @@ import TagList from '../common/TagList';
 import { Link } from 'react-router-dom';
 import { LockIcon } from '../../static/svg';
 import PrivatePostLabel from '../common/PrivatePostLabel';
+import optimizeImage from '../../lib/optimizeImage';
 
 const PostHeadBlock = styled(VelogResponsive)`
   margin-top: 5.5rem;
@@ -194,7 +195,7 @@ const PostHead: React.FC<PostHeadProps> = ({
         )}
       </div>
       {!hideThumbnail && thumbnail && (
-        <Thumbnail src={thumbnail} alt="post-thumbnail" />
+        <Thumbnail src={optimizeImage(thumbnail, 1024)} alt="post-thumbnail" />
       )}
       <PopupOKCancel
         visible={askRemove}
