@@ -12,6 +12,7 @@ import { detectJSDOM, ssrEnabled } from '../../lib/utils';
 import AskChangeEditor from './AskChangeEditor';
 import { WriteMode } from '../../modules/write';
 import zIndexes from '../../lib/styles/zIndexes';
+import { useSpring, animated } from 'react-spring';
 require('codemirror/mode/markdown/markdown');
 require('codemirror/mode/javascript/javascript');
 require('codemirror/mode/jsx/jsx');
@@ -40,12 +41,15 @@ type MarkdownEditorState = {
   };
   askChangeEditor: boolean;
   clientWidth: number;
+  hideUpper: boolean;
 };
 
 const MarkdownEditorBlock = styled.div`
   height: 100%;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   position: relative;
+
   &::-webkit-scrollbar {
     border-radius: 3px;
     width: 6px;
@@ -62,11 +66,26 @@ const MarkdownEditorBlock = styled.div`
   }
 
   & > .wrapper {
-    padding-top: 3rem;
-    padding-bottom: 10rem;
+    min-height: 0;
+    padding-bottom: 4rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
+
+  .CodeMirror-lines {
+    padding: 4px 0; /* Vertical padding around content */
+    padding-bottom: 3rem;
+  }
+
+  .CodeMirror pre.CodeMirror-line,
+  .CodeMirror pre.CodeMirror-line-like {
+    padding: 0 3rem; /* Horizontal padding of content */
+  }
+
   .CodeMirror {
-    height: auto;
+    min-height: 0;
+    flex: 1;
     font-size: 1.125rem;
     line-height: 1.5;
     color: ${palette.gray8};
@@ -111,8 +130,16 @@ const HorizontalBar = styled.div`
 `;
 
 const PaddingWrapper = styled.div`
+  padding-top: 2rem;
   padding-left: 3rem;
   padding-right: 3rem;
+`;
+
+const MarkdownWrapper = styled.div`
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 `;
 
 const FooterWrapper = styled.div`
@@ -165,6 +192,28 @@ const checkEmbed = (text: string) => {
   return null;
 };
 
+function WriterHead({
+  hide,
+  children,
+}: {
+  hide: boolean;
+  children: React.ReactNode;
+}) {
+  const springStyle = useSpring({
+    maxHeight: hide ? 0 : window.screen.height * 0.5,
+    opacity: hide ? 0 : 1,
+    config: {
+      duration: 300,
+    },
+  });
+
+  return (
+    <animated.div style={springStyle}>
+      <PaddingWrapper>{children}</PaddingWrapper>
+    </animated.div>
+  );
+}
+
 export default class WriteMarkdownEditor extends React.Component<
   MarkdownEditorProps,
   MarkdownEditorState
@@ -183,8 +232,11 @@ export default class WriteMarkdownEditor extends React.Component<
     },
     askChangeEditor: false,
     clientWidth: 0,
+    hideUpper: false,
   };
   codemirror: EditorFromTextArea | null = null;
+
+  ignore = false;
 
   initialize = () => {
     if (!this.editorElement.current) return;
@@ -193,7 +245,7 @@ export default class WriteMarkdownEditor extends React.Component<
       mode: 'markdown',
       theme: 'one-light',
       placeholder: '당신의 이야기를 적어보세요...',
-      viewportMargin: Infinity,
+      // viewportMargin: Infinity,
       lineWrapping: true,
     });
 
@@ -202,6 +254,30 @@ export default class WriteMarkdownEditor extends React.Component<
     this.codemirror.on('change', cm => {
       this.props.onChangeMarkdown(cm.getValue());
       this.stickToBottomIfNeeded();
+      const doc = cm.getDoc();
+
+      // scroll to bottom when editing last 5
+      const { line } = doc.getCursor();
+      const last = doc.lastLine();
+      if (last - line < 5) {
+        const preview = document.getElementById('preview');
+        if (!preview) return;
+        preview.scrollTop = preview.scrollHeight;
+      }
+    });
+
+    this.codemirror.on('scroll', cm => {
+      const info = cm.getScrollInfo();
+
+      if (info.top > 0 && info.height > window.screen.height) {
+        this.setState({ hideUpper: true });
+      } else {
+        this.setState({ hideUpper: false });
+      }
+    });
+
+    this.codemirror.on('mousewheel', cm => {
+      console.log(cm.getScrollInfo());
     });
 
     this.codemirror.on('paste', ((editor: any, e: any) => {
@@ -249,7 +325,7 @@ export default class WriteMarkdownEditor extends React.Component<
   handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const { shadow } = this.state;
     const nextShadow = e.currentTarget.scrollTop > this.toolbarTop;
-    console.log(e.currentTarget.scrollTop, this.toolbarTop);
+    // console.log(e.currentTarget.scrollTop, this.toolbarTop);
     if (shadow !== nextShadow) {
       this.setState({
         shadow: nextShadow,
@@ -726,7 +802,7 @@ ${selected}
         data-testid="codemirror"
       >
         <div className="wrapper">
-          <PaddingWrapper>
+          <WriterHead hide={this.state.hideUpper}>
             {ssrEnabled ? (
               <TitleTextareaForSSR placeholder="제목을 입력하세요" rows={1} />
             ) : (
@@ -738,15 +814,15 @@ ${selected}
             )}
             <HorizontalBar />
             {tagInput}
-          </PaddingWrapper>
+          </WriterHead>
           <Toolbar
-            shadow={shadow}
+            shadow={shadow || this.state.hideUpper}
             mode="MARKDOWN"
             onClick={this.handleToolbarClick}
             onConvert={this.handleAskConvert}
             innerRef={this.toolbarElement}
           />
-          <PaddingWrapper>
+          <MarkdownWrapper>
             {addLink.visible && (
               <AddLink
                 defaultValue=""
@@ -758,7 +834,7 @@ ${selected}
               />
             )}
             <textarea ref={this.editorElement} style={{ display: 'none' }} />
-          </PaddingWrapper>
+          </MarkdownWrapper>
         </div>
         <AskChangeEditor
           visible={this.state.askChangeEditor}

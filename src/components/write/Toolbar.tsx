@@ -32,19 +32,21 @@ const ToolbarBlock = styled.div<{
   z-index: ${zIndexes.Toolbar};
   transition: all 0.125s ease-in;
   flex-wrap: wrap;
-  ${props =>
-    props.shadow &&
-    css`
-      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.09);
-    `}
+
   ${props =>
     props.forMarkdown &&
     css`
-      margin-top: 2rem;
       margin-bottom: 1rem;
       padding-left: 3rem;
       padding-right: 3rem;
       width: auto;
+    `}
+
+  ${props =>
+    props.shadow &&
+    css`
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.09);
+      margin-bottom: 0;
     `}
 `;
 

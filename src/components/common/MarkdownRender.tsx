@@ -11,6 +11,7 @@ import embedPlugin from '../../lib/remark/embedPlugin';
 import { loadScript, ssrEnabled } from '../../lib/utils';
 import media from '../../lib/styles/media';
 import parse from 'html-react-parser';
+import { throttle } from 'throttle-debounce';
 
 export interface MarkdownRenderProps {
   markdown: string;
@@ -79,6 +80,13 @@ const MarkdownRenderBlock = styled.div`
 `;
 
 const { useState, useEffect } = React;
+
+type RenderedElement =
+  | string
+  | React.DetailedReactHTMLElement<{}, HTMLElement>
+  | Array<React.DetailedReactHTMLElement<{}, HTMLElement>>
+  | null;
+
 const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   markdown,
   codeTheme = 'atom-one-light',
@@ -95,7 +103,16 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
         .toString()
     : '';
 
-  const [html, setHtml] = useState(initialHtml);
+  const [element, setElement] = useState<RenderedElement>(
+    ssrEnabled ? parse(initialHtml) : null,
+  );
+
+  const applyElement = React.useMemo(() => {
+    return throttle(250, (el: any) => {
+      setElement(el);
+    });
+  }, []);
+
   useEffect(() => {
     remark()
       .use(breaks)
@@ -105,20 +122,20 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
       .use(slug)
       .process(markdown, (err: any, file: any) => {
         const html = String(file);
-        setHtml(html);
+
         if (onConvertFinish) {
           onConvertFinish(html);
         }
-
         // load twitter script if needed
         if (html.indexOf('class="twitter-tweet"') !== -1) {
           // if (window && (window as any).twttr) return;
           loadScript('https://platform.twitter.com/widgets.js');
         }
-      });
-  }, [markdown, onConvertFinish]);
+        const el = parse(html);
 
-  const element = parse(html);
+        applyElement(el);
+      });
+  }, [applyElement, markdown, onConvertFinish]);
 
   return (
     <Typography>
@@ -126,39 +143,5 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
     </Typography>
   );
 };
-
-// export default class MarkdownRender extends React.Component<
-//   MarkdownRenderProps,
-//   any
-// > {
-//   state = {
-//     html: '',
-//   };
-//   process = () => {
-//     remark()
-//       .use(prismPlugin)
-//       .use(htmlPlugin)
-//       .process(this.props.markdown, (err: any, file: any) => {
-//         console.log(err);
-//         console.log(file);
-//         const html = String(file);
-//         console.log(html);
-//       });
-//   };
-
-//   componentDidMount() {
-//     this.process();
-//   }
-
-//   componentDidUpdate(prevProps: MarkdownRenderProps) {
-//     if (prevProps.markdown !== this.props.markdown) {
-//       this.process();
-//     }
-//   }
-
-//   public render() {
-//     return <div />;
-//   }
-// }
 
 export default React.memo(MarkdownRender);

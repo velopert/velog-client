@@ -5,20 +5,6 @@ import palette from '../../lib/styles/palette';
 
 const MarkdownPreviewBlock = styled.div`
   word-break: break-word;
-  &::-webkit-scrollbar {
-    border-radius: 3px;
-    width: 6px;
-    &:hover {
-      width: 16px;
-    }
-    background: ${palette.gray1};
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: ${palette.gray9};
-    /* -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75); */
-  }
-
   padding: 3rem;
   flex: 1;
   overflow-y: auto;
@@ -43,7 +29,7 @@ const MarkdownPreview: React.FC<MarkdownPreviewProps> = ({
   className,
 }) => {
   return (
-    <MarkdownPreviewBlock>
+    <MarkdownPreviewBlock id="preview">
       <Title>{title}</Title>
       <MarkdownRender markdown={markdown} />
     </MarkdownPreviewBlock>
