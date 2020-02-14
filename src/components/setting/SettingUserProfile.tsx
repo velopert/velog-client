@@ -113,7 +113,7 @@ const Section = styled.section`
         margin-bottom: 1rem;
       }
       button {
-        width: 8rem;
+        width: 10rem;
       }
       align-items: center;
       padding-bottom: 1.5rem;
