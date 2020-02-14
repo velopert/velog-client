@@ -367,6 +367,7 @@ export default class WriteMarkdownEditor extends React.Component<
     const { lastUploadedImage, initialBody } = this.props;
     if (initialBody !== prevProps.initialBody) {
       if (!this.codemirror) return;
+      if (this.codemirror.getValue() === this.props.initialBody) return;
       this.codemirror.setValue(this.props.initialBody);
     }
     if (

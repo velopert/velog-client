@@ -249,7 +249,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     }
   }, [title, postId, onTempSave, lastSavedData, markdown]);
 
-  useSaveHotKey(onTempSave);
+  useSaveHotKey(() => onTempSave(true));
 
   return (
     <>
