@@ -61,7 +61,6 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
         color: ${palette.gray7};
         text-align: center;
         font-weight: 600;
-        font-size: 2rem;
       }
     }
     .white-block {
