@@ -55,7 +55,8 @@ const AddLinkBlock = styled.div`
 
 interface AddLinkProps {
   left: number;
-  top: number;
+  top: number | null;
+  bottom: number | null;
   stickToRight?: boolean;
   onConfirm: (link: string) => void;
   onClose: () => void;
@@ -68,6 +69,7 @@ const { useCallback, useRef, useEffect } = React;
 const AddLink: React.FC<AddLinkProps> = ({
   left,
   top,
+  bottom,
   stickToRight,
   onConfirm,
   onClose,
@@ -92,7 +94,8 @@ const AddLink: React.FC<AddLinkProps> = ({
       <AddLinkBlock
         style={{
           left: stickToRight ? 'initial' : left,
-          top,
+          top: top || 'initial',
+          bottom: bottom || 'initial',
           right: stickToRight ? '3rem' : 'initial',
         }}
       >
