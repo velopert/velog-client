@@ -134,10 +134,13 @@ const TypographyBlock = styled.div`
     padding: 1rem;
     padding-left: 2rem;
     color: ${palette.gray9};
-    p:first-child {
+    ul, ol {
+      padding-left: 1rem;
+    }
+    *:first-child {
       margin-top: 0;
     }
-    p:last-child {
+    *:last-child {
       margin-bottom: 0;
     }
   }
