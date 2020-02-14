@@ -4,7 +4,8 @@ import media from '../../lib/styles/media';
 
 const VelogResponsiveBlock = styled.div`
   width: 768px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   ${media.small} {
     width: 100%;
   }
