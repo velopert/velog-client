@@ -31,7 +31,7 @@ const MarkdownPreview: React.FC<MarkdownPreviewProps> = ({
   return (
     <MarkdownPreviewBlock id="preview">
       <Title>{title}</Title>
-      <MarkdownRender markdown={markdown} />
+      <MarkdownRender markdown={markdown} editing />
     </MarkdownPreviewBlock>
   );
 };

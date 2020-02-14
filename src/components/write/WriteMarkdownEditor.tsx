@@ -170,8 +170,15 @@ const checker = {
     return pathMatch[1];
   },
   codesandbox: (text: string) => {
-    const regex = /^<iframe src="https:\/\/codesandbox.io\/embed\/(.*?)".*<\/iframe>$/;
+    const regex = /^<iframe.*src="https:\/\/codesandbox.io\/embed\/(.*?)".*<\/iframe>$/s;
     const result = regex.exec(text);
+    if (!result) return null;
+    return result[1];
+  },
+  codepen: (text: string) => {
+    const regex = /^<iframe.*src="https:\/\/codepen.io\/(.*?)".*/;
+    const result = regex.exec(text);
+    console.log(result);
     if (!result) return null;
     return result[1];
   },
