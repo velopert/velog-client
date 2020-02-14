@@ -91,7 +91,7 @@ const CommentHead = styled.div`
   }
 `;
 
-const CommentText = styled.p<{ deleted: boolean }>`
+const CommentText = styled.div<{ deleted: boolean }>`
   h1,
   h2 {
     font-size: 1.75rem;
