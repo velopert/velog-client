@@ -97,6 +97,7 @@ const Section = styled.section`
     display: flex;
     flex-direction: column;
     img {
+      object-fit: cover;
       width: 8rem;
       height: 8rem;
       border-radius: 50%;

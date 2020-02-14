@@ -34,6 +34,7 @@ const CommentHead = styled.div`
       height: 3.375rem;
       display: block;
       border-radius: 50%;
+      object-fit: cover;
       ${media.small} {
         width: 2.5rem;
         height: 2.5rem;
