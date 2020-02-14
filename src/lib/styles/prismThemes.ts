@@ -316,7 +316,7 @@ const prismThemes = {
     code[class*='language-'],
     pre[class*='language-'] {
       color: #f8f8f2;
-      text-shadow: 0 1px rgba(0, 0, 0, 0.3); // direction: ltr;
+      text-shadow: 0 1px rgba(0, 0, 0, 0.3);
     }
 
     :not(pre) > code[class*='language-'],
@@ -326,7 +326,7 @@ const prismThemes = {
 
     pre {
       color: #f8f8f2;
-      text-shadow: 0 1px rgba(0, 0, 0, 0.3); // direction: ltr;
+      text-shadow: 0 1px rgba(0, 0, 0, 0.3);
       background: #272822;
     }
 
@@ -429,7 +429,7 @@ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascr
     code[class*='language-'],
     pre[class*='language-'] {
       color: #ccc;
-      background: rgb(40, 41, 54); // text-shadow: none;
+      background: rgb(40, 41, 54);
     }
 
     pre[class*='language-']::-moz-selection,

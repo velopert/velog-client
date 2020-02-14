@@ -12,11 +12,13 @@ import { loadScript, ssrEnabled } from '../../lib/utils';
 import media from '../../lib/styles/media';
 import parse from 'html-react-parser';
 import { throttle } from 'throttle-debounce';
+import sanitize from 'sanitize-html';
 
 export interface MarkdownRenderProps {
   markdown: string;
   codeTheme?: string;
   onConvertFinish?: (html: string) => any;
+  editing?: boolean;
 }
 
 const MarkdownRenderBlock = styled.div`
@@ -59,25 +61,83 @@ const MarkdownRenderBlock = styled.div`
     margin-bottom: 1.5rem;
   }
 
-  .youtube {
+  iframe {
     width: 768px;
     height: 430px;
     max-width: 100%;
     background: black;
     display: block;
     margin: auto;
+    border: none;
+    border-radius: 4px;
+    overflow: hidden;
   }
 
   .twitter-wrapper {
     display: flex;
     justify-content: center;
-    height: 580px;
     align-items: center;
     blockquote {
       border-left: none;
     }
   }
 `;
+
+function filter(html: string) {
+  return sanitize(html, {
+    allowedTags: [
+      'h1',
+      'h2',
+      'h3',
+      'h4',
+      'h5',
+      'h6',
+      'blockquote',
+      'p',
+      'a',
+      'ul',
+      'ol',
+      'nl',
+      'li',
+      'b',
+      'i',
+      'strong',
+      'em',
+      'strike',
+      'code',
+      'hr',
+      'br',
+      'div',
+      'table',
+      'thead',
+      'caption',
+      'tbody',
+      'tr',
+      'th',
+      'td',
+      'pre',
+      'iframe',
+      'span',
+    ],
+    allowedAttributes: {
+      a: ['href', 'name', 'target'],
+      img: ['src'],
+      iframe: ['src', 'allow', 'allowfullscreen', 'scrolling', 'class'],
+      '*': ['class', 'id'],
+    },
+    allowedStyles: {
+      '*': {
+        // Match HEX and RGB
+        color: [
+          /^#(0x)?[0-9a-f]+$/i,
+          /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/,
+        ],
+        'text-align': [/^left$/, /^right$/, /^center$/],
+      },
+    },
+    allowedIframeHostnames: ['www.youtube.com', 'codesandbox.io', 'codepen.io'],
+  });
+}
 
 const { useState, useEffect } = React;
 
@@ -91,12 +151,15 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   markdown,
   codeTheme = 'atom-one-light',
   onConvertFinish,
+  editing,
 }) => {
   const initialHtml = ssrEnabled
     ? remark()
         .use(breaks)
         .use(prismPlugin)
-        .use(htmlPlugin)
+        .use(htmlPlugin, {
+          sanitize: true,
+        })
         .use(embedPlugin)
         .use(slug)
         .processSync(markdown)
@@ -104,7 +167,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
     : '';
 
   const [element, setElement] = useState<RenderedElement>(
-    ssrEnabled ? parse(initialHtml) : null,
+    ssrEnabled ? parse(filter(initialHtml)) : null,
   );
 
   const applyElement = React.useMemo(() => {
@@ -131,11 +194,11 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
           // if (window && (window as any).twttr) return;
           loadScript('https://platform.twitter.com/widgets.js');
         }
-        const el = parse(html);
+        const el = parse(editing ? html : filter(html));
 
         applyElement(el);
       });
-  }, [applyElement, markdown, onConvertFinish]);
+  }, [applyElement, editing, markdown, onConvertFinish]);
 
   return (
     <Typography>
