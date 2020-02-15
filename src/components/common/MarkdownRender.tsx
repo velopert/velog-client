@@ -118,6 +118,7 @@ function filter(html: string) {
       'pre',
       'iframe',
       'span',
+      'img',
     ],
     allowedAttributes: {
       a: ['href', 'name', 'target'],
