@@ -77,9 +77,9 @@ const MarkdownRenderBlock = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    blockquote {
-      border-left: none;
-    }
+    border-left: none;
+    background: none;
+    padding: none;
   }
 `;
 
