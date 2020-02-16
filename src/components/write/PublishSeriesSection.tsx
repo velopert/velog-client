@@ -8,6 +8,7 @@ import { ellipsis } from '../../lib/styles/utils';
 
 const PublishSeriesSectionBlock = styled(PublishSection)``;
 const SeriesButton = styled.button`
+  background: white;
   height: 3rem;
   width: 100%;
   border-radius: 4px;
