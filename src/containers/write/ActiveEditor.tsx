@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { RootState } from '../../modules';
 import {
@@ -31,6 +31,7 @@ const ActiveEditor: React.FC<ActiveEditorProps> = () => {
   const mode = useSelector((state: RootState) => state.write.mode);
   const postId = useSelector((state: RootState) => state.write.postId);
   const [askLoadTemp, setAskLoadTemp] = useState(false);
+  const initialized = useRef(false);
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -75,6 +76,7 @@ const ActiveEditor: React.FC<ActiveEditorProps> = () => {
   const post = safe(() => readPostForEdit.data!.post);
   useEffect(() => {
     if (!post) return;
+    if (initialized.current) return;
     dispatch(
       prepareEdit({
         id: post.id,
@@ -91,6 +93,7 @@ const ActiveEditor: React.FC<ActiveEditorProps> = () => {
       }),
     );
     dispatch(setInitialBody(post.body));
+    initialized.current = true;
   }, [dispatch, post]);
 
   const lastPostHistory = safe(() => getLastPostHistory.data!.lastPostHistory);
@@ -105,6 +108,7 @@ const ActiveEditor: React.FC<ActiveEditorProps> = () => {
   useEffect(() => {
     if (!lastPostHistory) return;
     if (!post) return;
+
     const equals = shallowEqual(
       {
         title: lastPostHistory.title,
