@@ -214,7 +214,10 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
           {element}
         </MarkdownRenderBlock>
       ) : (
-        <MarkdownRenderBlock dangerouslySetInnerHTML={{ __html: html }} />
+        <MarkdownRenderBlock
+          className={codeTheme}
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
       )}
     </Typography>
   );
