@@ -5,7 +5,7 @@ import media from '../../lib/styles/media';
 
 const TypographyBlock = styled.div`
   font-size: 1.125rem;
-  color: ${palette.gray7};
+  color: ${palette.gray8};
   line-height: 1.85;
   letter-spacing: -0.02em;
   word-break: keep-all;
@@ -119,6 +119,29 @@ const TypographyBlock = styled.div`
     p + h3,
     p + h4 {
       margin-top: 2rem;
+    }
+  }
+
+  blockquote {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-left: 4px solid ${palette.teal5};
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background: ${palette.gray0};
+    margin-left: 0;
+    margin-right: 0;
+    padding: 1rem;
+    padding-left: 2rem;
+    color: ${palette.gray9};
+    ul, ol {
+      padding-left: 1rem;
+    }
+    *:first-child {
+      margin-top: 0;
+    }
+    *:last-child {
+      margin-bottom: 0;
     }
   }
 `;

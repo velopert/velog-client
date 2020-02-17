@@ -97,6 +97,7 @@ const Section = styled.section`
     display: flex;
     flex-direction: column;
     img {
+      object-fit: cover;
       width: 8rem;
       height: 8rem;
       border-radius: 50%;
@@ -113,7 +114,7 @@ const Section = styled.section`
         margin-bottom: 1rem;
       }
       button {
-        width: 8rem;
+        width: 10rem;
       }
       align-items: center;
       padding-bottom: 1.5rem;

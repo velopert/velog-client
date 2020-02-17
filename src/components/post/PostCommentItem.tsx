@@ -34,6 +34,7 @@ const CommentHead = styled.div`
       height: 3.375rem;
       display: block;
       border-radius: 50%;
+      object-fit: cover;
       ${media.small} {
         width: 2.5rem;
         height: 2.5rem;
@@ -91,7 +92,7 @@ const CommentHead = styled.div`
   }
 `;
 
-const CommentText = styled.p<{ deleted: boolean }>`
+const CommentText = styled.div<{ deleted: boolean }>`
   h1,
   h2 {
     font-size: 1.75rem;

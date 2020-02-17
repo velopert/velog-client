@@ -34,7 +34,8 @@ export interface MarkdownEditorProps {
 type MarkdownEditorState = {
   shadow: boolean;
   addLink: {
-    top: number;
+    top: number | null;
+    bottom: number | null;
     left: number;
     visible: boolean;
     stickToRight: boolean;
@@ -235,6 +236,7 @@ export default class WriteMarkdownEditor extends React.Component<
     shadow: false,
     addLink: {
       top: 0,
+      bottom: 0,
       left: 0,
       visible: false,
       stickToRight: false,
@@ -367,6 +369,7 @@ export default class WriteMarkdownEditor extends React.Component<
     const { lastUploadedImage, initialBody } = this.props;
     if (initialBody !== prevProps.initialBody) {
       if (!this.codemirror) return;
+      if (this.codemirror.getValue() === this.props.initialBody) return;
       this.codemirror.setValue(this.props.initialBody);
     }
     if (
@@ -403,15 +406,20 @@ export default class WriteMarkdownEditor extends React.Component<
     const cursorPos = this.codemirror.cursorCoords(cursor);
     if (!this.block.current) return;
     const stickToRight = cursorPos.left > this.block.current.clientWidth - 341;
+    const calculatedTop =
+      this.block.current.scrollTop +
+      cursorPos.top +
+      this.codemirror.defaultTextHeight() / 2 +
+      1;
 
+    const isAtBottom = calculatedTop + 173 > this.block.current?.clientHeight;
+    const pos = isAtBottom
+      ? { top: null, bottom: 64 }
+      : { top: calculatedTop, bottom: null };
     this.setState({
       addLink: {
         visible: true,
-        top:
-          this.block.current.scrollTop +
-          cursorPos.top +
-          this.codemirror.defaultTextHeight() / 2 +
-          1,
+        ...pos,
         left: cursorPos.left,
         stickToRight,
       },
@@ -837,6 +845,7 @@ ${selected}
                 defaultValue=""
                 left={addLink.left}
                 top={addLink.top}
+                bottom={addLink.bottom}
                 stickToRight={addLink.stickToRight}
                 onConfirm={this.handleConfirmAddLink}
                 onClose={this.handleCancelAddLink}

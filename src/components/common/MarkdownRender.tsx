@@ -77,9 +77,9 @@ const MarkdownRenderBlock = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    blockquote {
-      border-left: none;
-    }
+    border-left: none;
+    background: none;
+    padding: none;
   }
 `;
 
@@ -118,6 +118,7 @@ function filter(html: string) {
       'pre',
       'iframe',
       'span',
+      'img',
     ],
     allowedAttributes: {
       a: ['href', 'name', 'target'],
@@ -153,22 +154,22 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   onConvertFinish,
   editing,
 }) => {
-  const initialHtml = ssrEnabled
-    ? remark()
-        .use(breaks)
-        .use(prismPlugin)
-        .use(htmlPlugin, {
-          sanitize: true,
-        })
-        .use(embedPlugin)
-        .use(slug)
-        .processSync(markdown)
-        .toString()
-    : '';
-
-  const [element, setElement] = useState<RenderedElement>(
-    ssrEnabled ? parse(filter(initialHtml)) : null,
+  const [html, setHtml] = useState(
+    ssrEnabled
+      ? remark()
+          .use(breaks)
+          .use(prismPlugin)
+          .use(htmlPlugin, {
+            sanitize: true,
+          })
+          .use(embedPlugin)
+          .use(slug)
+          .processSync(markdown)
+          .toString()
+      : '',
   );
+
+  const [element, setElement] = useState<RenderedElement>(null);
 
   const applyElement = React.useMemo(() => {
     return throttle(250, (el: any) => {
@@ -194,6 +195,12 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
           // if (window && (window as any).twttr) return;
           loadScript('https://platform.twitter.com/widgets.js');
         }
+
+        if (!editing) {
+          setHtml(html);
+          return;
+        }
+
         const el = parse(editing ? html : filter(html));
 
         applyElement(el);
@@ -202,7 +209,13 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
 
   return (
     <Typography>
-      <MarkdownRenderBlock className={codeTheme}>{element}</MarkdownRenderBlock>
+      {editing ? (
+        <MarkdownRenderBlock className={codeTheme}>
+          {element}
+        </MarkdownRenderBlock>
+      ) : (
+        <MarkdownRenderBlock dangerouslySetInnerHTML={{ __html: html }} />
+      )}
     </Typography>
   );
 };
