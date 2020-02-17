@@ -6,6 +6,7 @@ export default function useUserTags(username: string) {
     variables: {
       username,
     },
+    fetchPolicy: 'network-only',
   });
 
   return {
