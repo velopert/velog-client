@@ -21,12 +21,10 @@ const ToolbarBlock = styled.div<{
   forMarkdown: boolean;
 }>`
   width: 100%;
-  position: sticky;
   top: 0;
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
-  position: sticky;
   width: 100%;
   background: white;
   z-index: ${zIndexes.Toolbar};

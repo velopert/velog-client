@@ -32,7 +32,6 @@ export interface MarkdownEditorProps {
 }
 
 type MarkdownEditorState = {
-  shadow: boolean;
   addLink: {
     top: number | null;
     bottom: number | null;
@@ -208,7 +207,7 @@ function WriterHead({
   children: React.ReactNode;
 }) {
   const screenHeight =
-    (typeof window !== 'undefined' && window.screen.height) || 0;
+    (typeof window !== 'undefined' && window.screen.height) || 508;
 
   const springStyle = useSpring({
     maxHeight: hide ? 0 : screenHeight * 0.5,
@@ -233,7 +232,6 @@ export default class WriteMarkdownEditor extends React.Component<
   editorElement = React.createRef<HTMLTextAreaElement>();
   toolbarTop = 0;
   state = {
-    shadow: false,
     addLink: {
       top: 0,
       bottom: 0,
@@ -330,25 +328,6 @@ export default class WriteMarkdownEditor extends React.Component<
     const scrollBottom = scrollHeight - scrollTop - clientHeight;
     if (scrollBottom < 192) {
       this.block.current.scrollTo(0, scrollHeight);
-    }
-  };
-
-  handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const { shadow } = this.state;
-    const nextShadow = e.currentTarget.scrollTop > this.toolbarTop;
-    // console.log(e.currentTarget.scrollTop, this.toolbarTop);
-    if (shadow !== nextShadow) {
-      this.setState({
-        shadow: nextShadow,
-      });
-    }
-    if (this.block.current) {
-      const { clientWidth } = this.block.current;
-      if (clientWidth !== this.state.clientWidth) {
-        this.setState({
-          clientWidth,
-        });
-      }
     }
   };
 
@@ -810,14 +789,10 @@ ${selected}
   };
 
   public render() {
-    const { shadow, addLink, clientWidth } = this.state;
+    const { addLink, clientWidth } = this.state;
     const { title, tagInput, footer } = this.props;
     return (
-      <MarkdownEditorBlock
-        ref={this.block}
-        onScroll={this.handleScroll}
-        data-testid="codemirror"
-      >
+      <MarkdownEditorBlock ref={this.block} data-testid="codemirror">
         <div className="wrapper">
           <WriterHead hide={this.state.hideUpper}>
             {ssrEnabled ? (
@@ -833,7 +808,7 @@ ${selected}
             {tagInput}
           </WriterHead>
           <Toolbar
-            shadow={shadow || this.state.hideUpper}
+            shadow={this.state.hideUpper}
             mode="MARKDOWN"
             onClick={this.handleToolbarClick}
             onConvert={this.handleAskConvert}
