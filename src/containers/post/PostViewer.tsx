@@ -301,9 +301,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
   return (
     <PostViewerProvider prefetchLinkedPosts={prefetchLinkedPosts}>
       <Helmet>
-        <title>
-          {post.title} - {velogTitle}
-        </title>
+        <title>{post.title}</title>
         {post.short_description && (
           <meta name="description" content={post.short_description} />
         )}
