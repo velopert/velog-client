@@ -11,12 +11,14 @@ import styled from 'styled-components';
 
 interface UserPostsProps {
   username: string;
+  tag: string | null;
 }
 
-const UserPosts: React.FC<UserPostsProps> = ({ username }) => {
+const UserPosts: React.FC<UserPostsProps> = ({ username, tag }) => {
   const getPostList = useQuery<{ posts: PartialPost[] }>(GET_POST_LIST, {
     variables: {
       username,
+      tag,
     },
     notifyOnNetworkStatusChange: true,
   });
@@ -29,6 +31,7 @@ const UserPosts: React.FC<UserPostsProps> = ({ username }) => {
         variables: {
           cursor,
           username,
+          tag,
         },
         updateQuery: (prev, { fetchMoreResult }) => {
           if (!fetchMoreResult) return prev;
@@ -38,7 +41,7 @@ const UserPosts: React.FC<UserPostsProps> = ({ username }) => {
         },
       });
     },
-    [getPostList, username],
+    [getPostList, tag, username],
   );
 
   if (!data || !data.posts) return <PostCardListSkeleton hideUser={true} />;

@@ -104,6 +104,7 @@ function SearchInput({
 }: SearchInputProps) {
   const [focus, toggleFocus] = useToggle(false);
   const [value, onChange] = useInput(initial);
+  const mounted = useRef(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -124,6 +125,10 @@ function SearchInput({
   };
 
   useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
     if (searchAsYouType) {
       debouncedSearch(value);
     }

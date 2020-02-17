@@ -19,9 +19,15 @@ const UserPostsTab: React.FC<UserPostsTabProps> = ({
   location,
   history,
 }) => {
-  const { q }: { q: string | undefined } = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
+  const {
+    q,
+    tag,
+  }: { q: string | undefined; tag: string | undefined } = qs.parse(
+    location.search,
+    {
+      ignoreQueryPrefix: true,
+    },
+  );
 
   const { username } = match.params;
   usePreserveScroll('user/posts');
@@ -47,7 +53,7 @@ const UserPostsTab: React.FC<UserPostsTabProps> = ({
         {q ? (
           <SearchResult username={username} keyword={q} />
         ) : (
-          <UserPosts username={match.params.username} />
+          <UserPosts username={match.params.username} tag={tag || null} />
         )}
       </Block>
     </>

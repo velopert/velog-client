@@ -9,11 +9,9 @@ import {
   MdFormatQuote,
   MdImage,
   MdCode,
-  MdRemoveRedEye,
 } from 'react-icons/md';
 import palette from '../../lib/styles/palette';
 import zIndexes from '../../lib/styles/zIndexes';
-import { FaMarkdown } from 'react-icons/fa';
 
 // box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.09);
 const ToolbarBlock = styled.div<{
