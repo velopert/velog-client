@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import UserPosts from '../../../containers/velog/UserPosts';
 import { RouteComponentProps } from 'react-router';
 import qs from 'qs';
@@ -8,6 +8,8 @@ import styled from 'styled-components';
 import media from '../../../lib/styles/media';
 import usePreserveScroll from '../../../lib/hooks/usePreserveScroll';
 import { Helmet } from 'react-helmet-async';
+import { usePrevious } from 'react-use';
+import UserTags from '../../../components/velog/UserTags';
 
 export interface UserPostsTabProps
   extends RouteComponentProps<{ username: string }> {
@@ -32,8 +34,15 @@ const UserPostsTab: React.FC<UserPostsTabProps> = ({
   const { username } = match.params;
   usePreserveScroll('user/posts');
 
+  const prevTag = usePrevious(tag);
+  useEffect(() => {
+    if (prevTag !== tag) {
+      window.scrollTo(0, 0);
+    }
+  }, [prevTag, tag]);
+
   return (
-    <>
+    <div>
       <HideOnMobile>
         <Helmet>
           <link
@@ -49,6 +58,9 @@ const UserPostsTab: React.FC<UserPostsTabProps> = ({
           username={match.params.username}
         />
       </HideOnMobile>
+      <TagWrapper>
+        <UserTags username={username} tag={tag || null} />
+      </TagWrapper>
       <Block>
         {q ? (
           <SearchResult username={username} keyword={q} />
@@ -56,7 +68,7 @@ const UserPostsTab: React.FC<UserPostsTabProps> = ({
           <UserPosts username={match.params.username} tag={tag || null} />
         )}
       </Block>
-    </>
+    </div>
   );
 };
 
@@ -73,4 +85,7 @@ const Block = styled.div`
   }
 `;
 
+const TagWrapper = styled.div`
+  position: relative;
+`;
 export default UserPostsTab;

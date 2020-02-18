@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 
 const Block = styled.div`
   position: absolute;
-  margin-top: 4.25rem;
+
   width: 11.5rem;
   left: -13.5rem;
 
