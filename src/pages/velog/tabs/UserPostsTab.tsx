@@ -10,6 +10,7 @@ import usePreserveScroll from '../../../lib/hooks/usePreserveScroll';
 import { Helmet } from 'react-helmet-async';
 import { usePrevious } from 'react-use';
 import UserTags from '../../../components/velog/UserTags';
+import { getScrollTop } from '../../../lib/utils';
 
 export interface UserPostsTabProps
   extends RouteComponentProps<{ username: string }> {
@@ -36,7 +37,11 @@ const UserPostsTab: React.FC<UserPostsTabProps> = ({
 
   const prevTag = usePrevious(tag);
   useEffect(() => {
-    if (prevTag !== tag) {
+    if (
+      prevTag !== tag &&
+      window.screen.width > 768 &&
+      getScrollTop() > window.screen.height * 0.6
+    ) {
       window.scrollTo(0, 0);
     }
   }, [prevTag, tag]);

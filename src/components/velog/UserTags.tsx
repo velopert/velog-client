@@ -2,6 +2,7 @@ import React from 'react';
 
 import UserTagVerticalList from './UserTagVerticalList';
 import useUserTags from './hooks/useUserTags';
+import UserTagHorizontalList from './UserTagHorizontalList';
 
 export type UserTagsProps = {
   username: string;
@@ -15,6 +16,12 @@ function UserTags({ username, tag }: UserTagsProps) {
   return (
     <>
       <UserTagVerticalList
+        active={tag}
+        tags={data.tags}
+        postsCount={data.postsCount}
+        username={username}
+      />
+      <UserTagHorizontalList
         active={tag}
         tags={data.tags}
         postsCount={data.postsCount}
