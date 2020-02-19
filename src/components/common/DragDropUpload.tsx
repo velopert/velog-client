@@ -31,10 +31,9 @@ const DragDropUpload: React.FC<DragDropUploadProps> = ({ onUpload }) => {
   const [dragging, setDragging] = useState(false);
 
   useEffect(() => {
-    const onDrop = (e: any) => {
+    const onDrop = (e: DragEvent) => {
       e.preventDefault();
-      const { files } = e.dataTransfer;
-      console.log(files);
+      const { files } = e.dataTransfer || { files: null };
       if (!files) return;
       if (!files[0]) return;
       onUpload(files[0]);
@@ -57,6 +56,17 @@ const DragDropUpload: React.FC<DragDropUploadProps> = ({ onUpload }) => {
         setDragging(true);
       }
     };
+
+    const onDragOver = (e: DragEvent) => {
+      e.preventDefault();
+      if (e.dataTransfer) {
+        e.dataTransfer.dropEffect = 'copy';
+      }
+      if (!dragging) {
+        setDragging(true);
+      }
+    };
+
     const onDragLeave = () => {
       if (down.current) return;
       dragIndex.current -= 1;
@@ -65,20 +75,30 @@ const DragDropUpload: React.FC<DragDropUploadProps> = ({ onUpload }) => {
       }
     };
 
+    const onMouseLeave = () => {
+      if (dragging) {
+        setDragging(false);
+      }
+    };
+
     window.addEventListener('drop', onDrop);
+    window.addEventListener('dragover', onDragOver);
     window.addEventListener('mousedown', onMouseDown);
     window.addEventListener('mouseup', onMouseUp);
     window.addEventListener('dragenter', onDragEnter);
     window.addEventListener('dragleave', onDragLeave);
+    document.addEventListener('mouseleave', onMouseLeave);
 
     return () => {
       window.removeEventListener('drop', onDrop);
+      window.removeEventListener('dragover', onDragOver);
       window.removeEventListener('mousedown', onMouseDown);
       window.removeEventListener('mouseup', onMouseUp);
-      window.addEventListener('dragenter', onDragEnter);
+      window.removeEventListener('dragenter', onDragEnter);
       window.removeEventListener('dragleave', onDragLeave);
+      document.removeEventListener('mouseleave', onMouseLeave);
     };
-  }, [onUpload]);
+  }, [dragging, onUpload]);
 
   return dragging ? (
     <DragDropUploadBlock>

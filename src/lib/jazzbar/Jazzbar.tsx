@@ -4,6 +4,7 @@ import { JazzbarContext } from '.';
 
 export interface JazzbarProps {}
 
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 const Jazzbar: React.FC<JazzbarProps> = props => {
   const jazzbar = useContext(JazzbarContext);
   const [visible, setVisible] = useState(false);
@@ -14,10 +15,13 @@ const Jazzbar: React.FC<JazzbarProps> = props => {
 
   const hide = useCallback(() => {
     setHiding(true);
-    setTimeout(() => {
-      setHiding(false);
+    const run = async () => {
+      await sleep(200);
       setZero(true);
-    }, 200);
+      await sleep(400);
+      setHiding(false);
+    };
+    run();
   }, []);
 
   useEffect(() => {

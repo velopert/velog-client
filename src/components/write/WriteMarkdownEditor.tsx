@@ -285,6 +285,12 @@ export default class WriteMarkdownEditor extends React.Component<
       }
     });
 
+    this.codemirror.on('dragover', (cm, e) => {
+      if (e.dataTransfer) {
+        e.dataTransfer.dropEffect = 'copy';
+      }
+    });
+
     this.codemirror.on('mousewheel', cm => {
       console.log(cm.getScrollInfo());
     });
