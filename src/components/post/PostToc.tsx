@@ -4,12 +4,12 @@ import palette from '../../lib/styles/palette';
 import Sticky from '../common/Sticky';
 import { usePostViewerState } from './PostViewerProvider';
 import { getScrollTop } from '../../lib/utils';
-import media from '../../lib/styles/media';
+import media, { mediaQuery } from '../../lib/styles/media';
 
 const Wrapper = styled.div`
   position: relative;
   margin-top: 2rem;
-  ${media.xlarge} {
+  ${mediaQuery(1365)} {
     display: none;
   }
 `;
@@ -21,6 +21,9 @@ const Positioner = styled.div`
 const PostTocBlock = styled(Sticky)`
   width: 240px;
   margin-left: 5rem;
+  ${media.xlarge} {
+    margin-left: 3rem;
+  }
   border-left: 2px solid ${palette.gray2};
   padding-left: 0.75rem;
   padding-right: 0.75rem;
