@@ -239,8 +239,8 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     const changed = !shallowEqual(lastSavedData, { title, body: markdown });
     if (changed) {
       const timeoutId = setTimeout(() => {
-        if (!postId) return;
-        onTempSave();
+        if (!postId && !title && markdown.length < 30) return;
+        onTempSave(true);
       }, 10 * 1000);
 
       return () => {
