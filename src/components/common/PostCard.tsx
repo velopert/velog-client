@@ -151,7 +151,7 @@ const PostCard = ({ post, hideUser }: PostCardProps) => {
           <Link to={velogUrl}>
             <img
               src={optimizeImage(
-                post.user.profile.thumbnail || userThumbnail,
+                post.user.profile?.thumbnail || userThumbnail,
                 120,
               )}
               alt="thumbnail"
