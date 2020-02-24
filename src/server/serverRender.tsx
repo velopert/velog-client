@@ -37,14 +37,16 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
   const store = createStore(rootReducer);
   // prepare apollo client
 
-  if (!loggedIn && process.env.STAGE !== 'true') {
-    const cachedPage = await cacheManager.get(url);
-    if (cachedPage) {
-      return {
-        html: cachedPage,
-        statusCode: 200,
-      };
-    }
+  if (!loggedIn && process.env.STAGE !== 'true' && false) {
+    try {
+      const cachedPage = await cacheManager.get(url);
+      if (cachedPage) {
+        return {
+          html: cachedPage,
+          statusCode: 200,
+        };
+      }
+    } catch (e) {}
   }
 
   const client = new ApolloClient({
@@ -115,7 +117,7 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
   )}`;
 
   try {
-    if (!loggedIn && process.env.STAGE !== 'true') {
+    if (!loggedIn && process.env.STAGE !== 'true' && false) {
       await cacheManager.set(url, pageHtml);
     }
   } catch (e) {
