@@ -1,299 +1,130 @@
-import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import styled from 'styled-components';
-import palette from '../../lib/styles/palette';
-import { userThumbnail } from '../../static/images';
-import Tag from './TagItem';
-import { PartialPost } from '../../lib/graphql/post';
-import { formatDate } from '../../lib/utils';
-import usePrefetchPost from '../../lib/hooks/usePrefetchPost';
-import Skeleton from './Skeleton';
-import SkeletonTexts from './SkeletonTexts';
 import RatioImage from './RatioImage';
-import media from '../../lib/styles/media';
-import PrivatePostLabel from './PrivatePostLabel';
-import optimizeImage from '../../lib/optimizeImage';
+import { ellipsis } from '../../lib/styles/utils';
+import palette from '../../lib/styles/palette';
+import { LikeIcon } from '../../static/svg';
 
-const PostCardBlock = styled.div`
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-  ${media.small} {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
+export type PostCardProps = {};
 
-  & > a {
-    color: inherit;
-    text-decoration: none;
+function PostCard(props: PostCardProps) {
+  return (
+    <Block>
+      <RatioImage
+        widthRatio={1.916}
+        heightRatio={1}
+        src="https://img.velog.io/images/velog/post/ebf87853-b6b7-47af-a659-d97fb39e66b0/velog_logo.png?w=768"
+      />
+      <Content>
+        <h4>벨로그 v2 업데이트 안내</h4>
+        <p>
+          Node.js, PHP 등 익숙한 언어들을 던지고 생뚱맞은 장고를 택한 이유는 단
+          하나였습니다. 장고를 사용하시는 분들이 가장 많이 이야기하는,
+          생산성입니다 내용이 더 길어지면 엉떻게 되니닌
+        </p>
+        <div className="sub-info">
+          <span>2020년 2월 10일</span>
+          <span className="separator">·</span>
+          <span>64개의 댓글</span>
+        </div>
+      </Content>
+      <Footer>
+        <div className="userinfo">
+          <img
+            src="https://img.velog.io/images/velog/profile/9aa07f66-5fcd-41f4-84f2-91d73afcec28/green favicon.png?w=120"
+            alt="post-thumbnail"
+          />
+          <span>
+            by <b>velopert</b>
+          </span>
+        </div>
+        <div className="likes">
+          <LikeIcon />
+          65
+        </div>
+      </Footer>
+    </Block>
+  );
+}
+
+const Block = styled.div`
+  width: 20rem;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.04);
+  margin: 1rem;
+  overflow: hidden;
+`;
+
+const Content = styled.div`
+  padding: 1rem;
+  h4 {
+    font-size: 1rem;
+    margin: 0;
+    margin-bottom: 0.25rem;
+    line-height: 1.5;
+    ${ellipsis}
+    color: ${palette.gray9};
   }
-  &:first-child {
-    padding-top: 0;
+  p {
+    margin: 0;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    height: 3.9375rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: ${palette.gray7};
+    margin-bottom: 1.5rem;
   }
-  .user-info {
+  .sub-info {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: ${palette.gray6};
+    .separator {
+      margin-left: 0.25rem;
+      margin-right: 0.25rem;
+    }
+  }
+`;
+
+const Footer = styled.div`
+  padding: 0.625rem 1rem;
+  border-top: 1px solid ${palette.gray0};
+  display: flex;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  justify-content: space-between;
+  .userinfo {
     display: flex;
     align-items: center;
     img {
-      width: 3rem;
-      height: 3rem;
+      border-radius: 50%;
+      width: 1.5rem;
+      height: 1.5rem;
       display: block;
-      margin-right: 1rem;
-      background: ${palette.gray0};
-      object-fit: cover;
-      border-radius: 1.5rem;
-      box-shadow: 0px 0 8px rgba(0, 0, 0, 0.1);
-      ${media.small} {
-        width: 2rem;
-        height: 2rem;
-        border-radius: 1rem;
-      }
-    }
-    .username {
-      font-size: 0.875rem;
-      color: ${palette.gray9};
-      font-weight: bold;
-      a {
-        color: inherit;
-        text-decoration: none;
-        &:hover {
-          color: ${palette.gray8};
-        }
-      }
-    }
-    margin-bottom: 1.5rem;
-    ${media.small} {
-      margin-bottom: 0.75rem;
-    }
-  }
-  .post-thumbnail {
-    margin-bottom: 1rem;
-    ${media.small} {
-    }
-  }
-  line-height: 1.5;
-  h2 {
-    font-size: 1.5rem;
-    margin: 0;
-    color: ${palette.gray9};
-    word-break: keep-all;
-    ${media.small} {
-      font-size: 1rem;
-    }
-  }
-  p {
-    margin-bottom: 2rem;
-    margin-top: 0.5rem;
-    font-size: 1rem;
-    color: ${palette.gray7};
-    word-break: keep-all;
-    overflow-wrap: break-word;
-    ${media.small} {
-      font-size: 0.875rem;
-      margin-bottom: 1.5rem;
-    }
-  }
-  .subinfo {
-    display: flex;
-    align-items: center;
-    margin-top: 1rem;
-    color: ${palette.gray6};
-    font-size: 0.875rem;
-    ${media.small} {
-      font-size: 0.75rem;
+      margin-right: 0.5rem;
     }
     span {
+      color: ${palette.gray6};
+      b {
+        color: ${palette.gray8};
+      }
     }
-    .separator {
-      margin-left: 0.5rem;
+  }
+  .likes {
+    display: flex;
+    align-items: center;
+    svg {
+      width: 0.75rem;
+      height: 0.75rem;
       margin-right: 0.5rem;
     }
   }
-  .tags-wrapper {
-    margin-bottom: -0.875rem;
-    ${media.small} {
-      margin-bottom: -0.5rem;
-    }
-  }
-
-  & + & {
-    border-top: 1px solid ${palette.gray2};
-  }
 `;
 
-interface PostCardProps {
-  post: PartialPost;
-  hideUser?: boolean;
-}
-
-const PostCard = ({ post, hideUser }: PostCardProps) => {
-  const prefetch = usePrefetchPost(post.user.username, post.url_slug);
-  const prefetchTimeoutId = useRef<number | null>(null);
-
-  const onMouseEnter = () => {
-    prefetchTimeoutId.current = setTimeout(prefetch, 2000);
-  };
-
-  const onMouseLeave = () => {
-    if (prefetchTimeoutId.current) {
-      clearTimeout(prefetchTimeoutId.current);
-    }
-  };
-
-  const url = `/@${post.user.username}/${post.url_slug}`;
-  const velogUrl = `/@${post.user.username}`;
-
-  if (!post.user.profile) {
-    console.log(post);
-  }
-  return (
-    <PostCardBlock onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-      {!hideUser && (
-        <div className="user-info">
-          <Link to={velogUrl}>
-            <img
-              src={optimizeImage(
-                post.user.profile?.thumbnail || userThumbnail,
-                120,
-              )}
-              alt="thumbnail"
-            />
-          </Link>
-          <div className="username">
-            <Link to={`/@${post.user.username}`}>{post.user.username}</Link>
-          </div>
-        </div>
-      )}
-      {post.thumbnail && (
-        <Link to={url}>
-          <RatioImage
-            src={optimizeImage(post.thumbnail, 768)}
-            alt="post-thumbnail"
-            widthRatio={1.91}
-            heightRatio={1}
-            className="post-thumbnail"
-          />
-        </Link>
-      )}
-      <Link to={url}>
-        <h2>{post.title}</h2>
-      </Link>
-      <p>{post.short_description}</p>
-      <div className="tags-wrapper">
-        {post.tags.map(tag => (
-          <Tag key={tag} name={tag} link />
-        ))}
-      </div>
-      <div className="subinfo">
-        <span>{formatDate(post.released_at)}</span>
-        <div className="separator">·</div>
-        <span>{post.comments_count}개의 댓글</span>
-        {post.is_private && (
-          <>
-            <div className="separator">·</div>
-            <span>
-              <PrivatePostLabel />
-            </span>
-          </>
-        )}
-      </div>
-    </PostCardBlock>
-  );
-};
-
-export type PostCardSkeletonProps = {
-  hideUser?: boolean;
-};
-
-export function PostCardSkeleton({ hideUser }: PostCardSkeletonProps) {
-  return (
-    <SkeletonBlock>
-      {!hideUser && (
-        <div className="user-info">
-          <Skeleton
-            className="user-thumbnail-skeleton"
-            circle
-            marginRight="1rem"
-          />
-          <div className="username">
-            <Skeleton width="5rem" />
-          </div>
-        </div>
-      )}
-      <div className="post-thumbnail">
-        <div className="thumbnail-skeleton-wrapper">
-          <Skeleton className="skeleton" />
-        </div>
-      </div>
-      <h2>
-        <SkeletonTexts wordLengths={[4, 3, 2, 5, 3, 6]} useFlex />
-      </h2>
-      <div className="short-description">
-        <div className="line">
-          <SkeletonTexts wordLengths={[2, 4, 3, 6, 2, 7]} useFlex />
-        </div>
-        <div className="line">
-          <SkeletonTexts wordLengths={[3, 2, 3, 4, 7, 3]} useFlex />
-        </div>
-        <div className="line">
-          <SkeletonTexts wordLengths={[4, 3, 3]} />
-        </div>
-      </div>
-      <div className="tags-skeleton">
-        <Skeleton width="6rem" marginRight="0.875rem" />
-        <Skeleton width="4rem" marginRight="0.875rem" />
-        <Skeleton width="5rem" noSpacing />
-      </div>
-      <div className="subinfo">
-        <Skeleton width="3em" marginRight="1rem" />
-        <Skeleton width="6em" noSpacing />
-      </div>
-    </SkeletonBlock>
-  );
-}
-
-const SkeletonBlock = styled(PostCardBlock)`
-  h2 {
-    display: flex;
-    margin-top: 1.375rem;
-    margin-bottom: 0.375rem;
-  }
-  .user-thumbnail-skeleton {
-    width: 3rem;
-    height: 3rem;
-    ${media.small} {
-      width: 2rem;
-      height: 2rem;
-    }
-  }
-  .thumbnail-skeleton-wrapper {
-    width: 100%;
-    padding-top: 52.35%;
-    position: relative;
-    .skeleton {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .short-description {
-    margin-bottom: 2rem;
-    margin-top: 1rem;
-    font-size: 1rem;
-    .line {
-      display: flex;
-    }
-    .line + .line {
-      margin-top: 0.5rem;
-    }
-  }
-  .tags-skeleton {
-    line-height: 1;
-    font-size: 2rem;
-    ${media.small} {
-      font-size: 1.25rem;
-    }
-  }
-`;
-
-export default React.memo(PostCard);
+export default PostCard;

@@ -12,6 +12,7 @@ import VelogPageFallback from './containers/velog/VelogPageFallback';
 import ErrorBoundary from './components/error/ErrorBoundary';
 import NotFoundPage from './pages/NotFoundPage';
 import { Helmet } from 'react-helmet-async';
+import HomePage from './pages/home/HomePage';
 
 const loadableConfig = {
   fallback: <PageTemplate />,
@@ -57,12 +58,13 @@ const App: React.FC<AppProps> = props => {
       </Helmet>
       <ErrorBoundary>
         <Switch>
-          <Route path="/" component={MainPage} exact />
-          <Route path="/register" component={RegisterPage} />
+          <Route path="/" component={HomePage} exact />
           <Route
             path="/:mode(trending|recent|following)"
-            component={MainPage}
+            component={HomePage}
           />
+
+          <Route path="/register" component={RegisterPage} />
           <Route path="/@:username" component={VelogPage} />
           {/* <Route path="/@:username/:urlSlug" component={PostPage} /> */}
           <Route path="/email-login" component={EmailLoginPage} />

@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import PostCardList, {
   PostCardListSkeleton,
-} from '../../components/common/PostCardList';
+} from '../../components/common/FlatPostCardList';
 import {
   GET_TRENDING_POSTS,
   GetTrendingPostsResponse,

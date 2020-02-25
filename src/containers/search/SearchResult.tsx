@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import SearchResultInfo from '../../components/search/SearchResultInfo';
-import PostCardList from '../../components/common/PostCardList';
+import PostCardList from '../../components/common/FlatPostCardList';
 import { useQuery } from '@apollo/react-hooks';
 import { SearchPostsResponse, SEARCH_POSTS } from '../../lib/graphql/post';
 import useScrollPagination from '../../lib/hooks/useScrollPagination';
