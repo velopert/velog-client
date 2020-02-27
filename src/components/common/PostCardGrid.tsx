@@ -1,20 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import PostCard from './PostCard';
+import { PartialPost } from '../../lib/graphql/post';
 
-export type PostCardGridProps = {};
+export type PostCardGridProps = {
+  posts: PartialPost[];
+};
 
-function PostCardGrid(props: PostCardGridProps) {
+function PostCardGrid({ posts }: PostCardGridProps) {
   return (
     <Block>
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
+      {posts.map(post => (
+        <PostCard post={post} key={post.id} />
+      ))}
     </Block>
   );
 }

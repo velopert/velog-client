@@ -7,6 +7,7 @@ import HomeLayout from '../../components/home/HomeLayout';
 import { Route } from 'react-router-dom';
 import TrendingPostsPage from './TrendingPostsPage';
 import RecentPostsPage from './RecentPostsPage';
+import HomeSidebar from '../../components/home/HomeSidebar';
 
 export type HomePageProps = {};
 
@@ -27,7 +28,7 @@ function HomePage(props: HomePageProps) {
               <Route path={['/recent']} component={RecentPostsPage} />
             </>
           }
-          side={<div>Hello</div>}
+          side={<HomeSidebar />}
         />
       </HomeResponsive>
     </HomeTemplate>

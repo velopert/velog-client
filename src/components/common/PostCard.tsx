@@ -1,46 +1,55 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import RatioImage from './RatioImage';
 import { ellipsis } from '../../lib/styles/utils';
 import palette from '../../lib/styles/palette';
 import { LikeIcon } from '../../static/svg';
+import { PartialPost } from '../../lib/graphql/post';
+import { formatDate } from '../../lib/utils';
+import { userThumbnail } from '../../static/images';
+import optimizeImage from '../../lib/optimizeImage';
 
-export type PostCardProps = {};
+export type PostCardProps = {
+  post: PartialPost;
+};
 
-function PostCard(props: PostCardProps) {
+function PostCard({ post }: PostCardProps) {
   return (
     <Block>
-      <RatioImage
-        widthRatio={1.916}
-        heightRatio={1}
-        src="https://img.velog.io/images/velog/post/ebf87853-b6b7-47af-a659-d97fb39e66b0/velog_logo.png?w=768"
-      />
-      <Content>
-        <h4>벨로그 v2 업데이트 안내</h4>
-        <p>
-          Node.js, PHP 등 익숙한 언어들을 던지고 생뚱맞은 장고를 택한 이유는 단
-          하나였습니다. 장고를 사용하시는 분들이 가장 많이 이야기하는,
-          생산성입니다 내용이 더 길어지면 엉떻게 되니닌
-        </p>
+      {post.thumbnail && (
+        <RatioImage
+          widthRatio={1.916}
+          heightRatio={1}
+          src={optimizeImage(post.thumbnail, 640)}
+        />
+      )}
+      <Content clamp={!!post.thumbnail}>
+        <h4>{post.title}</h4>
+        <div className="description-wrapper">
+          <p>
+            {post.short_description}
+            {post.short_description.length === 150 && '...'}
+          </p>
+        </div>
         <div className="sub-info">
-          <span>2020년 2월 10일</span>
+          <span>{formatDate(post.released_at)}</span>
           <span className="separator">·</span>
-          <span>64개의 댓글</span>
+          <span>{post.comments_count}개의 댓글</span>
         </div>
       </Content>
       <Footer>
         <div className="userinfo">
           <img
-            src="https://img.velog.io/images/velog/profile/9aa07f66-5fcd-41f4-84f2-91d73afcec28/green favicon.png?w=120"
-            alt="post-thumbnail"
+            src={post.user.profile.thumbnail || userThumbnail}
+            alt={`user thumbnail of ${post.user.username}`}
           />
           <span>
-            by <b>velopert</b>
+            by <b>{post.user.username}</b>
           </span>
         </div>
         <div className="likes">
           <LikeIcon />
-          65
+          {post.likes}
         </div>
       </Footer>
     </Block>
@@ -54,10 +63,15 @@ const Block = styled.div`
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.04);
   margin: 1rem;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 `;
 
-const Content = styled.div`
+const Content = styled.div<{ clamp: boolean }>`
   padding: 1rem;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   h4 {
     font-size: 1rem;
     margin: 0;
@@ -66,18 +80,26 @@ const Content = styled.div`
     ${ellipsis}
     color: ${palette.gray9};
   }
+  .description-wrapper {
+    flex: 1;
+  }
   p {
     margin: 0;
     word-break: keep-all;
     overflow-wrap: break-word;
     font-size: 0.875rem;
     line-height: 1.5;
-    height: 3.9375rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    ${props =>
+      props.clamp &&
+      css`
+        height: 3.9375rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      `}
+  
     color: ${palette.gray7};
     margin-bottom: 1.5rem;
   }

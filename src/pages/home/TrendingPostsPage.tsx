@@ -7,7 +7,8 @@ export type TrendingPageProps = {};
 function TrendingPage(props: TrendingPageProps) {
   const { data, loading } = useTrendingPosts();
 
-  return <PostCardGrid />;
+  if (!data) return null;
+  return <PostCardGrid posts={data.trendingPosts} />;
 }
 
 export default TrendingPage;

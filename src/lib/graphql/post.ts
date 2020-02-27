@@ -162,6 +162,7 @@ export const GET_POST_LIST = gql`
       comments_count
       tags
       is_private
+      likes
     }
   }
 `;
