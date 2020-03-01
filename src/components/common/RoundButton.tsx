@@ -98,7 +98,6 @@ const RoundButton: React.FC<RoundButtonProps> = ({
   color = 'teal',
   size = 'DEFAULT',
   border = false,
-  className,
   ...rest
 }) => {
   if (to) {

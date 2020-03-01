@@ -150,6 +150,9 @@ const Block = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  ${mediaQuery(944)} {
+    width: calc(50% - 2rem);
+  }
   ${mediaQuery(767)} {
     margin: 0;
     width: 100%;
