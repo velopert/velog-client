@@ -1,5 +1,5 @@
 import { useRef, useCallback, useEffect } from 'react';
-import { getScrollBottom } from '../utils';
+import { getScrollBottom, getScrollTop } from '../utils';
 
 type Params = {
   offset?: number | null;
@@ -18,19 +18,28 @@ export default function useScrollPagination({
 }: Params) {
   const last = useRef<string | number | null>(null);
 
-  const loadMore = useCallback(() => {
+  const preventBottomStick = useCallback(() => {
+    console.log(getScrollBottom());
+    if (getScrollBottom() === 0) {
+      window.scrollTo(0, getScrollTop() - 1);
+    }
+  }, []);
+
+  const loadMore = useCallback(async () => {
     if (!cursor || !onLoadMore) return;
     if (cursor === last.current) return;
-    onLoadMore(cursor);
     last.current = cursor;
-  }, [cursor, onLoadMore]);
+    await onLoadMore(cursor);
+    preventBottomStick();
+  }, [cursor, onLoadMore, preventBottomStick]);
 
-  const loadMoreUsingOffset = useCallback(() => {
+  const loadMoreUsingOffset = useCallback(async () => {
     if (stop || !offset || !onLoadMoreByOffset) return;
     if (offset === last.current) return;
-    onLoadMoreByOffset(offset);
     last.current = offset;
-  }, [offset, onLoadMoreByOffset, stop]);
+    await onLoadMoreByOffset(offset);
+    preventBottomStick();
+  }, [offset, onLoadMoreByOffset, preventBottomStick, stop]);
 
   const onScroll = useCallback(() => {
     const scrollBottom = getScrollBottom();

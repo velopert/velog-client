@@ -9,7 +9,7 @@ export type HomeSidebarProps = {};
 
 function HomeSidebar(props: HomeSidebarProps) {
   return (
-    <Sticky top={80}>
+    <Sticky top={118}>
       <Block>
         <MainNoticeWidgetContainer />
         <MainTagWidgetContainer />

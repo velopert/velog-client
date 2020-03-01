@@ -66,7 +66,7 @@ const TrendingPosts: React.FC<TrendingPostsProps> = props => {
         <link rel="canonical" href="https://velog.io/" />
       </Helmet>
       <PostCardList posts={data.trendingPosts} />
-      {loading && <PostCardListSkeleton forLoading />}
+      <PostCardListSkeleton forLoading />
     </>
   );
 };

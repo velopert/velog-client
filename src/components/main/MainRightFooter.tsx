@@ -2,9 +2,13 @@ import * as React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
+import media from '../../lib/styles/media';
 
 const MainRightFooterBlock = styled.div`
   margin-top: 6.25rem;
+  ${media.medium} {
+    margin-top: 3rem;
+  }
   line-height: 1.5;
   font-size: 0.875rem;
   .links {

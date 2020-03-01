@@ -1,14 +1,22 @@
 import React from 'react';
-import PostCardGrid from '../../components/common/PostCardGrid';
+import PostCardGrid, {
+  PostCardGridSkeleton,
+} from '../../components/common/PostCardGrid';
 import useTrendingPosts from './hooks/useTrendingPosts';
 
 export type TrendingPageProps = {};
 
 function TrendingPage(props: TrendingPageProps) {
-  const { data, loading } = useTrendingPosts();
+  const { data, loading, isFinished } = useTrendingPosts();
 
-  if (!data) return null;
-  return <PostCardGrid posts={data.trendingPosts} />;
+  console.log(loading);
+  if (!data) return <PostCardGridSkeleton />;
+  return (
+    <>
+      <PostCardGrid posts={data.trendingPosts} />
+      {data && loading && <PostCardGridSkeleton />}
+    </>
+  );
 }
 
 export default TrendingPage;

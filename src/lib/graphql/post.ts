@@ -137,12 +137,14 @@ export const GET_POST_LIST = gql`
     $username: String
     $temp_only: Boolean
     $tag: String
+    $limit: Int
   ) {
     posts(
       cursor: $cursor
       username: $username
       temp_only: $temp_only
       tag: $tag
+      limit: $limit
     ) {
       id
       title

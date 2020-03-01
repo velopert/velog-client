@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { mediaQuery } from '../../lib/styles/media';
 
 export type HomeLayoutProps = {
   main: React.ReactNode;
@@ -25,6 +26,13 @@ const Main = styled.main`
 const Side = styled.aside`
   margin-left: 6rem;
   width: 16rem;
+  ${mediaQuery(1440)} {
+    margin-left: 3rem;
+    width: 12rem;
+  }
+  ${mediaQuery(944)} {
+    display: none;
+  }
 `;
 
 export default HomeLayout;

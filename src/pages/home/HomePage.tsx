@@ -8,6 +8,7 @@ import { Route } from 'react-router-dom';
 import TrendingPostsPage from './TrendingPostsPage';
 import RecentPostsPage from './RecentPostsPage';
 import HomeSidebar from '../../components/home/HomeSidebar';
+import FloatingHomeHeader from '../../components/home/FloatingHomeHeader';
 
 export type HomePageProps = {};
 
@@ -15,6 +16,7 @@ function HomePage(props: HomePageProps) {
   return (
     <HomeTemplate>
       <HomeHeader />
+      <FloatingHomeHeader />
       <HomeResponsive>
         <HomeTab />
         <HomeLayout
