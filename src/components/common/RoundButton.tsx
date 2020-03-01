@@ -63,7 +63,7 @@ const RoundButtonBlock = styled.button<RoundButtonBlockProps>`
   ${props =>
     props.border &&
     css<RoundButtonBlockProps>`
-      background: transparent;
+      background: white;
       border: 1px solid ${props => buttonColorMap[props.color].background};
       color: ${props => buttonColorMap[props.color].background};
       &:hover {
@@ -98,6 +98,7 @@ const RoundButton: React.FC<RoundButtonProps> = ({
   color = 'teal',
   size = 'DEFAULT',
   border = false,
+  className,
   ...rest
 }) => {
   if (to) {

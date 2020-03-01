@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import PostCard, { PostCardSkeleton } from './PostCard';
+import PostCard, { PostCardSkeleton } from './FlatPostCard';
 import { PartialPost } from '../../lib/graphql/post';
 import palette from '../../lib/styles/palette';
 
