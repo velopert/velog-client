@@ -156,16 +156,18 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
 }) => {
   const [html, setHtml] = useState(
     ssrEnabled
-      ? remark()
-          .use(breaks)
-          .use(prismPlugin)
-          .use(htmlPlugin, {
-            sanitize: true,
-          })
-          .use(embedPlugin)
-          .use(slug)
-          .processSync(markdown)
-          .toString()
+      ? filter(
+          remark()
+            .use(breaks)
+            .use(prismPlugin)
+            .use(htmlPlugin, {
+              sanitize: true,
+            })
+            .use(embedPlugin)
+            .use(slug)
+            .processSync(markdown)
+            .toString(),
+        )
       : '',
   );
 
