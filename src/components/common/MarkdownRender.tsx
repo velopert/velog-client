@@ -197,7 +197,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
         }
 
         if (!editing) {
-          setHtml(html);
+          setHtml(filter(html));
           return;
         }
 
