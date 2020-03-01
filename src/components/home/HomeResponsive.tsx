@@ -25,7 +25,7 @@ const Block = styled.div`
     width: 912px;
   }
   ${mediaQuery(944)} {
-    width: 672px;
+    width: calc(100% - 2rem);
   }
   ${mediaQuery(767)} {
     width: calc(100% - 2rem);
