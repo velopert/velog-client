@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled, { css } from 'styled-components';
 import RatioImage from './RatioImage';
 import { ellipsis } from '../../lib/styles/utils';
@@ -12,6 +12,7 @@ import SkeletonTexts from './SkeletonTexts';
 import Skeleton from './Skeleton';
 import { mediaQuery } from '../../lib/styles/media';
 import { Link } from 'react-router-dom';
+import usePrefetchPost from '../../lib/hooks/usePrefetchPost';
 
 export type PostCardProps = {
   post: PartialPost;
@@ -20,8 +21,21 @@ export type PostCardProps = {
 function PostCard({ post }: PostCardProps) {
   const url = `/@${post.user.username}/${post.url_slug}`;
 
+  const prefetch = usePrefetchPost(post.user.username, post.url_slug);
+  const prefetchTimeoutId = useRef<number | null>(null);
+
+  const onMouseEnter = () => {
+    prefetchTimeoutId.current = setTimeout(prefetch, 2000);
+  };
+
+  const onMouseLeave = () => {
+    if (prefetchTimeoutId.current) {
+      clearTimeout(prefetchTimeoutId.current);
+    }
+  };
+
   return (
-    <Block>
+    <Block onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       {post.thumbnail && (
         <StyledLink to={url}>
           <RatioImage
