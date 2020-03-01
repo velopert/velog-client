@@ -64,7 +64,10 @@ function PostCard({ post }: PostCardProps) {
       <Footer>
         <Link className="userinfo" to={`/@${post.user.username}`}>
           <img
-            src={post.user.profile.thumbnail || userThumbnail}
+            src={optimizeImage(
+              post.user.profile.thumbnail || userThumbnail,
+              120,
+            )}
             alt={`user thumbnail of ${post.user.username}`}
           />
           <span>
