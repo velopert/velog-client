@@ -9,12 +9,22 @@ import TrendingPostsPage from './TrendingPostsPage';
 import RecentPostsPage from './RecentPostsPage';
 import HomeSidebar from '../../components/home/HomeSidebar';
 import FloatingHomeHeader from '../../components/home/FloatingHomeHeader';
+import { Helmet } from 'react-helmet-async';
 
 export type HomePageProps = {};
 
 function HomePage(props: HomePageProps) {
   return (
     <HomeTemplate>
+      <Helmet>
+        <link
+          data-rh="true"
+          rel="alternate"
+          type="application/rss+xml"
+          title="RSS"
+          href="https://v2.velog.io/api/v2/rss"
+        />
+      </Helmet>
       <HomeHeader />
       <FloatingHomeHeader />
       <HomeResponsive>
