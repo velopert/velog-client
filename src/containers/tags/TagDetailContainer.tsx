@@ -7,7 +7,7 @@ import { safe, ssrEnabled } from '../../lib/utils';
 import useScrollPagination from '../../lib/hooks/useScrollPagination';
 import PostCardList, {
   PostCardListSkeleton,
-} from '../../components/common/PostCardList';
+} from '../../components/common/FlatPostCardList';
 import useNotFound from '../../lib/hooks/useNotFound';
 import { Helmet } from 'react-helmet-async';
 

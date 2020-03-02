@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import PostCardList, {
   PostCardListSkeleton,
-} from '../../components/common/PostCardList';
+} from '../../components/common/FlatPostCardList';
 import {
   GET_TRENDING_POSTS,
   GetTrendingPostsResponse,
@@ -66,7 +66,7 @@ const TrendingPosts: React.FC<TrendingPostsProps> = props => {
         <link rel="canonical" href="https://velog.io/" />
       </Helmet>
       <PostCardList posts={data.trendingPosts} />
-      {loading && <PostCardListSkeleton forLoading />}
+      <PostCardListSkeleton forLoading />
     </>
   );
 };

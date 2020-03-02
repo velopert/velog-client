@@ -12,15 +12,16 @@ import HeaderLogo from './HeaderLogo';
 import media from '../../lib/styles/media';
 import { SearchIcon2 } from '../../static/svg';
 import { Link } from 'react-router-dom';
+import HomeResponsive from '../home/HomeResponsive';
 
 const HeaderBlock = styled.div<{ floating: boolean }>`
   width: 100%;
-  > .wrapper {
-    width: 1200px;
+  .wrapper {
+    /* width: 1200px; */
+    width: 100%;
     height: 4rem;
-    margin: 0 auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    /* padding-left: 1rem;
+    padding-right: 1rem; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -36,10 +37,10 @@ const HeaderBlock = styled.div<{ floating: boolean }>`
     }
 
     ${media.large} {
-      width: 1024px;
+      /* width: 1024px; */
     }
     ${media.medium} {
-      width: 100%;
+      /* width: 100%; */
       .write-button {
         display: none;
       }
@@ -122,63 +123,65 @@ const Header: React.FC<HeaderProps> = ({
         style={{ marginTop: floating ? floatingMargin : 0 }}
         data-testid="Header"
       >
-        <div className="wrapper">
-          <div className="brand">
-            <HeaderLogo
-              custom={custom}
-              userLogo={userLogo}
-              velogUsername={velogUsername}
-            />
-          </div>
-          <div className="right">
-            {/* {velogUsername ? (
+        <HomeResponsive>
+          <div className="wrapper">
+            <div className="brand">
+              <HeaderLogo
+                custom={custom}
+                userLogo={userLogo}
+                velogUsername={velogUsername}
+              />
+            </div>
+            <div className="right">
+              {/* {velogUsername ? (
               <SearchIcon2 className="search" />
             ) : (
               <Link to="/search">
                 <SearchIcon2 className="search" />
               </Link>
             )} */}
-            {!isSearch && (
-              <Link
-                to={
-                  velogUsername
-                    ? `/search?username=${velogUsername}`
-                    : '/search'
-                }
-              >
-                <SearchIcon2 className="search" />
-              </Link>
-            )}
-            {user ? (
-              <div className="logged-in">
-                <RoundButton
-                  border
-                  color="darkGray"
-                  style={{ marginRight: '1.25rem' }}
-                  to="/write"
-                  className="write-button"
+              {!isSearch && (
+                <Link
+                  to={
+                    velogUsername
+                      ? `/search?username=${velogUsername}`
+                      : '/search'
+                  }
                 >
-                  새 글 작성
+                  <SearchIcon2 className="search" />
+                </Link>
+              )}
+              {user ? (
+                <div className="logged-in">
+                  <RoundButton
+                    border
+                    color="darkGray"
+                    style={{ marginRight: '1.25rem' }}
+                    to="/write"
+                    className="write-button"
+                  >
+                    새 글 작성
+                  </RoundButton>
+                  <HeaderUserIcon user={user} onClick={toggleUserMenu} />
+                  <HeaderUserMenu
+                    onClose={toggleUserMenu}
+                    username={user.username}
+                    onLogout={onLogout}
+                    visible={userMenu}
+                  />
+                </div>
+              ) : (
+                <RoundButton
+                  color="darkGray"
+                  onClick={onLoginClick}
+                  className="login-button"
+                >
+                  로그인
                 </RoundButton>
-                <HeaderUserIcon user={user} onClick={toggleUserMenu} />
-                <HeaderUserMenu
-                  onClose={toggleUserMenu}
-                  username={user.username}
-                  onLogout={onLogout}
-                  visible={userMenu}
-                />
-              </div>
-            ) : (
-              <RoundButton
-                color="darkGray"
-                onClick={onLoginClick}
-                className="login-button"
-              >
-                로그인
-              </RoundButton>
-            )}
+              )}
+            </div>
           </div>
-        </div>
+        </HomeResponsive>
       </HeaderBlock>
       {floating && <Placeholder />}
     </>

@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import PostCardList, {
   PostCardListSkeleton,
-} from '../../components/common/PostCardList';
+} from '../../components/common/FlatPostCardList';
 import { GET_POST_LIST, PartialPost } from '../../lib/graphql/post';
 import { useQuery } from '@apollo/react-hooks';
 import useScrollPagination from '../../lib/hooks/useScrollPagination';
