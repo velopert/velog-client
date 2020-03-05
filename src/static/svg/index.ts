@@ -19,3 +19,4 @@ export { ReactComponent as ShareIcon2 } from './icon-share-2.svg';
 export { ReactComponent as SearchIcon } from './icon-search.svg'; // iconmonstr-magnifier-3
 export { ReactComponent as SearchIcon2 } from './icon-search-2.svg';
 export { ReactComponent as VelogIcon } from './velog-icon.svg';
+export { ReactComponent as CheckIcon } from './icon-check.svg';

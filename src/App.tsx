@@ -21,10 +21,7 @@ const loadableConfig = {
 const VelogPage = loadable(() => import('./pages/velog/VelogPage'), {
   fallback: <VelogPageFallback />,
 });
-const MainPage = loadable(
-  () => import('./pages/main/MainPage'),
-  loadableConfig,
-);
+
 const EmailLoginPage = loadable(
   () => import('./pages/EmailLoginPage'),
   loadableConfig,
@@ -41,6 +38,7 @@ const SettingPage = loadable(
   () => import('./pages/SettingPage'),
   loadableConfig,
 );
+const SuccessPage = loadable(() => import('./pages/SuccessPage'));
 
 interface AppProps {}
 
@@ -74,6 +72,7 @@ const App: React.FC<AppProps> = props => {
           <Route path="/tags" component={TagsPage} />
           <Route path={['/policy/:type?']} component={PolicyPage} />
           <Route path="/setting" component={SettingPage} />
+          <Route path="/success" component={SuccessPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </ErrorBoundary>
