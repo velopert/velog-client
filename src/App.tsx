@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-// import MainPage from './pages/main/MainPage';
 // import PostPage from './pages/PostPage';
 
 import loadable from '@loadable/component';

@@ -1,13 +1,13 @@
 import React, { useEffect, useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
-import HomeHeader from './HomeHeader';
-import HomeTab from './HomeTab';
-import HomeResponsive from './HomeResponsive';
+import MainHeader from './MainHeader';
+import HomeTab from '../home/HomeTab';
+import MainResponsive from './MainResponsive';
 import { getScrollTop } from '../../lib/utils';
 
-export type FloatingHomeHeaderProps = {};
+export type FloatingMainHeaderProps = {};
 
-function FloatingHomeHeader(props: FloatingHomeHeaderProps) {
+function FloatingMainHeader(props: FloatingMainHeaderProps) {
   const [visible, setVisible] = useState(false);
   const [marginTop, setMarginTop] = useState(-102);
 
@@ -66,11 +66,11 @@ function FloatingHomeHeader(props: FloatingHomeHeaderProps) {
             }
       }
     >
-      <HomeHeader />
+      <MainHeader />
       <div className="tab-wrapper">
-        <HomeResponsive>
+        <MainResponsive>
           <HomeTab />
-        </HomeResponsive>
+        </MainResponsive>
       </div>
       <div></div>
     </Block>
@@ -90,4 +90,4 @@ const Block = styled.div`
   }
 `;
 
-export default FloatingHomeHeader;
+export default FloatingMainHeader;

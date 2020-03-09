@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import MainNoticeWidgetContainer from '../../containers/main/MainNoticeWidgetContainer';
-import MainTagWidgetContainer from '../../containers/main/MainTagWidgetContainer';
-import MainRightFooter from '../main/MainRightFooter';
+import MainNoticeWidgetContainer from '../../containers/home/MainNoticeWidgetContainer';
+import MainTagWidgetContainer from '../../containers/home/MainTagWidgetContainer';
+import HomeRightFooter from './HomeRightFooter';
 import Sticky from '../common/Sticky';
 
 export type HomeSidebarProps = {};
@@ -13,7 +13,7 @@ function HomeSidebar(props: HomeSidebarProps) {
       <Block>
         <MainNoticeWidgetContainer />
         <MainTagWidgetContainer />
-        <MainRightFooter />
+        <HomeRightFooter />
       </Block>
     </Sticky>
   );

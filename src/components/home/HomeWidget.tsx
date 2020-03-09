@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 
-export type MainWidgetProps = {
+export type HomeWidgetProps = {
   title: string;
   children: React.ReactNode;
   className?: string;
 };
 
-function MainWidget({ title, children, className }: MainWidgetProps) {
+function HomeWidget({ title, children, className }: HomeWidgetProps) {
   return (
     <MainWidgetBlock className={className}>
       <h4>{title}</h4>
@@ -33,4 +33,4 @@ const MainWidgetBlock = styled.section`
   }
 `;
 
-export default MainWidget;
+export default HomeWidget;

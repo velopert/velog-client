@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
-import MainTagWidget, {
-  MainTagWidgetSkeleton,
-} from '../../components/main/MainTagWidget';
+import HomeTagWidget, {
+  HomeTagWidgetSkeleton,
+} from '../../components/home/HomeTagWidget';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_TAGS, GetTagsResponse } from '../../lib/graphql/tags';
 
@@ -20,9 +20,9 @@ function MainTagWidgetContainer(props: MainTagWidgetContainerProps) {
     [data],
   );
 
-  if (!tags) return <MainTagWidgetSkeleton />;
+  if (!tags) return <HomeTagWidgetSkeleton />;
 
-  return <MainTagWidget tags={tags} />;
+  return <HomeTagWidget tags={tags} />;
 }
 
 export default MainTagWidgetContainer;

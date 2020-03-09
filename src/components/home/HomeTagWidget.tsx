@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import MainWidget from './MainWidget';
+import HomeWidget from './HomeWidget';
 import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
 import Skeleton from '../common/Skeleton';
 
-export type MainTagWidgetProps = {
+export type HomeTagWidgetProps = {
   tags: string[];
 };
 
-function MainTagWidget({ tags }: MainTagWidgetProps) {
+function HomeTagWidget({ tags }: HomeTagWidgetProps) {
   return (
     <StyledWidget title="인기 태그">
       <ul>
@@ -26,7 +26,7 @@ function MainTagWidget({ tags }: MainTagWidgetProps) {
   );
 }
 
-export function MainTagWidgetSkeleton() {
+export function HomeTagWidgetSkeleton() {
   return (
     <StyledWidget title="인기 태그">
       <ul>
@@ -40,7 +40,7 @@ export function MainTagWidgetSkeleton() {
   );
 }
 
-const StyledWidget = styled(MainWidget)`
+const StyledWidget = styled(HomeWidget)`
   ul {
     list-style: none;
     padding-left: 0;
@@ -72,4 +72,4 @@ const StyledWidget = styled(MainWidget)`
   }
 `;
 
-export default MainTagWidget;
+export default HomeTagWidget;
