@@ -9,12 +9,12 @@ export type RecentPostsPageProps = {};
 function RecentPostsPage(props: RecentPostsPageProps) {
   const { data, loading } = useRecentPosts();
 
-  if (!data) return <PostCardGridSkeleton />;
   return (
-    <>
-      <PostCardGrid posts={data.posts} />
-      {loading && <PostCardGridSkeleton />}
-    </>
+    <PostCardGrid
+      posts={data?.posts || []}
+      forHome
+      loading={!data || loading}
+    />
   );
 }
 

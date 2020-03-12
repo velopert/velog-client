@@ -100,7 +100,7 @@ const Block = styled.div`
     font-size: 1.125rem;
     text-decoration: none;
     color: ${palette.gray6};
-    height: 2.875rem;
+    height: 3rem;
 
     svg {
       font-size: 1.5rem;

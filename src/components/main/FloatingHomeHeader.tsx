@@ -4,12 +4,21 @@ import MainHeader from './MainHeader';
 import HomeTab from '../home/HomeTab';
 import MainResponsive from './MainResponsive';
 import { getScrollTop } from '../../lib/utils';
+import { Route } from 'react-router-dom';
+import ReadingListTab from '../readingList/ReadingListTab';
 
 export type FloatingMainHeaderProps = {};
 
 function FloatingMainHeader(props: FloatingMainHeaderProps) {
   const [visible, setVisible] = useState(false);
-  const [marginTop, setMarginTop] = useState(-102);
+  const blockRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+  const [marginTop, setMarginTop] = useState(0);
+  useEffect(() => {
+    if (!blockRef.current) return;
+    setHeight(blockRef.current.clientHeight);
+    setMarginTop(-1 * blockRef.current.clientHeight);
+  }, []);
 
   const prevScrollTop = useRef(0);
   const direction = useRef<'UP' | 'DOWN'>('DOWN');
@@ -31,20 +40,22 @@ function FloatingMainHeader(props: FloatingMainHeaderProps) {
     if (
       direction.current === 'UP' &&
       nextDirection === 'DOWN' &&
-      scrollTop - transitionPoint.current < -102
+      scrollTop - transitionPoint.current < -1 * height
     ) {
-      transitionPoint.current = scrollTop + 102;
+      transitionPoint.current = scrollTop + height;
     }
 
     if (scrollTop < 64) {
       setVisible(false);
     }
 
-    setMarginTop(Math.min(0, -102 + transitionPoint.current - scrollTop));
+    setMarginTop(
+      Math.min(0, -1 * height + transitionPoint.current - scrollTop),
+    );
 
     direction.current = nextDirection;
     prevScrollTop.current = scrollTop;
-  }, []);
+  }, [height]);
 
   useEffect(() => {
     document.addEventListener('scroll', onScroll);
@@ -62,17 +73,33 @@ function FloatingMainHeader(props: FloatingMainHeaderProps) {
               display: 'block',
             }
           : {
-              display: 'none',
+              marginTop: -1 * height,
+              opacity: 0,
             }
       }
+      ref={blockRef}
     >
       <MainHeader />
-      <div className="tab-wrapper">
-        <MainResponsive>
-          <HomeTab />
-        </MainResponsive>
-      </div>
-      <div></div>
+      <Route
+        path={['/', '/:mode(recent|trending)']}
+        render={() => (
+          <div className="tab-wrapper">
+            <MainResponsive>
+              <HomeTab />
+            </MainResponsive>
+          </div>
+        )}
+        exact
+      />
+      <Route
+        path="/lists/:type(liked|read)"
+        render={({ match }) => (
+          <StyledMainResponsive>
+            <ReadingListTab type={match.params.type} />
+          </StyledMainResponsive>
+        )}
+        exact
+      />
     </Block>
   );
 }
@@ -88,6 +115,10 @@ const Block = styled.div`
   .tab-wrapper {
     margin-top: -2rem;
   }
+`;
+
+const StyledMainResponsive = styled(MainResponsive)`
+  margin-top: 1.5rem;
 `;
 
 export default FloatingMainHeader;

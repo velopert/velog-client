@@ -19,7 +19,6 @@ export default function useScrollPagination({
   const last = useRef<string | number | null>(null);
 
   const preventBottomStick = useCallback(() => {
-    console.log(getScrollBottom());
     if (getScrollBottom() === 0) {
       window.scrollTo(0, getScrollTop() - 1);
     }
@@ -43,7 +42,7 @@ export default function useScrollPagination({
 
   const onScroll = useCallback(() => {
     const scrollBottom = getScrollBottom();
-    if (scrollBottom < 768) {
+    if (scrollBottom < window.screen.height) {
       loadMore();
       loadMoreUsingOffset();
     }

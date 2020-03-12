@@ -704,8 +704,32 @@ export type PostViewResponse = {
   postView: boolean;
 };
 
-// mutation {
-//   createPostHistory(post_id: "41f19ed8-bc7e-4af3-86e9-4c5e482cb8e4", title: "안녕하세요", body: "내용입니다.", is_markdown:true) {
-//     id
-//   }
-// }
+export const GET_READING_LIST = gql`
+  query ReadingList($type: ReadingListOption, $cursor: ID, $limit: Int) {
+    readingList(type: $type, cursor: $cursor, limit: $limit) {
+      id
+      title
+      short_description
+      thumbnail
+      user {
+        id
+        username
+        profile {
+          id
+          thumbnail
+        }
+      }
+      url_slug
+      released_at
+      updated_at
+      comments_count
+      tags
+      is_private
+      likes
+    }
+  }
+`;
+
+export type GetReadingListResponse = {
+  readingList: PartialPost[];
+};

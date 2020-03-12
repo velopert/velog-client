@@ -6,14 +6,20 @@ import { mediaQuery } from '../../lib/styles/media';
 
 export type PostCardGridProps = {
   posts: PartialPost[];
+  loading?: boolean;
+  forHome?: boolean;
 };
 
-function PostCardGrid({ posts }: PostCardGridProps) {
+function PostCardGrid({ posts, loading, forHome }: PostCardGridProps) {
   return (
     <Block>
       {posts.map(post => (
-        <PostCard post={post} key={post.id} />
+        <PostCard post={post} key={post.id} forHome={forHome} />
       ))}
+      {loading &&
+        Array.from({ length: 8 }).map((_, i) => (
+          <PostCardSkeleton key={i} forHome={forHome} />
+        ))}
     </Block>
   );
 }

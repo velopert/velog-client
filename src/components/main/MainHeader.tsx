@@ -19,7 +19,9 @@ function MainHeader(props: MainHeaderProps) {
   return (
     <Block>
       <Inner>
-        <Logo />
+        <StyledLink to="/">
+          <Logo />
+        </StyledLink>
         {user ? (
           <Right>
             <SearchButton to="/search">
@@ -60,6 +62,11 @@ function MainHeader(props: MainHeaderProps) {
 
 const Block = styled.div`
   height: 4rem;
+`;
+
+const StyledLink = styled(Link)`
+  display: flex;
+  align-items: center;
 `;
 
 const SearchButton = styled(Link)`

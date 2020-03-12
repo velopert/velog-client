@@ -12,6 +12,7 @@ import ErrorBoundary from './components/error/ErrorBoundary';
 import NotFoundPage from './pages/NotFoundPage';
 import { Helmet } from 'react-helmet-async';
 import HomePage from './pages/home/HomePage';
+import MainPageTemplate from './components/main/MainPageTemplate';
 
 const loadableConfig = {
   fallback: <PageTemplate />,
@@ -38,6 +39,12 @@ const SettingPage = loadable(
   loadableConfig,
 );
 const SuccessPage = loadable(() => import('./pages/SuccessPage'));
+const ReadingListPage = loadable(
+  () => import('./pages/readingList/ReadingListPage'),
+  {
+    fallback: <MainPageTemplate />,
+  },
+);
 
 interface AppProps {}
 
@@ -72,6 +79,7 @@ const App: React.FC<AppProps> = props => {
           <Route path={['/policy/:type?']} component={PolicyPage} />
           <Route path="/setting" component={SettingPage} />
           <Route path="/success" component={SuccessPage} />
+          <Route path="/lists/:type(liked|read)" component={ReadingListPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </ErrorBoundary>
