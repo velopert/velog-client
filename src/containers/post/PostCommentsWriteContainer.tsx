@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PostCommentsWrite from '../../components/post/PostCommentsWrite';
 import { WRITE_COMMENT, RELOAD_COMMENTS } from '../../lib/graphql/post';
 import { useMutation, useQuery } from '@apollo/react-hooks';
+import useUser from '../../lib/hooks/useUser';
+import useRequireLogin from '../../lib/hooks/useRequireLogin';
+import storage from '../../lib/storage';
 
 export interface PostCommentsWriteContainerProps {
   postId: string;
@@ -11,6 +14,9 @@ export interface PostCommentsWriteContainerProps {
 const PostCommentsWriteContainer: React.FC<PostCommentsWriteContainerProps> = ({
   postId,
 }) => {
+  const user = useUser();
+  const requireLogin = useRequireLogin();
+
   const [comment, setComment] = useState('');
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
@@ -24,7 +30,24 @@ const PostCommentsWriteContainer: React.FC<PostCommentsWriteContainerProps> = ({
     },
   });
 
+  useEffect(() => {
+    const key = `comment_before_login:${postId}`;
+
+    const commentBeforeLogin = storage.getItem(
+      `comment_before_login:${postId}`,
+    );
+
+    if (commentBeforeLogin) {
+      setComment(commentBeforeLogin);
+      storage.removeItem(key);
+    }
+  }, [postId]);
+
   const onWrite = async () => {
+    if (!user) {
+      storage.setItem(`comment_before_login:${postId}`, comment);
+      return requireLogin();
+    }
     try {
       await writeComment({
         variables: {
