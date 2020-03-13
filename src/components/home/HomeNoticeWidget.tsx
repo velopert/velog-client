@@ -1,17 +1,17 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
-import MainWidget from './MainWidget';
+import HomeWidget from './HomeWidget';
 import { Link } from 'react-router-dom';
 import { PartialPost } from '../../lib/graphql/post';
 import { formatDate } from '../../lib/utils';
 import Skeleton from '../common/Skeleton';
 
-interface MainNoticeWidgetProps {
+interface HomeNoticeWidgetProps {
   posts: PartialPost[];
 }
 
-const MainNoticeWidget: React.FC<MainNoticeWidgetProps> = ({ posts }) => {
+const HomeNoticeWidget: React.FC<HomeNoticeWidgetProps> = ({ posts }) => {
   const sliced = posts.slice(0, 5);
 
   return (
@@ -39,7 +39,7 @@ const MainNoticeWidget: React.FC<MainNoticeWidgetProps> = ({ posts }) => {
   );
 };
 
-export function MainNoticeWidgetSkeleton() {
+export function HomeNoticeWidgetSkeleton() {
   return (
     <StyledWidget title="공지사항">
       <ul>
@@ -58,7 +58,7 @@ export function MainNoticeWidgetSkeleton() {
   );
 }
 
-const StyledWidget = styled(MainWidget)`
+const StyledWidget = styled(HomeWidget)`
   .empty {
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -105,4 +105,4 @@ const StyledWidget = styled(MainWidget)`
   }
 `;
 
-export default MainNoticeWidget;
+export default HomeNoticeWidget;

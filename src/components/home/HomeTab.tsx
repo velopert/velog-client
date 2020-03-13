@@ -6,7 +6,7 @@ import { MdTrendingUp, MdAccessTime, MdMoreVert } from 'react-icons/md';
 import { useSpring, animated } from 'react-spring';
 import { mediaQuery } from '../../lib/styles/media';
 import useToggle from '../../lib/hooks/useToggle';
-import MainMobileHeadExtra from '../../components/main/MainMobileHeadExtra';
+import HomeMobileHeadExtra from './HomeMobileHeadExtra';
 
 export type HomeTabProps = {};
 
@@ -58,7 +58,7 @@ function HomeTab(props: HomeTabProps) {
       <MobileMore ref={moreButtonRef}>
         <MdMoreVert className="more" onClick={toggle} />
       </MobileMore>
-      <MainMobileHeadExtra visible={extra} onClose={onClose} />
+      <HomeMobileHeadExtra visible={extra} onClose={onClose} />
     </Wrapper>
   );
 }
@@ -100,7 +100,7 @@ const Block = styled.div`
     font-size: 1.125rem;
     text-decoration: none;
     color: ${palette.gray6};
-    height: 2.875rem;
+    height: 3rem;
 
     svg {
       font-size: 1.5rem;

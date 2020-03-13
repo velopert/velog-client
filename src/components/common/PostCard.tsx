@@ -16,9 +16,10 @@ import usePrefetchPost from '../../lib/hooks/usePrefetchPost';
 
 export type PostCardProps = {
   post: PartialPost;
+  forHome?: boolean;
 };
 
-function PostCard({ post }: PostCardProps) {
+function PostCard({ post, forHome }: PostCardProps) {
   const url = `/@${post.user.username}/${post.url_slug}`;
 
   const prefetch = usePrefetchPost(post.user.username, post.url_slug);
@@ -35,7 +36,11 @@ function PostCard({ post }: PostCardProps) {
   };
 
   return (
-    <Block onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+    <Block
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      forHome={!!forHome}
+    >
       {post.thumbnail && (
         <StyledLink to={url}>
           <RatioImage
@@ -83,9 +88,9 @@ function PostCard({ post }: PostCardProps) {
   );
 }
 
-export function PostCardSkeleton() {
+export function PostCardSkeleton({ forHome }: { forHome?: boolean }) {
   return (
-    <SkeletonBlock>
+    <SkeletonBlock forHome={!!forHome}>
       <div className="skeleton-thumbnail-wrapper">
         <Skeleton className="skeleton-thumbnail"></Skeleton>
       </div>
@@ -136,7 +141,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-const Block = styled.div`
+const Block = styled.div<{ forHome: boolean }>`
   width: 20rem;
   background: white;
   border-radius: 4px;
@@ -153,6 +158,18 @@ const Block = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
+
+  ${props =>
+    !props.forHome &&
+    css`
+      ${mediaQuery(1440)} {
+        width: calc(25% - 2rem);
+      }
+      ${mediaQuery(1312)} {
+        width: calc(33% - 1.8125rem);
+      }
+    `}
+
   ${mediaQuery(944)} {
     width: calc(50% - 2rem);
   }

@@ -4,6 +4,7 @@ import LargeSearchInput from '../containers/search/LargeSearchInput';
 import SearchResult from '../containers/search/SearchResult';
 import { RouteComponentProps } from 'react-router';
 import qs from 'qs';
+import { Helmet } from 'react-helmet-async';
 
 export interface SearchPageProps extends RouteComponentProps {}
 
@@ -17,6 +18,11 @@ function SearchPage({ location }: SearchPageProps) {
 
   return (
     <SearchTemplate>
+      <Helmet>
+        {(query.q || query.username) && (
+          <meta name="robots" content="noindex" />
+        )}
+      </Helmet>
       <LargeSearchInput initialKeyword={query.q} />
       <SearchResult keyword={query.q} username={query.username} />
     </SearchTemplate>

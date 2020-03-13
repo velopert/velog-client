@@ -2,24 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 import { Logo, SearchIcon2 } from '../../static/svg';
 import RoundButton from '../common/RoundButton';
-import HomeResponsive from './HomeResponsive';
-import useHeader from './hooks/useHeader';
+import MainResponsive from './MainResponsive';
+import useHeader from '../home/hooks/useHeader';
 import HeaderUserIcon from '../base/HeaderUserIcon';
 import useToggle from '../../lib/hooks/useToggle';
 import HeaderUserMenu from '../base/HeaderUserMenu';
 import { Link } from 'react-router-dom';
 import { mediaQuery } from '../../lib/styles/media';
 
-export type HomeHeaderProps = {};
+export type MainHeaderProps = {};
 
-function HomeHeader(props: HomeHeaderProps) {
+function MainHeader(props: MainHeaderProps) {
   const { user, onLoginClick, onLogout } = useHeader();
   const [userMenu, toggleUserMenu] = useToggle(false);
 
   return (
     <Block>
       <Inner>
-        <Logo />
+        <StyledLink to="/">
+          <Logo />
+        </StyledLink>
         {user ? (
           <Right>
             <SearchButton to="/search">
@@ -62,6 +64,11 @@ const Block = styled.div`
   height: 4rem;
 `;
 
+const StyledLink = styled(Link)`
+  display: flex;
+  align-items: center;
+`;
+
 const SearchButton = styled(Link)`
   display: flex;
   align-items: center;
@@ -83,7 +90,7 @@ const SearchButton = styled(Link)`
   margin-right: 0.75rem;
 `;
 
-const Inner = styled(HomeResponsive)`
+const Inner = styled(MainResponsive)`
   height: 100%;
   display: flex;
   align-items: center;
@@ -101,4 +108,4 @@ const Right = styled.div`
   }
 `;
 
-export default HomeHeader;
+export default MainHeader;

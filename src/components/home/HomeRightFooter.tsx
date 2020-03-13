@@ -27,9 +27,9 @@ const MainRightFooterBlock = styled.div`
   }
 `;
 
-interface MainRightFooterProps {}
+interface HomeRightFooterProps {}
 
-const MainRightFooter: React.FC<MainRightFooterProps> = props => {
+const HomeRightFooter: React.FC<HomeRightFooterProps> = props => {
   return (
     <MainRightFooterBlock>
       <div className="links">
@@ -51,4 +51,4 @@ const MainRightFooter: React.FC<MainRightFooterProps> = props => {
   );
 };
 
-export default MainRightFooter;
+export default HomeRightFooter;

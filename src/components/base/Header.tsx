@@ -12,7 +12,7 @@ import HeaderLogo from './HeaderLogo';
 import media from '../../lib/styles/media';
 import { SearchIcon2 } from '../../static/svg';
 import { Link } from 'react-router-dom';
-import HomeResponsive from '../home/HomeResponsive';
+import MainResponsive from '../main/MainResponsive';
 
 const HeaderBlock = styled.div<{ floating: boolean }>`
   width: 100%;
@@ -123,7 +123,7 @@ const Header: React.FC<HeaderProps> = ({
         style={{ marginTop: floating ? floatingMargin : 0 }}
         data-testid="Header"
       >
-        <HomeResponsive>
+        <MainResponsive>
           <div className="wrapper">
             <div className="brand">
               <HeaderLogo
@@ -181,7 +181,7 @@ const Header: React.FC<HeaderProps> = ({
               )}
             </div>
           </div>
-        </HomeResponsive>
+        </MainResponsive>
       </HeaderBlock>
       {floating && <Placeholder />}
     </>

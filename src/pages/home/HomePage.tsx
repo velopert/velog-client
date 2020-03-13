@@ -1,23 +1,23 @@
 import React from 'react';
-import HomeTemplate from '../../components/home/HomeTemplate';
-import HomeHeader from '../../components/home/HomeHeader';
+import MainTemplate from '../../components/main/MainTemplate';
+import MainHeader from '../../components/main/MainHeader';
 import HomeTab from '../../components/home/HomeTab';
-import HomeResponsive from '../../components/home/HomeResponsive';
+import MainResponsive from '../../components/main/MainResponsive';
 import HomeLayout from '../../components/home/HomeLayout';
 import { Route } from 'react-router-dom';
 import TrendingPostsPage from './TrendingPostsPage';
 import RecentPostsPage from './RecentPostsPage';
 import HomeSidebar from '../../components/home/HomeSidebar';
-import FloatingHomeHeader from '../../components/home/FloatingHomeHeader';
+import FloatingMainHeader from '../../components/main/FloatingHomeHeader';
 
 export type HomePageProps = {};
 
 function HomePage(props: HomePageProps) {
   return (
-    <HomeTemplate>
-      <HomeHeader />
-      <FloatingHomeHeader />
-      <HomeResponsive>
+    <MainTemplate>
+      <MainHeader />
+      <FloatingMainHeader />
+      <MainResponsive>
         <HomeTab />
         <HomeLayout
           main={
@@ -32,8 +32,8 @@ function HomePage(props: HomePageProps) {
           }
           side={<HomeSidebar />}
         />
-      </HomeResponsive>
-    </HomeTemplate>
+      </MainResponsive>
+    </MainTemplate>
   );
 }
 

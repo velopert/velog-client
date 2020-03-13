@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { mediaQuery } from '../../lib/styles/media';
 
-export type HomeResponsiveProps = {
+export type MainResponsiveProps = {
   className?: string;
   children: React.ReactNode;
 };
 
-function HomeResponsive({ className, children }: HomeResponsiveProps) {
+function MainResponsive({ className, children }: MainResponsiveProps) {
   return <Block className={className}>{children}</Block>;
 }
 
@@ -32,4 +32,4 @@ const Block = styled.div`
   }
 `;
 
-export default HomeResponsive;
+export default MainResponsive;
