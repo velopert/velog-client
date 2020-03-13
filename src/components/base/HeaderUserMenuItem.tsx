@@ -14,6 +14,7 @@ const HeaderUserMenuItemBlock = styled.div`
   padding: 0.75rem 1rem;
   line-height: 1.5;
   font-weight: 500;
+  cursor: pointer;
   &:hover {
     background: ${palette.gray0};
   }

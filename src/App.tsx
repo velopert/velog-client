@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 // import PostPage from './pages/PostPage';
 
 import loadable from '@loadable/component';
@@ -80,6 +80,7 @@ const App: React.FC<AppProps> = props => {
           <Route path="/setting" component={SettingPage} />
           <Route path="/success" component={SuccessPage} />
           <Route path="/lists/:type(liked|read)" component={ReadingListPage} />
+          <Route path="/lists" render={() => <Redirect to="/lists/liked" />} />
           <Route component={NotFoundPage} />
         </Switch>
       </ErrorBoundary>

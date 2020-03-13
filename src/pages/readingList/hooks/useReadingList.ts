@@ -14,12 +14,21 @@ export default function useReadingList(type: 'liked' | 'read') {
         type: type.toUpperCase(),
         limit: 20,
       },
+      fetchPolicy: 'cache-and-network',
     },
   );
   const [isFinished, setIsFinished] = useState(false);
+
   useEffect(() => {
     setIsFinished(false);
   }, [type]);
+
+  useEffect(() => {
+    if (!data) return;
+    if (data.readingList.length < 20) {
+      setIsFinished(true);
+    }
+  }, [data]);
 
   const onLoadMore = useCallback(
     (cursor: string) => {

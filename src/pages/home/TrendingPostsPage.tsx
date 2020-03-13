@@ -3,6 +3,7 @@ import PostCardGrid, {
   PostCardGridSkeleton,
 } from '../../components/common/PostCardGrid';
 import useTrendingPosts from './hooks/useTrendingPosts';
+import { Helmet } from 'react-helmet-async';
 
 export type TrendingPageProps = {};
 
@@ -10,11 +11,16 @@ function TrendingPage(props: TrendingPageProps) {
   const { data, loading } = useTrendingPosts();
 
   return (
-    <PostCardGrid
-      posts={data?.trendingPosts || []}
-      forHome
-      loading={!data || loading}
-    />
+    <>
+      <Helmet>
+        <link rel="canonical" href="https://velog.io/" />
+      </Helmet>
+      <PostCardGrid
+        posts={data?.trendingPosts || []}
+        forHome
+        loading={!data || loading}
+      />
+    </>
   );
 }
 

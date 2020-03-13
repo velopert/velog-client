@@ -39,6 +39,7 @@ const HeaderUserMenu: React.FC<HeaderUserMenuProps> = ({
             내 벨로그
           </HeaderUserMenuItem>
           <HeaderUserMenuItem to="/saves">임시 글</HeaderUserMenuItem>
+          <HeaderUserMenuItem to="/lists/liked">읽기 목록</HeaderUserMenuItem>
           <HeaderUserMenuItem to="/setting">설정</HeaderUserMenuItem>
           <HeaderUserMenuItem onClick={onLogout}>로그아웃</HeaderUserMenuItem>
         </div>
