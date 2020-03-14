@@ -3,6 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import SettingUserProfile, {
   SettingUserProfileProps,
 } from '../SettingUserProfile';
+import optimizeImage from '../../../lib/optimizeImage';
 
 describe('SettingUserProfile', () => {
   const setup = (props: Partial<SettingUserProfileProps> = {}) => {
@@ -13,6 +14,7 @@ describe('SettingUserProfile', () => {
         'https://images.velog.io/images/velopert/profile/ca385170-77e7-11e9-ba3a-fb3a8e4f1096/1536400727.98.png',
       displayName: 'Minjun Kim',
       shortBio: 'Hello World',
+      onUpdate: () => Promise.resolve(),
     };
     const utils = render(<SettingUserProfile {...initialProps} {...props} />);
     return {
@@ -23,7 +25,10 @@ describe('SettingUserProfile', () => {
     const utils = setup();
     const img = utils.getByAltText('profile') as HTMLImageElement;
     expect(img.src).toBe(
-      'https://images.velog.io/images/velopert/profile/ca385170-77e7-11e9-ba3a-fb3a8e4f1096/1536400727.98.png',
+      optimizeImage(
+        'https://images.velog.io/images/velopert/profile/ca385170-77e7-11e9-ba3a-fb3a8e4f1096/1536400727.98.png',
+        400,
+      ),
     );
     utils.getByText('Minjun Kim');
     utils.getByText('Hello World');

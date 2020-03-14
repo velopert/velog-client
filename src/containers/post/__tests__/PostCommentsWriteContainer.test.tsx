@@ -4,15 +4,15 @@ import PostCommentsWriteContainer, {
   PostCommentsWriteContainerProps,
 } from '../PostCommentsWriteContainer';
 import renderWithApollo from '../../../lib/renderWithApollo';
+import renderWithProviders from '../../../lib/renderWithProviders';
 
 describe('PostCommentsWriteContainer', () => {
   const setup = (props: Partial<PostCommentsWriteContainerProps> = {}) => {
     const initialProps: PostCommentsWriteContainerProps = {
       postId: 'd91aa54b-0e2c-4a18-9104-ec32ea7218a3',
     };
-    const utils = renderWithApollo(
+    const utils = renderWithProviders(
       <PostCommentsWriteContainer {...initialProps} {...props} />,
-      [],
     );
 
     const textarea = utils.getByPlaceholderText(

@@ -3,26 +3,30 @@
 exports[`MarkdownEditor matches snapshot 1`] = `
 <div>
   <div
-    class="sc-jTzLTM ekUQPf"
+    class="sc-jTzLTM bLrIva"
     data-testid="codemirror"
   >
     <div
       class="wrapper"
     >
       <div
-        class="sc-jzJRlG cocNVz"
+        style="max-height: 254px; opacity: 1;"
       >
-        <textarea
-          class="sc-bwzfXH fHpybz"
-          placeholder="제목을 입력하세요"
-          style="height: 0px;"
-        />
         <div
-          class="sc-fjdhpX gWglfo"
-        />
+          class="sc-jzJRlG bDuWxS"
+        >
+          <textarea
+            class="sc-bwzfXH fHpybz"
+            placeholder="제목을 입력하세요"
+            style="height: 0px;"
+          />
+          <div
+            class="sc-fjdhpX gWglfo"
+          />
+        </div>
       </div>
       <div
-        class="sc-htpNat iBxfzA"
+        class="sc-htpNat dNruCf"
         id="toolbar"
       >
         <button
@@ -204,7 +208,7 @@ exports[`MarkdownEditor matches snapshot 1`] = `
         </button>
       </div>
       <div
-        class="sc-jzJRlG cocNVz"
+        class="sc-cSHVUG jOkdze"
       >
         <textarea
           style="display: none;"
@@ -314,7 +318,7 @@ exports[`MarkdownEditor matches snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-cSHVUG fnIIPU"
+      class="sc-kAzzGY wRxqq"
       style="width: 50%;"
     />
   </div>
