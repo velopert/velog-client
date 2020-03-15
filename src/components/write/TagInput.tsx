@@ -111,7 +111,24 @@ const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
       ignore.current = true;
       setValue('');
       if (tag === '' || tags.includes(tag)) return;
-      setTags([...tags, tag.trim()]);
+      let processed = tag;
+      processed = tag.trim();
+      if (processed.indexOf(' #') > 0) {
+        const tempTags: string[] = [];
+        const regex = /#(\S+)/g;
+        let execArray: RegExpExecArray | null = null;
+        while ((execArray = regex.exec(processed))) {
+          if (execArray !== null) {
+            tempTags.push(execArray[1]);
+          }
+        }
+        setTags([...tags, ...tempTags]);
+        return;
+      }
+      if (processed.charAt(0) === '#') {
+        processed = processed.slice(1, processed.length);
+      }
+      setTags([...tags, processed]);
     },
     [tags],
   );
