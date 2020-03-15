@@ -34,6 +34,7 @@ import useNotFound from '../../lib/hooks/useNotFound';
 import { Helmet } from 'react-helmet-async';
 import { RootState } from '../../modules';
 import { toast } from 'react-toastify';
+import MobileLikeButton from '../../components/post/MobileLikeButton';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -348,6 +349,13 @@ const PostViewer: React.FC<PostViewerProps> = ({
         }
         toc={<PostToc />}
         isPrivate={post.is_private}
+        mobileLikeButton={
+          <MobileLikeButton
+            likes={post.likes}
+            liked={post.liked}
+            onToggle={onLikeToggle}
+          />
+        }
       />
       <PostContent isMarkdown={post.is_markdown} body={post.body} />
       <UserProfileWrapper>
