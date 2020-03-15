@@ -78,6 +78,13 @@ const SubInfo = styled.div`
 `;
 
 const EditRemoveGroup = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: -1.25rem;
+  ${media.medium} {
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+  }
   button {
     padding: 0;
     outline: none;
@@ -112,6 +119,14 @@ const Thumbnail = styled.img`
   }
 `;
 
+const MobileOnly = styled.div`
+  align-items: center;
+  display: none;
+  ${media.medium} {
+    display: flex;
+  }
+`;
+
 export interface PostHeadProps {
   title: string;
   tags: string[];
@@ -132,6 +147,7 @@ export interface PostHeadProps {
   shareButtons: React.ReactNode;
   toc: React.ReactNode;
   isPrivate?: boolean;
+  mobileLikeButton: React.ReactNode;
 }
 
 const PostHead: React.FC<PostHeadProps> = ({
@@ -149,6 +165,7 @@ const PostHead: React.FC<PostHeadProps> = ({
   shareButtons,
   toc,
   isPrivate,
+  mobileLikeButton,
 }) => {
   const [askRemove, toggleAskRemove] = useToggle(false);
 
@@ -160,6 +177,12 @@ const PostHead: React.FC<PostHeadProps> = ({
     <PostHeadBlock>
       <div className="head-wrapper">
         <h1>{title}</h1>
+        {ownPost && (
+          <EditRemoveGroup>
+            <button onClick={onEdit}>수정</button>
+            <button onClick={toggleAskRemove}>삭제</button>
+          </EditRemoveGroup>
+        )}
         <SubInfo>
           <div className="information">
             <span className="username">
@@ -174,12 +197,7 @@ const PostHead: React.FC<PostHeadProps> = ({
               </>
             )}
           </div>
-          {ownPost && (
-            <EditRemoveGroup>
-              <button onClick={onEdit}>수정</button>
-              <button onClick={toggleAskRemove}>삭제</button>
-            </EditRemoveGroup>
-          )}
+          <MobileOnly>{mobileLikeButton}</MobileOnly>
         </SubInfo>
         <TagList tags={tags} link />
         {shareButtons}

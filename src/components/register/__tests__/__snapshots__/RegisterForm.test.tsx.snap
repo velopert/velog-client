@@ -90,13 +90,13 @@ exports[`RegisterForm matches snapshot 1`] = `
         class="buttons"
       >
         <button
-          class="sc-bwzfXH glbJxy"
+          class="sc-bwzfXH eZmwIP"
           color="lightGray"
         >
           취소
         </button>
         <button
-          class="sc-bwzfXH hKmRNK"
+          class="sc-bwzfXH iVHqRZ"
           color="teal"
           type="submit"
         >
