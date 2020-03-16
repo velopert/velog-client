@@ -8,5 +8,6 @@ export { default as undrawBugFixing } from './undraw_bug_fixing_oc7a.svg';
 export { default as undrawPageNotFound } from './undraw_page_not_found_su7k.svg';
 export { default as undrawServerDown } from './undraw_server_down_s4lk.svg';
 export { default as undrawUpdate } from './undraw_update_uxn2.svg';
+export { default as undrawLogin } from './undraw_login_v483.svg';
 
 // export { default as undrawSearching } from './undraw_searching.svg';
