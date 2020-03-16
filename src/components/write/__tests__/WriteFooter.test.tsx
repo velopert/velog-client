@@ -7,6 +7,8 @@ describe('WriteFooter', () => {
     const initialProps: WriteFooterProps = {
       onPublish: () => {},
       onTempSave: () => {},
+      onGoBack: () => {},
+      edit: false,
     };
     const utils = render(<WriteFooter {...initialProps} {...props} />);
     const buttons = {
@@ -40,5 +42,12 @@ describe('WriteFooter', () => {
       edit: true,
     });
     expect(buttons.publish.textContent).toBe('수정하기');
+  });
+  it('calls onGoBack', () => {
+    const onGoBack = jest.fn();
+    const utils = setup({ onGoBack });
+    const button = utils.getByTestId('goback');
+    fireEvent.click(button);
+    expect(onGoBack).toBeCalled();
   });
 });

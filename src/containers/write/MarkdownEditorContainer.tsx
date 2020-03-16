@@ -121,6 +121,10 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       });
   }, [actionCreators, markdown]);
 
+  const onGoBack = useCallback(() => {
+    history.goBack();
+  }, [history]);
+
   const [upload, file] = useUpload();
   const [s3Upload, image] = useS3Upload();
   const prevImage = usePrevious(image);
@@ -270,6 +274,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
           <WriteFooter
             onPublish={onPublish}
             onTempSave={onTempSave}
+            onGoBack={onGoBack}
             edit={!!postId && !isTemp}
           />
         }

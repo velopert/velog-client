@@ -3,20 +3,49 @@
 exports[`WriteFooter matches snapshot 1`] = `
 <div>
   <div
-    class="sc-bwzfXH cvCbtW"
+    class="sc-bxivhb dqcLEN"
   >
     <button
-      class="sc-bdVaJa eORyJT sc-htpNat bGXGEN"
-      color="lightGray"
+      class="sc-htpNat ipyqxD"
+      data-testid="goback"
     >
-      임시저장
+      <div
+        class="sc-bwzfXH OWyms"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
+          />
+        </svg>
+      </div>
+      <span>
+        뒤로가기
+      </span>
     </button>
-    <button
-      class="sc-bdVaJa czPBkf sc-htpNat bGXGEN"
-      color="teal"
+    <div
+      class="sc-ifAKCX WOpjk"
     >
-      출간하기
-    </button>
+      <button
+        class="sc-bdVaJa eORyJT sc-EHOje ZYAtB"
+        color="lightGray"
+      >
+        임시저장
+      </button>
+      <button
+        class="sc-bdVaJa czPBkf sc-EHOje ZYAtB"
+        color="teal"
+      >
+        출간하기
+      </button>
+    </div>
   </div>
 </div>
 `;

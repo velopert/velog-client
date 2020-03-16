@@ -351,20 +351,49 @@ exports[`ActiveEditor matches snapshot 1`] = `
           style="width: 50%;"
         >
           <div
-            class="sc-eNQAEJ cEWQpy"
+            class="sc-kEYyzF eWpIyS"
           >
             <button
-              class="sc-fjdhpX jXoOWc sc-hMqMXs jmhCdt"
-              color="lightGray"
+              class="sc-hMqMXs bZMDzs"
+              data-testid="goback"
             >
-              임시저장
+              <div
+                class="sc-eNQAEJ eCRfxh"
+              >
+                <svg
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 24 24"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
+                  />
+                </svg>
+              </div>
+              <span>
+                뒤로가기
+              </span>
             </button>
-            <button
-              class="sc-fjdhpX ilmKPu sc-hMqMXs jmhCdt"
-              color="teal"
+            <div
+              class="sc-kkGfuU fESlcU"
             >
-              출간하기
-            </button>
+              <button
+                class="sc-fjdhpX jXoOWc sc-iAyFgw juknrw"
+                color="lightGray"
+              >
+                임시저장
+              </button>
+              <button
+                class="sc-fjdhpX ilmKPu sc-iAyFgw juknrw"
+                color="teal"
+              >
+                출간하기
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -375,17 +404,17 @@ exports[`ActiveEditor matches snapshot 1`] = `
       style="background-color: rgb(251, 253, 252);"
     >
       <div
-        class="sc-eHgmQL khFzES"
+        class="sc-brqgnP bNesev"
         id="preview"
       >
         <h1
-          class="sc-cvbbAY bowXyp"
+          class="sc-cMljjf hxoyKh"
         />
         <div
-          class="sc-iAyFgw jtGtzs"
+          class="sc-cvbbAY cgBRCb"
         >
           <div
-            class="sc-hSdWYo iRHTSI atom-one-light"
+            class="sc-jWBwVP OSClR atom-one-light"
           >
             
 
