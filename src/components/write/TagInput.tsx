@@ -2,50 +2,8 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import transitions from '../../lib/styles/transitions';
-
-const TagInputBlock = styled.div`
-  color: ${palette.gray8};
-  font-size: 1.125rem;
-  margin-bottom: 4rem;
-  display: flex;
-  flex-wrap: wrap;
-  [contenteditable='true']:empty:before {
-    content: attr(placeholder);
-    display: block; /* For Firefox */
-    color: ${palette.gray5};
-  }
-`;
-const StyledInput = styled.input`
-  display: inline-flex;
-  outline: none;
-  cursor: text;
-  font-size: 1.125rem;
-  line-height: 2rem;
-  margin-bottom: 0.75rem;
-  min-width: 8rem;
-  border: none;
-`;
-
-const Tag = styled.div`
-  color: ${palette.gray9};
-  font-size: 1rem;
-  display: inline-flex;
-  align-items: center;
-  height: 2rem;
-  border-radius: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  background: ${palette.gray1};
-  color: ${palette.teal7};
-  margin-right: 0.75rem;
-  transition: ease-in 0.125s;
-  cursor: pointer;
-  &:hover {
-    opacity: 0.6;
-  }
-  margin-bottom: 0.75rem;
-  animation: ${transitions.popIn} 0.125s forwards ease-in-out;
-`;
+import media, { mediaQuery } from '../../lib/styles/media';
+import { useTransition, animated } from 'react-spring';
 
 export interface TagInputProps {
   ref?: React.RefObject<HTMLDivElement>;
@@ -58,24 +16,6 @@ const TagItem: React.FC<{
 }> = ({ onClick, children }) => {
   return <Tag onClick={onClick}>{children}</Tag>;
 };
-
-const Help = styled.div<{ visible: boolean }>`
-  display: block;
-  width: 100%;
-  font-size: 0.875rem;
-  color: ${palette.gray7};
-  transition: ease-in 0.125s;
-  opacity: 0;
-  & > .inside {
-    margin-top: 0.5rem;
-    position: absolute;
-  }
-  ${props =>
-    props.visible &&
-    css`
-      opacity: 1;
-    `}
-`;
 
 const { useState, useCallback, useEffect, useRef } = React;
 const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
@@ -170,15 +110,110 @@ const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
       />
-      <Help visible={focus}>
-        <div className="inside">
-          쉼표 혹은 엔터를 입력하여 태그를 등록 할 수 있습니다.
-          <br />
-          등록된 태그를 클릭하면 삭제됩니다.
-        </div>
-      </Help>
+      <Help focus={focus} />
     </TagInputBlock>
   );
 };
+
+function Help({ focus }: { focus: boolean }) {
+  const transitions = useTransition(focus, null, {
+    from: { opacity: 0, transform: 'translateY(-1rem)' },
+    enter: { opacity: 1, transform: 'translateY(0rem)' },
+    leave: { opacity: 0, transform: 'translateY(-1rem)' },
+    config: {
+      tension: 350,
+      friction: 22,
+    },
+  });
+
+  return (
+    <HelpBlock>
+      {transitions.map(({ item, key, props }) =>
+        item ? (
+          <animated.div className="inside" style={props} key={key}>
+            쉼표 혹은 엔터를 입력하여 태그를 등록 할 수 있습니다.
+            <br />
+            등록된 태그를 클릭하면 삭제됩니다.
+          </animated.div>
+        ) : null,
+      )}
+    </HelpBlock>
+  );
+}
+
+const HelpBlock = styled.div`
+  display: block;
+  width: 100%;
+
+  color: ${palette.gray7};
+  transition: ease-in 0.125s;
+
+  & > .inside {
+    position: absolute;
+    background: ${palette.gray8};
+    color: white;
+    padding: 0.75rem;
+    z-index: 20;
+    line-height: 1.5;
+    font-size: 0.75rem;
+  }
+`;
+
+const TagInputBlock = styled.div`
+  color: ${palette.gray8};
+  font-size: 1.125rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  [contenteditable='true']:empty:before {
+    content: attr(placeholder);
+    display: block; /* For Firefox */
+    color: ${palette.gray5};
+  }
+`;
+const StyledInput = styled.input`
+  display: inline-flex;
+  outline: none;
+  cursor: text;
+  font-size: 1.125rem;
+  line-height: 2rem;
+  ${mediaQuery(767)} {
+    line-height: 1.5rem;
+    font-size: 0.75rem;
+  }
+  margin-bottom: 0.75rem;
+  min-width: 8rem;
+  border: none;
+`;
+
+const Tag = styled.div`
+  color: ${palette.gray9};
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  height: 2rem;
+  border-radius: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background: ${palette.gray1};
+  color: ${palette.teal7};
+  margin-right: 0.75rem;
+  transition: ease-in 0.125s;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.6;
+  }
+  margin-bottom: 0.75rem;
+  animation: ${transitions.popIn} 0.125s forwards ease-in-out;
+  ${mediaQuery(767)} {
+    height: 1.5rem;
+    font-size: 0.75rem;
+    border-radius: 0.75rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+`;
 
 export default TagInput;

@@ -13,6 +13,7 @@ import AskChangeEditor from './AskChangeEditor';
 import { WriteMode } from '../../modules/write';
 import zIndexes from '../../lib/styles/zIndexes';
 import { useSpring, animated } from 'react-spring';
+import media, { mediaQuery } from '../../lib/styles/media';
 require('codemirror/mode/markdown/markdown');
 require('codemirror/mode/javascript/javascript');
 require('codemirror/mode/jsx/jsx');
@@ -81,6 +82,9 @@ const MarkdownEditorBlock = styled.div`
   .CodeMirror pre.CodeMirror-line,
   .CodeMirror pre.CodeMirror-line-like {
     padding: 0 3rem; /* Horizontal padding of content */
+    ${mediaQuery(767)} {
+      padding: 0 1rem;
+    }
   }
 
   .CodeMirror {
@@ -126,6 +130,10 @@ const HorizontalBar = styled.div`
   width: 4rem;
   margin-top: 1.5rem;
   margin-bottom: 1rem;
+  ${mediaQuery(767)} {
+    margin-top: 1rem;
+    margin-bottom: 0.66rem;
+  }
   border-radius: 1px;
 `;
 
@@ -133,6 +141,9 @@ const PaddingWrapper = styled.div`
   padding-top: 2rem;
   padding-left: 3rem;
   padding-right: 3rem;
+  ${mediaQuery(767)} {
+    padding: 1rem;
+  }
 `;
 
 const MarkdownWrapper = styled.div`

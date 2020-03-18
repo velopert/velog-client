@@ -12,6 +12,7 @@ import {
 } from 'react-icons/md';
 import palette from '../../lib/styles/palette';
 import zIndexes from '../../lib/styles/zIndexes';
+import { mediaQuery } from '../../lib/styles/media';
 
 // box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.09);
 const ToolbarBlock = styled.div<{
@@ -35,6 +36,13 @@ const ToolbarBlock = styled.div<{
       margin-bottom: 1rem;
       padding-left: 3rem;
       padding-right: 3rem;
+
+      ${mediaQuery(767)} {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        flex-wrap: unset;
+        overflow-x: auto;
+      }
       width: auto;
     `}
 
@@ -44,6 +52,16 @@ const ToolbarBlock = styled.div<{
       box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.09);
       margin-bottom: 0;
     `}
+
+  .mobile-placeholder {
+    display: none;
+    ${mediaQuery(767)} {
+      display: block;
+    }
+    height: 1px;
+    width: 1rem;
+    flex-shrink: 0;
+  }
 `;
 
 const ToolbarGroup = styled.div`
@@ -68,6 +86,13 @@ const ToolbarItem = styled.button`
   font-size: 1.75rem;
   color: ${palette.gray6};
   cursor: pointer;
+  flex-shrink: 0;
+
+  ${mediaQuery(767)} {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.45rem;
+  }
   &:hover {
     color: ${palette.gray9};
     background: ${palette.gray0};
@@ -182,6 +207,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
       >
         <MdCode />
       </ToolbarItem>
+      <div className="mobile-placeholder"></div>
       {/* <Separator /> */}
       {/* <ToolbarGroup> */}
       {/* forMarkdown ? (
