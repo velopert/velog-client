@@ -12,20 +12,28 @@ exports[`PublishPrivacySetting matches snapshot 1`] = `
       class="contents"
     >
       <button
-        class="sc-htpNat iyyGXk"
+        class="sc-htpNat iAsitD"
       >
         <svg>
           icon-globe.svg
         </svg>
-        전체 공개
+        <div
+          class="description"
+        >
+          전체 공개
+        </div>
       </button>
       <button
-        class="sc-htpNat eajANS"
+        class="sc-htpNat gjoXMo"
       >
         <svg>
           icon-lock.svg
         </svg>
-        비공개
+        <div
+          class="description"
+        >
+          비공개
+        </div>
       </button>
     </div>
   </section>
