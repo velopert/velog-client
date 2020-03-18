@@ -96,7 +96,7 @@ const MarkdownEditorBlock = styled.div`
     font-family: 'Fira Mono', monospace;
     /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', */
     .cm-header {
-      line-height: 2;
+      line-height: 1.5;
       color: ${palette.gray9};
     }
     .cm-header-1 {
@@ -120,6 +120,24 @@ const MarkdownEditorBlock = styled.div`
     .CodeMirror-placeholder {
       color: ${palette.gray5};
       font-style: italic;
+    }
+
+    ${media.custom(767)} {
+      font-size: 0.875rem;
+      .cm-header-1 {
+        font-size: 2rem;
+      }
+      .cm-header-2 {
+        font-size: 1.5rem;
+      }
+      .cm-header-3 {
+        font-size: 1.15rem;
+      }
+      .cm-header-4,
+      .cm-header-5,
+      .cm-header-6 {
+        font-size: 1rem;
+      }
     }
   }
 `;
