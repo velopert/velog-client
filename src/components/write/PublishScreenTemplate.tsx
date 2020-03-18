@@ -4,12 +4,29 @@ import palette from '../../lib/styles/palette';
 import zIndexes from '../../lib/styles/zIndexes';
 import transitions from '../../lib/styles/transitions';
 import HideScroll from '../common/HideScroll';
+import media from '../../lib/styles/media';
 
 const PublishScreenTemplateBlock = styled.div<{ visible: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
+  @media (max-width: 1024px) and (orientation: landscape) {
+    align-items: flex-start;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    overflow: auto;
+  }
+
+  ${media.custom(767)} {
+    align-items: flex-start;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    overflow: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
   left: 0;
   top: 0;
   width: 100%;
@@ -30,6 +47,12 @@ const PublishScreenTemplateBlock = styled.div<{ visible: boolean }>`
 const Wrapper = styled.div`
   width: 768px;
   display: flex;
+  ${media.medium} {
+    width: 704px;
+  }
+  ${media.custom(767)} {
+    flex-direction: column;
+  }
 `;
 const Pane = styled.div`
   flex: 1;
@@ -46,6 +69,9 @@ const Separator = styled.div`
   background: ${palette.gray2};
   margin-left: 2rem;
   margin-right: 2rem;
+  ${media.custom(767)} {
+    display: none;
+  }
 `;
 
 export interface PublishScreenTemplateProps {
