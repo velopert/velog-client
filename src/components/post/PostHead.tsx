@@ -214,7 +214,7 @@ const PostHead: React.FC<PostHeadProps> = ({
       </div>
       {!hideThumbnail && thumbnail && (
         <Thumbnail
-          src={optimizeImage(thumbnail, 1024)}
+          src={optimizeImage(thumbnail)}
           alt="post-thumbnail"
           key={thumbnail}
         />
