@@ -31,7 +31,7 @@ function optimizeImagesFromPost(markdown: string) {
   if (!matches) return markdown;
   const replacers = matches.map(match => [
     match,
-    match.replace('https://images.', 'https://img.').replace(/\)$/, '?w=1024)'),
+    match.replace('https://images.velog.io', 'https://media.vlpt.us'),
   ]);
   return replacers.reduce((acc, [original, optimized]) => {
     return acc.replace(original, optimized);
