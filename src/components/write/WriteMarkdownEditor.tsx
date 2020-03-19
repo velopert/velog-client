@@ -14,6 +14,7 @@ import { WriteMode } from '../../modules/write';
 import zIndexes from '../../lib/styles/zIndexes';
 import { useSpring, animated } from 'react-spring';
 import media, { mediaQuery } from '../../lib/styles/media';
+import detectIOS from '../../lib/detectIOS';
 require('codemirror/mode/markdown/markdown');
 require('codemirror/mode/javascript/javascript');
 require('codemirror/mode/jsx/jsx');
@@ -43,174 +44,7 @@ type MarkdownEditorState = {
   askChangeEditor: boolean;
   clientWidth: number;
   hideUpper: boolean;
-};
-
-const MarkdownEditorBlock = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-
-  &::-webkit-scrollbar {
-    border-radius: 3px;
-    width: 6px;
-    &:hover {
-      width: 16px;
-    }
-    background: ${palette.gray1};
-  }
-
-  &::-webkit-scrollbar-thumb {
-    z-index: 100;
-    background: ${palette.gray9};
-    /* -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75); */
-  }
-
-  & > .wrapper {
-    min-height: 0;
-    padding-bottom: 4rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .CodeMirror-lines {
-    padding: 4px 0; /* Vertical padding around content */
-    padding-bottom: 3rem;
-  }
-
-  .CodeMirror pre.CodeMirror-line,
-  .CodeMirror pre.CodeMirror-line-like {
-    padding: 0 3rem; /* Horizontal padding of content */
-    ${mediaQuery(767)} {
-      padding: 0 1rem;
-    }
-  }
-
-  .CodeMirror {
-    min-height: 0;
-    flex: 1;
-    font-size: 1.125rem;
-    line-height: 1.5;
-    color: ${palette.gray8};
-    font-family: 'Fira Mono', monospace;
-    /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', */
-    .cm-header {
-      line-height: 1.5;
-      color: ${palette.gray9};
-    }
-    .cm-header-1 {
-      font-size: 2.5rem;
-    }
-    .cm-header-2 {
-      font-size: 2rem;
-    }
-    .cm-header-3 {
-      font-size: 1.5rem;
-    }
-    .cm-header-4,
-    .cm-header-5,
-    .cm-header-6 {
-      font-size: 1.3125rem;
-    }
-    .cm-strong,
-    .cm-em {
-      color: ${palette.gray9};
-    }
-    .CodeMirror-placeholder {
-      color: ${palette.gray5};
-      font-style: italic;
-    }
-
-    ${media.custom(767)} {
-      font-size: 0.875rem;
-      .cm-header-1 {
-        font-size: 2rem;
-      }
-      .cm-header-2 {
-        font-size: 1.5rem;
-      }
-      .cm-header-3 {
-        font-size: 1.15rem;
-      }
-      .cm-header-4,
-      .cm-header-5,
-      .cm-header-6 {
-        font-size: 1rem;
-      }
-    }
-  }
-`;
-
-const HorizontalBar = styled.div`
-  background: ${palette.gray7};
-  height: 6px;
-  width: 4rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-  ${mediaQuery(767)} {
-    margin-top: 1rem;
-    margin-bottom: 0.66rem;
-  }
-  border-radius: 1px;
-`;
-
-const PaddingWrapper = styled.div`
-  padding-top: 2rem;
-  padding-left: 3rem;
-  padding-right: 3rem;
-  ${mediaQuery(767)} {
-    padding: 1rem;
-  }
-`;
-
-const MarkdownWrapper = styled.div`
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-`;
-
-const FooterWrapper = styled.div`
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: ${zIndexes.WriteFooter};
-`;
-
-const checker = {
-  youtube: (text: string) => {
-    const regex = /^<iframe.*src="https:\/\/www.youtube.com\/embed\/(.*?)".*<\/iframe>$/;
-    const result = regex.exec(text);
-    if (!result) return null;
-    return result[1];
-  },
-  twitter: (text: string) => {
-    if (!/^<blockquote class="twitter-tweet/.test(text)) return null;
-    const regex = /href="(.*?)"/g;
-    const links = [];
-    let match = regex.exec(text);
-    while (match) {
-      links.push(match[1]);
-      match = regex.exec(text);
-    }
-    const pathMatch = /twitter.com\/(.*?)\?/.exec(links[links.length - 1]);
-    if (!pathMatch) return null;
-    return pathMatch[1];
-  },
-  codesandbox: (text: string) => {
-    const regex = /^<iframe.*src="https:\/\/codesandbox.io\/embed\/(.*?)".*<\/iframe>$/s;
-    const result = regex.exec(text);
-    if (!result) return null;
-    return result[1];
-  },
-  codepen: (text: string) => {
-    const regex = /^<iframe.*src="https:\/\/codepen.io\/(.*?)".*/;
-    const result = regex.exec(text);
-    console.log(result);
-    if (!result) return null;
-    return result[1];
-  },
+  appleCursorPos: number;
 };
 
 type CheckerKey = keyof typeof checker;
@@ -226,6 +60,10 @@ const checkEmbed = (text: string) => {
     }
   }
   return null;
+};
+
+const removeHeading = (text: string) => {
+  return text.replace(/#{1,6} /, '');
 };
 
 function WriterHead({
@@ -259,6 +97,8 @@ export default class WriteMarkdownEditor extends React.Component<
   block = React.createRef<HTMLDivElement>();
   toolbarElement = React.createRef<HTMLDivElement>();
   editorElement = React.createRef<HTMLTextAreaElement>();
+  appleEditorElement = React.createRef<HTMLTextAreaElement>();
+
   toolbarTop = 0;
   state = {
     addLink: {
@@ -271,14 +111,15 @@ export default class WriteMarkdownEditor extends React.Component<
     askChangeEditor: false,
     clientWidth: 0,
     hideUpper: false,
+    appleCursorPos: 0,
   };
   codemirror: EditorFromTextArea | null = null;
-
   ignore = false;
+  isIOS = detectIOS();
 
   initialize = () => {
+    if (this.isIOS) return;
     if (!this.editorElement.current) return;
-
     this.codemirror = CodeMirror.fromTextArea(this.editorElement.current, {
       mode: 'markdown',
       theme: 'one-light',
@@ -483,8 +324,42 @@ export default class WriteMarkdownEditor extends React.Component<
     });
   };
 
+  handleToolbarClickForApple = (mode: string) => {
+    const cursorPos = this.appleEditorElement.current?.selectionStart || 0;
+    const { markdown, onChangeMarkdown } = this.props;
+    const sliced = markdown.slice(0, cursorPos);
+    console.log(sliced);
+
+    // const lineNumber = sliced.split('\n').length;
+    const lastNewLineIndex = sliced.lastIndexOf('\n');
+    const textBefore = sliced.slice(0, lastNewLineIndex + 1);
+    const textAfter = markdown.slice(lastNewLineIndex + 1, markdown.length);
+    const result = textBefore + '# ' + textAfter;
+    onChangeMarkdown(result);
+
+    // const handlers: {
+    //   [key: string]: Function;
+    // } = {
+    //   ...[1, 2, 3, 4] // creates handlers for heading1, heading2, heading3, heading4
+    //     .map(number => () => {
+    //       // create handler function
+    //       const characters = '#'.repeat(number);
+    //       const plain = removeHeading(line);
+    //       selectWholeLine();
+    //       doc.replaceSelection(`${characters} ${plain}`);
+    //     })
+    //     .reduce((headingHandlers, handler, index) => {
+    //       // reduce into handlers object
+    //       return Object.assign(headingHandlers, {
+    //         [`heading${index + 1}`]: handler,
+    //       });
+    //     }, {}),
+    // };
+  };
+
   handleToolbarClick = (mode: string) => {
     const codemirror = this.codemirror;
+    if (this.isIOS) return this.handleToolbarClickForApple(mode);
 
     if (!codemirror) return;
     const doc = codemirror.getDoc();
@@ -508,10 +383,6 @@ export default class WriteMarkdownEditor extends React.Component<
           ch: line.length,
         },
       );
-    };
-
-    const removeHeading = (text: string) => {
-      return text.replace(/#{1,6} /, '');
     };
 
     const handlers: {
@@ -823,6 +694,13 @@ ${selected}
     });
   };
 
+  handleAppleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    this.props.onChangeMarkdown(e.target.value);
+    this.setState({
+      appleCursorPos: e.target.selectionStart,
+    });
+  };
+
   public render() {
     const { addLink, clientWidth } = this.state;
     const { title, tagInput, footer } = this.props;
@@ -862,6 +740,13 @@ ${selected}
               />
             )}
             <textarea ref={this.editorElement} style={{ display: 'none' }} />
+            {this.isIOS && (
+              <AppleTextarea
+                onChange={this.handleAppleTextareaChange}
+                ref={this.appleEditorElement}
+                value={this.props.markdown}
+              />
+            )}
           </MarkdownWrapper>
         </div>
         <AskChangeEditor
@@ -877,3 +762,188 @@ ${selected}
     );
   }
 }
+
+const MarkdownEditorBlock = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &::-webkit-scrollbar {
+    border-radius: 3px;
+    width: 6px;
+    &:hover {
+      width: 16px;
+    }
+    background: ${palette.gray1};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    z-index: 100;
+    background: ${palette.gray9};
+    /* -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75); */
+  }
+
+  & > .wrapper {
+    min-height: 0;
+    padding-bottom: 4rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .CodeMirror-lines {
+    padding: 4px 0; /* Vertical padding around content */
+    padding-bottom: 3rem;
+  }
+
+  .CodeMirror pre.CodeMirror-line,
+  .CodeMirror pre.CodeMirror-line-like {
+    padding: 0 3rem; /* Horizontal padding of content */
+    ${mediaQuery(767)} {
+      padding: 0 1rem;
+    }
+  }
+
+  .CodeMirror {
+    min-height: 0;
+    flex: 1;
+    font-size: 1.125rem;
+    line-height: 1.5;
+    color: ${palette.gray8};
+    font-family: 'Fira Mono', monospace;
+    /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', */
+    .cm-header {
+      line-height: 1.5;
+      color: ${palette.gray9};
+    }
+    .cm-header-1 {
+      font-size: 2.5rem;
+    }
+    .cm-header-2 {
+      font-size: 2rem;
+    }
+    .cm-header-3 {
+      font-size: 1.5rem;
+    }
+    .cm-header-4,
+    .cm-header-5,
+    .cm-header-6 {
+      font-size: 1.3125rem;
+    }
+    .cm-strong,
+    .cm-em {
+      color: ${palette.gray9};
+    }
+    .CodeMirror-placeholder {
+      color: ${palette.gray5};
+      font-style: italic;
+    }
+
+    ${media.custom(767)} {
+      font-size: 0.875rem;
+      .cm-header-1 {
+        font-size: 2rem;
+      }
+      .cm-header-2 {
+        font-size: 1.5rem;
+      }
+      .cm-header-3 {
+        font-size: 1.15rem;
+      }
+      .cm-header-4,
+      .cm-header-5,
+      .cm-header-6 {
+        font-size: 1rem;
+      }
+    }
+  }
+`;
+
+const HorizontalBar = styled.div`
+  background: ${palette.gray7};
+  height: 6px;
+  width: 4rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  ${mediaQuery(767)} {
+    margin-top: 1rem;
+    margin-bottom: 0.66rem;
+  }
+  border-radius: 1px;
+`;
+
+const PaddingWrapper = styled.div`
+  padding-top: 2rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  ${mediaQuery(767)} {
+    padding: 1rem;
+  }
+`;
+
+const MarkdownWrapper = styled.div`
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+`;
+
+const FooterWrapper = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: ${zIndexes.WriteFooter};
+`;
+
+const AppleTextarea = styled.textarea`
+  flex: 1;
+  outline: none;
+  font-size: 1.125rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  line-height: 1.5;
+  padding-bottom: 3rem;
+  color: ${palette.gray8};
+  ${media.custom(767)} {
+    font-size: 0.875rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+  }
+`;
+
+const checker = {
+  youtube: (text: string) => {
+    const regex = /^<iframe.*src="https:\/\/www.youtube.com\/embed\/(.*?)".*<\/iframe>$/;
+    const result = regex.exec(text);
+    if (!result) return null;
+    return result[1];
+  },
+  twitter: (text: string) => {
+    if (!/^<blockquote class="twitter-tweet/.test(text)) return null;
+    const regex = /href="(.*?)"/g;
+    const links = [];
+    let match = regex.exec(text);
+    while (match) {
+      links.push(match[1]);
+      match = regex.exec(text);
+    }
+    const pathMatch = /twitter.com\/(.*?)\?/.exec(links[links.length - 1]);
+    if (!pathMatch) return null;
+    return pathMatch[1];
+  },
+  codesandbox: (text: string) => {
+    const regex = /^<iframe.*src="https:\/\/codesandbox.io\/embed\/(.*?)".*<\/iframe>$/s;
+    const result = regex.exec(text);
+    if (!result) return null;
+    return result[1];
+  },
+  codepen: (text: string) => {
+    const regex = /^<iframe.*src="https:\/\/codepen.io\/(.*?)".*/;
+    const result = regex.exec(text);
+    console.log(result);
+    if (!result) return null;
+    return result[1];
+  },
+};
