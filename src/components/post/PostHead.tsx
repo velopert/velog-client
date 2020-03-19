@@ -213,7 +213,11 @@ const PostHead: React.FC<PostHeadProps> = ({
         )}
       </div>
       {!hideThumbnail && thumbnail && (
-        <Thumbnail src={optimizeImage(thumbnail, 1024)} alt="post-thumbnail" />
+        <Thumbnail
+          src={optimizeImage(thumbnail, 1024)}
+          alt="post-thumbnail"
+          key={thumbnail}
+        />
       )}
       <PopupOKCancel
         visible={askRemove}
