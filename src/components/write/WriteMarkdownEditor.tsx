@@ -353,7 +353,9 @@ export default class WriteMarkdownEditor extends React.Component<
     const lastNewLineIndex = sliced.lastIndexOf('\n');
     const textBefore = sliced.slice(0, lastNewLineIndex + 1);
     const textAfter = markdown.slice(lastNewLineIndex + 1, markdown.length);
-    const currentNewLineIndex = textAfter.indexOf('\n');
+    let currentNewLineIndex = textAfter.indexOf('\n');
+    if (currentNewLineIndex === -1) currentNewLineIndex = textAfter.length;
+
     const lineText = textAfter.slice(0, currentNewLineIndex);
     const textBelowCurrentLine = textAfter.slice(
       currentNewLineIndex,
@@ -366,6 +368,8 @@ export default class WriteMarkdownEditor extends React.Component<
         this.appleEditorElement.current!.selectionEnd = pos;
       }, 0);
     };
+
+    console.log({ lineText });
     const handlers: {
       [key: string]: () => void;
     } = {
