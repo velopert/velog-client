@@ -38,7 +38,7 @@ const HeaderUserIconBlock = styled.div`
 
 export interface HeaderUserIconProps {
   user: CurrentUser;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent) => void;
 }
 
 // TODO: show user thumbnail

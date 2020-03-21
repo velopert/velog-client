@@ -26,7 +26,7 @@ const HeaderUserMenuBlock = styled.div`
 `;
 
 interface HeaderUserMenuProps {
-  onClose: () => void;
+  onClose: (e: React.MouseEvent) => void;
   onLogout: () => void;
   username: string;
   visible: boolean;

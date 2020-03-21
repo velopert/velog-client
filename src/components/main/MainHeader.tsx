@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import { Logo, SearchIcon2 } from '../../static/svg';
 import RoundButton from '../common/RoundButton';
@@ -15,6 +15,16 @@ export type MainHeaderProps = {};
 function MainHeader(props: MainHeaderProps) {
   const { user, onLoginClick, onLogout } = useHeader();
   const [userMenu, toggleUserMenu] = useToggle(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const onOutsideClick = useCallback(
+    (e: React.MouseEvent) => {
+      if (!ref.current) return;
+      if (ref.current.contains(e.target as any)) return;
+      toggleUserMenu();
+    },
+    [toggleUserMenu],
+  );
 
   return (
     <Block>
@@ -37,9 +47,11 @@ function MainHeader(props: MainHeaderProps) {
               새 글 작성
             </RoundButton>
 
-            <HeaderUserIcon user={user} onClick={toggleUserMenu} />
+            <div ref={ref}>
+              <HeaderUserIcon user={user} onClick={toggleUserMenu} />
+            </div>
             <HeaderUserMenu
-              onClose={toggleUserMenu}
+              onClose={onOutsideClick}
               onLogout={onLogout}
               username={user.username}
               visible={userMenu}

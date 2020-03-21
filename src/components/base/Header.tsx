@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useRef, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import RoundButton from '../common/RoundButton';
 import { CurrentUser } from '../../lib/graphql/user';
@@ -95,8 +95,6 @@ interface HeaderProps {
   isSearch: boolean;
 }
 
-const { useCallback } = React;
-
 const Header: React.FC<HeaderProps> = ({
   floating,
   floatingMargin,
@@ -108,6 +106,7 @@ const Header: React.FC<HeaderProps> = ({
   isSearch,
 }) => {
   const [userMenu, toggleUserMenu] = useToggle(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   const onLogout = useCallback(async () => {
     try {
@@ -116,6 +115,16 @@ const Header: React.FC<HeaderProps> = ({
     storage.removeItem('CURRENT_USER');
     window.location.href = '/';
   }, []);
+
+  const onOutsideClick = useCallback(
+    (e: React.MouseEvent) => {
+      if (!ref.current) return;
+      if (ref.current.contains(e.target as any)) return;
+      toggleUserMenu();
+    },
+    [toggleUserMenu],
+  );
+
   return (
     <>
       <HeaderBlock
@@ -162,9 +171,11 @@ const Header: React.FC<HeaderProps> = ({
                   >
                     새 글 작성
                   </RoundButton>
-                  <HeaderUserIcon user={user} onClick={toggleUserMenu} />
+                  <div ref={ref}>
+                    <HeaderUserIcon user={user} onClick={toggleUserMenu} />
+                  </div>
                   <HeaderUserMenu
-                    onClose={toggleUserMenu}
+                    onClose={onOutsideClick}
                     username={user.username}
                     onLogout={onLogout}
                     visible={userMenu}
