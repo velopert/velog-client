@@ -41,10 +41,15 @@ const Button = styled.button<{ active: boolean }>`
     `}
 
   svg {
-    margin-right: 1.5rem;
   }
   & + & {
     margin-left: 1rem;
+  }
+  .description {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -69,11 +74,11 @@ const PublishPrivacySetting: React.FC<PublishPrivacySettingProps> = ({
     <PublishPrivacySettingBlock title="공개 설정">
       <Button active={!isPrivate} onClick={onClickPublic}>
         <GlobeIcon />
-        전체 공개
+        <div className="description">전체 공개</div>
       </Button>
       <Button active={isPrivate} onClick={onClickPrivate}>
         <LockIcon />
-        비공개
+        <div className="description">비공개</div>
       </Button>
     </PublishPrivacySettingBlock>
   );

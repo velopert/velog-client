@@ -14,8 +14,8 @@ describe('PublishPrivacySetting', () => {
       <PublishPrivacySetting {...initialProps} {...props} />,
     );
     const buttons = {
-      public: utils.getByText('전체 공개'),
-      private: utils.getByText('비공개'),
+      public: utils.getByText('전체 공개').parentElement,
+      private: utils.getByText('비공개').parentElement,
     };
     return {
       ...utils,

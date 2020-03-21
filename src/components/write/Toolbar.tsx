@@ -12,6 +12,7 @@ import {
 } from 'react-icons/md';
 import palette from '../../lib/styles/palette';
 import zIndexes from '../../lib/styles/zIndexes';
+import { mediaQuery } from '../../lib/styles/media';
 
 // box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.09);
 const ToolbarBlock = styled.div<{
@@ -35,6 +36,13 @@ const ToolbarBlock = styled.div<{
       margin-bottom: 1rem;
       padding-left: 3rem;
       padding-right: 3rem;
+
+      ${mediaQuery(767)} {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        flex-wrap: unset;
+        overflow-x: auto;
+      }
       width: auto;
     `}
 
@@ -44,6 +52,16 @@ const ToolbarBlock = styled.div<{
       box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.09);
       margin-bottom: 0;
     `}
+
+  .mobile-placeholder {
+    display: none;
+    ${mediaQuery(767)} {
+      display: block;
+    }
+    height: 1px;
+    width: 1rem;
+    flex-shrink: 0;
+  }
 `;
 
 const ToolbarGroup = styled.div`
@@ -68,6 +86,13 @@ const ToolbarItem = styled.button`
   font-size: 1.75rem;
   color: ${palette.gray6};
   cursor: pointer;
+  flex-shrink: 0;
+
+  ${mediaQuery(767)} {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.45rem;
+  }
   &:hover {
     color: ${palette.gray9};
     background: ${palette.gray0};
@@ -95,6 +120,7 @@ export interface ToolbarProps {
   onClick?: Function;
   onConvert?: () => void;
   innerRef?: React.RefObject<HTMLDivElement>;
+  ios?: boolean;
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({
@@ -103,6 +129,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
   onClick = () => {},
   onConvert,
   innerRef,
+  ios,
 }) => {
   const forMarkdown = mode === 'MARKDOWN';
   return (
@@ -149,39 +176,47 @@ const Toolbar: React.FC<ToolbarProps> = ({
         </Heading>
       </ToolbarItem>
       <Separator />
-      <ToolbarItem className="ql-bold" onClick={() => onClick('bold')}>
-        <MdFormatBold />
-      </ToolbarItem>
-      <ToolbarItem className="ql-italic" onClick={() => onClick('italic')}>
-        <MdFormatItalic />
-      </ToolbarItem>
-      {!forMarkdown && (
-        <ToolbarItem className="ql-underline">
-          <MdFormatUnderlined />
-        </ToolbarItem>
+      {!ios && (
+        <>
+          <ToolbarItem className="ql-bold" onClick={() => onClick('bold')}>
+            <MdFormatBold />
+          </ToolbarItem>
+          <ToolbarItem className="ql-italic" onClick={() => onClick('italic')}>
+            <MdFormatItalic />
+          </ToolbarItem>
+          {!forMarkdown && (
+            <ToolbarItem className="ql-underline">
+              <MdFormatUnderlined />
+            </ToolbarItem>
+          )}
+          <ToolbarItem className="ql-strike" onClick={() => onClick('strike')}>
+            <MdFormatStrikethrough />
+          </ToolbarItem>
+          <Separator />
+          <ToolbarItem
+            className="ql-blockquote"
+            onClick={() => onClick('blockquote')}
+          >
+            <MdFormatQuote />
+          </ToolbarItem>
+          <ToolbarItem className="ql-link" onClick={() => onClick('link')}>
+            <MdInsertLink />
+          </ToolbarItem>
+        </>
       )}
-      <ToolbarItem className="ql-strike" onClick={() => onClick('strike')}>
-        <MdFormatStrikethrough />
-      </ToolbarItem>
-      <Separator />
-      <ToolbarItem
-        className="ql-blockquote"
-        onClick={() => onClick('blockquote')}
-      >
-        <MdFormatQuote />
-      </ToolbarItem>
-      <ToolbarItem className="ql-link" onClick={() => onClick('link')}>
-        <MdInsertLink />
-      </ToolbarItem>
       <ToolbarItem className="ql-image" onClick={() => onClick('image')}>
         <MdImage />
       </ToolbarItem>
-      <ToolbarItem
-        className="ql-code-block"
-        onClick={() => onClick('codeblock')}
-      >
-        <MdCode />
-      </ToolbarItem>
+
+      {!ios && (
+        <ToolbarItem
+          className="ql-code-block"
+          onClick={() => onClick('codeblock')}
+        >
+          <MdCode />
+        </ToolbarItem>
+      )}
+      <div className="mobile-placeholder"></div>
       {/* <Separator /> */}
       {/* <ToolbarGroup> */}
       {/* forMarkdown ? (

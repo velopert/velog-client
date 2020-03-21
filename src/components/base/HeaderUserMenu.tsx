@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import OutsideClickHandler from 'react-outside-click-handler';
 import HeaderUserMenuItem from './HeaderUserMenuItem';
+import media from '../../lib/styles/media';
 
 const HeaderUserMenuBlock = styled.div`
   position: absolute;
@@ -14,6 +15,13 @@ const HeaderUserMenuBlock = styled.div`
     width: 12rem;
     background: white;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+
+    .mobile-only {
+      display: none;
+      ${media.medium} {
+        display: block;
+      }
+    }
   }
 `;
 
@@ -38,6 +46,9 @@ const HeaderUserMenu: React.FC<HeaderUserMenuProps> = ({
           <HeaderUserMenuItem to={`/@${username}`}>
             내 벨로그
           </HeaderUserMenuItem>
+          <div className="mobile-only">
+            <HeaderUserMenuItem to="/write">새 글 작성</HeaderUserMenuItem>
+          </div>
           <HeaderUserMenuItem to="/saves">임시 글</HeaderUserMenuItem>
           <HeaderUserMenuItem to="/lists/liked">읽기 목록</HeaderUserMenuItem>
           <HeaderUserMenuItem to="/setting">설정</HeaderUserMenuItem>

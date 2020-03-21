@@ -8,7 +8,7 @@ import HeaderUserIcon from '../base/HeaderUserIcon';
 import useToggle from '../../lib/hooks/useToggle';
 import HeaderUserMenu from '../base/HeaderUserMenu';
 import { Link } from 'react-router-dom';
-import { mediaQuery } from '../../lib/styles/media';
+import media, { mediaQuery } from '../../lib/styles/media';
 
 export type MainHeaderProps = {};
 
@@ -102,7 +102,7 @@ const Right = styled.div`
   align-items: center;
   position: relative;
   .write-button {
-    ${mediaQuery(376)} {
+    ${media.medium} {
       display: none;
     }
   }

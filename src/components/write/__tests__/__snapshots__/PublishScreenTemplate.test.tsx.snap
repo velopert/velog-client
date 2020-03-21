@@ -3,10 +3,10 @@
 exports[`PublishScreenTemplate matches snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa cudYLo"
+    class="sc-bdVaJa cnqWNu"
   >
     <div
-      class="sc-bwzfXH hVLrlj"
+      class="sc-bwzfXH gMgEWS"
     >
       <div
         class="sc-htpNat iigZIp"
@@ -14,7 +14,7 @@ exports[`PublishScreenTemplate matches snapshot 1`] = `
         left
       </div>
       <div
-        class="sc-ifAKCX hmDUcM"
+        class="sc-ifAKCX dZhikv"
       />
       <div
         class="sc-htpNat sc-bxivhb djjBWZ"

@@ -3,11 +3,11 @@
 exports[`Toolbar matches snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa gYMKah"
+    class="sc-bdVaJa eOpsME"
     id="toolbar"
   >
     <button
-      class="sc-bxivhb bLfgHt ql-header"
+      class="sc-bxivhb cshiNX ql-header"
       value="1"
     >
       <div
@@ -20,7 +20,7 @@ exports[`Toolbar matches snapshot 1`] = `
       </div>
     </button>
     <button
-      class="sc-bxivhb bLfgHt ql-header"
+      class="sc-bxivhb cshiNX ql-header"
       value="2"
     >
       <div
@@ -33,7 +33,7 @@ exports[`Toolbar matches snapshot 1`] = `
       </div>
     </button>
     <button
-      class="sc-bxivhb bLfgHt ql-header"
+      class="sc-bxivhb cshiNX ql-header"
       value="3"
     >
       <div
@@ -46,7 +46,7 @@ exports[`Toolbar matches snapshot 1`] = `
       </div>
     </button>
     <button
-      class="sc-bxivhb bLfgHt ql-header"
+      class="sc-bxivhb cshiNX ql-header"
       value="4"
     >
       <div
@@ -62,7 +62,7 @@ exports[`Toolbar matches snapshot 1`] = `
       class="sc-ifAKCX eqJNNy"
     />
     <button
-      class="sc-bxivhb bLfgHt ql-bold"
+      class="sc-bxivhb cshiNX ql-bold"
     >
       <svg
         fill="currentColor"
@@ -79,7 +79,7 @@ exports[`Toolbar matches snapshot 1`] = `
       </svg>
     </button>
     <button
-      class="sc-bxivhb bLfgHt ql-italic"
+      class="sc-bxivhb cshiNX ql-italic"
     >
       <svg
         fill="currentColor"
@@ -96,7 +96,7 @@ exports[`Toolbar matches snapshot 1`] = `
       </svg>
     </button>
     <button
-      class="sc-bxivhb bLfgHt ql-strike"
+      class="sc-bxivhb cshiNX ql-strike"
     >
       <svg
         fill="currentColor"
@@ -116,7 +116,7 @@ exports[`Toolbar matches snapshot 1`] = `
       class="sc-ifAKCX eqJNNy"
     />
     <button
-      class="sc-bxivhb bLfgHt ql-blockquote"
+      class="sc-bxivhb cshiNX ql-blockquote"
     >
       <svg
         fill="currentColor"
@@ -133,7 +133,7 @@ exports[`Toolbar matches snapshot 1`] = `
       </svg>
     </button>
     <button
-      class="sc-bxivhb bLfgHt ql-link"
+      class="sc-bxivhb cshiNX ql-link"
     >
       <svg
         fill="currentColor"
@@ -150,7 +150,7 @@ exports[`Toolbar matches snapshot 1`] = `
       </svg>
     </button>
     <button
-      class="sc-bxivhb bLfgHt ql-image"
+      class="sc-bxivhb cshiNX ql-image"
     >
       <svg
         fill="currentColor"
@@ -167,7 +167,7 @@ exports[`Toolbar matches snapshot 1`] = `
       </svg>
     </button>
     <button
-      class="sc-bxivhb bLfgHt ql-code-block"
+      class="sc-bxivhb cshiNX ql-code-block"
     >
       <svg
         fill="currentColor"
@@ -183,6 +183,9 @@ exports[`Toolbar matches snapshot 1`] = `
         />
       </svg>
     </button>
+    <div
+      class="mobile-placeholder"
+    />
   </div>
 </div>
 `;
