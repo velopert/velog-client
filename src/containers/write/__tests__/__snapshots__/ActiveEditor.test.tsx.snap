@@ -32,16 +32,16 @@ exports[`ActiveEditor matches snapshot 1`] = `
                 class="sc-kAzzGY eHnKgt"
               />
               <div
-                class="sc-dxgOiQ esbHrp"
+                class="sc-ckVGcZ fqvCvv"
               >
                 <input
-                  class="sc-ckVGcZ gkoJzr"
+                  class="sc-jKJlTe ixuWhS"
                   placeholder="태그를 입력하세요"
                   tabindex="2"
                   value=""
                 />
                 <div
-                  class="sc-kpOJdX jJktMo"
+                  class="sc-dxgOiQ jWNXFC"
                 />
               </div>
             </div>
@@ -346,16 +346,16 @@ exports[`ActiveEditor matches snapshot 1`] = `
           style="width: 50%;"
         >
           <div
-            class="sc-eNQAEJ cEWQpy"
+            class="sc-hMqMXs dtEIDI"
           >
             <button
-              class="sc-fjdhpX jXoOWc sc-hMqMXs jmhCdt"
+              class="sc-fjdhpX jXoOWc sc-kEYyzF kWApkt"
               color="lightGray"
             >
               임시저장
             </button>
             <button
-              class="sc-fjdhpX ilmKPu sc-hMqMXs jmhCdt"
+              class="sc-fjdhpX ilmKPu sc-kEYyzF kWApkt"
               color="teal"
             >
               출간하기
@@ -370,17 +370,17 @@ exports[`ActiveEditor matches snapshot 1`] = `
       style="background-color: rgb(251, 253, 252);"
     >
       <div
-        class="sc-eHgmQL khFzES"
+        class="sc-cvbbAY cwRsVU"
         id="preview"
       >
         <h1
-          class="sc-cvbbAY bowXyp"
+          class="sc-jWBwVP PMTxR"
         />
         <div
-          class="sc-iAyFgw jtGtzs"
+          class="sc-hSdWYo izVxtR"
         >
           <div
-            class="sc-hSdWYo iRHTSI atom-one-light"
+            class="sc-eHgmQL cxxJmN atom-one-light"
           >
             
 
