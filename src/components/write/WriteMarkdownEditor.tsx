@@ -216,6 +216,25 @@ export default class WriteMarkdownEditor extends React.Component<
   };
 
   addImageToEditor = (image: string) => {
+    if (this.isIOS) {
+      const textarea = this.appleEditorElement.current;
+      if (!textarea) return;
+      const { markdown, onChangeMarkdown } = this.props;
+
+      const cursorPos = textarea.selectionEnd;
+      const textBefore = markdown.slice(0, cursorPos);
+      const textAfter = markdown.slice(cursorPos, markdown.length);
+      const imageMarkdown = `![](${encodeURI(image)})`;
+      const nextMarkdown = `${textBefore}${imageMarkdown}${textAfter}`;
+      onChangeMarkdown(nextMarkdown);
+      setTimeout(() => {
+        textarea.focus();
+        const nextCursorPos = cursorPos + imageMarkdown.length;
+        textarea.selectionStart = nextCursorPos;
+        textarea.selectionEnd = nextCursorPos;
+      }, 0);
+      return;
+    }
     if (!this.codemirror) return;
     this.codemirror.getDoc().replaceSelection(`![](${encodeURI(image)})`);
   };
@@ -325,17 +344,143 @@ export default class WriteMarkdownEditor extends React.Component<
   };
 
   handleToolbarClickForApple = (mode: string) => {
+    if (!this.appleEditorElement.current) return;
     const cursorPos = this.appleEditorElement.current?.selectionStart || 0;
     const { markdown, onChangeMarkdown } = this.props;
     const sliced = markdown.slice(0, cursorPos);
-    console.log(sliced);
 
     // const lineNumber = sliced.split('\n').length;
     const lastNewLineIndex = sliced.lastIndexOf('\n');
     const textBefore = sliced.slice(0, lastNewLineIndex + 1);
     const textAfter = markdown.slice(lastNewLineIndex + 1, markdown.length);
-    const result = textBefore + '# ' + textAfter;
-    onChangeMarkdown(result);
+    const currentNewLineIndex = textAfter.indexOf('\n');
+    const lineText = textAfter.slice(0, currentNewLineIndex);
+    const textBelowCurrentLine = textAfter.slice(
+      currentNewLineIndex,
+      textAfter.length,
+    );
+
+    const setCursorPos = (pos: number) => {
+      setTimeout(() => {
+        this.appleEditorElement.current!.selectionStart = pos;
+        this.appleEditorElement.current!.selectionEnd = pos;
+      }, 0);
+    };
+    const handlers: {
+      [key: string]: () => void;
+    } = {
+      heading1: () => {
+        const applied = /^# /.test(lineText);
+        if (applied) {
+          const replacedLine = lineText.replace(/^# /, '');
+          onChangeMarkdown(
+            `${textBefore}${replacedLine}${textBelowCurrentLine}`,
+          );
+          setCursorPos(cursorPos - 2);
+          return;
+        }
+
+        const anotherHeading = /^#{1,4} /.test(lineText);
+        if (anotherHeading) {
+          const replacedLine = lineText.replace(/^#{1,4} /, '# ');
+          onChangeMarkdown(
+            `${textBefore}${replacedLine}${textBelowCurrentLine}`,
+          );
+          const posDiff = replacedLine.length - lineText.length;
+          setCursorPos(cursorPos + posDiff);
+
+          return;
+        }
+
+        onChangeMarkdown(`${textBefore}# ${textAfter}`);
+        // this.appleEditorElement.current!.selectionStart = cursorPos;
+        setCursorPos(cursorPos + 2);
+      },
+      heading2: () => {
+        const applied = /^## /.test(lineText);
+        if (applied) {
+          const replacedLine = lineText.replace(/^## /, '');
+          onChangeMarkdown(
+            `${textBefore}${replacedLine}${textBelowCurrentLine}`,
+          );
+          setCursorPos(cursorPos - 3);
+
+          return;
+        }
+
+        const anotherHeading = /^#{1,4} /.test(lineText);
+        if (anotherHeading) {
+          const replacedLine = lineText.replace(/^#{1,4} /, '## ');
+          onChangeMarkdown(
+            `${textBefore}${replacedLine}${textBelowCurrentLine}`,
+          );
+          const posDiff = replacedLine.length - lineText.length;
+          setCursorPos(cursorPos + posDiff);
+          return;
+        }
+
+        onChangeMarkdown(`${textBefore}## ${textAfter}`);
+        setCursorPos(cursorPos + 3);
+      },
+      heading3: () => {
+        const applied = /^### /.test(lineText);
+        if (applied) {
+          const replacedLine = lineText.replace(/^### /, '');
+          onChangeMarkdown(
+            `${textBefore}${replacedLine}${textBelowCurrentLine}`,
+          );
+          setCursorPos(cursorPos - 4);
+
+          return;
+        }
+
+        const anotherHeading = /^#{1,4} /.test(lineText);
+        if (anotherHeading) {
+          const replacedLine = lineText.replace(/^#{1,4} /, '### ');
+          onChangeMarkdown(
+            `${textBefore}${replacedLine}${textBelowCurrentLine}`,
+          );
+          const posDiff = replacedLine.length - lineText.length;
+          setCursorPos(cursorPos + posDiff);
+          return;
+        }
+
+        onChangeMarkdown(`${textBefore}### ${textAfter}`);
+        setCursorPos(cursorPos + 4);
+      },
+      heading4: () => {
+        const applied = /^#### /.test(lineText);
+        if (applied) {
+          const replacedLine = lineText.replace(/^#### /, '');
+          onChangeMarkdown(
+            `${textBefore}${replacedLine}${textBelowCurrentLine}`,
+          );
+          setCursorPos(cursorPos - 5);
+
+          return;
+        }
+
+        const anotherHeading = /^#{1,4} /.test(lineText);
+        if (anotherHeading) {
+          const replacedLine = lineText.replace(/^#{1,4} /, '#### ');
+          onChangeMarkdown(
+            `${textBefore}${replacedLine}${textBelowCurrentLine}`,
+          );
+          const posDiff = replacedLine.length - lineText.length;
+          setCursorPos(cursorPos + posDiff);
+          return;
+        }
+
+        onChangeMarkdown(`${textBefore}#### ${textAfter}`);
+        setCursorPos(cursorPos + 5);
+      },
+      image: () => {
+        this.props.onUpload();
+      },
+    };
+
+    this.appleEditorElement.current!.focus();
+    handlers[mode]();
 
     // const handlers: {
     //   [key: string]: Function;
@@ -726,6 +871,7 @@ ${selected}
             onClick={this.handleToolbarClick}
             onConvert={this.handleAskConvert}
             innerRef={this.toolbarElement}
+            ios={this.isIOS}
           />
           <MarkdownWrapper>
             {addLink.visible && (

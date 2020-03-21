@@ -120,6 +120,7 @@ export interface ToolbarProps {
   onClick?: Function;
   onConvert?: () => void;
   innerRef?: React.RefObject<HTMLDivElement>;
+  ios?: boolean;
 }
 
 const Toolbar: React.FC<ToolbarProps> = ({
@@ -128,6 +129,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
   onClick = () => {},
   onConvert,
   innerRef,
+  ios,
 }) => {
   const forMarkdown = mode === 'MARKDOWN';
   return (
@@ -174,39 +176,46 @@ const Toolbar: React.FC<ToolbarProps> = ({
         </Heading>
       </ToolbarItem>
       <Separator />
-      <ToolbarItem className="ql-bold" onClick={() => onClick('bold')}>
-        <MdFormatBold />
-      </ToolbarItem>
-      <ToolbarItem className="ql-italic" onClick={() => onClick('italic')}>
-        <MdFormatItalic />
-      </ToolbarItem>
-      {!forMarkdown && (
-        <ToolbarItem className="ql-underline">
-          <MdFormatUnderlined />
-        </ToolbarItem>
+      {!ios && (
+        <>
+          <ToolbarItem className="ql-bold" onClick={() => onClick('bold')}>
+            <MdFormatBold />
+          </ToolbarItem>
+          <ToolbarItem className="ql-italic" onClick={() => onClick('italic')}>
+            <MdFormatItalic />
+          </ToolbarItem>
+          {!forMarkdown && (
+            <ToolbarItem className="ql-underline">
+              <MdFormatUnderlined />
+            </ToolbarItem>
+          )}
+          <ToolbarItem className="ql-strike" onClick={() => onClick('strike')}>
+            <MdFormatStrikethrough />
+          </ToolbarItem>
+          <Separator />
+          <ToolbarItem
+            className="ql-blockquote"
+            onClick={() => onClick('blockquote')}
+          >
+            <MdFormatQuote />
+          </ToolbarItem>
+          <ToolbarItem className="ql-link" onClick={() => onClick('link')}>
+            <MdInsertLink />
+          </ToolbarItem>
+        </>
       )}
-      <ToolbarItem className="ql-strike" onClick={() => onClick('strike')}>
-        <MdFormatStrikethrough />
-      </ToolbarItem>
-      <Separator />
-      <ToolbarItem
-        className="ql-blockquote"
-        onClick={() => onClick('blockquote')}
-      >
-        <MdFormatQuote />
-      </ToolbarItem>
-      <ToolbarItem className="ql-link" onClick={() => onClick('link')}>
-        <MdInsertLink />
-      </ToolbarItem>
       <ToolbarItem className="ql-image" onClick={() => onClick('image')}>
         <MdImage />
       </ToolbarItem>
-      <ToolbarItem
-        className="ql-code-block"
-        onClick={() => onClick('codeblock')}
-      >
-        <MdCode />
-      </ToolbarItem>
+
+      {!ios && (
+        <ToolbarItem
+          className="ql-code-block"
+          onClick={() => onClick('codeblock')}
+        >
+          <MdCode />
+        </ToolbarItem>
+      )}
       <div className="mobile-placeholder"></div>
       {/* <Separator /> */}
       {/* <ToolbarGroup> */}
