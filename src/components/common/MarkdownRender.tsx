@@ -204,9 +204,11 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
           return;
         }
 
-        const el = parse(editing ? html : filter(html));
-
-        applyElement(el);
+        try {
+          const el = parse(filter(html));
+          // const el = parse(html);
+          applyElement(el);
+        } catch (e) {}
       });
   }, [applyElement, editing, markdown, onConvertFinish]);
 
