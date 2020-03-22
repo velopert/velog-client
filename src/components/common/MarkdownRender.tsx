@@ -173,6 +173,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   );
 
   const [element, setElement] = useState<RenderedElement>(null);
+  const [hasTagError, setHasTagError] = useState(false);
 
   const applyElement = React.useMemo(() => {
     return throttle(250, (el: any) => {
@@ -204,18 +205,25 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
           return;
         }
 
-        const el = parse(editing ? html : filter(html));
-
-        applyElement(el);
+        try {
+          const el = parse(html);
+          setHasTagError(false);
+          applyElement(el);
+        } catch (e) {}
       });
   }, [applyElement, editing, markdown, onConvertFinish]);
 
   return (
     <Typography>
       {editing ? (
-        <MarkdownRenderBlock className={codeTheme}>
-          {element}
-        </MarkdownRenderBlock>
+        <MarkdownRenderErrorBoundary
+          onError={() => setHasTagError(true)}
+          hasTagError={hasTagError}
+        >
+          <MarkdownRenderBlock className={codeTheme}>
+            {element}
+          </MarkdownRenderBlock>
+        </MarkdownRenderErrorBoundary>
       ) : (
         <MarkdownRenderBlock
           className={codeTheme}
@@ -225,5 +233,36 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
     </Typography>
   );
 };
+
+type ErrorBoundaryProps = {
+  onError: () => void;
+  hasTagError: boolean;
+};
+class MarkdownRenderErrorBoundary extends React.Component<ErrorBoundaryProps> {
+  state = {
+    hasError: false,
+  };
+  componentDidCatch() {
+    this.setState({
+      hasError: true,
+    });
+    this.props.onError();
+  }
+
+  componentDidUpdate(prevProps: ErrorBoundaryProps) {
+    if (prevProps.hasTagError && !this.props.hasTagError) {
+      this.setState({
+        hasError: false,
+      });
+    }
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <div>HTML 태그 파싱 실패</div>;
+    }
+    return this.props.children;
+  }
+}
 
 export default React.memo(MarkdownRender);

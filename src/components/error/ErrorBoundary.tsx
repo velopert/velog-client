@@ -23,12 +23,18 @@ class ErrorBoundary extends React.Component {
       Sentry.captureException(error);
     }
   }
+
+  handleResolveError = () => {
+    this.setState({
+      hasError: false,
+    });
+  };
   render() {
     if (this.state.chunkError) {
       return <ChunkErrorScreen />;
     }
     if (this.state.hasError) {
-      return <CrashErrorScreen />;
+      return <CrashErrorScreen onResolve={this.handleResolveError} />;
     }
     return (
       <ErrorBoundaryWrapper hasError={this.state.hasError}>
