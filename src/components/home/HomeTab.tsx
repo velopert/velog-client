@@ -40,7 +40,7 @@ function HomeTab(props: HomeTabProps) {
     <Wrapper>
       <Block>
         <NavLink
-          to="/trending"
+          to="/"
           activeClassName="active"
           isActive={(match, location) => {
             return ['/', '/trending'].indexOf(location.pathname) !== -1;

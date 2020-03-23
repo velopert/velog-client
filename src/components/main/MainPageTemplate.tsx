@@ -1,7 +1,7 @@
 import React from 'react';
 import MainTemplate from './MainTemplate';
-import MainHeader from './MainHeader';
-import FloatingMainHeader from './FloatingHomeHeader';
+import Header from '../base/Header';
+import FloatingHeader from '../base/FloatingHeader';
 
 export type MainPageTemplateProps = {
   children?: React.ReactNode;
@@ -10,8 +10,8 @@ export type MainPageTemplateProps = {
 function MainPageTemplate({ children }: MainPageTemplateProps) {
   return (
     <MainTemplate>
-      <MainHeader />
-      <FloatingMainHeader />
+      <Header />
+      <FloatingHeader />
       {children}
     </MainTemplate>
   );

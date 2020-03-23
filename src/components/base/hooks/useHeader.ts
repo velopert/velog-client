@@ -8,6 +8,7 @@ import storage from '../../../lib/storage';
 export default function useHeader() {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.core.user);
+  const customHeader = useSelector((state: RootState) => state.header);
 
   const onLoginClick = useCallback(() => {
     dispatch(showAuthModal('LOGIN'));
@@ -21,5 +22,5 @@ export default function useHeader() {
     window.location.href = '/';
   }, []);
 
-  return { user, onLoginClick, onLogout };
+  return { user, onLoginClick, onLogout, customHeader };
 }
