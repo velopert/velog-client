@@ -20,7 +20,7 @@ function SearchResult({ keyword, username }: SearchResultProps) {
       keyword,
       username,
     },
-    skip: keyword === '',
+    skip: keyword === '' || keyword === undefined,
   });
 
   const onLoadMoreByOffset = useCallback(
