@@ -1,15 +1,15 @@
 import React, { useEffect, useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
-import MainHeader from './MainHeader';
+import Header from './Header';
 import HomeTab from '../home/HomeTab';
-import MainResponsive from './MainResponsive';
+import MainResponsive from '../main/MainResponsive';
 import { getScrollTop } from '../../lib/utils';
 import { Route } from 'react-router-dom';
 import ReadingListTab from '../readingList/ReadingListTab';
 
-export type FloatingMainHeaderProps = {};
+export type FloatingHeaderProps = {};
 
-function FloatingMainHeader(props: FloatingMainHeaderProps) {
+function FloatingHeader(props: FloatingHeaderProps) {
   const [visible, setVisible] = useState(false);
   const blockRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
@@ -79,7 +79,7 @@ function FloatingMainHeader(props: FloatingMainHeaderProps) {
       }
       ref={blockRef}
     >
-      <MainHeader />
+      <Header />
       <Route
         path={['/', '/:mode(recent|trending)']}
         render={() => (
@@ -121,4 +121,4 @@ const StyledMainResponsive = styled(MainResponsive)`
   margin-top: 1.5rem;
 `;
 
-export default FloatingMainHeader;
+export default FloatingHeader;

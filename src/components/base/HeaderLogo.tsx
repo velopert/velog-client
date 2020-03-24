@@ -10,13 +10,13 @@ import media from '../../lib/styles/media';
 export interface HeaderLogoProps {
   custom: boolean;
   userLogo: UserLogo | null;
-  velogUsername: string | null;
+  username: string | null;
 }
 
 const HeaderLogo: React.FC<HeaderLogoProps> = ({
   custom,
   userLogo,
-  velogUsername,
+  username,
 }) => {
   if (!custom) {
     return (
@@ -27,16 +27,16 @@ const HeaderLogo: React.FC<HeaderLogoProps> = ({
       </HeaderLogoBlock>
     );
   }
-  if (!userLogo) return null;
-  if (!velogUsername) return null;
-  const velogPath = `/@${velogUsername}`;
+  if (!userLogo) return <div />;
+  if (!username) return <div />;
+  const velogPath = `/@${username}`;
   return (
     <HeaderLogoBlock>
       <VelogLogoLink to="/">
         <VelogIcon />
       </VelogLogoLink>
       <Link to={velogPath}>
-        {userLogo.title || createFallbackTitle(velogUsername)}
+        {userLogo.title || createFallbackTitle(username)}
       </Link>
     </HeaderLogoBlock>
   );

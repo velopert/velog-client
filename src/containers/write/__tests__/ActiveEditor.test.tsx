@@ -2,13 +2,16 @@ import * as React from 'react';
 import ActiveEditor, { ActiveEditorProps } from '../ActiveEditor';
 import renderWithProviders from '../../../lib/renderWithProviders';
 import { HelmetProvider } from 'react-helmet-async';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('ActiveEditor', () => {
   const setup = (props: Partial<ActiveEditorProps> = {}) => {
     const utils = renderWithProviders(
-      <HelmetProvider>
-        <ActiveEditor {...props} />
-      </HelmetProvider>,
+      <MemoryRouter>
+        <HelmetProvider>
+          <ActiveEditor {...props} />
+        </HelmetProvider>
+      </MemoryRouter>,
     );
     return {
       ...utils,

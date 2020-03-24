@@ -69,6 +69,10 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     body: initialBody,
   });
 
+  const onGoBack = () => {
+    history.goBack();
+  };
+
   useEffect(() => {
     setLastSavedData({
       title: initialTitle,
@@ -270,6 +274,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
           <WriteFooter
             onPublish={onPublish}
             onTempSave={onTempSave}
+            onGoBack={onGoBack}
             edit={!!postId && !isTemp}
           />
         }

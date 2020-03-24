@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import HeaderContainer from '../../containers/base/HeaderContainer';
+import Header from './Header';
+import FloatingHeader from './FloatingHeader';
 
 const PageTemplateBlock = styled.div``;
 
@@ -18,7 +19,12 @@ const PageTemplate: React.FC<PageTemplateProps> = ({
 }) => {
   return (
     <PageTemplateBlock style={style} className={className}>
-      {!hideHeader && <HeaderContainer />}
+      {!hideHeader && (
+        <>
+          <Header />
+          <FloatingHeader />
+        </>
+      )}
       {children}
     </PageTemplateBlock>
   );

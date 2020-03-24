@@ -3,7 +3,7 @@ import React from 'react';
 import fetch from 'node-fetch';
 import ReactDOMServer from 'react-dom/server';
 import { ApolloProvider } from '@apollo/react-common';
-import { ApolloClient } from 'apollo-client';
+import { ApolloClient, ApolloError } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-boost';
 import { getDataFromTree } from '@apollo/react-ssr';
@@ -17,6 +17,7 @@ import Html from './Html';
 import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 import CacheManager from './CacheManager';
 import { HelmetProvider, FilledContext } from 'react-helmet-async';
+import error from '../modules/error';
 
 const statsFile = path.resolve(__dirname, '../build/loadable-stats.json');
 const cacheManager = new CacheManager();
@@ -94,6 +95,12 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
     await getDataFromTree(Root);
   } catch (e) {
     console.log('Apollo Error! Rendering result anyways');
+    if (e instanceof ApolloError) {
+      const notFound = e.graphQLErrors.some(
+        ge => (ge.extensions as any)?.code === 'NOT_FOUND',
+      );
+      if (notFound) store.dispatch(error.actions.showNotFound());
+    }
     console.log(e);
   }
 
