@@ -57,6 +57,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     isTemp,
     initialBody,
     initialTitle,
+    tags,
   } = useSelector((state: RootState) => state.write);
   const [writePost] = useMutation<WritePostResponse>(WRITE_POST);
   const [createPostHistory] = useMutation<CreatePostHistoryResponse>(
@@ -168,7 +169,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
           variables: {
             title,
             body: markdown,
-            tags: [],
+            tags,
             is_markdown: true,
             is_temp: true,
             is_private: false,
@@ -199,7 +200,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
             thumbnail: null,
             meta: {},
             series_id: null,
-            tags: [],
+            tags,
           },
         });
         notifySuccess();
@@ -234,6 +235,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       lastSavedData,
       markdown,
       postId,
+      tags,
       title,
       writePost,
     ],
