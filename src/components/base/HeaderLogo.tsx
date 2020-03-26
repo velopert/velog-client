@@ -6,6 +6,7 @@ import { UserLogo } from '../../modules/header';
 import palette from '../../lib/styles/palette';
 import { createFallbackTitle } from '../../lib/utils';
 import media from '../../lib/styles/media';
+import { ellipsis } from '../../lib/styles/utils';
 
 export interface HeaderLogoProps {
   custom: boolean;
@@ -35,7 +36,7 @@ const HeaderLogo: React.FC<HeaderLogoProps> = ({
       <VelogLogoLink to="/">
         <VelogIcon />
       </VelogLogoLink>
-      <Link to={velogPath}>
+      <Link to={velogPath} className="user-logo">
         {userLogo.title || createFallbackTitle(username)}
       </Link>
     </HeaderLogoBlock>
@@ -64,6 +65,12 @@ const HeaderLogoBlock = styled.div`
     align-items: center;
     color: inherit;
     text-decoration: none;
+  }
+
+  .user-logo {
+    display: block;
+    max-width: calc(100vw - 200px);
+    ${ellipsis};
   }
 `;
 
