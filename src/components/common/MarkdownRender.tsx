@@ -13,6 +13,7 @@ import media from '../../lib/styles/media';
 import parse from 'html-react-parser';
 import { throttle } from 'throttle-debounce';
 import sanitize from 'sanitize-html';
+import palette from '../../lib/styles/palette';
 
 export interface MarkdownRenderProps {
   markdown: string;
@@ -80,6 +81,35 @@ const MarkdownRenderBlock = styled.div`
     border-left: none;
     background: none;
     padding: none;
+  }
+
+  table {
+    min-width: 40%;
+    max-width: 100%;
+    border: 1px solid ${palette.gray7};
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    thead > tr > th {
+      /* text-align: left; */
+      border-bottom: 4px solid ${palette.gray7};
+    }
+    th,
+    td {
+      word-break: break-word;
+      padding: 0.5rem;
+    }
+
+    td + td,
+    th + th {
+      border-left: 1px solid ${palette.gray7};
+    }
+
+    tr:nth-child(even) {
+      background: ${palette.gray1};
+    }
+    tr:nth-child(odd) {
+      background: white;
+    }
   }
 `;
 
