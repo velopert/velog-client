@@ -26,6 +26,9 @@ const tags = [
   'mpadded',
   'mphantom',
   'mglyph',
+  'svg',
+  'path',
+  'line',
 ];
 
 const attributes = tags.reduce((acc, current) => {

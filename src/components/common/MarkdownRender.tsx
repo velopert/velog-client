@@ -158,6 +158,7 @@ function filter(html: string) {
       'span',
       'img',
       'del',
+
       ...katexWhitelist.tags,
     ],
     allowedAttributes: {
