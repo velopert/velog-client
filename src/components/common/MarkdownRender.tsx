@@ -14,6 +14,11 @@ import parse from 'html-react-parser';
 import { throttle } from 'throttle-debounce';
 import sanitize from 'sanitize-html';
 import palette from '../../lib/styles/palette';
+import math from 'remark-math';
+import remark2rehype from 'remark-rehype';
+import katex from 'rehype-katex';
+import stringify from 'rehype-stringify';
+import 'katex/dist/katex.min.css';
 
 export interface MarkdownRenderProps {
   markdown: string;
@@ -216,6 +221,10 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
       .use(htmlPlugin)
       .use(embedPlugin)
       .use(slug)
+      .use(math)
+      .use(remark2rehype)
+      .use(katex)
+      .use(stringify)
       .process(markdown, (err: any, file: any) => {
         const html = String(file);
 
@@ -240,6 +249,14 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
         } catch (e) {}
       });
   }, [applyElement, editing, markdown, onConvertFinish]);
+
+  // useEffect(() => {
+  //   if (editing) return;
+  //   const using = checkUsingMathjax(markdown);
+  //   if (using) {
+  //     loadMathjax();
+  //   }
+  // }, [html, element, markdown, editing]);
 
   return (
     <Typography>
