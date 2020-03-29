@@ -191,9 +191,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
           remark()
             .use(breaks)
             .use(prismPlugin)
-            .use(htmlPlugin, {
-              sanitize: true,
-            })
+            .use(htmlPlugin)
             .use(embedPlugin)
             .use(slug)
             .processSync(markdown)
