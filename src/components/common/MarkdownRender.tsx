@@ -14,6 +14,14 @@ import parse from 'html-react-parser';
 import { throttle } from 'throttle-debounce';
 import sanitize from 'sanitize-html';
 import palette from '../../lib/styles/palette';
+import math from 'remark-math';
+import remark2rehype from 'remark-rehype';
+import katex from 'rehype-katex';
+import raw from 'rehype-raw';
+import remarkParse from 'remark-parse';
+import stringify from 'rehype-stringify';
+import { Helmet } from 'react-helmet-async';
+import katexWhitelist from '../../lib/katexWhitelist';
 
 export interface MarkdownRenderProps {
   markdown: string;
@@ -150,12 +158,16 @@ function filter(html: string) {
       'span',
       'img',
       'del',
+
+      ...katexWhitelist.tags,
     ],
     allowedAttributes: {
       a: ['href', 'name', 'target'],
       img: ['src'],
       iframe: ['src', 'allow', 'allowfullscreen', 'scrolling', 'class'],
-      '*': ['class', 'id'],
+      '*': ['class', 'id', 'aria-hidden'],
+      span: ['style'],
+      ...katexWhitelist.attributes,
     },
     allowedStyles: {
       '*': {
@@ -165,6 +177,9 @@ function filter(html: string) {
           /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/,
         ],
         'text-align': [/^left$/, /^right$/, /^center$/],
+      },
+      span: {
+        ...katexWhitelist.styles,
       },
     },
     allowedIframeHostnames: ['www.youtube.com', 'codesandbox.io', 'codepen.io'],
@@ -189,11 +204,16 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
     ssrEnabled
       ? filter(
           remark()
-            .use(breaks)
+            .use(remarkParse)
             .use(prismPlugin)
-            .use(htmlPlugin)
             .use(embedPlugin)
+            .use(remark2rehype, { allowDangerousHTML: true })
+            .use(raw)
+            .use(breaks)
             .use(slug)
+            .use(math)
+            .use(katex)
+            .use(stringify)
             .processSync(markdown)
             .toString(),
         )
@@ -211,11 +231,16 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
 
   useEffect(() => {
     remark()
-      .use(breaks)
+      .use(remarkParse)
       .use(prismPlugin)
-      .use(htmlPlugin)
       .use(embedPlugin)
+      .use(remark2rehype, { allowDangerousHTML: true })
+      .use(raw)
+      .use(breaks)
       .use(slug)
+      .use(math)
+      .use(katex)
+      .use(stringify)
       .process(markdown, (err: any, file: any) => {
         const html = String(file);
 
@@ -241,8 +266,26 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
       });
   }, [applyElement, editing, markdown, onConvertFinish]);
 
+  // useEffect(() => {
+  //   if (editing) return;
+  //   const using = checkUsingMathjax(markdown);
+  //   if (using) {
+  //     loadMathjax();
+  //   }
+  // }, [html, element, markdown, editing]);
+
   return (
     <Typography>
+      <Helmet>
+        {/\$(.*)\$/.test(markdown) && (
+          <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+            integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
+            crossOrigin="anonymous"
+          />
+        )}
+      </Helmet>
       {editing ? (
         <MarkdownRenderErrorBoundary
           onError={() => setHasTagError(true)}
