@@ -238,7 +238,6 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
       .use(remark2rehype, { allowDangerousHTML: true })
       .use(raw)
       .use(breaks)
-
       .use(math)
       .use(katex)
       .use(stringify)
