@@ -119,6 +119,10 @@ const MarkdownRenderBlock = styled.div`
       background: white;
     }
   }
+
+  .katex-mathml {
+    display: none;
+  }
 `;
 
 function filter(html: string) {
