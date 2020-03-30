@@ -205,12 +205,12 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
       ? filter(
           remark()
             .use(remarkParse)
+            .use(slug)
             .use(prismPlugin)
             .use(embedPlugin)
             .use(remark2rehype, { allowDangerousHTML: true })
             .use(raw)
             .use(breaks)
-            .use(slug)
             .use(math)
             .use(katex)
             .use(stringify)
@@ -232,12 +232,13 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   useEffect(() => {
     remark()
       .use(remarkParse)
+      .use(slug)
       .use(prismPlugin)
       .use(embedPlugin)
       .use(remark2rehype, { allowDangerousHTML: true })
       .use(raw)
       .use(breaks)
-      .use(slug)
+
       .use(math)
       .use(katex)
       .use(stringify)
