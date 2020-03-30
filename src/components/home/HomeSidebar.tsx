@@ -4,6 +4,7 @@ import MainNoticeWidgetContainer from '../../containers/home/MainNoticeWidgetCon
 import MainTagWidgetContainer from '../../containers/home/MainTagWidgetContainer';
 import HomeRightFooter from './HomeRightFooter';
 import Sticky from '../common/Sticky';
+import { mediaQuery } from '../../lib/styles/media';
 
 export type HomeSidebarProps = {};
 
@@ -19,6 +20,11 @@ function HomeSidebar(props: HomeSidebarProps) {
   );
 }
 
-const Block = styled.div``;
+const Block = styled.div`
+  width: 16rem;
+  ${mediaQuery(1440)} {
+    width: 12rem;
+  }
+`;
 
 export default HomeSidebar;
