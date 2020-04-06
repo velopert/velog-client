@@ -119,6 +119,10 @@ const MarkdownRenderBlock = styled.div`
       background: white;
     }
   }
+
+  .katex-mathml {
+    display: none;
+  }
 `;
 
 function filter(html: string) {
@@ -205,12 +209,12 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
       ? filter(
           remark()
             .use(remarkParse)
+            .use(slug)
             .use(prismPlugin)
             .use(embedPlugin)
             .use(remark2rehype, { allowDangerousHTML: true })
             .use(raw)
             .use(breaks)
-            .use(slug)
             .use(math)
             .use(katex)
             .use(stringify)
@@ -222,26 +226,27 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
 
   const [element, setElement] = useState<RenderedElement>(null);
   const [hasTagError, setHasTagError] = useState(false);
+  const [delay, setDelay] = useState(25);
 
-  const applyElement = React.useMemo(() => {
-    return throttle(250, (el: any) => {
-      setElement(el);
-    });
-  }, []);
-
-  useEffect(() => {
-    remark()
+  const throttledUpdate = React.useMemo(() => {
+    return throttle(delay, (markdown: string) => {
+      remark()
       .use(remarkParse)
+      .use(slug)
       .use(prismPlugin)
       .use(embedPlugin)
       .use(remark2rehype, { allowDangerousHTML: true })
       .use(raw)
       .use(breaks)
-      .use(slug)
       .use(math)
       .use(katex)
       .use(stringify)
       .process(markdown, (err: any, file: any) => {
+        const lines = markdown.split(/\r\n|\r|\n/).length
+        const nextDelay = Math.max(Math.min(Math.floor(lines * 0.5), 1500), 22)
+        if (nextDelay !== delay) {
+          setDelay(nextDelay)
+        }
         const html = String(file);
 
         if (onConvertFinish) {
@@ -261,18 +266,17 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
         try {
           const el = parse(html);
           setHasTagError(false);
-          applyElement(el);
+          setElement(el);
         } catch (e) {}
-      });
-  }, [applyElement, editing, markdown, onConvertFinish]);
+    }, 1)
+    });
+  }, [delay, editing, onConvertFinish]);
 
-  // useEffect(() => {
-  //   if (editing) return;
-  //   const using = checkUsingMathjax(markdown);
-  //   if (using) {
-  //     loadMathjax();
-  //   }
-  // }, [html, element, markdown, editing]);
+
+
+  useEffect(() => {
+    throttledUpdate(markdown)    
+  }, [markdown, throttledUpdate]);
 
   return (
     <Typography>
