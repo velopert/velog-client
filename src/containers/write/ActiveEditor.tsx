@@ -2,12 +2,9 @@ import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { RootState } from '../../modules';
 import {
-  WriteMode,
   clearEditor,
   prepareEdit,
-  convertEditorMode,
   setInitialBody,
-  changeTitle,
   setInitialTitle,
 } from '../../modules/write';
 import EditorPanesContainer from './EditorPanesContainer';
@@ -28,7 +25,7 @@ export type ActiveEditorProps = {};
 
 const ActiveEditor: React.FC<ActiveEditorProps> = () => {
   const [newPost, setNewPost] = useState(false);
-  const mode = useSelector((state: RootState) => state.write.mode);
+  // const mode = useSelector((state: RootState) => state.write.mode);
   const postId = useSelector((state: RootState) => state.write.postId);
   const [askLoadTemp, setAskLoadTemp] = useState(false);
   const initialized = useRef(false);

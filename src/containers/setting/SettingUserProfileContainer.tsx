@@ -11,9 +11,9 @@ export type SettingUserProfileContainerProps = {};
 
 function SettingUserProfileContainer(props: SettingUserProfileContainerProps) {
   const user = useUser();
-  const { profile, loading, update } = useUserProfile();
+  const { profile,  update } = useUserProfile();
   const [upload] = useUpload();
-  const [s3Upload, image, error] = useS3Upload();
+  const [s3Upload] = useS3Upload();
   const updateThumbnail = useUpdateThumbnail();
 
   const uploadThumbnail = async () => {

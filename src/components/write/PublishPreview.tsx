@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import PublishSection from './PublishSection';
 import palette from '../../lib/styles/palette';
