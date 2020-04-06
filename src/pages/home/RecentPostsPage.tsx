@@ -1,8 +1,6 @@
 import React from 'react';
 import useRecentPosts from './hooks/useRecentPosts';
-import PostCardGrid, {
-  PostCardGridSkeleton,
-} from '../../components/common/PostCardGrid';
+import PostCardGrid from '../../components/common/PostCardGrid';
 import { Helmet } from 'react-helmet-async';
 
 export type RecentPostsPageProps = {};

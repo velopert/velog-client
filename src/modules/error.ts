@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export type ErrorState = {
   errorType: 'NOT_FOUND' | 'CRASHED' | null;

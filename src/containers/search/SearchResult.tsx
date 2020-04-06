@@ -5,7 +5,6 @@ import { useQuery } from '@apollo/react-hooks';
 import { SearchPostsResponse, SEARCH_POSTS } from '../../lib/graphql/post';
 import useScrollPagination from '../../lib/hooks/useScrollPagination';
 import { safe } from '../../lib/utils';
-import styled from 'styled-components';
 import { Helmet } from 'react-helmet-async';
 // import { undrawSearching } from '../../static/images';
 
@@ -73,16 +72,5 @@ function SearchResult({ keyword, username }: SearchResultProps) {
   );
 }
 
-const ImageWrapper = styled.div`
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  display: flex;
-  justify-content: center;
-  img {
-    width: 16rem;
-    height: auto;
-    display: block;
-  }
-`;
 
 export default SearchResult;

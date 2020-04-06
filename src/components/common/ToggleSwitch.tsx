@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { useSpring, animated } from 'react-spring';
-import useDidMount from '../../lib/hooks/useDidMount';
+
 
 export type ToggleSwitchProps = {
   name?: string;

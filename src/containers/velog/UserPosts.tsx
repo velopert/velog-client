@@ -23,7 +23,7 @@ const UserPosts: React.FC<UserPostsProps> = ({ username, tag }) => {
     notifyOnNetworkStatusChange: true,
   });
 
-  const { data, error, loading } = getPostList;
+  const { data,  loading } = getPostList;
 
   const onLoadMore = useCallback(
     (cursor: string) => {

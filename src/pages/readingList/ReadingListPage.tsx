@@ -1,13 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import MainPageTemplate from '../../components/main/MainPageTemplate';
 import MainResponsive from '../../components/main/MainResponsive';
 import ReadingListTab from '../../components/readingList/ReadingListTab';
 import styled from 'styled-components';
 import { RouteComponentProps } from 'react-router-dom';
 import useReadingList from './hooks/useReadingList';
-import PostCardGrid, {
-  PostCardGridSkeleton,
-} from '../../components/common/PostCardGrid';
+import PostCardGrid from '../../components/common/PostCardGrid';
 import { undrawEmpty } from '../../static/images';
 import palette from '../../lib/styles/palette';
 import media from '../../lib/styles/media';
@@ -20,7 +18,7 @@ export type ReadingListPageProps = {} & RouteComponentProps<{
 function ReadingListPage({ match, history }: ReadingListPageProps) {
   const { type } = match.params;
 
-  const { data, loading, isFinished } = useReadingList(type);
+  const { data, isFinished } = useReadingList(type);
 
   return (
     <MainPageTemplate>

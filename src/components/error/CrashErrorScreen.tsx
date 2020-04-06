@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import ErrorScreenTemplate from './ErrorScreenTemplate';
 import { undrawBugFixing } from '../../static/images';
 import { useHistory } from 'react-router-dom';
