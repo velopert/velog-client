@@ -1,7 +1,5 @@
 import React from 'react';
-import PostCardGrid, {
-  PostCardGridSkeleton,
-} from '../../components/common/PostCardGrid';
+import PostCardGrid from '../../components/common/PostCardGrid';
 import useTrendingPosts from './hooks/useTrendingPosts';
 import { Helmet } from 'react-helmet-async';
 

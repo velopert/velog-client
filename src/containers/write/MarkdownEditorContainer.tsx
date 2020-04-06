@@ -52,7 +52,6 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     title,
     markdown,
     thumbnail,
-    publish,
     postId,
     isTemp,
     initialBody,

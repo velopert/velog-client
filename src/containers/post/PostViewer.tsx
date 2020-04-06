@@ -1,5 +1,5 @@
-import React, { useEffect, useCallback, useRef, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useCallback, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   READ_POST,
   SinglePost,
@@ -27,12 +27,10 @@ import { getScrollTop, ssrEnabled } from '../../lib/utils';
 import UserProfile from '../../components/common/UserProfile';
 import VelogResponsive from '../../components/velog/VelogResponsive';
 import styled from 'styled-components';
-import { useMount } from 'react-use';
 import PostSkeleton from '../../components/post/PostSkeleton';
 import media from '../../lib/styles/media';
 import useNotFound from '../../lib/hooks/useNotFound';
 import { Helmet } from 'react-helmet-async';
-import { RootState } from '../../modules';
 import { toast } from 'react-toastify';
 import MobileLikeButton from '../../components/post/MobileLikeButton';
 
@@ -93,11 +91,11 @@ const PostViewer: React.FC<PostViewerProps> = ({
   const [likePost, { loading: loadingLike }] = useMutation(LIKE_POST);
   const [unlikePost, { loading: loadingUnlike }] = useMutation(UNLIKE_POST);
   const { showNotFound } = useNotFound();
-  const userLogo = useSelector((state: RootState) => state.header.userLogo);
-  const velogTitle = useMemo(() => {
-    if (!userLogo || !userLogo.title) return `${username}.log`;
-    return userLogo.title;
-  }, [userLogo, username]);
+  // const userLogo = useSelector((state: RootState) => state.header.userLogo);
+  // const velogTitle = useMemo(() => {
+  //   if (!userLogo || !userLogo.title) return `${username}.log`;
+  //   return userLogo.title;
+  // }, [userLogo, username]);
   const user = useUser();
 
   const { error, data } = readPost;

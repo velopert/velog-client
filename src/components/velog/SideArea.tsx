@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import media from '../../lib/styles/media';
-import palette from '../../lib/styles/palette';
 
 export type SideAreaProps = {
   children: React.ReactNode;

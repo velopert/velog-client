@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Button from '../common/Button';
 import { MdArrowBack } from 'react-icons/md';
 import media from '../../lib/styles/media';
-import { useHistory } from 'react-router-dom';
+
 
 const WriteFooterBlock = styled.div`
   padding-left: 1rem;

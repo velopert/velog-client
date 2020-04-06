@@ -84,10 +84,10 @@ const Block = styled.div`
   height: 4rem;
 `;
 
-const StyledLink = styled(Link)`
-  display: flex;
-  align-items: center;
-`;
+// const StyledLink = styled(Link)`
+//   display: flex;
+//   align-items: center;
+// `;
 
 const SearchButton = styled(Link)`
   display: flex;

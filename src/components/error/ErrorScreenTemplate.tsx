@@ -19,7 +19,7 @@ function ErrorScreenTemplate({
 }: ErrorScreenTemplateProps) {
   return (
     <Screen>
-      <img src={image} alt="error-image" />
+      <img src={image} alt="error" />
       <div className="message">{message}</div>
       {buttonText && (
         <div className="button-wrapper">

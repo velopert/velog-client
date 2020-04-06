@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import remark from 'remark';
-import htmlPlugin from 'remark-html';
+// import htmlPlugin from 'remark-html';
 import slug from 'remark-slug';
 import prismPlugin from '../../lib/remark/prismPlugin';
 import prismThemes from '../../lib/styles/prismThemes';

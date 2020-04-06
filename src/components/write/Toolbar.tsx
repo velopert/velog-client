@@ -64,10 +64,10 @@ const ToolbarBlock = styled.div<{
   }
 `;
 
-const ToolbarGroup = styled.div`
-  display: flex;
-  height: 100%;
-`;
+// const ToolbarGroup = styled.div`
+//   display: flex;
+//   height: 100%;
+// `;
 
 const Heading = styled.div`
   font-size: 1rem;

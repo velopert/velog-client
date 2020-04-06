@@ -1,8 +1,8 @@
 import * as React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import transitions from '../../lib/styles/transitions';
-import media, { mediaQuery } from '../../lib/styles/media';
+import { mediaQuery } from '../../lib/styles/media';
 import { useTransition, animated } from 'react-spring';
 
 export interface TagInputProps {
