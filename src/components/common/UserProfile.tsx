@@ -138,6 +138,10 @@ export interface UserProfileProps {
   username: string;
 }
 
+function includeProtocol(address: string) {
+  return /^https?:\/\//.test(address) ? address : `https://${address}`;
+}
+
 const UserProfile: React.FC<UserProfileProps> = ({
   className,
   style,
@@ -211,7 +215,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
         )}
         {url && (
           <a
-            href={url}
+            href={includeProtocol(url)}
             target="_blank"
             rel="noopener noreferrer"
             data-testid="facebook"
