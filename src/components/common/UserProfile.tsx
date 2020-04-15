@@ -73,7 +73,7 @@ const UserInfo = styled.div`
     line-height: 1.5;
     margin-top: 0.25rem;
     color: ${palette.gray7};
-    letter-spacing: -0.02em;
+    letter-spacing: -0.004em;
   }
 
   ${media.small} {
@@ -86,7 +86,7 @@ const UserInfo = styled.div`
     .description {
       margin-top: 0.5rem;
       font-size: 0.875rem;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.004em;
     }
   }
 `;

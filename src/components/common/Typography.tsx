@@ -5,9 +5,9 @@ import media from '../../lib/styles/media';
 
 const TypographyBlock = styled.div`
   font-size: 1.125rem;
-  color: ${palette.gray8};
-  line-height: 1.85;
-  letter-spacing: -0.02em;
+  color: #222426;
+  line-height: 1.7;
+  letter-spacing: -0.004em;
   word-break: keep-all;
   word-wrap: break-word;
   p {
@@ -20,9 +20,10 @@ const TypographyBlock = styled.div`
       font-weight: 400;
     }
     code {
-      background: #e3fff6;
-      padding-left: 0.25em;
-      padding-right: 0.25em;
+      background: rgba(27,31,35,.05);
+      padding: .2em .4em;
+      font-size: 85%;
+      border-radius: 3px;
     }
     a {
       code {
