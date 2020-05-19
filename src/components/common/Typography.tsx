@@ -10,7 +10,7 @@ const TypographyBlock = styled.div`
   letter-spacing: -0.004em;
   word-break: keep-all;
   word-wrap: break-word;
-  p {
+  ul, ol, p {
     /* ${media.xxlarge} {
       color: ${palette.gray8};
       font-weight: 300;
