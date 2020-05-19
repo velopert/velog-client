@@ -162,6 +162,7 @@ function filter(html: string) {
       'span',
       'img',
       'del',
+      'input',
 
       ...katexWhitelist.tags,
     ],
@@ -171,6 +172,7 @@ function filter(html: string) {
       iframe: ['src', 'allow', 'allowfullscreen', 'scrolling', 'class'],
       '*': ['class', 'id', 'aria-hidden'],
       span: ['style'],
+      input: ['type'],
       ...katexWhitelist.attributes,
     },
     allowedStyles: {
