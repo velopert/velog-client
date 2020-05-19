@@ -48,6 +48,7 @@ const PostCommentsWriteContainer: React.FC<PostCommentsWriteContainerProps> = ({
       storage.setItem(`comment_before_login:${postId}`, comment);
       return requireLogin();
     }
+    if (comment === '') return;
     try {
       await writeComment({
         variables: {
