@@ -202,7 +202,7 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
       ) : (
         <Typography>
           <CommentText deleted={deleted}>
-            <MarkdownRender markdown={text || '삭제된 댓글입니다.'} />
+            <MarkdownRender markdown={text ?? '삭제된 댓글입니다.'} />
           </CommentText>
         </Typography>
       )}
