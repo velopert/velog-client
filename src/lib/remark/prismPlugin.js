@@ -56,13 +56,36 @@ export default function attacher({ include, exclude } = {}) {
       window.prism = Prism;
     }
 
+    const generateSpans = (numberOfLines) => {
+      let spans = ``;
+      for (let i = 0; i < numberOfLines; i++) {
+        spans += `<span></span>`;
+      }
+      return spans;
+    };
+
+    const numberOfLines = node.value.split(`\n`).filter((val) => val !== '')
+      .length;
+
+    // Generate the container for the line numbers.
+    // Relevant code in the Prism Line Numbers plugin can be found here:
+    // https://github.com/PrismJS/prism/blob/f356dfe71bf126e6dc060c03f3e042de28a9bec4/plugins/line-numbers/prism-line-numbers.js#L99-L115
+    const lineNumbersWrapper =
+      `<span aria-hidden="true" class="line-numbers-rows" style="left:0;padding: 1rem;">` +
+      `${generateSpans(numberOfLines)}` +
+      `</span>`;
+
+    console.log(lineNumbersWrapper);
+
     const highlighted = Prism.highlight(
       node.value,
       Prism.languages[lang] || Prism.languages.markup,
     );
 
     node.type = 'html';
-    node.value = `<pre><code class="language-${lang}">${highlighted}</code></pre>`;
+    node.value = `<pre class="line-numbers"><code class="language-${lang}">${highlighted}</code>${
+      node.value !== '' ? lineNumbersWrapper : ''
+    }</pre>`;
     // console.log(data);
     // data.hChildren = '<div>so what?</div>';
     // data.hChildren =
@@ -73,5 +96,5 @@ export default function attacher({ include, exclude } = {}) {
     //   'language-' + lang,
     // ];
   }
-  return ast => visit(ast, 'code', visitor);
+  return (ast) => visit(ast, 'code', visitor);
 }
