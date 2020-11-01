@@ -129,7 +129,7 @@
     "rehype-raw": "^4.0.2",
     "rehype-stringify": "^6.0.1",
     "remark": "^11.0.2",
-    "remark-breaks": "^1.0.3",
+    "remark-breaks": "^2.0.1",
     "remark-highlight.js": "^5.2.0",
     "remark-html": "^10.0.0",
     "remark-math": "^2.0.1",

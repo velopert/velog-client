@@ -206,18 +206,17 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   onConvertFinish,
   editing,
 }) => {
-  console.log({ markdown });
   const [html, setHtml] = useState(
-    ssrEnabled && markdown
+    ssrEnabled
       ? filter(
           remark()
+            .use(breaks)
             .use(remarkParse)
             .use(slug)
             .use(prismPlugin)
             .use(embedPlugin)
             .use(remark2rehype, { allowDangerousHTML: true })
             .use(raw)
-            .use(breaks)
             .use(math)
             .use(katex)
             .use(stringify)
@@ -234,13 +233,13 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   const throttledUpdate = React.useMemo(() => {
     return throttle(delay, (markdown: string) => {
       remark()
+        .use(breaks)
         .use(remarkParse)
         .use(slug)
         .use(prismPlugin)
         .use(embedPlugin)
         .use(remark2rehype, { allowDangerousHTML: true })
         .use(raw)
-        .use(breaks)
         .use(math)
         .use(katex)
         .use(stringify)
