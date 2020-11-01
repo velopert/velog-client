@@ -19,15 +19,9 @@ const Block = styled.div`
     width: 1376px;
   }
   ${mediaQuery(1440)} {
-    width: 1280px;
+    width: 1024px;
   }
-  ${mediaQuery(1312)} {
-    width: 912px;
-  }
-  ${mediaQuery(944)} {
-    width: calc(100% - 2rem);
-  }
-  ${mediaQuery(767)} {
+  ${mediaQuery(1056)} {
     width: calc(100% - 2rem);
   }
 `;
