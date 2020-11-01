@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { mediaQuery } from '../../lib/styles/media';
 
 export type HomeLayoutProps = {
   main: React.ReactNode;

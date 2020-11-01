@@ -7,7 +7,6 @@ import HomeLayout from '../../components/home/HomeLayout';
 import { Route } from 'react-router-dom';
 import TrendingPostsPage from './TrendingPostsPage';
 import RecentPostsPage from './RecentPostsPage';
-import HomeSidebar from '../../components/home/HomeSidebar';
 import FloatingHeader from '../../components/base/FloatingHeader';
 
 export type HomePageProps = {};
