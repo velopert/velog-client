@@ -206,6 +206,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   onConvertFinish,
   editing,
 }) => {
+  console.log({ markdown });
   const [html, setHtml] = useState(
     ssrEnabled && markdown
       ? filter(
