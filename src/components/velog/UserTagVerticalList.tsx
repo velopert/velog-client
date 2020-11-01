@@ -28,9 +28,9 @@ function UserTagVerticalList({
             <Link to={`/@${username}`}>전체보기</Link>
             <span>({postsCount})</span>
           </ListItem>
-          {tags.map(tag => (
+          {tags.map((tag) => (
             <ListItem active={active === escapeForUrl(tag.name)} key={tag.id}>
-              <Link to={`@${username}?tag=${escapeForUrl(tag.name)}`}>
+              <Link to={`/@${username}?tag=${escapeForUrl(tag.name)}`}>
                 {tag.name}
               </Link>
               <span>({tag.posts_count})</span>
@@ -69,7 +69,7 @@ const ListItem = styled.li<{ active?: boolean }>`
     text-decoration: none;
     &:hover {
       color: ${palette.gray9};
-      ${props =>
+      ${(props) =>
         props.active &&
         `
     color: ${palette.teal5};
@@ -81,7 +81,7 @@ const ListItem = styled.li<{ active?: boolean }>`
     }
   }
 
-  ${props =>
+  ${(props) =>
     props.active &&
     `
     color: ${palette.teal5};
