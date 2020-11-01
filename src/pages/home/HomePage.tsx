@@ -30,7 +30,6 @@ function HomePage(props: HomePageProps) {
               <Route path={['/recent']} component={RecentPostsPage} />
             </>
           }
-          side={<HomeSidebar />}
         />
       </MainResponsive>
     </MainTemplate>

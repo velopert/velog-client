@@ -77,12 +77,9 @@ const Wrapper = styled.div`
 `;
 
 const MobileMore = styled.div`
-  display: none;
-  ${mediaQuery(944)} {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Block = styled.div`
