@@ -207,7 +207,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   editing,
 }) => {
   const [html, setHtml] = useState(
-    ssrEnabled
+    ssrEnabled && markdown
       ? filter(
           remark()
             .use(remarkParse)
