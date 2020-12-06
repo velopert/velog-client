@@ -173,6 +173,7 @@ function filter(html: string) {
       '*': ['class', 'id', 'aria-hidden'],
       span: ['style'],
       input: ['type'],
+      ol: ['start'],
       ...katexWhitelist.attributes,
     },
     allowedStyles: {
