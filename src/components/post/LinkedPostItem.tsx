@@ -128,7 +128,9 @@ const LinkedPostItem: React.FC<LinkedPostItemProps> = ({
         {right ? <MdArrowForward /> : <MdArrowBack />}
       </Circle>
       <Text right={right}>
-        <div className="description">{right ? '다음' : '이전'} 포스트</div>
+        <div className="description">
+          {right ? '다음 포스트' : '이전 포스트'}
+        </div>
         <h3>{linkedPost.title}</h3>
       </Text>
     </LinkedPostItemBlock>

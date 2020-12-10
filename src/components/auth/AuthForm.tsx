@@ -85,7 +85,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
       <div className="upper-wrapper">
         <h2 data-testid="title">{modeText}</h2>
         <section>
-          <h4>이메일로 {modeText}</h4>
+          <h4>{`이메일로 ${modeText}`}</h4>
           {registered !== null ? (
             <AuthEmailSuccess registered={registered} />
           ) : (
@@ -99,7 +99,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
           )}
         </section>
         <section>
-          <h4>소셜 계정으로 {modeText}</h4>
+          <h4>{`소셜 계정으로 ${modeText}`}</h4>
           <AuthSocialButtonGroup currentPath={currentPath} />
         </section>
       </div>

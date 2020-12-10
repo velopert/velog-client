@@ -47,6 +47,7 @@ function PostCard({ post, forHome }: PostCardProps) {
             widthRatio={1.916}
             heightRatio={1}
             src={optimizeImage(post.thumbnail, 640)}
+            alt="post-thumbnail"
           />
         </StyledLink>
       )}
@@ -222,7 +223,7 @@ const Content = styled.div<{ clamp: boolean }>`
       css`
         height: 15.875rem;
       `} */
-  
+
     color: ${palette.gray7};
     margin-bottom: 1.5rem;
   }

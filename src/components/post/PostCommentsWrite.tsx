@@ -63,7 +63,7 @@ const PostCommentsWrite: React.FC<PostCommentsWriteProps> = ({
           </Button>
         )}
         <Button inline onClick={onWrite}>
-          댓글 {edit ? '수정' : '작성'}
+          {edit ? '댓글 수정' : '댓글 작성'}
         </Button>
       </div>
     </PostCommentsWriteBlock>

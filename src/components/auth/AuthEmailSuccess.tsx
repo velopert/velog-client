@@ -31,7 +31,7 @@ const AuthEmailSuccess: React.FC<AuthEmailSuccessProps> = ({ registered }) => {
   return (
     <AuthEmailSuccessBlock>
       <MdCheck className="icon" />
-      <div className="description">{text} 링크가 이메일로 전송되었습니다.</div>
+      <div className="description">{`${text} 링크가 이메일로 전송되었습니다.`}</div>
     </AuthEmailSuccessBlock>
   );
 };

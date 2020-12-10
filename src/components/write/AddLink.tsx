@@ -101,7 +101,9 @@ const AddLink: React.FC<AddLinkProps> = ({
       >
         <div className="wrapper">
           <div className="top-wrapper">
-            <div className="title">링크 {defaultValue ? '수정' : '등록'}</div>
+            <div className="title">
+              {defaultValue ? '링크 수정' : '링크 등록'}
+            </div>
             {defaultValue && <MdDelete onClick={onDelete} />}
           </div>
           <form onSubmit={onSubmit}>
