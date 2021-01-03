@@ -192,6 +192,7 @@ const Content = styled.div<{ clamp: boolean }>`
     margin: 0;
     margin-bottom: 0.25rem;
     line-height: 1.5;
+    word-break: break-word;
     ${ellipsis}
     color: ${palette.gray9};
     ${mediaQuery(767)} {
