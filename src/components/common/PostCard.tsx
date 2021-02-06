@@ -159,7 +159,7 @@ const Block = styled.div<{ forHome: boolean }>`
   display: flex;
   flex-direction: column;
 
-  ${props =>
+  ${(props) =>
     !props.forHome &&
     css`
       ${mediaQuery(1440)} {
@@ -170,7 +170,7 @@ const Block = styled.div<{ forHome: boolean }>`
       }
     `}
 
-  ${mediaQuery(944)} {
+  ${mediaQuery(1056)} {
     width: calc(50% - 2rem);
   }
   ${mediaQuery(767)} {
@@ -192,6 +192,7 @@ const Content = styled.div<{ clamp: boolean }>`
     margin: 0;
     margin-bottom: 0.25rem;
     line-height: 1.5;
+    word-break: break-word;
     ${ellipsis}
     color: ${palette.gray9};
     ${mediaQuery(767)} {
@@ -207,7 +208,7 @@ const Content = styled.div<{ clamp: boolean }>`
     overflow-wrap: break-word;
     font-size: 0.875rem;
     line-height: 1.5;
-    ${props =>
+    ${(props) =>
       props.clamp &&
       css`
         height: 3.9375rem;
@@ -217,7 +218,7 @@ const Content = styled.div<{ clamp: boolean }>`
         overflow: hidden;
         text-overflow: ellipsis;
       `}
-    /* ${props =>
+    /* ${(props) =>
       !props.clamp &&
       css`
         height: 15.875rem;

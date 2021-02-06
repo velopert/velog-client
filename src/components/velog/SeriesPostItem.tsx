@@ -47,7 +47,7 @@ const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
     align-items: flex-start;
     flex: 1;
     min-width: 0;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.004em;
     height: 6.25rem;
 
     ${media.small} {

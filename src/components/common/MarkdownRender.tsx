@@ -50,7 +50,7 @@ const MarkdownRenderBlock = styled.div`
   pre {
     font-family: 'Fira Mono', source-code-pro, Menlo, Monaco, Consolas,
       'Courier New', monospace;
-    font-size: 1rem;
+    font-size: 0.875rem;
     padding: 1rem;
     border-radius: 4px;
     line-height: 1.5;
@@ -162,6 +162,7 @@ function filter(html: string) {
       'span',
       'img',
       'del',
+      'input',
 
       ...katexWhitelist.tags,
     ],
@@ -171,6 +172,8 @@ function filter(html: string) {
       iframe: ['src', 'allow', 'allowfullscreen', 'scrolling', 'class'],
       '*': ['class', 'id', 'aria-hidden'],
       span: ['style'],
+      input: ['type'],
+      ol: ['start'],
       ...katexWhitelist.attributes,
     },
     allowedStyles: {
@@ -208,13 +211,13 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
     ssrEnabled
       ? filter(
           remark()
+            .use(breaks)
             .use(remarkParse)
             .use(slug)
             .use(prismPlugin)
             .use(embedPlugin)
             .use(remark2rehype, { allowDangerousHTML: true })
             .use(raw)
-            .use(breaks)
             .use(math)
             .use(katex)
             .use(stringify)
@@ -231,51 +234,56 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   const throttledUpdate = React.useMemo(() => {
     return throttle(delay, (markdown: string) => {
       remark()
-      .use(remarkParse)
-      .use(slug)
-      .use(prismPlugin)
-      .use(embedPlugin)
-      .use(remark2rehype, { allowDangerousHTML: true })
-      .use(raw)
-      .use(breaks)
-      .use(math)
-      .use(katex)
-      .use(stringify)
-      .process(markdown, (err: any, file: any) => {
-        const lines = markdown.split(/\r\n|\r|\n/).length
-        const nextDelay = Math.max(Math.min(Math.floor(lines * 0.5), 1500), 22)
-        if (nextDelay !== delay) {
-          setDelay(nextDelay)
-        }
-        const html = String(file);
+        .use(breaks)
+        .use(remarkParse)
+        .use(slug)
+        .use(prismPlugin)
+        .use(embedPlugin)
+        .use(remark2rehype, { allowDangerousHTML: true })
+        .use(raw)
+        .use(math)
+        .use(katex)
+        .use(stringify)
+        .process(
+          markdown,
+          (err: any, file: any) => {
+            const lines = markdown.split(/\r\n|\r|\n/).length;
+            const nextDelay = Math.max(
+              Math.min(Math.floor(lines * 0.5), 1500),
+              22,
+            );
+            if (nextDelay !== delay) {
+              setDelay(nextDelay);
+            }
+            const html = String(file);
 
-        if (onConvertFinish) {
-          onConvertFinish(html);
-        }
-        // load twitter script if needed
-        if (html.indexOf('class="twitter-tweet"') !== -1) {
-          // if (window && (window as any).twttr) return;
-          loadScript('https://platform.twitter.com/widgets.js');
-        }
+            if (onConvertFinish) {
+              onConvertFinish(html);
+            }
+            // load twitter script if needed
+            if (html.indexOf('class="twitter-tweet"') !== -1) {
+              // if (window && (window as any).twttr) return;
+              loadScript('https://platform.twitter.com/widgets.js');
+            }
 
-        if (!editing) {
-          setHtml(filter(html));
-          return;
-        }
+            if (!editing) {
+              setHtml(filter(html));
+              return;
+            }
 
-        try {
-          const el = parse(html);
-          setHasTagError(false);
-          setElement(el);
-        } catch (e) {}
-    }, 1)
+            try {
+              const el = parse(html);
+              setHasTagError(false);
+              setElement(el);
+            } catch (e) {}
+          },
+          1,
+        );
     });
   }, [delay, editing, onConvertFinish]);
 
-
-
   useEffect(() => {
-    throttledUpdate(markdown)    
+    throttledUpdate(markdown);
   }, [markdown, throttledUpdate]);
 
   return (

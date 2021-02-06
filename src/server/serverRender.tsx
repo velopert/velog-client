@@ -97,11 +97,13 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
     console.log('Apollo Error! Rendering result anyways');
     if (e instanceof ApolloError) {
       const notFound = e.graphQLErrors.some(
-        ge => (ge.extensions as any)?.code === 'NOT_FOUND',
+        (ge) => (ge.extensions as any)?.code === 'NOT_FOUND',
       );
       if (notFound) store.dispatch(error.actions.showNotFound());
     }
-    console.log(e);
+    console.log(e.name);
+    console.log(e.message);
+    console.log(JSON.stringify(e));
   }
 
   const content = ReactDOMServer.renderToString(Root);

@@ -11,6 +11,7 @@ import { RootState } from '../../modules';
 import { sendAuthEmail, SendAuthEmailResponse } from '../../lib/api/auth';
 import useRequest from '../../lib/hooks/useRequest';
 import { useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 interface OwnProps {}
 interface StateProps {
@@ -49,6 +50,10 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
 
   const onSendAuthEmail = useCallback(
     async (email: string) => {
+      if (!validateEmail(email)) {
+        toast.error('잘못된 이메일 형식입니다.');
+        return;
+      }
       _sendAuthEmail(email);
     },
     [_sendAuthEmail],
@@ -68,8 +73,13 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
   );
 };
 
+function validateEmail(email: string) {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
+
 export default connect<StateProps, DispatchProps, OwnProps, RootState>(
-  state => ({
+  (state) => ({
     visible: state.core.auth.visible,
     mode: state.core.auth.mode,
   }),

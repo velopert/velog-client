@@ -26,7 +26,7 @@ const PostHeadBlock = styled(VelogResponsive)`
     /* font-family: 'Spoqa Han Sans'; */
     font-size: 3rem;
     line-height: 1.5;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.004em;
     margin-top: 0;
     font-weight: 800;
     color: ${palette.gray8};
