@@ -56,7 +56,7 @@ function Html({
         {styledElement}
         {extractor.getLinkElements()}
         {extractor.getStyleElements()}
-        {favicons.map(favicon => (
+        {favicons.map((favicon) => (
           <link
             key={favicon.path}
             rel={favicon.rel}
@@ -65,6 +65,11 @@ function Html({
           />
         ))}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script
+          data-ad-client="ca-pub-5574866530496701"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        ></script>
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=UA-125599395-1"
