@@ -28,7 +28,7 @@ jobs:
     - name: npm run build:ci
       run: npm run build:ci
       env:
-        REACT_APP_API_HOST: 'https://v2dev.velog.io/'
+        REACT_APP_API_HOST: 'https://v2.velog.io/'
         PUBLIC_URL: 'https://d3v0gm8v6v8olv.cloudfront.net/'
         STAGE: true
     - name: s3 sync
@@ -50,7 +50,7 @@ jobs:
         # or if using AWS creds directly
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
-        REACT_APP_API_HOST: 'https://v2dev.velog.io/'
+        REACT_APP_API_HOST: 'https://v2.velog.io/'
         PUBLIC_URL: 'https://d3v0gm8v6v8olv.cloudfront.net/'
         STAGE: true
     - name: Slack Notification
