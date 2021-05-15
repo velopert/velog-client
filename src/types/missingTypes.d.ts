@@ -12,3 +12,4 @@ declare module 'rehype-stringify';
 declare module 'rehype-raw';
 declare module 'unist-util-visit';
 declare module 'strip-markdown';
+declare module 'just-detect-adblock';

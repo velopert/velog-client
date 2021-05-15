@@ -7879,6 +7879,11 @@ jsx-ast-utils@^2.2.1:
     array-includes "^3.0.3"
     object.assign "^4.1.0"
 
+just-detect-adblock@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/just-detect-adblock/-/just-detect-adblock-1.1.0.tgz#01910678247394b8d8b146afc869055eda2edd2e"
+  integrity sha512-xtgnwBBZaLtKspGo6jDX/H0FDsHrn41mQVWhNHge7pZe6Nj2gU2izfC09O0rPU/i97iMcJFVjbecFiTAvmNhLQ==
+
 katex@^0.11.0, katex@^0.11.1:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/katex/-/katex-0.11.1.tgz#df30ca40c565c9df01a466a00d53e079e84ffaa2"

@@ -1,9 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PostCard, { PostCardSkeleton } from './PostCard';
 import { PartialPost } from '../../lib/graphql/post';
 import { mediaQuery } from '../../lib/styles/media';
 import AdFeed from './AdFeed';
+import { detectAnyAdblocker } from 'just-detect-adblock';
 
 export type PostCardGridProps = {
   posts: PartialPost[];
@@ -12,14 +13,18 @@ export type PostCardGridProps = {
 };
 
 function PostCardGrid({ posts, loading, forHome }: PostCardGridProps) {
-  // const [adVisible, setAdVisible] = useState(true);
-  // useEffect(() => {
-  //   if (localStorage.getItem('SHOW_AD') === 'true') {
-  //     setAdVisible(true);
-  //   }
-  // }, []);
+  const [adBlocked, setAdBlocked] = useState(false);
+
+  useEffect(() => {
+    detectAnyAdblocker().then((detected: boolean) => {
+      if (detected) {
+        setAdBlocked(true);
+      }
+    });
+  }, []);
 
   const postsWithAds = useMemo(() => {
+    if (adBlocked) return posts;
     if (!forHome) return posts;
     if (posts.length === 0) return posts;
     const cloned: (PartialPost | undefined)[] = [...posts];
@@ -37,7 +42,7 @@ function PostCardGrid({ posts, loading, forHome }: PostCardGridProps) {
       cloned.splice(62, 0, undefined);
     }
     return cloned;
-  }, [posts, forHome]);
+  }, [posts, forHome, adBlocked]);
 
   return (
     <Block>
