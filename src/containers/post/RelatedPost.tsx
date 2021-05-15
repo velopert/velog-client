@@ -18,7 +18,9 @@ function RelatedPost({ type }: RelatedPostProps) {
       setVisible(false);
       return;
     }
-    (window.adsbygoogle = window.adsbygoogle || []).push({});
+    setTimeout(() => {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    }, 100);
   }, [type]);
 
   useEffect(() => {
@@ -34,13 +36,30 @@ function RelatedPost({ type }: RelatedPostProps) {
   return (
     <Wrapper>
       <h4>관심 있을 만한 포스트</h4>
-      <ins
-        className="adsbygoogle"
-        style={{ display: 'block' }}
-        data-ad-format="autorelaxed"
-        data-ad-client="ca-pub-5574866530496701"
-        data-ad-slot="4990574169"
-      ></ins>
+      {type === 'desktop' && (
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-format="autorelaxed"
+          data-ad-client="ca-pub-5574866530496701"
+          data-ad-slot="4990574169"
+          data-matched-content-ui-type="image_stacked"
+          data-matched-content-rows-num="2"
+          data-matched-content-columns-num="3"
+        ></ins>
+      )}
+      {type === 'mobile' && (
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-format="autorelaxed"
+          data-ad-client="ca-pub-5574866530496701"
+          data-ad-slot="4990574169"
+          data-matched-content-ui-type="image_stacked"
+          data-matched-content-rows-num="4"
+          data-matched-content-columns-num="1"
+        ></ins>
+      )}
     </Wrapper>
   );
 }
