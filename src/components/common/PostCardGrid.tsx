@@ -45,7 +45,7 @@ function PostCardGrid({ posts, loading, forHome }: PostCardGridProps) {
       cloned.splice(62, 0, undefined);
     }
     return cloned;
-  }, [posts, forHome, adBlocked]);
+  }, [posts, forHome, adBlocked, user]);
 
   return (
     <Block>
