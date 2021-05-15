@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PostCard, { PostCardSkeleton } from './PostCard';
 import { PartialPost } from '../../lib/graphql/post';
 import { mediaQuery } from '../../lib/styles/media';
+import AdFeed from './AdFeed';
 
 export type PostCardGridProps = {
   posts: PartialPost[];
@@ -11,9 +12,17 @@ export type PostCardGridProps = {
 };
 
 function PostCardGrid({ posts, loading, forHome }: PostCardGridProps) {
+  const [adVisible, setAdVisible] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem('SHOW_AD') === 'true') {
+      setAdVisible(true);
+    }
+  }, []);
+
   return (
     <Block>
-      {posts.map(post => (
+      {adVisible && <AdFeed />}
+      {posts.map((post) => (
         <PostCard post={post} key={post.id} forHome={forHome} />
       ))}
       {loading &&
