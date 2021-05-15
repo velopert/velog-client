@@ -2,12 +2,6 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { mediaQuery } from '../../lib/styles/media';
 
-declare global {
-  interface Window {
-    adsbygoogle: { [key: string]: unknown }[];
-  }
-}
-
 function AdFeed() {
   useEffect(() => {
     (window.adsbygoogle = window.adsbygoogle || []).push({});

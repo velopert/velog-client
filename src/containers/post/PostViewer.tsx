@@ -33,6 +33,7 @@ import useNotFound from '../../lib/hooks/useNotFound';
 import { Helmet } from 'react-helmet-async';
 import { toast } from 'react-toastify';
 import MobileLikeButton from '../../components/post/MobileLikeButton';
+import RelatedPost from './RelatedPost';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -366,6 +367,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         />
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />
+      <RelatedPost />
       <PostComments
         count={post.comments_count}
         comments={post.comments}
