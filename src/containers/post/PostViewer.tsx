@@ -367,7 +367,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         />
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />
-      [post.user.username === 'velopert' <RelatedPost />}
+      <RelatedPost />
       <PostComments
         count={post.comments_count}
         comments={post.comments}
