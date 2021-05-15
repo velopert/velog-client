@@ -1,11 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import VelogResponsive from '../../components/velog/VelogResponsive';
 
-function RelatedPost() {
+type RelatedPostProps = {
+  type: 'desktop' | 'mobile';
+};
+function RelatedPost({ type }: RelatedPostProps) {
+  const [visible, setVisible] = useState(true);
   useEffect(() => {
+    const width = window.innerWidth;
+    if (type === 'desktop' && width < 468) {
+      setVisible(false);
+      return;
+    }
+    if (type === 'mobile' && width >= 468) {
+      setVisible(false);
+      return;
+    }
     (window.adsbygoogle = window.adsbygoogle || []).push({});
-  }, []);
+  }, [type]);
+
+  if (!visible) return null;
 
   return (
     <Wrapper>
