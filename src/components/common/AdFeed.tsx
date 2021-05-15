@@ -1,11 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { mediaQuery } from '../../lib/styles/media';
 
 function AdFeed() {
+  const [adBlocked, setAdBlocked] = useState(false);
   useEffect(() => {
-    (window as any).adsbygoogle = ((window as any).adsbygoogle || []).push({});
+    if ((window as any)?.adsbygoogle?.push) {
+      (window as any).adsbygoogle = ((window as any).adsbygoogle || []).push(
+        {},
+      );
+    } else {
+      setAdBlocked(true);
+    }
   }, []);
+
+  if (adBlocked) return null;
+
   return (
     <Block>
       <ins

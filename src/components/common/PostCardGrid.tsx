@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import PostCard, { PostCardSkeleton } from './PostCard';
 import { PartialPost } from '../../lib/graphql/post';
@@ -21,20 +21,30 @@ function PostCardGrid({ posts, loading, forHome }: PostCardGridProps) {
 
   const postsWithAds = useMemo(() => {
     if (!forHome) return posts;
+    if (posts.length === 0) return posts;
     const cloned: (PartialPost | undefined)[] = [...posts];
     cloned.splice(4, 0, undefined);
-    if (cloned.length > 30) {
+    if (cloned.length > 21) {
       cloned.splice(20, 0, undefined);
+    }
+    if (cloned.length > 33) {
+      cloned.splice(32, 0, undefined);
+    }
+    if (cloned.length > 49) {
+      cloned.splice(48, 0, undefined);
+    }
+    if (cloned.length > 63) {
+      cloned.splice(62, 0, undefined);
     }
     return cloned;
   }, [posts, forHome]);
 
   return (
     <Block>
-      {postsWithAds.map((post) => {
+      {postsWithAds.map((post, i) => {
         if (post)
           return <PostCard post={post} key={post.id} forHome={forHome} />;
-        return <AdFeed />;
+        return <AdFeed key={i} />;
       })}
       {loading &&
         Array.from({ length: 8 }).map((_, i) => (
