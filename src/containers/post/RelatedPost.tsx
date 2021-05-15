@@ -10,11 +10,11 @@ function RelatedPost({ type }: RelatedPostProps) {
   const [visible, setVisible] = useState(true);
   useEffect(() => {
     const width = window.innerWidth;
-    if (type === 'desktop' && width < 468) {
+    if (type === 'desktop' && width < 768) {
       setVisible(false);
       return;
     }
-    if (type === 'mobile' && width >= 468) {
+    if (type === 'mobile' && width >= 768) {
       setVisible(false);
       return;
     }
@@ -56,7 +56,7 @@ function RelatedPost({ type }: RelatedPostProps) {
           data-ad-client="ca-pub-5574866530496701"
           data-ad-slot="4990574169"
           data-matched-content-ui-type="image_stacked"
-          data-matched-content-rows-num="4"
+          data-matched-content-rows-num="6"
           data-matched-content-columns-num="1"
         ></ins>
       )}
