@@ -5,7 +5,7 @@ import { mediaQuery } from '../../lib/styles/media';
 function AdFeed() {
   const [adBlocked, setAdBlocked] = useState(false);
   useEffect(() => {
-    if ((window as any)?.adsbygoogle?.push) {
+    if (((window as any)?.adsbygoogle || [])?.push) {
       (window as any).adsbygoogle = ((window as any).adsbygoogle || []).push(
         {},
       );
