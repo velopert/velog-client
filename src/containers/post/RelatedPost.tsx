@@ -8,22 +8,22 @@ type RelatedPostProps = {
 };
 function RelatedPost({ type }: RelatedPostProps) {
   const [visible, setVisible] = useState(true);
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     const width = window.innerWidth;
-  //     if (type === 'desktop' && width < 768) {
-  //       setVisible(false);
-  //       return;
-  //     }
-  //     if (type === 'mobile' && width >= 768) {
-  //       setVisible(false);
-  //       return;
-  //     }
-  //     setTimeout(() => {
-  //       (window.adsbygoogle = window.adsbygoogle || []).push({});
-  //     }, 100);
-  //   }, 250);
-  // }, [type]);
+  useEffect(() => {
+    setTimeout(() => {
+      const width = window.innerWidth;
+      if (type === 'desktop' && width < 768) {
+        setVisible(false);
+        return;
+      }
+      if (type === 'mobile' && width >= 768) {
+        setVisible(false);
+        return;
+      }
+      setTimeout(() => {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      }, 500);
+    }, 250);
+  }, [type]);
 
   useEffect(() => {
     detectAnyAdblocker().then((detected: boolean) => {
@@ -37,17 +37,31 @@ function RelatedPost({ type }: RelatedPostProps) {
 
   return (
     <Wrapper>
-      <h4>관심 있을 만한 포스트</h4>(
-      <ins
-        className="adsbygoogle"
-        style={{ display: 'block' }}
-        data-ad-format="autorelaxed"
-        data-ad-client="ca-pub-5574866530496701"
-        data-ad-slot="4990574169"
-        data-matched-content-ui-type="image_stacked"
-        data-matched-content-rows-num="2"
-        data-matched-content-columns-num="3"
-      ></ins>
+      <h4>관심 있을 만한 포스트</h4>
+      {type === 'desktop' && (
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-format="autorelaxed"
+          data-ad-client="ca-pub-5574866530496701"
+          data-ad-slot="4990574169"
+          data-matched-content-ui-type="image_stacked"
+          data-matched-content-rows-num="2"
+          data-matched-content-columns-num="3"
+        ></ins>
+      )}
+      {type === 'mobile' && (
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-format="autorelaxed"
+          data-ad-client="ca-pub-5574866530496701"
+          data-ad-slot="4990574169"
+          data-matched-content-ui-type="image_stacked"
+          data-matched-content-rows-num="6"
+          data-matched-content-columns-num="1"
+        ></ins>
+      )}
     </Wrapper>
   );
 }
