@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import VelogResponsive from '../../components/velog/VelogResponsive';
 
 function RelatedPost() {
   useEffect(() => {
@@ -19,7 +20,7 @@ function RelatedPost() {
   );
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled(VelogResponsive)`
   margin-top: 2rem;
   margin-bottom: 2rem;
 `;
