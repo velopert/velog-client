@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import PostCard, { PostCardSkeleton } from './PostCard';
 import { PartialPost } from '../../lib/graphql/post';
@@ -12,19 +12,30 @@ export type PostCardGridProps = {
 };
 
 function PostCardGrid({ posts, loading, forHome }: PostCardGridProps) {
-  const [adVisible, setAdVisible] = useState(false);
-  useEffect(() => {
-    if (localStorage.getItem('SHOW_AD') === 'true') {
-      setAdVisible(true);
+  // const [adVisible, setAdVisible] = useState(true);
+  // useEffect(() => {
+  //   if (localStorage.getItem('SHOW_AD') === 'true') {
+  //     setAdVisible(true);
+  //   }
+  // }, []);
+
+  const postsWithAds = useMemo(() => {
+    if (!forHome) return posts;
+    const cloned: (PartialPost | undefined)[] = [...posts];
+    cloned.splice(4, 0, undefined);
+    if (cloned.length > 30) {
+      cloned.splice(20, 0, undefined);
     }
-  }, []);
+    return cloned;
+  }, [posts, forHome]);
 
   return (
     <Block>
-      {adVisible && <AdFeed />}
-      {posts.map((post) => (
-        <PostCard post={post} key={post.id} forHome={forHome} />
-      ))}
+      {postsWithAds.map((post) => {
+        if (post)
+          return <PostCard post={post} key={post.id} forHome={forHome} />;
+        return <AdFeed />;
+      })}
       {loading &&
         Array.from({ length: 8 }).map((_, i) => (
           <PostCardSkeleton key={i} forHome={forHome} />

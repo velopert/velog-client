@@ -15,7 +15,6 @@ function AdFeed() {
         data-ad-layout-key="-6u+e7+18-4k+8t"
         data-ad-client="ca-pub-5574866530496701"
         data-ad-slot="3828701581"
-        data-adtest="on"
       ></ins>
     </Block>
   );
