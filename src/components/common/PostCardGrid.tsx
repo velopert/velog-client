@@ -5,6 +5,7 @@ import { PartialPost } from '../../lib/graphql/post';
 import { mediaQuery } from '../../lib/styles/media';
 import AdFeed from './AdFeed';
 import { detectAnyAdblocker } from 'just-detect-adblock';
+import useUser from '../../lib/hooks/useUser';
 
 export type PostCardGridProps = {
   posts: PartialPost[];
@@ -14,6 +15,7 @@ export type PostCardGridProps = {
 
 function PostCardGrid({ posts, loading, forHome }: PostCardGridProps) {
   const [adBlocked, setAdBlocked] = useState(false);
+  const user = useUser();
 
   useEffect(() => {
     detectAnyAdblocker().then((detected: boolean) => {
@@ -24,6 +26,7 @@ function PostCardGrid({ posts, loading, forHome }: PostCardGridProps) {
   }, []);
 
   const postsWithAds = useMemo(() => {
+    if (user) return posts; // hide ads to users
     if (adBlocked) return posts;
     if (!forHome) return posts;
     if (posts.length === 0) return posts;
