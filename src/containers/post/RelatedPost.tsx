@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import VelogResponsive from '../../components/velog/VelogResponsive';
 import { detectAnyAdblocker } from 'just-detect-adblock';
+import media from '../../lib/styles/media';
 
 type RelatedPostProps = {
   type: 'desktop' | 'mobile';
@@ -67,10 +68,13 @@ function RelatedPost({ type }: RelatedPostProps) {
 }
 
 const Wrapper = styled(VelogResponsive)`
-  padding-left: 1rem;
-  padding-right: 1rem;
   margin-top: 4rem;
   margin-bottom: 3rem;
+  ${media.small} {
+    flex-direction: column-reverse;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 `;
 
 export default RelatedPost;
