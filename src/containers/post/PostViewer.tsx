@@ -367,13 +367,12 @@ const PostViewer: React.FC<PostViewerProps> = ({
         />
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />
-      <RelatedPost type="desktop" />
+      <RelatedPost />
       <PostComments
         count={post.comments_count}
         comments={post.comments}
         postId={post.id}
       />
-      <RelatedPost type="mobile" />
     </PostViewerProvider>
   );
 };

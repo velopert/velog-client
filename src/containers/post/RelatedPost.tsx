@@ -4,27 +4,19 @@ import VelogResponsive from '../../components/velog/VelogResponsive';
 import { detectAnyAdblocker } from 'just-detect-adblock';
 import media from '../../lib/styles/media';
 
-type RelatedPostProps = {
-  type: 'desktop' | 'mobile';
-};
-function RelatedPost({ type }: RelatedPostProps) {
+function RelatedPost() {
+  const [isMobile, setIsMobile] = useState(false);
   const [visible, setVisible] = useState(true);
   useEffect(() => {
+    const width = window.innerWidth;
+    if (width < 768) {
+      setIsMobile(true);
+    }
+
     setTimeout(() => {
-      const width = window.innerWidth;
-      if (type === 'desktop' && width < 768) {
-        setVisible(false);
-        return;
-      }
-      if (type === 'mobile' && width >= 768) {
-        setVisible(false);
-        return;
-      }
-      setTimeout(() => {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      }, 500);
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
     }, 250);
-  }, [type]);
+  }, []);
 
   useEffect(() => {
     detectAnyAdblocker().then((detected: boolean) => {
@@ -39,7 +31,7 @@ function RelatedPost({ type }: RelatedPostProps) {
   return (
     <Wrapper>
       <h4>관심 있을 만한 포스트</h4>
-      {type === 'desktop' && (
+      {!isMobile && (
         <ins
           className="adsbygoogle"
           style={{ display: 'block' }}
@@ -51,7 +43,7 @@ function RelatedPost({ type }: RelatedPostProps) {
           data-matched-content-columns-num="3"
         ></ins>
       )}
-      {type === 'mobile' && (
+      {isMobile && (
         <ins
           className="adsbygoogle"
           style={{ display: 'block' }}
@@ -59,8 +51,8 @@ function RelatedPost({ type }: RelatedPostProps) {
           data-ad-client="ca-pub-5574866530496701"
           data-ad-slot="4990574169"
           data-matched-content-ui-type="image_stacked"
-          data-matched-content-rows-num="6"
-          data-matched-content-columns-num="1"
+          data-matched-content-rows-num="3"
+          data-matched-content-columns-num="2"
         ></ins>
       )}
     </Wrapper>
