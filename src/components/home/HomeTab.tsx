@@ -2,11 +2,19 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { NavLink, useLocation } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
-import { MdTrendingUp, MdAccessTime, MdMoreVert } from 'react-icons/md';
+import {
+  MdTrendingUp,
+  MdAccessTime,
+  MdMoreVert,
+  MdArrowDropDown,
+} from 'react-icons/md';
 import { useSpring, animated } from 'react-spring';
 import { mediaQuery } from '../../lib/styles/media';
 import useToggle from '../../lib/hooks/useToggle';
 import HomeMobileHeadExtra from './HomeMobileHeadExtra';
+import TimeframePicker from './TimeframePicker';
+import { useTimeframe } from './hooks/useTimeframe';
+import { timeframes } from './utils/timeframeMap';
 
 export type HomeTabProps = {};
 
@@ -15,7 +23,10 @@ function HomeTab(props: HomeTabProps) {
 
   const isRecent = location.pathname === '/recent';
   const [extra, toggle] = useToggle(false);
+  const [timeframePicker, toggleTimeframePicker] = useToggle(false);
   const moreButtonRef = useRef<HTMLDivElement | null>(null);
+  const timeframeRef = useRef<HTMLDivElement | null>(null);
+  const [timeframe] = useTimeframe();
 
   const onClose = (e: React.MouseEvent<HTMLElement>) => {
     if (!moreButtonRef.current) return;
@@ -28,6 +39,17 @@ function HomeTab(props: HomeTabProps) {
     toggle();
   };
 
+  const onCloseTimeframePicker = (e: React.MouseEvent<HTMLElement>) => {
+    if (!timeframeRef.current) return;
+    if (
+      e.target === timeframeRef.current ||
+      timeframeRef.current.contains(e.target as Node)
+    ) {
+      return;
+    }
+    toggleTimeframePicker();
+  };
+
   const springStyle = useSpring({
     left: isRecent ? '50%' : '0%',
     config: {
@@ -38,23 +60,37 @@ function HomeTab(props: HomeTabProps) {
 
   return (
     <Wrapper>
-      <Block>
-        <NavLink
-          to="/"
-          activeClassName="active"
-          isActive={(match, location) => {
-            return ['/', '/trending'].indexOf(location.pathname) !== -1;
-          }}
-        >
-          <MdTrendingUp />
-          트렌딩
-        </NavLink>
-        <NavLink to="/recent" activeClassName="active">
-          <MdAccessTime />
-          최신
-        </NavLink>
-        <Indicator style={springStyle} />
-      </Block>
+      <Left>
+        <Block>
+          <NavLink
+            to="/"
+            activeClassName="active"
+            isActive={(match, location) => {
+              return ['/', '/trending'].indexOf(location.pathname) !== -1;
+            }}
+          >
+            <MdTrendingUp />
+            트렌딩
+          </NavLink>
+          <NavLink to="/recent" activeClassName="active">
+            <MdAccessTime />
+            최신
+          </NavLink>
+          <Indicator style={springStyle} />
+        </Block>
+        {['/', '/trending'].includes(location.pathname) && (
+          <>
+            <Selector onClick={toggleTimeframePicker} ref={timeframeRef}>
+              {timeframes.find((t) => t[0] === timeframe)![1]}{' '}
+              <MdArrowDropDown />
+            </Selector>
+            <TimeframePicker
+              visible={timeframePicker}
+              onClose={onCloseTimeframePicker}
+            />
+          </>
+        )}
+      </Left>
       <MobileMore ref={moreButtonRef}>
         <MdMoreVert className="more" onClick={toggle} />
       </MobileMore>
@@ -80,6 +116,12 @@ const MobileMore = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const Left = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
 `;
 
 const Block = styled.div`
@@ -124,6 +166,32 @@ const Indicator = styled(animated.div)`
   position: absolute;
   bottom: 0px;
   background: ${palette.gray8};
+`;
+
+const Selector = styled.div`
+  background: white;
+  height: 2rem;
+  width: 5rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-weight: 600;
+  color: ${palette.gray7};
+  font-size: 0.875rem;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.05);
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  cursor: pointer;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      opacity: 0.75;
+    }
+  }
 `;
 
 export default HomeTab;

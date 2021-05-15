@@ -5,13 +5,16 @@ import {
 import { useQuery } from '@apollo/react-hooks';
 import { useCallback, useState } from 'react';
 import useScrollPagination from '../../../lib/hooks/useScrollPagination';
+import { useTimeframe } from '../../../components/home/hooks/useTimeframe';
 
 export default function useTrendingPosts() {
+  const [timeframe] = useTimeframe();
   const { data, loading, fetchMore } = useQuery<GetTrendingPostsResponse>(
     GET_TRENDING_POSTS,
     {
       variables: {
         limit: 24,
+        timeframe: timeframe,
       },
       // https://github.com/apollographql/apollo-client/issues/1617
       notifyOnNetworkStatusChange: true,
@@ -42,7 +45,7 @@ export default function useTrendingPosts() {
           );
 
           const uniquePosts = fetchMoreResult.trendingPosts.filter(
-            post => !idMap[post.id],
+            (post) => !idMap[post.id],
           );
 
           return {

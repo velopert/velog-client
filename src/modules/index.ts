@@ -5,6 +5,7 @@ import header, { HeaderState } from './header';
 import post, { PostState } from './post';
 import error, { ErrorState } from './error';
 import scroll, { ScrollState } from './scroll';
+import home, { HomeState } from './home';
 
 export type RootState = {
   core: CoreState;
@@ -13,6 +14,7 @@ export type RootState = {
   post: PostState;
   error: ErrorState;
   scroll: ScrollState;
+  home: HomeState;
 };
 
 const rootReducer = combineReducers({
@@ -22,6 +24,7 @@ const rootReducer = combineReducers({
   post: post.reducer,
   error: error.reducer,
   scroll: scroll.reducer,
+  home: home.reducer,
 });
 
 export default rootReducer;
