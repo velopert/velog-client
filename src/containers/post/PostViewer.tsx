@@ -373,7 +373,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         comments={post.comments}
         postId={post.id}
       />
-      <RelatedPost type="mobile" />
+      {/* <RelatedPost type="mobile" /> */}
     </PostViewerProvider>
   );
 };
