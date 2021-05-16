@@ -9,7 +9,7 @@ import {
   MdArrowDropDown,
 } from 'react-icons/md';
 import { useSpring, animated } from 'react-spring';
-import { mediaQuery } from '../../lib/styles/media';
+import media, { mediaQuery } from '../../lib/styles/media';
 import useToggle from '../../lib/hooks/useToggle';
 import HomeMobileHeadExtra from './HomeMobileHeadExtra';
 import TimeframePicker from './TimeframePicker';
@@ -171,7 +171,7 @@ const Indicator = styled(animated.div)`
 const Selector = styled.div`
   background: white;
   height: 2rem;
-  width: 5rem;
+  width: 5.25rem;
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -191,6 +191,9 @@ const Selector = styled.div`
     &:hover {
       opacity: 0.75;
     }
+  }
+  ${media.medium} {
+    font-size: 0.75rem;
   }
 `;
 
