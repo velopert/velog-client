@@ -171,7 +171,7 @@ const Indicator = styled(animated.div)`
 const Selector = styled.div`
   background: white;
   height: 2rem;
-  width: 5.25rem;
+  width: 6rem;
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -193,6 +193,7 @@ const Selector = styled.div`
     }
   }
   ${media.medium} {
+    width: 5.25rem;
     font-size: 0.75rem;
   }
 `;
