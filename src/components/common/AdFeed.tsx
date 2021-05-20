@@ -9,13 +9,21 @@ function AdFeed() {
 
   return (
     <Block>
-      <ins
+      {/* <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
         data-ad-format="fluid"
         data-ad-layout-key="-6z+el+w-4n+70"
         data-ad-client="ca-pub-5574866530496701"
         data-ad-slot="8258809297"
+      ></ins> */}
+      <ins
+        className="adsbygoogle"
+        style={{ display: 'block' }}
+        data-ad-client="ca-pub-5574866530496701"
+        data-ad-slot="6548419604"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
       ></ins>
     </Block>
   );
@@ -38,6 +46,7 @@ const Block = styled.div`
     width: 100%;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    min-height: 5rem;
   }
 `;
 
