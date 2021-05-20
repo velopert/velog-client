@@ -367,7 +367,12 @@ const PostViewer: React.FC<PostViewerProps> = ({
         />
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />
-      <RelatedPost />
+      <RelatedPost
+        showAds={
+          Date.now() - new Date(post.released_at).getTime() >
+          1000 * 60 * 60 * 24 * 30 * 3
+        }
+      />
       <PostComments
         count={post.comments_count}
         comments={post.comments}

@@ -1,30 +1,42 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { mediaQuery } from '../../lib/styles/media';
 
 function AdFeed() {
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
-    (window.adsbygoogle = window.adsbygoogle || []).push({});
+    const width = window.innerWidth;
+    if (width < 768) {
+      setIsMobile(true);
+    }
+
+    setTimeout(() => {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    }, 250);
   }, []);
 
   return (
     <Block>
-      {/* <ins
-        className="adsbygoogle"
-        style={{ display: 'block' }}
-        data-ad-format="fluid"
-        data-ad-layout-key="-6z+el+w-4n+70"
-        data-ad-client="ca-pub-5574866530496701"
-        data-ad-slot="8258809297"
-      ></ins> */}
-      <ins
-        className="adsbygoogle"
-        style={{ display: 'block' }}
-        data-ad-client="ca-pub-5574866530496701"
-        data-ad-slot="6548419604"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      ></ins>
+      {isMobile ? (
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-format="fluid"
+          data-ad-layout-key="-6z+el+w-4n+70"
+          data-ad-client="ca-pub-5574866530496701"
+          data-ad-slot="8258809297"
+        ></ins>
+      ) : (
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-client="ca-pub-5574866530496701"
+          data-ad-slot="6548419604"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+      )}
     </Block>
   );
 }
