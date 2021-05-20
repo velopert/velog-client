@@ -12,7 +12,13 @@ export const handler = async (event: APIGatewayEvent) => {
     cookie.includes('refresh_token') || cookie.includes('access_token');
 
   if (event.path === 'ads.txt') {
-    return 'google.com, pub-5574866530496701, DIRECT, f08c47fec0942fa0';
+    return {
+      statusCode: 200,
+      headers: {
+        'content-type': 'text/html; charset=utf-8;',
+      },
+      body: 'google.com, pub-5574866530496701, DIRECT, f08c47fec0942fa0',
+    };
   }
 
   try {
