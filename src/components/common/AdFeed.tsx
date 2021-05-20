@@ -12,11 +12,19 @@ function AdFeed() {
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
+        data-ad-client="ca-pub-5574866530496701"
+        data-ad-slot="6548419604"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
+      {/* <ins
+        className="adsbygoogle"
+        style={{ display: 'block' }}
         data-ad-format="fluid"
         data-ad-layout-key="-6u+e7+18-4k+8t"
         data-ad-client="ca-pub-5574866530496701"
         data-ad-slot="3828701581"
-      ></ins>
+      ></ins> */}
     </Block>
   );
 }
