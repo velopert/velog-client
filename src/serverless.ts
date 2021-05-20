@@ -11,7 +11,7 @@ export const handler = async (event: APIGatewayEvent) => {
   const loggedIn =
     cookie.includes('refresh_token') || cookie.includes('access_token');
 
-  if (event.path === 'ads.txt') {
+  if (event.path === '/ads.txt') {
     return {
       statusCode: 200,
       headers: {
