@@ -370,7 +370,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
       <RelatedPost
         showAds={
           Date.now() - new Date(post.released_at).getTime() >
-          1000 * 60 * 60 * 24 * 30 * 3
+            1000 * 60 * 60 * 24 * 30 * 3 && userId === null
         }
       />
       <PostComments
