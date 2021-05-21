@@ -18,7 +18,15 @@ function AdFeed() {
 
   return (
     <Block>
-      {isMobile ? (
+      <ins
+        className="adsbygoogle"
+        style={{ display: 'block' }}
+        data-ad-format="fluid"
+        data-ad-layout-key="-6u+e7+18-4k+8t"
+        data-ad-client="ca-pub-5574866530496701"
+        data-ad-slot="3828701581"
+      ></ins>
+      {/* {isMobile ? (
         <ins
           className="adsbygoogle"
           style={{ display: 'block' }}
@@ -36,7 +44,7 @@ function AdFeed() {
           data-ad-format="auto"
           data-full-width-responsive="true"
         ></ins>
-      )}
+      )} */}
     </Block>
   );
 }
