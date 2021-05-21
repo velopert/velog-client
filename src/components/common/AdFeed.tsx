@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { mediaQuery } from '../../lib/styles/media';
 
 function AdFeed() {
-  const [isMobile, setIsMobile] = useState(false);
+  // const [isMobile, setIsMobile] = useState(false);
 
+  // useEffect(() => {
+  //   const width = window.innerWidth;
+  //   if (width < 768) {
+  //     setIsMobile(true);
+  //   }
+
+  //   setTimeout(() => {
+  //     (window.adsbygoogle = window.adsbygoogle || []).push({});
+  //   }, 250);
+  // }, []);
   useEffect(() => {
-    const width = window.innerWidth;
-    if (width < 768) {
-      setIsMobile(true);
-    }
-
-    setTimeout(() => {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    }, 250);
+    (window.adsbygoogle = window.adsbygoogle || []).push({});
   }, []);
 
   return (
