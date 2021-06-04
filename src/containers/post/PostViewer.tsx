@@ -212,6 +212,10 @@ const PostViewer: React.FC<PostViewerProps> = ({
     history.push(`/write?id=${post.id}`);
   };
 
+  const onOpenStats = () => {
+    history.push(`/post-stats/${post.id}`);
+  };
+
   const onLikeToggle = async () => {
     if (loadingLike || loadingUnlike) return;
 
@@ -337,6 +341,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         ownPost={post.user.id === userId}
         onRemove={onRemove}
         onEdit={onEdit}
+        onOpenStats={onOpenStats}
         shareButtons={
           <PostLikeShareButtons
             onLikeToggle={onLikeToggle}

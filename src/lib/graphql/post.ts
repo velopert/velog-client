@@ -131,6 +131,14 @@ export interface CommentWithReplies {
   replies: Comment[];
 }
 
+export interface Stats {
+  total: number;
+  count_by_day: {
+    count: number;
+    day: string;
+  }[];
+}
+
 export const GET_POST_LIST = gql`
   query Posts(
     $cursor: ID
@@ -733,3 +741,15 @@ export const GET_READING_LIST = gql`
 export type GetReadingListResponse = {
   readingList: PartialPost[];
 };
+
+export const GET_STATS = gql`
+  query GetStats($post_id: ID!) {
+    getStats(post_id: $post_id) {
+      total
+      count_by_day {
+        count
+        day
+      }
+    }
+  }
+`;
