@@ -46,9 +46,11 @@ const ReadingListPage = loadable(
   },
 );
 
+const PostStatsPage = loadable(() => import('./pages/PostStatsPage'));
+
 interface AppProps {}
 
-const App: React.FC<AppProps> = props => {
+const App: React.FC<AppProps> = (props) => {
   return (
     <JazzbarProvider>
       <Helmet>
@@ -81,6 +83,7 @@ const App: React.FC<AppProps> = props => {
           <Route path="/success" component={SuccessPage} />
           <Route path="/lists/:type(liked|read)" component={ReadingListPage} />
           <Route path="/lists" render={() => <Redirect to="/lists/liked" />} />
+          <Route path="/post-stats/:postId" component={PostStatsPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </ErrorBoundary>

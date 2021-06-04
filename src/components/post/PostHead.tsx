@@ -147,6 +147,7 @@ export interface PostHeadProps {
   toc: React.ReactNode;
   isPrivate?: boolean;
   mobileLikeButton: React.ReactNode;
+  onOpenStats(): void;
 }
 
 const PostHead: React.FC<PostHeadProps> = ({
@@ -165,6 +166,7 @@ const PostHead: React.FC<PostHeadProps> = ({
   toc,
   isPrivate,
   mobileLikeButton,
+  onOpenStats,
 }) => {
   const [askRemove, toggleAskRemove] = useToggle(false);
 
@@ -178,6 +180,7 @@ const PostHead: React.FC<PostHeadProps> = ({
         <h1>{title}</h1>
         {ownPost && (
           <EditRemoveGroup>
+            <button onClick={onOpenStats}>통계</button>
             <button onClick={onEdit}>수정</button>
             <button onClick={toggleAskRemove}>삭제</button>
           </EditRemoveGroup>
@@ -204,7 +207,7 @@ const PostHead: React.FC<PostHeadProps> = ({
         {series && (
           <PostSeriesInfo
             name={series.name}
-            posts={series.series_posts.map(sp => sp.post)}
+            posts={series.series_posts.map((sp) => sp.post)}
             postId={postId}
             username={username}
             urlSlug={series.url_slug}
