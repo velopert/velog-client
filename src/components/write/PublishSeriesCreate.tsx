@@ -5,6 +5,7 @@ import OutsideClickHandler from 'react-outside-click-handler';
 import Button from '../common/Button';
 import useInputs from '../../lib/hooks/useInputs';
 import { escapeForUrl } from '../../lib/utils';
+import { toast } from 'react-toastify';
 
 const fadeIn = keyframes`
   from {
@@ -145,6 +146,10 @@ const PublishSeriesCreate: React.FC<PublishSeriesCreateProps> = ({
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
+    if (form.name.trim() === '') {
+      toast.error('시리즈 제목이 비어있습니다.');
+      return;
+    }
     onSubmit({
       name: form.name,
       urlSlug: form.urlSlug || defaultUrlSlug,
