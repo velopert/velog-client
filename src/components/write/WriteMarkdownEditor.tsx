@@ -130,7 +130,7 @@ export default class WriteMarkdownEditor extends React.Component<
 
     if (detectJSDOM()) return;
     this.codemirror.setValue(this.props.initialBody);
-    this.codemirror.on('change', cm => {
+    this.codemirror.on('change', (cm) => {
       this.props.onChangeMarkdown(cm.getValue());
       this.stickToBottomIfNeeded();
       const doc = cm.getDoc();
@@ -145,7 +145,7 @@ export default class WriteMarkdownEditor extends React.Component<
       }
     });
 
-    this.codemirror.on('scroll', cm => {
+    this.codemirror.on('scroll', (cm) => {
       const info = cm.getScrollInfo();
 
       if (info.top > 0 && info.height > window.screen.height) {
@@ -161,7 +161,7 @@ export default class WriteMarkdownEditor extends React.Component<
       }
     });
 
-    this.codemirror.on('mousewheel', cm => {
+    this.codemirror.on('mousewheel', (cm) => {
       console.log(cm.getScrollInfo());
     });
 
@@ -538,7 +538,7 @@ export default class WriteMarkdownEditor extends React.Component<
       [key: string]: Function;
     } = {
       ...[1, 2, 3, 4] // creates handlers for heading1, heading2, heading3, heading4
-        .map(number => () => {
+        .map((number) => () => {
           // create handler function
           const characters = '#'.repeat(number);
           const plain = removeHeading(line);
@@ -858,12 +858,17 @@ ${selected}
         <div className="wrapper">
           <WriterHead hide={this.state.hideUpper}>
             {ssrEnabled ? (
-              <TitleTextareaForSSR placeholder="제목을 입력하세요" rows={1} />
+              <TitleTextareaForSSR
+                placeholder="제목을 입력하세요"
+                rows={1}
+                tabIndex={1}
+              />
             ) : (
               <TitleTextarea
                 placeholder="제목을 입력하세요"
                 onChange={this.handleTitleChange}
                 value={title}
+                tabIndex={1}
               />
             )}
             <HorizontalBar />
@@ -889,7 +894,11 @@ ${selected}
                 onClose={this.handleCancelAddLink}
               />
             )}
-            <textarea ref={this.editorElement} style={{ display: 'none' }} />
+            <textarea
+              ref={this.editorElement}
+              style={{ display: 'none' }}
+              tabIndex={3}
+            />
             {this.isIOS && (
               <AppleTextarea
                 onChange={this.handleAppleTextareaChange}
