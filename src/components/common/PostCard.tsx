@@ -13,13 +13,15 @@ import Skeleton from './Skeleton';
 import { mediaQuery } from '../../lib/styles/media';
 import { Link } from 'react-router-dom';
 import usePrefetchPost from '../../lib/hooks/usePrefetchPost';
+import gtag from '../../lib/gtag';
 
 export type PostCardProps = {
   post: PartialPost;
   forHome?: boolean;
+  forPost?: boolean;
 };
 
-function PostCard({ post, forHome }: PostCardProps) {
+function PostCard({ post, forHome, forPost }: PostCardProps) {
   const url = `/@${post.user.username}/${post.url_slug}`;
 
   const prefetch = usePrefetchPost(post.user.username, post.url_slug);
@@ -40,6 +42,10 @@ function PostCard({ post, forHome }: PostCardProps) {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       forHome={!!forHome}
+      forPost={!!forPost}
+      onClick={() => {
+        gtag('event', 'recommend_click');
+      }}
     >
       {post.thumbnail && (
         <StyledLink to={url}>
@@ -88,9 +94,15 @@ function PostCard({ post, forHome }: PostCardProps) {
   );
 }
 
-export function PostCardSkeleton({ forHome }: { forHome?: boolean }) {
+export function PostCardSkeleton({
+  forHome,
+  forPost,
+}: {
+  forHome?: boolean;
+  forPost?: boolean;
+}) {
   return (
-    <SkeletonBlock forHome={!!forHome}>
+    <SkeletonBlock forHome={!!forHome} forPost={!!forPost}>
       <div className="skeleton-thumbnail-wrapper">
         <Skeleton className="skeleton-thumbnail"></Skeleton>
       </div>
@@ -141,7 +153,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-const Block = styled.div<{ forHome: boolean }>`
+const Block = styled.div<{ forHome: boolean; forPost: boolean }>`
   width: 20rem;
   background: white;
   border-radius: 4px;
@@ -161,6 +173,7 @@ const Block = styled.div<{ forHome: boolean }>`
 
   ${(props) =>
     !props.forHome &&
+    !props.forPost &&
     css`
       ${mediaQuery(1440)} {
         width: calc(25% - 2rem);

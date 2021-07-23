@@ -319,6 +319,40 @@ export const READ_POST_FOR_EDIT = gql`
   }
 `;
 
+export const GET_RECOMMENDED_POST = gql`
+  query GetRecommendedPosts($id: ID) {
+    post(id: $id) {
+      recommended_posts {
+        id
+        title
+        short_description
+        thumbnail
+        likes
+        user {
+          id
+          username
+          profile {
+            id
+            thumbnail
+          }
+        }
+        url_slug
+        released_at
+        updated_at
+        comments_count
+        tags
+        is_private
+      }
+    }
+  }
+`;
+
+export type GetRecommendedPostResponse = {
+  post: {
+    recommended_posts: PartialPost[];
+  };
+};
+
 export type ReadPostForEditResponse = {
   post: {
     id: string;
