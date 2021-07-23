@@ -61,55 +61,59 @@ function PostStats() {
   useEffect(() => {
     if (!filledStats) return;
 
-    promise.then(() => {
-      const { echarts } = window;
-      if (!chartBoxRef.current) return;
-      if (!echarts) return;
-      let option = {
-        tooltip: {
-          trigger: 'axis',
-        },
-
-        xAxis: {
-          type: 'time',
-          boundaryGap: false,
-        },
-        yAxis: {
-          type: 'value',
-          boundaryGap: [0, '25%'],
-        },
-        dataZoom:
-          filledStats.length > 30
-            ? [
-                {
-                  type: 'inside',
-                  start: filledStats.length - 30,
-                  end: filledStats.length,
-                },
-                {},
-              ]
-            : undefined,
-        series: [
-          {
-            name: '조회수',
-            type: 'line',
-            smooth: false,
-            data: filledStats.map((item) => [item.day, item.count]),
-            symbol: 'none',
+    promise
+      .then(() => {
+        const { echarts } = window;
+        if (!chartBoxRef.current) return;
+        if (!echarts) return;
+        let option = {
+          tooltip: {
+            trigger: 'axis',
           },
-        ],
-        grid: {
-          top: 32,
-          left: 32,
-          right: 8,
-        },
-      };
 
-      const myChart =
-        chartInstance.current ?? echarts.init(chartBoxRef.current);
-      chartInstance.current = myChart;
-      myChart.setOption(option);
-    });
+          xAxis: {
+            type: 'time',
+            boundaryGap: false,
+          },
+          yAxis: {
+            type: 'value',
+            boundaryGap: [0, '25%'],
+          },
+          dataZoom:
+            filledStats.length > 30
+              ? [
+                  {
+                    type: 'inside',
+                    start: filledStats.length - 30,
+                    end: filledStats.length,
+                  },
+                  {},
+                ]
+              : undefined,
+          series: [
+            {
+              name: '조회수',
+              type: 'line',
+              smooth: false,
+              data: filledStats.map((item) => [item.day, item.count]),
+              symbol: 'none',
+            },
+          ],
+          grid: {
+            top: 32,
+            left: 32,
+            right: 8,
+          },
+        };
+
+        const myChart =
+          chartInstance.current ?? echarts.init(chartBoxRef.current);
+        chartInstance.current = myChart;
+        myChart.setOption(option);
+      })
+      .catch((e) => {
+        console.error('Failed to load echarts', e);
+      });
   }, [filledStats]);
 
   // handle chart responsive

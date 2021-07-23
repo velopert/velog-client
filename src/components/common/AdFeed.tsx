@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { mediaQuery } from '../../lib/styles/media';
+import gtag from '../../lib/gtag';
 
-function AdFeed() {
+function AdFeed({ forPost, index }: { forPost?: boolean; index: number }) {
   // const [isMobile, setIsMobile] = useState(false);
 
   // useEffect(() => {
@@ -20,7 +21,14 @@ function AdFeed() {
   }, []);
 
   return (
-    <Block>
+    <Block
+      forPost={forPost}
+      onClick={() => {
+        if (forPost) {
+          gtag('event', 'ads_click', { event_label: index });
+        }
+      }}
+    >
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
@@ -52,7 +60,7 @@ function AdFeed() {
   );
 }
 
-const Block = styled.div`
+const Block = styled.div<{ forPost?: boolean }>`
   width: 20rem;
   margin: 1rem;
   min-height: 23.5625rem;

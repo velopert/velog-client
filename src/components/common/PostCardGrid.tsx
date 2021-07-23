@@ -8,12 +8,13 @@ import { detectAnyAdblocker } from 'just-detect-adblock';
 import useUser from '../../lib/hooks/useUser';
 
 export type PostCardGridProps = {
-  posts: PartialPost[];
+  posts: (PartialPost | undefined)[];
   loading?: boolean;
   forHome?: boolean;
+  forPost?: boolean;
 };
 
-function PostCardGrid({ posts, loading, forHome }: PostCardGridProps) {
+function PostCardGrid({ posts, loading, forHome, forPost }: PostCardGridProps) {
   const [adBlocked, setAdBlocked] = useState(false);
   const user = useUser();
 
@@ -51,8 +52,15 @@ function PostCardGrid({ posts, loading, forHome }: PostCardGridProps) {
     <Block>
       {postsWithAds.map((post, i) => {
         if (post)
-          return <PostCard post={post} key={post.id} forHome={forHome} />;
-        return <AdFeed key={i} />;
+          return (
+            <PostCard
+              post={post}
+              key={post.id}
+              forHome={forHome}
+              forPost={forPost}
+            />
+          );
+        return <AdFeed key={i} index={i} forPost={forPost} />;
       })}
       {loading &&
         Array.from({ length: 8 }).map((_, i) => (

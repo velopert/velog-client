@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from 'react';
+import React, { useEffect, useCallback, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   READ_POST,
@@ -61,6 +61,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
   history,
   match,
 }) => {
+  const [showRecommends, setShowRecommends] = useState(false);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [username, urlSlug]);
@@ -136,6 +137,8 @@ const PostViewer: React.FC<PostViewerProps> = ({
     }
   }, [data, prefetchPost]);
 
+  const postReady = !!data?.post;
+
   const onScroll = useCallback(() => {
     const scrollTop = getScrollTop();
     const { scrollHeight } = document.body;
@@ -144,7 +147,10 @@ const PostViewer: React.FC<PostViewerProps> = ({
     if (percentage > 50) {
       prefetchLinkedPosts();
     }
-  }, [prefetchLinkedPosts]);
+    if (percentage > 75 && postReady) {
+      setShowRecommends(true);
+    }
+  }, [prefetchLinkedPosts, postReady]);
 
   useEffect(() => {
     if (!data) return;
@@ -372,17 +378,14 @@ const PostViewer: React.FC<PostViewerProps> = ({
         />
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />
-      <RelatedPost
-        showAds={
-          Date.now() - new Date(post.released_at).getTime() >
-            1000 * 60 * 60 * 24 * 30 * 3 && userId === null
-        }
-      />
       <PostComments
         count={post.comments_count}
         comments={post.comments}
         postId={post.id}
       />
+      {showRecommends && (
+        <RelatedPost showAds={userId === null} postId={post.id} />
+      )}
     </PostViewerProvider>
   );
 };
