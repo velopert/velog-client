@@ -34,6 +34,7 @@ import { Helmet } from 'react-helmet-async';
 import { toast } from 'react-toastify';
 import MobileLikeButton from '../../components/post/MobileLikeButton';
 import RelatedPost from './RelatedPost';
+import optimizeImage from '../../lib/optimizeImage';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -321,7 +322,10 @@ const PostViewer: React.FC<PostViewerProps> = ({
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.short_description} />
         {post.thumbnail && (
-          <meta property="og:image" content={post.thumbnail} />
+          <meta
+            property="og:image"
+            content={optimizeImage(post.thumbnail, 768)}
+          />
         )}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={post.title} />
