@@ -103,7 +103,9 @@ function RelatedPostsForGuest({
               </div>
             </Row>
           ) : (
-            <RelatedPostAd isMobile />
+            <Row>
+              <RelatedPostAd isMobile />
+            </Row>
           );
         })}
       </Wrapper>
