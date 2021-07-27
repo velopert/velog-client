@@ -29,8 +29,8 @@ function RelatedPostAd({ isMobile }: Props) {
       data-ad-format="fluid"
       data-ad-layout-key="-7v+er-k-t+3r"
       data-ad-client="ca-pub-5574866530496701"
-      data-ad-slot="9497725960">
-    ></ins>
+      data-ad-slot="9497725960"
+    />
   );
 }
 
