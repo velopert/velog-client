@@ -106,7 +106,7 @@ function RelatedPostsForGuest({
               </StyledRowLink>
             </Row>
           ) : (
-            <Row style={{ marginBottom: '-0.5rem' }}>
+            <Row>
               <RelatedPostAd isMobile />
             </Row>
           );
