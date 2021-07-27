@@ -13,6 +13,7 @@ import { userThumbnail } from '../../static/images';
 import { Link } from 'react-router-dom';
 import gtag from '../../lib/gtag';
 import optimizeImage from '../../lib/optimizeImage';
+import RelatedPostAd from './RelatedPostAd';
 // import { detectAnyAdblocker } from 'just-detect-adblock';
 
 function RelatedPostsForGuest({
@@ -83,14 +84,7 @@ function RelatedPostsForGuest({
             </Item>
           ) : (
             <Item>
-              <ins
-                className="adsbygoogle"
-                style={{ display: 'block' }}
-                data-ad-format="fluid"
-                data-ad-layout-key="-7p+de+1x+n+9"
-                data-ad-client="ca-pub-5574866530496701"
-                data-ad-slot="9497725960"
-              ></ins>
+              <RelatedPostAd />
             </Item>
           ),
         )}
@@ -114,8 +108,8 @@ const Wrapper = styled(VelogResponsive)`
 `;
 
 const Grid = styled.div`
-  margin-left: -0.5rem;
-  margin-right: -0.5rem;
+  margin-left: -1rem;
+  margin-right: -1rem;
   display: flex;
   flex-wrap: wrap;
   margin-top: 1.5rem;
@@ -124,8 +118,8 @@ const Grid = styled.div`
 const Item = styled.div`
   position: relative;
   width: 33.333%;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
   padding-bottom: 2rem;
   ${media.medium} {
     width: 50%;
