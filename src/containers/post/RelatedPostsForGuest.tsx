@@ -80,7 +80,7 @@ function RelatedPostsForGuest({
         <h4>관심 있을 만한 포스트</h4>
         {postsWithAds.map((post, index) => {
           return post ? (
-            <Row>
+            <Row style={{ marginBottm: '-1.5rem' }}>
               <StyledRowLink
                 to={`/@${post.user.username}/${post.url_slug}`}
                 key={post.id ?? index}
@@ -143,7 +143,7 @@ function RelatedPostsForGuest({
               </StyledLink>
             </Item>
           ) : (
-            <Item style={{ marginBottom: '-3.375rem' }}>
+            <Item style={{ marginBottom: '-0.75rem' }}>
               <RelatedPostAd />
             </Item>
           ),
@@ -202,6 +202,7 @@ const Item = styled.div`
     }
   }
   h5 {
+    height: 3rem;
     font-size: 1rem;
     line-height: 1.5;
     margin-top: 0.5rem;
