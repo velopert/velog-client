@@ -14,7 +14,6 @@ import { Link } from 'react-router-dom';
 import gtag from '../../lib/gtag';
 import optimizeImage from '../../lib/optimizeImage';
 import RelatedPostAd from './RelatedPostAd';
-import { ellipsis } from '../../lib/styles/utils';
 // import { detectAnyAdblocker } from 'just-detect-adblock';
 
 function RelatedPostsForGuest({
