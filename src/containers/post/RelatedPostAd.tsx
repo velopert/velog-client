@@ -1,11 +1,27 @@
 import React, { useEffect } from 'react';
-interface Props {}
+interface Props {
+  isMobile?: boolean;
+}
 
-function RelatedPostAd(props: Props) {
+function RelatedPostAd({ isMobile }: Props) {
   useEffect(() => {
-    (window.adsbygoogle = window.adsbygoogle || []).push({});
-  }, []);
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {}
+  }, [isMobile]);
 
+  if (isMobile) {
+    return (
+      <ins
+        className="adsbygoogle"
+        style={{ display: 'block' }}
+        data-ad-format="fluid"
+        data-ad-layout-key="-g0+60+3y-ct+85"
+        data-ad-client="ca-pub-5574866530496701"
+        data-ad-slot="8237449336"
+      ></ins>
+    );
+  }
   return (
     <ins
       className="adsbygoogle"
