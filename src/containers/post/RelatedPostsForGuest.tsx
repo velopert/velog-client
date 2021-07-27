@@ -80,7 +80,7 @@ function RelatedPostsForGuest({
         <h4>관심 있을 만한 포스트</h4>
         {postsWithAds.map((post, index) => {
           return post ? (
-            <Row style={{ marginBottm: '-1.5rem' }}>
+            <Row style={{ marginBottom: '-1.5rem' }}>
               <StyledRowLink
                 to={`/@${post.user.username}/${post.url_slug}`}
                 key={post.id ?? index}
