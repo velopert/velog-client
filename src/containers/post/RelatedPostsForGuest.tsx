@@ -136,7 +136,7 @@ function RelatedPostsForGuest({
               </StyledLink>
             </Item>
           ) : (
-            <Item style={{ margin: '-3.375rem' }}>
+            <Item style={{ marginBottom: '-3.375rem' }}>
               <RelatedPostAd />
             </Item>
           ),
