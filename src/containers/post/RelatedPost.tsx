@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import media from '../../lib/styles/media';
 import { useQuery } from '@apollo/react-hooks';

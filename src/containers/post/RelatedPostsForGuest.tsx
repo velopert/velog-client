@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import media from '../../lib/styles/media';
 import { useQuery } from '@apollo/react-hooks';
@@ -7,7 +7,6 @@ import {
   GET_RECOMMENDED_POST,
   PartialPost,
 } from '../../lib/graphql/post';
-import PostCardGrid from '../../components/common/PostCardGrid';
 import palette from '../../lib/styles/palette';
 import VelogResponsive from '../../components/velog/VelogResponsive';
 import { userThumbnail } from '../../static/images';
