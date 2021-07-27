@@ -85,7 +85,7 @@ function RelatedPostsForGuest({
                 to={`/@${post.user.username}/${post.url_slug}`}
                 key={post.id ?? index}
               >
-                <div className="fourty">
+                <div className="left">
                   <div className="thumbnail-wrapper">
                     <img
                       src={optimizeImage(
@@ -229,9 +229,9 @@ const StyledRowLink = styled(Link)`
   text-decoration: none;
   color: inherit;
   display: flex;
-  .fourty {
-    width: 40%;
-    margin-right: 0.75rem;
+  .left {
+    width: 35%;
+    margin-right: 0.5rem;
   }
   .thumbnail-wrapper {
     width: 100%;
@@ -255,19 +255,21 @@ const StyledRowLink = styled(Link)`
   }
   h5 {
     margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-size: 0.875rem;
+    margin-bottom: 0;
+    font-size: 0.75rem;
     color: ${palette.gray8};
-    ${ellipsis}
+    font-size: 0.75rem;
+
+    line-height: 1.5;
   }
 
   p {
     margin: 0;
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-height: 1.5;
-    height: 2.25rem;
+    height: 2.0625rem;
     overflow: hidden;
     word-break: keep-all;
     color: ${palette.gray6};
