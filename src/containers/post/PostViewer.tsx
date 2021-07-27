@@ -35,6 +35,7 @@ import { toast } from 'react-toastify';
 import MobileLikeButton from '../../components/post/MobileLikeButton';
 import RelatedPost from './RelatedPost';
 import optimizeImage from '../../lib/optimizeImage';
+import RelatedPostsForGuest from './RelatedPostsForGuest';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -148,7 +149,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
     if (percentage > 50) {
       prefetchLinkedPosts();
     }
-    if (percentage > 75 && postReady) {
+    if (percentage > 50 && postReady) {
       setShowRecommends(true);
     }
   }, [prefetchLinkedPosts, postReady]);
@@ -382,14 +383,21 @@ const PostViewer: React.FC<PostViewerProps> = ({
         />
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />
+      {showRecommends && userId === null && (
+        <RelatedPostsForGuest
+          postId={post.id}
+          showAds={
+            Date.now() - new Date(post.released_at).getTime() >
+            1000 * 60 * 60 * 24 * 21
+          }
+        />
+      )}
       <PostComments
         count={post.comments_count}
         comments={post.comments}
         postId={post.id}
       />
-      {showRecommends && (
-        <RelatedPost showAds={userId === null} postId={post.id} />
-      )}
+      {showRecommends && userId !== null && <RelatedPost postId={post.id} />}
     </PostViewerProvider>
   );
 };
