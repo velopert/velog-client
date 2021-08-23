@@ -82,6 +82,11 @@ export const remove = (char: string, str: string) =>
 export const toggle = (char: string, str: string) =>
   hasSurroundedWith(char, str) ? remove(char, str) : surround(char, str);
 
+const extendCh = (position: CodeMirror.Position, chCount: number) => ({
+  line: position.line,
+  ch: position.ch + chCount,
+});
+
 const generateTextFormatter = (char: string) => (doc: CodeMirror.Doc) => {
   const selection = {
     start: doc.getCursor('start'),
@@ -109,11 +114,6 @@ const generateTextFormatter = (char: string) => (doc: CodeMirror.Doc) => {
 
   doc.replaceSelection(toggle(char, doc.getSelection()), 'around');
 };
-
-const extendCh = (position: CodeMirror.Position, chCount: number) => ({
-  line: position.line,
-  ch: position.ch + chCount,
-});
 
 function WriterHead({
   hide,
