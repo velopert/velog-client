@@ -76,6 +76,14 @@ describe('MarkdownEditor: keymap', () => {
     expect(hasSurroundedWith('~~', '무~~야호~~b~~cd~~def')).toBe(true);
   });
 
+  test('hasSurroundedWith: 문자열이 multiline 인 경우에도 정상 작동한다', () => {
+    expect(hasSurroundedWith('**', 'a\nbc**d\nd')).toBe(false);
+    expect(hasSurroundedWith('**', '*a\nbc**dd*')).toBe(false);
+
+    expect(hasSurroundedWith('**', 'abc**\ndd**\nee')).toBe(true);
+    expect(hasSurroundedWith('**', '\n**d\nd**')).toBe(true);
+  });
+
   test('surround: 문자열의 앞과 뒤를 char로 감싼 문자열을 반환한다', () => {
     expect(surround('**', 'abcdd')).toBe('**abcdd**');
     expect(surround('_', 'abcddee')).toBe('_abcddee_');

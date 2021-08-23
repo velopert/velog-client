@@ -70,7 +70,7 @@ export const escapeRegExp = (str: string) =>
   str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 export const hasSurroundedWith = (char: string, str: string) =>
-  new RegExp(escapeRegExp(char) + '.*' + escapeRegExp(char)).test(str);
+  new RegExp(escapeRegExp(char) + '[\\s\\S]*' + escapeRegExp(char)).test(str);
 
 export const surround = (char: string, str: string) => char + str + char;
 
