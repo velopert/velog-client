@@ -66,7 +66,7 @@ const removeHeading = (text: string) => {
   return text.replace(/#{1,6} /, '');
 };
 
-const escapeRegExp = (str: string) =>
+export const escapeRegExp = (str: string) =>
   str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 export const hasSurroundedWith = (char: string, str: string) =>
