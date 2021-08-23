@@ -83,6 +83,11 @@ export const toggle = (char: string, str: string) =>
 const generateKeyMapFunction = (char: string) => (cm: CodeMirror.Editor) =>
   cm.replaceSelection(toggle(char, cm.getSelection() || '텍스트'), 'around');
 
+const extendCh = (position: CodeMirror.Position, chCount: number) => ({
+  line: position.line,
+  ch: position.ch + chCount,
+});
+
 function WriterHead({
   hide,
   children,
@@ -584,216 +589,78 @@ export default class WriteMarkdownEditor extends React.Component<
           });
         }, {}),
       bold: () => {
-        const selected = doc.getSelection();
-        if (selected === '텍스트') {
-          const isBold = /\*\*(.*)\*\*/.test(
-            doc.getRange(
-              { line: selection.start.line, ch: selection.start.ch - 2 },
-              { line: selection.end.line, ch: selection.end.ch + 2 },
-            ),
-          );
+        const boldChar = '**';
 
-          if (isBold) {
-            doc.setSelection(
-              { line: selection.start.line, ch: selection.start.ch - 2 },
-              { line: selection.end.line, ch: selection.end.ch + 2 },
-            );
-            doc.replaceSelection('텍스트');
-            doc.setSelection(
-              { line: selection.start.line, ch: selection.start.ch - 2 },
-              { line: selection.end.line, ch: selection.end.ch - 2 },
-            );
-            return;
+        if (doc.getSelection() === '') {
+          doc.replaceSelection(surround(boldChar, '텍스트'), 'around');
+          doc.setSelection(
+            extendCh(selection.start, boldChar.length),
+            extendCh(selection.end, '텍스트'.length + boldChar.length),
+          );
+          return;
+        }
+
+        if (doc.getSelection() === '텍스트') {
+          const extendedStart = extendCh(selection.start, -boldChar.length);
+          const extendedEnd = extendCh(selection.end, boldChar.length);
+          const extendedSelected = doc.getRange(extendedStart, extendedEnd);
+
+          if (hasSurroundedWith(boldChar, extendedSelected)) {
+            doc.setSelection(extendedStart, extendedEnd);
           }
         }
-        if (/\*\*(.*)\*\*/.test(selected)) {
-          // matches **string**
-          doc.replaceSelection(selected.replace(/\*\*/g, ''));
-          doc.setSelection(
-            {
-              line: selection.start.line,
-              ch: selection.start.ch,
-            },
-            { line: selection.end.line, ch: selection.end.ch - 4 },
-          );
-          return;
-        }
-        if (selected.length > 0) {
-          doc.replaceSelection(`**${selected}**`);
-          doc.setSelection(
-            {
-              line: selection.start.line,
-              ch: selection.start.ch,
-            },
-            { line: selection.end.line, ch: selection.end.ch + 4 },
-          );
-          return;
-        }
-        doc.replaceSelection('**텍스트**');
-        doc.setSelection(
-          {
-            line: cursor.line,
-            ch: cursor.ch + 2,
-          },
-          {
-            line: cursor.line,
-            ch: cursor.ch + 5,
-          },
-        );
+
+        doc.replaceSelection(toggle(boldChar, doc.getSelection()), 'around');
       },
       italic: () => {
-        let selected = doc.getSelection();
+        const italicChar = '_';
 
-        if (selected.length === 0) {
-          doc.replaceSelection(`_텍스트_`);
+        if (doc.getSelection() === '') {
+          doc.replaceSelection(surround(italicChar, '텍스트'), 'around');
           doc.setSelection(
-            {
-              line: cursor.line,
-              ch: cursor.ch + 1,
-            },
-            {
-              line: cursor.line,
-              ch: cursor.ch + 4,
-            },
+            extendCh(selection.start, italicChar.length),
+            extendCh(selection.end, '텍스트'.length + italicChar.length),
           );
+
           return;
         }
 
-        if (selected === '텍스트') {
-          const selectLeftAndRight = doc.getRange(
-            {
-              line: selection.start.line,
-              ch: selection.start.ch - 1,
-            },
-            {
-              line: selection.end.line,
-              ch: selection.end.ch + 1,
-            },
-          );
-          if (/_(.*)_/.test(selectLeftAndRight)) {
-            selected = selectLeftAndRight;
-            doc.setSelection(
-              {
-                line: selection.start.line,
-                ch: selection.start.ch - 1,
-              },
-              {
-                line: selection.end.line,
-                ch: selection.end.ch + 1,
-              },
-            );
-            selection.start = {
-              line: selection.start.line,
-              ch: selection.start.ch - 1,
-            };
-            selection.end = {
-              line: selection.end.line,
-              ch: selection.end.ch + 1,
-            };
+        if (doc.getSelection() === '텍스트') {
+          const extendedStart = extendCh(selection.start, -italicChar.length);
+          const extendedEnd = extendCh(selection.end, italicChar.length);
+          const extendedSelected = doc.getRange(extendedStart, extendedEnd);
+
+          if (hasSurroundedWith(italicChar, extendedSelected)) {
+            doc.setSelection(extendedStart, extendedEnd);
           }
         }
 
-        if (/_(.*)_/.test(selected)) {
-          const plain = selected
-            .replace(/^_/, '') // remove starting _
-            .replace(/_$/, ''); // remove ending _
-          doc.replaceSelection(plain);
-          doc.setSelection(
-            {
-              line: selection.start.line,
-              ch: selection.start.ch,
-            },
-            { line: selection.end.line, ch: selection.end.ch - 2 },
-          );
-          return;
-        }
-        if (selected.length > 0) {
-          doc.replaceSelection(`_${selected}_`);
-          doc.setSelection(
-            {
-              line: selection.start.line,
-              ch: selection.start.ch,
-            },
-            { line: selection.end.line, ch: selection.end.ch + 2 },
-          );
-        }
+        doc.replaceSelection(toggle(italicChar, doc.getSelection()), 'around');
       },
       strike: () => {
-        let selected = doc.getSelection();
+        const strikeChar = '~~';
 
-        if (selected.length === 0) {
-          doc.replaceSelection(`~~텍스트~~`);
+        if (doc.getSelection() === '') {
+          doc.replaceSelection(surround(strikeChar, '텍스트'), 'around');
           doc.setSelection(
-            {
-              line: cursor.line,
-              ch: cursor.ch + 2,
-            },
-            {
-              line: cursor.line,
-              ch: cursor.ch + 5,
-            },
+            extendCh(selection.start, strikeChar.length),
+            extendCh(selection.end, '텍스트'.length + strikeChar.length),
           );
+
           return;
         }
 
-        if (selected === '텍스트') {
-          const selectLeftAndRight = doc.getRange(
-            {
-              line: selection.start.line,
-              ch: selection.start.ch - 2,
-            },
-            {
-              line: selection.end.line,
-              ch: selection.end.ch + 2,
-            },
-          );
-          if (/~~(.*)~~/.test(selectLeftAndRight)) {
-            selected = selectLeftAndRight;
-            doc.setSelection(
-              {
-                line: selection.start.line,
-                ch: selection.start.ch - 2,
-              },
-              {
-                line: selection.end.line,
-                ch: selection.end.ch + 2,
-              },
-            );
-            selection.start = {
-              line: selection.start.line,
-              ch: selection.start.ch - 2,
-            };
-            selection.end = {
-              line: selection.end.line,
-              ch: selection.end.ch + 2,
-            };
+        if (doc.getSelection() === '텍스트') {
+          const extendedStart = extendCh(selection.start, -strikeChar.length);
+          const extendedEnd = extendCh(selection.end, strikeChar.length);
+          const extendedSelected = doc.getRange(extendedStart, extendedEnd);
+
+          if (hasSurroundedWith(strikeChar, extendedSelected)) {
+            doc.setSelection(extendedStart, extendedEnd);
           }
         }
 
-        if (/~~(.*)~~/.test(selected)) {
-          const plain = selected
-            .replace(/^~~/, '') // remove starting ~~
-            .replace(/~~$/, ''); // remove ending ~~
-          doc.replaceSelection(plain);
-          doc.setSelection(
-            {
-              line: selection.start.line,
-              ch: selection.start.ch,
-            },
-            { line: selection.end.line, ch: selection.end.ch - 4 },
-          );
-          return;
-        }
-        if (selected.length > 0) {
-          doc.replaceSelection(`~~${selected}~~`);
-          doc.setSelection(
-            {
-              line: selection.start.line,
-              ch: selection.start.ch,
-            },
-            { line: selection.end.line, ch: selection.end.ch + 4 },
-          );
-        }
+        doc.replaceSelection(toggle(strikeChar, doc.getSelection()), 'around');
       },
       blockquote: () => {
         const matches = /^> /.test(line);
