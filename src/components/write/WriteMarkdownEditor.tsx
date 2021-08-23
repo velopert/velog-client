@@ -196,6 +196,24 @@ export default class WriteMarkdownEditor extends React.Component<
         e.preventDefault();
       }
     }) as any);
+
+    this.codemirror.addKeyMap({
+      // bold
+      'Ctrl-B': (cm) => {
+        const isSurroundedWith = (char: string, str: string) =>
+          str.startsWith(char) && str.endsWith(char);
+
+        const surround = (char: string, str: string) => char + str + char;
+
+        const remove = (char: string, str: string) =>
+          str.slice(char.length, -char.length);
+
+        const toggle = (char: string, str: string) =>
+          isSurroundedWith(char, str) ? remove(char, str) : surround(char, str);
+
+        cm.replaceSelection(toggle('**', cm.getSelection()), 'around');
+      },
+    });
   };
 
   stickToBottomIfNeeded = () => {
