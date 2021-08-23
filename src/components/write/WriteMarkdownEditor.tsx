@@ -244,6 +244,12 @@ export default class WriteMarkdownEditor extends React.Component<
         cm.replaceSelection(toggle('~~', cm.getSelection()), 'around');
       },
     });
+
+    this.codemirror.on('keydown', (_, event) => {
+      if (event.ctrlKey && event.shiftKey && event.key === 'S') {
+        event.stopPropagation();
+      }
+    });
   };
 
   stickToBottomIfNeeded = () => {
