@@ -66,6 +66,20 @@ const removeHeading = (text: string) => {
   return text.replace(/#{1,6} /, '');
 };
 
+export const isSurroundedWith = (char: string, str: string) =>
+  str.startsWith(char) && str.endsWith(char);
+
+export const surround = (char: string, str: string) => char + str + char;
+
+export const remove = (char: string, str: string) =>
+  str.slice(char.length, -char.length);
+
+export const toggle = (char: string, str: string) =>
+  isSurroundedWith(char, str) ? remove(char, str) : surround(char, str);
+
+const generateKeyMapFunction = (char: string) => (cm: CodeMirror.Editor) =>
+  cm.replaceSelection(toggle(char, cm.getSelection()), 'around');
+
 function WriterHead({
   hide,
   children,
@@ -198,51 +212,12 @@ export default class WriteMarkdownEditor extends React.Component<
     }) as any);
 
     this.codemirror.addKeyMap({
-      // bold
-      'Ctrl-B': (cm) => {
-        const isSurroundedWith = (char: string, str: string) =>
-          str.startsWith(char) && str.endsWith(char);
-
-        const surround = (char: string, str: string) => char + str + char;
-
-        const remove = (char: string, str: string) =>
-          str.slice(char.length, -char.length);
-
-        const toggle = (char: string, str: string) =>
-          isSurroundedWith(char, str) ? remove(char, str) : surround(char, str);
-
-        cm.replaceSelection(toggle('**', cm.getSelection()), 'around');
-      },
+      // Bold
+      'Ctrl-B': generateKeyMapFunction('**'),
       // Italic
-      'Ctrl-I': (cm) => {
-        const isSurroundedWith = (char: string, str: string) =>
-          str.startsWith(char) && str.endsWith(char);
-
-        const surround = (char: string, str: string) => char + str + char;
-
-        const remove = (char: string, str: string) =>
-          str.slice(char.length, -char.length);
-
-        const toggle = (char: string, str: string) =>
-          isSurroundedWith(char, str) ? remove(char, str) : surround(char, str);
-
-        cm.replaceSelection(toggle('_', cm.getSelection()), 'around');
-      },
+      'Ctrl-I': generateKeyMapFunction('_'),
       // Strike
-      'Shift-Ctrl-S': (cm) => {
-        const isSurroundedWith = (char: string, str: string) =>
-          str.startsWith(char) && str.endsWith(char);
-
-        const surround = (char: string, str: string) => char + str + char;
-
-        const remove = (char: string, str: string) =>
-          str.slice(char.length, -char.length);
-
-        const toggle = (char: string, str: string) =>
-          isSurroundedWith(char, str) ? remove(char, str) : surround(char, str);
-
-        cm.replaceSelection(toggle('~~', cm.getSelection()), 'around');
-      },
+      'Shift-Ctrl-S': generateKeyMapFunction('~~'),
     });
 
     this.codemirror.on('keydown', (_, event) => {
