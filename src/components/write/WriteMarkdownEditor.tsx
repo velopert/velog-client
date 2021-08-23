@@ -66,6 +66,8 @@ const removeHeading = (text: string) => {
   return text.replace(/#{1,6} /, '');
 };
 
+const fallbackString = '텍스트';
+
 export const escapeRegExp = (str: string) =>
   str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -80,8 +82,33 @@ export const remove = (char: string, str: string) =>
 export const toggle = (char: string, str: string) =>
   hasSurroundedWith(char, str) ? remove(char, str) : surround(char, str);
 
-const generateKeyMapFunction = (char: string) => (cm: CodeMirror.Editor) =>
-  cm.replaceSelection(toggle(char, cm.getSelection() || '텍스트'), 'around');
+const generateTextFormatter = (char: string) => (doc: CodeMirror.Doc) => {
+  const selection = {
+    start: doc.getCursor('start'),
+    end: doc.getCursor('end'),
+  };
+
+  if (doc.getSelection() === '') {
+    doc.replaceSelection(surround(char, fallbackString), 'around');
+    doc.setSelection(
+      extendCh(selection.start, char.length),
+      extendCh(selection.end, fallbackString.length + char.length),
+    );
+    return;
+  }
+
+  if (doc.getSelection() === fallbackString) {
+    const extendedStart = extendCh(selection.start, -char.length);
+    const extendedEnd = extendCh(selection.end, char.length);
+    const extendedSelected = doc.getRange(extendedStart, extendedEnd);
+
+    if (hasSurroundedWith(char, extendedSelected)) {
+      doc.setSelection(extendedStart, extendedEnd);
+    }
+  }
+
+  doc.replaceSelection(toggle(char, doc.getSelection()), 'around');
+};
 
 const extendCh = (position: CodeMirror.Position, chCount: number) => ({
   line: position.line,
@@ -221,11 +248,11 @@ export default class WriteMarkdownEditor extends React.Component<
 
     this.codemirror.addKeyMap({
       // Bold
-      'Ctrl-B': generateKeyMapFunction('**'),
+      'Ctrl-B': generateTextFormatter('**'),
       // Italic
-      'Ctrl-I': generateKeyMapFunction('_'),
+      'Ctrl-I': generateTextFormatter('_'),
       // Strike
-      'Shift-Ctrl-S': generateKeyMapFunction('~~'),
+      'Shift-Ctrl-S': generateTextFormatter('~~'),
     });
 
     this.codemirror.on('keydown', (_, event) => {
@@ -588,80 +615,9 @@ export default class WriteMarkdownEditor extends React.Component<
             [`heading${index + 1}`]: handler,
           });
         }, {}),
-      bold: () => {
-        const boldChar = '**';
-
-        if (doc.getSelection() === '') {
-          doc.replaceSelection(surround(boldChar, '텍스트'), 'around');
-          doc.setSelection(
-            extendCh(selection.start, boldChar.length),
-            extendCh(selection.end, '텍스트'.length + boldChar.length),
-          );
-          return;
-        }
-
-        if (doc.getSelection() === '텍스트') {
-          const extendedStart = extendCh(selection.start, -boldChar.length);
-          const extendedEnd = extendCh(selection.end, boldChar.length);
-          const extendedSelected = doc.getRange(extendedStart, extendedEnd);
-
-          if (hasSurroundedWith(boldChar, extendedSelected)) {
-            doc.setSelection(extendedStart, extendedEnd);
-          }
-        }
-
-        doc.replaceSelection(toggle(boldChar, doc.getSelection()), 'around');
-      },
-      italic: () => {
-        const italicChar = '_';
-
-        if (doc.getSelection() === '') {
-          doc.replaceSelection(surround(italicChar, '텍스트'), 'around');
-          doc.setSelection(
-            extendCh(selection.start, italicChar.length),
-            extendCh(selection.end, '텍스트'.length + italicChar.length),
-          );
-
-          return;
-        }
-
-        if (doc.getSelection() === '텍스트') {
-          const extendedStart = extendCh(selection.start, -italicChar.length);
-          const extendedEnd = extendCh(selection.end, italicChar.length);
-          const extendedSelected = doc.getRange(extendedStart, extendedEnd);
-
-          if (hasSurroundedWith(italicChar, extendedSelected)) {
-            doc.setSelection(extendedStart, extendedEnd);
-          }
-        }
-
-        doc.replaceSelection(toggle(italicChar, doc.getSelection()), 'around');
-      },
-      strike: () => {
-        const strikeChar = '~~';
-
-        if (doc.getSelection() === '') {
-          doc.replaceSelection(surround(strikeChar, '텍스트'), 'around');
-          doc.setSelection(
-            extendCh(selection.start, strikeChar.length),
-            extendCh(selection.end, '텍스트'.length + strikeChar.length),
-          );
-
-          return;
-        }
-
-        if (doc.getSelection() === '텍스트') {
-          const extendedStart = extendCh(selection.start, -strikeChar.length);
-          const extendedEnd = extendCh(selection.end, strikeChar.length);
-          const extendedSelected = doc.getRange(extendedStart, extendedEnd);
-
-          if (hasSurroundedWith(strikeChar, extendedSelected)) {
-            doc.setSelection(extendedStart, extendedEnd);
-          }
-        }
-
-        doc.replaceSelection(toggle(strikeChar, doc.getSelection()), 'around');
-      },
+      bold: generateTextFormatter('**'),
+      italic: generateTextFormatter('_'),
+      strike: generateTextFormatter('~~'),
       blockquote: () => {
         const matches = /^> /.test(line);
         doc.setSelection(
@@ -713,7 +669,7 @@ ${selected}
     const handler = handlers[mode];
     if (!handler) return;
 
-    handler();
+    handler(doc);
     codemirror.focus();
   };
 
