@@ -228,6 +228,21 @@ export default class WriteMarkdownEditor extends React.Component<
 
         cm.replaceSelection(toggle('_', cm.getSelection()), 'around');
       },
+      // Strike
+      'Shift-Ctrl-S': (cm) => {
+        const isSurroundedWith = (char: string, str: string) =>
+          str.startsWith(char) && str.endsWith(char);
+
+        const surround = (char: string, str: string) => char + str + char;
+
+        const remove = (char: string, str: string) =>
+          str.slice(char.length, -char.length);
+
+        const toggle = (char: string, str: string) =>
+          isSurroundedWith(char, str) ? remove(char, str) : surround(char, str);
+
+        cm.replaceSelection(toggle('~~', cm.getSelection()), 'around');
+      },
     });
   };
 
