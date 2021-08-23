@@ -66,19 +66,22 @@ const removeHeading = (text: string) => {
   return text.replace(/#{1,6} /, '');
 };
 
-export const isSurroundedWith = (char: string, str: string) =>
-  str.startsWith(char) && str.endsWith(char);
+const escapeRegExp = (str: string) =>
+  str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+export const hasSurroundedWith = (char: string, str: string) =>
+  new RegExp(escapeRegExp(char) + '.*' + escapeRegExp(char)).test(str);
 
 export const surround = (char: string, str: string) => char + str + char;
 
 export const remove = (char: string, str: string) =>
-  str.slice(char.length, -char.length);
+  str.replace(new RegExp(escapeRegExp(char), 'g'), '');
 
 export const toggle = (char: string, str: string) =>
-  isSurroundedWith(char, str) ? remove(char, str) : surround(char, str);
+  hasSurroundedWith(char, str) ? remove(char, str) : surround(char, str);
 
 const generateKeyMapFunction = (char: string) => (cm: CodeMirror.Editor) =>
-  cm.replaceSelection(toggle(char, cm.getSelection()), 'around');
+  cm.replaceSelection(toggle(char, cm.getSelection() || '텍스트'), 'around');
 
 function WriterHead({
   hide,
