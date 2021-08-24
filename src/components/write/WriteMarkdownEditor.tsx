@@ -66,7 +66,7 @@ const removeHeading = (text: string) => {
   return text.replace(/#{1,6} /, '');
 };
 
-const fallbackString = '텍스트';
+export const fallbackString = '텍스트';
 
 export const escapeRegExp = (str: string) =>
   str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -87,7 +87,8 @@ const extendCh = (position: CodeMirror.Position, chCount: number) => ({
   ch: position.ch + chCount,
 });
 
-const generateTextFormatter = (char: string) => (doc: CodeMirror.Doc) => {
+export const generateTextFormatter =
+  (char: string) => (doc: CodeMirror.Doc) => {
   const selection = {
     start: doc.getCursor('start'),
     end: doc.getCursor('end'),
