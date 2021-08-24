@@ -579,10 +579,6 @@ export default class WriteMarkdownEditor extends React.Component<
     const doc = codemirror.getDoc();
 
     const cursor = doc.getCursor();
-    const selection = {
-      start: doc.getCursor('start'),
-      end: doc.getCursor('end'),
-    };
 
     const line = doc.getLine(cursor.line);
 
