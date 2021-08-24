@@ -2,12 +2,15 @@ import * as React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import MarkdownEditor, {
   escapeRegExp,
+  fallbackString,
+  generateTextFormatter,
   hasSurroundedWith,
   MarkdownEditorProps,
   remove,
   surround,
   toggle,
 } from '../WriteMarkdownEditor';
+import CodeMirror from 'codemirror';
 
 describe('MarkdownEditor', () => {
   const setup = (props: Partial<MarkdownEditorProps> = {}) => {
@@ -58,7 +61,7 @@ describe('MarkdownEditor', () => {
   });
 });
 
-describe('MarkdownEditor: keymap', () => {
+describe('MarkdownEditor: TextFormatter', () => {
   test('escapeRegExp: 문자열에 포함된 정규표현식 상 모든 특수문자를 escape한다', () => {
     `.*+?$^{}()|[]\\`
       .split('')
@@ -100,5 +103,116 @@ describe('MarkdownEditor: keymap', () => {
     expect(toggle('**', 'abc**dd**')).toBe('abcdd');
     expect(toggle('_', 'abcddee')).toBe('_abcddee_');
     expect(toggle('~~', '')).toBe('~~~~');
+  });
+
+  describe('generateTextFormatter', () => {
+    const setup = (char: string) => {
+      document.body.createTextRange = () => ({
+        setEnd: () => {},
+        setStart: () => {},
+        getBoundingClientRect: () => {},
+        getClientRects: () => [],
+      });
+
+      const textarea = document.createElement('textarea');
+      document.body.append(textarea);
+
+      const codemirror = CodeMirror.fromTextArea(textarea, {
+        mode: 'markdown',
+        theme: 'one-light',
+        placeholder: '당신의 이야기를 적어보세요...',
+        lineWrapping: true,
+      });
+
+      const textFormatter = generateTextFormatter(char);
+
+      return { codemirror, textFormatter };
+    };
+
+    test('아무 문자열도 선택되지 않았을 때 ', () => {
+      const boldChar = '**';
+
+      const { textFormatter, codemirror } = setup(boldChar);
+
+      expect(codemirror.getValue()).toBe('');
+      expect(codemirror.getSelection()).toBe('');
+      expect(codemirror.somethingSelected()).toBe(false);
+
+      // bold button has been clicked or Ctrl-B pressed
+      textFormatter(codemirror);
+
+      expect(codemirror.getSelection()).toBe(fallbackString);
+      expect(codemirror.getValue()).toBe(boldChar + fallbackString + boldChar);
+
+      // bold button has been clicked or Ctrl-B pressed again
+      textFormatter(codemirror);
+
+      expect(codemirror.getSelection()).toBe(fallbackString);
+      expect(codemirror.getValue()).toBe(fallbackString);
+    });
+
+    test('선택된 문자열이 특수기호(** 등)를 포함한 경우: 한 번 누를 경우 포함된 모든 특수기호를 제거하며, 두 번 누를 경우 처음과 끝에 특수기호를 추가한다', () => {
+      const boldChar = '**';
+      const initialValue = 'already **bold** word';
+
+      const { textFormatter, codemirror } = setup(boldChar);
+
+      codemirror.setValue(initialValue);
+      codemirror.setSelection(
+        { line: 0, ch: 0 },
+        { line: 0, ch: initialValue.length },
+      );
+
+      expect(codemirror.getValue()).toBe(initialValue);
+      expect(codemirror.getSelection()).toBe(initialValue);
+
+      // bold button has been clicked or Ctrl-B pressed
+      textFormatter(codemirror);
+
+      const unboldValue = 'already bold word';
+
+      expect(codemirror.getSelection()).toBe(unboldValue);
+      expect(codemirror.getValue()).toBe(unboldValue);
+
+      // bold button has been clicked or Ctrl-B pressed again
+      textFormatter(codemirror);
+
+      const boldValue = '**already bold word**';
+
+      expect(codemirror.getSelection()).toBe(boldValue);
+      expect(codemirror.getValue()).toBe(boldValue);
+    });
+
+    test('선택된 문자열이 특수기호(** 등)를 포함하지 않은 경우: 한 번 누를 경우 처음과 끝에 특수기호를 추가하며, 두 번 누를 경우 포함된 모든 특수기호를 제거한다, ', () => {
+      const boldChar = '**';
+      const initialValue = 'initial bold word';
+
+      const { textFormatter, codemirror } = setup(boldChar);
+
+      codemirror.setValue(initialValue);
+      codemirror.setSelection(
+        { line: 0, ch: 'initial '.length },
+        { line: 0, ch: 'initial bold'.length },
+      );
+
+      expect(codemirror.getValue()).toBe(initialValue);
+      expect(codemirror.getSelection()).toBe('bold');
+
+      // bold button has been clicked or Ctrl-B pressed
+      textFormatter(codemirror);
+
+      const boldValue = 'initial **bold** word';
+
+      expect(codemirror.getSelection()).toBe('**bold**');
+      expect(codemirror.getValue()).toBe(boldValue);
+
+      // bold button has been clicked or Ctrl-B pressed again
+      textFormatter(codemirror);
+
+      const unboldValue = 'initial bold word';
+
+      expect(codemirror.getSelection()).toBe('bold');
+      expect(codemirror.getValue()).toBe(unboldValue);
+    });
   });
 });
