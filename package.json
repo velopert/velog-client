@@ -132,7 +132,7 @@
     "remark": "^11.0.2",
     "remark-breaks": "^2.0.1",
     "remark-highlight.js": "^5.2.0",
-    "remark-html": "^10.0.0",
+    "remark-html": "^13.0.2",
     "remark-math": "^2.0.1",
     "remark-rehype": "^6.0.0",
     "remark-slug": "^5.1.2",
