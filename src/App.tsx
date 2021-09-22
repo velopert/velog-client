@@ -7,23 +7,25 @@ import Core from './containers/base/Core';
 import RegisterPage from './pages/RegisterPage';
 import { JazzbarProvider } from './lib/jazzbar';
 import PageTemplate from './components/base/PageTemplate';
-// import VelogPageFallback from './containers/velog/VelogPageFallback';
+import VelogPageFallback from './containers/velog/VelogPageFallback';
 import ErrorBoundary from './components/error/ErrorBoundary';
 import NotFoundPage from './pages/NotFoundPage';
 import { Helmet } from 'react-helmet-async';
 import HomePage from './pages/home/HomePage';
 import MainPageTemplate from './components/main/MainPageTemplate';
-import VelogPage from './pages/velog/VelogPage';
-import EmailLoginPage from './pages/EmailLoginPage';
 
 const loadableConfig = {
   fallback: <PageTemplate />,
 };
 
-// const VelogPage = loadable(() => import('./pages/velog/VelogPage'), {
-//   fallback: <VelogPageFallback />,
-// });
+const VelogPage = loadable(() => import('./pages/velog/VelogPage'), {
+  fallback: <VelogPageFallback />,
+});
 
+const EmailLoginPage = loadable(
+  () => import('./pages/EmailLoginPage'),
+  loadableConfig,
+);
 const WritePage = loadable(() => import('./pages/WritePage'));
 const SearchPage = loadable(() => import('./pages/SearchPage'), loadableConfig);
 const SavesPage = loadable(() => import('./pages/SavesPage'), loadableConfig);

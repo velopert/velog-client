@@ -3,13 +3,10 @@ import VelogPageTemplate from '../../components/velog/VelogPageTemplate';
 import { RouteComponentProps, Route, Switch } from 'react-router';
 import loadable from '@loadable/component';
 import useApplyVelogConfig from '../../containers/velog/hooks/useApplyVelogConfig';
-import SeriesPage from './SeriesPage';
-import PostPage from './PostPage';
-import UserPage from './UserPage';
 
-// const PostPage = loadable(() => import('./PostPage'));
-// const UserPage = loadable(() => import('./UserPage'));
-// const SeriesPage = loadable(() => import('./SeriesPage'));
+const PostPage = loadable(() => import('./PostPage'));
+const UserPage = loadable(() => import('./UserPage'));
+const SeriesPage = loadable(() => import('./SeriesPage'));
 
 export interface VelogPageProps
   extends RouteComponentProps<{
