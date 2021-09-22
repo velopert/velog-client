@@ -1164,35 +1164,35 @@
     path-to-regexp "1.x"
     urijs "^1.19.2"
 
-"@loadable/babel-plugin@5.13.2":
+"@loadable/babel-plugin@^5.13.2":
   version "5.13.2"
   resolved "https://registry.yarnpkg.com/@loadable/babel-plugin/-/babel-plugin-5.13.2.tgz#373cddc64ee5437814f7dca1c1b6a7b2c1665a9f"
   integrity sha512-vSZUVeTH1S1sDbk8Tzft0plZSkN7W4zmVR5w/Bmy4UmvBiu9lin7ztrDpoUTUzxpoups+OJbTc/OosvN0aMXWg==
   dependencies:
     "@babel/plugin-syntax-dynamic-import" "^7.7.4"
 
-"@loadable/component@5.13.2":
-  version "5.13.2"
-  resolved "https://registry.yarnpkg.com/@loadable/component/-/component-5.13.2.tgz#219b679c9e76bb5dd247923a3195ad3ef92cf977"
-  integrity sha512-eCtJhCFfUg7dzEBc5O4ZNfG0wftCLVSzpfOw9qPYJ16T/bmvrGRDdY8q/ARM4o90MOFlJzIRepnuXnqxB5ZUyQ==
+"@loadable/component@^5.15.0":
+  version "5.15.0"
+  resolved "https://registry.yarnpkg.com/@loadable/component/-/component-5.15.0.tgz#48b9524237be553f48b158f8c9152593f3f3fded"
+  integrity sha512-g63rQzypPOZi0BeGsK4ST2MYhsFR+i7bhL8k/McUoWDNMDuTTdUlQ2GACKxqh5sI/dNC/6nVoPrycMnSylnAgQ==
   dependencies:
     "@babel/runtime" "^7.7.7"
     hoist-non-react-statics "^3.3.1"
     react-is "^16.12.0"
 
-"@loadable/server@5.13.2":
-  version "5.13.2"
-  resolved "https://registry.yarnpkg.com/@loadable/server/-/server-5.13.2.tgz#e8a4e9bb08a3112772d5d171c0fa905e0c13c8c9"
-  integrity sha512-2Nn4YdpAuXngP5H3OQ1TlmdILLx35jyCZ0iOVWAf0ihdkWBYXbAiwOTYt+r2vQiXIGeAaQc44GkKgod8Vp5S8g==
+"@loadable/server@^5.15.1":
+  version "5.15.1"
+  resolved "https://registry.yarnpkg.com/@loadable/server/-/server-5.15.1.tgz#fe8e8b2a631ad0ae48dfb765ec96d758ed5206dd"
+  integrity sha512-LdwzskjMtCMDJoz73JhbkBzTfaopx8U/Bfb0uKkqTxrsjH0uC+h4+cPo5mqKYyHz/dwPRf7aJsvQNcLQZdKHHw==
   dependencies:
     lodash "^4.17.15"
 
-"@loadable/webpack-plugin@^5.7.1":
-  version "5.7.1"
-  resolved "https://registry.yarnpkg.com/@loadable/webpack-plugin/-/webpack-plugin-5.7.1.tgz#9fe4b19c347eaa72f8ff366ae9a9d2b724f86124"
-  integrity sha512-tURNYwPUahbM4Miz/mwMD+PZGnMpknRukwt4RViVX6tYOt06a5U92xJTv7t54C4tHdtCIEOmDrqCo97sfIu4mg==
+"@loadable/webpack-plugin@^5.15.1":
+  version "5.15.1"
+  resolved "https://registry.yarnpkg.com/@loadable/webpack-plugin/-/webpack-plugin-5.15.1.tgz#826891c76611d22b5e8259709664f9f18ab91526"
+  integrity sha512-DqGJmazsh9XEG4CtMbaR+Ay+6+iw3NvzYqzqVIb7nsTi7UB38gEQJkT/enXdCkMZhLNSYL2HAr4rbFerhfyL2Q==
   dependencies:
-    mkdirp "^0.5.1"
+    make-dir "^3.0.2"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -8297,6 +8297,13 @@ make-dir@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-3.0.0.tgz#1b5f39f6b9270ed33f9f054c5c0f84304989f801"
   integrity sha512-grNJDhb8b1Jm1qeqW5R/O63wUo4UXo2v2HMic6YT9i/HBlF93S8jkMgH7yugvY9ABDShH4VZMn8I+U8+fCNegw==
+  dependencies:
+    semver "^6.0.0"
+
+make-dir@^3.0.2:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-3.1.0.tgz#415e967046b3a7f1d185277d84aa58203726a13f"
+  integrity sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==
   dependencies:
     semver "^6.0.0"
 
