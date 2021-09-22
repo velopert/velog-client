@@ -40,17 +40,6 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
         AWS_REGION: 'ap-northeast-2'
         SOURCE_DIR: 'build'
-
-    - name: serverless deploy
-      uses: serverless/github-action@master
-      with:
-        args: deploy --stage production
-      env:
-        # or if using AWS creds directly
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
-        REACT_APP_API_HOST: 'https://v2.velog.io/'
-        PUBLIC_URL: 'https://static.velog.io/'
     - name: Deploy Completion Webhook
       uses: joelwmale/webhook-action@master
       env:
