@@ -167,7 +167,8 @@
     "start:server:local": "node ./dist/server.js",
     "test": "node scripts/test.js",
     "upload:s3": "aws s3 sync ./build s3://$S3_BUCKET --delete",
-    "upload:ssr": "aws s3 sync ./build s3://$S3_BUCKET_SSR"
+    "upload:ssr": "aws s3 sync ./build s3://$S3_BUCKET_SSR",
+    "download": "aws s3 cp s3://$S3_BUCKET ./build/ --recursive && aws s3 cp s3://$S3_BUCKET_SSR ./dist/ --recursive"
   },
   "eslintConfig": {
     "extends": [
