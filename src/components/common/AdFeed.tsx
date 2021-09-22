@@ -31,7 +31,6 @@ function AdFeed({ forPost, index }: { forPost?: boolean; index: number }) {
           if (entry.isIntersecting && !initializedRef.current) {
             initializedRef.current = true;
             (window.adsbygoogle = window.adsbygoogle || []).push({});
-            console.log('initialized!');
           }
         });
       },
@@ -41,6 +40,9 @@ function AdFeed({ forPost, index }: { forPost?: boolean; index: number }) {
       },
     );
     observer.observe(ref.current!);
+    return () => {
+      observer.disconnect();
+    };
   }, [forPost]);
 
   return (
