@@ -1,7 +1,7 @@
 import * as React from 'react';
 import VelogPageTemplate from '../../components/velog/VelogPageTemplate';
 import { RouteComponentProps, Route, Switch } from 'react-router';
-// import loadable from '@loadable/component';
+import loadable from '@loadable/component';
 import useApplyVelogConfig from '../../containers/velog/hooks/useApplyVelogConfig';
 
 const PostPage = loadable(() => import('./PostPage'));
