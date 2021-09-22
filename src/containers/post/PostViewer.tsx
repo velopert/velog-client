@@ -397,7 +397,16 @@ const PostViewer: React.FC<PostViewerProps> = ({
         comments={post.comments}
         postId={post.id}
       />
-      {showRecommends && userId !== null && <RelatedPost postId={post.id} />}
+      {showRecommends && userId !== null && (
+        <RelatedPost
+          postId={post.id}
+          showAds={
+            post.user.id !== userId &&
+            Date.now() - new Date(post.released_at).getTime() >
+              1000 * 60 * 60 * 24 * 30
+          }
+        />
+      )}
     </PostViewerProvider>
   );
 };

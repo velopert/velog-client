@@ -1,24 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import media from '../../lib/styles/media';
 import { useQuery } from '@apollo/react-hooks';
 import {
   GetRecommendedPostResponse,
   GET_RECOMMENDED_POST,
+  PartialPost,
 } from '../../lib/graphql/post';
 import PostCardGrid from '../../components/common/PostCardGrid';
 import palette from '../../lib/styles/palette';
-// import { detectAnyAdblocker } from 'just-detect-adblock';
+import { detectAnyAdblocker } from 'just-detect-adblock';
 
-function RelatedPost({ postId }: { postId: string }) {
-  // const [adBlocked, setAdBlocked] = useState(false);
-  // useEffect(() => {
-  //   detectAnyAdblocker().then((detected: boolean) => {
-  //     if (detected) {
-  //       setAdBlocked(true);
-  //     }
-  //   });
-  // }, []);
+function RelatedPost({
+  postId,
+  showAds,
+}: {
+  postId: string;
+  showAds: boolean;
+}) {
+  const [adBlocked, setAdBlocked] = useState(false);
+  useEffect(() => {
+    detectAnyAdblocker().then((detected: boolean) => {
+      if (detected) {
+        setAdBlocked(true);
+      }
+    });
+  }, []);
 
   const { data } = useQuery<GetRecommendedPostResponse>(GET_RECOMMENDED_POST, {
     variables: {
@@ -26,36 +33,36 @@ function RelatedPost({ postId }: { postId: string }) {
     },
   });
 
-  // const postWithAds = useMemo(() => {
-  //   if (!data?.post) return null;
-  //   if (!showAds || adBlocked) return data.post.recommended_posts;
-  //   const cloned: (PartialPost | undefined)[] = [
-  //     ...data.post.recommended_posts,
-  //   ];
-  //   // get random number between 0 and length of array
-  //   const randomIndex = () => Math.floor(Math.random() * 8);
-  //   const firstAdIndex = randomIndex();
-  //   const secondAdIndex = (() => {
-  //     let index = randomIndex();
-  //     while (index === firstAdIndex) {
-  //       index = randomIndex();
-  //     }
-  //     return index;
-  //   })();
+  const postWithAds = useMemo(() => {
+    if (!data?.post) return null;
+    if (!showAds || adBlocked) return data.post.recommended_posts;
+    const cloned: (PartialPost | undefined)[] = [
+      ...data.post.recommended_posts,
+    ];
+    // get random number between 0 and length of array
+    const randomIndex = () => Math.floor(Math.random() * 8);
+    const firstAdIndex = randomIndex();
+    const secondAdIndex = (() => {
+      let index = randomIndex();
+      while (index === firstAdIndex) {
+        index = randomIndex();
+      }
+      return index;
+    })();
 
-  //   cloned[firstAdIndex] = undefined;
-  //   cloned[secondAdIndex] = undefined;
-  //   return cloned;
-  // }, [data, showAds, adBlocked]);
+    cloned[firstAdIndex] = undefined;
+    cloned[secondAdIndex] = undefined;
+    return cloned;
+  }, [data, showAds, adBlocked]);
 
-  if (!data?.post.recommended_posts) return null;
+  if (!postWithAds) return null;
 
   return (
     <>
       <Background>
         <Title>관심 있을 만한 포스트</Title>
         <Wrapper>
-          <PostCardGrid posts={data?.post.recommended_posts} forPost />
+          <PostCardGrid posts={postWithAds} forPost />
         </Wrapper>
       </Background>
       <PullUp />

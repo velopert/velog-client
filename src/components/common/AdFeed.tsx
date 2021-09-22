@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { mediaQuery } from '../../lib/styles/media';
 import gtag from '../../lib/gtag';
 
 function AdFeed({ forPost, index }: { forPost?: boolean; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const initializedRef = useRef(false);
   // const [isMobile, setIsMobile] = useState(false);
 
   // useEffect(() => {
@@ -17,11 +19,33 @@ function AdFeed({ forPost, index }: { forPost?: boolean; index: number }) {
   //   }, 250);
   // }, []);
   useEffect(() => {
+    if (forPost) return;
     (window.adsbygoogle = window.adsbygoogle || []).push({});
-  }, []);
+  }, [forPost]);
+
+  useEffect(() => {
+    if (!forPost) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !initializedRef.current) {
+            initializedRef.current = true;
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            console.log('initialized!');
+          }
+        });
+      },
+      {
+        rootMargin: '90px',
+        threshold: 0,
+      },
+    );
+    observer.observe(ref.current!);
+  }, [forPost]);
 
   return (
     <Block
+      ref={ref}
       forPost={forPost}
       onClick={() => {
         if (forPost) {
@@ -29,14 +53,25 @@ function AdFeed({ forPost, index }: { forPost?: boolean; index: number }) {
         }
       }}
     >
-      <ins
-        className="adsbygoogle"
-        style={{ display: 'block' }}
-        data-ad-format="fluid"
-        data-ad-layout-key="-6u+e7+18-4k+8t"
-        data-ad-client="ca-pub-5574866530496701"
-        data-ad-slot="3828701581"
-      ></ins>
+      {forPost ? (
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-format="fluid"
+          data-ad-layout-key="-6u+e5+1a-3q+77"
+          data-ad-client="ca-pub-5574866530496701"
+          data-ad-slot="8480422066"
+        ></ins>
+      ) : (
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-format="fluid"
+          data-ad-layout-key="-6u+e7+18-4k+8t"
+          data-ad-client="ca-pub-5574866530496701"
+          data-ad-slot="3828701581"
+        ></ins>
+      )}
       {/* {isMobile ? (
         <ins
           className="adsbygoogle"
