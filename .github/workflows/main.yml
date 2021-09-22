@@ -30,6 +30,7 @@ jobs:
       env:
         REACT_APP_API_HOST: 'https://v2.velog.io/'
         PUBLIC_URL: 'https://static.velog.io/'
+        REACT_APP_REDIS_HOST: ${{ secrets.REDIS_HOST }}
     - name: s3 sync
       uses: jakejarvis/s3-sync-action@master
       with:
@@ -40,6 +41,16 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
         AWS_REGION: 'ap-northeast-2'
         SOURCE_DIR: 'build'
+    - name: s3 sync:ssr
+      uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --follow-symlinks --delete
+      env:
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET_SSR }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+        AWS_REGION: 'ap-northeast-2'
+        SOURCE_DIR: 'dist'
     - name: Deploy Completion Webhook
       uses: joelwmale/webhook-action@master
       env:
