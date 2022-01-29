@@ -47,7 +47,7 @@ const shining = keyframes`
 `;
 
 const Block = styled.span<{ noSpacing?: boolean; circle?: boolean }>`
-  background: ${themedPalette.bg_element2};
+  background: ${themedPalette.bg_element4};
   animation: ${shining} 1s ease-in-out infinite;
   display: inline-block;
   border-radius: 4px;

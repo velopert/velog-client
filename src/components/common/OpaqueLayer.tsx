@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import transitions from '../../lib/styles/transitions';
 import zIndexes from '../../lib/styles/zIndexes';
 
@@ -12,10 +13,10 @@ const OpaqueLayerBlock = styled.div<{
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(249, 249, 249, 0.85);
+  background: ${themedPalette.opaque_layer};
   z-index: ${zIndexes.OpaqueLayer};
 
-  ${props =>
+  ${(props) =>
     props.visible
       ? css`
           animation: ${transitions.fadeIn} 0.25s forwards;

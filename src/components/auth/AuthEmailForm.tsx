@@ -13,7 +13,9 @@ const AuthEmailFormBlock = styled.form`
     border-bottom-left-radius: 2px;
     padding: 1rem;
     font-size: 1rem;
+    background: ${themedPalette.bg_element1};
     border: 1px solid ${themedPalette.border3};
+    color: ${themedPalette.text1};
     border-right: none;
     &::placeholder {
       color: ${themedPalette.text3};

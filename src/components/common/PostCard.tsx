@@ -107,7 +107,7 @@ export function PostCardSkeleton({
       <div className="skeleton-thumbnail-wrapper">
         <Skeleton className="skeleton-thumbnail"></Skeleton>
       </div>
-      <Content clamp={true}>
+      <Content clamp={true} isSkeleton>
         <h4>
           <SkeletonTexts wordLengths={[2, 4, 3, 6, 5]} />
         </h4>
@@ -196,7 +196,7 @@ const Block = styled.div<{ forHome: boolean; forPost: boolean }>`
   }
 `;
 
-const Content = styled.div<{ clamp: boolean }>`
+const Content = styled.div<{ clamp: boolean; isSkeleton?: boolean }>`
   padding: 1rem;
   display: flex;
   flex: 1;
@@ -207,7 +207,13 @@ const Content = styled.div<{ clamp: boolean }>`
     margin-bottom: 0.25rem;
     line-height: 1.5;
     word-break: break-word;
+
     ${ellipsis}
+    ${(props) =>
+      props.isSkeleton &&
+      css`
+        text-overflow: initial;
+      `}
     color: ${themedPalette.text1};
     ${mediaQuery(767)} {
       white-space: initial;

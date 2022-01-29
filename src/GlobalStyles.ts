@@ -31,8 +31,8 @@ html, body, #root {
 }
 
 body {
+  background: ${themedPalette.bg_page1};
   ${themes.light}
-  transition: 0.125s all ease-in;
 }
 
 @media (prefers-color-scheme: dark) {

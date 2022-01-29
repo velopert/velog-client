@@ -13,6 +13,8 @@ type ThemeVariables = {
   border2: string;
   border3: string;
   border4: string;
+
+  opaque_layer: string;
 };
 
 type Theme = 'light' | 'dark';
@@ -35,6 +37,7 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
     border2: '#ADB5BD',
     border3: '#DEE2E6',
     border4: '#F1F3F5',
+    opaque_layer: 'rgba(249, 249, 249, 0.85)',
   },
   dark: {
     bg_page1: '#121212',
@@ -51,6 +54,7 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
     border2: '#A0A0A0',
     border3: '#4D4D4D',
     border4: '#2A2A2A',
+    opaque_layer: 'rgba(0, 0, 0, 0.85)',
   },
 };
 
