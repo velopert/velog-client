@@ -31,7 +31,7 @@ const AddLinkBlock = styled.div`
         color: ${palette.gray5};
         cursor: pointer;
         &:hover {
-          color: ${palette.gray9};
+          color: ${themedPalette.text1};
         }
       }
     }

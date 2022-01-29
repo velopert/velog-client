@@ -188,7 +188,7 @@ const StyledInput = styled.input`
 `;
 
 const Tag = styled.div`
-  color: ${palette.gray9};
+  color: ${themedPalette.text1};
   font-size: 1rem;
   display: inline-flex;
   align-items: center;

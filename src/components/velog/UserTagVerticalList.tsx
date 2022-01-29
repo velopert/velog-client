@@ -69,7 +69,7 @@ const ListItem = styled.li<{ active?: boolean }>`
     color: inherit;
     text-decoration: none;
     &:hover {
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
       ${(props) =>
         props.active &&
         `

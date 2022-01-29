@@ -137,7 +137,7 @@ const TypographyBlock = styled.div`
     margin-right: 0;
     padding: 1rem;
     padding-left: 2rem;
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
     ul,
     ol {
       padding-left: 1rem;

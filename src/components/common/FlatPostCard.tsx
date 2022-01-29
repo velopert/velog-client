@@ -50,7 +50,7 @@ const PostCardBlock = styled.div`
     }
     .username {
       font-size: 0.875rem;
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
       font-weight: bold;
       a {
         color: inherit;
@@ -74,7 +74,7 @@ const PostCardBlock = styled.div`
   h2 {
     font-size: 1.5rem;
     margin: 0;
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
     word-break: keep-all;
     ${media.small} {
       font-size: 1rem;

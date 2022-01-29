@@ -181,7 +181,7 @@ const Row = styled.div`
 
   line-height: 1.5;
   .name {
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
     font-weight: bold;
   }
   .value {

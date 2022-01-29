@@ -11,13 +11,13 @@ const RegisterTemplateBlock = styled.div`
   line-height: 1.5;
   h1 {
     font-size: 4rem;
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
     font-weight: bolder;
     margin: 0;
   }
   .description {
     font-size: 1.5rem;
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
   }
 
   ${media.small} {

@@ -88,9 +88,9 @@ const Fold = styled.div`
     font-size: 1.5rem;
   }
   &:hover {
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
     svg {
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
     }
   }
 `;
@@ -163,7 +163,7 @@ const PostList = styled.ol`
     color: inherit;
     text-decoration: none;
     &:hover {
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
       text-decoration: underline;
     }
   }

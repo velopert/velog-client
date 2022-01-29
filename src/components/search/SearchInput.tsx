@@ -50,7 +50,7 @@ const SearchInputBlock = styled.div<{ focus: boolean; large?: boolean }>`
         fill: ${palette.gray9};
       }
       input {
-        color: ${palette.gray9};
+        color: ${themedPalette.text1};
       }
     `}
 

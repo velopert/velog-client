@@ -30,7 +30,7 @@ const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
       color: inherit;
       text-decoration: none;
       &:hover {
-        color: ${palette.gray9};
+        color: ${themedPalette.text1};
         text-decoration: underline;
       }
     }

@@ -102,7 +102,7 @@ const Editor = styled.div`
         line-height: 1.75;
       }
     }
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
     .ql-syntax {
       margin-top: 2rem;
       margin-bottom: 2rem;

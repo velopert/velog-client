@@ -58,7 +58,7 @@ const UserInfo = styled.div`
     font-size: 1.5rem;
     line-height: 1.5;
     font-weight: bold;
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
     a {
       color: inherit;
       text-decoration: none;

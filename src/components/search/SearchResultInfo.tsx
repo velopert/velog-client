@@ -14,7 +14,7 @@ const Info = styled.p`
   }
   color: ${palette.gray7};
   b {
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
   }
 `;
 export interface SearchResultInfoProps {

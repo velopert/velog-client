@@ -82,7 +82,7 @@ const Block = styled(animated.div)`
   width: 12rem;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
   background: ${themedPalette.bg_element1};
-  color: ${palette.gray9};
+  color: ${themedPalette.text1};
   transform-origin: top right;
   ul {
     list-style: none;

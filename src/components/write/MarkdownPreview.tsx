@@ -9,7 +9,7 @@ const MarkdownPreviewBlock = styled.div`
   padding: 3rem;
   flex: 1;
   overflow-y: auto;
-  color: ${palette.gray9};
+  color: ${themedPalette.text1};
 `;
 
 const Title = styled.h1`

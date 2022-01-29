@@ -17,7 +17,7 @@ const style = css`
   outline: none;
   border: none;
   font-weight: bold;
-  color: ${palette.gray9};
+  color: ${themedPalette.text1};
   &::placeholder {
     color: ${palette.gray5};
   }

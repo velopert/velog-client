@@ -95,7 +95,7 @@ const ToolbarItem = styled.button`
     font-size: 1.45rem;
   }
   &:hover {
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
     background: ${themedPalette.bg_element2};
   }
   background: none;

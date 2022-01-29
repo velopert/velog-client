@@ -18,7 +18,7 @@ const MarkdownEditorBlock = styled.div`
     /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', */
     .cm-header {
       line-height: 2;
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
     }
     .cm-header-1 {
       font-size: 2.5rem;
@@ -36,7 +36,7 @@ const MarkdownEditorBlock = styled.div`
     }
     .cm-strong,
     .cm-em {
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
     }
     .CodeMirror-placeholder {
       color: ${palette.gray5};

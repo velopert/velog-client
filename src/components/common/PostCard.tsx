@@ -208,7 +208,7 @@ const Content = styled.div<{ clamp: boolean }>`
     line-height: 1.5;
     word-break: break-word;
     ${ellipsis}
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
     ${mediaQuery(767)} {
       white-space: initial;
     }

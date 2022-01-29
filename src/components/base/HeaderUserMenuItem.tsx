@@ -11,7 +11,7 @@ const WrapperLink = styled(Link)`
 `;
 
 const HeaderUserMenuItemBlock = styled.div`
-  color: ${palette.gray9};
+  color: ${themedPalette.text1};
   padding: 0.75rem 1rem;
   line-height: 1.5;
   font-weight: 500;

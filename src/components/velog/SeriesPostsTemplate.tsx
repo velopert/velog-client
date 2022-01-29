@@ -22,7 +22,7 @@ const SeriesPostsTemplateBlock = styled.div`
     line-height: 1.5;
     margin-bottom: 1.5rem;
     font-size: 2.5rem;
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
     outline: none;
   }
 `;

@@ -58,7 +58,7 @@ const TocItem = styled.div<{ active: boolean }>`
   transition: 0.125s all ease-in;
   a {
     &:hover {
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
     }
     text-decoration: none;
     color: inherit;
@@ -66,7 +66,7 @@ const TocItem = styled.div<{ active: boolean }>`
   ${(props) =>
     props.active &&
     css`
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
       transform: scale(1.05);
     `}
   & + & {

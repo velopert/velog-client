@@ -25,7 +25,7 @@ const StyledTextarea = styled(TextareaAutosize)`
   min-height: 6.125rem;
   font-size: 1rem;
   ${customFont};
-  color: ${palette.gray9};
+  color: ${themedPalette.text1};
   &::placeholder {
     color: ${palette.gray5};
   }

@@ -32,7 +32,7 @@ const HeaderUserIconBlock = styled.div`
       box-shadow: 0px 0 12px rgba(0, 0, 0, 0.1);
     }
     svg {
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
     }
   }
 `;

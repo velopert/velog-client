@@ -13,7 +13,7 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
   label {
     font-weight: bold;
     font-size: 1.125rem;
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
     margin-bottom: 1rem;
     transition: all 0.125s ease-in;
     ${(props) =>

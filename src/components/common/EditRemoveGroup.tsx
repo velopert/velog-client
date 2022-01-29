@@ -12,7 +12,7 @@ const EditRemoveGroup = styled.div`
     cursor: pointer;
     color: ${palette.gray6};
     &:hover {
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
     }
   }
   button + button {
