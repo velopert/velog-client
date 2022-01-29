@@ -7,6 +7,7 @@ type ThemeVariables = {
   bg_element4: string;
   bg_element5: string;
   bg_element6: string;
+  bg_invert: string;
   text1: string;
   text2: string;
   text3: string;
@@ -39,6 +40,7 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
     bg_element4: '#DEE2E6',
     bg_element5: '#212529',
     bg_element6: '#343A40',
+    bg_invert: '#1E1E1E',
     text1: '#212529',
     text2: '#495057',
     text3: '#868E96',
@@ -65,6 +67,7 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
     bg_element4: '#2E2E2E',
     bg_element5: '#F1F3F5',
     bg_element6: '#F8F9FA',
+    bg_invert: '#FFFFFF',
     text1: '#ECECEC',
     text2: '#D9D9D9',
     text3: '#ACACAC',
@@ -79,7 +82,7 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
     destructive2: '#FFA8A8',
     button_text: '#121212',
 
-    slight_layer: 'rgba(255,255,255,0.05)',
+    slight_layer: 'rgba(255,255,255,0.1)',
     opaque_layer: 'rgba(0, 0, 0, 0.85)',
   },
 };

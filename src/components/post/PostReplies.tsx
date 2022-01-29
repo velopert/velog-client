@@ -37,19 +37,19 @@ const StartWritingButton = styled.button`
   height: 2.5rem;
   font-size: 1rem;
   border-radius: 4px;
-  border: 1px solid ${palette.teal6};
+  border: 1px solid ${themedPalette.primary1};
   display: flex;
   outline: none;
-  color: ${palette.teal6};
+  color: ${themedPalette.primary1};
   width: 100%;
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  background: ${themedPalette.bg_element1};
+  background: ${themedPalette.bg_page2};
   &:hover,
   &:focus {
-    background: ${palette.teal6};
-    color: white;
+    background: ${themedPalette.primary1};
+    color: ${themedPalette.button_text};
   }
 `;
 
