@@ -16,7 +16,7 @@ const AuthEmailFormBlock = styled.form`
     border: 1px solid ${palette.gray3};
     border-right: none;
     &::placeholder {
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
     }
     &:disabled {
       background: ${themedPalette.bg_element2};

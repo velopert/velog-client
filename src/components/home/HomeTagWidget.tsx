@@ -62,7 +62,7 @@ const StyledWidget = styled(HomeWidget)`
       margin-top: 0.25rem;
     }
     li.more {
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
       a {
         &:hover {
           color: ${palette.gray5};

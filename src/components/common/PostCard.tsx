@@ -244,7 +244,7 @@ const Content = styled.div<{ clamp: boolean }>`
   .sub-info {
     font-size: 0.75rem;
     line-height: 1.5;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     .separator {
       margin-left: 0.25rem;
       margin-right: 0.25rem;
@@ -273,7 +273,7 @@ const Footer = styled.div`
       margin-right: 0.5rem;
     }
     span {
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
       b {
         color: ${themedPalette.text1};
       }

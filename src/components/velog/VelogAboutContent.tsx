@@ -23,7 +23,7 @@ const EmptyAbout = styled.div`
   }
   .message {
     font-size: 2rem;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     margin-bottom: 2rem;
   }
 `;

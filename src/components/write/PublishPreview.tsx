@@ -90,7 +90,7 @@ const TextLimit = styled.div<{ limit: boolean }>`
   text-align: right;
   margin-top: 0.25rem;
   font-size: 0.75rem;
-  color: ${palette.gray6};
+  color: ${themedPalette.text3};
   ${(props) =>
     props.limit &&
     css`
@@ -131,7 +131,7 @@ const ThumbnailModifyBlock = styled.div`
       outline: none;
       border: none;
       font-size: 1rem;
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
       cursor: pointer;
       padding: 0;
       text-decoration: underline;

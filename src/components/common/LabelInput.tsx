@@ -43,7 +43,7 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
       color: ${palette.gray5};
     }
     &:disabled {
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
     }
   }
   .group {
@@ -65,7 +65,7 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
     }
     svg {
       font-size: 1.5rem;
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
     }
   }
   .width-maker {

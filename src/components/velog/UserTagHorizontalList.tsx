@@ -71,7 +71,7 @@ const TagItem = styled(Link)<{ active?: boolean }>`
 
   span {
     margin-left: 0.25rem;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     font-size: 0.75rem;
   }
 

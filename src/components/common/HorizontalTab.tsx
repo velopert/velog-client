@@ -121,7 +121,7 @@ const StyledLink = styled(Link)<{
   ${media.small} {
     font-size: 1rem;
   }
-  color: ${palette.gray6};
+  color: ${themedPalette.text3};
   display: flex;
   align-items: center;
   justify-content: center;

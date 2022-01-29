@@ -139,7 +139,7 @@ const Section = styled.section`
       margin-top: 0.25rem;
       margin-bottom: 0.5rem;
       line-height: 1.5;
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
     }
     ${media.small} {
       padding-top: 1.5rem;

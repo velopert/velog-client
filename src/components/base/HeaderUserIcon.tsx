@@ -21,7 +21,7 @@ const HeaderUserIconBlock = styled.div`
   svg {
     font-size: 1.5rem;
     margin-left: 0.25rem;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     transition: 0.125s all ease-in;
     margin-right: -0.4375rem;
   }

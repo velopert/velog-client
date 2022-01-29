@@ -14,7 +14,7 @@ const Empty = styled.div`
   padding-bottom: 5rem;
   text-align: center;
   font-size: 1.5rem;
-  color: ${palette.gray6};
+  color: ${themedPalette.text3};
 `;
 
 function SavedPosts(props: SavedPostsProps) {

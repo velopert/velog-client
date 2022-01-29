@@ -31,7 +31,7 @@ const SeriesListBlock = styled.div`
     }
     .message {
       font-size: 2rem;
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
       margin-top: 3rem;
       margin-bottom: 2rem;
     }

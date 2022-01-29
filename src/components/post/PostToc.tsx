@@ -30,7 +30,7 @@ const PostTocBlock = styled(Sticky)`
   padding-right: 0.75rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
-  color: ${palette.gray6};
+  color: ${themedPalette.text3};
   line-height: 1.5;
   font-size: 0.875rem;
   max-height: calc(100vh - 128px);

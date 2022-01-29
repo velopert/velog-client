@@ -52,7 +52,7 @@ const SeriesItemBlock = styled.div`
       line-height: 1;
     }
     font-size: 0.875rem;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     .count {
       color: ${themedPalette.text1};
     }

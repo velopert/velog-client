@@ -85,7 +85,7 @@ const ToolbarItem = styled.button`
   align-items: center;
   justify-content: center;
   font-size: 1.75rem;
-  color: ${palette.gray6};
+  color: ${themedPalette.text3};
   cursor: pointer;
   flex-shrink: 0;
 

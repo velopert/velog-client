@@ -38,7 +38,7 @@ const PostSeriesInfoBlock = styled.div`
       text-decoration: none;
       color: inherit;
       &:hover {
-        color: ${palette.gray6};
+        color: ${themedPalette.text3};
         text-decoration: underline;
       }
     }

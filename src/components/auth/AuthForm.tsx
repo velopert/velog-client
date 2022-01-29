@@ -31,7 +31,7 @@ const AuthFormBlock = styled.div`
   h4 {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
   }
   section + section {
     margin-top: 2.5rem;

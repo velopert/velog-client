@@ -24,7 +24,7 @@ const Button = styled.button<{ active: boolean }>`
   font-weight: bold;
   background: ${themedPalette.bg_element1};
   font-size: 1.125rem;
-  color: ${palette.gray6};
+  color: ${themedPalette.text3};
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.05);
   padding: 0;
   padding-left: 1rem;

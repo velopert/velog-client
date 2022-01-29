@@ -75,7 +75,7 @@ const Row = styled.div`
   }
   .description {
     margin-top: 0.875rem;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     font-size: 0.875rem;
   }
   .edit-wrapper {

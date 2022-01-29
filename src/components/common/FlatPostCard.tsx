@@ -96,7 +96,7 @@ const PostCardBlock = styled.div`
     display: flex;
     align-items: center;
     margin-top: 1rem;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     font-size: 0.875rem;
     ${media.small} {
       font-size: 0.75rem;

@@ -13,7 +13,7 @@ const MainRightFooterBlock = styled.div`
   line-height: 1.5;
   font-size: 0.875rem;
   .links {
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     a {
       color: inherit;
       text-decoration: none;

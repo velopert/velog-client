@@ -109,7 +109,7 @@ const Wrapper = styled.div`
   .more {
     cursor: pointer;
     font-size: 1.5rem;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
   }
 `;
 
@@ -139,7 +139,7 @@ const Block = styled.div`
     justify-content: center;
     font-size: 1.125rem;
     text-decoration: none;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     height: 3rem;
 
     svg {

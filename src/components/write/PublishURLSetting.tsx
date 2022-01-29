@@ -12,7 +12,7 @@ const URLTextBlock = styled.div`
   padding: 0.5rem 0.875rem;
   line-height: 1.5;
   .username {
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
   }
 `;
 const Input = styled.input`

@@ -42,7 +42,7 @@ const CircleButton = styled(animated.div)<{ active?: string }>`
   background: ${themedPalette.bg_element1};
   border: 1px solid ${palette.gray5};
   border-radius: 1.5rem;
-  color: ${palette.gray6};
+  color: ${themedPalette.text3};
   cursor: pointer;
   z-index: 5;
   svg {

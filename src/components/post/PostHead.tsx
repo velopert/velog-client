@@ -92,7 +92,7 @@ const EditRemoveGroup = styled.div`
     background: none;
     font-size: inherit;
     cursor: pointer;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     &:hover {
       color: ${themedPalette.text1};
     }

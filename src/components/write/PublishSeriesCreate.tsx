@@ -61,7 +61,7 @@ const URLInput = styled.div`
   border-radius: 2px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.03);
   background: ${themedPalette.bg_element1};
-  color: ${palette.gray6};
+  color: ${themedPalette.text3};
   input {
     color: ${themedPalette.text1};
     flex: 1;

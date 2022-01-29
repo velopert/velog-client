@@ -93,7 +93,7 @@ const Block = styled.div`
   }
   .count {
     margin-top: 1rem;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     font-size: 1rem;
   }
 `;

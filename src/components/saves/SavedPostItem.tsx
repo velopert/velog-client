@@ -36,7 +36,7 @@ const SavedItemBlock = styled.div`
     justify-content: space-between;
     font-size: 0.875rem;
     .time {
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
     }
     .remove {
       cursor: pointer;

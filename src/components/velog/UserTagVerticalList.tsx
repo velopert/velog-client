@@ -91,7 +91,7 @@ const ListItem = styled.li<{ active?: boolean }>`
 
   span {
     margin-left: 0.5rem;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     font-weight: normal;
   }
 

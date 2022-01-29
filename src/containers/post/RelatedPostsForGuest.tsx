@@ -271,7 +271,7 @@ const StyledRowLink = styled(Link)`
     height: 2.0625rem;
     overflow: hidden;
     word-break: keep-all;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     -webkit-box-orient: vertical;
   }
 `;

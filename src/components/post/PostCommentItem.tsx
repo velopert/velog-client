@@ -65,7 +65,7 @@ const CommentHead = styled.div`
       }
       .date {
         margin-top: 0.5rem;
-        color: ${palette.gray6};
+        color: ${themedPalette.text3};
         font-size: 0.875rem;
         ${media.small} {
           font-size: 0.75rem;
@@ -79,7 +79,7 @@ const CommentHead = styled.div`
       font-size: 0.75rem;
     }
 
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     span {
       cursor: pointer;
       &:hover {
@@ -105,7 +105,7 @@ const CommentText = styled.div<{ deleted: boolean }>`
   ${(props) =>
     props.deleted &&
     css`
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
       font-style: italic;
     `}
 `;

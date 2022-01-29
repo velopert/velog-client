@@ -77,7 +77,7 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
         display: flex;
         justify-content: flex-end;
         font-size: 1.5rem;
-        color: ${palette.gray6};
+        color: ${themedPalette.text3};
         margin-bottom: 2.25rem;
         svg {
           cursor: pointer;
