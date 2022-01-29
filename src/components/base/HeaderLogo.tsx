@@ -77,7 +77,9 @@ const HeaderLogoBlock = styled.div`
 
 const VelogLogoLink = styled(Link)`
   color: inherit;
+
   svg {
+    color: inherit;
     margin-right: 1rem;
     width: 1.75rem;
     height: 1.75rem;
