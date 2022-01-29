@@ -59,7 +59,7 @@ const CommentHead = styled.div`
           text-decoration: none;
           &:hover {
             text-decoration: underline;
-            color: ${palette.gray7};
+            color: ${themedPalette.text2};
           }
         }
       }

@@ -16,7 +16,7 @@ const PopupOKCancelBlock = styled.div`
   .message {
     line-height: 1.5;
     font-size: 1rem;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     margin-top: 1rem;
     margin-bottom: 1rem;
     white-space: pre-wrap;

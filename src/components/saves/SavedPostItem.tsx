@@ -29,7 +29,7 @@ const SavedItemBlock = styled.div`
     font-size: 1rem;
     margin-top: 0;
     margin-bottom: 1rem;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
   }
   section {
     display: flex;

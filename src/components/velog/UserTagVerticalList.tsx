@@ -50,7 +50,7 @@ const Block = styled.div`
     padding-bottom: 0.5rem;
     border-bottom: 1px solid ${palette.gray5};
     margin-bottom: 1rem;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     font-weight: bold;
   }
   ul {

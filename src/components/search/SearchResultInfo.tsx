@@ -12,7 +12,7 @@ const Info = styled.p`
     font-size: 1rem;
     margin-bottom: 1rem;
   }
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   b {
     color: ${themedPalette.text1};
   }

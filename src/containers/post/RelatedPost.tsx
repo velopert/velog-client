@@ -76,7 +76,7 @@ const Title = styled.div`
 
   font-size: 2rem;
   font-weight: 400;
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   margin-bottom: 3.5rem;
   ${media.custom(1376)} {
     font-size: 1.5rem;

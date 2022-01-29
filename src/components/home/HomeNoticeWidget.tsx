@@ -80,7 +80,7 @@ const StyledWidget = styled(HomeWidget)`
           text-decoration: none;
           color: inherit;
           &:hover {
-            color: ${palette.gray7};
+            color: ${themedPalette.text2};
             text-decoration: underline;
           }
         }

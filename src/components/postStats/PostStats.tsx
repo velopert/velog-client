@@ -185,7 +185,7 @@ const Row = styled.div`
     font-weight: bold;
   }
   .value {
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     margin-left: 1rem;
   }
 

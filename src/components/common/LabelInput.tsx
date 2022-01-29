@@ -32,7 +32,7 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
     }
 
     width: 100%;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     transition: all 0.125s ease-in;
     ${(props) =>
       props.focus &&

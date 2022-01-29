@@ -65,7 +65,7 @@ const EmptyWrapper = styled.div`
   }
 
   .description {
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     font-size: 1.5rem;
   }
 

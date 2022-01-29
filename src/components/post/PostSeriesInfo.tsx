@@ -44,7 +44,7 @@ const PostSeriesInfoBlock = styled.div`
     }
     margin-top: 0;
     /* font-family: 'Spoqa Han Sans'; */
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     font-weight: bold;
     padding-right: 2rem;
     font-size: 1.5rem;
@@ -79,7 +79,7 @@ const Fold = styled.div`
   display: flex;
   align-items: center;
   margin-left: -5px;
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   line-height: 1;
   cursor: pointer;
   svg {
@@ -143,7 +143,7 @@ const PostList = styled.ol`
   line-height: 1.8;
   font-size: 1rem;
   /* font-family: 'Spoqa Han Sans'; */
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   counter-reset: item;
   ${media.small} {
     font-size: 0.875rem;

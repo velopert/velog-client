@@ -146,7 +146,7 @@ const HelpBlock = styled.div`
   display: block;
   width: 100%;
 
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   transition: ease-in 0.125s;
 
   & > .inside {

@@ -73,7 +73,7 @@ const CircleButton = styled(animated.div)<{ active?: string }>`
 
 const LikeCount = styled.div`
   margin-top: 0.5rem;
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   line-height: 1;
   font-size: 0.75rem;
   margin-bottom: 1rem;

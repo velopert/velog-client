@@ -46,7 +46,7 @@ const PostHeadBlock = styled(VelogResponsive)`
 const SubInfo = styled.div`
   align-items: center;
   font-size: 1rem;
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   /* font-family: 'Spoqa Han Sans'; */
   display: flex;
   justify-content: space-between;
@@ -58,7 +58,7 @@ const SubInfo = styled.div`
         color: inherit;
         text-decoration: none;
         &:hover {
-          color: ${palette.gray7};
+          color: ${themedPalette.text2};
           text-decoration: underline;
         }
       }

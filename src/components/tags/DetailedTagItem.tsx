@@ -91,7 +91,7 @@ const Block = styled.div<{ hasDescription: boolean }>`
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     font-size: 0.875rem;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     line-height: 1.5;
     ${media.small} {
       font-size: 0.75rem;

@@ -17,7 +17,7 @@ const StyledInput = styled.input<{ fullWidth?: boolean }>`
   border: 1px solid ${palette.gray3};
   background: ${themedPalette.bg_element1};
   padding: 0.5rem;
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   font-size: 1rem;
   line-height: 1rem;
   outline: none;

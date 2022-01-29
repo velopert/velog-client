@@ -31,7 +31,7 @@ const TabItem = styled(PlainNavLink)`
   font-size: 1.325rem;
   width: 8rem;
   height: 3rem;
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   text-decoration: none;
   transition: 0.25s color ease-in-out;
   font-weight: 600;

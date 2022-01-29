@@ -282,7 +282,7 @@ const StyledLink = styled(Link)`
   color: inherit;
   &:hover {
     text-decoration: underline;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
   }
 `;
 

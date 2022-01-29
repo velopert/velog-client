@@ -70,7 +70,7 @@ const Row = styled.div`
   .contents {
     flex: 1;
     font-size: 1rem;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     line-height: 1.5;
   }
   .description {

@@ -84,7 +84,7 @@ const Block = styled.div`
     margin-bottom: 1rem;
     font-size: 1.125rem;
     line-height: 1.5;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     ${media.small} {
       margin-top: 0.5rem;
       margin-bottom: 0.5rem;

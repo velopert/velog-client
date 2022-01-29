@@ -73,7 +73,7 @@ const UserInfo = styled.div`
     font-size: 1.125rem;
     line-height: 1.5;
     margin-top: 0.25rem;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     letter-spacing: -0.004em;
   }
 

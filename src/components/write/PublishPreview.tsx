@@ -139,7 +139,7 @@ const ThumbnailModifyBlock = styled.div`
         color: ${palette.gray5};
       }
       &:active {
-        color: ${palette.gray7};
+        color: ${themedPalette.text2};
       }
     }
     .middledot {

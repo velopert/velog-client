@@ -238,7 +238,7 @@ const Content = styled.div<{ clamp: boolean }>`
         height: 15.875rem;
       `} */
   
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     margin-bottom: 1.5rem;
   }
   .sub-info {

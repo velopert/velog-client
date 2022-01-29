@@ -47,7 +47,7 @@ const EditSeries = styled.div`
     background: ${themedPalette.bg_element1};
     font-size: 1.125rem;
     line-height: 1;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     flex: 1;
   }
   .name {

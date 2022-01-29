@@ -88,7 +88,7 @@ const Text = styled.div<{ right?: boolean }>`
   .description {
     font-size: 0.75rem;
     font-weight: bold;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
   }
   h3 {
     ${(props) =>
@@ -98,7 +98,7 @@ const Text = styled.div<{ right?: boolean }>`
       `};
     width: 100%;
     font-size: 1.125rem;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     line-height: 1.15;
     margin: 0;
     margin-top: 0.5rem;

@@ -180,7 +180,7 @@ const Selector = styled.div`
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   font-weight: 600;
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   font-size: 0.875rem;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.05);
   svg {

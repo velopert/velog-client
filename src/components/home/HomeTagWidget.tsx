@@ -54,7 +54,7 @@ const StyledWidget = styled(HomeWidget)`
       }
     }
     li {
-      color: ${palette.gray7};
+      color: ${themedPalette.text2};
       line-height: 1.5;
       font-size: 1rem;
     }

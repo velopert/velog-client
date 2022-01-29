@@ -19,7 +19,7 @@ const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
     margin: 0;
     line-height: 1.5;
     font-size: 1.325rem;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     .number {
       color: ${palette.gray5};
       margin-right: 0.25rem;
@@ -64,7 +64,7 @@ const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
       justify-content: space-between;
       height: 100%;
       p {
-        color: ${palette.gray7};
+        color: ${themedPalette.text2};
         font-size: 1rem;
         line-height: 1.5rem;
         margin: 0;
