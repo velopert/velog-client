@@ -64,12 +64,12 @@ const RoundButtonBlock = styled.button<RoundButtonBlockProps>`
   ${(props) =>
     props.border &&
     css<RoundButtonBlockProps>`
-      background: ${themedPalette.bg_element1};
+      background: ${themedPalette.bg_element2};
       border: 1px solid ${(props) => buttonColorMap[props.color].background};
       color: ${(props) => buttonColorMap[props.color].background};
       &:hover {
         background: ${(props) => buttonColorMap[props.color].background};
-        color: white;
+        color: ${themedPalette.button_text};
       }
     `}
 

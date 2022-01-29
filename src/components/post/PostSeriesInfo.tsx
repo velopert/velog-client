@@ -135,6 +135,7 @@ const NavigateButton = styled.button`
     background: ${themedPalette.bg_element2};
     border: 1px solid ${themedPalette.border4};
     color: ${themedPalette.text3};
+    opacity: 0.3;
   }
 `;
 

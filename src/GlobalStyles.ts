@@ -31,7 +31,7 @@ html, body, #root {
 }
 
 body {
-  background: ${themedPalette.bg_page1};
+  background: ${themedPalette.bg_page2};
   ${themes.light}
 }
 

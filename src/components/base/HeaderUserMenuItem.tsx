@@ -18,6 +18,7 @@ const HeaderUserMenuItemBlock = styled.div`
   cursor: pointer;
   &:hover {
     background: ${themedPalette.bg_element2};
+    color: ${themedPalette.primary1};
   }
 `;
 
