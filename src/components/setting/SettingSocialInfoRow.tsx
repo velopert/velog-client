@@ -179,7 +179,7 @@ const InfoList = styled.ul`
 const FacebookInputBox = styled.div<{ focus: boolean }>`
   flex: 1;
   display: flex;
-  border: 1px solid ${palette.gray3};
+  border: 1px solid ${themedPalette.border3};
   background: ${themedPalette.bg_element1};
   padding: 0.5rem;
   color: ${themedPalette.text2};
@@ -205,7 +205,7 @@ const FacebookInputBox = styled.div<{ focus: boolean }>`
   ${(props) =>
     props.focus &&
     css`
-      border: 1px solid ${palette.gray9};
+      border: 1px solid ${themedPalette.border1};
     `}
 `;
 

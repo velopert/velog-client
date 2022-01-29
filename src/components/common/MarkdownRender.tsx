@@ -95,7 +95,7 @@ const MarkdownRenderBlock = styled.div`
   table {
     min-width: 40%;
     max-width: 100%;
-    border: 1px solid ${palette.gray7};
+    border: 1px solid ${themedPalette.border2};
     border-collapse: collapse;
     font-size: 0.875rem;
     thead > tr > th {

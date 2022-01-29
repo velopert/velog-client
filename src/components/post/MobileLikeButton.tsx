@@ -21,7 +21,7 @@ function MobileLikeButton({ likes, onToggle, liked }: MobileLikeButtonProps) {
 
 const Button = styled.button<{ liked: boolean }>`
   background: ${themedPalette.bg_element1};
-  border: 1px solid ${palette.gray5};
+  border: 1px solid ${themedPalette.border2};
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   display: flex;

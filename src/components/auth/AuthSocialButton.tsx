@@ -17,7 +17,7 @@ const AuthSocialButtonBlock = styled.a<{ border: boolean }>`
   ${(props) =>
     props.border &&
     css`
-      border: 1px solid ${palette.gray3};
+      border: 1px solid ${themedPalette.border3};
     `}
   &:focus {
     box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.35);

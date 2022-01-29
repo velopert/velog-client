@@ -25,7 +25,7 @@ const Positioner = styled.div`
 const PostLikeShareButtonsBlock = styled(Sticky)`
   width: 4rem;
   background: ${themedPalette.bg_element2};
-  border: 1px solid ${palette.gray1};
+  border: 1px solid ${themedPalette.border4};
   border-radius: 2rem;
   padding: 0.5rem;
   display: flex;
@@ -40,7 +40,7 @@ const CircleButton = styled(animated.div)<{ active?: string }>`
   align-items: center;
   justify-content: center;
   background: ${themedPalette.bg_element1};
-  border: 1px solid ${palette.gray5};
+  border: 1px solid ${themedPalette.border2};
   border-radius: 1.5rem;
   color: ${themedPalette.text3};
   cursor: pointer;

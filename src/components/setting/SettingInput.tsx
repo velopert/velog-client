@@ -14,7 +14,7 @@ function SettingInput(props: SettingInputProps) {
 
 const StyledInput = styled.input<{ fullWidth?: boolean }>`
   display: block;
-  border: 1px solid ${palette.gray3};
+  border: 1px solid ${themedPalette.border3};
   background: ${themedPalette.bg_element1};
   padding: 0.5rem;
   color: ${themedPalette.text2};
@@ -23,7 +23,7 @@ const StyledInput = styled.input<{ fullWidth?: boolean }>`
   outline: none;
   border-radius: 4px;
   &:focus {
-    border: 1px solid ${palette.gray9};
+    border: 1px solid ${themedPalette.border1};
   }
   ${(props) =>
     props.fullWidth &&

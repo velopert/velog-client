@@ -118,7 +118,7 @@ const NavigateButton = styled.button`
   font-size: 1.25rem;
   color: ${palette.teal6};
   background: ${themedPalette.bg_element1};
-  border: 1px solid ${palette.gray1};
+  border: 1px solid ${themedPalette.border4};
   padding: 0;
   cursor: pointer;
   &:hover {
@@ -133,7 +133,7 @@ const NavigateButton = styled.button`
   &:disabled {
     cursor: default;
     background: ${themedPalette.bg_element2};
-    border: 1px solid ${palette.gray2};
+    border: 1px solid ${themedPalette.border4};
     color: ${themedPalette.text3};
   }
 `;

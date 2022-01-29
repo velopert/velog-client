@@ -18,7 +18,7 @@ const StyledTextarea = styled(TextareaAutosize)`
   padding: 1rem;
   padding-bottom: 1.5rem;
   outline: none;
-  border: 1px solid ${palette.gray2};
+  border: 1px solid ${themedPalette.border4};
   margin-bottom: 1.5rem;
   width: 100%;
   border-radius: 4px;

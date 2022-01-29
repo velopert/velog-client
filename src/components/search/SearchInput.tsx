@@ -11,7 +11,7 @@ import media from '../../lib/styles/media';
 const SearchInputBlock = styled.div<{ focus: boolean; large?: boolean }>`
   display: flex;
   height: 2.25rem;
-  border: 1px solid ${palette.gray5};
+  border: 1px solid ${themedPalette.border2};
   padding-left: 0.625rem;
   padding-right: 0.625rem;
   align-items: center;
@@ -45,7 +45,7 @@ const SearchInputBlock = styled.div<{ focus: boolean; large?: boolean }>`
   ${(props) =>
     props.focus &&
     css`
-      border: 1px solid ${palette.gray8};
+      border: 1px solid ${themedPalette.border1};
       svg {
         fill: ${palette.gray9};
       }

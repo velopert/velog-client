@@ -254,7 +254,7 @@ const Content = styled.div<{ clamp: boolean }>`
 
 const Footer = styled.div`
   padding: 0.625rem 1rem;
-  border-top: 1px solid ${palette.gray0};
+  border-top: 1px solid ${themedPalette.border4};
   display: flex;
   font-size: 0.75rem;
   line-height: 1.5;

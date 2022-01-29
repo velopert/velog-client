@@ -13,7 +13,7 @@ const AuthEmailFormBlock = styled.form`
     border-bottom-left-radius: 2px;
     padding: 1rem;
     font-size: 1rem;
-    border: 1px solid ${palette.gray3};
+    border: 1px solid ${themedPalette.border3};
     border-right: none;
     &::placeholder {
       color: ${themedPalette.text3};
