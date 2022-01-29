@@ -24,7 +24,7 @@ const MainRightFooterBlock = styled.div`
     }
   }
   .copyright {
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
   }
 `;
 

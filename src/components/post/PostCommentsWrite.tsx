@@ -27,7 +27,7 @@ const StyledTextarea = styled(TextareaAutosize)`
   ${customFont};
   color: ${themedPalette.text1};
   &::placeholder {
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
   }
   line-height: 1.75;
   ${media.small} {

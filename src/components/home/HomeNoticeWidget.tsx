@@ -63,7 +63,7 @@ const StyledWidget = styled(HomeWidget)`
   .empty {
     padding-top: 1rem;
     padding-bottom: 1rem;
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
     text-align: center;
     font-size: 0.875rem;
   }
@@ -95,7 +95,7 @@ const StyledWidget = styled(HomeWidget)`
       color: ${themedPalette.text3};
       a {
         &:hover {
-          color: ${palette.gray5};
+          color: ${themedPalette.text3};
         }
         text-decoration: underline;
       }

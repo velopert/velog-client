@@ -190,7 +190,7 @@ const FacebookInputBox = styled.div<{ focus: boolean }>`
   height: 2.25rem;
   align-items: center;
   span {
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
     margin-right: 0.25rem;
   }
   input {

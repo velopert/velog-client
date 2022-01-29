@@ -28,7 +28,7 @@ const AddLinkBlock = styled.div`
       align-items: center;
       svg {
         font-size: 1.5rem;
-        color: ${palette.gray5};
+        color: ${themedPalette.text3};
         cursor: pointer;
         &:hover {
           color: ${themedPalette.text1};

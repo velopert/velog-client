@@ -988,7 +988,7 @@ const MarkdownEditorBlock = styled.div`
       color: ${themedPalette.text1};
     }
     .CodeMirror-placeholder {
-      color: ${palette.gray5};
+      color: ${themedPalette.text3};
       font-style: italic;
     }
 

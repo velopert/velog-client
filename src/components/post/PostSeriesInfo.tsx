@@ -71,7 +71,7 @@ const Right = styled.div`
   align-items: center;
   .series-number {
     font-size: 0.875rem;
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
   }
 `;
 
@@ -155,7 +155,7 @@ const PostList = styled.ol`
   li:before {
     content: counter(item) '. ';
     counter-increment: item;
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
     font-style: italic;
     margin-right: 0.25rem;
   }

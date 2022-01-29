@@ -65,7 +65,7 @@ const StyledWidget = styled(HomeWidget)`
       color: ${themedPalette.text3};
       a {
         &:hover {
-          color: ${palette.gray5};
+          color: ${themedPalette.text3};
         }
         text-decoration: underline;
       }

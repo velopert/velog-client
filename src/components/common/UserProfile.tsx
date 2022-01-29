@@ -105,7 +105,7 @@ const Separator = styled.div`
 `;
 
 const ProfileIcons = styled.div`
-  color: ${palette.gray5};
+  color: ${themedPalette.text3};
   display: flex;
   svg {
     cursor: pointer;

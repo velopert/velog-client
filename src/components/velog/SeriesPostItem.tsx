@@ -21,7 +21,7 @@ const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
     font-size: 1.325rem;
     color: ${themedPalette.text2};
     .number {
-      color: ${palette.gray5};
+      color: ${themedPalette.text3};
       margin-right: 0.25rem;
       font-style: italic;
     }
@@ -92,7 +92,7 @@ const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
     }
   }
   .date {
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
     font-size: 0.875rem;
     ${media.small} {
       margin-top: 1rem;

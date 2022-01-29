@@ -79,10 +79,10 @@ const ButtonBlock = styled.button<{
     &:disabled {
     cursor: not-allowed;
     background: ${themedPalette.bg_element4};
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
     &:hover {
       background: ${themedPalette.bg_element4};
-      color: ${palette.gray5};
+      color: ${themedPalette.text3};
     }
   }
 `;

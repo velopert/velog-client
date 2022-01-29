@@ -40,7 +40,7 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
         color: ${palette.teal7};
       `}
     &::placeholder {
-      color: ${palette.gray5};
+      color: ${themedPalette.text3};
     }
     &:disabled {
       color: ${themedPalette.text3};

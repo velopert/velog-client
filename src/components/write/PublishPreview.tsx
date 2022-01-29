@@ -136,7 +136,7 @@ const ThumbnailModifyBlock = styled.div`
       padding: 0;
       text-decoration: underline;
       &:hover {
-        color: ${palette.gray5};
+        color: ${themedPalette.text3};
       }
       &:active {
         color: ${themedPalette.text2};

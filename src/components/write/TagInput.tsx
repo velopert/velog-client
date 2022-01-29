@@ -169,7 +169,7 @@ const TagInputBlock = styled.div`
   [contenteditable='true']:empty:before {
     content: attr(placeholder);
     display: block; /* For Firefox */
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
   }
 `;
 const StyledInput = styled.input`

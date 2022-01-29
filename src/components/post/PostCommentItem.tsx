@@ -83,7 +83,7 @@ const CommentHead = styled.div`
     span {
       cursor: pointer;
       &:hover {
-        color: ${palette.gray5};
+        color: ${themedPalette.text3};
         text-decoration: underline;
       }
     }

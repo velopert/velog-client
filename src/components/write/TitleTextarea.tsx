@@ -19,7 +19,7 @@ const style = css`
   font-weight: bold;
   color: ${themedPalette.text1};
   &::placeholder {
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
   }
 `;
 

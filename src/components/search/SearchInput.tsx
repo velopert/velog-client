@@ -38,7 +38,7 @@ const SearchInputBlock = styled.div<{ focus: boolean; large?: boolean }>`
     color: ${themedPalette.text2};
     min-width: 0;
     &::placeholder {
-      color: ${palette.gray5};
+      color: ${themedPalette.text3};
     }
   }
 

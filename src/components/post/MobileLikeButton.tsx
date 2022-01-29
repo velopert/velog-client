@@ -33,12 +33,12 @@ const Button = styled.button<{ liked: boolean }>`
     width: 0.75rem;
     height: 0.75rem;
     margin-right: 0.75rem;
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
   }
   span {
     font-size: 0.75rem;
     font-weight: bold;
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
   }
   ${(props) =>
     props.liked &&

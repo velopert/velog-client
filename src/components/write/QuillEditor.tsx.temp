@@ -191,7 +191,7 @@ const Editor = styled.div`
   }
   .ql-editor.ql-blank::before {
     left: 0px;
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
   }
 `;
 

@@ -100,7 +100,7 @@ const Block = styled.div<{ hasDescription: boolean }>`
 
   .count {
     font-size: 0.875rem;
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
     ${media.medium} {
       margin-top: 0.5rem;
     }
