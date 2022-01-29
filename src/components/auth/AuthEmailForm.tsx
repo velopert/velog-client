@@ -40,7 +40,7 @@ const AuthEmailFormBlock = styled.form`
     }
     &:disabled {
       background: ${themedPalette.border4};
-      color: ${palette.gray3};
+      color: ${themedPalette.text4};
       cursor: default;
     }
   }

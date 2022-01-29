@@ -134,7 +134,7 @@ const NavigateButton = styled.button`
     cursor: default;
     background: ${themedPalette.bg_element2};
     border: 1px solid ${palette.gray2};
-    color: ${palette.gray4};
+    color: ${themedPalette.text3};
   }
 `;
 
