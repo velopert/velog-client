@@ -113,7 +113,7 @@ const Separator = styled.div`
   height: 1.25rem;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
-  background: ${palette.gray4};
+  background: ${themedPalette.border3};
 `;
 export interface ToolbarProps {
   shadow: boolean;
