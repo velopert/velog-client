@@ -19,7 +19,7 @@ const PostCommentItemBlock = styled.div`
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
   & + & {
-    border-top: 1px solid ${palette.gray2};
+    border-top: 1px solid ${themedPalette.border4};
   }
 `;
 const CommentHead = styled.div`

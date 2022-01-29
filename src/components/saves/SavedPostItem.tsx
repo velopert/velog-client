@@ -53,7 +53,7 @@ const SavedItemBlock = styled.div`
     }
   }
   & + & {
-    border-top: 1px solid ${palette.gray3};
+    border-top: 1px solid ${themedPalette.border3};
   }
 `;
 function SavedPostItem({ post, onRemove }: SavedPostItemProps) {

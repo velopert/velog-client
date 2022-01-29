@@ -25,7 +25,7 @@ const PostTocBlock = styled(Sticky)`
   ${media.xlarge} {
     margin-left: 3rem;
   }
-  border-left: 2px solid ${palette.gray2};
+  border-left: 2px solid ${themedPalette.border4};
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   padding-top: 0.25rem;

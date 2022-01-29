@@ -166,7 +166,7 @@ const Indicator = styled(animated.div)`
   height: 2px;
   position: absolute;
   bottom: 0px;
-  background: ${palette.gray8};
+  background: ${themedPalette.border1};
 `;
 
 const Selector = styled.div`

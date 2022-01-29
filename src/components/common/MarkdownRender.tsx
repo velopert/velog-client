@@ -100,7 +100,7 @@ const MarkdownRenderBlock = styled.div`
     font-size: 0.875rem;
     thead > tr > th {
       /* text-align: left; */
-      border-bottom: 4px solid ${palette.gray7};
+      border-bottom: 4px solid ${themedPalette.border2};
     }
     th,
     td {
@@ -110,7 +110,7 @@ const MarkdownRenderBlock = styled.div`
 
     td + td,
     th + th {
-      border-left: 1px solid ${palette.gray7};
+      border-left: 1px solid ${themedPalette.border2};
     }
 
     tr:nth-child(even) {

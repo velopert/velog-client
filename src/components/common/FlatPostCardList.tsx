@@ -42,7 +42,7 @@ export function PostCardListSkeleton({
 }
 
 const Separator = styled.div`
-  border-top: 1px solid ${palette.gray2};
+  border-top: 1px solid ${themedPalette.border4};
 `;
 
 export default PostCardList;

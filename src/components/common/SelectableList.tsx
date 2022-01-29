@@ -16,7 +16,7 @@ const ListItem = styled.li<{ active: boolean }>`
   font-size: 1rem;
   line-height: 1;
   color: ${themedPalette.text2};
-  border-bottom: 1px solid ${palette.gray2};
+  border-bottom: 1px solid ${themedPalette.border4};
 
   ${(props) =>
     props.active &&

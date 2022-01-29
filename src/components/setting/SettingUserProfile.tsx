@@ -127,7 +127,7 @@ const Section = styled.section`
     flex: 1;
     padding-left: 1.5rem;
 
-    border-left: 1px solid ${palette.gray2};
+    border-left: 1px solid ${themedPalette.border4};
     h2 {
       font-size: 2.25rem;
       margin: 0;
@@ -145,8 +145,8 @@ const Section = styled.section`
       padding-top: 1.5rem;
       padding-bottom: 1.5rem;
       /* padding-left: 1rem; */
-      border-top: 1px solid ${palette.gray1};
-      border-bottom: 1px solid ${palette.gray1};
+      border-top: 1px solid ${themedPalette.border4};
+      border-bottom: 1px solid ${themedPalette.border4};
       border-left: none;
       padding-left: 0;
       h2 {

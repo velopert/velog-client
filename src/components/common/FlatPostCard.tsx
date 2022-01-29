@@ -116,7 +116,7 @@ const PostCardBlock = styled.div`
   }
 
   & + & {
-    border-top: 1px solid ${palette.gray2};
+    border-top: 1px solid ${themedPalette.border4};
   }
 `;
 

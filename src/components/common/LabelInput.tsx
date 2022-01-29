@@ -52,7 +52,7 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
   }
   .input-wrapper {
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid ${palette.gray7};
+    border-bottom: 1px solid ${themedPalette.border2};
     display: flex;
     align-items: center;
     ${(props) =>

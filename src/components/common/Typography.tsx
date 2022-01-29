@@ -6,7 +6,7 @@ import media from '../../lib/styles/media';
 
 const TypographyBlock = styled.div`
   font-size: 1.125rem;
-  color: #222426;
+  color: ${themedPalette.text1};
   line-height: 1.7;
   letter-spacing: -0.004em;
   word-break: keep-all;

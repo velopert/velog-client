@@ -48,7 +48,7 @@ const Block = styled.div`
     font-size: 1rem;
     line-height: 1.5;
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid ${palette.gray5};
+    border-bottom: 1px solid ${themedPalette.border2};
     margin-bottom: 1rem;
     color: ${themedPalette.text2};
     font-weight: bold;

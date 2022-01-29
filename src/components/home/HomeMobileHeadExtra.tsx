@@ -101,7 +101,7 @@ const Block = styled(animated.div)`
     }
   }
   li + li {
-    border-top: 1px solid ${palette.gray1};
+    border-top: 1px solid ${themedPalette.border4};
   }
   .contact {
     border-top: 1px solid #f1f3f5;

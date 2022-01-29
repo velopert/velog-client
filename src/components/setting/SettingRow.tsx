@@ -84,7 +84,7 @@ const Row = styled.div`
     margin-left: 1rem;
   }
   & + & {
-    border-top: 1px solid ${palette.gray2};
+    border-top: 1px solid ${themedPalette.border4};
   }
 `;
 
