@@ -180,7 +180,7 @@ const FacebookInputBox = styled.div<{ focus: boolean }>`
   flex: 1;
   display: flex;
   border: 1px solid ${palette.gray3};
-  background: white;
+  background: ${themedPalette.bg_element1};
   padding: 0.5rem;
   color: ${palette.gray7};
   font-size: 1rem;

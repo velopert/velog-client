@@ -28,7 +28,7 @@ const SeriesPostsTemplateBlock = styled.div`
 `;
 
 const Separator = styled.div`
-  background: ${palette.gray3};
+  background: ${themedPalette.bg_element4};
   height: 1px;
   width: 100%;
   margin-bottom: 1.5rem;

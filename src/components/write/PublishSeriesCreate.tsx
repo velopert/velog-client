@@ -26,7 +26,7 @@ const fadeOut = keyframes`
 `;
 
 const PublishSeriesCreateBlock = styled.form<{ open: boolean }>`
-  background: ${palette.gray2};
+  background: ${themedPalette.bg_element3};
   padding: 1rem;
   height: 4rem;
   transition: 0.125s all ease-in;
@@ -60,7 +60,7 @@ const URLInput = styled.div`
   font-size: 0.75rem;
   border-radius: 2px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.03);
-  background: white;
+  background: ${themedPalette.bg_element1};
   color: ${palette.gray6};
   input {
     color: ${palette.gray8};

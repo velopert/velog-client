@@ -67,7 +67,7 @@ const RightPane = styled(Pane)`
 const Separator = styled.div`
   width: 1px;
   min-height: 425px;
-  background: ${palette.gray2};
+  background: ${themedPalette.bg_element3};
   margin-left: 2rem;
   margin-right: 2rem;
   ${media.custom(767)} {

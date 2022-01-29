@@ -14,7 +14,7 @@ const AddLinkBlock = styled.div`
   & > .wrapper {
     margin-top: 1rem;
     width: 20rem;
-    background: white;
+    background: ${themedPalette.bg_element1};
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08);
     border-radius: 4px;
     .top-wrapper {

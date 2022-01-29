@@ -93,7 +93,7 @@ const UserInfo = styled.div`
 `;
 
 const Separator = styled.div`
-  background: ${palette.gray2};
+  background: ${themedPalette.bg_element3};
   width: 100%;
   height: 1px;
   margin-top: 2rem;

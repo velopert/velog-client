@@ -35,7 +35,7 @@ describe('MobileLikeButton', () => {
   it('shows inactive button', () => {
     const utils = setup({ liked: false });
     const button = utils.getByTestId('like-btn');
-    expect(button).toHaveStyle('background: white');
+    expect(button).toHaveStyle('background: ${themedPalette.bg_element1}');
   });
 
   it('shows active button', () => {

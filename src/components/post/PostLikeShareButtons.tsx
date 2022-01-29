@@ -39,7 +39,7 @@ const CircleButton = styled(animated.div)<{ active?: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: white;
+  background: ${themedPalette.bg_element1};
   border: 1px solid ${palette.gray5};
   border-radius: 1.5rem;
   color: ${palette.gray6};

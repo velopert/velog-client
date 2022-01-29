@@ -99,7 +99,7 @@ exports[`AuthForm renders correctly 1`] = `
                   <a
                     class="sc-htpNat bUuZiL"
                     href="http://localhost:5000/api/v2/auth/social/redirect/google?next=/"
-                    style="background: white;"
+                    style="background: ${themedPalette.bg_element1};"
                     tabindex="5"
                   >
                     <svg>

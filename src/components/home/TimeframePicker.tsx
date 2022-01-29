@@ -71,7 +71,7 @@ const Block = styled(animated.div)`
   margin-top: 0.5rem;
   width: 12rem;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
-  background: white;
+  background: ${themedPalette.bg_element1};
   color: ${palette.gray9};
   transform-origin: top right;
   ul {

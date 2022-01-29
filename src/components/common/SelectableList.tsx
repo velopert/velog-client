@@ -7,7 +7,7 @@ const SelectableListBlock = styled.ul`
   padding-left: 0;
   list-style: none;
   margin: 0;
-  background: white;
+  background: ${themedPalette.bg_element1};
   overflow-y: auto;
 `;
 

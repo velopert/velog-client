@@ -170,7 +170,7 @@ const Indicator = styled(animated.div)`
 `;
 
 const Selector = styled.div`
-  background: white;
+  background: ${themedPalette.bg_element1};
   height: 2rem;
   width: 6rem;
   border-radius: 4px;

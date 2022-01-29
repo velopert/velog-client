@@ -22,7 +22,7 @@ const Button = styled.button<{ active: boolean }>`
   align-items: center;
   justify-content: flex-start;
   font-weight: bold;
-  background: white;
+  background: ${themedPalette.bg_element1};
   font-size: 1.125rem;
   color: ${palette.gray6};
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.05);

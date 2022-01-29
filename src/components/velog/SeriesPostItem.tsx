@@ -103,7 +103,7 @@ const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
     props.edit &&
     css`
       padding: 1rem;
-      background: white;
+      background: ${themedPalette.bg_element1};
       border-radius: 4px;
       box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.06);
     `}

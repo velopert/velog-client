@@ -156,7 +156,7 @@ const StyledLink = styled(Link)`
 
 const Block = styled.div<{ forHome: boolean; forPost: boolean }>`
   width: 20rem;
-  background: white;
+  background: ${themedPalette.bg_element1};
   border-radius: 4px;
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.04);
   transition: 0.25s box-shadow ease-in, 0.25s transform ease-in;

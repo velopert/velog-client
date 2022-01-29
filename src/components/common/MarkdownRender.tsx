@@ -117,7 +117,7 @@ const MarkdownRenderBlock = styled.div`
       background: ${themedPalette.bg_element2};
     }
     tr:nth-child(odd) {
-      background: white;
+      background: ${themedPalette.bg_element1};
     }
   }
 

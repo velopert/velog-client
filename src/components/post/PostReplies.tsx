@@ -28,7 +28,7 @@ const PullUp = styled.div`
 const Separator = styled.div`
   width: 100%;
   height: 1px;
-  background: ${palette.gray2};
+  background: ${themedPalette.bg_element3};
   margin-bottom: 1.5rem;
 `;
 
@@ -45,7 +45,7 @@ const StartWritingButton = styled.button`
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  background: white;
+  background: ${themedPalette.bg_element1};
   &:hover,
   &:focus {
     background: ${palette.teal6};

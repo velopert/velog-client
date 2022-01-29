@@ -9,7 +9,7 @@ import { ellipsis } from '../../lib/styles/utils';
 
 const PublishSeriesSectionBlock = styled(PublishSection)``;
 const SeriesButton = styled.button`
-  background: white;
+  background: ${themedPalette.bg_element1};
   height: 3rem;
   width: 100%;
   border-radius: 4px;
@@ -44,7 +44,7 @@ const EditSeries = styled.div`
     align-items: center;
     padding-left: 1rem;
     padding-right: 1rem;
-    background: white;
+    background: ${themedPalette.bg_element1};
     font-size: 1.125rem;
     line-height: 1;
     color: ${palette.gray7};

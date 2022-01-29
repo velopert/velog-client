@@ -24,7 +24,7 @@ const ThumbnailBlock = styled.div`
 `;
 
 const MissingThumbnail = styled.div`
-  background: ${palette.gray2};
+  background: ${themedPalette.bg_element3};
   width: 100%;
   height: 100%;
   display: flex;
@@ -43,7 +43,7 @@ const Image = styled.img`
 const UploadButton = styled.button`
   margin-top: 1rem;
   padding: 0.25rem 2rem;
-  background: white;
+  background: ${themedPalette.bg_element1};
   border-radius: 4px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.025);
   font-size: 1rem;

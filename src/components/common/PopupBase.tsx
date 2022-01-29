@@ -4,6 +4,7 @@ import OpaqueLayer from './OpaqueLayer';
 import zIndexes from '../../lib/styles/zIndexes';
 import transitions from '../../lib/styles/transitions';
 import media from '../../lib/styles/media';
+import { themedPalette } from '../../lib/styles/themes';
 
 const PopupBaseBlock = styled.div`
   position: fixed;
@@ -20,13 +21,13 @@ const PopupBaseBlock = styled.div`
 const PopupWrapper = styled.div<{ visible: boolean }>`
   width: 25rem;
   border-radius: 4px;
-  background: white;
+  background: ${themedPalette.bg_element1};
   padding: 2rem 1.5rem;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.09);
   ${media.small} {
     width: calc(100% - 2rem);
   }
-  ${props =>
+  ${(props) =>
     props.visible
       ? css`
           animation: ${transitions.popInFromBottom} 0.4s forwards ease-in-out;

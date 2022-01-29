@@ -117,7 +117,7 @@ const NavigateButton = styled.button`
   justify-content: center;
   font-size: 1.25rem;
   color: ${palette.teal6};
-  background: white;
+  background: ${themedPalette.bg_element1};
   border: 1px solid ${palette.gray1};
   padding: 0;
   cursor: pointer;

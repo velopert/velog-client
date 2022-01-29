@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { mediaQuery } from '../../lib/styles/media';
 import gtag from '../../lib/gtag';
+import { themedPalette } from '../../lib/styles/themes';
 
 function AdFeed({ forPost, index }: { forPost?: boolean; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -104,7 +105,7 @@ const Block = styled.div<{ forPost?: boolean }>`
   height: auto;
   border-radius: 4px;
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.04);
-  background: white;
+  background: ${themedPalette.bg_element1};
 
   ${mediaQuery(1056)} {
     width: calc(50% - 2rem);

@@ -15,7 +15,7 @@ function SettingInput(props: SettingInputProps) {
 const StyledInput = styled.input<{ fullWidth?: boolean }>`
   display: block;
   border: 1px solid ${palette.gray3};
-  background: white;
+  background: ${themedPalette.bg_element1};
   padding: 0.5rem;
   color: ${palette.gray7};
   font-size: 1rem;

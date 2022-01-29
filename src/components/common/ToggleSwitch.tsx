@@ -59,7 +59,7 @@ const Block = styled.div<{ active: boolean }>`
   align-items: center;
   width: 2.875rem;
   height: 1.5rem;
-  background: ${palette.gray2};
+  background: ${themedPalette.bg_element3};
   transition: 0.125s all ease-in;
   border-radius: 1.125rem;
   padding: 0.125rem;
@@ -72,7 +72,7 @@ const Block = styled.div<{ active: boolean }>`
     width: 1.25rem;
     height: 1.25rem;
     border-radius: 0.625rem;
-    background: white;
+    background: ${themedPalette.bg_element1};
     box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
   }
 `;
