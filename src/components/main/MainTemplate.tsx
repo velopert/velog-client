@@ -1,10 +1,10 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import palette from '../../lib/styles/palette';
+import { themedPalette } from '../../lib/styles/themes';
 
 const BackgroundStyle = createGlobalStyle`
   body {
-    background: ${palette.gray0};
+    background: ${themedPalette.bg_page1};
   }
 `;
 
