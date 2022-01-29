@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import media from '../../lib/styles/media';
 

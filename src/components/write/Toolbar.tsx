@@ -10,6 +10,7 @@ import {
   MdImage,
   MdCode,
 } from 'react-icons/md';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import zIndexes from '../../lib/styles/zIndexes';
 import { mediaQuery } from '../../lib/styles/media';
@@ -30,7 +31,7 @@ const ToolbarBlock = styled.div<{
   transition: all 0.125s ease-in;
   flex-wrap: wrap;
 
-  ${props =>
+  ${(props) =>
     props.forMarkdown &&
     css`
       margin-bottom: 1rem;
@@ -46,7 +47,7 @@ const ToolbarBlock = styled.div<{
       width: auto;
     `}
 
-  ${props =>
+  ${(props) =>
     props.shadow &&
     css`
       box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.09);
@@ -95,7 +96,7 @@ const ToolbarItem = styled.button`
   }
   &:hover {
     color: ${palette.gray9};
-    background: ${palette.gray0};
+    background: ${themedPalette.bg_element2};
   }
   background: none;
   outline: none;

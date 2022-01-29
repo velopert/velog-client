@@ -5,6 +5,7 @@ import 'codemirror/lib/codemirror.css';
 import CodeMirror, { EditorFromTextArea } from 'codemirror';
 import TitleTextarea, { TitleTextareaForSSR } from './TitleTextarea';
 import '../common/atom-one-light.css';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import Toolbar from './Toolbar';
 import AddLink from './AddLink';
@@ -130,7 +131,7 @@ export default class WriteMarkdownEditor extends React.Component<
 
     if (detectJSDOM()) return;
     this.codemirror.setValue(this.props.initialBody);
-    this.codemirror.on('change', cm => {
+    this.codemirror.on('change', (cm) => {
       this.props.onChangeMarkdown(cm.getValue());
       this.stickToBottomIfNeeded();
       const doc = cm.getDoc();
@@ -145,7 +146,7 @@ export default class WriteMarkdownEditor extends React.Component<
       }
     });
 
-    this.codemirror.on('scroll', cm => {
+    this.codemirror.on('scroll', (cm) => {
       const info = cm.getScrollInfo();
 
       if (info.top > 0 && info.height > window.screen.height) {
@@ -161,7 +162,7 @@ export default class WriteMarkdownEditor extends React.Component<
       }
     });
 
-    this.codemirror.on('mousewheel', cm => {
+    this.codemirror.on('mousewheel', (cm) => {
       console.log(cm.getScrollInfo());
     });
 
@@ -258,7 +259,8 @@ export default class WriteMarkdownEditor extends React.Component<
     this.initialize();
     setTimeout(() => {
       if (this.toolbarElement.current) {
-        this.toolbarTop = this.toolbarElement.current.getBoundingClientRect().top;
+        this.toolbarTop =
+          this.toolbarElement.current.getBoundingClientRect().top;
       }
     });
     if (this.block.current) {
@@ -538,7 +540,7 @@ export default class WriteMarkdownEditor extends React.Component<
       [key: string]: Function;
     } = {
       ...[1, 2, 3, 4] // creates handlers for heading1, heading2, heading3, heading4
-        .map(number => () => {
+        .map((number) => () => {
           // create handler function
           const characters = '#'.repeat(number);
           const plain = removeHeading(line);
@@ -1065,7 +1067,8 @@ const AppleTextarea = styled.textarea`
 
 const checker = {
   youtube: (text: string) => {
-    const regex = /^<iframe.*src="https:\/\/www.youtube.com\/embed\/(.*?)".*<\/iframe>$/;
+    const regex =
+      /^<iframe.*src="https:\/\/www.youtube.com\/embed\/(.*?)".*<\/iframe>$/;
     const result = regex.exec(text);
     if (!result) return null;
     return result[1];
@@ -1084,7 +1087,8 @@ const checker = {
     return pathMatch[1];
   },
   codesandbox: (text: string) => {
-    const regex = /^<iframe.*src="https:\/\/codesandbox.io\/embed\/(.*?)".*<\/iframe>$/s;
+    const regex =
+      /^<iframe.*src="https:\/\/codesandbox.io\/embed\/(.*?)".*<\/iframe>$/s;
     const result = regex.exec(text);
     if (!result) return null;
     return result[1];

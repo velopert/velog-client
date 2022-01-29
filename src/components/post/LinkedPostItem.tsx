@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import { LinkedPost } from '../../lib/graphql/post';
@@ -41,7 +42,7 @@ const Circle = styled.div<{ right?: boolean }>`
   border: 1px solid ${palette.teal5};
   font-size: 1.5rem;
   color: ${palette.teal5};
-  ${props =>
+  ${(props) =>
     props.right
       ? css`
           margin-left: 1rem;
@@ -53,7 +54,7 @@ const Circle = styled.div<{ right?: boolean }>`
 
 const LinkedPostItemBlock = styled(PlainLink)<{ right?: boolean }>`
   cursor: pointer;
-  background: ${palette.gray0};
+  background: ${themedPalette.bg_element2};
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.06);
   width: 100%;
   padding-left: 1rem;
@@ -62,7 +63,7 @@ const LinkedPostItemBlock = styled(PlainLink)<{ right?: boolean }>`
   display: flex;
   align-items: center;
   text-decoration: none;
-  ${props =>
+  ${(props) =>
     props.right &&
     css`
       flex-direction: row-reverse;
@@ -70,7 +71,7 @@ const LinkedPostItemBlock = styled(PlainLink)<{ right?: boolean }>`
   &:hover {
     ${Circle} {
       animation-duration: 0.35s;
-      animation-name: ${props => (props.right ? bounceRight : bounceLeft)};
+      animation-name: ${(props) => (props.right ? bounceRight : bounceLeft)};
       animation-fill-mode: forwards;
       animation-timing-function: ease-out;
     }
@@ -81,7 +82,7 @@ const Text = styled.div<{ right?: boolean }>`
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: ${props => (props.right ? 'flex-end' : 'flex-start')};
+  align-items: ${(props) => (props.right ? 'flex-end' : 'flex-start')};
   line-height: 1;
   min-width: 0;
   .description {
@@ -90,7 +91,7 @@ const Text = styled.div<{ right?: boolean }>`
     color: ${palette.gray7};
   }
   h3 {
-    ${props =>
+    ${(props) =>
       props.right &&
       css`
         text-align: right;

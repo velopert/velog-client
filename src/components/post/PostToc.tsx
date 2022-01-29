@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import Sticky from '../common/Sticky';
 import { usePostViewerState } from './PostViewerProvider';
@@ -62,7 +63,7 @@ const TocItem = styled.div<{ active: boolean }>`
     text-decoration: none;
     color: inherit;
   }
-  ${props =>
+  ${(props) =>
     props.active &&
     css`
       color: ${palette.gray9};
@@ -129,7 +130,7 @@ const PostToc: React.FC<PostTocProps> = () => {
   const onScroll = useCallback(() => {
     const scrollTop = getScrollTop();
     if (!headingTops) return;
-    const currentHeading = [...headingTops].reverse().find(headingTop => {
+    const currentHeading = [...headingTops].reverse().find((headingTop) => {
       return scrollTop >= headingTop.top - 4;
     });
     if (!currentHeading) {
@@ -158,7 +159,7 @@ const PostToc: React.FC<PostTocProps> = () => {
     <Wrapper>
       <Positioner>
         <PostTocBlock top={112}>
-          {toc.map(item => (
+          {toc.map((item) => (
             <TocItem
               key={item.id}
               style={{ marginLeft: item.level * 12 }}

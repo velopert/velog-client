@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { NavLink, useLocation } from 'react-router-dom';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import {
   MdTrendingUp,

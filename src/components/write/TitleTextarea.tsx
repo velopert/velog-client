@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import TextareaAutosize from 'react-textarea-autosize';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { mediaQuery } from '../../lib/styles/media';
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { CheckIcon } from '../static/svg';
+import { themedPalette } from '../lib/styles/themes';
 import palette from '../lib/styles/palette';
 import Button from '../components/common/Button';
 import { RouteComponentProps } from 'react-router-dom';

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import HomeWidget from './HomeWidget';
 import { Link } from 'react-router-dom';
@@ -19,7 +20,7 @@ const HomeNoticeWidget: React.FC<HomeNoticeWidgetProps> = ({ posts }) => {
       {posts.length === 0 && <div className="empty">공지사항이 없습니다.</div>}
       {posts.length > 0 && (
         <ul>
-          {sliced.map(post => (
+          {sliced.map((post) => (
             <li key={post.id}>
               <h5>
                 <Link to={`/@velog/${post.url_slug}`}>{post.title}</Link>

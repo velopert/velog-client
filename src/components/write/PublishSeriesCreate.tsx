@@ -1,5 +1,6 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import OutsideClickHandler from 'react-outside-click-handler';
 import Button from '../common/Button';
@@ -29,7 +30,7 @@ const PublishSeriesCreateBlock = styled.form<{ open: boolean }>`
   padding: 1rem;
   height: 4rem;
   transition: 0.125s all ease-in;
-  ${props =>
+  ${(props) =>
     props.open &&
     css`
       height: 9rem;
@@ -77,7 +78,7 @@ const OpenBlock = styled.div<{ disappear: boolean }>`
   animation-name: ${fadeIn};
   animation-fill-mode: forwards;
 
-  ${props =>
+  ${(props) =>
     props.disappear &&
     css`
       animation-name: ${fadeOut};

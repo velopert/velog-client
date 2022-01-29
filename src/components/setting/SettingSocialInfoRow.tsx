@@ -11,6 +11,7 @@ import styled, { css } from 'styled-components';
 import Button from '../common/Button';
 import SettingInput from './SettingInput';
 import useInputs from '../../lib/hooks/useInputs';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { ProfileLinks } from '../../lib/graphql/user';
 import SettingEditButton from './SettingEditButton';
@@ -42,7 +43,7 @@ function SettingSocialInfoRow({
   onUpdate,
 }: SettingSocialInfoRowProps) {
   const infoArray = [email, github, twitter, facebook, url];
-  const empty = infoArray.every(value => !value);
+  const empty = infoArray.every((value) => !value);
   const [edit, setEdit] = useState(false);
   const [form, onChange] = useInputs({ email, github, twitter, facebook, url });
   const [facebookInputFocus, setFacebookInputFocus] = useState(false);
@@ -88,7 +89,7 @@ function SettingSocialInfoRow({
           <FacebookInputBox
             tabIndex={0}
             focus={facebookInputFocus}
-            onFocus={e => {
+            onFocus={(e) => {
               const el = e.currentTarget.querySelector('input');
               if (!el) return;
               el.focus();
@@ -201,7 +202,7 @@ const FacebookInputBox = styled.div<{ focus: boolean }>`
     flex: 1;
     width: 100%;
   }
-  ${props =>
+  ${(props) =>
     props.focus &&
     css`
       border: 1px solid ${palette.gray9};

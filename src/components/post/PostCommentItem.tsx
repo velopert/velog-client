@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { Comment } from '../../lib/graphql/post';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { formatDate } from '../../lib/utils';
 import Typography from '../common/Typography';
@@ -101,7 +102,7 @@ const CommentText = styled.div<{ deleted: boolean }>`
     }
   }
 
-  ${props =>
+  ${(props) =>
     props.deleted &&
     css`
       color: ${palette.gray6};

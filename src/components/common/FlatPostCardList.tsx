@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import PostCard, { PostCardSkeleton } from './FlatPostCard';
 import { PartialPost } from '../../lib/graphql/post';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 const PostCardListBlock = styled.div``;
@@ -14,7 +15,7 @@ interface PostCardListProps {
 const PostCardList: React.FC<PostCardListProps> = ({ posts, hideUser }) => {
   return (
     <PostCardListBlock>
-      {posts.map(post => (
+      {posts.map((post) => (
         <PostCard key={post.id} post={post} hideUser={hideUser} />
       ))}
     </PostCardListBlock>

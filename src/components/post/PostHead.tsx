@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import VelogResponsive from '../velog/VelogResponsive';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { formatDate } from '../../lib/utils';
 import { SeriesPost } from '../../lib/graphql/post';

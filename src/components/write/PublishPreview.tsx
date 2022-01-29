@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import PublishSection from './PublishSection';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { ImageVector } from '../../static/svg';
 import { ellipsis } from '../../lib/styles/utils';
@@ -57,7 +58,7 @@ const UploadButton = styled.button`
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
   }
   &:hover {
-    background: ${palette.gray0};
+    background: ${themedPalette.bg_element2};
   }
 `;
 
@@ -90,7 +91,7 @@ const TextLimit = styled.div<{ limit: boolean }>`
   margin-top: 0.25rem;
   font-size: 0.75rem;
   color: ${palette.gray6};
-  ${props =>
+  ${(props) =>
     props.limit &&
     css`
       color: ${palette.red6};

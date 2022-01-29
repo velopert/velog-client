@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import HomeWidget from './HomeWidget';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
 import Skeleton from '../common/Skeleton';
@@ -13,7 +14,7 @@ function HomeTagWidget({ tags }: HomeTagWidgetProps) {
   return (
     <StyledWidget title="인기 태그">
       <ul>
-        {tags.map(tag => (
+        {tags.map((tag) => (
           <li key={tag}>
             <Link to={`/tags/${tag}`}># {tag}</Link>
           </li>

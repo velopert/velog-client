@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MdKeyboardArrowUp } from 'react-icons/md';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 const StyledButton = styled.button`
@@ -15,7 +16,7 @@ const StyledButton = styled.button`
   border: none;
   outline: none;
   &:hover {
-    background: ${palette.gray0};
+    background: ${themedPalette.bg_element2};
   }
   &:focus {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.12);

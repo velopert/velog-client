@@ -7,6 +7,7 @@ import VelogTab from '../../components/velog/VelogTab';
 import UserPostsTab from './tabs/UserPostsTab';
 import SeriesTab from './tabs/SeriesTab';
 import AboutTab from './tabs/AboutTab';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import media from '../../lib/styles/media';
 

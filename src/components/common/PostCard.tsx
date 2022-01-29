@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import styled, { css } from 'styled-components';
 import RatioImage from './RatioImage';
 import { ellipsis } from '../../lib/styles/utils';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { LikeIcon } from '../../static/svg';
 import { PartialPost } from '../../lib/graphql/post';

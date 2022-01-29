@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 const PostTagsBlock = styled.div`
@@ -23,7 +24,7 @@ const Tag = styled(Link)`
   text-decoration: none;
   font-weight: 500;
   &:hover {
-    background: ${palette.gray0};
+    background: ${themedPalette.bg_element2};
   }
   font-size: 0.875rem;
 `;
@@ -35,7 +36,7 @@ export interface PostTagsProps {
 const PostTags: React.FC<PostTagsProps> = ({ tags }) => {
   return (
     <PostTagsBlock>
-      {tags.map(tag => (
+      {tags.map((tag) => (
         <Tag key={tag} to={`/tags/${tag}`}>
           {tag}
         </Tag>

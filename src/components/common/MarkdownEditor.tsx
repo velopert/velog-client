@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CodeMirror, { EditorFromTextArea, Editor } from 'codemirror';
 import './atom-one-light.css';
 import 'codemirror/lib/codemirror.css';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import 'codemirror/mode/markdown/markdown';
 import 'codemirror/addon/display/placeholder';

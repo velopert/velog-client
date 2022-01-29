@@ -21,6 +21,7 @@ import {
   usePostViewerPrefetch,
 } from './PostViewerProvider';
 import media from '../../lib/styles/media';
+import { themedPalette } from '../../lib/styles/themes';
 
 const PostSeriesInfoBlock = styled.div`
   margin-top: 2rem;
@@ -28,7 +29,7 @@ const PostSeriesInfoBlock = styled.div`
   ${media.small} {
     padding: 1rem;
   }
-  background: ${palette.gray0};
+  background: ${themedPalette.bg_element2};
   border-radius: 8px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.06);
   position: relative;
@@ -193,7 +194,7 @@ const PostSeriesInfo: React.FC<PostSeriesInfoProps> = ({
   urlSlug,
 }) => {
   const currentIndex = useMemo(
-    () => posts.findIndex(post => post.id === postId),
+    () => posts.findIndex((post) => post.id === postId),
     [postId, posts],
   );
   const [open, toggle, setValue] = useBoolean(false);
@@ -217,13 +218,13 @@ const PostSeriesInfo: React.FC<PostSeriesInfoProps> = ({
   }, []);
 
   const navigatePrev = () => {
-    const prevPost = posts[posts.findIndex(post => post.id === postId) - 1];
+    const prevPost = posts[posts.findIndex((post) => post.id === postId) - 1];
     if (!prevPost) return;
     history.push(`/@${username}/${prevPost.url_slug}`);
   };
 
   const navigateNext = () => {
-    const nextPos = posts[posts.findIndex(post => post.id === postId) + 1];
+    const nextPos = posts[posts.findIndex((post) => post.id === postId) + 1];
     if (!nextPos) return;
     history.push(`/@${username}/${nextPos.url_slug}`);
   };
@@ -240,7 +241,7 @@ const PostSeriesInfo: React.FC<PostSeriesInfoProps> = ({
       <SeriesImage className="series-corner-image" />
       {open && (
         <PostList>
-          {posts.map(post => (
+          {posts.map((post) => (
             <li key={post.id}>
               <NavLink
                 to={`/@${username}/${post.url_slug}`}

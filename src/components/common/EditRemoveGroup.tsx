@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 const EditRemoveGroup = styled.div`

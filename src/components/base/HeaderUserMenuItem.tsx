@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 const WrapperLink = styled(Link)`
@@ -16,7 +17,7 @@ const HeaderUserMenuItemBlock = styled.div`
   font-weight: 500;
   cursor: pointer;
   &:hover {
-    background: ${palette.gray0};
+    background: ${themedPalette.bg_element2};
   }
 `;
 

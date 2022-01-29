@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Comment } from '../../lib/graphql/post';
 import PostCommentsList from './PostCommentsList';
 import useBoolean from '../../lib/hooks/useBoolean';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import PostCommentsWrite from './PostCommentsWrite';
 import useInput from '../../lib/hooks/useInput';

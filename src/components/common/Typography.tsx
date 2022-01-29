@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import media from '../../lib/styles/media';
 
@@ -10,7 +11,9 @@ const TypographyBlock = styled.div`
   letter-spacing: -0.004em;
   word-break: keep-all;
   word-wrap: break-word;
-  ul, ol, p {
+  ul,
+  ol,
+  p {
     /* ${media.xxlarge} {
       color: ${palette.gray8};
       font-weight: 300;
@@ -20,8 +23,8 @@ const TypographyBlock = styled.div`
       font-weight: 400;
     }
     code {
-      background: rgba(27,31,35,.05);
-      padding: .2em .4em;
+      background: rgba(27, 31, 35, 0.05);
+      padding: 0.2em 0.4em;
       font-size: 85%;
       border-radius: 3px;
     }
@@ -129,13 +132,14 @@ const TypographyBlock = styled.div`
     border-left: 4px solid ${palette.teal5};
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
-    background: ${palette.gray0};
+    background: ${themedPalette.bg_element2};
     margin-left: 0;
     margin-right: 0;
     padding: 1rem;
     padding-left: 2rem;
     color: ${palette.gray9};
-    ul, ol {
+    ul,
+    ol {
       padding-left: 1rem;
     }
     *:first-child {

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { emptyThumbnail } from '../../static/images';
 import { formatDate } from '../../lib/utils';
@@ -98,7 +99,7 @@ const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
     }
   }
 
-  ${props =>
+  ${(props) =>
     props.edit &&
     css`
       padding: 1rem;

@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import OutsideClickHandler from 'react-outside-click-handler';
 import useInput from '../../lib/hooks/useInput';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import RoundButton from '../common/RoundButton';
 import { MdDelete } from 'react-icons/md';

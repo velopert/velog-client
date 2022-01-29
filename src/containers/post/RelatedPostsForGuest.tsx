@@ -7,6 +7,7 @@ import {
   GET_RECOMMENDED_POST,
   PartialPost,
 } from '../../lib/graphql/post';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import VelogResponsive from '../../components/velog/VelogResponsive';
 import { userThumbnail } from '../../static/images';

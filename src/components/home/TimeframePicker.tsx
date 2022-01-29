@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { useTransition, animated } from 'react-spring';
 import OutsideClickHandler from 'react-outside-click-handler';
@@ -81,7 +82,7 @@ const Block = styled(animated.div)`
   li {
     cursor: pointer;
     &:hover {
-      background: ${palette.gray0};
+      background: ${themedPalette.bg_element2};
     }
     font-weight: 600;
 

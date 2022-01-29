@@ -1,5 +1,6 @@
 import React, { useRef, useMemo, useEffect } from 'react';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { SearchIcon2 } from '../../static/svg';
 import useToggle from '../../lib/hooks/useToggle';
@@ -41,7 +42,7 @@ const SearchInputBlock = styled.div<{ focus: boolean; large?: boolean }>`
     }
   }
 
-  ${props =>
+  ${(props) =>
     props.focus &&
     css`
       border: 1px solid ${palette.gray8};
@@ -53,7 +54,7 @@ const SearchInputBlock = styled.div<{ focus: boolean; large?: boolean }>`
       }
     `}
 
-  ${props =>
+  ${(props) =>
     props.large &&
     css`
       height: 4rem;

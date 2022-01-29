@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import transitions from '../../lib/styles/transitions';
 import { mediaQuery } from '../../lib/styles/media';
@@ -90,13 +91,13 @@ const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
   );
 
   const onRemove = (tag: string) => {
-    const nextTags = tags.filter(t => t !== tag);
+    const nextTags = tags.filter((t) => t !== tag);
     setTags(nextTags);
   };
 
   return (
     <TagInputBlock>
-      {tags.map(tag => (
+      {tags.map((tag) => (
         <TagItem key={tag} onClick={() => onRemove(tag)}>
           {tag}
         </TagItem>

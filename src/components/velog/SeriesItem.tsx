@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import RatioImage from '../common/RatioImage';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { ellipsis } from '../../lib/styles/utils';
 import { formatDate } from '../../lib/utils';

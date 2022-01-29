@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import MarkdownRender from '../common/MarkdownRender';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 const MarkdownPreviewBlock = styled.div`

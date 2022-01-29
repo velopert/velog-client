@@ -8,6 +8,7 @@ import {
   PartialPost,
 } from '../../lib/graphql/post';
 import PostCardGrid from '../../components/common/PostCardGrid';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { detectAnyAdblocker } from 'just-detect-adblock';
 
@@ -97,7 +98,7 @@ const Background = styled.div`
     padding-bottom: 1rem;
   }
   margin-top: 4rem;
-  background: ${palette.gray0};
+  background: ${themedPalette.bg_element2};
   box-shadow: 0px 0 32px rgb(0 0 0 / 8%);
 `;
 const Wrapper = styled.div`

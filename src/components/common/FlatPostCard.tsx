@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { userThumbnail } from '../../static/images';
 import Tag from './TagItem';
@@ -37,7 +38,7 @@ const PostCardBlock = styled.div`
       height: 3rem;
       display: block;
       margin-right: 1rem;
-      background: ${palette.gray0};
+      background: ${themedPalette.bg_element2};
       object-fit: cover;
       border-radius: 1.5rem;
       box-shadow: 0px 0 8px rgba(0, 0, 0, 0.1);
@@ -178,7 +179,7 @@ const FlatPostCard = ({ post, hideUser }: PostCardProps) => {
       </Link>
       <p>{post.short_description}</p>
       <div className="tags-wrapper">
-        {post.tags.map(tag => (
+        {post.tags.map((tag) => (
           <Tag key={tag} name={tag} link />
         ))}
       </div>

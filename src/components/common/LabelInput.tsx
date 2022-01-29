@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { MdLockOutline } from 'react-icons/md';
 import media from '../../lib/styles/media';
@@ -15,7 +16,7 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
     color: ${palette.gray9};
     margin-bottom: 1rem;
     transition: all 0.125s ease-in;
-    ${props =>
+    ${(props) =>
       props.focus &&
       css`
         color: ${palette.teal7};
@@ -33,7 +34,7 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
     width: 100%;
     color: ${palette.gray7};
     transition: all 0.125s ease-in;
-    ${props =>
+    ${(props) =>
       props.focus &&
       css`
         color: ${palette.teal7};
@@ -54,7 +55,7 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
     border-bottom: 1px solid ${palette.gray7};
     display: flex;
     align-items: center;
-    ${props =>
+    ${(props) =>
       props.focus &&
       css`
         border-color: ${palette.teal7};

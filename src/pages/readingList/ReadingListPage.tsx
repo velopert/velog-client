@@ -7,6 +7,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import useReadingList from './hooks/useReadingList';
 import PostCardGrid from '../../components/common/PostCardGrid';
 import { undrawEmpty } from '../../static/images';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import media from '../../lib/styles/media';
 import { Helmet } from 'react-helmet-async';

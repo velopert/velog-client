@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import PublishSection from './PublishSection';
 import { AddListIcon } from '../../static/svg';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { MdSettings } from 'react-icons/md';
 import { ellipsis } from '../../lib/styles/utils';

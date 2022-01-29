@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { MdClose } from 'react-icons/md';
 import zIndexes from '../../lib/styles/zIndexes';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { undrawJoyride } from '../../static/images';
 import transitions from '../../lib/styles/transitions';
@@ -28,7 +29,7 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
       height: 100%;
     }
 
-    ${props =>
+    ${(props) =>
       props.visible
         ? css`
             animation: ${transitions.popInFromBottom} 0.4s forwards ease-in-out;

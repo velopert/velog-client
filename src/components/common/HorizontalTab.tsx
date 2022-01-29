@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { useSpring, animated } from 'react-spring';
 import media from '../../lib/styles/media';
@@ -23,7 +24,7 @@ function HorizontalTab({
   theme,
 }: HorizontalTabProps) {
   const activeIndex = React.Children.toArray(children).findIndex(
-    tab => tab.props.name === activeTab,
+    (tab) => tab.props.name === activeTab,
   );
 
   const ratio = 100 / children.length;
@@ -40,7 +41,7 @@ function HorizontalTab({
   return (
     <Block className={className} align={align}>
       <div className="tab-wrapper">
-        {React.Children.map(children, tab => {
+        {React.Children.map(children, (tab) => {
           return React.cloneElement(tab, {
             active: tab.props.name === activeTab,
             width: `${tabWidth}rem`,
@@ -87,7 +88,7 @@ TabItem.defaultProps = {
 
 const Block = styled.div<{ align: 'center' | 'left' }>`
   display: flex;
-  ${props =>
+  ${(props) =>
     props.align === 'center' &&
     css`
       justify-content: center;
@@ -104,7 +105,7 @@ const Indicator = styled(animated.div)<{ theme: 'teal' | 'gray' }>`
   position: absolute;
   bottom: 0px;
   background: ${palette.teal5};
-  ${props =>
+  ${(props) =>
     props.theme === 'gray' &&
     css`
       background: ${palette.gray8};
@@ -129,7 +130,7 @@ const StyledLink = styled(Link)<{
   &.active {
     font-weight: bold;
     color: ${palette.teal5};
-    ${props =>
+    ${(props) =>
       props.theme === 'gray' &&
       css`
         color: ${palette.gray8};

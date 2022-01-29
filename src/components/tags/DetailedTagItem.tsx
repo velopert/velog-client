@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import TagItem from '../common/TagItem';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import Skeleton from '../common/Skeleton';
 import SkeletonTexts from '../common/SkeletonTexts';
@@ -72,7 +73,7 @@ const Block = styled.div<{ hasDescription: boolean }>`
     width: 100%;
     margin-bottom: 0;
   }
-  ${props =>
+  ${(props) =>
     props.hasDescription &&
     css`
       height: 12rem;

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import useInput from '../../lib/hooks/useInput';
 import AuthEmailForm from './AuthEmailForm';
 import { AuthMode } from '../../modules/core';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import AuthSocialButtonGroup from './AuthSocialButtonGroup';
 import AuthEmailSuccess from './AuthEmailSuccess';

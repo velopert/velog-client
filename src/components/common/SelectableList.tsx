@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 const SelectableListBlock = styled.ul`
@@ -17,7 +18,7 @@ const ListItem = styled.li<{ active: boolean }>`
   color: ${palette.gray7};
   border-bottom: 1px solid ${palette.gray2};
 
-  ${props =>
+  ${(props) =>
     props.active &&
     css`
       background: ${palette.teal6};
@@ -35,28 +36,27 @@ export interface SelectableListProps {
   onChangeId: (id: any) => void;
 }
 
-const SelectableList: React.ComponentType<
-  SelectableListProps
-> = React.forwardRef(
-  (
-    { list, selectedId, className, onChangeId }: SelectableListProps,
-    ref: React.Ref<HTMLUListElement>,
-  ) => {
-    return (
-      <SelectableListBlock className={className} ref={ref}>
-        {list.map(item => (
-          <ListItem
-            className="list-item"
-            active={item.id === selectedId}
-            key={item.id}
-            onClick={() => onChangeId(item.id)}
-          >
-            {item.text}
-          </ListItem>
-        ))}
-      </SelectableListBlock>
-    );
-  },
-);
+const SelectableList: React.ComponentType<SelectableListProps> =
+  React.forwardRef(
+    (
+      { list, selectedId, className, onChangeId }: SelectableListProps,
+      ref: React.Ref<HTMLUListElement>,
+    ) => {
+      return (
+        <SelectableListBlock className={className} ref={ref}>
+          {list.map((item) => (
+            <ListItem
+              className="list-item"
+              active={item.id === selectedId}
+              key={item.id}
+              onClick={() => onChangeId(item.id)}
+            >
+              {item.text}
+            </ListItem>
+          ))}
+        </SelectableListBlock>
+      );
+    },
+  );
 
 export default SelectableList;

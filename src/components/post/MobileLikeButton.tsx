@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { LikeIcon } from '../../static/svg';
 
@@ -39,7 +40,7 @@ const Button = styled.button<{ liked: boolean }>`
     font-weight: bold;
     color: ${palette.gray5};
   }
-  ${props =>
+  ${(props) =>
     props.liked &&
     css`
       border-color: ${palette.teal5};

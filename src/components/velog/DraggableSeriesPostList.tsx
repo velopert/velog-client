@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { SeriesPostPreview } from '../../lib/graphql/series';
 import SeriesPostItem from './SeriesPostItem';
@@ -16,7 +17,7 @@ const DraggableSeriesPostList = styled.div`
 `;
 
 const DroppableBlock = styled.div<{ isDraggingOver: boolean }>`
-  background: ${props =>
+  background: ${(props) =>
     props.isDraggingOver ? palette.gray1 : palette.gray0};
   border-radius: 4px;
   padding: 1.5rem;
@@ -25,7 +26,7 @@ const DroppableBlock = styled.div<{ isDraggingOver: boolean }>`
 
 const DraggableBlock = styled.div<{ isDragging: boolean }>`
   user-select: none;
-  ${props =>
+  ${(props) =>
     props.isDragging
       ? css`
           opacity: 0.6;
@@ -57,13 +58,13 @@ const DraggableSeriesList = ({
   const onDragEnd = (result: DropResult, provided: ResponderProvided) => {
     if (!result.destination) return;
     if (result.destination.index === result.source.index) return;
-    setTempPosts(prevTempPosts =>
+    setTempPosts((prevTempPosts) =>
       reorder(prevTempPosts, result.source.index, result.destination!.index),
     );
   };
 
   useEffect(() => {
-    onChangeSeriesOrder(tempPosts.map(tp => tp.id));
+    onChangeSeriesOrder(tempPosts.map((tp) => tp.id));
   }, [onChangeSeriesOrder, tempPosts]);
 
   return (

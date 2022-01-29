@@ -5,6 +5,7 @@ import Quill from 'quill';
 import 'highlight.js/styles/atom-one-dark.css';
 import 'quill/dist/quill.snow.css';
 import MarkdownShortcuts from '../../lib/quill/markdownShortcuts';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import Toolbar from './Toolbar';
 import AddLink from './AddLink';

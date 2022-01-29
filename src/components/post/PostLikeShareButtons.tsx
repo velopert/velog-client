@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { usePrevious } from 'react-use';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { LikeIcon, ShareIcon, ClipIcon } from '../../static/svg';
 import { useSpring, animated, config } from 'react-spring';
@@ -23,7 +24,7 @@ const Positioner = styled.div`
 `;
 const PostLikeShareButtonsBlock = styled(Sticky)`
   width: 4rem;
-  background: ${palette.gray0};
+  background: ${themedPalette.bg_element2};
   border: 1px solid ${palette.gray1};
   border-radius: 2rem;
   padding: 0.5rem;
@@ -56,7 +57,7 @@ const CircleButton = styled(animated.div)<{ active?: string }>`
     color: ${palette.gray9};
     border-color: ${palette.gray9};
   }
-  ${props =>
+  ${(props) =>
     props.active === 'true' &&
     css`
       background: ${palette.teal5};
@@ -156,7 +157,7 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
                   range: [0, 0.25, 0.5, 0.6, 1],
                   output: [1, 1.25, 1, 1.25, 1],
                 })
-                .interpolate(x => `scale(${x})`),
+                .interpolate((x) => `scale(${x})`),
             }}
           >
             <LikeIcon />
@@ -173,7 +174,7 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
                       output: [0, 1],
                     })
                     .interpolate(
-                      shareX =>
+                      (shareX) =>
                         `translate(${shareX * 48}px, -${shareX * 52}px)`,
                     ),
                 }}
@@ -190,7 +191,7 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
                       range: [0, 1],
                       output: [0, 1],
                     })
-                    .interpolate(shareX => `translate(${shareX * 72}px)`),
+                    .interpolate((shareX) => `translate(${shareX * 72}px)`),
                 }}
               >
                 <CircleButton onClick={() => onShareClick('twitter')}>
@@ -206,7 +207,8 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
                       output: [0, 1],
                     })
                     .interpolate(
-                      shareX => `translate(${shareX * 48}px, ${shareX * 52}px)`,
+                      (shareX) =>
+                        `translate(${shareX * 48}px, ${shareX * 52}px)`,
                     ),
                 }}
               >

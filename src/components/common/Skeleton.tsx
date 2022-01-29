@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes, css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 export type SkeletonProps = {
@@ -52,7 +53,7 @@ const Block = styled.span<{ noSpacing?: boolean; circle?: boolean }>`
   border-radius: 4px;
   height: 1em;
 
-  ${props =>
+  ${(props) =>
     !props.noSpacing &&
     css`
       & + & {
@@ -60,7 +61,7 @@ const Block = styled.span<{ noSpacing?: boolean; circle?: boolean }>`
       }
     `}
 
-  ${props =>
+  ${(props) =>
     props.circle &&
     css`
       border-radius: 50%;

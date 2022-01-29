@@ -13,6 +13,7 @@ import media from '../../lib/styles/media';
 import parse from 'html-react-parser';
 import { throttle } from 'throttle-debounce';
 import sanitize from 'sanitize-html';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import math from 'remark-math';
 import remark2rehype from 'remark-rehype';
