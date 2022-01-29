@@ -45,7 +45,7 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
         display: none;
       }
       width: 216px;
-      background: ${palette.gray1};
+      background: ${themedPalette.bg_element2};
       padding: 1.5rem;
       display: flex;
       flex-direction: column;

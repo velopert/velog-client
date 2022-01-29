@@ -63,7 +63,7 @@ const TagItem = styled(Link)<{ active?: boolean }>`
   border-radius: 0.75rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  background: ${palette.gray1};
+  background: ${themedPalette.bg_element2};
   color: ${palette.gray8};
   display: flex;
   align-items: center;

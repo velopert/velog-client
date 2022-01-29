@@ -32,7 +32,7 @@ const UserPage: React.FC<UserPageProps> = ({ match, location }) => {
 };
 
 const MobileSeparator = styled.div`
-  background: ${palette.gray1};
+  background: ${themedPalette.bg_element2};
   height: 1rem;
   margin-top: 2rem;
 

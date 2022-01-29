@@ -927,7 +927,7 @@ const MarkdownEditorBlock = styled.div`
     &:hover {
       width: 16px;
     }
-    background: ${palette.gray1};
+    background: ${themedPalette.bg_element2};
   }
 
   &::-webkit-scrollbar-thumb {

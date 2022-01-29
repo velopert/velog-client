@@ -19,7 +19,7 @@ const AuthEmailFormBlock = styled.form`
       color: ${palette.gray6};
     }
     &:disabled {
-      background: ${palette.gray1};
+      background: ${themedPalette.bg_element2};
     }
   }
   button {

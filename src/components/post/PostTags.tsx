@@ -12,7 +12,7 @@ const PostTagsBlock = styled.div`
 
 const Tag = styled(Link)`
   margin-bottom: 0.875rem;
-  background: ${palette.gray1};
+  background: ${themedPalette.bg_element2};
   padding-left: 1rem;
   padding-right: 1rem;
   height: 2rem;

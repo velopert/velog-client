@@ -114,7 +114,7 @@ const MarkdownRenderBlock = styled.div`
     }
 
     tr:nth-child(even) {
-      background: ${palette.gray1};
+      background: ${themedPalette.bg_element2};
     }
     tr:nth-child(odd) {
       background: white;

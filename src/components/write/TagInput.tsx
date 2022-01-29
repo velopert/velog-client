@@ -196,7 +196,7 @@ const Tag = styled.div`
   border-radius: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  background: ${palette.gray1};
+  background: ${themedPalette.bg_element2};
   color: ${palette.teal7};
   margin-right: 0.75rem;
   transition: ease-in 0.125s;

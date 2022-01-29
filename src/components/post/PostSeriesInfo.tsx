@@ -132,7 +132,7 @@ const NavigateButton = styled.button`
 
   &:disabled {
     cursor: default;
-    background: ${palette.gray1};
+    background: ${themedPalette.bg_element2};
     border: 1px solid ${palette.gray2};
     color: ${palette.gray4};
   }

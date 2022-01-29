@@ -11,7 +11,7 @@ const StyledButton = styled.button`
   padding-right: 0.75rem;
   align-items: center;
   cursor: pointer;
-  background: ${palette.gray1};
+  background: ${themedPalette.bg_element2};
   border-radius: 4px;
   border: none;
   outline: none;
