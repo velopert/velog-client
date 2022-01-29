@@ -149,7 +149,7 @@ const ThumbnailModifyBlock = styled.div`
       width: 2px;
       height: 2px;
       border-radius: 1px;
-      background: ${palette.gray6};
+      background: ${themedPalette.text4};
     }
   }
 `;
