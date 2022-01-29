@@ -13,7 +13,7 @@ const MarkdownEditorBlock = styled.div`
     height: auto;
     font-size: 1.125rem;
     line-height: 1.5;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     font-family: 'Fira Mono', monospace;
     /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', */
     .cm-header {

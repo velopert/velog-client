@@ -39,7 +39,7 @@ const Block = styled.div<{ hasMargin?: boolean }>`
   }
   h2 {
     font-weight: 400;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     margin-top: 2rem;
     ${media.small} {
       font-size: 1.25rem;

@@ -147,7 +147,7 @@ const Block = styled.div`
       margin-right: 0.5rem;
     }
     &.active {
-      color: ${palette.gray8};
+      color: ${themedPalette.text1};
       font-weight: bold;
     }
 

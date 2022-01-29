@@ -54,7 +54,7 @@ const Row = styled.div`
     flex-shrink: 0;
     h3 {
       line-height: 1.5;
-      color: ${palette.gray8};
+      color: ${themedPalette.text1};
       margin: 0;
       font-size: 1.125rem;
       ${media.small} {

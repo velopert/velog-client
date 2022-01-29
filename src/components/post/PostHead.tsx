@@ -30,7 +30,7 @@ const PostHeadBlock = styled(VelogResponsive)`
     letter-spacing: -0.004em;
     margin-top: 0;
     font-weight: 800;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     margin-bottom: 2rem;
     word-break: keep-all;
   }
@@ -52,7 +52,7 @@ const SubInfo = styled.div`
   justify-content: space-between;
   .information {
     .username {
-      color: ${palette.gray8};
+      color: ${themedPalette.text1};
       font-weight: bold;
       a {
         color: inherit;

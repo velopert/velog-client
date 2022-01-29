@@ -21,7 +21,7 @@ const AddLinkBlock = styled.div`
       margin-bottom: 1rem;
       .title {
         font-weight: bold;
-        color: ${palette.gray8};
+        color: ${themedPalette.text1};
       }
       display: flex;
       justify-content: space-between;

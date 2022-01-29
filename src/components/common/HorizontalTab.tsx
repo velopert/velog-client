@@ -133,7 +133,7 @@ const StyledLink = styled(Link)<{
     ${(props) =>
       props.theme === 'gray' &&
       css`
-        color: ${palette.gray8};
+        color: ${themedPalette.text1};
       `}
   }
 `;

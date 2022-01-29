@@ -17,7 +17,7 @@ const StyledVelogResponsive = styled(VelogResponsive)`
     font-size: 3rem;
     margin-top: 0;
     margin-bottom: 3rem;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
   }
 
   ${media.medium} {

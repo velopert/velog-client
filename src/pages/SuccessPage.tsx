@@ -55,7 +55,7 @@ const Block = styled.div`
     line-height: 1.5;
   }
   .button-wrapper {
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     margin-top: 1.5rem;
   }
 

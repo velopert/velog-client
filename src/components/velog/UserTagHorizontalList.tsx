@@ -64,7 +64,7 @@ const TagItem = styled(Link)<{ active?: boolean }>`
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   background: ${themedPalette.bg_element2};
-  color: ${palette.gray8};
+  color: ${themedPalette.text1};
   display: flex;
   align-items: center;
   line-height: 1.5;

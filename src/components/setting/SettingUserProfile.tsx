@@ -132,7 +132,7 @@ const Section = styled.section`
       font-size: 2.25rem;
       margin: 0;
       line-height: 1.5;
-      color: ${palette.gray8};
+      color: ${themedPalette.text1};
     }
     p {
       font-size: 1rem;

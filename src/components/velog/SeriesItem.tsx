@@ -42,7 +42,7 @@ const SeriesItemBlock = styled.div`
     ${media.small} {
       line-height: 1;
     }
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     a {
       ${ellipsis};
     }
@@ -54,7 +54,7 @@ const SeriesItemBlock = styled.div`
     font-size: 0.875rem;
     color: ${palette.gray6};
     .count {
-      color: ${palette.gray8};
+      color: ${themedPalette.text1};
     }
     .dot {
       margin-left: 0.25rem;

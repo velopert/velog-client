@@ -9,7 +9,7 @@ const PopupOKCancelBlock = styled.div`
   h3 {
     margin: 0;
     font-size: 1.5rem;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     line-height: 1.5;
     font-weight: bold;
   }

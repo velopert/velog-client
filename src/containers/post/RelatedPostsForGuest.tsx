@@ -155,7 +155,7 @@ function RelatedPostsForGuest({
 const Wrapper = styled(VelogResponsive)`
   h4 {
     font-size: 1.125rem;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
   }
   margin-top: 4rem;
   margin-bottom: 3rem;
@@ -213,7 +213,7 @@ const Item = styled.div`
     text-overflow: ellipsis;
     text-decoration: none;
     color: inherit;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
   }
 `;
 
@@ -256,7 +256,7 @@ const StyledRowLink = styled(Link)`
     margin-top: 0;
     margin-bottom: 0;
     font-size: 0.75rem;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     font-size: 0.75rem;
 
     line-height: 1.5;

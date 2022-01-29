@@ -15,7 +15,7 @@ const TypographyBlock = styled.div`
   ol,
   p {
     /* ${media.xxlarge} {
-      color: ${palette.gray8};
+      color: ${themedPalette.text1};
       font-weight: 300;
     } */
 

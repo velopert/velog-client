@@ -75,7 +75,7 @@ const StyledWidget = styled(HomeWidget)`
         margin: 0;
         font-size: 1.125rem;
         line-height: 1.5;
-        color: ${palette.gray8};
+        color: ${themedPalette.text1};
         a {
           text-decoration: none;
           color: inherit;

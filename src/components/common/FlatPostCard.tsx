@@ -56,7 +56,7 @@ const PostCardBlock = styled.div`
         color: inherit;
         text-decoration: none;
         &:hover {
-          color: ${palette.gray8};
+          color: ${themedPalette.text1};
         }
       }
     }

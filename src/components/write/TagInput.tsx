@@ -161,7 +161,7 @@ const HelpBlock = styled.div`
 `;
 
 const TagInputBlock = styled.div`
-  color: ${palette.gray8};
+  color: ${themedPalette.text1};
   font-size: 1.125rem;
 
   display: flex;

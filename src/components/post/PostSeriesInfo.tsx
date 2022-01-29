@@ -84,7 +84,7 @@ const Fold = styled.div`
   cursor: pointer;
   svg {
     margin-right: 0.25rem;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     font-size: 1.5rem;
   }
   &:hover {

@@ -46,7 +46,7 @@ const Input = styled.input`
   border: none;
   outline: none;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.03);
-  color: ${palette.gray8};
+  color: ${themedPalette.text1};
   &::placeholder {
     color: ${palette.gray5};
   }
@@ -63,7 +63,7 @@ const URLInput = styled.div`
   background: ${themedPalette.bg_element1};
   color: ${palette.gray6};
   input {
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     flex: 1;
     outline: none;
     border: none;

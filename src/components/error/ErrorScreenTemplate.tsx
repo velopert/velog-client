@@ -54,7 +54,7 @@ const Screen = styled.div`
     text-align: center;
     line-height: 1.5;
     font-size: 2.5rem;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     margin-top: 2rem;
     ${media.small} {
       font-size: 1.5rem;

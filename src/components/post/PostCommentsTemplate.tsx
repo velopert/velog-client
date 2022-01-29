@@ -7,7 +7,7 @@ import media from '../../lib/styles/media';
 
 const PostCommentsTemplateBlock = styled(VelogResponsive)`
   margin-top: 3rem;
-  color: ${palette.gray8};
+  color: ${themedPalette.text1};
   h4 {
     font-size: 1.125rem;
     line-height: 1.5;

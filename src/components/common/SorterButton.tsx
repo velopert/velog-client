@@ -33,7 +33,7 @@ const StyledButton = styled.button`
   span {
     margin-left: 0.25rem;
     font-size: 1rem;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     line-height: 1;
   }
 `;

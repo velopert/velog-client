@@ -61,7 +61,7 @@ const Block = styled.div`
 `;
 
 const ListItem = styled.li<{ active?: boolean }>`
-  color: ${palette.gray8};
+  color: ${themedPalette.text1};
   font-size: 0.875rem;
   line-height: 1.5;
 

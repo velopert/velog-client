@@ -275,7 +275,7 @@ const Footer = styled.div`
     span {
       color: ${palette.gray6};
       b {
-        color: ${palette.gray8};
+        color: ${themedPalette.text1};
       }
     }
   }

@@ -74,7 +74,7 @@ const Block = styled.div`
     font-size: 3rem;
     margin: 0;
     line-height: 1.5;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     ${media.small} {
       font-size: 2rem;
     }

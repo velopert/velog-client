@@ -23,7 +23,7 @@ const Input = styled.input`
   border: none;
   padding: 0;
   line-height: 1.5;
-  color: ${palette.gray8};
+  color: ${themedPalette.text1};
 `;
 
 export interface PublishURLSettingProps {

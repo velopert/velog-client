@@ -104,7 +104,7 @@ const Block = styled(animated.div)`
       font-size: 0.75rem;
     }
     .email {
-      color: ${palette.gray8};
+      color: ${themedPalette.text1};
       font-size: 0.75rem;
     }
   }

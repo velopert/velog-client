@@ -23,7 +23,7 @@ const SavedItemBlock = styled.div`
     font-size: 1.5rem;
     margin-top: 0;
     margin-bottom: 1.5rem;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
   }
   p {
     font-size: 1rem;
@@ -41,7 +41,7 @@ const SavedItemBlock = styled.div`
     .remove {
       cursor: pointer;
       text-decoration: underline;
-      color: ${palette.gray8};
+      color: ${themedPalette.text1};
       outline: none;
       border: none;
       background: none;

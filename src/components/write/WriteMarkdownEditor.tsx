@@ -962,7 +962,7 @@ const MarkdownEditorBlock = styled.div`
     flex: 1;
     font-size: 1.125rem;
     line-height: 1.5;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     font-family: 'Fira Mono', monospace;
     /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', */
     .cm-header {
@@ -1056,7 +1056,7 @@ const AppleTextarea = styled.textarea`
   padding-right: 3rem;
   line-height: 1.5;
   padding-bottom: 3rem;
-  color: ${palette.gray8};
+  color: ${themedPalette.text1};
   ${media.custom(767)} {
     font-size: 0.875rem;
     padding-left: 1rem;

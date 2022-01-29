@@ -63,7 +63,7 @@ const UserInfo = styled.div`
       color: inherit;
       text-decoration: none;
       &:hover {
-        color: ${palette.gray8};
+        color: ${themedPalette.text1};
         text-decoration: underline;
       }
     }
@@ -112,7 +112,7 @@ const ProfileIcons = styled.div`
     width: 2rem;
     height: 2rem;
     &:hover {
-      color: ${palette.gray8};
+      color: ${themedPalette.text1};
     }
     ${media.small} {
       width: 1.5rem;

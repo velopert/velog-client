@@ -49,7 +49,7 @@ const HeaderLogoBlock = styled.div`
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  color: ${palette.gray8};
+  color: ${themedPalette.text1};
   font-size: 1.3125rem;
   text-decoration: none;
   font-family: Fira Mono, monospace;

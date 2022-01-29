@@ -26,7 +26,7 @@ const AuthFormBlock = styled.div`
   }
   h2 {
     font-size: 1.3125rem;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
   }
   h4 {
     margin-top: 1rem;
