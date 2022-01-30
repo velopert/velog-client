@@ -2,6 +2,7 @@ import React, { CSSProperties, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import CodeMirror, { EditorFromTextArea, Editor } from 'codemirror';
 import './atom-one-light.css';
+import './atom-one-dark.css';
 import 'codemirror/lib/codemirror.css';
 import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';

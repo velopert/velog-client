@@ -173,6 +173,7 @@ const TagInputBlock = styled.div`
   }
 `;
 const StyledInput = styled.input`
+  background: transparent;
   display: inline-flex;
   outline: none;
   cursor: text;

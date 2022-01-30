@@ -114,7 +114,7 @@ const PublishSeriesCreate: React.FC<PublishSeriesCreateProps> = ({
   const [defaultUrlSlug, setDefaultUrlSlug] = useState('');
 
   useEffect(() => {
-    let timeoutId: number | null = null;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
     if (open) {
       timeoutId = setTimeout(() => setShowOpenBlock(true), 125);
     } else {

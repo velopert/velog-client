@@ -127,7 +127,7 @@ interface PostCardProps {
 
 const FlatPostCard = ({ post, hideUser }: PostCardProps) => {
   const prefetch = usePrefetchPost(post.user.username, post.url_slug);
-  const prefetchTimeoutId = useRef<number | null>(null);
+  const prefetchTimeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const onMouseEnter = () => {
     prefetchTimeoutId.current = setTimeout(prefetch, 2000);

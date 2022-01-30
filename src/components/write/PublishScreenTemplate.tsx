@@ -90,7 +90,7 @@ const PublishScreenTemplate: React.FC<PublishScreenTemplateProps> = ({
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    let timeoutId: null | number = null;
+    let timeoutId: null | ReturnType<typeof setTimeout> = null;
     if (visible) {
       setAnimate(true);
     } else if (!visible && animate) {

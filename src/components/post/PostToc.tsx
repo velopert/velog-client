@@ -110,7 +110,7 @@ const PostToc: React.FC<PostTocProps> = () => {
   useEffect(() => {
     updateTocPositions();
     let prevScrollHeight = document.body.scrollHeight;
-    let timeoutId: number | null = null;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
     function checkScrollHeight() {
       const scrollHeight = document.body.scrollHeight;
       if (prevScrollHeight !== scrollHeight) {

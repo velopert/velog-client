@@ -40,6 +40,8 @@ const AddLinkBlock = styled.div`
       display: flex;
       align-items: center;
       input {
+        color: ${themedPalette.text1};
+        background: transparent;
         flex: 1;
         border: none;
         outline: none;
@@ -112,7 +114,7 @@ const AddLink: React.FC<AddLinkProps> = ({
               placeholder="URL 을 입력하세요"
               ref={input}
             />
-            <RoundButton color="darkGray" size="SMALL">
+            <RoundButton color="gray" size="SMALL">
               확인
             </RoundButton>
           </form>

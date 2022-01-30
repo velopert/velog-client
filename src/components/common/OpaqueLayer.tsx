@@ -34,7 +34,7 @@ const { useState, useEffect, useRef } = React;
 
 const OpaqueLayer: React.FC<OpaqueLayerProps> = ({ visible }) => {
   const [animate, setAnimate] = useState(false);
-  const timeoutId = useRef<number | null>(null);
+  const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
   const mounted = useRef(false);
   const [closed, setClosed] = useState(true);
 

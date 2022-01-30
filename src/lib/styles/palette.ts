@@ -49,9 +49,9 @@ export const buttonColorMap: {
     hoverBackground: themedPalette.primary2,
   },
   lightGray: {
-    background: themedPalette.bg_element3,
+    background: themedPalette.bg_element4,
     color: themedPalette.text1,
-    hoverBackground: themedPalette.bg_element2,
+    hoverBackground: themedPalette.bg_element3,
   },
   gray: {
     background: palette.gray6,

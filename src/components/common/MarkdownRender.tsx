@@ -13,7 +13,6 @@ import media from '../../lib/styles/media';
 import parse from 'html-react-parser';
 import { throttle } from 'throttle-debounce';
 import sanitize from 'sanitize-html';
-import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import math from 'remark-math';
 import remark2rehype from 'remark-rehype';
@@ -95,12 +94,12 @@ const MarkdownRenderBlock = styled.div`
   table {
     min-width: 40%;
     max-width: 100%;
-    border: 1px solid ${themedPalette.border2};
+    border: 1px solid ${palette.gray7};
     border-collapse: collapse;
     font-size: 0.875rem;
     thead > tr > th {
       /* text-align: left; */
-      border-bottom: 4px solid ${themedPalette.border2};
+      border-bottom: 4px solid ${palette.gray7};
     }
     th,
     td {
@@ -110,14 +109,14 @@ const MarkdownRenderBlock = styled.div`
 
     td + td,
     th + th {
-      border-left: 1px solid ${themedPalette.border2};
+      border-left: 1px solid ${palette.gray7};
     }
 
     tr:nth-child(even) {
-      background: ${themedPalette.bg_element2};
+      background: ${palette.gray1};
     }
     tr:nth-child(odd) {
-      background: ${themedPalette.bg_element1};
+      background: white;
     }
   }
 
@@ -204,7 +203,7 @@ type RenderedElement =
 
 const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   markdown,
-  codeTheme = 'atom-one-light',
+  codeTheme = 'atom-one-dark',
   onConvertFinish,
   editing,
 }) => {

@@ -26,7 +26,7 @@ const ToolbarBlock = styled.div<{
   align-items: center;
   margin-bottom: 1rem;
   width: 100%;
-  background: ${themedPalette.bg_element1};
+  background: ${themedPalette.bg_page2};
   z-index: ${zIndexes.Toolbar};
   transition: all 0.125s ease-in;
   flex-wrap: wrap;

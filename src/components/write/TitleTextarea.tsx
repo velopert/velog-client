@@ -5,6 +5,7 @@ import palette from '../../lib/styles/palette';
 import { mediaQuery } from '../../lib/styles/media';
 
 const style = css`
+  background: transparent;
   display: block;
   padding: 0;
   font-size: 2.75rem;
