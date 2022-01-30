@@ -108,7 +108,7 @@ const Indicator = styled(animated.div)<{ theme: 'teal' | 'gray' }>`
   ${(props) =>
     props.theme === 'gray' &&
     css`
-      background: ${palette.gray8};
+      background: ${themedPalette.border1};
     `}
 `;
 

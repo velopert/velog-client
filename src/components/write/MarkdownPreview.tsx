@@ -2,14 +2,13 @@ import * as React from 'react';
 import styled from 'styled-components';
 import MarkdownRender from '../common/MarkdownRender';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 
 const MarkdownPreviewBlock = styled.div`
   word-break: break-word;
   padding: 3rem;
   flex: 1;
   overflow-y: auto;
-  color: ${palette.gray9};
+  color: ${themedPalette.text1};
 `;
 
 const Title = styled.h1`

@@ -10,6 +10,7 @@ import HeaderUserMenu from './HeaderUserMenu';
 import { Link } from 'react-router-dom';
 import media from '../../lib/styles/media';
 import HeaderLogo from './HeaderLogo';
+import { themedPalette } from '../../lib/styles/themes';
 
 export type MainHeaderProps = {};
 
@@ -99,9 +100,10 @@ const SearchButton = styled(Link)`
   height: 2.5rem;
   outline: none;
   border-radius: 50%;
+  color: ${themedPalette.text1};
   cursor: pointer;
   &:hover {
-    background: rgba(0, 0, 0, 0.045);
+    background: ${themedPalette.slight_layer};
   }
   svg {
     width: 1.125rem;

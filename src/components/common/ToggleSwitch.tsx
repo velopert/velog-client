@@ -59,7 +59,7 @@ const Block = styled.div<{ active: boolean }>`
   align-items: center;
   width: 2.875rem;
   height: 1.5rem;
-  background: ${themedPalette.bg_element3};
+  background: ${palette.gray6};
   transition: 0.125s all ease-in;
   border-radius: 1.125rem;
   padding: 0.125rem;
