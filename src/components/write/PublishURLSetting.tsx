@@ -7,7 +7,7 @@ import palette from '../../lib/styles/palette';
 const PublishURLSettingBlock = styled(PublishSection)``;
 const URLTextBlock = styled.div`
   display: flex;
-  background: ${themedPalette.bg_element1};
+  background: ${themedPalette.bg_element7};
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.03);
   padding: 0.5rem 0.875rem;
   line-height: 1.5;

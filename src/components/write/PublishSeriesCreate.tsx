@@ -46,6 +46,7 @@ const Input = styled.input`
   border: none;
   outline: none;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.03);
+  background: ${themedPalette.bg_element1};
   color: ${themedPalette.text1};
   &::placeholder {
     color: ${themedPalette.text3};
@@ -68,6 +69,7 @@ const URLInput = styled.div`
     outline: none;
     border: none;
     font-size: inherit;
+    background: transparent;
   }
 `;
 
@@ -176,7 +178,7 @@ const PublishSeriesCreate: React.FC<PublishSeriesCreateProps> = ({
               />
             </URLInput>
             <Buttons>
-              <Button inline color="darkGray" onClick={onHide} type="button">
+              <Button inline color="transparent" onClick={onHide} type="button">
                 취소
               </Button>
               <Button inline color="teal" type="submit">

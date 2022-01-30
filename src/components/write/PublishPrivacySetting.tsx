@@ -22,7 +22,7 @@ const Button = styled.button<{ active: boolean }>`
   align-items: center;
   justify-content: flex-start;
   font-weight: bold;
-  background: ${themedPalette.bg_element1};
+  background: ${themedPalette.bg_element7};
   font-size: 1.125rem;
   color: ${themedPalette.text3};
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.05);
@@ -32,13 +32,17 @@ const Button = styled.button<{ active: boolean }>`
   cursor: pointer;
   border: solid 1px transparent;
   &:hover {
-    background: #fdfdfd;
+    opacity: 0.7;
   }
   ${(props) =>
     props.active &&
     css`
       border: solid 1px ${themedPalette.primary2};
       color: ${themedPalette.primary2};
+      /* opacity: 1; */
+      &:hover {
+        opacity: 1;
+      }
     `}
 
   svg {

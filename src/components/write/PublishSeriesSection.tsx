@@ -9,7 +9,7 @@ import { ellipsis } from '../../lib/styles/utils';
 
 const PublishSeriesSectionBlock = styled(PublishSection)``;
 const SeriesButton = styled.button`
-  background: ${themedPalette.bg_element1};
+  background: ${themedPalette.bg_element7};
   height: 3rem;
   width: 100%;
   border-radius: 4px;
@@ -27,7 +27,7 @@ const SeriesButton = styled.button`
     margin-right: 0.875rem;
   }
   &:hover {
-    background: #fdfdfd;
+    opacity: 0.7;
   }
 `;
 

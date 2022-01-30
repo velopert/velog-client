@@ -7,7 +7,7 @@ const SelectableListBlock = styled.ul`
   padding-left: 0;
   list-style: none;
   margin: 0;
-  background: ${themedPalette.bg_element1};
+  background: ${themedPalette.bg_element7};
   overflow-y: auto;
 `;
 
@@ -16,13 +16,13 @@ const ListItem = styled.li<{ active: boolean }>`
   font-size: 1rem;
   line-height: 1;
   color: ${themedPalette.text2};
-  border-bottom: 1px solid ${themedPalette.border4};
+  border-bottom: 1px solid ${themedPalette.border3};
 
   ${(props) =>
     props.active &&
     css`
       background: ${themedPalette.primary1};
-      color: white;
+      color: ${themedPalette.button_text};
     `};
 `;
 

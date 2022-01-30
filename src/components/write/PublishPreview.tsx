@@ -58,7 +58,7 @@ const UploadButton = styled.button`
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
   }
   &:hover {
-    background: ${themedPalette.bg_element2};
+    opacity: 0.7;
   }
 `;
 
@@ -79,6 +79,8 @@ const ShortDescriptionTextarea = styled.textarea`
   border: none;
   outline: none;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.03);
+  background: ${themedPalette.bg_element7};
+  color: ${themedPalette.text1};
   line-height: 1.5;
   font-size: 0.875rem;
   height: 7.375rem;
