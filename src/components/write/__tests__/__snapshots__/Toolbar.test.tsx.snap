@@ -3,15 +3,15 @@
 exports[`Toolbar matches snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa eOpsME"
+    class="sc-bdvvtL hmKDwG"
     id="toolbar"
   >
     <button
-      class="sc-bxivhb cshiNX ql-header"
+      class="sc-dkPtRN jTUKKG ql-header"
       value="1"
     >
       <div
-        class="sc-htpNat jrmEoq"
+        class="sc-gsDKAQ biNERh"
       >
         H
         <span>
@@ -20,11 +20,11 @@ exports[`Toolbar matches snapshot 1`] = `
       </div>
     </button>
     <button
-      class="sc-bxivhb cshiNX ql-header"
+      class="sc-dkPtRN jTUKKG ql-header"
       value="2"
     >
       <div
-        class="sc-htpNat jrmEoq"
+        class="sc-gsDKAQ biNERh"
       >
         H
         <span>
@@ -33,11 +33,11 @@ exports[`Toolbar matches snapshot 1`] = `
       </div>
     </button>
     <button
-      class="sc-bxivhb cshiNX ql-header"
+      class="sc-dkPtRN jTUKKG ql-header"
       value="3"
     >
       <div
-        class="sc-htpNat jrmEoq"
+        class="sc-gsDKAQ biNERh"
       >
         H
         <span>
@@ -46,11 +46,11 @@ exports[`Toolbar matches snapshot 1`] = `
       </div>
     </button>
     <button
-      class="sc-bxivhb cshiNX ql-header"
+      class="sc-dkPtRN jTUKKG ql-header"
       value="4"
     >
       <div
-        class="sc-htpNat jrmEoq"
+        class="sc-gsDKAQ biNERh"
       >
         H
         <span>
@@ -59,10 +59,10 @@ exports[`Toolbar matches snapshot 1`] = `
       </div>
     </button>
     <div
-      class="sc-ifAKCX eqJNNy"
+      class="sc-hKwDye blKdJt"
     />
     <button
-      class="sc-bxivhb cshiNX ql-bold"
+      class="sc-dkPtRN jTUKKG ql-bold"
     >
       <svg
         fill="currentColor"
@@ -79,7 +79,7 @@ exports[`Toolbar matches snapshot 1`] = `
       </svg>
     </button>
     <button
-      class="sc-bxivhb cshiNX ql-italic"
+      class="sc-dkPtRN jTUKKG ql-italic"
     >
       <svg
         fill="currentColor"
@@ -96,7 +96,7 @@ exports[`Toolbar matches snapshot 1`] = `
       </svg>
     </button>
     <button
-      class="sc-bxivhb cshiNX ql-strike"
+      class="sc-dkPtRN jTUKKG ql-strike"
     >
       <svg
         fill="currentColor"
@@ -113,10 +113,10 @@ exports[`Toolbar matches snapshot 1`] = `
       </svg>
     </button>
     <div
-      class="sc-ifAKCX eqJNNy"
+      class="sc-hKwDye blKdJt"
     />
     <button
-      class="sc-bxivhb cshiNX ql-blockquote"
+      class="sc-dkPtRN jTUKKG ql-blockquote"
     >
       <svg
         fill="currentColor"
@@ -133,7 +133,7 @@ exports[`Toolbar matches snapshot 1`] = `
       </svg>
     </button>
     <button
-      class="sc-bxivhb cshiNX ql-link"
+      class="sc-dkPtRN jTUKKG ql-link"
     >
       <svg
         fill="currentColor"
@@ -150,7 +150,7 @@ exports[`Toolbar matches snapshot 1`] = `
       </svg>
     </button>
     <button
-      class="sc-bxivhb cshiNX ql-image"
+      class="sc-dkPtRN jTUKKG ql-image"
     >
       <svg
         fill="currentColor"
@@ -167,7 +167,7 @@ exports[`Toolbar matches snapshot 1`] = `
       </svg>
     </button>
     <button
-      class="sc-bxivhb cshiNX ql-code-block"
+      class="sc-dkPtRN jTUKKG ql-code-block"
     >
       <svg
         fill="currentColor"

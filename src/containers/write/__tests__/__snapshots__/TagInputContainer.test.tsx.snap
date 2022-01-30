@@ -3,16 +3,16 @@
 exports[`TagInputContainer matches snapshot 1`] = `
 <div>
   <div
-    class="sc-bwzfXH kCbYda"
+    class="sc-gsDKAQ dJJKiL"
   >
     <input
-      class="sc-htpNat dEQGam"
+      class="sc-dkPtRN kObxDj"
       placeholder="태그를 입력하세요"
       tabindex="2"
       value=""
     />
     <div
-      class="sc-bdVaJa bEtHQh"
+      class="sc-bdvvtL kiHcww"
     />
   </div>
 </div>

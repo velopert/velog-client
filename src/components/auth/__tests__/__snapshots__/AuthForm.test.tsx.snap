@@ -3,7 +3,7 @@
 exports[`AuthForm renders correctly 1`] = `
 <div>
   <div
-    class="sc-ifAKCX kIBOZW"
+    class="sc-eCImPb fOWQkg"
   >
     <div
       class="upper-wrapper"
@@ -19,7 +19,7 @@ exports[`AuthForm renders correctly 1`] = `
           회원가입
         </h4>
         <form
-          class="sc-bdVaJa izhlxF"
+          class="sc-bdvvtL knJYhw"
         >
           <input
             placeholder="이메일을 입력하세요."
@@ -39,10 +39,10 @@ exports[`AuthForm renders correctly 1`] = `
           회원가입
         </h4>
         <div
-          class="sc-htpNat jVlyIb"
+          class="sc-dkPtRN dHVNVs"
         >
           <a
-            class="sc-bwzfXH dOnywA"
+            class="sc-gsDKAQ cQxaoZ"
             href="http://localhost:5000/api/v2/auth/social/redirect/github?next=/"
             style="background: rgb(39, 46, 51);"
             tabindex="4"
@@ -52,9 +52,9 @@ exports[`AuthForm renders correctly 1`] = `
             </svg>
           </a>
           <a
-            class="sc-bwzfXH fVlvjo"
+            class="sc-gsDKAQ YbYbf"
             href="http://localhost:5000/api/v2/auth/social/redirect/google?next=/"
-            style="background: ${themedPalette.bg_element1};"
+            style="background: white;"
             tabindex="5"
           >
             <svg>
@@ -62,7 +62,7 @@ exports[`AuthForm renders correctly 1`] = `
             </svg>
           </a>
           <a
-            class="sc-bwzfXH dOnywA"
+            class="sc-gsDKAQ cQxaoZ"
             href="http://localhost:5000/api/v2/auth/social/redirect/facebook?next=/"
             style="background: rgb(59, 89, 152);"
             tabindex="6"

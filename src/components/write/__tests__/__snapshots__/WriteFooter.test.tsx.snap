@@ -3,10 +3,10 @@
 exports[`WriteFooter matches snapshot 1`] = `
 <div>
   <div
-    class="sc-bwzfXH prIea"
+    class="sc-gsDKAQ hNEpqi"
   >
     <button
-      class="sc-ifAKCX ehUtwD"
+      class="sc-eCImPb eAKSBD"
     >
       <svg
         fill="currentColor"
@@ -26,16 +26,16 @@ exports[`WriteFooter matches snapshot 1`] = `
       </span>
     </button>
     <div
-      class="sc-htpNat SXVIf"
+      class="sc-dkPtRN bboflg"
     >
       <button
-        class="sc-bdVaJa eORyJT sc-bxivhb eFySeT"
+        class="sc-bdvvtL dKSLkY sc-hKwDye eMLlDd"
         color="lightGray"
       >
         임시저장
       </button>
       <button
-        class="sc-bdVaJa czPBkf sc-bxivhb eFySeT"
+        class="sc-bdvvtL ejlzoA sc-hKwDye eMLlDd"
         color="teal"
       >
         출간하기
