@@ -73,7 +73,7 @@ const ListItem = styled.li<{ active?: boolean }>`
       ${(props) =>
         props.active &&
         `
-    color: ${palette.teal5};
+    color: ${themedPalette.primary2};
   `}
       text-decoration: underline;
       span {
@@ -85,7 +85,7 @@ const ListItem = styled.li<{ active?: boolean }>`
   ${(props) =>
     props.active &&
     `
-    color: ${palette.teal5};
+    color: ${themedPalette.primary2};
     font-weight: bold;
   `}
 

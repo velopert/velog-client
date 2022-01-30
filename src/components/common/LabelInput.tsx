@@ -19,7 +19,7 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
     ${(props) =>
       props.focus &&
       css`
-        color: ${palette.teal7};
+        color: ${themedPalette.primary1};
       `}
   }
 
@@ -37,7 +37,7 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
     ${(props) =>
       props.focus &&
       css`
-        color: ${palette.teal7};
+        color: ${themedPalette.primary1};
       `}
     &::placeholder {
       color: ${themedPalette.text3};
@@ -58,7 +58,7 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
     ${(props) =>
       props.focus &&
       css`
-        border-color: ${palette.teal7};
+        border-color: ${themedPalette.primary1};
       `}
     input {
       width: 1;

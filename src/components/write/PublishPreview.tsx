@@ -48,7 +48,7 @@ const UploadButton = styled.button`
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.025);
   font-size: 1rem;
   line-height: 1.5;
-  color: ${palette.teal5};
+  color: ${themedPalette.primary2};
   outline: none;
   border: none;
   cursor: pointer;

@@ -48,7 +48,7 @@ const AuthFormBlock = styled.div`
     .link {
       display: inline-block;
       font-weight: bold;
-      color: ${palette.teal6};
+      color: ${themedPalette.primary1};
       cursor: pointer;
       &:hover {
         text-decoration: underline;

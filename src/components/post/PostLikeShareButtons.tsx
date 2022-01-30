@@ -60,13 +60,13 @@ const CircleButton = styled(animated.div)<{ active?: string }>`
   ${(props) =>
     props.active === 'true' &&
     css`
-      background: ${palette.teal5};
-      border-color: ${palette.teal5};
-      color: white;
+      background: ${themedPalette.primary2};
+      border-color: ${themedPalette.primary2};
+      color: ${themedPalette.button_text};
       &:hover {
         background: ${palette.teal4};
         border-color: ${palette.teal4};
-        color: white;
+        color: ${themedPalette.button_text};
       }
     `}
 `;

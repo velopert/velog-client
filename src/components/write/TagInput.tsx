@@ -197,7 +197,7 @@ const Tag = styled.div`
   padding-left: 1rem;
   padding-right: 1rem;
   background: ${themedPalette.bg_element2};
-  color: ${palette.teal7};
+  color: ${themedPalette.primary1};
   margin-right: 0.75rem;
   transition: ease-in 0.125s;
   cursor: pointer;

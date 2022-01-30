@@ -25,7 +25,7 @@ const AuthEmailFormBlock = styled.form`
     }
   }
   button {
-    background: ${palette.teal6};
+    background: ${themedPalette.primary1};
     color: white;
     font-size: 1rem;
     font-weight: bold;
@@ -38,7 +38,7 @@ const AuthEmailFormBlock = styled.form`
     cursor: pointer;
     &:hover,
     &:focus {
-      background: ${palette.teal5};
+      background: ${themedPalette.primary2};
     }
     &:disabled {
       background: ${themedPalette.border4};

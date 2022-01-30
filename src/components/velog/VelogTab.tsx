@@ -36,7 +36,7 @@ const TabItem = styled(PlainNavLink)`
   transition: 0.25s color ease-in-out;
   font-weight: 600;
   &.active {
-    color: ${palette.teal5};
+    color: ${themedPalette.primary2};
     /* font-weight: bold; */
   }
   ${media.small} {
@@ -49,7 +49,7 @@ const TabItem = styled(PlainNavLink)`
 const Indicator = styled.div`
   width: 8rem;
   height: 2px;
-  background: ${palette.teal5};
+  background: ${themedPalette.primary2};
   position: absolute;
   bottom: -2px;
   transition: 0.25s left ease-in-out;

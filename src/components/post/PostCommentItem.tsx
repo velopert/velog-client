@@ -115,14 +115,14 @@ const CommentFoot = styled.div`
 const TogglerBlock = styled.div`
   display: inline-flex;
   align-items: center;
-  color: ${palette.teal6};
+  color: ${themedPalette.primary1};
   font-weight: bold;
   svg {
     margin-right: 0.5rem;
   }
   cursor: pointer;
   &:hover {
-    color: ${palette.teal5};
+    color: ${themedPalette.primary2};
   }
 `;
 

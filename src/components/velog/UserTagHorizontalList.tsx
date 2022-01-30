@@ -78,7 +78,7 @@ const TagItem = styled(Link)<{ active?: boolean }>`
   ${(props) =>
     props.active &&
     css`
-      background: ${palette.teal6};
+      background: ${themedPalette.primary1};
       color: white;
       span {
         color: white;

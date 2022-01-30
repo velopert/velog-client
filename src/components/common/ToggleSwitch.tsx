@@ -66,7 +66,7 @@ const Block = styled.div<{ active: boolean }>`
   ${(props) =>
     props.active &&
     css`
-      background: ${palette.teal5};
+      background: ${themedPalette.primary2};
     `}
   .circle {
     width: 1.25rem;

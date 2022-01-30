@@ -37,8 +37,8 @@ const Button = styled.button<{ active: boolean }>`
   ${(props) =>
     props.active &&
     css`
-      border: solid 1px ${palette.teal5};
-      color: ${palette.teal5};
+      border: solid 1px ${themedPalette.primary2};
+      color: ${themedPalette.primary2};
     `}
 
   svg {

@@ -23,7 +23,7 @@ const StyledButton = styled.button`
   }
 
   svg {
-    color: ${palette.teal5};
+    color: ${themedPalette.primary2};
     font-size: 1.5rem;
     transition: 0.125s all ease-in;
     &.rotate {

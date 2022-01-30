@@ -116,13 +116,13 @@ const NavigateButton = styled.button`
   align-items: center;
   justify-content: center;
   font-size: 1.25rem;
-  color: ${palette.teal6};
+  color: ${themedPalette.primary1};
   background: ${themedPalette.bg_element1};
   border: 1px solid ${themedPalette.border4};
   padding: 0;
   cursor: pointer;
   &:hover {
-    background: ${palette.teal6};
+    background: ${themedPalette.primary1};
     color: white;
   }
 
@@ -246,7 +246,10 @@ const PostSeriesInfo: React.FC<PostSeriesInfoProps> = ({
             <li key={post.id}>
               <NavLink
                 to={`/@${username}/${post.url_slug}`}
-                activeStyle={{ color: palette.teal6, fontWeight: 'bold' }}
+                activeStyle={{
+                  color: themedPalette.primary1,
+                  fontWeight: 'bold',
+                }}
               >
                 {post.title}
               </NavLink>

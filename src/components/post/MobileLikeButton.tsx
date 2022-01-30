@@ -43,8 +43,8 @@ const Button = styled.button<{ liked: boolean }>`
   ${(props) =>
     props.liked &&
     css`
-      border-color: ${palette.teal5};
-      background: ${palette.teal5};
+      border-color: ${themedPalette.primary2};
+      background: ${themedPalette.primary2};
       svg,
       span {
         color: white;

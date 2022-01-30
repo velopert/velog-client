@@ -28,7 +28,7 @@ const tagStyle = css`
   display: inline-flex;
   align-items: center;
   margin-right: 0.875rem;
-  color: ${palette.teal7};
+  color: ${themedPalette.primary1};
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;

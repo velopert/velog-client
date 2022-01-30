@@ -39,9 +39,9 @@ const Circle = styled.div<{ right?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid ${palette.teal5};
+  border: 1px solid ${themedPalette.primary2};
   font-size: 1.5rem;
-  color: ${palette.teal5};
+  color: ${themedPalette.primary2};
   ${(props) =>
     props.right
       ? css`

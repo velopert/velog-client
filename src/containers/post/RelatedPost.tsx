@@ -98,7 +98,7 @@ const Background = styled.div`
     padding-bottom: 1rem;
   }
   margin-top: 4rem;
-  background: ${themedPalette.bg_element2};
+  background: ${themedPalette.bg_page1};
   box-shadow: 0px 0 32px rgb(0 0 0 / 8%);
 `;
 const Wrapper = styled.div`

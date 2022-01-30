@@ -36,7 +36,7 @@ const Block = styled.div`
     display: block;
     width: 25%;
     height: 25%;
-    background-color: ${palette.teal6};
+    background-color: ${themedPalette.primary1};
     border-radius: 100%;
     animation: sk-chase-dot-before 2s infinite ease-in-out both;
   }

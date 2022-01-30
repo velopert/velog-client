@@ -104,7 +104,7 @@ const ToolbarItem = styled.button`
   padding: 0;
 
   &.ql-active {
-    color: ${palette.teal6};
+    color: ${themedPalette.primary1};
   }
 `;
 

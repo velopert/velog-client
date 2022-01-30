@@ -12,7 +12,7 @@ const AuthEmailSuccessBlock = styled.div`
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   height: 3rem;
-  color: ${palette.teal7};
+  color: ${themedPalette.primary1};
   .icon {
     font-size: 1.5rem;
   }

@@ -7,10 +7,10 @@ import SkeletonTexts from '../common/SkeletonTexts';
 const SeriesPostsTemplateBlock = styled.div`
   & > label {
     display: inline-flex;
-    border-bottom: 4px solid ${palette.teal5};
+    border-bottom: 4px solid ${themedPalette.primary2};
     font-size: 1.125rem;
     font-weight: bold;
-    color: ${palette.teal5};
+    color: ${themedPalette.primary2};
     line-height: 1.5;
   }
   h1 {

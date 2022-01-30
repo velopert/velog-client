@@ -19,7 +19,7 @@ const SeriesButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${palette.teal5};
+  color: ${themedPalette.primary2};
   font-size: 1.125rem;
   font-weight: bold;
   cursor: pointer;
@@ -56,7 +56,7 @@ const EditSeries = styled.div`
   button {
     outline: none;
     color: white;
-    background: ${palette.teal6};
+    background: ${themedPalette.primary1};
     font-size: 1.25rem;
     display: flex;
     align-items: center;
@@ -65,10 +65,10 @@ const EditSeries = styled.div`
     border: none;
     cursor: pointer;
     &:hover {
-      background: ${palette.teal5};
+      background: ${themedPalette.primary2};
     }
     &:active {
-      background: ${palette.teal7};
+      background: ${themedPalette.primary1};
     }
   }
 `;

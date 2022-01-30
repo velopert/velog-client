@@ -90,7 +90,7 @@ const Block = styled(animated.div)`
     padding: 0.75rem 1rem;
 
     &.active {
-      color: ${palette.teal6};
+      color: ${themedPalette.primary1};
     }
   }
   li + li {

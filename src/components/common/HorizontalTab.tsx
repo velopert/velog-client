@@ -104,7 +104,7 @@ const Indicator = styled(animated.div)<{ theme: 'teal' | 'gray' }>`
   display: block;
   position: absolute;
   bottom: 0px;
-  background: ${palette.teal5};
+  background: ${themedPalette.primary2};
   ${(props) =>
     props.theme === 'gray' &&
     css`
@@ -129,7 +129,7 @@ const StyledLink = styled(Link)<{
 
   &.active {
     font-weight: bold;
-    color: ${palette.teal5};
+    color: ${themedPalette.primary2};
     ${(props) =>
       props.theme === 'gray' &&
       css`

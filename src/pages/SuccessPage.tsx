@@ -43,7 +43,7 @@ const Block = styled.div`
   flex-direction: column;
   justify-content: center;
   svg {
-    fill: ${palette.teal5};
+    fill: ${themedPalette.primary2};
     width: 5rem;
     height: 5rem;
   }

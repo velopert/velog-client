@@ -30,7 +30,7 @@ const TypographyBlock = styled.div`
     }
     a {
       code {
-        color: ${palette.teal6};
+        color: ${themedPalette.primary1};
       }
     }
   }
@@ -39,10 +39,10 @@ const TypographyBlock = styled.div`
     arial, 나눔고딕, 'Nanum Gothic', 돋움; */
 
   a {
-    color: ${palette.teal7};
+    color: ${themedPalette.primary1};
     text-decoration: none;
     &:hover {
-      color: ${palette.teal6};
+      color: ${themedPalette.primary1};
       text-decoration: underline;
     }
   }
@@ -129,7 +129,7 @@ const TypographyBlock = styled.div`
   blockquote {
     margin-top: 2rem;
     margin-bottom: 2rem;
-    border-left: 4px solid ${palette.teal5};
+    border-left: 4px solid ${themedPalette.primary2};
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
     background: ${themedPalette.bg_element2};
