@@ -201,6 +201,8 @@ const FacebookInputBox = styled.div<{ focus: boolean }>`
     line-height: 1;
     flex: 1;
     width: 100%;
+    background: transparent;
+    color: ${themedPalette.text1};
   }
   ${(props) =>
     props.focus &&
