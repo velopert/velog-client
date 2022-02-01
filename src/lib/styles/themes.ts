@@ -130,7 +130,7 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
     prism_bg: '#1E1E1E',
     prism_default_text: '#e0e6f1',
     prism_selection_bg: '#383e49',
-    prism_code_block_bg: '#282c34',
+    prism_code_block_bg: '#1e1e1e',
     prism_code_1: '#7c858d',
     prism_code_2: '#abb2bf',
     prism_code_3: '#e06c75',
