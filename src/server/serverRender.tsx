@@ -119,8 +119,6 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
 
   const theme = extractFromCookie(cookie, 'theme');
 
-  console.log(theme);
-
   const html = (
     <Html
       content={content}
