@@ -33,6 +33,7 @@ const StyledTextarea = styled(TextareaAutosize)`
   ${media.small} {
     margin-bottom: 1rem;
   }
+  background: ${themedPalette.bg_element1};
 `;
 
 export interface PostCommentsWriteProps {

@@ -11,7 +11,7 @@ const WriteFooterBlock = styled.div`
   height: 4rem;
   width: 100%;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
-  background: ${themedPalette.bg_element9};
+  background: ${themedPalette.editor_footer};
   display: flex;
   justify-content: space-between;
   align-items: center;

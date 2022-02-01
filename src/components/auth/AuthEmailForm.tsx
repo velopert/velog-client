@@ -17,6 +17,10 @@ const AuthEmailFormBlock = styled.form`
     border: 1px solid ${themedPalette.border3};
     color: ${themedPalette.text1};
     border-right: none;
+    outline: none;
+    &:focus {
+      border: 1px solid ${themedPalette.primary1};
+    }
     &::placeholder {
       color: ${themedPalette.text3};
     }
@@ -26,7 +30,7 @@ const AuthEmailFormBlock = styled.form`
   }
   button {
     background: ${themedPalette.primary1};
-    color: white;
+    color: ${themedPalette.button_text};
     font-size: 1rem;
     font-weight: bold;
     outline: none;

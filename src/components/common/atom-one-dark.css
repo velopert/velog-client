@@ -10,9 +10,9 @@
   font-weight: 350;
   font-size: 18px;
   color: #abb2bf;
-  background-color: #121212;
+  background-color: #121212!important;
 }
-.cm-s-one-dark .CodeMirror-selected {background-color: #3e4451;}
+.cm-s-one-dark .CodeMirror-selected {background-color: rgba(255,255,255,0.15)!important;}
 .cm-s-one-dark .CodeMirror-gutter,
 .cm-s-one-dark .CodeMirror-gutters {
   border: none;

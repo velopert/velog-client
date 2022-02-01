@@ -5,7 +5,7 @@ import './atom-one-light.css';
 import './atom-one-dark.css';
 import 'codemirror/lib/codemirror.css';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
+
 import 'codemirror/mode/markdown/markdown';
 import 'codemirror/addon/display/placeholder';
 
@@ -74,7 +74,7 @@ const MarkdownEditor = ({
     if (!textArea.current) return;
     const cm = CodeMirror.fromTextArea(textArea.current, {
       mode: 'markdown',
-      theme: 'one-light',
+      theme: 'one-dark',
       placeholder: '당신은 어떤 사람인가요? 당신에 대해서 알려주세요.',
       lineWrapping: true,
     });

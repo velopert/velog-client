@@ -27,6 +27,7 @@ type ThemeVariables = {
 
   slight_layer: string;
   opaque_layer: string;
+  editor_footer: string;
 };
 
 type Theme = 'light' | 'dark';
@@ -63,6 +64,7 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
 
     slight_layer: 'rgba(0,0,0,0.05)',
     opaque_layer: 'rgba(249,249,249,0.85)',
+    editor_footer: '#FFFFFF',
   },
   dark: {
     bg_page1: '#121212',
@@ -93,6 +95,7 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
 
     slight_layer: 'rgba(255,255,255,0.1)',
     opaque_layer: 'rgba(0, 0, 0, 0.85)',
+    editor_footer: '#2E2E2E',
   },
 };
 

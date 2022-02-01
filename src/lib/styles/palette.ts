@@ -60,7 +60,7 @@ export const buttonColorMap: {
   },
   darkGray: {
     background: themedPalette.bg_element5,
-    color: 'white',
+    color: themedPalette.button_text,
     hoverBackground: themedPalette.bg_element6,
   },
   transparent: {

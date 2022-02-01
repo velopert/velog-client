@@ -24,6 +24,7 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
   }
 
   input {
+    background: transparent;
     font-size: 1.5rem;
     border: none;
     outline: none;

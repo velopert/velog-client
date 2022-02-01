@@ -186,6 +186,7 @@ const StyledInput = styled.input`
   margin-bottom: 0.75rem;
   min-width: 8rem;
   border: none;
+  color: ${themedPalette.text1};
 `;
 
 const Tag = styled.div`
