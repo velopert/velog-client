@@ -13,7 +13,7 @@ export type TimeframePickerProps = {
 };
 
 function TimeframePicker({ visible, onClose }: TimeframePickerProps) {
-  const transition = useTransition(visible, null, {
+  const transition = useTransition(visible, {
     from: {
       opacity: 0,
       transform: 'scale(0.8)',
@@ -36,11 +36,11 @@ function TimeframePicker({ visible, onClose }: TimeframePickerProps) {
 
   return (
     <>
-      {transition.map(({ item, key, props }) =>
+      {transition((styles, item) =>
         item ? (
-          <Aligner key={key}>
-            <OutsideClickHandler onOutsideClick={onClose} key={key}>
-              <Block style={props} onClick={onClose}>
+          <Aligner>
+            <OutsideClickHandler onOutsideClick={onClose}>
+              <Block style={styles} onClick={onClose}>
                 <ul>
                   {timeframes.map(([value, text]) => (
                     <li

@@ -8,7 +8,7 @@ type UseRequestReturnType<R> = [
   boolean,
   R | null,
   Error | null,
-  () => void
+  () => void,
 ];
 
 export default function useRequest<R = any>(
@@ -25,7 +25,7 @@ export default function useRequest<R = any>(
         const response = await promiseCreator(...params);
         setData(response.data);
       } catch (e) {
-        setError(e);
+        setError(e as any);
         throw e;
       }
       setLoading(false);

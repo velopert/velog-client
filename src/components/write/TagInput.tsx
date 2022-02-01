@@ -117,7 +117,7 @@ const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
 };
 
 function Help({ focus }: { focus: boolean }) {
-  const transitions = useTransition(focus, null, {
+  const transitions = useTransition(focus, {
     from: { opacity: 0, transform: 'translateY(-1rem)' },
     enter: { opacity: 1, transform: 'translateY(0rem)' },
     leave: { opacity: 0, transform: 'translateY(-1rem)' },
@@ -129,9 +129,9 @@ function Help({ focus }: { focus: boolean }) {
 
   return (
     <HelpBlock>
-      {transitions.map(({ item, key, props }) =>
+      {transitions((styles, item) =>
         item ? (
-          <animated.div className="inside" style={props} key={key}>
+          <animated.div className="inside" style={styles}>
             쉼표 혹은 엔터를 입력하여 태그를 등록 할 수 있습니다.
             <br />
             등록된 태그를 클릭하면 삭제됩니다.

@@ -12,7 +12,7 @@ export type MainMobileHeadExtraProps = {
 };
 
 function MainMobileHeadExtra({ visible, onClose }: MainMobileHeadExtraProps) {
-  const transition = useTransition(visible, null, {
+  const transition = useTransition(visible, {
     from: {
       opacity: 0,
       transform: 'scale(0.8)',
@@ -33,11 +33,11 @@ function MainMobileHeadExtra({ visible, onClose }: MainMobileHeadExtraProps) {
 
   return (
     <>
-      {transition.map(({ item, key, props }) =>
+      {transition((styles, item) =>
         item ? (
-          <Aligner key={key}>
-            <OutsideClickHandler onOutsideClick={onClose} key={key}>
-              <Block style={props}>
+          <Aligner>
+            <OutsideClickHandler onOutsideClick={onClose}>
+              <Block style={styles}>
                 <ul>
                   <li>
                     <Link to="/@velog">공지사항</Link>

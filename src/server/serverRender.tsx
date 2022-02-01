@@ -101,8 +101,8 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
       );
       if (notFound) store.dispatch(error.actions.showNotFound());
     }
-    console.log(e.name);
-    console.log(e.message);
+    console.log((e as any).name);
+    console.log((e as any).message);
     console.log(JSON.stringify(e));
   }
 

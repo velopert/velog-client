@@ -29,7 +29,7 @@ const waitUntil = (
 
     const check = () => {
       if (conditionCallback()) {
-        return resolve();
+        return resolve(null);
       }
       timeoutId = setTimeout(check, interval);
     };

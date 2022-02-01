@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import media from '../../lib/styles/media';
 import HeaderLogo from './HeaderLogo';
 import { themedPalette } from '../../lib/styles/themes';
+import ThemeToggleButton from './ThemeToggleButton';
 
 export type MainHeaderProps = {};
 
@@ -43,6 +44,7 @@ function Header(props: MainHeaderProps) {
 
         {user ? (
           <Right>
+            <ThemeToggleButton />
             <SearchButton to={urlForSearch}>
               <SearchIcon2 />
             </SearchButton>
