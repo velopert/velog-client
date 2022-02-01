@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import { LinkedPost } from '../../lib/graphql/post';
 import { ellipsis } from '../../lib/styles/utils';

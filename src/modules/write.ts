@@ -35,26 +35,23 @@ export const setTextBody = createStandardAction(SET_TEXT_BODY)<string>();
 export const setDefaultDescription = createStandardAction(
   SET_DEFAULT_DESCRIPTION,
 )<string>();
-export const changeDescription = createStandardAction(CHANGE_DESCRIPTION)<
-  string
->();
+export const changeDescription =
+  createStandardAction(CHANGE_DESCRIPTION)<string>();
 export const setPrivacy = createStandardAction(SET_PRIVACY)<boolean>();
 export const changeUrlSlug = createStandardAction(CHANGE_URL_SLUG)<string>();
 export const setThumbnail = createStandardAction(SET_THUMBNAIL)<
   string | null
 >();
-export const toggleEditSeries = createStandardAction(TOGGLE_EDIT_SERIES)<
-  undefined
->();
+export const toggleEditSeries =
+  createStandardAction(TOGGLE_EDIT_SERIES)<undefined>();
 export const selectSeries = createStandardAction(SELECT_SERIES)<{
   id: string;
   name: string;
 } | null>();
 export const clearEditor = createStandardAction(CLEAR_EDITOR)<undefined>();
 export const setWritePostId = createStandardAction(SET_WRITE_POST_ID)<string>();
-export const setInitialTitle = createStandardAction(SET_INITIAL_TITLE)<
-  string
->();
+export const setInitialTitle =
+  createStandardAction(SET_INITIAL_TITLE)<string>();
 export const setInitialBody = createStandardAction(SET_INITIAL_BODY)<string>();
 
 export type PrepareEditPayload = {
@@ -74,16 +71,15 @@ export type PrepareEditPayload = {
   thumbnail: string | null;
 };
 
-export const prepareEdit = createStandardAction(PREPARE_EDIT)<
-  PrepareEditPayload
->();
+export const prepareEdit =
+  createStandardAction(PREPARE_EDIT)<PrepareEditPayload>();
 
 type ChangeMarkdown = ReturnType<typeof changeMarkdown>;
 type ChangeTitle = ReturnType<typeof changeTitle>;
 type SetHtml = ReturnType<typeof setHtml>;
 type ChangeTags = ReturnType<typeof changeTags>;
-type OpenPublish = ReturnType<typeof openPublish>;
-type ClosePublish = ReturnType<typeof closePublish>;
+// type OpenPublish = ReturnType<typeof openPublish>;
+// type ClosePublish = ReturnType<typeof closePublish>;
 type SetTextBody = ReturnType<typeof setTextBody>;
 type SetDefaultDescription = ReturnType<typeof setDefaultDescription>;
 type ChangeDescription = ReturnType<typeof changeDescription>;
@@ -91,7 +87,7 @@ type SetPrivacy = ReturnType<typeof setPrivacy>;
 type ChangeUrlSlug = ReturnType<typeof changeUrlSlug>;
 type SetThumbnail = ReturnType<typeof setThumbnail>;
 type SelectSeries = ReturnType<typeof selectSeries>;
-type ClearEditor = ReturnType<typeof clearEditor>;
+// type ClearEditor = ReturnType<typeof clearEditor>;
 type PrepareEdit = ReturnType<typeof prepareEdit>;
 type SetWritePostId = ReturnType<typeof setWritePostId>;
 type SetInitialBody = ReturnType<typeof setInitialBody>;
@@ -153,7 +149,7 @@ const write = createReducer(
       updateKey(state, 'markdown', action.payload),
     [CHANGE_TITLE]: (state, action: ChangeTitle) =>
       updateKey(state, 'title', action.payload),
-    [CONVERT_EDITOR_MODE]: state =>
+    [CONVERT_EDITOR_MODE]: (state) =>
       updateKey(
         state,
         'mode',
@@ -165,8 +161,8 @@ const write = createReducer(
       updateKey(state, 'html', action.payload),
     [CHANGE_TAGS]: (state, action: ChangeTags) =>
       updateKey(state, 'tags', action.payload),
-    [OPEN_PUBLISH]: state => updateKey(state, 'publish', true),
-    [CLOSE_PUBLISH]: state => updateKey(state, 'publish', false),
+    [OPEN_PUBLISH]: (state) => updateKey(state, 'publish', true),
+    [CLOSE_PUBLISH]: (state) => updateKey(state, 'publish', false),
     [SET_TEXT_BODY]: (state, { payload: textBody }: SetTextBody) =>
       updateKey(state, 'textBody', textBody),
     [SET_DEFAULT_DESCRIPTION]: (
@@ -183,7 +179,7 @@ const write = createReducer(
       updateKey(state, 'urlSlug', urlSlug),
     [SET_THUMBNAIL]: (state, { payload: thumbnail }: SetThumbnail) =>
       updateKey(state, 'thumbnail', thumbnail),
-    [TOGGLE_EDIT_SERIES]: state =>
+    [TOGGLE_EDIT_SERIES]: (state) =>
       updateKey(state, 'editSeries', !state.editSeries),
     [SELECT_SERIES]: (state, action: SelectSeries) =>
       updateKey(state, 'selectedSeries', action.payload),

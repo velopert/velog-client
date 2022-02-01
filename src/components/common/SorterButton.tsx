@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { MdKeyboardArrowUp } from 'react-icons/md';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 
 const StyledButton = styled.button`
   display: inline-flex;

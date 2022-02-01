@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import { userThumbnail } from '../../static/images';
 import Tag from './TagItem';
 import { PartialPost } from '../../lib/graphql/post';

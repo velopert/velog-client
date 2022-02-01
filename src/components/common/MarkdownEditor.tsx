@@ -92,7 +92,7 @@ const MarkdownEditor = ({
     return () => {
       cm.toTextArea();
     };
-  }, [initialMarkdown, onChange]);
+  }, [initialMarkdown, onChange, theme]);
 
   return (
     <MarkdownEditorBlock style={style} className={className}>

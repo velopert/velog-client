@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components';
 import Button from './Button';
 import useRequireLogin from '../../lib/hooks/useRequireLogin';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import media from '../../lib/styles/media';
 
 export type RequireLoginProps = {

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import VelogResponsive from './VelogResponsive';
 import MarkdownRender from '../common/MarkdownRender';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import { undrawEmpty } from '../../static/images';
 import Button from '../common/Button';
 import SkeletonTexts from '../common/SkeletonTexts';

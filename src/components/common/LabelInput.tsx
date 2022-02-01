@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import { MdLockOutline } from 'react-icons/md';
 import media from '../../lib/styles/media';
 const LabelInputBlock = styled.div<{ focus: boolean }>`
