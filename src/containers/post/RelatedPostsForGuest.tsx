@@ -67,9 +67,11 @@ function RelatedPostsForGuest({
     const randomIndex = Math.floor(Math.random() * indexes.length);
     const [firstIndex, secondIndex] = indexes[randomIndex];
     sliced[firstIndex] = undefined;
-    sliced[secondIndex] = undefined;
+    if (!isMobile) {
+      sliced[secondIndex] = undefined;
+    }
     return sliced;
-  }, [data, showAds]);
+  }, [data, showAds, isMobile]);
 
   if (!postsWithAds) return null;
 

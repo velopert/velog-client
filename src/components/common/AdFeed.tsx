@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { mediaQuery } from '../../lib/styles/media';
 import gtag from '../../lib/gtag';
 import { themedPalette } from '../../lib/styles/themes';
+import { useTheme } from '../../lib/hooks/useTheme';
 
 function AdFeed({ forPost, index }: { forPost?: boolean; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -45,6 +46,31 @@ function AdFeed({ forPost, index }: { forPost?: boolean; index: number }) {
       observer.disconnect();
     };
   }, [forPost]);
+
+  const theme = useTheme();
+
+  if (theme === 'dark') {
+    return (
+      <Block
+        ref={ref}
+        forPost={forPost}
+        onClick={() => {
+          if (forPost) {
+            gtag('event', 'ads_click', { event_label: index });
+          }
+        }}
+      >
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-format="fluid"
+          data-ad-layout-key="-6u+e5+1a-3q+77"
+          data-ad-client="ca-pub-5574866530496701"
+          data-ad-slot="2841722540"
+        ></ins>
+      </Block>
+    );
+  }
 
   return (
     <Block
