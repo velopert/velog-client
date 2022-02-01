@@ -93,9 +93,14 @@ const Block = styled(animated.div)`
     font-weight: 600;
 
     font-size: 0.875rem;
-    padding: 0.75rem 1rem;
-
+    padding: 0;
+    &:hover {
+      color: ${themedPalette.primary1};
+    }
     a {
+      display: block;
+      padding: 0.75rem 1rem;
+
       color: inherit;
       text-decoration: none;
     }
@@ -104,7 +109,7 @@ const Block = styled(animated.div)`
     border-top: 1px solid ${themedPalette.border4};
   }
   .contact {
-    border-top: 1px solid #f1f3f5;
+    border-top: 1px solid ${themedPalette.border3};
     padding: 1rem;
     h5 {
       margin: 0;

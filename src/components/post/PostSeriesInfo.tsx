@@ -33,6 +33,9 @@ const PostSeriesInfoBlock = styled.div`
   border-radius: 8px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.06);
   position: relative;
+  svg {
+    color: ${themedPalette.primary1};
+  }
   h2 {
     a {
       text-decoration: none;
