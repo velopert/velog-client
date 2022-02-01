@@ -4,7 +4,7 @@ import { themedPalette } from '../../lib/styles/themes';
 
 const BackgroundStyle = createGlobalStyle`
   body {
-    background: ${themedPalette.bg_page1};
+    background: ${themedPalette.bg_page1}!important;
   }
 `;
 

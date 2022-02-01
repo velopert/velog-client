@@ -77,6 +77,7 @@ function Header(props: MainHeaderProps) {
           </Right>
         ) : (
           <Right>
+            {themeReady && <ThemeToggleButton />}
             <SearchButton to={urlForSearch}>
               <SearchIcon2 />
             </SearchButton>
