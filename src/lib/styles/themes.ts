@@ -11,6 +11,7 @@ type ThemeVariables = {
   bg_element8: string;
   bg_invert: string;
   bg_inline_code: string;
+  bg_tag: string;
   text1: string;
   text2: string;
   text3: string;
@@ -63,6 +64,8 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
     bg_element8: '#FBFDFC',
     bg_invert: '#1E1E1E',
     bg_inline_code: '#E9ECEF',
+    bg_tag: '#F8F9FA',
+
     text1: '#212529',
     text2: '#495057',
     text3: '#868E96',
@@ -109,6 +112,7 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
     bg_element8: '#0c0c0c',
     bg_invert: '#FFFFFF',
     bg_inline_code: '#363636',
+    bg_tag: '#252525',
     text1: '#ECECEC',
     text2: '#D9D9D9',
     text3: '#ACACAC',

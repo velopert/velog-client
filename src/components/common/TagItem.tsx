@@ -19,7 +19,7 @@ const TagItem: React.FC<TagItemProps> = ({ name, link }) => {
 
 const tagStyle = css`
   margin-bottom: 0.875rem;
-  background: ${themedPalette.bg_element3};
+  background: ${themedPalette.bg_tag};
   padding-left: 1rem;
   padding-right: 1rem;
   height: 2rem;
@@ -49,7 +49,7 @@ const TagDiv = styled.div`
 const TagLink = styled(Link)`
   ${tagStyle}
   &:hover {
-    background: ${themedPalette.bg_element4};
+    opacity: 0.75;
   }
 `;
 
