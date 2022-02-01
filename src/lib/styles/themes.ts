@@ -106,7 +106,7 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
     bg_element5: '#F1F3F5',
     bg_element6: '#F8F9FA',
     bg_element7: '#252525',
-    bg_element8: '#1E1E1E',
+    bg_element8: '#0c0c0c',
     bg_invert: '#FFFFFF',
     bg_inline_code: '##2c4840',
     text1: '#ECECEC',
