@@ -127,11 +127,11 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
     opaque_layer: 'rgba(0, 0, 0, 0.85)',
     editor_footer: '#2E2E2E',
 
-    prism_bg: '#313440',
+    prism_bg: '#1E1E1E',
     prism_default_text: '#e0e6f1',
     prism_selection_bg: '#383e49',
     prism_code_block_bg: '#282c34',
-    prism_code_1: '#5c6370',
+    prism_code_1: '#7c858d',
     prism_code_2: '#abb2bf',
     prism_code_3: '#e06c75',
     prism_code_4: '#d19a66',
