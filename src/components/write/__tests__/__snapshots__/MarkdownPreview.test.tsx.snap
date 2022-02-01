@@ -3,21 +3,18 @@
 exports[`MarkdownPreview matches snapshot 1`] = `
 <div>
   <div
-    class="sc-htpNat ixBInR"
+    class="sc-dkPtRN eZhwqe"
     id="preview"
   >
     <h1
-      class="sc-bxivhb cFXJHm"
+      class="sc-hKwDye iDAhZs"
     />
     <div
-      class="sc-bdVaJa epxEIa"
+      class="sc-bdvvtL gDGNcL"
     >
       <div
-        class="sc-bwzfXH kcygLR atom-one-light"
-      >
-        
-
-      </div>
+        class="sc-gsDKAQ chISOf atom-one"
+      />
     </div>
   </div>
 </div>

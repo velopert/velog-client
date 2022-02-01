@@ -24,18 +24,18 @@ describe('EditorPanes', () => {
   //   const { container } = setup();
   //   expect(container).toMatchSnapshot();
   // });
-  describe('shows different themes', () => {
-    it('DARK theme', () => {
-      const utils = setup({ theme: 'DARK' });
-      expect(utils.left.style.backgroundColor).toBe('rgb(38, 50, 56)');
-      expect(utils.right.style.backgroundColor).toBe('white');
-    });
-    it('LIGHT theme', () => {
-      const utils = setup({ theme: 'LIGHT' });
-      expect(utils.left.style.backgroundColor).toBe('white');
-      expect(utils.right.style.backgroundColor).toBe('rgb(251, 253, 252)');
-    });
-  });
+  // describe('shows different themes', () => {
+  //   it('DARK theme', () => {
+  //     const utils = setup({ theme: 'DARK' });
+  //     expect(utils.left.style.backgroundColor).toBe('rgb(38, 50, 56)');
+  //     expect(utils.right.style.backgroundColor).toBe('white');
+  //   });
+  //   it('LIGHT theme', () => {
+  //     const utils = setup({ theme: 'LIGHT' });
+  //     expect(utils.left.style.backgroundColor).toBe('white');
+  //     expect(utils.right.style.backgroundColor).toBe('rgb(251, 253, 252)');
+  //   });
+  // });
   it('shows left and right node', () => {
     const utils = setup({ left: 'hello', right: 'world' });
     utils.getByText('hello');

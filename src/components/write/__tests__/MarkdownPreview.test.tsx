@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
 import MarkdownPreview, { MarkdownPreviewProps } from '../MarkdownPreview';
+import { HelmetProvider } from 'react-helmet-async';
 
 describe('MarkdownPreview', () => {
   const setup = (props: Partial<MarkdownPreviewProps> = {}) => {
@@ -8,7 +9,11 @@ describe('MarkdownPreview', () => {
       markdown: '',
       title: '',
     };
-    const utils = render(<MarkdownPreview {...initialProps} {...props} />);
+    const utils = render(
+      <HelmetProvider>
+        <MarkdownPreview {...initialProps} {...props} />
+      </HelmetProvider>,
+    );
     return {
       ...utils,
     };

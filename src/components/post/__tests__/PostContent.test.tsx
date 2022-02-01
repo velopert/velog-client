@@ -2,6 +2,7 @@ import * as React from 'react';
 import { render } from '@testing-library/react';
 import PostContent, { PostContentProps } from '../PostContent';
 import PostViewerProvider from '../PostViewerProvider';
+import { HelmetProvider } from 'react-helmet-async';
 
 describe('PostContent', () => {
   const setup = (props: Partial<PostContentProps> = {}) => {
@@ -10,9 +11,11 @@ describe('PostContent', () => {
       body: '# Hello World!\n안녕하세요.',
     };
     const utils = render(
-      <PostViewerProvider>
-        <PostContent {...initialProps} {...props} />
-      </PostViewerProvider>,
+      <HelmetProvider>
+        <PostViewerProvider prefetchLinkedPosts={() => {}}>
+          <PostContent {...initialProps} {...props} />
+        </PostViewerProvider>
+      </HelmetProvider>,
     );
     return {
       ...utils,

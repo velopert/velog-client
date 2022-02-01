@@ -3,10 +3,10 @@
 exports[`WriteFooter matches snapshot 1`] = `
 <div>
   <div
-    class="sc-gsDKAQ hNEpqi"
+    class="sc-gsDKAQ dycUtW"
   >
     <button
-      class="sc-eCImPb eAKSBD"
+      class="sc-eCImPb kTcXzW"
     >
       <svg
         fill="currentColor"
@@ -29,8 +29,8 @@ exports[`WriteFooter matches snapshot 1`] = `
       class="sc-dkPtRN bboflg"
     >
       <button
-        class="sc-bdvvtL dKSLkY sc-hKwDye eMLlDd"
-        color="lightGray"
+        class="sc-bdvvtL kLXTex sc-hKwDye eMLlDd"
+        color="transparent"
       >
         임시저장
       </button>
