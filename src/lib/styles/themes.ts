@@ -28,6 +28,21 @@ type ThemeVariables = {
   slight_layer: string;
   opaque_layer: string;
   editor_footer: string;
+
+  prism_bg: string;
+  prism_default_text: string;
+  prism_selection_bg: string;
+  prism_code_block_bg: string;
+  prism_code_1: string;
+  prism_code_2: string;
+  prism_code_3: string;
+  prism_code_4: string;
+  prism_code_5: string;
+  prism_code_6: string;
+  prism_code_7: string;
+  prism_code_8: string;
+  prism_code_9: string;
+  prism_line_number: string;
 };
 
 type Theme = 'light' | 'dark';
@@ -65,6 +80,21 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
     slight_layer: 'rgba(0,0,0,0.05)',
     opaque_layer: 'rgba(249,249,249,0.85)',
     editor_footer: '#FFFFFF',
+
+    prism_bg: '#fbfcfd',
+    prism_default_text: '#24292e',
+    prism_selection_bg: 'rgba(0,0,0,0.15)',
+    prism_code_block_bg: '#fbfcfd',
+    prism_code_1: '#969896',
+    prism_code_2: '#24292e',
+    prism_code_3: '#a626a4',
+    prism_code_4: '#63a35c',
+    prism_code_5: '#0184bc',
+    prism_code_6: '#50a14f',
+    prism_code_7: '#a626a4',
+    prism_code_8: '#005cc5',
+    prism_code_9: '#a626a4',
+    prism_line_number: '#585c63',
   },
   dark: {
     bg_page1: '#121212',
@@ -96,10 +126,25 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
     slight_layer: 'rgba(255,255,255,0.1)',
     opaque_layer: 'rgba(0, 0, 0, 0.85)',
     editor_footer: '#2E2E2E',
+
+    prism_bg: '#313440',
+    prism_default_text: '#e0e6f1',
+    prism_selection_bg: '#383e49',
+    prism_code_block_bg: '#282c34',
+    prism_code_1: '#5c6370',
+    prism_code_2: '#abb2bf',
+    prism_code_3: '#e06c75',
+    prism_code_4: '#d19a66',
+    prism_code_5: '#98c379',
+    prism_code_6: '#56b6c2',
+    prism_code_7: '#c678dd',
+    prism_code_8: '#61afef',
+    prism_code_9: '#c678dd',
+    prism_line_number: '#5c6370',
   },
 };
 
-const buildCssVariables = (variables: ThemeVariables) => {
+const buildCssVariables = <T>(variables: ThemeVariables) => {
   const keys = Object.keys(variables) as (keyof ThemeVariables)[];
   return keys.reduce(
     (acc, key) =>

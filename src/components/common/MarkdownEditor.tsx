@@ -8,6 +8,7 @@ import { themedPalette } from '../../lib/styles/themes';
 
 import 'codemirror/mode/markdown/markdown';
 import 'codemirror/addon/display/placeholder';
+import { useTheme } from '../../lib/hooks/useTheme';
 
 const MarkdownEditorBlock = styled.div`
   .CodeMirror {
@@ -69,12 +70,14 @@ const MarkdownEditor = ({
     [onChangeMarkdown],
   );
 
+  const theme = useTheme();
+
   // initialize editor
   useEffect(() => {
     if (!textArea.current) return;
     const cm = CodeMirror.fromTextArea(textArea.current, {
       mode: 'markdown',
-      theme: 'one-dark',
+      theme: `one-${theme}`,
       placeholder: '당신은 어떤 사람인가요? 당신에 대해서 알려주세요.',
       lineWrapping: true,
     });

@@ -33,6 +33,7 @@ export interface MarkdownEditorProps {
   onUpload: () => void;
   lastUploadedImage: string | null;
   initialBody: string;
+  theme: 'light' | 'dark';
 }
 
 type MarkdownEditorState = {
@@ -124,7 +125,7 @@ export default class WriteMarkdownEditor extends React.Component<
     if (!this.editorElement.current) return;
     this.codemirror = CodeMirror.fromTextArea(this.editorElement.current, {
       mode: 'markdown',
-      theme: 'one-dark',
+      theme: `one-${this.props.theme}`,
       placeholder: '당신의 이야기를 적어보세요...',
       // viewportMargin: Infinity,
       lineWrapping: true,

@@ -1,9 +1,11 @@
 import { css } from 'styled-components';
 
+import { themedPalette } from './themes';
+
 const prismThemes = {
-  'atom-one-dark': css`
+  'atom-one': css`
     pre {
-      background: #313440;
+      background: ${themedPalette.prism_bg};
     }
     /**
  * prism.js default theme for JavaScript, CSS and HTML
@@ -12,7 +14,7 @@ const prismThemes = {
  */
     code[class*='language-'],
     pre[class*='language-'] {
-      color: #e0e6f1;
+      color: ${themedPalette.prism_default_text};
       background: none;
       text-align: left;
       white-space: pre;
@@ -34,7 +36,7 @@ const prismThemes = {
     code[class*='language-']::-moz-selection,
     code[class*='language-'] ::-moz-selection {
       text-shadow: none;
-      background: #383e49;
+      background: ${themedPalette.prism_selection_bg};
     }
 
     pre[class*='language-']::selection,
@@ -42,7 +44,7 @@ const prismThemes = {
     code[class*='language-']::selection,
     code[class*='language-'] ::selection {
       text-shadow: none;
-      background: #9aa2b1;
+      background: ${themedPalette.prism_selection_bg};
     }
 
     @media print {
@@ -60,7 +62,7 @@ const prismThemes = {
 
     :not(pre) > code[class*='language-'],
     pre[class*='language-'] {
-      background: #282c34;
+      background: ${themedPalette.prism_code_block_bg};
     }
 
     /* Inline code */
@@ -74,16 +76,16 @@ const prismThemes = {
     .token.prolog,
     .token.doctype,
     .token.cdata {
-      color: #5c6370;
+      color: ${themedPalette.prism_code_1};
     }
 
     .token.punctuation {
-      color: #abb2bf;
+      color: ${themedPalette.prism_code_2};
     }
 
     .token.selector,
     .token.tag {
-      color: #e06c75;
+      color: ${themedPalette.prism_code_3};
     }
 
     .token.property,
@@ -93,7 +95,7 @@ const prismThemes = {
     .token.symbol,
     .token.attr-name,
     .token.deleted {
-      color: #d19a66;
+      color: ${themedPalette.prism_code_4};
     }
 
     .token.string,
@@ -101,7 +103,7 @@ const prismThemes = {
     .token.attr-value,
     .token.builtin,
     .token.inserted {
-      color: #98c379;
+      color: ${themedPalette.prism_code_6};
     }
 
     .token.operator,
@@ -109,22 +111,22 @@ const prismThemes = {
     .token.url,
     .language-css .token.string,
     .style .token.string {
-      color: #56b6c2;
+      color: ${themedPalette.prism_code_5};
     }
 
     .token.atrule,
     .token.keyword {
-      color: #c678dd;
+      color: ${themedPalette.prism_code_7};
     }
 
     .token.function {
-      color: #61afef;
+      color: ${themedPalette.prism_code_8};
     }
 
     .token.regex,
     .token.important,
     .token.variable {
-      color: #c678dd;
+      color: ${themedPalette.prism_code_9};
     }
 
     .token.important,
@@ -174,7 +176,7 @@ const prismThemes = {
 
     .line-numbers-rows > span:before {
       content: counter(linenumber);
-      color: #5c6370;
+      color: ${themedPalette.prism_line_number};
       display: block;
       padding-right: 0.8em;
       text-align: right;
