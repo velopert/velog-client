@@ -70,7 +70,7 @@ function RelatedPostAd({ isMobile }: Props) {
           className="adsbygoogle"
           style={{ display: 'block' }}
           data-ad-format="fluid"
-          data-ad-layout-key="-79+ew-1a-28+94"
+          data-ad-layout-key="-6k+em+10-4g+61"
           data-ad-client="ca-pub-5574866530496701"
           data-ad-slot="2892342366"
         ></ins>

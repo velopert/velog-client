@@ -117,7 +117,7 @@ const SearchButton = styled(Link)`
     width: 1.125rem;
     height: 1.125rem;
   }
-  margin-right: 0.25rem;
+  margin-right: 0.5rem;
 `;
 
 const Inner = styled(MainResponsive)`
