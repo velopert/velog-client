@@ -43,7 +43,6 @@ body {
 
 body[data-theme='light'] {
   ${themes.light};
-
 }
 
 body[data-theme='dark'] {

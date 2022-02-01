@@ -28,6 +28,15 @@ type SSROption = {
   cookie: string;
 };
 
+function extractFromCookie(cookie: string | undefined, key: string) {
+  if (!cookie) return null;
+  const cookieArray = cookie.split(';');
+  const keyValue = cookieArray.find((item) => item.trim().startsWith(key));
+  if (!keyValue) return null;
+  const value = keyValue.split('=')[1];
+  return value;
+}
+
 const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
   // enable proxy to backend server in development mode
   if (/^\/(api|graphql)/.test(url)) {
@@ -73,8 +82,6 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
 
   const helmetContext = {} as FilledContext;
 
-  console.log('URL: ', url);
-
   const Root = (
     <ChunkExtractorManager extractor={extractor}>
       <HelmetProvider context={helmetContext}>
@@ -110,6 +117,10 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
   const initialState = client.extract();
   const styledElement = sheet.getStyleElement();
 
+  const theme = extractFromCookie(cookie, 'theme');
+
+  console.log(theme);
+
   const html = (
     <Html
       content={content}
@@ -118,6 +129,7 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
       styledElement={styledElement}
       extractor={extractor}
       helmet={helmetContext.helmet}
+      theme={theme}
     />
   );
 

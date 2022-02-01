@@ -14,6 +14,8 @@ import { themedPalette } from '../../lib/styles/themes';
 import ThemeToggleButton from './ThemeToggleButton';
 import { useToggleTheme } from './hooks/useToggleTheme';
 import useDidMount from '../../lib/hooks/useDidMount';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../modules';
 
 export type MainHeaderProps = {};
 
@@ -21,7 +23,9 @@ function Header(props: MainHeaderProps) {
   const { user, onLoginClick, onLogout, customHeader } = useHeader();
   const [userMenu, toggleUserMenu] = useToggle(false);
   const ref = useRef<HTMLDivElement>(null);
-  const didMount = useDidMount();
+  const themeReady = useSelector(
+    (state: RootState) => state.darkMode.systemTheme !== 'not-ready',
+  );
 
   const onOutsideClick = useCallback(
     (e: React.MouseEvent) => {
@@ -47,7 +51,7 @@ function Header(props: MainHeaderProps) {
 
         {user ? (
           <Right>
-            {didMount && <ThemeToggleButton />}
+            {themeReady && <ThemeToggleButton />}
             <SearchButton to={urlForSearch}>
               <SearchIcon2 />
             </SearchButton>

@@ -13,7 +13,9 @@ export function useToggleTheme() {
   })();
 
   const saveToStorage = (value: 'light' | 'dark') => {
-    storage.setItem('theme', value);
+    storage.setItem('theme', value); // For CSR
+    // save to cookie
+    document.cookie = `theme=${value}; path=/;`; // For SSR
   };
 
   const toggle = () => {
