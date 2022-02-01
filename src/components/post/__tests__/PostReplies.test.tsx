@@ -4,6 +4,7 @@ import PostReplies, { PostRepliesProps } from '../PostReplies';
 import renderWithRedux from '../../../lib/renderWithRedux';
 import { Comment } from '../../../lib/graphql/post';
 import { MemoryRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 
 const sampleComments: Comment[] = [
   {
@@ -50,9 +51,11 @@ describe('PostReplies', () => {
       onRemove: () => {},
     };
     const utils = renderWithRedux(
-      <MemoryRouter>
-        <PostReplies {...initialProps} {...props} />
-      </MemoryRouter>,
+      <HelmetProvider>
+        <MemoryRouter>
+          <PostReplies {...initialProps} {...props} />
+        </MemoryRouter>
+      </HelmetProvider>w,
     );
     return {
       ...utils,
