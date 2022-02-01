@@ -12,6 +12,8 @@ import media from '../../lib/styles/media';
 import HeaderLogo from './HeaderLogo';
 import { themedPalette } from '../../lib/styles/themes';
 import ThemeToggleButton from './ThemeToggleButton';
+import { useToggleTheme } from './hooks/useToggleTheme';
+import useDidMount from '../../lib/hooks/useDidMount';
 
 export type MainHeaderProps = {};
 
@@ -19,6 +21,7 @@ function Header(props: MainHeaderProps) {
   const { user, onLoginClick, onLogout, customHeader } = useHeader();
   const [userMenu, toggleUserMenu] = useToggle(false);
   const ref = useRef<HTMLDivElement>(null);
+  const didMount = useDidMount();
 
   const onOutsideClick = useCallback(
     (e: React.MouseEvent) => {
@@ -44,7 +47,7 @@ function Header(props: MainHeaderProps) {
 
         {user ? (
           <Right>
-            <ThemeToggleButton />
+            {didMount && <ThemeToggleButton />}
             <SearchButton to={urlForSearch}>
               <SearchIcon2 />
             </SearchButton>

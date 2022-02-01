@@ -1,12 +1,12 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import media from '../../lib/styles/media';
 
 const TypographyBlock = styled.div`
   font-size: 1.125rem;
   color: ${themedPalette.text1};
+  transition: color 0.125s ease-in;
   line-height: 1.7;
   letter-spacing: -0.004em;
   word-break: keep-all;

@@ -6,6 +6,7 @@ import post, { PostState } from './post';
 import error, { ErrorState } from './error';
 import scroll, { ScrollState } from './scroll';
 import home, { HomeState } from './home';
+import darkMode, { DarkModeState } from './darkMode';
 
 export type RootState = {
   core: CoreState;
@@ -15,6 +16,7 @@ export type RootState = {
   error: ErrorState;
   scroll: ScrollState;
   home: HomeState;
+  darkMode: DarkModeState;
 };
 
 const rootReducer = combineReducers({
@@ -25,6 +27,7 @@ const rootReducer = combineReducers({
   error: error.reducer,
   scroll: scroll.reducer,
   home: home.reducer,
+  darkMode: darkMode.reducer,
 });
 
 export default rootReducer;

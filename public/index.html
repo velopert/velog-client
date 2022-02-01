@@ -38,6 +38,20 @@
 
       gtag('config', 'UA-125599395-1');
     </script>
+    <script>
+      function loadTheme() {
+        try {
+          const theme = localStorage.getItem('theme')
+          if (!theme)
+          return
+          document.body.dataset.theme = theme
+        } catch (e) {
+
+        }
+      }
+
+
+    </script>
 
     <title>React App</title>
   </head>

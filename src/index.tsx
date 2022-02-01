@@ -14,7 +14,8 @@ import rootReducer from './modules';
 import storage from './lib/storage';
 import { setUser } from './modules/core';
 import * as Sentry from '@sentry/browser';
-import {  HelmetProvider } from 'react-helmet-async';
+import { HelmetProvider } from 'react-helmet-async';
+import darkMode from './modules/darkMode';
 
 Sentry.init({
   dsn: 'https://99d0ac3ca0f64b4d8709e385e7692893@sentry.io/1886813',
@@ -32,7 +33,19 @@ const loadUser = () => {
   store.dispatch(setUser(user));
 };
 
+const loadTheme = () => {
+  const theme = storage.getItem('theme');
+  if (!theme) return;
+  if (theme === 'dark') {
+    store.dispatch(darkMode.actions.enableDarkMode());
+  } else {
+    store.dispatch(darkMode.actions.enableLightMode());
+  }
+  document.body.dataset.theme = theme;
+};
+
 loadUser();
+loadTheme();
 
 if (process.env.NODE_ENV === 'production') {
   loadableReady(() => {
@@ -64,7 +77,7 @@ if (process.env.NODE_ENV === 'production') {
   );
 }
 
-(window as any).fbAsyncInit = function() {
+(window as any).fbAsyncInit = function () {
   (window as any).FB.init({
     appId: '203040656938507',
     autoLogAppEvents: true,
@@ -74,7 +87,7 @@ if (process.env.NODE_ENV === 'production') {
 };
 
 // Load facebook SDK
-(function(d, s, id) {
+(function (d, s, id) {
   var js,
     fjs = d.getElementsByTagName(s)[0] as any;
   if (d.getElementById(id)) return;
