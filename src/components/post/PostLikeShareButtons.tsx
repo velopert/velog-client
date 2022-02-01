@@ -40,7 +40,7 @@ const CircleButton = styled(animated.div)<{ active?: string }>`
   align-items: center;
   justify-content: center;
   background: ${themedPalette.bg_element1};
-  border: 1px solid ${themedPalette.border2};
+  border: 1px solid ${themedPalette.border3};
   border-radius: 1.5rem;
   color: ${themedPalette.text3};
   cursor: pointer;
