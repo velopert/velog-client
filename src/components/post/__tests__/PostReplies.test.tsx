@@ -55,7 +55,7 @@ describe('PostReplies', () => {
         <MemoryRouter>
           <PostReplies {...initialProps} {...props} />
         </MemoryRouter>
-      </HelmetProvider>w,
+      </HelmetProvider>,
     );
     return {
       ...utils,

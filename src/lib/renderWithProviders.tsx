@@ -7,6 +7,7 @@ import rootReducer, { RootState } from '../modules';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { safe } from './utils';
+import { HelmetProvider } from 'react-helmet-async';
 
 type Options = {
   initialState?: RootState;
@@ -30,11 +31,13 @@ export default function renderWithProviders(
 
   return {
     ...render(
-      <Router history={history}>
-        <MockedProvider mocks={mocks} addTypename={false}>
-          <Provider store={store}>{ui}</Provider>
-        </MockedProvider>
-      </Router>,
+      <HelmetProvider>
+        <Router history={history}>
+          <MockedProvider mocks={mocks} addTypename={false}>
+            <Provider store={store}>{ui}</Provider>
+          </MockedProvider>
+        </Router>
+      </HelmetProvider>,
     ),
     store,
     history,

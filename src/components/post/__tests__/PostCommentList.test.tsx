@@ -3,6 +3,7 @@ import { render } from '@testing-library/react';
 import PostCommentsList, { PostCommentsListProps } from '../PostCommentsList';
 import { Comment } from '../../../lib/graphql/post';
 import { MemoryRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 
 describe('PostCommentsList', () => {
   const sampleComments: Comment[] = [
@@ -62,9 +63,11 @@ describe('PostCommentsList', () => {
       onRemove: () => {},
     };
     const utils = render(
-      <MemoryRouter>
-        <PostCommentsList {...initialProps} {...props} />
-      </MemoryRouter>,
+      <HelmetProvider>
+        <MemoryRouter>
+          <PostCommentsList {...initialProps} {...props} />
+        </MemoryRouter>
+      </HelmetProvider>,
     );
     return {
       ...utils,

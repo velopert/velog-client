@@ -8,8 +8,7 @@ describe('HeaderLogo', () => {
     const initialProps: HeaderLogoProps = {
       custom: false,
       userLogo: null,
-      velogUsername: null,
-      onVelogLogoClick: () => {},
+      username: null,
     };
     const utils = render(
       <MemoryRouter>
@@ -26,13 +25,13 @@ describe('HeaderLogo', () => {
     getByTestId('velog-logo');
   });
 
-  it('shows null when custom is true and data is not loaded', () => {
+  it('shows empty when custom is true and data is not loaded', () => {
     const utils = setup({
       custom: true,
       userLogo: null,
-      velogUsername: 'velopert',
+      username: 'velopert',
     });
-    expect(utils.container.innerHTML).toBe('');
+    expect(utils.container.innerHTML).toBe('<div></div>');
   });
   it('shows custom velog title when custom is true and data is loaded', () => {
     const { getByText } = setup({
@@ -41,7 +40,7 @@ describe('HeaderLogo', () => {
         logo_image: null,
         title: 'VELOPERT.LOG',
       },
-      velogUsername: 'velopert',
+      username: 'velopert',
     });
     getByText('VELOPERT.LOG');
   });
@@ -52,7 +51,7 @@ describe('HeaderLogo', () => {
         logo_image: null,
         title: null,
       },
-      velogUsername: 'velopert',
+      username: 'velopert',
     });
     getByText(`velopert.log`);
   });

@@ -13,7 +13,6 @@ describe('MarkdownPreview', () => {
       <HelmetProvider>
         <MarkdownPreview {...initialProps} {...props} />
       </HelmetProvider>,
-      u,
     );
     return {
       ...utils,
