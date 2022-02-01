@@ -256,7 +256,12 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
 
   useSaveHotKey(() => onTempSave(true));
 
+  const isReady = useSelector(
+    (state: RootState) => state.darkMode.systemTheme !== 'not-ready',
+  );
   const theme = useTheme();
+
+  if (!isReady) return null;
 
   return (
     <>

@@ -85,23 +85,6 @@ function Html({
           gtag('config', 'UA-125599395-1');`,
           }}
         ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-      function loadTheme() {
-        try {
-          const theme = localStorage.getItem('theme')
-          if (!theme)
-          return
-          document.body.dataset.theme = theme
-        } catch (e) {
-
-        }
-      }
-      loadTheme()   
-        `,
-          }}
-        ></script>
       </head>
       <body data-theme={theme}>
         <div id="root" dangerouslySetInnerHTML={{ __html: content }}></div>
