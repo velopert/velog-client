@@ -923,19 +923,20 @@ const MarkdownEditorBlock = styled.div`
   flex-direction: column;
   position: relative;
 
-  &::-webkit-scrollbar {
-    border-radius: 3px;
-    width: 6px;
-    &:hover {
-      width: 16px;
-    }
-    background: ${themedPalette.bg_element2};
+  /* width */
+  *::-webkit-scrollbar {
+    width: 4px;
   }
 
-  &::-webkit-scrollbar-thumb {
-    z-index: 100;
-    background: ${palette.gray9};
-    /* -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75); */
+  /* Handle */
+  *::-webkit-scrollbar-thumb {
+    background: ${themedPalette.bg_element5}!important;
+    border-radius: 1px !important;
+  }
+
+  */* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${themedPalette.bg_element6};
   }
 
   & > .wrapper {
