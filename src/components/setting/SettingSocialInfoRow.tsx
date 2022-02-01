@@ -12,7 +12,6 @@ import Button from '../common/Button';
 import SettingInput from './SettingInput';
 import useInputs from '../../lib/hooks/useInputs';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import { ProfileLinks } from '../../lib/graphql/user';
 import SettingEditButton from './SettingEditButton';
 import media from '../../lib/styles/media';

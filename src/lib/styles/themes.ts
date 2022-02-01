@@ -108,7 +108,7 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
     bg_element7: '#252525',
     bg_element8: '#0c0c0c',
     bg_invert: '#FFFFFF',
-    bg_inline_code: '##2c4840',
+    bg_inline_code: '#363636',
     text1: '#ECECEC',
     text2: '#D9D9D9',
     text3: '#ACACAC',
@@ -144,7 +144,7 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
   },
 };
 
-const buildCssVariables = <T>(variables: ThemeVariables) => {
+const buildCssVariables = (variables: ThemeVariables) => {
   const keys = Object.keys(variables) as (keyof ThemeVariables)[];
   return keys.reduce(
     (acc, key) =>

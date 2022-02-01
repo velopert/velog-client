@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { animated, useTransition } from 'react-spring';
 import styled from 'styled-components';
 import { themedPalette } from '../../lib/styles/themes';

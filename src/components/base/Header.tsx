@@ -12,8 +12,6 @@ import media from '../../lib/styles/media';
 import HeaderLogo from './HeaderLogo';
 import { themedPalette } from '../../lib/styles/themes';
 import ThemeToggleButton from './ThemeToggleButton';
-import { useToggleTheme } from './hooks/useToggleTheme';
-import useDidMount from '../../lib/hooks/useDidMount';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../modules';
 

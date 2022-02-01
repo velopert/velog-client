@@ -9,7 +9,6 @@ import {
 } from '../../lib/graphql/post';
 import PostCardGrid from '../../components/common/PostCardGrid';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import { detectAnyAdblocker } from 'just-detect-adblock';
 
 function RelatedPost({

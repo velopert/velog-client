@@ -11,7 +11,6 @@ import {
   MdCode,
 } from 'react-icons/md';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import zIndexes from '../../lib/styles/zIndexes';
 import { mediaQuery } from '../../lib/styles/media';
 

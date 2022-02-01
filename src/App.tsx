@@ -13,7 +13,6 @@ import NotFoundPage from './pages/NotFoundPage';
 import { Helmet } from 'react-helmet-async';
 import HomePage from './pages/home/HomePage';
 import MainPageTemplate from './components/main/MainPageTemplate';
-import { useThemeEffect } from './components/base/hooks/useThemeEffect';
 
 const loadableConfig = {
   fallback: <PageTemplate />,

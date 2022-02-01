@@ -1,7 +1,7 @@
 import React, { HTMLProps, CSSProperties } from 'react';
 import { NavLink } from 'react-router-dom';
 
-type PlainNavLink = HTMLProps<HTMLAnchorElement> & {
+type PlainNavLinkProps = HTMLProps<HTMLAnchorElement> & {
   to: string;
   activeClassName?: string;
   activeStyle?: CSSProperties;
@@ -11,7 +11,7 @@ type PlainNavLink = HTMLProps<HTMLAnchorElement> & {
 /**
  * Needed when StyledLink has a custom props
  */
-const PlainNavLink: React.FC<PlainNavLink> = ({
+const PlainNavLink: React.FC<PlainNavLinkProps> = ({
   to,
   activeClassName,
   activeStyle,
