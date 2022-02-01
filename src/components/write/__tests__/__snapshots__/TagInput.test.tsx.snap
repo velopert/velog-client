@@ -6,7 +6,7 @@ exports[`TagInput matches snapshot 1`] = `
     class="sc-gsDKAQ dJJKiL"
   >
     <input
-      class="sc-dkPtRN kObxDj"
+      class="sc-dkPtRN jSZhxl"
       placeholder="태그를 입력하세요"
       tabindex="2"
       value=""

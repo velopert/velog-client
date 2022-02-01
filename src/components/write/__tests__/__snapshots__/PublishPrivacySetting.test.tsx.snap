@@ -12,7 +12,7 @@ exports[`PublishPrivacySetting matches snapshot 1`] = `
       class="contents"
     >
       <button
-        class="sc-dkPtRN hGtWFl"
+        class="sc-dkPtRN fLeyqY"
       >
         <svg>
           icon-globe.svg
@@ -24,7 +24,7 @@ exports[`PublishPrivacySetting matches snapshot 1`] = `
         </div>
       </button>
       <button
-        class="sc-dkPtRN cDCJjK"
+        class="sc-dkPtRN huYDjn"
       >
         <svg>
           icon-lock.svg
