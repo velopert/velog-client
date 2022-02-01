@@ -23,7 +23,7 @@ const TypographyBlock = styled.div`
       font-weight: 400;
     }
     code {
-      background: ${themedPalette.bg_element3};
+      background: ${themedPalette.bg_inline_code};
       padding: 0.2em 0.4em;
       font-size: 85%;
       border-radius: 3px;
