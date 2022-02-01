@@ -30,7 +30,8 @@ jobs:
       env:
         REACT_APP_API_HOST: 'https://v2.velog.io/'
         PUBLIC_URL: 'https://static.velog.io/'
-        REACT_APP_REDIS_HOST: ${{ secrets.REDIS_HOST }}
+        REACT_APP_REDIS_HOST: ${{ secrets.REDIS_HOST }}\
+        CI: false
     - name: s3 sync
       uses: jakejarvis/s3-sync-action@master
       with:
