@@ -41,14 +41,25 @@ function RelatedPostAd({ isMobile }: Props) {
   if (isMobile) {
     return (
       <div ref={ref}>
-        <ins
-          className="adsbygoogle"
-          style={{ display: 'block' }}
-          data-ad-client="ca-pub-5574866530496701"
-          data-ad-slot="8181679131"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        ></ins>
+        {theme === 'dark' ? (
+          <ins
+            className="adsbygoogle"
+            style={{ display: 'block' }}
+            data-ad-format="fluid"
+            data-ad-layout-key="-fb+5w+4e-db+86"
+            data-ad-client="ca-pub-5574866530496701"
+            data-ad-slot="9916259177"
+          ></ins>
+        ) : (
+          <ins
+            className="adsbygoogle"
+            style={{ display: 'block' }}
+            data-ad-format="fluid"
+            data-ad-layout-key="-gh+5l+k-cu+l4"
+            data-ad-client="ca-pub-5574866530496701"
+            data-ad-slot="8237449336"
+          ></ins>
+        )}
       </div>
     );
   }
