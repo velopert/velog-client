@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import media from '../../lib/styles/media';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import Button from '../common/Button';
 
 export type ErrorScreenTemplateProps = {

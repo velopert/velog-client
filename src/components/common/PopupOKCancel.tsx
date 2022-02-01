@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import PopupBase from './PopupBase';
 import Button from './Button';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 
 const PopupOKCancelBlock = styled.div`
   h3 {

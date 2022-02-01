@@ -2,7 +2,6 @@ import * as React from 'react';
 import styled from 'styled-components';
 import PublishSection from './PublishSection';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 
 const PublishURLSettingBlock = styled(PublishSection)``;
 const URLTextBlock = styled.div`

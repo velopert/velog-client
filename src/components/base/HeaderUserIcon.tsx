@@ -4,7 +4,6 @@ import { CurrentUser } from '../../lib/graphql/user';
 import { MdArrowDropDown } from 'react-icons/md';
 import { userThumbnail } from '../../static/images';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import optimizeImage from '../../lib/optimizeImage';
 
 const HeaderUserIconBlock = styled.div`

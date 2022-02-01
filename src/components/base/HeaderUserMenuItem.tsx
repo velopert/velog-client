@@ -2,7 +2,6 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 
 const WrapperLink = styled(Link)`
   display: block;
