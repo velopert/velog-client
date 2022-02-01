@@ -148,7 +148,7 @@ const buildCssVariables = <T>(variables: ThemeVariables) => {
   const keys = Object.keys(variables) as (keyof ThemeVariables)[];
   return keys.reduce(
     (acc, key) =>
-      acc.concat(`--${key.replace(/_/, '-')}: ${variables[key]};`, '\n'),
+      acc.concat(`--${key.replace(/_/g, '-')}: ${variables[key]};`, '\n'),
     '',
   );
 };
@@ -158,7 +158,7 @@ export const themes = {
   dark: buildCssVariables(themeVariableSets.dark),
 };
 
-const cssVar = (name: string) => `var(--${name.replace(/_/, '-')})`;
+const cssVar = (name: string) => `var(--${name.replace(/_/g, '-')})`;
 
 const variableKeys = Object.keys(themeVariableSets.light) as VariableKey[];
 
