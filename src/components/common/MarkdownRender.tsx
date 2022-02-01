@@ -31,11 +31,8 @@ export interface MarkdownRenderProps {
 }
 
 const MarkdownRenderBlock = styled.div`
-  &.atom-one-dark {
-    ${prismThemes['atom-one-dark']}
-  }
-  &.atom-one-light {
-    ${prismThemes['atom-one-light']}
+  &.atom-one {
+    ${prismThemes['atom-one']}
   }
   &.github {
     ${prismThemes['github']}
@@ -203,7 +200,7 @@ type RenderedElement =
 
 const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   markdown,
-  codeTheme = 'atom-one-light',
+  codeTheme = 'atom-one',
   onConvertFinish,
   editing,
 }) => {

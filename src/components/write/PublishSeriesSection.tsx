@@ -2,13 +2,14 @@ import * as React from 'react';
 import styled from 'styled-components';
 import PublishSection from './PublishSection';
 import { AddListIcon } from '../../static/svg';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { MdSettings } from 'react-icons/md';
 import { ellipsis } from '../../lib/styles/utils';
 
 const PublishSeriesSectionBlock = styled(PublishSection)``;
 const SeriesButton = styled.button`
-  background: white;
+  background: ${themedPalette.bg_element7};
   height: 3rem;
   width: 100%;
   border-radius: 4px;
@@ -18,7 +19,7 @@ const SeriesButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${palette.teal5};
+  color: ${themedPalette.primary2};
   font-size: 1.125rem;
   font-weight: bold;
   cursor: pointer;
@@ -26,7 +27,7 @@ const SeriesButton = styled.button`
     margin-right: 0.875rem;
   }
   &:hover {
-    background: #fdfdfd;
+    opacity: 0.7;
   }
 `;
 
@@ -43,10 +44,10 @@ const EditSeries = styled.div`
     align-items: center;
     padding-left: 1rem;
     padding-right: 1rem;
-    background: white;
+    background: ${themedPalette.bg_element1};
     font-size: 1.125rem;
     line-height: 1;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     flex: 1;
   }
   .name {
@@ -55,7 +56,7 @@ const EditSeries = styled.div`
   button {
     outline: none;
     color: white;
-    background: ${palette.teal6};
+    background: ${themedPalette.primary1};
     font-size: 1.25rem;
     display: flex;
     align-items: center;
@@ -64,10 +65,10 @@ const EditSeries = styled.div`
     border: none;
     cursor: pointer;
     &:hover {
-      background: ${palette.teal5};
+      background: ${themedPalette.primary2};
     }
     &:active {
-      background: ${palette.teal7};
+      background: ${themedPalette.primary1};
     }
   }
 `;

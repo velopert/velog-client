@@ -1,18 +1,21 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import palette from '../../lib/styles/palette';
+import { themedPalette } from '../../lib/styles/themes';
 import media from '../../lib/styles/media';
 
 const TypographyBlock = styled.div`
   font-size: 1.125rem;
-  color: #222426;
+  color: ${themedPalette.text1};
+  transition: color 0.125s ease-in;
   line-height: 1.7;
   letter-spacing: -0.004em;
   word-break: keep-all;
   word-wrap: break-word;
-  ul, ol, p {
+  ul,
+  ol,
+  p {
     /* ${media.xxlarge} {
-      color: ${palette.gray8};
+      color: ${themedPalette.text1};
       font-weight: 300;
     } */
 
@@ -20,14 +23,14 @@ const TypographyBlock = styled.div`
       font-weight: 400;
     }
     code {
-      background: rgba(27,31,35,.05);
-      padding: .2em .4em;
+      background: ${themedPalette.bg_element3};
+      padding: 0.2em 0.4em;
       font-size: 85%;
       border-radius: 3px;
     }
     a {
       code {
-        color: ${palette.teal6};
+        color: ${themedPalette.primary1};
       }
     }
   }
@@ -36,10 +39,10 @@ const TypographyBlock = styled.div`
     arial, 나눔고딕, 'Nanum Gothic', 돋움; */
 
   a {
-    color: ${palette.teal7};
+    color: ${themedPalette.primary1};
     text-decoration: none;
     &:hover {
-      color: ${palette.teal6};
+      color: ${themedPalette.primary1};
       text-decoration: underline;
     }
   }
@@ -52,7 +55,7 @@ const TypographyBlock = styled.div`
     border: none;
     height: 1px;
     width: 100%;
-    background: #dedede;
+    background: ${themedPalette.border3};
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
@@ -126,16 +129,17 @@ const TypographyBlock = styled.div`
   blockquote {
     margin-top: 2rem;
     margin-bottom: 2rem;
-    border-left: 4px solid ${palette.teal5};
+    border-left: 4px solid ${themedPalette.primary2};
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
-    background: ${palette.gray0};
+    background: ${themedPalette.bg_element2};
     margin-left: 0;
     margin-right: 0;
     padding: 1rem;
     padding-left: 2rem;
-    color: ${palette.gray9};
-    ul, ol {
+    color: ${themedPalette.text1};
+    ul,
+    ol {
       padding-left: 1rem;
     }
     *:first-child {

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { MdCheck } from 'react-icons/md';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 const AuthEmailSuccessBlock = styled.div`
@@ -11,7 +12,7 @@ const AuthEmailSuccessBlock = styled.div`
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   height: 3rem;
-  color: ${palette.teal7};
+  color: ${palette.teal9};
   .icon {
     font-size: 1.5rem;
   }

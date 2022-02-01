@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 const AuthEmailFormBlock = styled.form`
@@ -12,18 +13,24 @@ const AuthEmailFormBlock = styled.form`
     border-bottom-left-radius: 2px;
     padding: 1rem;
     font-size: 1rem;
-    border: 1px solid ${palette.gray3};
+    background: ${themedPalette.bg_element1};
+    border: 1px solid ${themedPalette.border3};
+    color: ${themedPalette.text1};
     border-right: none;
+    outline: none;
+    &:focus {
+      border: 1px solid ${themedPalette.primary1};
+    }
     &::placeholder {
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
     }
     &:disabled {
-      background: ${palette.gray1};
+      background: ${themedPalette.bg_element2};
     }
   }
   button {
-    background: ${palette.teal6};
-    color: white;
+    background: ${themedPalette.primary1};
+    color: ${themedPalette.button_text};
     font-size: 1rem;
     font-weight: bold;
     outline: none;
@@ -35,11 +42,11 @@ const AuthEmailFormBlock = styled.form`
     cursor: pointer;
     &:hover,
     &:focus {
-      background: ${palette.teal5};
+      background: ${themedPalette.primary2};
     }
     &:disabled {
-      background: ${palette.gray5};
-      color: ${palette.gray3};
+      background: ${themedPalette.border4};
+      color: ${themedPalette.text4};
       cursor: default;
     }
   }
@@ -62,7 +69,7 @@ const AuthEmailForm: React.FC<AuthEmailFormProps> = ({
 }) => {
   return (
     <AuthEmailFormBlock
-      onSubmit={e => {
+      onSubmit={(e) => {
         e.preventDefault();
         onSubmit(value);
       }}

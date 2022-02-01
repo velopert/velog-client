@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 const EditRemoveGroup = styled.div`
@@ -9,9 +10,9 @@ const EditRemoveGroup = styled.div`
     background: none;
     font-size: inherit;
     cursor: pointer;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     &:hover {
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
     }
   }
   button + button {

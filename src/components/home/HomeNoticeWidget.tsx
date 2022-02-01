@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import HomeWidget from './HomeWidget';
 import { Link } from 'react-router-dom';
@@ -19,7 +20,7 @@ const HomeNoticeWidget: React.FC<HomeNoticeWidgetProps> = ({ posts }) => {
       {posts.length === 0 && <div className="empty">공지사항이 없습니다.</div>}
       {posts.length > 0 && (
         <ul>
-          {sliced.map(post => (
+          {sliced.map((post) => (
             <li key={post.id}>
               <h5>
                 <Link to={`/@velog/${post.url_slug}`}>{post.title}</Link>
@@ -62,7 +63,7 @@ const StyledWidget = styled(HomeWidget)`
   .empty {
     padding-top: 1rem;
     padding-bottom: 1rem;
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
     text-align: center;
     font-size: 0.875rem;
   }
@@ -74,27 +75,27 @@ const StyledWidget = styled(HomeWidget)`
         margin: 0;
         font-size: 1.125rem;
         line-height: 1.5;
-        color: ${palette.gray8};
+        color: ${themedPalette.text1};
         a {
           text-decoration: none;
           color: inherit;
           &:hover {
-            color: ${palette.gray7};
+            color: ${themedPalette.text2};
             text-decoration: underline;
           }
         }
       }
       .date {
-        color: ${palette.gray6};
+        color: ${themedPalette.text3};
         font-size: 0.875rem;
         margin-top: 0.25rem;
       }
     }
     li.more {
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
       a {
         &:hover {
-          color: ${palette.gray5};
+          color: ${themedPalette.text3};
         }
         text-decoration: underline;
       }

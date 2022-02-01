@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Logo, VelogIcon } from '../../static/svg';
 import { UserLogo } from '../../modules/header';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { createFallbackTitle } from '../../lib/utils';
 import media from '../../lib/styles/media';
@@ -48,7 +49,7 @@ const HeaderLogoBlock = styled.div`
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  color: ${palette.gray8};
+  color: ${themedPalette.text1};
   font-size: 1.3125rem;
   text-decoration: none;
   font-family: Fira Mono, monospace;
@@ -76,7 +77,9 @@ const HeaderLogoBlock = styled.div`
 
 const VelogLogoLink = styled(Link)`
   color: inherit;
+
   svg {
+    color: inherit;
     margin-right: 1rem;
     width: 1.75rem;
     height: 1.75rem;

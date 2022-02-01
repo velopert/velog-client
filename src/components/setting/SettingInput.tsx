@@ -1,5 +1,6 @@
 import React, { HTMLProps } from 'react';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 export type SettingInputProps = {
@@ -13,18 +14,18 @@ function SettingInput(props: SettingInputProps) {
 
 const StyledInput = styled.input<{ fullWidth?: boolean }>`
   display: block;
-  border: 1px solid ${palette.gray3};
-  background: white;
+  border: 1px solid ${themedPalette.border3};
+  background: ${themedPalette.bg_element1};
   padding: 0.5rem;
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   font-size: 1rem;
   line-height: 1rem;
   outline: none;
   border-radius: 4px;
   &:focus {
-    border: 1px solid ${palette.gray9};
+    border: 1px solid ${themedPalette.border1};
   }
-  ${props =>
+  ${(props) =>
     props.fullWidth &&
     css`
       width: 100%;

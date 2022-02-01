@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import useInput from '../../lib/hooks/useInput';
 import AuthEmailForm from './AuthEmailForm';
 import { AuthMode } from '../../modules/core';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import AuthSocialButtonGroup from './AuthSocialButtonGroup';
 import AuthEmailSuccess from './AuthEmailSuccess';
@@ -25,12 +26,12 @@ const AuthFormBlock = styled.div`
   }
   h2 {
     font-size: 1.3125rem;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
   }
   h4 {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
   }
   section + section {
     margin-top: 2.5rem;
@@ -47,7 +48,7 @@ const AuthFormBlock = styled.div`
     .link {
       display: inline-block;
       font-weight: bold;
-      color: ${palette.teal6};
+      color: ${themedPalette.primary1};
       cursor: pointer;
       &:hover {
         text-decoration: underline;

@@ -37,7 +37,7 @@ const useS3Upload = () => {
           headers: {
             'Content-Type': file.type,
           },
-          onUploadProgress: e => {
+          onUploadProgress: (e) => {
             console.log(Math.round((e.loaded / e.total) * 100));
             setProgress(Math.round((e.loaded / e.total) * 100));
           },
@@ -45,7 +45,7 @@ const useS3Upload = () => {
         setImage(image_path);
         return image_path;
       } catch (e) {
-        setError(e);
+        setError(e as any);
       }
     },
     [setProgress],
@@ -54,7 +54,7 @@ const useS3Upload = () => {
   return [s3Upload, image, error] as [
     typeof s3Upload,
     typeof image,
-    typeof error
+    typeof error,
   ];
 };
 

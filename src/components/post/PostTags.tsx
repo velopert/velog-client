@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 const PostTagsBlock = styled.div`
@@ -11,7 +12,7 @@ const PostTagsBlock = styled.div`
 
 const Tag = styled(Link)`
   margin-bottom: 0.875rem;
-  background: ${palette.gray1};
+  background: ${themedPalette.bg_element2};
   padding-left: 1rem;
   padding-right: 1rem;
   height: 2rem;
@@ -19,11 +20,11 @@ const Tag = styled(Link)`
   display: inline-flex;
   align-items: center;
   margin-right: 0.875rem;
-  color: ${palette.teal7};
+  color: ${themedPalette.primary1};
   text-decoration: none;
   font-weight: 500;
   &:hover {
-    background: ${palette.gray0};
+    background: ${themedPalette.bg_element2};
   }
   font-size: 0.875rem;
 `;
@@ -35,7 +36,7 @@ export interface PostTagsProps {
 const PostTags: React.FC<PostTagsProps> = ({ tags }) => {
   return (
     <PostTagsBlock>
-      {tags.map(tag => (
+      {tags.map((tag) => (
         <Tag key={tag} to={`/tags/${tag}`}>
           {tag}
         </Tag>

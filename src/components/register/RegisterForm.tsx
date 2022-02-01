@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import LabelInput from '../common/LabelInput';
 import useInputs from '../../lib/hooks/useInputs';
 import RoundButton from '../common/RoundButton';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 const RegisterFormBlock = styled.div`

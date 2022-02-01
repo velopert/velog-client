@@ -8,6 +8,7 @@ import {
   PartialPost,
 } from '../../lib/graphql/post';
 import PostCardGrid from '../../components/common/PostCardGrid';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { detectAnyAdblocker } from 'just-detect-adblock';
 
@@ -75,7 +76,7 @@ const Title = styled.div`
 
   font-size: 2rem;
   font-weight: 400;
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   margin-bottom: 3.5rem;
   ${media.custom(1376)} {
     font-size: 1.5rem;
@@ -97,7 +98,7 @@ const Background = styled.div`
     padding-bottom: 1rem;
   }
   margin-top: 4rem;
-  background: ${palette.gray0};
+  background: ${themedPalette.bg_page1};
   box-shadow: 0px 0 32px rgb(0 0 0 / 8%);
 `;
 const Wrapper = styled.div`

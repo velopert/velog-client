@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import media from '../../lib/styles/media';
 import { Tag } from '../../lib/graphql/tags';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
 import { escapeForUrl } from '../../lib/utils';
@@ -24,7 +25,7 @@ function UserTagHorizontalList({
       <TagItem to={`/@${username}`} active={active === null}>
         전체보기 <span>({postsCount})</span>
       </TagItem>
-      {tags.map(tag => (
+      {tags.map((tag) => (
         <TagItem
           active={active === escapeForUrl(tag.name)}
           key={tag.id}
@@ -62,22 +63,22 @@ const TagItem = styled(Link)<{ active?: boolean }>`
   border-radius: 0.75rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  background: ${palette.gray1};
-  color: ${palette.gray8};
+  background: ${themedPalette.bg_element2};
+  color: ${themedPalette.text1};
   display: flex;
   align-items: center;
   line-height: 1.5;
 
   span {
     margin-left: 0.25rem;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     font-size: 0.75rem;
   }
 
-  ${props =>
+  ${(props) =>
     props.active &&
     css`
-      background: ${palette.teal6};
+      background: ${themedPalette.primary1};
       color: white;
       span {
         color: white;

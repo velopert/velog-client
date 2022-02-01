@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { userThumbnail } from '../../static/images';
 import Tag from './TagItem';
@@ -37,7 +38,7 @@ const PostCardBlock = styled.div`
       height: 3rem;
       display: block;
       margin-right: 1rem;
-      background: ${palette.gray0};
+      background: ${themedPalette.bg_element2};
       object-fit: cover;
       border-radius: 1.5rem;
       box-shadow: 0px 0 8px rgba(0, 0, 0, 0.1);
@@ -49,13 +50,13 @@ const PostCardBlock = styled.div`
     }
     .username {
       font-size: 0.875rem;
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
       font-weight: bold;
       a {
         color: inherit;
         text-decoration: none;
         &:hover {
-          color: ${palette.gray8};
+          color: ${themedPalette.text1};
         }
       }
     }
@@ -73,7 +74,7 @@ const PostCardBlock = styled.div`
   h2 {
     font-size: 1.5rem;
     margin: 0;
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
     word-break: keep-all;
     ${media.small} {
       font-size: 1rem;
@@ -83,7 +84,7 @@ const PostCardBlock = styled.div`
     margin-bottom: 2rem;
     margin-top: 0.5rem;
     font-size: 1rem;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     word-break: keep-all;
     overflow-wrap: break-word;
     ${media.small} {
@@ -95,7 +96,7 @@ const PostCardBlock = styled.div`
     display: flex;
     align-items: center;
     margin-top: 1rem;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     font-size: 0.875rem;
     ${media.small} {
       font-size: 0.75rem;
@@ -115,7 +116,7 @@ const PostCardBlock = styled.div`
   }
 
   & + & {
-    border-top: 1px solid ${palette.gray2};
+    border-top: 1px solid ${themedPalette.border4};
   }
 `;
 
@@ -126,7 +127,7 @@ interface PostCardProps {
 
 const FlatPostCard = ({ post, hideUser }: PostCardProps) => {
   const prefetch = usePrefetchPost(post.user.username, post.url_slug);
-  const prefetchTimeoutId = useRef<number | null>(null);
+  const prefetchTimeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const onMouseEnter = () => {
     prefetchTimeoutId.current = setTimeout(prefetch, 2000);
@@ -178,7 +179,7 @@ const FlatPostCard = ({ post, hideUser }: PostCardProps) => {
       </Link>
       <p>{post.short_description}</p>
       <div className="tags-wrapper">
-        {post.tags.map(tag => (
+        {post.tags.map((tag) => (
           <Tag key={tag} name={tag} link />
         ))}
       </div>

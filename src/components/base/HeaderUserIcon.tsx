@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { CurrentUser } from '../../lib/graphql/user';
 import { MdArrowDropDown } from 'react-icons/md';
 import { userThumbnail } from '../../static/images';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import optimizeImage from '../../lib/optimizeImage';
 
@@ -20,7 +21,7 @@ const HeaderUserIconBlock = styled.div`
   svg {
     font-size: 1.5rem;
     margin-left: 0.25rem;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     transition: 0.125s all ease-in;
     margin-right: -0.4375rem;
   }
@@ -31,7 +32,7 @@ const HeaderUserIconBlock = styled.div`
       box-shadow: 0px 0 12px rgba(0, 0, 0, 0.1);
     }
     svg {
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
     }
   }
 `;

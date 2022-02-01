@@ -1,15 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import SkeletonTexts from '../common/SkeletonTexts';
 
 const SeriesPostsTemplateBlock = styled.div`
   & > label {
     display: inline-flex;
-    border-bottom: 4px solid ${palette.teal5};
+    border-bottom: 4px solid ${themedPalette.primary2};
     font-size: 1.125rem;
     font-weight: bold;
-    color: ${palette.teal5};
+    color: ${themedPalette.primary2};
     line-height: 1.5;
   }
   h1 {
@@ -21,13 +22,13 @@ const SeriesPostsTemplateBlock = styled.div`
     line-height: 1.5;
     margin-bottom: 1.5rem;
     font-size: 2.5rem;
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
     outline: none;
   }
 `;
 
 const Separator = styled.div`
-  background: ${palette.gray3};
+  background: ${themedPalette.bg_element4};
   height: 1px;
   width: 100%;
   margin-bottom: 1.5rem;

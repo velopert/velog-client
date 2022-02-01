@@ -27,7 +27,7 @@ const PublishActionButtons: React.FC<PublishActionButtonsProps> = ({
       <Button
         size="large"
         data-testid="cancelPublish"
-        color="gray"
+        color="transparent"
         onClick={onCancel}
       >
         취소

@@ -1,5 +1,6 @@
 import React, { CSSProperties, useState, useRef } from 'react';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import {
   GithubIcon,
@@ -57,12 +58,12 @@ const UserInfo = styled.div`
     font-size: 1.5rem;
     line-height: 1.5;
     font-weight: bold;
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
     a {
       color: inherit;
       text-decoration: none;
       &:hover {
-        color: ${palette.gray8};
+        color: ${themedPalette.text1};
         text-decoration: underline;
       }
     }
@@ -72,7 +73,7 @@ const UserInfo = styled.div`
     font-size: 1.125rem;
     line-height: 1.5;
     margin-top: 0.25rem;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     letter-spacing: -0.004em;
   }
 
@@ -92,7 +93,7 @@ const UserInfo = styled.div`
 `;
 
 const Separator = styled.div`
-  background: ${palette.gray2};
+  background: ${themedPalette.bg_element3};
   width: 100%;
   height: 1px;
   margin-top: 2rem;
@@ -104,14 +105,14 @@ const Separator = styled.div`
 `;
 
 const ProfileIcons = styled.div`
-  color: ${palette.gray5};
+  color: ${themedPalette.text3};
   display: flex;
   svg {
     cursor: pointer;
     width: 2rem;
     height: 2rem;
     &:hover {
-      color: ${palette.gray8};
+      color: ${themedPalette.text1};
     }
     ${media.small} {
       width: 1.5rem;

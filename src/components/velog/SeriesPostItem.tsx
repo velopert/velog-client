@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { emptyThumbnail } from '../../static/images';
 import { formatDate } from '../../lib/utils';
@@ -18,9 +19,9 @@ const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
     margin: 0;
     line-height: 1.5;
     font-size: 1.325rem;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     .number {
-      color: ${palette.gray5};
+      color: ${themedPalette.text3};
       margin-right: 0.25rem;
       font-style: italic;
     }
@@ -29,7 +30,7 @@ const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
       color: inherit;
       text-decoration: none;
       &:hover {
-        color: ${palette.gray9};
+        color: ${themedPalette.text1};
         text-decoration: underline;
       }
     }
@@ -63,7 +64,7 @@ const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
       justify-content: space-between;
       height: 100%;
       p {
-        color: ${palette.gray7};
+        color: ${themedPalette.text2};
         font-size: 1rem;
         line-height: 1.5rem;
         margin: 0;
@@ -91,18 +92,18 @@ const SeriesPostItemBlock = styled.div<{ edit?: boolean }>`
     }
   }
   .date {
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
     font-size: 0.875rem;
     ${media.small} {
       margin-top: 1rem;
     }
   }
 
-  ${props =>
+  ${(props) =>
     props.edit &&
     css`
       padding: 1rem;
-      background: white;
+      background: ${themedPalette.bg_element1};
       border-radius: 4px;
       box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.06);
     `}

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { MdLockOutline } from 'react-icons/md';
 import media from '../../lib/styles/media';
@@ -12,17 +13,18 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
   label {
     font-weight: bold;
     font-size: 1.125rem;
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
     margin-bottom: 1rem;
     transition: all 0.125s ease-in;
-    ${props =>
+    ${(props) =>
       props.focus &&
       css`
-        color: ${palette.teal7};
+        color: ${themedPalette.primary1};
       `}
   }
 
   input {
+    background: transparent;
     font-size: 1.5rem;
     border: none;
     outline: none;
@@ -31,18 +33,18 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
     }
 
     width: 100%;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     transition: all 0.125s ease-in;
-    ${props =>
+    ${(props) =>
       props.focus &&
       css`
-        color: ${palette.teal7};
+        color: ${themedPalette.primary1};
       `}
     &::placeholder {
-      color: ${palette.gray5};
+      color: ${themedPalette.text3};
     }
     &:disabled {
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
     }
   }
   .group {
@@ -51,20 +53,20 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
   }
   .input-wrapper {
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid ${palette.gray7};
+    border-bottom: 1px solid ${themedPalette.border2};
     display: flex;
     align-items: center;
-    ${props =>
+    ${(props) =>
       props.focus &&
       css`
-        border-color: ${palette.teal7};
+        border-color: ${themedPalette.primary1};
       `}
     input {
       width: 1;
     }
     svg {
       font-size: 1.5rem;
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
     }
   }
   .width-maker {

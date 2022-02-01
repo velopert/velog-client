@@ -10,6 +10,7 @@ import {
   MdImage,
   MdCode,
 } from 'react-icons/md';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import zIndexes from '../../lib/styles/zIndexes';
 import { mediaQuery } from '../../lib/styles/media';
@@ -25,12 +26,12 @@ const ToolbarBlock = styled.div<{
   align-items: center;
   margin-bottom: 1rem;
   width: 100%;
-  background: white;
+  background: ${themedPalette.bg_page2};
   z-index: ${zIndexes.Toolbar};
   transition: all 0.125s ease-in;
   flex-wrap: wrap;
 
-  ${props =>
+  ${(props) =>
     props.forMarkdown &&
     css`
       margin-bottom: 1rem;
@@ -46,7 +47,7 @@ const ToolbarBlock = styled.div<{
       width: auto;
     `}
 
-  ${props =>
+  ${(props) =>
     props.shadow &&
     css`
       box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.09);
@@ -84,7 +85,7 @@ const ToolbarItem = styled.button`
   align-items: center;
   justify-content: center;
   font-size: 1.75rem;
-  color: ${palette.gray6};
+  color: ${themedPalette.text3};
   cursor: pointer;
   flex-shrink: 0;
 
@@ -94,8 +95,8 @@ const ToolbarItem = styled.button`
     font-size: 1.45rem;
   }
   &:hover {
-    color: ${palette.gray9};
-    background: ${palette.gray0};
+    color: ${themedPalette.text1};
+    background: ${themedPalette.bg_element2};
   }
   background: none;
   outline: none;
@@ -103,7 +104,7 @@ const ToolbarItem = styled.button`
   padding: 0;
 
   &.ql-active {
-    color: ${palette.teal6};
+    color: ${themedPalette.primary1};
   }
 `;
 
@@ -112,7 +113,7 @@ const Separator = styled.div`
   height: 1.25rem;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
-  background: ${palette.gray4};
+  background: ${themedPalette.border3};
 `;
 export interface ToolbarProps {
   shadow: boolean;

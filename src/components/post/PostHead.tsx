@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import VelogResponsive from '../velog/VelogResponsive';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { formatDate } from '../../lib/utils';
 import { SeriesPost } from '../../lib/graphql/post';
@@ -29,9 +30,10 @@ const PostHeadBlock = styled(VelogResponsive)`
     letter-spacing: -0.004em;
     margin-top: 0;
     font-weight: 800;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     margin-bottom: 2rem;
     word-break: keep-all;
+    transition: color 0.125s ease-in;
   }
 
   ${media.medium} {
@@ -45,19 +47,19 @@ const PostHeadBlock = styled(VelogResponsive)`
 const SubInfo = styled.div`
   align-items: center;
   font-size: 1rem;
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   /* font-family: 'Spoqa Han Sans'; */
   display: flex;
   justify-content: space-between;
   .information {
     .username {
-      color: ${palette.gray8};
+      color: ${themedPalette.text1};
       font-weight: bold;
       a {
         color: inherit;
         text-decoration: none;
         &:hover {
-          color: ${palette.gray7};
+          color: ${themedPalette.text2};
           text-decoration: underline;
         }
       }
@@ -91,9 +93,9 @@ const EditRemoveGroup = styled.div`
     background: none;
     font-size: inherit;
     cursor: pointer;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     &:hover {
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
     }
     ${media.small} {
       font-size: 0.875rem;

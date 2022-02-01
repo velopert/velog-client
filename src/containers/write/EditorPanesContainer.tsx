@@ -5,7 +5,7 @@ import MarkdownPreviewContainer from './MarkdownPreviewContainer';
 
 interface EditorPanesContainerProps {}
 
-const EditorPanesContainer: React.FC<EditorPanesContainerProps> = props => {
+const EditorPanesContainer: React.FC<EditorPanesContainerProps> = (props) => {
   return (
     <EditorPanes
       left={<MarkdownEditorContainer />}

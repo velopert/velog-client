@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { NavLink, useLocation } from 'react-router-dom';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import {
   MdTrendingUp,
@@ -108,7 +109,7 @@ const Wrapper = styled.div`
   .more {
     cursor: pointer;
     font-size: 1.5rem;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
   }
 `;
 
@@ -138,7 +139,7 @@ const Block = styled.div`
     justify-content: center;
     font-size: 1.125rem;
     text-decoration: none;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     height: 3rem;
 
     svg {
@@ -146,7 +147,7 @@ const Block = styled.div`
       margin-right: 0.5rem;
     }
     &.active {
-      color: ${palette.gray8};
+      color: ${themedPalette.text1};
       font-weight: bold;
     }
 
@@ -165,11 +166,11 @@ const Indicator = styled(animated.div)`
   height: 2px;
   position: absolute;
   bottom: 0px;
-  background: ${palette.gray8};
+  background: ${themedPalette.border1};
 `;
 
 const Selector = styled.div`
-  background: white;
+  background: ${themedPalette.bg_element1};
   height: 2rem;
   width: 6rem;
   border-radius: 4px;
@@ -179,7 +180,7 @@ const Selector = styled.div`
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   font-weight: 600;
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   font-size: 0.875rem;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.05);
   svg {

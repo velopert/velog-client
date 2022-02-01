@@ -3,16 +3,16 @@
 exports[`PopupOKCancel matches snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa kNCPvv"
+    class="sc-bdvvtL huqkpu"
   />
   <div
-    class="sc-bwzfXH fIoYbF"
+    class="sc-gsDKAQ fGhWCT"
   >
     <div
-      class="sc-htpNat gFFQdP"
+      class="sc-dkPtRN jcaTtc"
     >
       <div
-        class="sc-ifAKCX lbyxTT"
+        class="sc-eCImPb jszbiA"
       >
         <h3>
           제목
@@ -26,7 +26,7 @@ exports[`PopupOKCancel matches snapshot 1`] = `
           class="button-area"
         >
           <button
-            class="sc-bxivhb jvTLUf"
+            class="sc-hKwDye erQiQD"
             color="teal"
           >
             확인

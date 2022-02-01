@@ -19,7 +19,7 @@ import { toast } from 'react-toastify';
 
 export interface PublishSeriesConfigProps {}
 
-const PublishSeriesConfig: React.FC<PublishSeriesConfigProps> = props => {
+const PublishSeriesConfig: React.FC<PublishSeriesConfigProps> = (props) => {
   const user = useUser();
   const selectedSeries = useSelector(
     (state: RootState) => state.write.selectedSeries,
@@ -46,7 +46,7 @@ const PublishSeriesConfig: React.FC<PublishSeriesConfigProps> = props => {
         if (dateA > dateB) return 1;
         return 0;
       })
-      .map(series => ({
+      .map((series) => ({
         id: series.id,
         text: series.name,
       }));
@@ -83,7 +83,7 @@ const PublishSeriesConfig: React.FC<PublishSeriesConfigProps> = props => {
       const lastItem = items.item(items.length - 1);
       lastItem.scrollIntoView();
     } catch (e) {
-      if ((e?.message as string).includes('URL Slug already exists')) {
+      if (((e as any)?.message as string).includes('URL Slug already exists')) {
         toast.error('이미 존재하는 URL입니다.');
         return;
       }
@@ -98,7 +98,7 @@ const PublishSeriesConfig: React.FC<PublishSeriesConfigProps> = props => {
   const onConfirm = () => {
     if (!seriesList.data || !seriesList.data.seriesList) return;
     const selectedSeries = seriesList.data.seriesList.find(
-      series => series.id === selectedId,
+      (series) => series.id === selectedId,
     );
     if (!selectedSeries || !selectedId) return;
     dispatch(

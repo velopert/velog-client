@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 export type HomeWidgetProps = {
@@ -22,7 +23,7 @@ const MainWidgetBlock = styled.section`
     line-height: 1.5;
     font-size: 0.875rem;
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid ${palette.gray2};
+    border-bottom: 1px solid ${themedPalette.border4};
     margin-top: 0;
     margin-bottom: 1rem;
     font-weight: bold;

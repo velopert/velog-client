@@ -7,6 +7,7 @@ import VelogTab from '../../components/velog/VelogTab';
 import UserPostsTab from './tabs/UserPostsTab';
 import SeriesTab from './tabs/SeriesTab';
 import AboutTab from './tabs/AboutTab';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import media from '../../lib/styles/media';
 
@@ -31,7 +32,7 @@ const UserPage: React.FC<UserPageProps> = ({ match, location }) => {
 };
 
 const MobileSeparator = styled.div`
-  background: ${palette.gray1};
+  background: ${themedPalette.bg_element2};
   height: 1rem;
   margin-top: 2rem;
 

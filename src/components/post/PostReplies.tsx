@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Comment } from '../../lib/graphql/post';
 import PostCommentsList from './PostCommentsList';
 import useBoolean from '../../lib/hooks/useBoolean';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import PostCommentsWrite from './PostCommentsWrite';
 import useInput from '../../lib/hooks/useInput';
@@ -27,7 +28,7 @@ const PullUp = styled.div`
 const Separator = styled.div`
   width: 100%;
   height: 1px;
-  background: ${palette.gray2};
+  background: ${themedPalette.bg_element3};
   margin-bottom: 1.5rem;
 `;
 
@@ -36,19 +37,19 @@ const StartWritingButton = styled.button`
   height: 2.5rem;
   font-size: 1rem;
   border-radius: 4px;
-  border: 1px solid ${palette.teal6};
+  border: 1px solid ${themedPalette.primary1};
   display: flex;
   outline: none;
-  color: ${palette.teal6};
+  color: ${themedPalette.primary1};
   width: 100%;
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  background: white;
+  background: ${themedPalette.bg_page2};
   &:hover,
   &:focus {
-    background: ${palette.teal6};
-    color: white;
+    background: ${themedPalette.primary1};
+    color: ${themedPalette.button_text};
   }
 `;
 

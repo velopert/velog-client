@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 export type SettingEditButtonProps = {
@@ -22,7 +23,7 @@ const StyledButton = styled.button`
   display: inline;
   font-size: 1rem;
   line-height: 1.5;
-  color: ${palette.teal6};
+  color: ${themedPalette.primary1};
   text-decoration: underline;
   background: none;
   cursor: pointer;

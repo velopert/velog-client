@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import Skeleton from '../common/Skeleton';
 import SkeletonTexts from '../common/SkeletonTexts';
@@ -73,7 +74,7 @@ const Block = styled.div`
     font-size: 3rem;
     margin: 0;
     line-height: 1.5;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     ${media.small} {
       font-size: 2rem;
     }
@@ -83,7 +84,7 @@ const Block = styled.div`
     margin-bottom: 1rem;
     font-size: 1.125rem;
     line-height: 1.5;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     ${media.small} {
       margin-top: 0.5rem;
       margin-bottom: 0.5rem;
@@ -92,7 +93,7 @@ const Block = styled.div`
   }
   .count {
     margin-top: 1rem;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     font-size: 1rem;
   }
 `;

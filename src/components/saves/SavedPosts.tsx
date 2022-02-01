@@ -1,6 +1,7 @@
 import React from 'react';
 import useSavedPosts from './hooks/useSavedPosts';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import SavedPostItem from './SavedPostItem';
 import PopupOKCancel from '../common/PopupOKCancel';
@@ -13,17 +14,12 @@ const Empty = styled.div`
   padding-bottom: 5rem;
   text-align: center;
   font-size: 1.5rem;
-  color: ${palette.gray6};
+  color: ${themedPalette.text3};
 `;
 
 function SavedPosts(props: SavedPostsProps) {
-  const {
-    posts,
-    askRemove,
-    onAskRemove,
-    onConfirmRemove,
-    onCancelRemove,
-  } = useSavedPosts();
+  const { posts, askRemove, onAskRemove, onConfirmRemove, onCancelRemove } =
+    useSavedPosts();
 
   if (!posts) return null;
 
@@ -38,7 +34,7 @@ function SavedPosts(props: SavedPostsProps) {
   return (
     <>
       <SavedPostsBlock>
-        {posts.map(post => (
+        {posts.map((post) => (
           <SavedPostItem post={post} key={post.id} onRemove={onAskRemove} />
         ))}
       </SavedPostsBlock>

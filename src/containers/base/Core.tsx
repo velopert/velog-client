@@ -10,6 +10,8 @@ import { ToastContainer, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
 import gtag from '../../lib/gtag';
+import { useThemeEffect } from '../../components/base/hooks/useThemeEffect';
+import BodyTransition from '../../components/base/BodyTransition';
 
 interface OwnProps {}
 interface StateProps {
@@ -20,11 +22,12 @@ type CoreProps = OwnProps & StateProps & DispatchProps;
 
 const Core: React.FC<CoreProps> = ({ layer }) => {
   useUserLoader();
+  useThemeEffect();
 
   const history = useHistory();
 
   useEffect(() => {
-    const unregister = history.listen(location => {
+    const unregister = history.listen((location) => {
       // adds setTimeout for page title sync
       // is there any better solution?
       setTimeout(() => {
@@ -45,6 +48,7 @@ const Core: React.FC<CoreProps> = ({ layer }) => {
       <AuthModalContainer />
       <CommonPopup />
       <GlobalStyles />
+      <BodyTransition />
       <ToastContainer
         transition={Flip}
         position="top-right"
@@ -57,7 +61,7 @@ const Core: React.FC<CoreProps> = ({ layer }) => {
 };
 
 export default connect<StateProps, DispatchProps, OwnProps, RootState>(
-  state => ({
+  (state) => ({
     layer: state.core.layer,
   }),
 )(Core);

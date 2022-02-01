@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
 import { escapeForUrl } from '../../lib/utils';
@@ -19,7 +20,7 @@ const TagItem: React.FC<TagItemProps> = ({ name, link }) => {
 
 const tagStyle = css`
   margin-bottom: 0.875rem;
-  background: ${palette.gray1};
+  background: ${themedPalette.bg_element2};
   padding-left: 1rem;
   padding-right: 1rem;
   height: 2rem;
@@ -27,7 +28,7 @@ const tagStyle = css`
   display: inline-flex;
   align-items: center;
   margin-right: 0.875rem;
-  color: ${palette.teal7};
+  color: ${themedPalette.primary1};
   text-decoration: none;
   font-weight: 500;
   font-size: 1rem;
@@ -49,7 +50,7 @@ const TagDiv = styled.div`
 const TagLink = styled(Link)`
   ${tagStyle}
   &:hover {
-    background: ${palette.gray0};
+    background: ${themedPalette.bg_element2};
   }
 `;
 

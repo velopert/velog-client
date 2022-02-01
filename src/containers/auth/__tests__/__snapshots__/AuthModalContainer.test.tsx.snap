@@ -3,7 +3,7 @@
 exports[`AuthForm renders correctly 1`] = `
 <div>
   <div
-    class="sc-bdVaJa hcvBqP"
+    class="sc-bdvvtL UckFJ"
   >
     <div
       class="wrapper"
@@ -48,7 +48,7 @@ exports[`AuthForm renders correctly 1`] = `
           class="block-content"
         >
           <div
-            class="sc-EHOje eYRLqA"
+            class="sc-jRQBWg hamHQT"
           >
             <div
               class="upper-wrapper"
@@ -64,7 +64,7 @@ exports[`AuthForm renders correctly 1`] = `
                   회원가입
                 </h4>
                 <form
-                  class="sc-bwzfXH cYqiPl"
+                  class="sc-gsDKAQ kNdYxl"
                 >
                   <input
                     placeholder="이메일을 입력하세요."
@@ -84,10 +84,10 @@ exports[`AuthForm renders correctly 1`] = `
                   회원가입
                 </h4>
                 <div
-                  class="sc-bxivhb hYrwtB"
+                  class="sc-hKwDye eeUgzb"
                 >
                   <a
-                    class="sc-htpNat bNCvmd"
+                    class="sc-dkPtRN TiBWh"
                     href="http://localhost:5000/api/v2/auth/social/redirect/github?next=/"
                     style="background: rgb(39, 46, 51);"
                     tabindex="4"
@@ -97,7 +97,7 @@ exports[`AuthForm renders correctly 1`] = `
                     </svg>
                   </a>
                   <a
-                    class="sc-htpNat bUuZiL"
+                    class="sc-dkPtRN bWMNeL"
                     href="http://localhost:5000/api/v2/auth/social/redirect/google?next=/"
                     style="background: white;"
                     tabindex="5"
@@ -107,7 +107,7 @@ exports[`AuthForm renders correctly 1`] = `
                     </svg>
                   </a>
                   <a
-                    class="sc-htpNat bNCvmd"
+                    class="sc-dkPtRN TiBWh"
                     href="http://localhost:5000/api/v2/auth/social/redirect/facebook?next=/"
                     style="background: rgb(59, 89, 152);"
                     tabindex="6"

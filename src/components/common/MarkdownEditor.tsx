@@ -2,22 +2,25 @@ import React, { CSSProperties, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import CodeMirror, { EditorFromTextArea, Editor } from 'codemirror';
 import './atom-one-light.css';
+import './atom-one-dark.css';
 import 'codemirror/lib/codemirror.css';
-import palette from '../../lib/styles/palette';
+import { themedPalette } from '../../lib/styles/themes';
+
 import 'codemirror/mode/markdown/markdown';
 import 'codemirror/addon/display/placeholder';
+import { useTheme } from '../../lib/hooks/useTheme';
 
 const MarkdownEditorBlock = styled.div`
   .CodeMirror {
     height: auto;
     font-size: 1.125rem;
     line-height: 1.5;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     font-family: 'Fira Mono', monospace;
     /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', */
     .cm-header {
       line-height: 2;
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
     }
     .cm-header-1 {
       font-size: 2.5rem;
@@ -35,10 +38,10 @@ const MarkdownEditorBlock = styled.div`
     }
     .cm-strong,
     .cm-em {
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
     }
     .CodeMirror-placeholder {
-      color: ${palette.gray5};
+      color: ${themedPalette.text3};
       font-style: italic;
     }
   }
@@ -67,12 +70,14 @@ const MarkdownEditor = ({
     [onChangeMarkdown],
   );
 
+  const theme = useTheme();
+
   // initialize editor
   useEffect(() => {
     if (!textArea.current) return;
     const cm = CodeMirror.fromTextArea(textArea.current, {
       mode: 'markdown',
-      theme: 'one-light',
+      theme: `one-${theme}`,
       placeholder: '당신은 어떤 사람인가요? 당신에 대해서 알려주세요.',
       lineWrapping: true,
     });

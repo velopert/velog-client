@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { CheckIcon } from '../static/svg';
+import { themedPalette } from '../lib/styles/themes';
 import palette from '../lib/styles/palette';
 import Button from '../components/common/Button';
 import { RouteComponentProps } from 'react-router-dom';
@@ -42,7 +43,7 @@ const Block = styled.div`
   flex-direction: column;
   justify-content: center;
   svg {
-    fill: ${palette.teal5};
+    fill: ${themedPalette.primary2};
     width: 5rem;
     height: 5rem;
   }
@@ -54,7 +55,7 @@ const Block = styled.div`
     line-height: 1.5;
   }
   .button-wrapper {
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     margin-top: 1.5rem;
   }
 

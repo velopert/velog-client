@@ -22,7 +22,7 @@ const PublishSeriesConfigButtons: React.FC<PublishSeriesConfigButtonsProps> = ({
 }) => {
   return (
     <PublishSeriesConfigButtonsBlock>
-      <Button inline size="large" color="gray" onClick={onCancel}>
+      <Button inline size="large" color="transparent" onClick={onCancel}>
         취소
       </Button>
       <Button inline size="large" onClick={onConfirm} disabled={disableConfirm}>

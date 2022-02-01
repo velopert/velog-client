@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
 import media from '../../lib/styles/media';
@@ -12,7 +13,7 @@ const MainRightFooterBlock = styled.div`
   line-height: 1.5;
   font-size: 0.875rem;
   .links {
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     a {
       color: inherit;
       text-decoration: none;
@@ -23,13 +24,13 @@ const MainRightFooterBlock = styled.div`
     }
   }
   .copyright {
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
   }
 `;
 
 interface HomeRightFooterProps {}
 
-const HomeRightFooter: React.FC<HomeRightFooterProps> = props => {
+const HomeRightFooter: React.FC<HomeRightFooterProps> = (props) => {
   return (
     <MainRightFooterBlock>
       <div className="links">

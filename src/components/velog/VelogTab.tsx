@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import PlainNavLink from '../common/PlainNavLink';
 import media from '../../lib/styles/media';
@@ -30,12 +31,12 @@ const TabItem = styled(PlainNavLink)`
   font-size: 1.325rem;
   width: 8rem;
   height: 3rem;
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   text-decoration: none;
   transition: 0.25s color ease-in-out;
   font-weight: 600;
   &.active {
-    color: ${palette.teal5};
+    color: ${themedPalette.primary2};
     /* font-weight: bold; */
   }
   ${media.small} {
@@ -48,7 +49,7 @@ const TabItem = styled(PlainNavLink)`
 const Indicator = styled.div`
   width: 8rem;
   height: 2px;
-  background: ${palette.teal5};
+  background: ${themedPalette.primary2};
   position: absolute;
   bottom: -2px;
   transition: 0.25s left ease-in-out;

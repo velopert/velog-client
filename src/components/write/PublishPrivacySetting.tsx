@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import PublishSection from './PublishSection';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { GlobeIcon, LockIcon } from '../../static/svg';
 
@@ -21,9 +22,9 @@ const Button = styled.button<{ active: boolean }>`
   align-items: center;
   justify-content: flex-start;
   font-weight: bold;
-  background: white;
+  background: ${themedPalette.bg_element7};
   font-size: 1.125rem;
-  color: ${palette.gray6};
+  color: ${themedPalette.text3};
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.05);
   padding: 0;
   padding-left: 1rem;
@@ -31,13 +32,17 @@ const Button = styled.button<{ active: boolean }>`
   cursor: pointer;
   border: solid 1px transparent;
   &:hover {
-    background: #fdfdfd;
+    opacity: 0.7;
   }
-  ${props =>
+  ${(props) =>
     props.active &&
     css`
-      border: solid 1px ${palette.teal5};
-      color: ${palette.teal5};
+      border: solid 1px ${themedPalette.primary2};
+      color: ${themedPalette.primary2};
+      /* opacity: 1; */
+      &:hover {
+        opacity: 1;
+      }
     `}
 
   svg {

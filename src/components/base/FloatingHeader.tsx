@@ -6,6 +6,7 @@ import MainResponsive from '../main/MainResponsive';
 import { getScrollTop } from '../../lib/utils';
 import { Route } from 'react-router-dom';
 import ReadingListTab from '../readingList/ReadingListTab';
+import { themedPalette } from '../../lib/styles/themes';
 
 export type FloatingHeaderProps = {};
 
@@ -107,7 +108,7 @@ function FloatingHeader(props: FloatingHeaderProps) {
 const Block = styled.div`
   position: fixed;
   top: 0;
-  background: white;
+  background: ${themedPalette.bg_element1};
   width: 100%;
   z-index: 10;
 

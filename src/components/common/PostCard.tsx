@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import styled, { css } from 'styled-components';
 import RatioImage from './RatioImage';
 import { ellipsis } from '../../lib/styles/utils';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { LikeIcon } from '../../static/svg';
 import { PartialPost } from '../../lib/graphql/post';
@@ -25,7 +26,7 @@ function PostCard({ post, forHome, forPost }: PostCardProps) {
   const url = `/@${post.user.username}/${post.url_slug}`;
 
   const prefetch = usePrefetchPost(post.user.username, post.url_slug);
-  const prefetchTimeoutId = useRef<number | null>(null);
+  const prefetchTimeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const onMouseEnter = () => {
     prefetchTimeoutId.current = setTimeout(prefetch, 2000);
@@ -106,7 +107,7 @@ export function PostCardSkeleton({
       <div className="skeleton-thumbnail-wrapper">
         <Skeleton className="skeleton-thumbnail"></Skeleton>
       </div>
-      <Content clamp={true}>
+      <Content clamp={true} isSkeleton>
         <h4>
           <SkeletonTexts wordLengths={[2, 4, 3, 6, 5]} />
         </h4>
@@ -155,7 +156,7 @@ const StyledLink = styled(Link)`
 
 const Block = styled.div<{ forHome: boolean; forPost: boolean }>`
   width: 20rem;
-  background: white;
+  background: ${themedPalette.bg_element1};
   border-radius: 4px;
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.04);
   transition: 0.25s box-shadow ease-in, 0.25s transform ease-in;
@@ -195,7 +196,7 @@ const Block = styled.div<{ forHome: boolean; forPost: boolean }>`
   }
 `;
 
-const Content = styled.div<{ clamp: boolean }>`
+const Content = styled.div<{ clamp: boolean; isSkeleton?: boolean }>`
   padding: 1rem;
   display: flex;
   flex: 1;
@@ -206,8 +207,14 @@ const Content = styled.div<{ clamp: boolean }>`
     margin-bottom: 0.25rem;
     line-height: 1.5;
     word-break: break-word;
+
     ${ellipsis}
-    color: ${palette.gray9};
+    ${(props) =>
+      props.isSkeleton &&
+      css`
+        text-overflow: initial;
+      `}
+    color: ${themedPalette.text1};
     ${mediaQuery(767)} {
       white-space: initial;
     }
@@ -237,13 +244,13 @@ const Content = styled.div<{ clamp: boolean }>`
         height: 15.875rem;
       `} */
   
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     margin-bottom: 1.5rem;
   }
   .sub-info {
     font-size: 0.75rem;
     line-height: 1.5;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     .separator {
       margin-left: 0.25rem;
       margin-right: 0.25rem;
@@ -253,7 +260,7 @@ const Content = styled.div<{ clamp: boolean }>`
 
 const Footer = styled.div`
   padding: 0.625rem 1rem;
-  border-top: 1px solid ${palette.gray0};
+  border-top: 1px solid ${themedPalette.border4};
   display: flex;
   font-size: 0.75rem;
   line-height: 1.5;
@@ -272,9 +279,9 @@ const Footer = styled.div`
       margin-right: 0.5rem;
     }
     span {
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
       b {
-        color: ${palette.gray8};
+        color: ${themedPalette.text1};
       }
     }
   }

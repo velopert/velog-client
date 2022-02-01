@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { MdClose } from 'react-icons/md';
 import zIndexes from '../../lib/styles/zIndexes';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { undrawJoyride } from '../../static/images';
 import transitions from '../../lib/styles/transitions';
@@ -28,7 +29,7 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
       height: 100%;
     }
 
-    ${props =>
+    ${(props) =>
       props.visible
         ? css`
             animation: ${transitions.popInFromBottom} 0.4s forwards ease-in-out;
@@ -44,7 +45,7 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
         display: none;
       }
       width: 216px;
-      background: ${palette.gray1};
+      background: ${themedPalette.bg_element2};
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
@@ -58,14 +59,14 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
       .welcome {
         font-size: 1.75rem;
         margin-top: 1.5rem;
-        color: ${palette.gray7};
+        color: ${themedPalette.text2};
         text-align: center;
         font-weight: 600;
       }
     }
     .white-block {
       flex: 1;
-      background: white;
+      background: ${themedPalette.bg_page2};
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
@@ -76,7 +77,7 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
         display: flex;
         justify-content: flex-end;
         font-size: 1.5rem;
-        color: ${palette.gray6};
+        color: ${themedPalette.text3};
         margin-bottom: 2.25rem;
         svg {
           cursor: pointer;
@@ -106,7 +107,7 @@ const AuthModal: React.FC<AuthModalProps> = ({
 }) => {
   const [closed, setClosed] = useState(true);
   useEffect(() => {
-    let timeoutId: number | null = null;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
     if (visible) {
       setClosed(false);
     } else {

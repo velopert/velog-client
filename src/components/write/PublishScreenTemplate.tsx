@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import zIndexes from '../../lib/styles/zIndexes';
 import transitions from '../../lib/styles/transitions';
@@ -31,10 +32,10 @@ const PublishScreenTemplateBlock = styled.div<{ visible: boolean }>`
   top: 0;
   width: 100%;
   height: 100%;
-  background: ${palette.gray0};
+  background: ${themedPalette.bg_element2};
   z-index: ${zIndexes.PublishScreen};
   animation: ${transitions.slideUp} 0.25s forwards ease-in;
-  ${props =>
+  ${(props) =>
     props.visible
       ? css`
           animation: ${transitions.slideUp} 0.25s forwards ease-in;
@@ -66,7 +67,7 @@ const RightPane = styled(Pane)`
 const Separator = styled.div`
   width: 1px;
   min-height: 425px;
-  background: ${palette.gray2};
+  background: ${themedPalette.bg_element3};
   margin-left: 2rem;
   margin-right: 2rem;
   ${media.custom(767)} {
@@ -89,7 +90,7 @@ const PublishScreenTemplate: React.FC<PublishScreenTemplateProps> = ({
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    let timeoutId: null | number = null;
+    let timeoutId: null | ReturnType<typeof setTimeout> = null;
     if (visible) {
       setAnimate(true);
     } else if (!visible && animate) {

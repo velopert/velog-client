@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 
 import transitions from '../../lib/styles/transitions';
 import media from '../../lib/styles/media';
+import { themedPalette } from '../../lib/styles/themes';
 const EditorPanesBlock = styled.div`
   width: 100%;
   height: 100%;
@@ -15,7 +16,7 @@ const EditorPane = styled.div<{ shadow?: boolean }>`
   display: flex;
   flex-direction: column;
   position: relative;
-  ${props =>
+  ${(props) =>
     props.shadow &&
     css`
       z-index: 1;
@@ -46,7 +47,7 @@ const EditorPanes: React.FC<EditorPanesProps> = ({
         shadow
         data-testid="left"
         style={{
-          backgroundColor: theme === 'DARK' ? '#263238' : 'white',
+          backgroundColor: themedPalette.bg_page2,
         }}
       >
         {left}
@@ -54,7 +55,7 @@ const EditorPanes: React.FC<EditorPanesProps> = ({
       <RightPane
         data-testid="right"
         style={{
-          backgroundColor: theme === 'DARK' ? 'white' : '#fbfdfc',
+          backgroundColor: themedPalette.bg_element8,
         }}
       >
         {right}

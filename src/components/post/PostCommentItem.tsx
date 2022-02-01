@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { Comment } from '../../lib/graphql/post';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { formatDate } from '../../lib/utils';
 import Typography from '../common/Typography';
@@ -18,7 +19,7 @@ const PostCommentItemBlock = styled.div`
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
   & + & {
-    border-top: 1px solid ${palette.gray2};
+    border-top: 1px solid ${themedPalette.border4};
   }
 `;
 const CommentHead = styled.div`
@@ -49,7 +50,7 @@ const CommentHead = styled.div`
       .username {
         font-size: 1rem;
         font-weight: bold;
-        color: ${palette.gray8};
+        color: ${themedPalette.text1};
         ${media.small} {
           font-size: 0.875rem;
         }
@@ -58,13 +59,13 @@ const CommentHead = styled.div`
           text-decoration: none;
           &:hover {
             text-decoration: underline;
-            color: ${palette.gray7};
+            color: ${themedPalette.text2};
           }
         }
       }
       .date {
         margin-top: 0.5rem;
-        color: ${palette.gray6};
+        color: ${themedPalette.text3};
         font-size: 0.875rem;
         ${media.small} {
           font-size: 0.75rem;
@@ -78,11 +79,11 @@ const CommentHead = styled.div`
       font-size: 0.75rem;
     }
 
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     span {
       cursor: pointer;
       &:hover {
-        color: ${palette.gray5};
+        color: ${themedPalette.text3};
         text-decoration: underline;
       }
     }
@@ -101,10 +102,10 @@ const CommentText = styled.div<{ deleted: boolean }>`
     }
   }
 
-  ${props =>
+  ${(props) =>
     props.deleted &&
     css`
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
       font-style: italic;
     `}
 `;
@@ -114,14 +115,14 @@ const CommentFoot = styled.div`
 const TogglerBlock = styled.div`
   display: inline-flex;
   align-items: center;
-  color: ${palette.teal6};
+  color: ${themedPalette.primary1};
   font-weight: bold;
   svg {
     margin-right: 0.5rem;
   }
   cursor: pointer;
   &:hover {
-    color: ${palette.teal5};
+    color: ${themedPalette.primary2};
   }
 `;
 

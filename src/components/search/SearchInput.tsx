@@ -1,5 +1,6 @@
 import React, { useRef, useMemo, useEffect } from 'react';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { SearchIcon2 } from '../../static/svg';
 import useToggle from '../../lib/hooks/useToggle';
@@ -10,7 +11,7 @@ import media from '../../lib/styles/media';
 const SearchInputBlock = styled.div<{ focus: boolean; large?: boolean }>`
   display: flex;
   height: 2.25rem;
-  border: 1px solid ${palette.gray5};
+  border: 1px solid ${themedPalette.border2};
   padding-left: 0.625rem;
   padding-right: 0.625rem;
   align-items: center;
@@ -34,26 +35,27 @@ const SearchInputBlock = styled.div<{ focus: boolean; large?: boolean }>`
     padding: 0;
     border: none;
     outline: 0;
-    color: ${palette.gray7};
+    background: transparent;
+    color: ${themedPalette.text2};
     min-width: 0;
     &::placeholder {
-      color: ${palette.gray5};
+      color: ${themedPalette.text3};
     }
   }
 
-  ${props =>
+  ${(props) =>
     props.focus &&
     css`
-      border: 1px solid ${palette.gray8};
+      border: 1px solid ${themedPalette.border1};
       svg {
         fill: ${palette.gray9};
       }
       input {
-        color: ${palette.gray9};
+        color: ${themedPalette.text1};
       }
     `}
 
-  ${props =>
+  ${(props) =>
     props.large &&
     css`
       height: 4rem;

@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import TextareaAutosize from 'react-textarea-autosize';
 import Button from '../common/Button';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { customFont } from '../../lib/styles/utils';
 import media from '../../lib/styles/media';
@@ -17,21 +18,22 @@ const StyledTextarea = styled(TextareaAutosize)`
   padding: 1rem;
   padding-bottom: 1.5rem;
   outline: none;
-  border: 1px solid ${palette.gray2};
+  border: 1px solid ${themedPalette.border4};
   margin-bottom: 1.5rem;
   width: 100%;
   border-radius: 4px;
   min-height: 6.125rem;
   font-size: 1rem;
   ${customFont};
-  color: ${palette.gray9};
+  color: ${themedPalette.text1};
   &::placeholder {
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
   }
   line-height: 1.75;
   ${media.small} {
     margin-bottom: 1rem;
   }
+  background: ${themedPalette.bg_element1};
 `;
 
 export interface PostCommentsWriteProps {
@@ -58,7 +60,7 @@ const PostCommentsWrite: React.FC<PostCommentsWriteProps> = ({
       />
       <div className="buttons-wrapper">
         {onCancel && (
-          <Button onClick={onCancel} inline color="gray">
+          <Button onClick={onCancel} inline color="transparent">
             취소
           </Button>
         )}

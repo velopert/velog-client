@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import OutsideClickHandler from 'react-outside-click-handler';
 import useInput from '../../lib/hooks/useInput';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import RoundButton from '../common/RoundButton';
 import { MdDelete } from 'react-icons/md';
@@ -13,24 +14,24 @@ const AddLinkBlock = styled.div`
   & > .wrapper {
     margin-top: 1rem;
     width: 20rem;
-    background: white;
+    background: ${themedPalette.bg_element1};
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08);
     border-radius: 4px;
     .top-wrapper {
       margin-bottom: 1rem;
       .title {
         font-weight: bold;
-        color: ${palette.gray8};
+        color: ${themedPalette.text1};
       }
       display: flex;
       justify-content: space-between;
       align-items: center;
       svg {
         font-size: 1.5rem;
-        color: ${palette.gray5};
+        color: ${themedPalette.text3};
         cursor: pointer;
         &:hover {
-          color: ${palette.gray9};
+          color: ${themedPalette.text1};
         }
       }
     }
@@ -39,6 +40,8 @@ const AddLinkBlock = styled.div`
       display: flex;
       align-items: center;
       input {
+        color: ${themedPalette.text1};
+        background: transparent;
         flex: 1;
         border: none;
         outline: none;
@@ -111,7 +114,7 @@ const AddLink: React.FC<AddLinkProps> = ({
               placeholder="URL 을 입력하세요"
               ref={input}
             />
-            <RoundButton color="darkGray" size="SMALL">
+            <RoundButton color="gray" size="SMALL">
               확인
             </RoundButton>
           </form>

@@ -21,6 +21,7 @@ import {
   usePostViewerPrefetch,
 } from './PostViewerProvider';
 import media from '../../lib/styles/media';
+import { themedPalette } from '../../lib/styles/themes';
 
 const PostSeriesInfoBlock = styled.div`
   margin-top: 2rem;
@@ -28,22 +29,25 @@ const PostSeriesInfoBlock = styled.div`
   ${media.small} {
     padding: 1rem;
   }
-  background: ${palette.gray0};
+  background: ${themedPalette.bg_element2};
   border-radius: 8px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.06);
   position: relative;
+  svg {
+    color: ${themedPalette.primary1};
+  }
   h2 {
     a {
       text-decoration: none;
       color: inherit;
       &:hover {
-        color: ${palette.gray6};
+        color: ${themedPalette.text3};
         text-decoration: underline;
       }
     }
     margin-top: 0;
     /* font-family: 'Spoqa Han Sans'; */
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     font-weight: bold;
     padding-right: 2rem;
     font-size: 1.5rem;
@@ -70,7 +74,7 @@ const Right = styled.div`
   align-items: center;
   .series-number {
     font-size: 0.875rem;
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
   }
 `;
 
@@ -78,18 +82,18 @@ const Fold = styled.div`
   display: flex;
   align-items: center;
   margin-left: -5px;
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   line-height: 1;
   cursor: pointer;
   svg {
     margin-right: 0.25rem;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     font-size: 1.5rem;
   }
   &:hover {
-    color: ${palette.gray9};
+    color: ${themedPalette.text1};
     svg {
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
     }
   }
 `;
@@ -115,13 +119,13 @@ const NavigateButton = styled.button`
   align-items: center;
   justify-content: center;
   font-size: 1.25rem;
-  color: ${palette.teal6};
-  background: white;
-  border: 1px solid ${palette.gray1};
+  color: ${themedPalette.primary1};
+  background: ${themedPalette.bg_element1};
+  border: 1px solid ${themedPalette.border4};
   padding: 0;
   cursor: pointer;
   &:hover {
-    background: ${palette.teal6};
+    background: ${themedPalette.primary1};
     color: white;
   }
 
@@ -131,9 +135,10 @@ const NavigateButton = styled.button`
 
   &:disabled {
     cursor: default;
-    background: ${palette.gray1};
-    border: 1px solid ${palette.gray2};
-    color: ${palette.gray4};
+    background: ${themedPalette.bg_element2};
+    border: 1px solid ${themedPalette.border4};
+    color: ${themedPalette.text3};
+    opacity: 0.3;
   }
 `;
 
@@ -142,7 +147,7 @@ const PostList = styled.ol`
   line-height: 1.8;
   font-size: 1rem;
   /* font-family: 'Spoqa Han Sans'; */
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   counter-reset: item;
   ${media.small} {
     font-size: 0.875rem;
@@ -154,7 +159,7 @@ const PostList = styled.ol`
   li:before {
     content: counter(item) '. ';
     counter-increment: item;
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
     font-style: italic;
     margin-right: 0.25rem;
   }
@@ -162,7 +167,7 @@ const PostList = styled.ol`
     color: inherit;
     text-decoration: none;
     &:hover {
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
       text-decoration: underline;
     }
   }
@@ -193,7 +198,7 @@ const PostSeriesInfo: React.FC<PostSeriesInfoProps> = ({
   urlSlug,
 }) => {
   const currentIndex = useMemo(
-    () => posts.findIndex(post => post.id === postId),
+    () => posts.findIndex((post) => post.id === postId),
     [postId, posts],
   );
   const [open, toggle, setValue] = useBoolean(false);
@@ -217,13 +222,13 @@ const PostSeriesInfo: React.FC<PostSeriesInfoProps> = ({
   }, []);
 
   const navigatePrev = () => {
-    const prevPost = posts[posts.findIndex(post => post.id === postId) - 1];
+    const prevPost = posts[posts.findIndex((post) => post.id === postId) - 1];
     if (!prevPost) return;
     history.push(`/@${username}/${prevPost.url_slug}`);
   };
 
   const navigateNext = () => {
-    const nextPos = posts[posts.findIndex(post => post.id === postId) + 1];
+    const nextPos = posts[posts.findIndex((post) => post.id === postId) + 1];
     if (!nextPos) return;
     history.push(`/@${username}/${nextPos.url_slug}`);
   };
@@ -240,11 +245,14 @@ const PostSeriesInfo: React.FC<PostSeriesInfoProps> = ({
       <SeriesImage className="series-corner-image" />
       {open && (
         <PostList>
-          {posts.map(post => (
+          {posts.map((post) => (
             <li key={post.id}>
               <NavLink
                 to={`/@${username}/${post.url_slug}`}
-                activeStyle={{ color: palette.teal6, fontWeight: 'bold' }}
+                activeStyle={{
+                  color: themedPalette.primary1,
+                  fontWeight: 'bold',
+                }}
               >
                 {post.title}
               </NavLink>

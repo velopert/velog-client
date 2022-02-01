@@ -34,9 +34,10 @@ const RegisterFormContainer: React.FC<RegisterFormContainerProps> = ({
     null,
   );
 
-  const [onGetRegisterToken, , registerToken] = useRequest<
-    GetRegisterTokenResponse
-  >((code: string) => getRegisterToken(code));
+  const [onGetRegisterToken, , registerToken] =
+    useRequest<GetRegisterTokenResponse>((code: string) =>
+      getRegisterToken(code),
+    );
 
   const [onLocalRegister] = useRequest<AuthResponse>(localEmailRegister);
 
@@ -79,9 +80,7 @@ const RegisterFormContainer: React.FC<RegisterFormContainerProps> = ({
       },
       shortBio: (text: string) => {
         if (text.length > 140) {
-          return `한 줄 소개는 140자 미만으로 입력해주세요. (현재 ${
-            text.length
-          }자)`;
+          return `한 줄 소개는 140자 미만으로 입력해주세요. (현재 ${text.length}자)`;
         }
       },
     };
@@ -100,7 +99,7 @@ const RegisterFormContainer: React.FC<RegisterFormContainerProps> = ({
     try {
       if (query.code) {
         // local email register
-        const formWithoutEmail = { ...form };
+        const formWithoutEmail = { ...form } as Partial<RegisterFormType>;
         delete formWithoutEmail.email;
         await onLocalRegister({
           registerToken: registerToken && registerToken.register_token,
@@ -115,7 +114,7 @@ const RegisterFormContainer: React.FC<RegisterFormContainerProps> = ({
         });
       }
     } catch (e) {
-      if (e.response.status === 409) {
+      if ((e as any).response.status === 409) {
         setError('이미 존재하는 아이디입니다.');
         return;
       }

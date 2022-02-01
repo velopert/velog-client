@@ -41,6 +41,7 @@ import embedPlugin from '../../lib/remark/embedPlugin';
 import { Helmet } from 'react-helmet-async';
 import { toast } from 'react-toastify';
 import { usePrevious } from 'react-use';
+import { useTheme } from '../../lib/hooks/useTheme';
 
 export type MarkdownEditorContainerProps = {};
 
@@ -59,9 +60,8 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     tags,
   } = useSelector((state: RootState) => state.write);
   const [writePost] = useMutation<WritePostResponse>(WRITE_POST);
-  const [createPostHistory] = useMutation<CreatePostHistoryResponse>(
-    CREATE_POST_HISTORY,
-  );
+  const [createPostHistory] =
+    useMutation<CreatePostHistoryResponse>(CREATE_POST_HISTORY);
   const [editPost] = useMutation<EditPostResult>(EDIT_POST);
 
   const [lastSavedData, setLastSavedData] = useState({
@@ -256,6 +256,8 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
 
   useSaveHotKey(() => onTempSave(true));
 
+  const theme = useTheme();
+
   return (
     <>
       <Helmet>
@@ -279,6 +281,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
             edit={!!postId && !isTemp}
           />
         }
+        theme={theme}
       />
       <DragDropUpload onUpload={onDragDropUpload} />
       <PasteUpload onUpload={onDragDropUpload} />

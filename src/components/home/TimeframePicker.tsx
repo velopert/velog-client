@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { useTransition, animated } from 'react-spring';
 import OutsideClickHandler from 'react-outside-click-handler';
@@ -12,7 +13,7 @@ export type TimeframePickerProps = {
 };
 
 function TimeframePicker({ visible, onClose }: TimeframePickerProps) {
-  const transition = useTransition(visible, null, {
+  const transition = useTransition(visible, {
     from: {
       opacity: 0,
       transform: 'scale(0.8)',
@@ -35,11 +36,11 @@ function TimeframePicker({ visible, onClose }: TimeframePickerProps) {
 
   return (
     <>
-      {transition.map(({ item, key, props }) =>
+      {transition((styles, item) =>
         item ? (
-          <Aligner key={key}>
-            <OutsideClickHandler onOutsideClick={onClose} key={key}>
-              <Block style={props} onClick={onClose}>
+          <Aligner>
+            <OutsideClickHandler onOutsideClick={onClose}>
+              <Block style={styles} onClick={onClose}>
                 <ul>
                   {timeframes.map(([value, text]) => (
                     <li
@@ -70,8 +71,8 @@ const Block = styled(animated.div)`
   margin-top: 0.5rem;
   width: 12rem;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
-  background: white;
-  color: ${palette.gray9};
+  background: ${themedPalette.bg_element1};
+  color: ${themedPalette.text1};
   transform-origin: top right;
   ul {
     list-style: none;
@@ -81,7 +82,7 @@ const Block = styled(animated.div)`
   li {
     cursor: pointer;
     &:hover {
-      background: ${palette.gray0};
+      background: ${themedPalette.bg_element2};
     }
     font-weight: 600;
 
@@ -89,11 +90,11 @@ const Block = styled(animated.div)`
     padding: 0.75rem 1rem;
 
     &.active {
-      color: ${palette.teal6};
+      color: ${themedPalette.primary1};
     }
   }
   li + li {
-    border-top: 1px solid ${palette.gray1};
+    border-top: 1px solid ${themedPalette.border4};
   }
   .contact {
     border-top: 1px solid #f1f3f5;
@@ -103,7 +104,7 @@ const Block = styled(animated.div)`
       font-size: 0.75rem;
     }
     .email {
-      color: ${palette.gray8};
+      color: ${themedPalette.text1};
       font-size: 0.75rem;
     }
   }

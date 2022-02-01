@@ -3,7 +3,7 @@
 exports[`MarkdownEditor matches snapshot 1`] = `
 <div>
   <div
-    class="sc-jTzLTM dazVNt"
+    class="sc-crHmcD fvyxtK"
     data-testid="codemirror"
   >
     <div
@@ -13,28 +13,28 @@ exports[`MarkdownEditor matches snapshot 1`] = `
         style="max-height: 254px; opacity: 1;"
       >
         <div
-          class="sc-jzJRlG gdCrHt"
+          class="sc-bqiRlB bUVBLG"
         >
           <textarea
-            class="sc-bwzfXH jEYIOR"
+            class="sc-gsDKAQ jwmzLz"
             placeholder="제목을 입력하세요"
             style="height: 0px;"
           />
           <div
-            class="sc-fjdhpX iiWqjF"
+            class="sc-egiyK dYoQJS"
           />
         </div>
       </div>
       <div
-        class="sc-htpNat kHBKrH"
+        class="sc-dkPtRN fDVUCr"
         id="toolbar"
       >
         <button
-          class="sc-EHOje rmILB ql-header"
+          class="sc-eCImPb dOviXd ql-header"
           value="1"
         >
           <div
-            class="sc-ifAKCX eKNCNY"
+            class="sc-hKwDye iUWBja"
           >
             H
             <span>
@@ -43,11 +43,11 @@ exports[`MarkdownEditor matches snapshot 1`] = `
           </div>
         </button>
         <button
-          class="sc-EHOje rmILB ql-header"
+          class="sc-eCImPb dOviXd ql-header"
           value="2"
         >
           <div
-            class="sc-ifAKCX eKNCNY"
+            class="sc-hKwDye iUWBja"
           >
             H
             <span>
@@ -56,11 +56,11 @@ exports[`MarkdownEditor matches snapshot 1`] = `
           </div>
         </button>
         <button
-          class="sc-EHOje rmILB ql-header"
+          class="sc-eCImPb dOviXd ql-header"
           value="3"
         >
           <div
-            class="sc-ifAKCX eKNCNY"
+            class="sc-hKwDye iUWBja"
           >
             H
             <span>
@@ -69,11 +69,11 @@ exports[`MarkdownEditor matches snapshot 1`] = `
           </div>
         </button>
         <button
-          class="sc-EHOje rmILB ql-header"
+          class="sc-eCImPb dOviXd ql-header"
           value="4"
         >
           <div
-            class="sc-ifAKCX eKNCNY"
+            class="sc-hKwDye iUWBja"
           >
             H
             <span>
@@ -82,10 +82,10 @@ exports[`MarkdownEditor matches snapshot 1`] = `
           </div>
         </button>
         <div
-          class="sc-bZQynM cbLeeV"
+          class="sc-jRQBWg iuRCxC"
         />
         <button
-          class="sc-EHOje rmILB ql-bold"
+          class="sc-eCImPb dOviXd ql-bold"
         >
           <svg
             fill="currentColor"
@@ -102,7 +102,7 @@ exports[`MarkdownEditor matches snapshot 1`] = `
           </svg>
         </button>
         <button
-          class="sc-EHOje rmILB ql-italic"
+          class="sc-eCImPb dOviXd ql-italic"
         >
           <svg
             fill="currentColor"
@@ -119,7 +119,7 @@ exports[`MarkdownEditor matches snapshot 1`] = `
           </svg>
         </button>
         <button
-          class="sc-EHOje rmILB ql-strike"
+          class="sc-eCImPb dOviXd ql-strike"
         >
           <svg
             fill="currentColor"
@@ -136,10 +136,10 @@ exports[`MarkdownEditor matches snapshot 1`] = `
           </svg>
         </button>
         <div
-          class="sc-bZQynM cbLeeV"
+          class="sc-jRQBWg iuRCxC"
         />
         <button
-          class="sc-EHOje rmILB ql-blockquote"
+          class="sc-eCImPb dOviXd ql-blockquote"
         >
           <svg
             fill="currentColor"
@@ -156,7 +156,7 @@ exports[`MarkdownEditor matches snapshot 1`] = `
           </svg>
         </button>
         <button
-          class="sc-EHOje rmILB ql-link"
+          class="sc-eCImPb dOviXd ql-link"
         >
           <svg
             fill="currentColor"
@@ -173,7 +173,7 @@ exports[`MarkdownEditor matches snapshot 1`] = `
           </svg>
         </button>
         <button
-          class="sc-EHOje rmILB ql-image"
+          class="sc-eCImPb dOviXd ql-image"
         >
           <svg
             fill="currentColor"
@@ -190,7 +190,7 @@ exports[`MarkdownEditor matches snapshot 1`] = `
           </svg>
         </button>
         <button
-          class="sc-EHOje rmILB ql-code-block"
+          class="sc-eCImPb dOviXd ql-code-block"
         >
           <svg
             fill="currentColor"
@@ -211,7 +211,7 @@ exports[`MarkdownEditor matches snapshot 1`] = `
         />
       </div>
       <div
-        class="sc-cSHVUG jOkdze"
+        class="sc-ksdxgE nNrgZ"
       >
         <textarea
           style="display: none;"
@@ -321,7 +321,7 @@ exports[`MarkdownEditor matches snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-kAzzGY wRxqq"
+      class="sc-hBUSln jOEyua"
       style="width: 50%;"
     />
   </div>

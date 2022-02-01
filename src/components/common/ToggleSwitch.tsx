@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { useSpring, animated } from 'react-spring';
-
 
 export type ToggleSwitchProps = {
   name?: string;
@@ -27,7 +27,7 @@ function ToggleSwitch({ value, name, onChange }: ToggleSwitchProps) {
   });
 
   const toggle = () => {
-    setLocalValue(v => !v);
+    setLocalValue((v) => !v);
   };
 
   useEffect(() => {
@@ -59,20 +59,20 @@ const Block = styled.div<{ active: boolean }>`
   align-items: center;
   width: 2.875rem;
   height: 1.5rem;
-  background: ${palette.gray2};
+  background: ${palette.gray6};
   transition: 0.125s all ease-in;
   border-radius: 1.125rem;
   padding: 0.125rem;
-  ${props =>
+  ${(props) =>
     props.active &&
     css`
-      background: ${palette.teal5};
+      background: ${themedPalette.primary2};
     `}
   .circle {
     width: 1.25rem;
     height: 1.25rem;
     border-radius: 0.625rem;
-    background: white;
+    background: ${themedPalette.bg_element1};
     box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
   }
 `;

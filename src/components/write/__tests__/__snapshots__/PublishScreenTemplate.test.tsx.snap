@@ -3,21 +3,21 @@
 exports[`PublishScreenTemplate matches snapshot 1`] = `
 <div>
   <div
-    class="sc-bdVaJa cnqWNu"
+    class="sc-bdvvtL iujxMQ"
   >
     <div
-      class="sc-bwzfXH gMgEWS"
+      class="sc-gsDKAQ btgcLd"
     >
       <div
-        class="sc-htpNat iigZIp"
+        class="sc-dkPtRN gKHqWx"
       >
         left
       </div>
       <div
-        class="sc-ifAKCX dZhikv"
+        class="sc-eCImPb eIgRed"
       />
       <div
-        class="sc-htpNat sc-bxivhb djjBWZ"
+        class="sc-dkPtRN sc-hKwDye gKHqWx AlDOn"
       >
         right
       </div>

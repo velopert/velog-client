@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import OutsideClickHandler from 'react-outside-click-handler';
 import HeaderUserMenuItem from './HeaderUserMenuItem';
 import media from '../../lib/styles/media';
+import { themedPalette } from '../../lib/styles/themes';
 
 const HeaderUserMenuBlock = styled.div`
   position: absolute;
@@ -13,7 +14,7 @@ const HeaderUserMenuBlock = styled.div`
     position: relative;
     z-index: 5;
     width: 12rem;
-    background: white;
+    background: ${themedPalette.bg_element1};
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
 
     .mobile-only {

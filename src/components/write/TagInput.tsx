@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import transitions from '../../lib/styles/transitions';
 import { mediaQuery } from '../../lib/styles/media';
@@ -90,13 +91,13 @@ const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
   );
 
   const onRemove = (tag: string) => {
-    const nextTags = tags.filter(t => t !== tag);
+    const nextTags = tags.filter((t) => t !== tag);
     setTags(nextTags);
   };
 
   return (
     <TagInputBlock>
-      {tags.map(tag => (
+      {tags.map((tag) => (
         <TagItem key={tag} onClick={() => onRemove(tag)}>
           {tag}
         </TagItem>
@@ -116,7 +117,7 @@ const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
 };
 
 function Help({ focus }: { focus: boolean }) {
-  const transitions = useTransition(focus, null, {
+  const transitions = useTransition(focus, {
     from: { opacity: 0, transform: 'translateY(-1rem)' },
     enter: { opacity: 1, transform: 'translateY(0rem)' },
     leave: { opacity: 0, transform: 'translateY(-1rem)' },
@@ -128,9 +129,9 @@ function Help({ focus }: { focus: boolean }) {
 
   return (
     <HelpBlock>
-      {transitions.map(({ item, key, props }) =>
+      {transitions((styles, item) =>
         item ? (
-          <animated.div className="inside" style={props} key={key}>
+          <animated.div className="inside" style={styles}>
             쉼표 혹은 엔터를 입력하여 태그를 등록 할 수 있습니다.
             <br />
             등록된 태그를 클릭하면 삭제됩니다.
@@ -145,7 +146,7 @@ const HelpBlock = styled.div`
   display: block;
   width: 100%;
 
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   transition: ease-in 0.125s;
 
   & > .inside {
@@ -160,7 +161,7 @@ const HelpBlock = styled.div`
 `;
 
 const TagInputBlock = styled.div`
-  color: ${palette.gray8};
+  color: ${themedPalette.text1};
   font-size: 1.125rem;
 
   display: flex;
@@ -168,10 +169,11 @@ const TagInputBlock = styled.div`
   [contenteditable='true']:empty:before {
     content: attr(placeholder);
     display: block; /* For Firefox */
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
   }
 `;
 const StyledInput = styled.input`
+  background: transparent;
   display: inline-flex;
   outline: none;
   cursor: text;
@@ -184,10 +186,11 @@ const StyledInput = styled.input`
   margin-bottom: 0.75rem;
   min-width: 8rem;
   border: none;
+  color: ${themedPalette.text1};
 `;
 
 const Tag = styled.div`
-  color: ${palette.gray9};
+  color: ${themedPalette.text1};
   font-size: 1rem;
   display: inline-flex;
   align-items: center;
@@ -195,8 +198,8 @@ const Tag = styled.div`
   border-radius: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  background: ${palette.gray1};
-  color: ${palette.teal7};
+  background: ${themedPalette.bg_element2};
+  color: ${themedPalette.primary1};
   margin-right: 0.75rem;
   transition: ease-in 0.125s;
   cursor: pointer;

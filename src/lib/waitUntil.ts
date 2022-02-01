@@ -16,7 +16,7 @@ const waitUntil = (
 ) => {
   const { interval, timeout } = { ...defaultOptions, ...options };
   const promise = new Promise((resolve, reject) => {
-    let timeoutId: null | number = null;
+    let timeoutId: null | ReturnType<typeof setTimeout> = null;
 
     setTimeout(() => {
       const e = new Error('waitUntil time out');
@@ -29,7 +29,7 @@ const waitUntil = (
 
     const check = () => {
       if (conditionCallback()) {
-        return resolve();
+        return resolve(null);
       }
       timeoutId = setTimeout(check, interval);
     };

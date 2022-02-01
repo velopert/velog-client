@@ -7,6 +7,7 @@ import {
   GET_RECOMMENDED_POST,
   PartialPost,
 } from '../../lib/graphql/post';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import VelogResponsive from '../../components/velog/VelogResponsive';
 import { userThumbnail } from '../../static/images';
@@ -154,7 +155,7 @@ function RelatedPostsForGuest({
 const Wrapper = styled(VelogResponsive)`
   h4 {
     font-size: 1.125rem;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
   }
   margin-top: 4rem;
   margin-bottom: 3rem;
@@ -212,7 +213,7 @@ const Item = styled.div`
     text-overflow: ellipsis;
     text-decoration: none;
     color: inherit;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
   }
 `;
 
@@ -255,7 +256,7 @@ const StyledRowLink = styled(Link)`
     margin-top: 0;
     margin-bottom: 0;
     font-size: 0.75rem;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     font-size: 0.75rem;
 
     line-height: 1.5;
@@ -270,7 +271,7 @@ const StyledRowLink = styled(Link)`
     height: 2.0625rem;
     overflow: hidden;
     word-break: keep-all;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     -webkit-box-orient: vertical;
   }
 `;
@@ -281,7 +282,7 @@ const StyledLink = styled(Link)`
   color: inherit;
   &:hover {
     text-decoration: underline;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
   }
 `;
 

@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { buttonColorMap } from '../../lib/styles/palette';
 import { Route } from 'react-router';
+import { themedPalette } from '../../lib/styles/themes';
 
 type ButtonSize = 'SMALL' | 'DEFAULT' | 'LARGE';
 
@@ -13,7 +14,7 @@ type RoundButtonBlockProps = {
 };
 
 const RoundButtonBlock = styled.button<RoundButtonBlockProps>`
-  ${props =>
+  ${(props) =>
     props.inline &&
     css`
       & + & {
@@ -21,7 +22,7 @@ const RoundButtonBlock = styled.button<RoundButtonBlockProps>`
       }
     `}
 
-  ${props =>
+  ${(props) =>
     props.size === 'SMALL' &&
     css`
       height: 1.5rem;
@@ -30,7 +31,7 @@ const RoundButtonBlock = styled.button<RoundButtonBlockProps>`
       font-size: 0.875rem;
       border-radius: 0.75rem;
     `};
-  ${props =>
+  ${(props) =>
     props.size === 'DEFAULT' &&
     css`
       height: 2rem;
@@ -39,7 +40,7 @@ const RoundButtonBlock = styled.button<RoundButtonBlockProps>`
       font-size: 1rem;
       border-radius: 1rem;
     `};
-  ${props =>
+  ${(props) =>
     props.size === 'LARGE' &&
     css`
       height: 3rem;
@@ -54,21 +55,21 @@ const RoundButtonBlock = styled.button<RoundButtonBlockProps>`
   outline: none;
   font-weight: bold;
   word-break: keep-all;
-  background: ${props => buttonColorMap[props.color].background};
-  color: ${props => buttonColorMap[props.color].color};
+  background: ${(props) => buttonColorMap[props.color].background};
+  color: ${(props) => buttonColorMap[props.color].color};
   &:hover {
-    background: ${props => buttonColorMap[props.color].hoverBackground};
+    background: ${(props) => buttonColorMap[props.color].hoverBackground};
   }
 
-  ${props =>
+  ${(props) =>
     props.border &&
     css<RoundButtonBlockProps>`
-      background: white;
-      border: 1px solid ${props => buttonColorMap[props.color].background};
-      color: ${props => buttonColorMap[props.color].background};
+      background: ${themedPalette.bg_element2};
+      border: 1px solid ${(props) => buttonColorMap[props.color].background};
+      color: ${(props) => buttonColorMap[props.color].background};
       &:hover {
-        background: ${props => buttonColorMap[props.color].background};
-        color: white;
+        background: ${(props) => buttonColorMap[props.color].background};
+        color: ${themedPalette.button_text};
       }
     `}
 
@@ -106,7 +107,7 @@ const RoundButton: React.FC<RoundButtonProps> = ({
         render={({ history }) => (
           <RoundButtonBlock
             color={color}
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
               history.push(to);
             }}

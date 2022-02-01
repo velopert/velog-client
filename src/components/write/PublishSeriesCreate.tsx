@@ -1,5 +1,6 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import OutsideClickHandler from 'react-outside-click-handler';
 import Button from '../common/Button';
@@ -25,11 +26,11 @@ const fadeOut = keyframes`
 `;
 
 const PublishSeriesCreateBlock = styled.form<{ open: boolean }>`
-  background: ${palette.gray2};
+  background: ${themedPalette.bg_element3};
   padding: 1rem;
   height: 4rem;
   transition: 0.125s all ease-in;
-  ${props =>
+  ${(props) =>
     props.open &&
     css`
       height: 9rem;
@@ -45,9 +46,10 @@ const Input = styled.input`
   border: none;
   outline: none;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.03);
-  color: ${palette.gray8};
+  background: ${themedPalette.bg_element1};
+  color: ${themedPalette.text1};
   &::placeholder {
-    color: ${palette.gray5};
+    color: ${themedPalette.text3};
   }
 `;
 
@@ -59,14 +61,15 @@ const URLInput = styled.div`
   font-size: 0.75rem;
   border-radius: 2px;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.03);
-  background: white;
-  color: ${palette.gray6};
+  background: ${themedPalette.bg_element1};
+  color: ${themedPalette.text3};
   input {
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     flex: 1;
     outline: none;
     border: none;
     font-size: inherit;
+    background: transparent;
   }
 `;
 
@@ -77,7 +80,7 @@ const OpenBlock = styled.div<{ disappear: boolean }>`
   animation-name: ${fadeIn};
   animation-fill-mode: forwards;
 
-  ${props =>
+  ${(props) =>
     props.disappear &&
     css`
       animation-name: ${fadeOut};
@@ -111,7 +114,7 @@ const PublishSeriesCreate: React.FC<PublishSeriesCreateProps> = ({
   const [defaultUrlSlug, setDefaultUrlSlug] = useState('');
 
   useEffect(() => {
-    let timeoutId: number | null = null;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
     if (open) {
       timeoutId = setTimeout(() => setShowOpenBlock(true), 125);
     } else {
@@ -175,7 +178,7 @@ const PublishSeriesCreate: React.FC<PublishSeriesCreateProps> = ({
               />
             </URLInput>
             <Buttons>
-              <Button inline color="darkGray" onClick={onHide} type="button">
+              <Button inline color="transparent" onClick={onHide} type="button">
                 취소
               </Button>
               <Button inline color="teal" type="submit">

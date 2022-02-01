@@ -1,6 +1,7 @@
 import React from 'react';
 import { PartialPost } from '../../lib/graphql/post';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { formatDate } from '../../lib/utils';
 import { Link } from 'react-router-dom';
@@ -22,25 +23,25 @@ const SavedItemBlock = styled.div`
     font-size: 1.5rem;
     margin-top: 0;
     margin-bottom: 1.5rem;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
   }
   p {
     font-size: 1rem;
     margin-top: 0;
     margin-bottom: 1rem;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
   }
   section {
     display: flex;
     justify-content: space-between;
     font-size: 0.875rem;
     .time {
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
     }
     .remove {
       cursor: pointer;
       text-decoration: underline;
-      color: ${palette.gray8};
+      color: ${themedPalette.text1};
       outline: none;
       border: none;
       background: none;
@@ -52,7 +53,7 @@ const SavedItemBlock = styled.div`
     }
   }
   & + & {
-    border-top: 1px solid ${palette.gray3};
+    border-top: 1px solid ${themedPalette.border3};
   }
 `;
 function SavedPostItem({ post, onRemove }: SavedPostItemProps) {

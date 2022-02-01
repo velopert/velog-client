@@ -3,17 +3,17 @@
 exports[`PublishActionButtons matches snapshot 1`] = `
 <div>
   <div
-    class="sc-bwzfXH hlaomC"
+    class="sc-gsDKAQ sYXuo"
   >
     <button
-      class="sc-bdVaJa gBmPlh"
-      color="gray"
+      class="sc-bdvvtL hCzGnn"
+      color="transparent"
       data-testid="cancelPublish"
     >
       취소
     </button>
     <button
-      class="sc-bdVaJa dwcrM"
+      class="sc-bdvvtL cJkIcC"
       color="teal"
       data-testid="publish"
     >

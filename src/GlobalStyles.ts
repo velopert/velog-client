@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { themedPalette, themes } from './lib/styles/themes';
 
 const GlobalStyles = createGlobalStyle`
 body {
@@ -7,8 +8,9 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", 나눔고딕, "Nanum Gothic", "Noto Sans KR", "Noto Sans CJK KR", arial, 돋움, Dotum, Tahoma, Geneva, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #212529;
+  color: ${themedPalette.text1};
   box-sizing: border-box;
+  background: ${themedPalette.bg_page2};
 }
 
 * {
@@ -27,6 +29,26 @@ input, button, textarea {
 html, body, #root {
   height: 100%;
 }
+
+body {
+  background: ${themedPalette.bg_page2};
+  ${themes.light}
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    ${themes.dark}
+  }
+}
+
+body[data-theme='light'] {
+  ${themes.light};
+}
+
+body[data-theme='dark'] {
+  ${themes.dark};
+}
+
 `;
 
 export default GlobalStyles;

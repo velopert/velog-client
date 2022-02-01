@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import Sticky from '../common/Sticky';
 import { usePostViewerState } from './PostViewerProvider';
@@ -24,12 +25,12 @@ const PostTocBlock = styled(Sticky)`
   ${media.xlarge} {
     margin-left: 3rem;
   }
-  border-left: 2px solid ${palette.gray2};
+  border-left: 2px solid ${themedPalette.border4};
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
-  color: ${palette.gray6};
+  color: ${themedPalette.text3};
   line-height: 1.5;
   font-size: 0.875rem;
   max-height: calc(100vh - 128px);
@@ -42,7 +43,7 @@ const PostTocBlock = styled(Sticky)`
     &:hover {
       width: 16px;
     }
-    background: ${palette.gray1};
+    background: ${themedPalette.bg_element2};
   }
 
   &::-webkit-scrollbar-thumb {
@@ -57,15 +58,15 @@ const TocItem = styled.div<{ active: boolean }>`
   transition: 0.125s all ease-in;
   a {
     &:hover {
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
     }
     text-decoration: none;
     color: inherit;
   }
-  ${props =>
+  ${(props) =>
     props.active &&
     css`
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
       transform: scale(1.05);
     `}
   & + & {
@@ -109,7 +110,7 @@ const PostToc: React.FC<PostTocProps> = () => {
   useEffect(() => {
     updateTocPositions();
     let prevScrollHeight = document.body.scrollHeight;
-    let timeoutId: number | null = null;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
     function checkScrollHeight() {
       const scrollHeight = document.body.scrollHeight;
       if (prevScrollHeight !== scrollHeight) {
@@ -129,7 +130,7 @@ const PostToc: React.FC<PostTocProps> = () => {
   const onScroll = useCallback(() => {
     const scrollTop = getScrollTop();
     if (!headingTops) return;
-    const currentHeading = [...headingTops].reverse().find(headingTop => {
+    const currentHeading = [...headingTops].reverse().find((headingTop) => {
       return scrollTop >= headingTop.top - 4;
     });
     if (!currentHeading) {
@@ -158,7 +159,7 @@ const PostToc: React.FC<PostTocProps> = () => {
     <Wrapper>
       <Positioner>
         <PostTocBlock top={112}>
-          {toc.map(item => (
+          {toc.map((item) => (
             <TocItem
               key={item.id}
               style={{ marginLeft: item.level * 12 }}

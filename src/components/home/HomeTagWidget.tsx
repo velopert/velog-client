@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import HomeWidget from './HomeWidget';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
 import Skeleton from '../common/Skeleton';
@@ -13,7 +14,7 @@ function HomeTagWidget({ tags }: HomeTagWidgetProps) {
   return (
     <StyledWidget title="인기 태그">
       <ul>
-        {tags.map(tag => (
+        {tags.map((tag) => (
           <li key={tag}>
             <Link to={`/tags/${tag}`}># {tag}</Link>
           </li>
@@ -53,7 +54,7 @@ const StyledWidget = styled(HomeWidget)`
       }
     }
     li {
-      color: ${palette.gray7};
+      color: ${themedPalette.text2};
       line-height: 1.5;
       font-size: 1rem;
     }
@@ -61,10 +62,10 @@ const StyledWidget = styled(HomeWidget)`
       margin-top: 0.25rem;
     }
     li.more {
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
       a {
         &:hover {
-          color: ${palette.gray5};
+          color: ${themedPalette.text3};
         }
         text-decoration: underline;
       }

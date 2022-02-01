@@ -3,6 +3,7 @@ import SearchInput from '../../components/search/SearchInput';
 import styled from 'styled-components';
 import { RouteComponentProps, withRouter } from 'react-router';
 import qs from 'qs';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 const StyledSearchInput = styled(SearchInput)`
@@ -55,7 +56,7 @@ const Block = styled.div`
     margin-top: 1rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
   }
 `;
 export default withRouter(LargeSearchInput);

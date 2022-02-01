@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import SeriesItem, { SeriesItemSkeleton } from './SeriesItem';
 import { PartialSeries } from '../../lib/graphql/user';
 import { undrawBlankCanvas } from '../../static/images';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import media from '../../lib/styles/media';
 
@@ -30,7 +31,7 @@ const SeriesListBlock = styled.div`
     }
     .message {
       font-size: 2rem;
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
       margin-top: 3rem;
       margin-bottom: 2rem;
     }
@@ -51,7 +52,7 @@ const SeriesList: React.FC<SeriesListProps> = ({ list, username }) => {
           <div className="message">시리즈가 없습니다.</div>
         </div>
       )}
-      {list.map(series => (
+      {list.map((series) => (
         <SeriesItem
           key={series.id}
           name={series.name}

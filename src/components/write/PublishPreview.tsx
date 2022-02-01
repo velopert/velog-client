@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import PublishSection from './PublishSection';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { ImageVector } from '../../static/svg';
 import { ellipsis } from '../../lib/styles/utils';
@@ -23,7 +24,7 @@ const ThumbnailBlock = styled.div`
 `;
 
 const MissingThumbnail = styled.div`
-  background: ${palette.gray2};
+  background: ${themedPalette.bg_element3};
   width: 100%;
   height: 100%;
   display: flex;
@@ -42,12 +43,12 @@ const Image = styled.img`
 const UploadButton = styled.button`
   margin-top: 1rem;
   padding: 0.25rem 2rem;
-  background: white;
+  background: ${themedPalette.bg_element1};
   border-radius: 4px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.025);
   font-size: 1rem;
   line-height: 1.5;
-  color: ${palette.teal5};
+  color: ${themedPalette.primary2};
   outline: none;
   border: none;
   cursor: pointer;
@@ -57,7 +58,7 @@ const UploadButton = styled.button`
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
   }
   &:hover {
-    background: ${palette.gray0};
+    opacity: 0.7;
   }
 `;
 
@@ -78,6 +79,8 @@ const ShortDescriptionTextarea = styled.textarea`
   border: none;
   outline: none;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.03);
+  background: ${themedPalette.bg_element7};
+  color: ${themedPalette.text1};
   line-height: 1.5;
   font-size: 0.875rem;
   height: 7.375rem;
@@ -89,8 +92,8 @@ const TextLimit = styled.div<{ limit: boolean }>`
   text-align: right;
   margin-top: 0.25rem;
   font-size: 0.75rem;
-  color: ${palette.gray6};
-  ${props =>
+  color: ${themedPalette.text3};
+  ${(props) =>
     props.limit &&
     css`
       color: ${palette.red6};
@@ -130,15 +133,15 @@ const ThumbnailModifyBlock = styled.div`
       outline: none;
       border: none;
       font-size: 1rem;
-      color: ${palette.gray6};
+      color: ${themedPalette.text3};
       cursor: pointer;
       padding: 0;
       text-decoration: underline;
       &:hover {
-        color: ${palette.gray5};
+        color: ${themedPalette.text3};
       }
       &:active {
-        color: ${palette.gray7};
+        color: ${themedPalette.text2};
       }
     }
     .middledot {
@@ -148,7 +151,7 @@ const ThumbnailModifyBlock = styled.div`
       width: 2px;
       height: 2px;
       border-radius: 1px;
-      background: ${palette.gray6};
+      background: ${themedPalette.text4};
     }
   }
 `;

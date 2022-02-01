@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import SettingEditButton from './SettingEditButton';
 import media from '../../lib/styles/media';
@@ -53,7 +54,7 @@ const Row = styled.div`
     flex-shrink: 0;
     h3 {
       line-height: 1.5;
-      color: ${palette.gray8};
+      color: ${themedPalette.text1};
       margin: 0;
       font-size: 1.125rem;
       ${media.small} {
@@ -69,12 +70,12 @@ const Row = styled.div`
   .contents {
     flex: 1;
     font-size: 1rem;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     line-height: 1.5;
   }
   .description {
     margin-top: 0.875rem;
-    color: ${palette.gray6};
+    color: ${themedPalette.text3};
     font-size: 0.875rem;
   }
   .edit-wrapper {
@@ -83,7 +84,7 @@ const Row = styled.div`
     margin-left: 1rem;
   }
   & + & {
-    border-top: 1px solid ${palette.gray2};
+    border-top: 1px solid ${themedPalette.border4};
   }
 `;
 

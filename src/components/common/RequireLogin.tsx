@@ -3,6 +3,7 @@ import { undrawLogin } from '../../static/images';
 import styled, { css } from 'styled-components';
 import Button from './Button';
 import useRequireLogin from '../../lib/hooks/useRequireLogin';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import media from '../../lib/styles/media';
 
@@ -38,13 +39,13 @@ const Block = styled.div<{ hasMargin?: boolean }>`
   }
   h2 {
     font-weight: 400;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     margin-top: 2rem;
     ${media.small} {
       font-size: 1.25rem;
     }
   }
-  ${props =>
+  ${(props) =>
     props.hasMargin &&
     css`
       margin-top: 10rem;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Button from '../common/Button';
 import { MdArrowBack } from 'react-icons/md';
 import media from '../../lib/styles/media';
-
+import { themedPalette } from '../../lib/styles/themes';
 
 const WriteFooterBlock = styled.div`
   padding-left: 1rem;
@@ -11,7 +11,7 @@ const WriteFooterBlock = styled.div`
   height: 4rem;
   width: 100%;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 0.85);
+  background: ${themedPalette.editor_footer};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,9 +40,10 @@ const BackButton = styled.button`
   border: none;
   display: flex;
   outline: none;
+  color: ${themedPalette.text1};
   &:hover,
   &:focus {
-    background: rgba(0, 0, 0, 0.05);
+    background: ${themedPalette.slight_layer};
   }
   svg {
     font-size: 1.25rem;
@@ -76,7 +77,11 @@ const WriteFooter: React.FC<WriteFooterProps> = ({
         <span>나가기</span>
       </BackButton>
       <Group>
-        <StyledButton inline color="lightGray" onClick={() => onTempSave(true)}>
+        <StyledButton
+          inline
+          color="transparent"
+          onClick={() => onTempSave(true)}
+        >
           임시저장
         </StyledButton>
         <StyledButton inline color="teal" onClick={onPublish}>

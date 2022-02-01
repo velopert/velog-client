@@ -1,3 +1,5 @@
+import { themedPalette } from './themes';
+
 const palette = {
   /* teal */
   teal0: '#F3FFFB',
@@ -42,14 +44,14 @@ export const buttonColorMap: {
   };
 } = {
   teal: {
-    background: palette.teal6,
-    color: 'white',
-    hoverBackground: palette.teal5,
+    background: themedPalette.primary1,
+    color: themedPalette.button_text,
+    hoverBackground: themedPalette.primary2,
   },
   lightGray: {
-    background: palette.gray2,
-    color: palette.gray7,
-    hoverBackground: palette.gray1,
+    background: themedPalette.bg_element4,
+    color: themedPalette.text1,
+    hoverBackground: themedPalette.bg_element3,
   },
   gray: {
     background: palette.gray6,
@@ -57,19 +59,19 @@ export const buttonColorMap: {
     hoverBackground: palette.gray5,
   },
   darkGray: {
-    background: palette.gray8,
-    color: 'white',
-    hoverBackground: palette.gray6,
+    background: themedPalette.bg_element5,
+    color: themedPalette.button_text,
+    hoverBackground: themedPalette.bg_element6,
   },
   transparent: {
     background: 'none',
-    color: palette.teal6,
-    hoverBackground: palette.teal1,
+    color: themedPalette.primary1,
+    hoverBackground: themedPalette.slight_layer,
   },
   red: {
-    background: palette.red5,
-    color: 'white',
-    hoverBackground: palette.red4,
+    background: themedPalette.destructive1,
+    color: themedPalette.button_text,
+    hoverBackground: themedPalette.destructive2,
   },
 };
 

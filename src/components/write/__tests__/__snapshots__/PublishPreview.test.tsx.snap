@@ -3,7 +3,7 @@
 exports[`PublishPreview matches snapshot 1`] = `
 <div>
   <section
-    class="sc-bdVaJa ezdyV sc-bwzfXH uTxCW"
+    class="sc-bdvvtL eLTzRJ sc-gsDKAQ"
   >
     <h3>
       포스트 미리보기
@@ -12,19 +12,19 @@ exports[`PublishPreview matches snapshot 1`] = `
       class="contents"
     >
       <div
-        class="sc-htpNat fGfspC"
+        class="sc-dkPtRN Txiqi"
       >
         <div
-          class="sc-bxivhb oVXVi"
+          class="sc-hKwDye VCkYW"
         >
           <div
-            class="sc-ifAKCX bnjEss"
+            class="sc-eCImPb dzudxv"
           >
             <svg>
               vector-image.svg
             </svg>
             <button
-              class="sc-bZQynM gnnAiV"
+              class="sc-gKclnd cBbLzQ"
             >
               썸네일 업로드
             </button>
@@ -32,17 +32,17 @@ exports[`PublishPreview matches snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-gzVnrw fwQhVf"
+        class="sc-iCfMLu dbAfZI"
       >
         <h4>
           타이틀
         </h4>
         <textarea
-          class="sc-htoDjs cNItPr"
+          class="sc-furwcr htTTyP"
           placeholder="당신의 포스트를 짧게 소개해보세요."
         />
         <div
-          class="sc-dnqmqq JcFnD"
+          class="sc-pVTFL eOTcin"
         >
           0
           /150

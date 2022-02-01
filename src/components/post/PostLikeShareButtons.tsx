@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { usePrevious } from 'react-use';
 import styled, { css } from 'styled-components';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { LikeIcon, ShareIcon, ClipIcon } from '../../static/svg';
 import { useSpring, animated, config } from 'react-spring';
@@ -23,8 +24,8 @@ const Positioner = styled.div`
 `;
 const PostLikeShareButtonsBlock = styled(Sticky)`
   width: 4rem;
-  background: ${palette.gray0};
-  border: 1px solid ${palette.gray1};
+  background: ${themedPalette.bg_element2};
+  border: 1px solid ${themedPalette.border4};
   border-radius: 2rem;
   padding: 0.5rem;
   display: flex;
@@ -38,10 +39,10 @@ const CircleButton = styled(animated.div)<{ active?: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: white;
-  border: 1px solid ${palette.gray5};
+  background: ${themedPalette.bg_element1};
+  border: 1px solid ${themedPalette.border2};
   border-radius: 1.5rem;
-  color: ${palette.gray6};
+  color: ${themedPalette.text3};
   cursor: pointer;
   z-index: 5;
   svg {
@@ -53,26 +54,26 @@ const CircleButton = styled(animated.div)<{ active?: string }>`
     }
   }
   &:hover {
-    color: ${palette.gray9};
-    border-color: ${palette.gray9};
+    color: ${themedPalette.text1};
+    border-color: ${themedPalette.text1};
   }
-  ${props =>
+  ${(props) =>
     props.active === 'true' &&
     css`
-      background: ${palette.teal5};
-      border-color: ${palette.teal5};
-      color: white;
+      background: ${themedPalette.primary2};
+      border-color: ${themedPalette.primary2};
+      color: ${themedPalette.button_text};
       &:hover {
         background: ${palette.teal4};
         border-color: ${palette.teal4};
-        color: white;
+        color: ${themedPalette.button_text};
       }
     `}
 `;
 
 const LikeCount = styled.div`
   margin-top: 0.5rem;
-  color: ${palette.gray7};
+  color: ${themedPalette.text2};
   line-height: 1;
   font-size: 0.75rem;
   margin-bottom: 1rem;
@@ -156,7 +157,7 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
                   range: [0, 0.25, 0.5, 0.6, 1],
                   output: [1, 1.25, 1, 1.25, 1],
                 })
-                .interpolate(x => `scale(${x})`),
+                .interpolate((x) => `scale(${x})`),
             }}
           >
             <LikeIcon />
@@ -173,7 +174,7 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
                       output: [0, 1],
                     })
                     .interpolate(
-                      shareX =>
+                      (shareX) =>
                         `translate(${shareX * 48}px, -${shareX * 52}px)`,
                     ),
                 }}
@@ -190,7 +191,7 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
                       range: [0, 1],
                       output: [0, 1],
                     })
-                    .interpolate(shareX => `translate(${shareX * 72}px)`),
+                    .interpolate((shareX) => `translate(${shareX * 72}px)`),
                 }}
               >
                 <CircleButton onClick={() => onShareClick('twitter')}>
@@ -206,7 +207,8 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
                       output: [0, 1],
                     })
                     .interpolate(
-                      shareX => `translate(${shareX * 48}px, ${shareX * 52}px)`,
+                      (shareX) =>
+                        `translate(${shareX * 48}px, ${shareX * 52}px)`,
                     ),
                 }}
               >

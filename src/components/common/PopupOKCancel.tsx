@@ -2,20 +2,21 @@ import * as React from 'react';
 import styled from 'styled-components';
 import PopupBase from './PopupBase';
 import Button from './Button';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 
 const PopupOKCancelBlock = styled.div`
   h3 {
     margin: 0;
     font-size: 1.5rem;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     line-height: 1.5;
     font-weight: bold;
   }
   .message {
     line-height: 1.5;
     font-size: 1rem;
-    color: ${palette.gray7};
+    color: ${themedPalette.text2};
     margin-top: 1rem;
     margin-bottom: 1rem;
     white-space: pre-wrap;
@@ -52,7 +53,7 @@ const PopupOKCancel: React.FC<PopupOKCancelProps> = ({
         <div className="message">{children}</div>
         <div className="button-area">
           {onCancel && (
-            <Button color="lightGray" onClick={onCancel}>
+            <Button color="transparent" onClick={onCancel}>
               취소
             </Button>
           )}

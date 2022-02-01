@@ -5,6 +5,8 @@ import 'codemirror/lib/codemirror.css';
 import CodeMirror, { EditorFromTextArea } from 'codemirror';
 import TitleTextarea, { TitleTextareaForSSR } from './TitleTextarea';
 import '../common/atom-one-light.css';
+import '../common/atom-one-dark.css';
+import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import Toolbar from './Toolbar';
 import AddLink from './AddLink';
@@ -31,6 +33,7 @@ export interface MarkdownEditorProps {
   onUpload: () => void;
   lastUploadedImage: string | null;
   initialBody: string;
+  theme: 'light' | 'dark';
 }
 
 type MarkdownEditorState = {
@@ -122,7 +125,7 @@ export default class WriteMarkdownEditor extends React.Component<
     if (!this.editorElement.current) return;
     this.codemirror = CodeMirror.fromTextArea(this.editorElement.current, {
       mode: 'markdown',
-      theme: 'one-light',
+      theme: `one-${this.props.theme}`,
       placeholder: '당신의 이야기를 적어보세요...',
       // viewportMargin: Infinity,
       lineWrapping: true,
@@ -130,7 +133,7 @@ export default class WriteMarkdownEditor extends React.Component<
 
     if (detectJSDOM()) return;
     this.codemirror.setValue(this.props.initialBody);
-    this.codemirror.on('change', cm => {
+    this.codemirror.on('change', (cm) => {
       this.props.onChangeMarkdown(cm.getValue());
       this.stickToBottomIfNeeded();
       const doc = cm.getDoc();
@@ -145,7 +148,7 @@ export default class WriteMarkdownEditor extends React.Component<
       }
     });
 
-    this.codemirror.on('scroll', cm => {
+    this.codemirror.on('scroll', (cm) => {
       const info = cm.getScrollInfo();
 
       if (info.top > 0 && info.height > window.screen.height) {
@@ -161,7 +164,7 @@ export default class WriteMarkdownEditor extends React.Component<
       }
     });
 
-    this.codemirror.on('mousewheel', cm => {
+    this.codemirror.on('mousewheel', (cm) => {
       console.log(cm.getScrollInfo());
     });
 
@@ -258,7 +261,8 @@ export default class WriteMarkdownEditor extends React.Component<
     this.initialize();
     setTimeout(() => {
       if (this.toolbarElement.current) {
-        this.toolbarTop = this.toolbarElement.current.getBoundingClientRect().top;
+        this.toolbarTop =
+          this.toolbarElement.current.getBoundingClientRect().top;
       }
     });
     if (this.block.current) {
@@ -538,7 +542,7 @@ export default class WriteMarkdownEditor extends React.Component<
       [key: string]: Function;
     } = {
       ...[1, 2, 3, 4] // creates handlers for heading1, heading2, heading3, heading4
-        .map(number => () => {
+        .map((number) => () => {
           // create handler function
           const characters = '#'.repeat(number);
           const plain = removeHeading(line);
@@ -925,7 +929,7 @@ const MarkdownEditorBlock = styled.div`
     &:hover {
       width: 16px;
     }
-    background: ${palette.gray1};
+    background: ${themedPalette.bg_element2};
   }
 
   &::-webkit-scrollbar-thumb {
@@ -960,12 +964,12 @@ const MarkdownEditorBlock = styled.div`
     flex: 1;
     font-size: 1.125rem;
     line-height: 1.5;
-    color: ${palette.gray8};
+    color: ${themedPalette.text1};
     font-family: 'Fira Mono', monospace;
     /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', */
     .cm-header {
       line-height: 1.5;
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
     }
     .cm-header-1 {
       font-size: 2.5rem;
@@ -983,10 +987,10 @@ const MarkdownEditorBlock = styled.div`
     }
     .cm-strong,
     .cm-em {
-      color: ${palette.gray9};
+      color: ${themedPalette.text1};
     }
     .CodeMirror-placeholder {
-      color: ${palette.gray5};
+      color: ${themedPalette.text3};
       font-style: italic;
     }
 
@@ -1054,7 +1058,7 @@ const AppleTextarea = styled.textarea`
   padding-right: 3rem;
   line-height: 1.5;
   padding-bottom: 3rem;
-  color: ${palette.gray8};
+  color: ${themedPalette.text1};
   ${media.custom(767)} {
     font-size: 0.875rem;
     padding-left: 1rem;
@@ -1065,7 +1069,8 @@ const AppleTextarea = styled.textarea`
 
 const checker = {
   youtube: (text: string) => {
-    const regex = /^<iframe.*src="https:\/\/www.youtube.com\/embed\/(.*?)".*<\/iframe>$/;
+    const regex =
+      /^<iframe.*src="https:\/\/www.youtube.com\/embed\/(.*?)".*<\/iframe>$/;
     const result = regex.exec(text);
     if (!result) return null;
     return result[1];
@@ -1084,7 +1089,8 @@ const checker = {
     return pathMatch[1];
   },
   codesandbox: (text: string) => {
-    const regex = /^<iframe.*src="https:\/\/codesandbox.io\/embed\/(.*?)".*<\/iframe>$/s;
+    const regex =
+      /^<iframe.*src="https:\/\/codesandbox.io\/embed\/(.*?)".*<\/iframe>$/s;
     const result = regex.exec(text);
     if (!result) return null;
     return result[1];
