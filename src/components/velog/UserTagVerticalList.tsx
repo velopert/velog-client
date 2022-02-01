@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import SideArea from './SideArea';
 import { Tag } from '../../lib/graphql/tags';
 import { Link } from 'react-router-dom';

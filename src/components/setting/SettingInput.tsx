@@ -1,7 +1,6 @@
 import React, { HTMLProps } from 'react';
 import styled, { css } from 'styled-components';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 
 export type SettingInputProps = {
   fullWidth?: boolean;

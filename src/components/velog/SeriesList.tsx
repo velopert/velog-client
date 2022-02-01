@@ -4,7 +4,6 @@ import SeriesItem, { SeriesItemSkeleton } from './SeriesItem';
 import { PartialSeries } from '../../lib/graphql/user';
 import { undrawBlankCanvas } from '../../static/images';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import media from '../../lib/styles/media';
 
 const SeriesListBlock = styled.div`

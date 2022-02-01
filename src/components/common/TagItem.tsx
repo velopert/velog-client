@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
 import { escapeForUrl } from '../../lib/utils';
 import media from '../../lib/styles/media';

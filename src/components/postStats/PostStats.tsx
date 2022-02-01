@@ -5,7 +5,6 @@ import { useQuery } from '@apollo/react-hooks';
 import { GET_STATS, Stats } from '../../lib/graphql/post';
 import { useParams } from 'react-router-dom';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import format from 'date-fns/format';
 import { loadScript } from '../../lib/utils';
 

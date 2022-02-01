@@ -2,7 +2,6 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import PublishSection from './PublishSection';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import { GlobeIcon, LockIcon } from '../../static/svg';
 
 const PublishPrivacySettingBlock = styled(PublishSection)`

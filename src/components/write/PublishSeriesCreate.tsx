@@ -1,7 +1,6 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import OutsideClickHandler from 'react-outside-click-handler';
 import Button from '../common/Button';
 import useInputs from '../../lib/hooks/useInputs';

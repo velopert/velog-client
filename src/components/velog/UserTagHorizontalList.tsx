@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 import media from '../../lib/styles/media';
 import { Tag } from '../../lib/graphql/tags';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
 import { escapeForUrl } from '../../lib/utils';
 

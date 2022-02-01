@@ -2,7 +2,6 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { FacebookIcon, GoogleIcon, GithubIcon } from '../../static/svg';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 
 const AuthSocialButtonBlock = styled.a<{ border: boolean }>`
   width: 3rem;

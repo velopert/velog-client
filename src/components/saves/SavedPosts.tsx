@@ -2,7 +2,6 @@ import React from 'react';
 import useSavedPosts from './hooks/useSavedPosts';
 import styled from 'styled-components';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import SavedPostItem from './SavedPostItem';
 import PopupOKCancel from '../common/PopupOKCancel';
 

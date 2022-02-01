@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { Logo, VelogIcon } from '../../static/svg';
 import { UserLogo } from '../../modules/header';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 import { createFallbackTitle } from '../../lib/utils';
 import media from '../../lib/styles/media';
 import { ellipsis } from '../../lib/styles/utils';
