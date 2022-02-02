@@ -1,6 +1,5 @@
 import React, { useMemo, useEffect } from 'react';
 import styled from 'styled-components';
-import palette from '../../lib/styles/palette';
 import { SeriesImage } from '../../static/svg';
 import {
   MdArrowDropDown,
