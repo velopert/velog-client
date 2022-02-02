@@ -14,8 +14,9 @@ import optimizeImage from '../../lib/optimizeImage';
 const StyledLink = styled(PlainLink)`
   display: block;
   text-decoration: none;
-  color: initial;
+  color: inherit;
 `;
+
 const SeriesItemBlock = styled.div`
   width: 50%;
   padding-left: 1rem;
