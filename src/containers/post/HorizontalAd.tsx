@@ -39,7 +39,7 @@ function HorizontalAd({}: Props) {
           data-ad-client="ca-pub-5574866530496701"
           data-ad-slot="8809887603"
           data-ad-format="auto"
-          data-full-width-responsive="true"
+          // data-full-width-responsive="true"
         />
       </Wrapper>
     </VelogResponsive>
