@@ -49,7 +49,9 @@ function HorizontalAd({}: Props) {
 const Wrapper = styled.div`
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-  max-height: 400px;
+  ins {
+    max-height: 400px;
+  }
 `;
 
 export default HorizontalAd;
