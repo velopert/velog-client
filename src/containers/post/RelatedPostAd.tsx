@@ -63,6 +63,7 @@ function RelatedPostAd({ isMobile }: Props) {
       </div>
     );
   }
+
   return (
     <div ref={ref}>
       {theme === 'dark' ? (
@@ -70,7 +71,7 @@ function RelatedPostAd({ isMobile }: Props) {
           className="adsbygoogle"
           style={{ display: 'block' }}
           data-ad-format="fluid"
-          data-ad-layout-key="-6k+em+10-4g+61"
+          data-ad-layout-key="-73+ex-1g-2s+as"
           data-ad-client="ca-pub-5574866530496701"
           data-ad-slot="2892342366"
         ></ins>
