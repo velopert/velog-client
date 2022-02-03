@@ -13,6 +13,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import { Helmet } from 'react-helmet-async';
 import HomePage from './pages/home/HomePage';
 import MainPageTemplate from './components/main/MainPageTemplate';
+import ConditionalBackground from './components/base/ConditionalBackground';
 
 const loadableConfig = {
   fallback: <PageTemplate />,
@@ -62,6 +63,7 @@ const App: React.FC<AppProps> = (props) => {
         <meta property="fb:app_id" content="203040656938507" />
         <meta property="og:image" content="https://images.velog.io/velog.png" />
       </Helmet>
+      <ConditionalBackground />
       <ErrorBoundary>
         <Switch>
           <Route path="/" component={HomePage} exact />

@@ -10,7 +10,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: ${themedPalette.text1};
   box-sizing: border-box;
-  background: ${themedPalette.bg_page2};
+
 }
 
 * {
@@ -31,7 +31,6 @@ html, body, #root {
 }
 
 body {
-  background: ${themedPalette.bg_page2};
   ${themes.light}
 }
 
