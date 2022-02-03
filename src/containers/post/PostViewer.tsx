@@ -388,7 +388,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         />
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />
-      {showRecommends && userId === null && (
+      {showRecommends && userId === null && !isVeryOld && (
         <RelatedPostsForGuest
           postId={post.id}
           showAds={
@@ -404,7 +404,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         comments={post.comments}
         postId={post.id}
       />
-      {showRecommends && userId !== null && (
+      {showRecommends && (userId !== null || isVeryOld) && (
         <RelatedPost
           postId={post.id}
           showAds={
