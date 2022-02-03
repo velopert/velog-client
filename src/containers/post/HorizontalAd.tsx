@@ -35,7 +35,7 @@ function HorizontalAd({}: Props) {
       <Wrapper ref={ref}>
         <ins
           className="adsbygoogle"
-          style={{ display: 'block' }}
+          style={{ display: 'block', maxHeight: 400, width: '100%' }}
           data-ad-client="ca-pub-5574866530496701"
           data-ad-slot="8809887603"
           data-ad-format="auto"
@@ -47,12 +47,9 @@ function HorizontalAd({}: Props) {
 }
 
 const Wrapper = styled.div`
+  max-height: 400px;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-  ins {
-    max-height: 400px;
-    width: 100%;
-  }
 `;
 
 export default HorizontalAd;
