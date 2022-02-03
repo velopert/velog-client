@@ -22,6 +22,7 @@ import remarkParse from 'remark-parse';
 import stringify from 'rehype-stringify';
 import { Helmet } from 'react-helmet-async';
 import katexWhitelist from '../../lib/katexWhitelist';
+import { themedPalette } from '../../lib/styles/themes';
 
 export interface MarkdownRenderProps {
   markdown: string;
@@ -91,12 +92,12 @@ const MarkdownRenderBlock = styled.div`
   table {
     min-width: 40%;
     max-width: 100%;
-    border: 1px solid ${palette.gray7};
+    border: 1px solid ${themedPalette.border2};
     border-collapse: collapse;
     font-size: 0.875rem;
     thead > tr > th {
       /* text-align: left; */
-      border-bottom: 4px solid ${palette.gray7};
+      border-bottom: 4px solid ${themedPalette.border2};
     }
     th,
     td {
@@ -106,14 +107,14 @@ const MarkdownRenderBlock = styled.div`
 
     td + td,
     th + th {
-      border-left: 1px solid ${palette.gray7};
+      border-left: 1px solid ${themedPalette.border2};
     }
 
     tr:nth-child(even) {
-      background: ${palette.gray1};
+      background: ${themedPalette.bg_element2};
     }
     tr:nth-child(odd) {
-      background: white;
+      background: ${themedPalette.bg_page1};
     }
   }
 
