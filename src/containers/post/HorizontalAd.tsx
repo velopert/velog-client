@@ -50,7 +50,7 @@ const Wrapper = styled.div`
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   ins {
-    max-height: 120px;
+    max-height: 400px;
     width: 100%;
   }
 `;
