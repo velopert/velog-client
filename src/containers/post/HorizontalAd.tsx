@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import VelogResponsive from '../../components/velog/VelogResponsive';
 interface Props {}
 
 function HorizontalAd({}: Props) {
@@ -30,16 +31,18 @@ function HorizontalAd({}: Props) {
   }, []);
 
   return (
-    <Wrapper ref={ref}>
-      <ins
-        className="adsbygoogle"
-        style={{ display: 'block' }}
-        data-ad-client="ca-pub-5574866530496701"
-        data-ad-slot="8809887603"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      />
-    </Wrapper>
+    <VelogResponsive>
+      <Wrapper ref={ref}>
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-client="ca-pub-5574866530496701"
+          data-ad-slot="8809887603"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
+      </Wrapper>
+    </VelogResponsive>
   );
 }
 
