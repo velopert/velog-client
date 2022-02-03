@@ -398,7 +398,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
           }
         />
       )}
-      {isVeryOld && <HorizontalAd />}
+      {isVeryOld && post.user.id !== userId && <HorizontalAd />}
       <PostComments
         count={post.comments_count}
         comments={post.comments}
