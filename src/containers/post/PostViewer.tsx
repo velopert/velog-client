@@ -36,6 +36,7 @@ import MobileLikeButton from '../../components/post/MobileLikeButton';
 import RelatedPost from './RelatedPost';
 import optimizeImage from '../../lib/optimizeImage';
 import RelatedPostsForGuest from './RelatedPostsForGuest';
+import HorizontalAd from './HorizontalAd';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -308,6 +309,10 @@ const PostViewer: React.FC<PostViewerProps> = ({
 
   const { post } = data;
 
+  const isVeryOld =
+    Date.now() - new Date(post.released_at).getTime() >
+    1000 * 60 * 60 * 24 * 365;
+
   const url = `https://velog.io/@${username}/${post.url_slug}`;
 
   return (
@@ -387,11 +392,13 @@ const PostViewer: React.FC<PostViewerProps> = ({
         <RelatedPostsForGuest
           postId={post.id}
           showAds={
+            !isVeryOld &&
             Date.now() - new Date(post.released_at).getTime() >
-            1000 * 60 * 60 * 24 * 21
+              1000 * 60 * 60 * 24 * 21
           }
         />
       )}
+      {isVeryOld && <HorizontalAd />}
       <PostComments
         count={post.comments_count}
         comments={post.comments}
@@ -401,6 +408,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         <RelatedPost
           postId={post.id}
           showAds={
+            !isVeryOld &&
             post.user.id !== userId &&
             Date.now() - new Date(post.released_at).getTime() >
               1000 * 60 * 60 * 24 * 30
