@@ -29,7 +29,7 @@ function HorizontalAd({}: Props) {
   }, []);
 
   return (
-    <Wrapper>
+    <Wrapper ref={ref}>
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
