@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import palette, { buttonColorMap } from '../../lib/styles/palette';
+import { buttonColorMap } from '../../lib/styles/palette';
 import media from '../../lib/styles/media';
 import { themedPalette } from '../../lib/styles/themes';
 
