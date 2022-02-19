@@ -122,7 +122,7 @@
     "react-router-dom": "^5.1.2",
     "react-spring": "^9.4.2",
     "react-textarea-autosize": "^7.1.2",
-    "react-toastify": "^5.5.0",
+    "react-toastify": "^8.2.0",
     "react-use": "^13.12.2",
     "react-virtualized": "^9.21.2",
     "redux": "^4.0.4",
