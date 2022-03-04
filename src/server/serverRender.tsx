@@ -62,7 +62,7 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
   const client = new ApolloClient({
     ssrMode: true,
     link: createHttpLink({
-      uri: `${process.env.REACT_APP_API_HOST}graphql`,
+      uri: `${process.env.REACT_APP_GRAPHQL_HOST}graphql`,
       fetch: fetch as any,
       headers: {
         cookie,

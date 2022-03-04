@@ -5,7 +5,7 @@ import { createHttpLink } from 'apollo-link-http';
 const host =
   (process.env.NODE_ENV === 'development'
     ? '/'
-    : process.env.REACT_APP_API_HOST) || '/';
+    : process.env.REACT_APP_GRAPHQL_HOST) || '/';
 
 const graphqlURI = host.concat('graphql');
 const link = createHttpLink({
