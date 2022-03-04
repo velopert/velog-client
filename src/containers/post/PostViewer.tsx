@@ -37,6 +37,7 @@ import RelatedPost from './RelatedPost';
 import optimizeImage from '../../lib/optimizeImage';
 import RelatedPostsForGuest from './RelatedPostsForGuest';
 import HorizontalAd from './HorizontalAd';
+import { useSetShowFooter } from '../../components/velog/VelogPageTemplate';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -64,6 +65,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
   history,
   match,
 }) => {
+  const setShowFooter = useSetShowFooter();
   const [showRecommends, setShowRecommends] = useState(false);
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -141,6 +143,16 @@ const PostViewer: React.FC<PostViewerProps> = ({
   }, [data, prefetchPost]);
 
   const postReady = !!data?.post;
+
+  useEffect(() => {
+    setShowFooter(postReady);
+  }, [setShowFooter, postReady]);
+
+  useEffect(() => {
+    return () => {
+      setShowFooter(false);
+    };
+  }, [setShowFooter]);
 
   const onScroll = useCallback(() => {
     const scrollTop = getScrollTop();

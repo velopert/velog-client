@@ -177,6 +177,44 @@ export const GET_POST_LIST = gql`
   }
 `;
 
+export const GET_RECENT_POSTS = gql`
+  query RecentPosts(
+    $cursor: ID
+    $username: String
+    $temp_only: Boolean
+    $tag: String
+    $limit: Int
+  ) {
+    posts(
+      cursor: $cursor
+      username: $username
+      temp_only: $temp_only
+      tag: $tag
+      limit: $limit
+    ) {
+      id
+      title
+      short_description
+      thumbnail
+      user {
+        id
+        username
+        profile {
+          id
+          thumbnail
+        }
+      }
+      url_slug
+      released_at
+      updated_at
+      comments_count
+      tags
+      is_private
+      likes
+    }
+  }
+`;
+
 export const GET_TRENDING_POSTS = gql`
   query TrendingPosts($limit: Int, $offset: Int, $timeframe: String) {
     trendingPosts(limit: $limit, offset: $offset, timeframe: $timeframe) {

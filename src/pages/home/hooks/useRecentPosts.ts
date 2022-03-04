@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/react-hooks';
-import { GET_POST_LIST, PartialPost } from '../../../lib/graphql/post';
+import { GET_RECENT_POSTS, PartialPost } from '../../../lib/graphql/post';
 import { useCallback, useState } from 'react';
 import useScrollPagination from '../../../lib/hooks/useScrollPagination';
 
 export default function useRecentPosts() {
   const { data, loading, fetchMore } = useQuery<{ posts: PartialPost[] }>(
-    GET_POST_LIST,
+    GET_RECENT_POSTS,
     {
       variables: {
         limit: 24,

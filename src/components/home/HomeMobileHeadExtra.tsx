@@ -5,6 +5,7 @@ import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
 import { useTransition, animated } from 'react-spring';
 import OutsideClickHandler from 'react-outside-click-handler';
+import { useTheme } from '../../lib/hooks/useTheme';
 
 export type MainMobileHeadExtraProps = {
   visible: boolean;
@@ -30,6 +31,12 @@ function MainMobileHeadExtra({ visible, onClose }: MainMobileHeadExtraProps) {
       friction: 26,
     },
   });
+
+  const theme = useTheme();
+  const img =
+    theme === 'dark'
+      ? 'https://graphcdn.io/badge-light.svg'
+      : 'https://graphcdn.io/badge.svg';
 
   return (
     <>
@@ -62,6 +69,11 @@ function MainMobileHeadExtra({ visible, onClose }: MainMobileHeadExtraProps) {
                   <h5>문의</h5>
                   <div className="email">contact@velog.io</div>
                 </div>
+                <GraphCDNWrapper>
+                  <a href="https://graphcdn.io/?ref=powered-by">
+                    <img src={img} alt="Powered by GraphCDN, the GraphQL CDN" />
+                  </a>
+                </GraphCDNWrapper>
               </Block>
             </OutsideClickHandler>
           </Aligner>
@@ -78,6 +90,7 @@ const Aligner = styled.div`
   z-index: 5;
 `;
 const Block = styled(animated.div)`
+  border: 1px solid ${themedPalette.border3};
   margin-top: 0.5rem;
   width: 12rem;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
@@ -119,6 +132,17 @@ const Block = styled(animated.div)`
       color: ${themedPalette.text1};
       font-size: 0.75rem;
     }
+  }
+`;
+
+const GraphCDNWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  img {
+    width: 120px;
+    height: auto;
   }
 `;
 
