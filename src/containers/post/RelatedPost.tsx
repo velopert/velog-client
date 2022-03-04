@@ -87,7 +87,7 @@ const Title = styled.div`
 `;
 
 const Background = styled.div`
-  z-index: 30;
+  z-index: 5;
   position: relative;
   padding-top: 4rem;
   padding-bottom: 4rem;
@@ -98,7 +98,7 @@ const Background = styled.div`
   }
   margin-top: 4rem;
   background: ${themedPalette.bg_page1};
-  box-shadow: 0px 0 32px rgb(0 0 0 / 8%);
+  box-shadow: 0px -16px 16px rgb(0 0 0 / 4%);
 `;
 const Wrapper = styled.div`
   width: 1376px;

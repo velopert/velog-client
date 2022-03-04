@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import styled from 'styled-components';
 import { useTheme } from '../../lib/hooks/useTheme';
+import { themedPalette } from '../../lib/styles/themes';
 import PageTemplate from '../base/PageTemplate';
 
 const VelogPageTemplateBlock = styled(PageTemplate)`
@@ -15,10 +16,8 @@ const VelogPageTemplate: React.FC<VelogPageTemplateProps> = ({ children }) => {
   const [showFooter, setShowFooter] = useState(false);
   return (
     <FooterContext.Provider value={setShowFooter}>
-      <VelogPageTemplateBlock>
-        {children}
-        {showFooter && <GraphCDNFooter />}
-      </VelogPageTemplateBlock>
+      <VelogPageTemplateBlock>{children}</VelogPageTemplateBlock>
+      {showFooter && <GraphCDNFooter />}
     </FooterContext.Provider>
   );
 };
@@ -43,13 +42,17 @@ function GraphCDNFooter() {
 }
 
 const Block = styled.div`
+  background: ${themedPalette.bg_page1};
   display: flex;
   justify-content: center;
   padding-top: 1rem;
   padding-bottom: 1rem;
   position: relative;
-  z-index: 50;
+  a {
+    display: block;
+  }
   img {
+    display: block;
     width: 150px;
     height: auto;
   }
