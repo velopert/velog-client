@@ -157,3 +157,9 @@ export const UPDATE_ABOUT = gql`
     }
   }
 `;
+
+export const LOGOUT = gql`
+  mutation Logout {
+    logout
+  }
+`;
