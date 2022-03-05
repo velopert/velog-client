@@ -71,7 +71,7 @@ function filterOutMapFiles(files) {
  */
 function downloadUrls(urls) {
   return Promise.all(
-    urls.map(url => {
+    urls.map((url) => {
       const downloadPath = url
         .slice(0, url.lastIndexOf('/'))
         .replace(PUBLIC_URL, '');
@@ -95,13 +95,15 @@ async function keepChunks() {
     .reduce((acc, current) => {
       return acc.concat(Object.values(current.files));
     }, [])
-    .filter(url =>
+    .filter((url) =>
       ['index.html', 'loadable-stats.json', 'service-worker.js'].every(
-        ignored => !url.includes(ignored),
+        (ignored) => !url.includes(ignored),
       ),
     );
 
-  await downloadUrls(urls);
+  try {
+    await downloadUrls(urls);
+  } catch (e) {}
 
   // update assetHistory
   assetHistory.history.push({
