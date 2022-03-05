@@ -163,12 +163,12 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "build:ci": "node scripts/build.js && node scripts/keepChunks.js && node scripts/build.server.js",
+    "build:ci": "node scripts/build.js && node scripts/build.server.js",
     "build:server": "node scripts/build.server.js",
     "start:server:local": "node ./dist/server.js",
     "test": "node scripts/test.js",
-    "upload:s3": "aws s3 sync ./build s3://$S3_BUCKET --delete",
-    "upload:ssr": "aws s3 sync ./build s3://$S3_BUCKET_SSR",
+    "upload": "aws s3 cp ./build s3://$S3_BUCKET",
+    "upload:ssr": "aws s3 cp ./dist s3://$S3_BUCKET_SSR",
     "download": "aws s3 cp s3://$S3_BUCKET ./build/ --recursive && aws s3 cp s3://$S3_BUCKET_SSR ./dist/ --recursive",
     "deploy": "pm2 reload deploy.config.json"
   },
@@ -248,7 +248,7 @@
       "@loadable/babel-plugin"
     ]
   },
-  "proxy": "https://v2.velog.io/",
+  "proxy": "https://v2cdn.velog.io/",
   "devDependencies": {
     "@loadable/webpack-plugin": "^5.15.1"
   }

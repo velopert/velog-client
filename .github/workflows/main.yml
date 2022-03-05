@@ -33,35 +33,13 @@ jobs:
         PUBLIC_URL: 'https://static.velog.io/'
         REACT_APP_REDIS_HOST: ${{ secrets.REDIS_HOST }}
         CI: false
-    - name: s3 sync
-      uses: jakejarvis/s3-sync-action@master
-      with:
-        args: --follow-symlinks --delete
+    - name: upload
       env:
         AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        AWS_S3_BUCKET_SSR: ${{ secrets.AWS_S3_BUCKET_SSR }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
         AWS_REGION: 'ap-northeast-2'
-        SOURCE_DIR: 'build'
-    - name: s3 sync:ssr
-      uses: jakejarvis/s3-sync-action@master
-      with:
-        args: --follow-symlinks --delete
-      env:
-        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET_SSR }}
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
-        AWS_REGION: 'ap-northeast-2'
-        SOURCE_DIR: 'dist'
-    - name: Deploy Completion Webhook
-      uses: joelwmale/webhook-action@master
-      env:
-        WEBHOOK_URL: ${{ secrets.SSR_COMPLETE_WEBHOOK }}
-        data: "{'deployment': 'finished'}"
-    - name: Slack Notification
-      uses: rtCamp/action-slack-notify@v2.0.0
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_USERNAME: 'Github Actions'
-        SLACK_ICON: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-        SLACK_MESSAGE: '*stage: production* - 벨로그 웹 클라이언트 배포가 끝났어요! :rocket:'
+      run: |
+        yarn upload:s3
+        yarn upload:ssr
