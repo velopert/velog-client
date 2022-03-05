@@ -35,8 +35,8 @@ jobs:
         CI: false
     - name: upload
       env:
-        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-        AWS_S3_BUCKET_SSR: ${{ secrets.AWS_S3_BUCKET_SSR }}
+        S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        S3_BUCKET_SSR: ${{ secrets.AWS_S3_BUCKET_SSR }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
         AWS_REGION: 'ap-northeast-2'
