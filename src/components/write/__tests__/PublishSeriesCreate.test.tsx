@@ -8,6 +8,7 @@ import {
 import PublishSeriesCreate, {
   PublishSeriesCreateProps,
 } from '../PublishSeriesCreate';
+import { toast } from 'react-toastify';
 
 describe('PublishSeriesCreate', () => {
   const setup = (props: Partial<PublishSeriesCreateProps> = {}) => {
@@ -78,6 +79,20 @@ describe('PublishSeriesCreate', () => {
       name: '새로운 시리즈',
       urlSlug: '새로운-시리즈',
     });
+  });
+
+  it('show error toast when called onSubmit with no name', async () => {
+    const onSubmit = jest.fn();
+    toast.error = jest.fn();
+    const { getByText } = setup({ onSubmit });
+    const createSeriesButton = await waitForElement(() =>
+      getByText('시리즈 추가'),
+    );
+    fireEvent.click(createSeriesButton);
+    expect(onSubmit).toHaveBeenCalledWith({
+      name: '',
+    });
+    expect(toast.error).toHaveBeenCalledWith('시리즈 제목이 비어있습니다.');
   });
 
   it('shows username recevied via props', async () => {
