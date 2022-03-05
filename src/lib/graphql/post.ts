@@ -178,20 +178,8 @@ export const GET_POST_LIST = gql`
 `;
 
 export const GET_RECENT_POSTS = gql`
-  query RecentPosts(
-    $cursor: ID
-    $username: String
-    $temp_only: Boolean
-    $tag: String
-    $limit: Int
-  ) {
-    posts(
-      cursor: $cursor
-      username: $username
-      temp_only: $temp_only
-      tag: $tag
-      limit: $limit
-    ) {
+  query RecentPosts($cursor: ID, $limit: Int) {
+    recentPosts(cursor: $cursor, limit: $limit) {
       id
       title
       short_description

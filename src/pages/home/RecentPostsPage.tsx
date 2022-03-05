@@ -18,7 +18,7 @@ function RecentPostsPage(props: RecentPostsPageProps) {
         />
       </Helmet>
       <PostCardGrid
-        posts={data?.posts || []}
+        posts={data?.recentPosts || []}
         forHome
         loading={!data || loading}
       />
