@@ -41,5 +41,5 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
         AWS_REGION: 'ap-northeast-2'
       run: |
-        yarn upload:s3
+        yarn upload
         yarn upload:ssr
