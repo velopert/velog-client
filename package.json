@@ -167,8 +167,8 @@
     "build:server": "node scripts/build.server.js",
     "start:server:local": "node ./dist/server.js",
     "test": "node scripts/test.js",
-    "upload": "aws s3 cp ./build s3://$S3_BUCKET",
-    "upload:ssr": "aws s3 cp ./dist s3://$S3_BUCKET_SSR",
+    "upload": "aws s3 cp --recursive ./build s3://$S3_BUCKET",
+    "upload:ssr": "aws s3 cp --recursive ./dist s3://$S3_BUCKET_SSR",
     "download": "aws s3 cp s3://$S3_BUCKET ./build/ --recursive && aws s3 cp s3://$S3_BUCKET_SSR ./dist/ --recursive",
     "deploy": "pm2 reload deploy.config.json"
   },
