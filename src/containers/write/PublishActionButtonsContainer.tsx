@@ -16,7 +16,7 @@ import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { setHeadingId } from '../../lib/heading';
 import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
-import { noCdnClient } from '../../lib/graphql/client';
+import { useUncachedApolloClient } from '../../lib/graphql/UncachedApolloContext';
 
 type PublishActionButtonsContainerProps = {};
 
@@ -52,11 +52,13 @@ const PublishActionButtonsContainer: React.FC<
     dispatch(closePublish());
   }, [dispatch]);
 
+  const uncachedClient = useUncachedApolloClient();
+
   const [writePost] = useMutation<WritePostResponse>(WRITE_POST, {
-    client: noCdnClient,
+    client: uncachedClient,
   });
   const [editPost] = useMutation<EditPostResult>(EDIT_POST, {
-    client: noCdnClient,
+    client: uncachedClient,
   });
 
   const variables = {

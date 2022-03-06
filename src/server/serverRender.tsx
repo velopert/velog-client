@@ -18,6 +18,7 @@ import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 import CacheManager from './CacheManager';
 import { HelmetProvider, FilledContext } from 'react-helmet-async';
 import error from '../modules/error';
+import { UncachedApolloProvider } from '../lib/graphql/UncachedApolloContext';
 
 const statsFile = path.resolve(__dirname, '../build/loadable-stats.json');
 const cacheManager = new CacheManager();
@@ -87,11 +88,13 @@ const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
       <HelmetProvider context={helmetContext}>
         <StyleSheetManager sheet={sheet.instance}>
           <Provider store={store}>
-            <ApolloProvider client={client}>
-              <StaticRouter location={url} context={context}>
-                <App />
-              </StaticRouter>
-            </ApolloProvider>
+            <UncachedApolloProvider client={client}>
+              <ApolloProvider client={client}>
+                <StaticRouter location={url} context={context}>
+                  <App />
+                </StaticRouter>
+              </ApolloProvider>
+            </UncachedApolloProvider>
           </Provider>
         </StyleSheetManager>
       </HelmetProvider>
