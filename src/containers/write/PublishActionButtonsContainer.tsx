@@ -16,10 +16,13 @@ import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { setHeadingId } from '../../lib/heading';
 import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
+import { noCdnClient } from '../../lib/graphql/client';
 
 type PublishActionButtonsContainerProps = {};
 
-const PublishActionButtonsContainer: React.FC<PublishActionButtonsContainerProps> = () => {
+const PublishActionButtonsContainer: React.FC<
+  PublishActionButtonsContainerProps
+> = () => {
   const history = useHistory();
   const client = useApolloClient();
 
@@ -49,8 +52,12 @@ const PublishActionButtonsContainer: React.FC<PublishActionButtonsContainerProps
     dispatch(closePublish());
   }, [dispatch]);
 
-  const [writePost] = useMutation<WritePostResponse>(WRITE_POST);
-  const [editPost] = useMutation<EditPostResult>(EDIT_POST);
+  const [writePost] = useMutation<WritePostResponse>(WRITE_POST, {
+    client: noCdnClient,
+  });
+  const [editPost] = useMutation<EditPostResult>(EDIT_POST, {
+    client: noCdnClient,
+  });
 
   const variables = {
     title: options.title,

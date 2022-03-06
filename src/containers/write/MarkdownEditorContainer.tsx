@@ -42,6 +42,7 @@ import { Helmet } from 'react-helmet-async';
 import { toast } from 'react-toastify';
 import { usePrevious } from 'react-use';
 import { useTheme } from '../../lib/hooks/useTheme';
+import { noCdnClient } from '../../lib/graphql/client';
 
 export type MarkdownEditorContainerProps = {};
 
@@ -59,10 +60,14 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     initialTitle,
     tags,
   } = useSelector((state: RootState) => state.write);
-  const [writePost] = useMutation<WritePostResponse>(WRITE_POST);
+  const [writePost] = useMutation<WritePostResponse>(WRITE_POST, {
+    client: noCdnClient,
+  });
   const [createPostHistory] =
     useMutation<CreatePostHistoryResponse>(CREATE_POST_HISTORY);
-  const [editPost] = useMutation<EditPostResult>(EDIT_POST);
+  const [editPost] = useMutation<EditPostResult>(EDIT_POST, {
+    client: noCdnClient,
+  });
 
   const [lastSavedData, setLastSavedData] = useState({
     title: initialTitle,
