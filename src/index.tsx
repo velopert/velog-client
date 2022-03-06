@@ -53,11 +53,13 @@ if (process.env.NODE_ENV === 'production') {
     ReactDOM.hydrate(
       <HelmetProvider>
         <Provider store={store}>
-          <ApolloProvider client={client}>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </ApolloProvider>
+          <UncachedApolloProvider client={noCdnClient}>
+            <ApolloProvider client={client}>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+            </ApolloProvider>
+          </UncachedApolloProvider>
         </Provider>
       </HelmetProvider>,
       document.getElementById('root'),
