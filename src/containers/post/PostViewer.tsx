@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   READ_POST,
   SinglePost,
@@ -38,6 +38,7 @@ import optimizeImage from '../../lib/optimizeImage';
 import RelatedPostsForGuest from './RelatedPostsForGuest';
 import HorizontalAd from './HorizontalAd';
 import { useSetShowFooter } from '../../components/velog/VelogPageTemplate';
+import { RootState } from '../../modules';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -98,7 +99,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
   const [likePost, { loading: loadingLike }] = useMutation(LIKE_POST);
   const [unlikePost, { loading: loadingUnlike }] = useMutation(UNLIKE_POST);
   const { showNotFound } = useNotFound();
-  // const userLogo = useSelector((state: RootState) => state.header.userLogo);
+  const userLogo = useSelector((state: RootState) => state.header.userLogo);
   // const velogTitle = useMemo(() => {
   //   if (!userLogo || !userLogo.title) return `${username}.log`;
   //   return userLogo.title;
@@ -326,6 +327,8 @@ const PostViewer: React.FC<PostViewerProps> = ({
     1000 * 60 * 60 * 24 * 365;
 
   const url = `https://velog.io/@${username}/${post.url_slug}`;
+  const siteName = `${username}.log`;
+  const ogSiteName = userLogo?.title ?? siteName;
 
   return (
     <PostViewerProvider prefetchLinkedPosts={prefetchLinkedPosts}>
@@ -335,6 +338,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
           <meta name="description" content={post.short_description} />
         )}
         <link rel="canonical" href={url} />
+        <meta property="og:site_name" content={ogSiteName} />
         <meta property="og:url" content={url} />
         <meta property="og:type" content="article" />
         <meta property="og:title" content={post.title} />
