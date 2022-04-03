@@ -17,6 +17,7 @@ export type SettingUserProfileProps = {
   thumbnail: string | null;
   displayName: string;
   shortBio: string;
+  loading: boolean;
 };
 
 function SettingUserProfile({
@@ -26,6 +27,7 @@ function SettingUserProfile({
   thumbnail,
   displayName,
   shortBio,
+  loading,
 }: SettingUserProfileProps) {
   const [edit, onToggleEdit] = useToggle(false);
   const [inputs, onChange] = useInputs({
@@ -45,7 +47,9 @@ function SettingUserProfile({
           src={optimizeImage(thumbnail || userThumbnail, 400)}
           alt="profile"
         />
-        <Button onClick={onUpload}>이미지 업로드</Button>
+        <Button onClick={onUpload} disabled={loading}>
+          {loading ? '업로드중...' : '이미지 업로드'}
+        </Button>
         <Button color="transparent" onClick={onClearThumbnail}>
           이미지 제거
         </Button>

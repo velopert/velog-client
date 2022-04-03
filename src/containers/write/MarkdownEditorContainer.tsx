@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import MarkdownEditor from '../../components/write/WriteMarkdownEditor';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { RootState } from '../../modules';
@@ -21,7 +21,6 @@ import strip from 'strip-markdown';
 import TagInputContainer from './TagInputContainer';
 import WriteFooter from '../../components/write/WriteFooter';
 import useUpload from '../../lib/hooks/useUpload';
-import useS3Upload from '../../lib/hooks/useS3Upload';
 import DragDropUpload from '../../components/common/DragDropUpload';
 import PasteUpload from '../../components/common/PasteUpload';
 import { bindActionCreators } from 'redux';
@@ -43,6 +42,7 @@ import { toast } from 'react-toastify';
 import { usePrevious } from 'react-use';
 import { useTheme } from '../../lib/hooks/useTheme';
 import { useUncachedApolloClient } from '../../lib/graphql/UncachedApolloContext';
+import { useCFUpload } from '../../lib/hooks/useCFUpload';
 
 export type MarkdownEditorContainerProps = {};
 
@@ -64,6 +64,9 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
   const [writePost] = useMutation<WritePostResponse>(WRITE_POST, {
     client: uncachedClient,
   });
+
+  const bodyRef = useRef(initialBody);
+  const titleRef = useRef(title);
   const [createPostHistory] =
     useMutation<CreatePostHistoryResponse>(CREATE_POST_HISTORY);
   const [editPost] = useMutation<EditPostResult>(EDIT_POST, {
@@ -132,30 +135,16 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
   }, [actionCreators, markdown]);
 
   const [upload, file] = useUpload();
-  const [s3Upload, image] = useS3Upload();
-  const prevImage = usePrevious(image);
 
-  useEffect(() => {
-    if (!file) return;
-    s3Upload(file, {
-      type: 'post',
-    });
-  }, [file, s3Upload]);
+  const { upload: cfUpload, image } = useCFUpload();
+  const prevImage = usePrevious(image);
+  const [imageBlobUrl, setImageBlobUrl] = useState<string | null>(null);
 
   useEffect(() => {
     if (image !== prevImage && !thumbnail && image) {
       actionCreators.setThumbnail(image);
     }
   }, [actionCreators, image, prevImage, thumbnail]);
-
-  const onDragDropUpload = useCallback(
-    (file: File) => {
-      s3Upload(file, {
-        type: 'post',
-      });
-    },
-    [s3Upload],
-  );
 
   const onTempSave = useCallback(
     async (notify?: boolean) => {
@@ -189,7 +178,6 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
         dispatch(setWritePostId(id));
         history.replace(`/write?id=${id}`);
         notifySuccess();
-        return;
       }
       // tempsaving unreleased post:
       if (isTemp) {
@@ -246,6 +234,57 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     ],
   );
 
+  const uploadWithPostId = useCallback(
+    async (file: File) => {
+      if (!file) return;
+      let id = postId;
+      if (!id) {
+        const title = titleRef.current || 'Temp Title';
+        const body = bodyRef.current || 'Temp Body';
+
+        const response = await writePost({
+          variables: {
+            title,
+            body,
+            tags: [],
+            is_markdown: true,
+            is_temp: true,
+            is_private: false,
+            url_slug: escapeForUrl(title),
+            thumbnail: null,
+            meta: {},
+            series_id: null,
+          },
+        });
+        if (!response || !response.data) return;
+        id = response.data.writePost.id;
+        dispatch(setWritePostId(id));
+        history.replace(`/write?id=${id}`);
+      }
+      if (!id) return;
+
+      const url = URL.createObjectURL(file);
+      setImageBlobUrl(url);
+
+      cfUpload(file, { type: 'post', refId: id }).catch((e) => {
+        toast.error('이미지 업로드 실패! 잠시 후 다시 시도하세요.');
+      });
+    },
+    [postId, cfUpload, writePost, dispatch, history],
+  );
+
+  const onDragDropUpload = useCallback(
+    (file: File) => {
+      uploadWithPostId(file);
+    },
+    [uploadWithPostId],
+  );
+
+  useEffect(() => {
+    if (!file) return;
+    uploadWithPostId(file);
+  }, [file, uploadWithPostId]);
+
   useEffect(() => {
     const changed = !shallowEqual(lastSavedData, { title, body: markdown });
     if (changed) {
@@ -267,6 +306,11 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
   );
   const theme = useTheme();
 
+  useEffect(() => {
+    bodyRef.current = markdown;
+    titleRef.current = title;
+  }, [markdown, title]);
+
   if (!isReady) return null;
 
   return (
@@ -276,6 +320,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       </Helmet>
       <MarkdownEditor
         onUpload={upload}
+        tempBlobImage={imageBlobUrl}
         lastUploadedImage={image}
         initialBody={initialBody}
         title={title}
