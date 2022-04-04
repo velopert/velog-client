@@ -1,10 +1,18 @@
 import React, { useEffect, useCallback, useRef } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../modules';
 import PublishPreview from '../../components/write/PublishPreview';
-import { changeDescription, setThumbnail } from '../../modules/write';
+import {
+  changeDescription,
+  setThumbnail,
+  setWritePostId,
+} from '../../modules/write';
 import useUpload from '../../lib/hooks/useUpload';
-import useS3Upload from '../../lib/hooks/useS3Upload';
+import { useCFUpload } from '../../lib/hooks/useCFUpload';
+import { useMutation } from '@apollo/react-hooks';
+import { WritePostResponse, WRITE_POST } from '../../lib/graphql/post';
+import { useUncachedApolloClient } from '../../lib/graphql/UncachedApolloContext';
+import { escapeForUrl } from '../../lib/utils';
 
 const mapStateToProps = (state: RootState) => ({
   title: state.write.title,
@@ -38,9 +46,16 @@ const PublishPreviewContainer: React.FC<PublishPreviewContainerProps> = ({
     (description: string) => changeDescription(description),
     [changeDescription],
   );
-
+  const uncachedClient = useUncachedApolloClient();
+  const [writePost] = useMutation<WritePostResponse>(WRITE_POST, {
+    client: uncachedClient,
+  });
   const [upload, file] = useUpload();
-  const [s3Upload, image] = useS3Upload();
+  const { upload: cfUpload, image } = useCFUpload();
+
+  const { markdown, postId, tags } = useSelector(
+    (state: RootState) => state.write,
+  );
 
   // fills description with defaultDescription when it is empty
   useEffect(() => {
@@ -57,12 +72,48 @@ const PublishPreviewContainer: React.FC<PublishPreviewContainerProps> = ({
     upload();
   };
 
+  const dispatch = useDispatch();
+
+  const getValidPostId = useCallback(async () => {
+    if (postId) return postId;
+    const validTitle = title || 'Temp Title';
+    const validBody = markdown || 'Temp Body';
+
+    const response = await writePost({
+      variables: {
+        title: validTitle,
+        body: validBody,
+        tags,
+        is_markdown: true,
+        is_temp: true,
+        is_private: false,
+        url_slug: escapeForUrl(validTitle),
+        thumbnail: null,
+        meta: {},
+        series_id: null,
+      },
+    });
+
+    if (!response || !response.data) return null;
+    const id = response.data.writePost.id;
+    dispatch(setWritePostId(id));
+    return id;
+  }, [postId, writePost, markdown, tags, title, dispatch]);
+
+  const uploadWithPostId = useCallback(
+    async (file: File) => {
+      const id = await getValidPostId();
+      if (!id) return;
+      cfUpload(file, { type: 'post', refId: id });
+    },
+    [cfUpload, getValidPostId],
+  );
+
   useEffect(() => {
     if (!file) return;
-    s3Upload(file, {
-      type: 'post',
-    });
-  }, [file, s3Upload]);
+    uploadWithPostId(file);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [file]);
 
   useEffect(() => {
     if (!image) return;

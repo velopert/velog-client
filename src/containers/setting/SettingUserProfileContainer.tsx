@@ -1,25 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SettingUserProfile from '../../components/setting/SettingUserProfile';
 import useUpload from '../../lib/hooks/useUpload';
-import useS3Upload from '../../lib/hooks/useS3Upload';
 import useUserProfile from './hooks/useUserProfile';
 import useUpdateThumbnail from './hooks/useUpdateThumbnail';
 import useUser from '../../lib/hooks/useUser';
 import RequireLogin from '../../components/common/RequireLogin';
+import { useCFUpload } from '../../lib/hooks/useCFUpload';
 
 export type SettingUserProfileContainerProps = {};
 
 function SettingUserProfileContainer(props: SettingUserProfileContainerProps) {
   const user = useUser();
-  const { profile,  update } = useUserProfile();
+  const { profile, update } = useUserProfile();
   const [upload] = useUpload();
-  const [s3Upload] = useS3Upload();
+  const { upload: cfUpload } = useCFUpload();
   const updateThumbnail = useUpdateThumbnail();
+  const [imageBlobUrl, setImageBlobUrl] = React.useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const uploadThumbnail = async () => {
     const file = await upload();
     if (!file) return;
-    const image = await s3Upload(file, { type: 'profile' });
+    setLoading(true);
+    setImageBlobUrl(URL.createObjectURL(file));
+    const image = await cfUpload(file, { type: 'profile' });
+    setLoading(false);
     if (!image) return;
     updateThumbnail(image);
   };
@@ -45,7 +50,8 @@ function SettingUserProfileContainer(props: SettingUserProfileContainerProps) {
       onClearThumbnail={clearThumbnail}
       displayName={profile.display_name}
       shortBio={profile.short_bio}
-      thumbnail={profile.thumbnail}
+      thumbnail={imageBlobUrl || profile.thumbnail}
+      loading={loading}
     />
   );
 }

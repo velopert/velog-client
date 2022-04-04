@@ -34,6 +34,7 @@ export interface MarkdownEditorProps {
   lastUploadedImage: string | null;
   initialBody: string;
   theme: 'light' | 'dark';
+  tempBlobImage: string | null;
 }
 
 type MarkdownEditorState = {
@@ -239,7 +240,29 @@ export default class WriteMarkdownEditor extends React.Component<
       return;
     }
     if (!this.codemirror) return;
-    this.codemirror.getDoc().replaceSelection(`![](${encodeURI(image)})`);
+    const lines = this.codemirror.getValue().split('\n');
+    const lineIndex = lines.findIndex((l) => l.includes('![업로드중..]'));
+    if (lineIndex === -1) return;
+
+    const startCh = lines[lineIndex].indexOf('![업로드중..]');
+    this.codemirror
+      .getDoc()
+      .replaceRange(
+        `![](${encodeURI(image)})`,
+        { line: lineIndex, ch: startCh },
+        { line: lineIndex, ch: lines[lineIndex].length },
+      );
+    // this.codemirror.getDoc().replaceSelection(`![](${encodeURI(image)})`);
+  };
+
+  addTempImageBlobToEditor = (blobUrl: string) => {
+    const imageMarkdown = `![업로드중..](${blobUrl})\n`;
+
+    if (this.isIOS) {
+      return;
+    }
+    if (!this.codemirror) return;
+    this.codemirror.getDoc().replaceSelection(imageMarkdown);
   };
 
   componentDidUpdate(prevProps: MarkdownEditorProps) {
@@ -254,6 +277,13 @@ export default class WriteMarkdownEditor extends React.Component<
       prevProps.lastUploadedImage !== lastUploadedImage
     ) {
       this.addImageToEditor(lastUploadedImage);
+    }
+
+    if (
+      this.props.tempBlobImage &&
+      this.props.tempBlobImage !== prevProps.tempBlobImage
+    ) {
+      this.addTempImageBlobToEditor(this.props.tempBlobImage);
     }
   }
 
