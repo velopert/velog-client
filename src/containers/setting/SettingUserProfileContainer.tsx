@@ -31,6 +31,7 @@ function SettingUserProfileContainer(props: SettingUserProfileContainerProps) {
 
   const clearThumbnail = () => {
     updateThumbnail(null);
+    setImageBlobUrl(null);
   };
 
   const onUpdate = (params: { displayName: string; shortBio: string }) => {
