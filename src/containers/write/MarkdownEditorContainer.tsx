@@ -234,10 +234,15 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     ],
   );
 
+  const postIdRef = useRef(postId);
+  useEffect(() => {
+    postIdRef.current = postId;
+  }, [postId]);
+
   const uploadWithPostId = useCallback(
     async (file: File) => {
       if (!file) return;
-      let id = postId;
+      let id = postIdRef.current;
       if (!id) {
         const title = titleRef.current || 'Temp Title';
         const body = bodyRef.current || 'Temp Body';
@@ -270,7 +275,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
         toast.error('이미지 업로드 실패! 잠시 후 다시 시도하세요.');
       });
     },
-    [postId, cfUpload, writePost, dispatch, history],
+    [cfUpload, writePost, dispatch, history],
   );
 
   const onDragDropUpload = useCallback(

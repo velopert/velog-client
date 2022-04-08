@@ -5,6 +5,7 @@ const useUpload = () => {
   const upload = useCallback(() => {
     const promise = new Promise<File | null>((resolve, reject) => {
       const input = document.createElement('input');
+      input.accept = 'image/*';
 
       const timeout = setTimeout(reject, 1000 * 60 * 3);
       input.type = 'file';
