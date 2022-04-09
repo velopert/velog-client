@@ -29,9 +29,9 @@ function optimizeImagesFromPost(markdown: string) {
     /(?:!\[(.*?)\]\(https:\/\/images.velog.io\/(.*?)\))/g,
   );
   if (!matches) return markdown;
-  const replacers = matches.map(match => [
+  const replacers = matches.map((match) => [
     match,
-    match.replace('https://images.velog.io', 'https://media.vlpt.us'),
+    match.replace('https://images.velog.io', 'https://velog.velcdn.com'),
   ]);
   return replacers.reduce((acc, [original, optimized]) => {
     return acc.replace(original, optimized);
@@ -41,9 +41,10 @@ function optimizeImagesFromPost(markdown: string) {
 const PostContent: React.FC<PostContentProps> = ({ isMarkdown, body }) => {
   const [html, setHtml] = useState(isMarkdown ? null : body);
   const dispatch = usePostViewerDispatch();
-  const imageOptimizedPost = useMemo(() => optimizeImagesFromPost(body), [
-    body,
-  ]);
+  const imageOptimizedPost = useMemo(
+    () => optimizeImagesFromPost(body),
+    [body],
+  );
 
   useEffect(() => {
     if (!html) return;
