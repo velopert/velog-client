@@ -29,10 +29,19 @@ function optimizeImagesFromPost(markdown: string) {
     /(?:!\[(.*?)\]\(https:\/\/images.velog.io\/(.*?)\))/g,
   );
   if (!matches) return markdown;
-  const replacers = matches.map((match) => [
-    match,
-    match.replace('https://images.velog.io', 'https://velog.velcdn.com'),
-  ]);
+  console.log(matches);
+  const replacers = matches.map((match) => {
+    const filename =
+      match.match(/https:\/\/images.velog.io\/(.*?)\)/)?.[1] ?? '';
+    console.log(filename);
+    const proeperlyEncoded = encodeURIComponent(decodeURI(filename));
+    return [
+      match,
+      match
+        .replace('https://images.velog.io', 'https://velog.velcdn.com')
+        .replace(filename, proeperlyEncoded),
+    ];
+  });
   return replacers.reduce((acc, [original, optimized]) => {
     return acc.replace(original, optimized);
   }, markdown);
