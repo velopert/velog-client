@@ -132,8 +132,9 @@ const ActiveEditor: React.FC<ActiveEditorProps> = () => {
   }, [dispatch, lastPostHistory, post]);
 
   if (
-    (!readPostForEdit.loading && post === null) ||
-    (post && post.user.id !== userId)
+    id &&
+    ((!readPostForEdit.loading && post === null) ||
+      (post && post.user.id !== userId))
   ) {
     return <NotFoundPage />;
   }
