@@ -20,6 +20,8 @@ import {
 } from '../../lib/graphql/post';
 import { safe } from '../../lib/utils';
 import PopupOKCancel from '../../components/common/PopupOKCancel';
+import { useUserId } from '../../lib/hooks/useUser';
+import NotFoundPage from '../../pages/NotFoundPage';
 
 export type ActiveEditorProps = {};
 
@@ -29,6 +31,7 @@ const ActiveEditor: React.FC<ActiveEditorProps> = () => {
   const postId = useSelector((state: RootState) => state.write.postId);
   const [askLoadTemp, setAskLoadTemp] = useState(false);
   const initialized = useRef(false);
+  const userId = useUserId();
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -127,6 +130,13 @@ const ActiveEditor: React.FC<ActiveEditorProps> = () => {
     // dispatch(changeTitle(lastPostHistory.title));
     // dispatch(setInitialBody(lastPostHistory.body));
   }, [dispatch, lastPostHistory, post]);
+
+  if (
+    (!readPostForEdit.loading && post === null) ||
+    (post && post.user.id !== userId)
+  ) {
+    return <NotFoundPage />;
+  }
 
   if (id && !post && !postId) return null;
 

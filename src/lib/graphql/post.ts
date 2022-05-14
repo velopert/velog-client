@@ -341,6 +341,9 @@ export const READ_POST_FOR_EDIT = gql`
         id
         name
       }
+      user {
+        id
+      }
     }
   }
 `;
@@ -396,6 +399,9 @@ export type ReadPostForEditResponse = {
       name: string;
     } | null;
     updated_at: string;
+    user: {
+      id: string;
+    };
   };
 };
 
