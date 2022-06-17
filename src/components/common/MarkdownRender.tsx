@@ -5,6 +5,7 @@ import remark from 'remark';
 import slug from 'remark-slug';
 import prismPlugin from '../../lib/remark/prismPlugin';
 import prismThemes from '../../lib/styles/prismThemes';
+import imgCaptionPlugin from '../../lib/remark/imgCaptionPlugin';
 import breaks from 'remark-breaks';
 import Typography from './Typography';
 import embedPlugin from '../../lib/remark/embedPlugin';
@@ -64,8 +65,21 @@ const MarkdownRenderBlock = styled.div`
     max-width: 100%;
     height: auto;
     display: block;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin: auto;
+  }
+
+  figure {
+    margin: 3rem 0 3rem 0;
+  }
+
+  figure > figcaption {
+    text-align: center;
+    line-height: 2;
+    font-size: 0.875rem;
+    opacity: 0.8;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   iframe {
@@ -161,6 +175,8 @@ function filter(html: string) {
       'img',
       'del',
       'input',
+      'figure',
+      'figcaption',
 
       ...katexWhitelist.tags,
     ],
@@ -237,6 +253,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
         .use(slug)
         .use(prismPlugin)
         .use(embedPlugin)
+        .use(imgCaptionPlugin)
         .use(remark2rehype, { allowDangerousHTML: true })
         .use(raw)
         .use(math)
