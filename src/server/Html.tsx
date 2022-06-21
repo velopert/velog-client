@@ -49,7 +49,7 @@ function Html({
   theme,
 }: HtmlProps) {
   return (
-    <html>
+    <html lang="en">
       {/* <head dangerouslySetInnerHTML={{ __html: head }}></head> */}
       <head>
         {helmet.title.toComponent()}
