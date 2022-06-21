@@ -19,6 +19,7 @@ export type PostCardProps = {
   post: PartialPost;
   forHome?: boolean;
   forPost?: boolean;
+  index: number;
 };
 
 function PostCard({ post, forHome, forPost, index }: PostCardProps) {
