@@ -22,6 +22,12 @@ export const formatDate = (date: string): string => {
   return format(d, 'yyyy년 M월 d일');
 };
 
+export const getNumberWithOrdinal = (num: number) => {
+  const suffix = ["th", "st", "nd", "rd"];
+  const v = num % 100;
+  return num + (suffix[(v - 20) % 10] || suffix[v] || suffix[0]);
+};
+
 export const getScrollTop = () => {
   if (!document.body) return 0;
   const scrollTop = document.documentElement

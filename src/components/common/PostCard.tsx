@@ -5,7 +5,7 @@ import { ellipsis } from '../../lib/styles/utils';
 import { themedPalette } from '../../lib/styles/themes';
 import { LikeIcon } from '../../static/svg';
 import { PartialPost } from '../../lib/graphql/post';
-import { formatDate } from '../../lib/utils';
+import { formatDate, getNumberWithOrdinal } from '../../lib/utils';
 import { userThumbnail } from '../../static/images';
 import optimizeImage from '../../lib/optimizeImage';
 import SkeletonTexts from './SkeletonTexts';
@@ -21,7 +21,7 @@ export type PostCardProps = {
   forPost?: boolean;
 };
 
-function PostCard({ post, forHome, forPost }: PostCardProps) {
+function PostCard({ post, forHome, forPost, index }: PostCardProps) {
   const url = `/@${post.user.username}/${post.url_slug}`;
 
   const prefetch = usePrefetchPost(post.user.username, post.url_slug);
@@ -53,6 +53,7 @@ function PostCard({ post, forHome, forPost }: PostCardProps) {
             widthRatio={1.916}
             heightRatio={1}
             src={optimizeImage(post.thumbnail, 640)}
+            art={`thumbnail of ${getNumberWithOrdinal(index)} post`}
           />
         </StyledLink>
       )}

@@ -66,6 +66,7 @@ function PostCardGrid({ posts, loading, forHome, forPost }: PostCardGridProps) {
               key={post.id}
               forHome={forHome}
               forPost={forPost}
+              index={i}
             />
           );
 
