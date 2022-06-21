@@ -54,7 +54,7 @@ function PostCard({ post, forHome, forPost, index }: PostCardProps) {
             widthRatio={1.916}
             heightRatio={1}
             src={optimizeImage(post.thumbnail, 640)}
-            art={`thumbnail of ${getNumberWithOrdinal(index + 1)} post`}
+            alt={`thumbnail of ${getNumberWithOrdinal(index + 1)} post`}
           />
         </StyledLink>
       )}
