@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { mediaQuery } from '../../lib/styles/media';
 import gtag from '../../lib/gtag';

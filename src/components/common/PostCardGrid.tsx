@@ -6,7 +6,6 @@ import { mediaQuery } from '../../lib/styles/media';
 import AdFeed from './AdFeed';
 import { detectAnyAdblocker } from 'just-detect-adblock';
 import useUser from '../../lib/hooks/useUser';
-import SetupAdFeed from './SetupAdFeed';
 
 export type PostCardGridProps = {
   posts: (PartialPost | undefined)[];
@@ -17,14 +16,8 @@ export type PostCardGridProps = {
 
 function PostCardGrid({ posts, loading, forHome, forPost }: PostCardGridProps) {
   const [adBlocked, setAdBlocked] = useState(false);
-  const [mode, setMode] = useState<'google' | 'setupad'>('setupad');
-  const user = useUser();
 
-  useEffect(() => {
-    if (window.innerWidth < 768) {
-      setMode('google');
-    }
-  }, []);
+  const user = useUser();
 
   useEffect(() => {
     detectAnyAdblocker().then((detected: boolean) => {
@@ -69,11 +62,7 @@ function PostCardGrid({ posts, loading, forHome, forPost }: PostCardGridProps) {
             />
           );
 
-        return mode === 'google' ? (
-          <AdFeed key={i} index={i} forPost={forPost} />
-        ) : (
-          <SetupAdFeed key={i} />
-        );
+        return <AdFeed key={i} index={i} forPost={forPost} />;
       })}
       {loading &&
         Array.from({ length: 8 }).map((_, i) => (
