@@ -29,11 +29,9 @@ function optimizeImagesFromPost(markdown: string) {
     /(?:!\[(.*?)\]\(https:\/\/images.velog.io\/(.*?)\))/g,
   );
   if (!matches) return markdown;
-  console.log(matches);
   const replacers = matches.map((match) => {
     const filename =
       match.match(/https:\/\/images.velog.io\/(.*?)\)/)?.[1] ?? '';
-    console.log(filename);
     const proeperlyEncoded = encodeURIComponent(decodeURI(filename));
     return [
       match,
