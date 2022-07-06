@@ -35,6 +35,7 @@ export interface RegisterFormProps {
     displayName: string;
     username: string;
   } | null;
+  loading: boolean;
 }
 
 const RegisterForm: React.FC<RegisterFormProps> = ({
@@ -42,6 +43,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
   fixedEmail,
   error,
   defaultInfo,
+  loading,
 }) => {
   const [form, onChange] = useInputs({
     displayName: defaultInfo ? defaultInfo.displayName : '',
@@ -99,6 +101,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
               onSubmit({ ...form, email: fixedEmail || form.email })
             }
             size="LARGE"
+            disabled={loading}
           >
             다음
           </RoundButton>

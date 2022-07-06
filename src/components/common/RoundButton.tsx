@@ -78,6 +78,9 @@ const RoundButtonBlock = styled.button<RoundButtonBlockProps>`
     box-shadow: 0px 2px 12px #00000030;
   }
   cursor: pointer;
+  &:disabled {
+    background: ${themedPalette.bg_element2};
+  }
 `;
 
 type ButtonProps = React.DetailedHTMLProps<

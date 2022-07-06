@@ -28,6 +28,7 @@ const RegisterFormContainer: React.FC<RegisterFormContainerProps> = ({
     ignoreQueryPrefix: true,
   });
   const client = useApolloClient();
+  const [loading, setLoading] = useState(false);
 
   const [error, setError] = useState<null | string>(null);
   const [socialProfile, setSocialProfile] = useState<SocialProfile | null>(
@@ -97,6 +98,7 @@ const RegisterFormContainer: React.FC<RegisterFormContainerProps> = ({
     }
 
     try {
+      setLoading(true);
       if (query.code) {
         // local email register
         const formWithoutEmail = { ...form } as Partial<RegisterFormType>;
@@ -114,6 +116,7 @@ const RegisterFormContainer: React.FC<RegisterFormContainerProps> = ({
         });
       }
     } catch (e) {
+      setLoading(false);
       if ((e as any).response.status === 409) {
         setError('이미 존재하는 아이디입니다.');
         return;
@@ -139,6 +142,7 @@ const RegisterFormContainer: React.FC<RegisterFormContainerProps> = ({
 
   return (
     <RegisterForm
+      loading={loading}
       onSubmit={onSubmit}
       fixedEmail={
         (registerToken && registerToken.email) ||
