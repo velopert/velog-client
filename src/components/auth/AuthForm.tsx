@@ -56,6 +56,13 @@ const AuthFormBlock = styled.div`
   }
 `;
 
+const Warning = styled.div`
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  color: ${themedPalette.text3};
+`;
+
 export interface AuthFormProps {
   mode: AuthMode;
   loading: boolean;
@@ -101,6 +108,12 @@ const AuthForm: React.FC<AuthFormProps> = ({
         <section>
           <h4>소셜 계정으로 {modeText}</h4>
           <AuthSocialButtonGroup currentPath={currentPath} />
+          <Warning>
+            현재 페이스북 로그인이 정상적으로 작동하지 않으며 고치는중에
+            있습니다. 페이스북 계정과 같은 이메일로 로그인을 시도하시거나, 해당
+            계정에 이메일이 설정되어 있지 않다면 contact@velog.io로 문의 메일을
+            보내주세요.
+          </Warning>
         </section>
       </div>
       <div className="foot">

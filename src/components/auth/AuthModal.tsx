@@ -21,7 +21,7 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
   z-index: ${zIndexes.AuthModal};
   .wrapper {
     width: 606px;
-    height: 480px;
+    height: 530px;
     ${media.small} {
       flex: 1;
       width: auto;
