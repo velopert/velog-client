@@ -17,6 +17,7 @@ export interface PostCommentsProps {
   comments: Comment[];
   postId: string;
   count: number;
+  ownPost: boolean;
 }
 
 const MarginTop = styled.div`
@@ -27,6 +28,7 @@ const PostComments: React.FC<PostCommentsProps> = ({
   comments,
   postId,
   count,
+  ownPost,
 }) => {
   const [askRemove, onToggleAskRemove] = useBoolean(false);
   const [removeId, setRemoveId] = useState('');
@@ -64,6 +66,7 @@ const PostComments: React.FC<PostCommentsProps> = ({
             comments={comments}
             currentUserId={currentUserId}
             onRemove={onRemove}
+            ownPost={ownPost}
           />
         </MarginTop>
       </PostCommentsTemplate>

@@ -415,6 +415,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         count={post.comments_count}
         comments={post.comments}
         postId={post.id}
+        ownPost={post.user.id === userId}
       />
       {showRecommends && (userId !== null || isVeryOld) && (
         <RelatedPost

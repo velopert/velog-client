@@ -129,6 +129,7 @@ export interface PostCommentItemProps {
   comment: Comment;
   ownComment: boolean;
   onRemove: (id: string) => any;
+  ownPost: boolean;
 }
 
 interface TogglerProps {
@@ -152,6 +153,7 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
   comment,
   ownComment,
   onRemove,
+  ownPost,
 }) => {
   const { id, user, created_at, text, replies_count, deleted, level } = comment;
   const [open, onToggleOpen] = useBoolean(false);
@@ -192,6 +194,11 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
             <span onClick={() => onRemove(id)}>삭제</span>
           </div>
         )}
+        {ownPost && !(ownComment && !editing) && (
+          <div className="actions">
+            <span onClick={() => onRemove(id)}>삭제</span>
+          </div>
+        )}
       </CommentHead>
       {editing ? (
         <PostEditComment
@@ -210,7 +217,13 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
         {level < 2 && (
           <Toggler open={open} onToggle={onToggleOpen} count={replies_count} />
         )}
-        {open && <PostRepliesContainer commentId={id} onHide={onToggleOpen} />}
+        {open && (
+          <PostRepliesContainer
+            commentId={id}
+            onHide={onToggleOpen}
+            ownPost={ownPost}
+          />
+        )}
       </CommentFoot>
     </PostCommentItemBlock>
   );

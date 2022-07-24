@@ -57,6 +57,7 @@ export interface PostRepliesProps {
   onReply: (text: string) => any;
   onHide: () => void;
   onRemove: (id: string) => any;
+  ownPost: boolean;
 }
 
 const PostReplies: React.FC<PostRepliesProps> = ({
@@ -64,6 +65,7 @@ const PostReplies: React.FC<PostRepliesProps> = ({
   onReply,
   onHide,
   onRemove,
+  ownPost,
 }) => {
   const [writing, onToggle] = useBoolean(false);
   const currentUserId = useUserId();
@@ -90,6 +92,7 @@ const PostReplies: React.FC<PostRepliesProps> = ({
         comments={comments}
         currentUserId={currentUserId}
         onRemove={onRemove}
+        ownPost={ownPost}
       />
       {hasComments && <Separator />}
       {writing || !hasComments ? (

@@ -16,11 +16,13 @@ import PopupOKCancel from '../../components/common/PopupOKCancel';
 export interface PostRepliesProps {
   commentId: string;
   onHide: () => void;
+  ownPost: boolean;
 }
 
 const PostRepliesContainer: React.FC<PostRepliesProps> = ({
   commentId,
   onHide,
+  ownPost,
 }) => {
   const [askRemove, onToggleAskRemove] = useBoolean(false);
   const [removeId, setRemoveId] = useState('');
@@ -76,6 +78,7 @@ const PostRepliesContainer: React.FC<PostRepliesProps> = ({
     <>
       <PostReplies
         comments={replies.data.comment.replies}
+        ownPost={ownPost}
         onReply={onReply}
         onHide={onHide}
         onRemove={onRemove}
