@@ -13,6 +13,7 @@ import RatioImage from './RatioImage';
 import media from '../../lib/styles/media';
 import PrivatePostLabel from './PrivatePostLabel';
 import optimizeImage from '../../lib/optimizeImage';
+import { LikeIcon } from '../../static/svg';
 
 const PostCardBlock = styled.div`
   padding-top: 4rem;
@@ -106,6 +107,16 @@ const PostCardBlock = styled.div`
       margin-left: 0.5rem;
       margin-right: 0.5rem;
     }
+
+    .likes {
+      display: flex;
+      align-items: center;
+      svg {
+        width: 0.875rem;
+        height: 0.875rem;
+        margin-right: 0.25rem;
+      }
+    }
   }
   .tags-wrapper {
     margin-bottom: -0.875rem;
@@ -186,6 +197,11 @@ const FlatPostCard = ({ post, hideUser }: PostCardProps) => {
         <span>{formatDate(post.released_at)}</span>
         <div className="separator">·</div>
         <span>{post.comments_count}개의 댓글</span>
+        <div className="separator">·</div>
+        <span className="likes">
+          <LikeIcon />
+          {post.likes}
+        </span>
         {post.is_private && (
           <>
             <div className="separator">·</div>
