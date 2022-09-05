@@ -74,6 +74,11 @@ function Html({
         ></script> */}
         <script
           async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9161852896103498"
+          crossOrigin="anonymous"
+        ></script>
+        <script
+          async
           src="https://www.googletagmanager.com/gtag/js?id=UA-125599395-1"
         ></script>
         <script
