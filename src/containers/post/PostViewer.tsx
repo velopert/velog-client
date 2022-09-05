@@ -404,13 +404,14 @@ const PostViewer: React.FC<PostViewerProps> = ({
         <RelatedPostsForGuest
           postId={post.id}
           showAds={
-            !isVeryOld &&
-            Date.now() - new Date(post.released_at).getTime() >
-              1000 * 60 * 60 * 24 * 21
+            false
+            // !isVeryOld &&
+            // Date.now() - new Date(post.released_at).getTime() >
+            //   1000 * 60 * 60 * 24 * 21
           }
         />
       )}
-      {isVeryOld && userId === null && <HorizontalAd />}
+      {/* {isVeryOld && userId === null && <HorizontalAd />} */}
       <PostComments
         count={post.comments_count}
         comments={post.comments}
@@ -421,10 +422,11 @@ const PostViewer: React.FC<PostViewerProps> = ({
         <RelatedPost
           postId={post.id}
           showAds={
-            !isVeryOld &&
-            post.user.id !== userId &&
-            Date.now() - new Date(post.released_at).getTime() >
-              1000 * 60 * 60 * 24 * 30
+            false
+            // !isVeryOld &&
+            // post.user.id !== userId &&
+            // Date.now() - new Date(post.released_at).getTime() >
+            //   1000 * 60 * 60 * 24 * 30
           }
         />
       )}

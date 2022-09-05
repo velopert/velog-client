@@ -28,6 +28,7 @@ function PostCardGrid({ posts, loading, forHome, forPost }: PostCardGridProps) {
   }, []);
 
   const postsWithAds = useMemo(() => {
+    if (1 === 1) return posts; // disable adsense
     if (user) return posts; // hide ads to users
     if (adBlocked) return posts;
     if (!forHome) return posts;
