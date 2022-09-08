@@ -16,10 +16,16 @@ app.use(
   }),
 );
 
-const proxyMiddleware = proxy('localhost', { port: 5000 });
+const proxyMiddleware = proxy(
+  process.env.REACT_APP_API_HOST ?? 'http://localhost:5000',
+  {},
+);
+
+app.use((ctx, next) => {
+  return next();
+});
 
 app.use(router.routes()).use(router.allowedMethods());
-
 app.use(ssrMiddleware);
 app.use(proxyMiddleware);
 // router.get('/ads.txt', (ctx) => {

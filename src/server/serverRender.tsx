@@ -40,7 +40,7 @@ function extractFromCookie(cookie: string | undefined, key: string) {
 
 const serverRender = async ({ url, loggedIn, cookie }: SSROption) => {
   // enable proxy to backend server in development mode
-  if (/^\/(api|graphql)/.test(url)) {
+  if (/^\/(api|graphql|sitemaps)/.test(url)) {
     return null;
   }
 
