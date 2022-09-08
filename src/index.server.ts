@@ -22,9 +22,9 @@ app.use(router.routes()).use(router.allowedMethods());
 
 app.use(ssrMiddleware);
 app.use(proxyMiddleware);
-router.get('/ads.txt', (ctx) => {
-  ctx.body = `google.com, pub-5574866530496701, DIRECT, f08c47fec0942fa0`;
-});
+// router.get('/ads.txt', (ctx) => {
+//   ctx.body = `google.com, pub-5574866530496701, DIRECT, f08c47fec0942fa0`;
+// });
 // router.post('/graphql', proxyMiddleware);
 
 app.listen(3001, () => {
