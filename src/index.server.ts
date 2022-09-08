@@ -21,10 +21,6 @@ const proxyMiddleware = proxy(
   {},
 );
 
-app.use((ctx, next) => {
-  return next();
-});
-
 app.use(router.routes()).use(router.allowedMethods());
 app.use(ssrMiddleware);
 app.use(proxyMiddleware);
