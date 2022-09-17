@@ -35,9 +35,8 @@ import { toast } from 'react-toastify';
 import MobileLikeButton from '../../components/post/MobileLikeButton';
 import RelatedPost from './RelatedPost';
 import optimizeImage from '../../lib/optimizeImage';
-import RelatedPostsForGuest from './RelatedPostsForGuest';
-import HorizontalAd from './HorizontalAd';
 import { useSetShowFooter } from '../../components/velog/VelogPageTemplate';
+import HorizontalBanner from './HorizontalBanner';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -323,7 +322,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
 
   const isVeryOld =
     Date.now() - new Date(post.released_at).getTime() >
-    1000 * 60 * 60 * 24 * 365;
+    1000 * 60 * 60 * 24 * 180;
 
   const url = `https://velog.io/@${username}/${post.url_slug}`;
 
@@ -389,6 +388,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
           />
         }
       />
+      {userId === null && isVeryOld ? <HorizontalBanner /> : null}
       <PostContent isMarkdown={post.is_markdown} body={post.body} />
       <UserProfileWrapper>
         <UserProfile
@@ -400,7 +400,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         />
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />
-      {showRecommends && userId === null && !isVeryOld && (
+      {/* {showRecommends && userId === null && !isVeryOld && (
         <RelatedPostsForGuest
           postId={post.id}
           showAds={
@@ -410,15 +410,18 @@ const PostViewer: React.FC<PostViewerProps> = ({
             //   1000 * 60 * 60 * 24 * 21
           }
         />
-      )}
-      {/* {isVeryOld && userId === null && <HorizontalAd />} */}
+      )} */}
+      {userId === null && isVeryOld && post.body.length > 300 ? (
+        <HorizontalBanner />
+      ) : null}
+
       <PostComments
         count={post.comments_count}
         comments={post.comments}
         postId={post.id}
         ownPost={post.user.id === userId}
       />
-      {showRecommends && (userId !== null || isVeryOld) && (
+      {/* {showRecommends && (userId !== null || isVeryOld) && (
         <RelatedPost
           postId={post.id}
           showAds={
@@ -429,7 +432,8 @@ const PostViewer: React.FC<PostViewerProps> = ({
             //   1000 * 60 * 60 * 24 * 30
           }
         />
-      )}
+      )} */}
+      {showRecommends ? <RelatedPost postId={post.id} showAds={false} /> : null}
     </PostViewerProvider>
   );
 };
