@@ -256,7 +256,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
             const html = String(file);
 
             if (onConvertFinish) {
-              onConvertFinish(html);
+              onConvertFinish(filter(html));
             }
             // load twitter script if needed
             if (html.indexOf('class="twitter-tweet"') !== -1) {
