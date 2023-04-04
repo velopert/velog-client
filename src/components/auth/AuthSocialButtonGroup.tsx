@@ -8,23 +8,32 @@ const AuthSocialButtonGroupBlock = styled.div`
   margin-top: 1.5rem;
 `;
 
-const AuthSocialButtonGroup = ({ currentPath }: { currentPath: string }) => {
+const AuthSocialButtonGroup = ({
+  currentPath,
+  isIntegrate,
+}: {
+  currentPath: string;
+  isIntegrate?: boolean;
+}) => {
   return (
     <AuthSocialButtonGroupBlock>
       <AuthSocialButton
         provider="github"
         tabIndex={4}
         currentPath={currentPath}
+        isIntegrate={isIntegrate}
       />
       <AuthSocialButton
         provider="google"
         tabIndex={5}
         currentPath={currentPath}
+        isIntegrate={isIntegrate}
       />
       <AuthSocialButton
         provider="facebook"
         tabIndex={6}
         currentPath={currentPath}
+        isIntegrate={isIntegrate}
       />
     </AuthSocialButtonGroupBlock>
   );

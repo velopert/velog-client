@@ -70,6 +70,7 @@ export interface AuthFormProps {
   onSendAuthEmail: (email: string) => void;
   registered: boolean | null;
   currentPath: string;
+  isIntegrate?: boolean;
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({
@@ -79,6 +80,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
   loading,
   registered,
   currentPath,
+  isIntegrate,
 }) => {
   const [email, onChangeEmail] = useInput('');
   const onSubmit = (email: string) => {
@@ -107,24 +109,29 @@ const AuthForm: React.FC<AuthFormProps> = ({
         </section>
         <section>
           <h4>소셜 계정으로 {modeText}</h4>
-          <AuthSocialButtonGroup currentPath={currentPath} />
+          <AuthSocialButtonGroup
+            currentPath={currentPath}
+            isIntegrate={isIntegrate}
+          />
         </section>
       </div>
-      <div className="foot">
-        <span>
-          {mode === 'LOGIN'
-            ? '아직 회원이 아니신가요?'
-            : '계정이 이미 있으신가요?'}
-        </span>
-        <div
-          className="link"
-          tabIndex={7}
-          onClick={onToggleMode}
-          data-testid="switchmode"
-        >
-          {mode === 'LOGIN' ? '회원가입' : '로그인'}
+      {isIntegrate ? null : (
+        <div className="foot">
+          <span>
+            {mode === 'LOGIN'
+              ? '아직 회원이 아니신가요?'
+              : '계정이 이미 있으신가요?'}
+          </span>
+          <div
+            className="link"
+            tabIndex={7}
+            onClick={onToggleMode}
+            data-testid="switchmode"
+          >
+            {mode === 'LOGIN' ? '회원가입' : '로그인'}
+          </div>
         </div>
-      </div>
+      )}
     </AuthFormBlock>
   );
 };

@@ -163,3 +163,13 @@ export const LOGOUT = gql`
     logout
   }
 `;
+
+export const ACCEPT_INTEGRATION = gql`
+  mutation AcceptIntegration {
+    acceptIntegration
+  }
+`;
+
+export type AcceptIntegrationResponse = {
+  acceptIntegration: string;
+};

@@ -27,6 +27,7 @@ interface AuthSocialButtonProps {
   provider: 'facebook' | 'google' | 'github';
   tabIndex?: number;
   currentPath: string;
+  isIntegrate?: boolean;
 }
 
 const providerMap = {
@@ -51,6 +52,7 @@ const AuthSocialButton: React.FC<AuthSocialButtonProps> = ({
   provider,
   tabIndex,
   currentPath,
+  isIntegrate,
 }) => {
   const info = providerMap[provider];
   const { icon: Icon, color, border } = info;
@@ -60,7 +62,9 @@ const AuthSocialButton: React.FC<AuthSocialButtonProps> = ({
       ? process.env.REACT_APP_API_HOST
       : 'http://localhost:5000/';
 
-  const redirectTo = `${host}api/v2/auth/social/redirect/${provider}?next=${currentPath}`;
+  const redirectTo = `${host}api/v2/auth/social/redirect/${provider}?next=${currentPath}&isIntegrate=${
+    isIntegrate ? 1 : 0
+  }`;
 
   return (
     <AuthSocialButtonBlock

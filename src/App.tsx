@@ -14,6 +14,7 @@ import { Helmet } from 'react-helmet-async';
 import HomePage from './pages/home/HomePage';
 import MainPageTemplate from './components/main/MainPageTemplate';
 import ConditionalBackground from './components/base/ConditionalBackground';
+import UserIntegratePage from './pages/UserIntegratePage';
 
 const loadableConfig = {
   fallback: <PageTemplate />,
@@ -86,6 +87,7 @@ const App: React.FC<AppProps> = (props) => {
           <Route path="/lists/:type(liked|read)" component={ReadingListPage} />
           <Route path="/lists" render={() => <Redirect to="/lists/liked" />} />
           <Route path="/post-stats/:postId" component={PostStatsPage} />
+          <Route path="/user-integrate" component={UserIntegratePage} />
           <Route component={NotFoundPage} />
         </Switch>
       </ErrorBoundary>
