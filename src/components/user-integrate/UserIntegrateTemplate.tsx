@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import useUser from '../../lib/hooks/useUser';
 import media from '../../lib/styles/media';
@@ -11,11 +11,35 @@ import {
   ACCEPT_INTEGRATION,
   AcceptIntegrationResponse,
 } from '../../lib/graphql/user';
+import { useLocation } from 'react-router-dom';
+import qs from 'qs';
+import { toast } from 'react-toastify';
+import useRequest from '../../lib/hooks/useRequest';
+import { SendAuthEmailResponse, sendAuthEmail } from '../../lib/api/auth';
 
 function UserIntegrateTemplate() {
   const user = useUser();
+  const location = useLocation();
+  const query = qs.parse(location.search, { ignoreQueryPrefix: true });
+  const integrateState = query.state ?? '';
+  const [_sendAuthEmail, loading, data, , resetSendAuthEmail] =
+    useRequest<SendAuthEmailResponse>(sendAuthEmail);
+
   const [acceptIntegration] =
     useMutation<AcceptIntegrationResponse>(ACCEPT_INTEGRATION);
+
+  const onSendAuthEmail = useCallback(
+    async (email: string) => {
+      if (!validateEmail(email)) {
+        toast.error('잘못된 이메일 형식입니다.');
+        return;
+      }
+      _sendAuthEmail(email);
+    },
+    [_sendAuthEmail],
+  );
+
+  const registered = data && data.registered;
 
   return (
     <Block>
@@ -45,7 +69,7 @@ function UserIntegrateTemplate() {
                 onClick={async () => {
                   const result = await acceptIntegration();
                   if (!result.data) return;
-                  window.location.href = `https://api-dev.codenary.co.kr/contents/velog/callback?code=${result.data.acceptIntegration}`;
+                  window.location.href = `https://api-dev.codenary.co.kr/contents/velog/callback?code=${result.data.acceptIntegration}&state=${integrateState}`;
                 }}
               >
                 승인
@@ -56,11 +80,12 @@ function UserIntegrateTemplate() {
           <AuthForm
             mode="LOGIN"
             onToggleMode={() => {}}
-            onSendAuthEmail={() => {}}
-            loading={false}
-            registered={null}
+            onSendAuthEmail={onSendAuthEmail}
+            loading={loading}
+            registered={registered}
             currentPath="/user-integrate"
             isIntegrate
+            integrateState={integrateState}
           />
         )}
       </Content>
@@ -128,3 +153,9 @@ const DataRow = styled.div`
 `;
 
 export default UserIntegrateTemplate;
+
+function validateEmail(email: string) {
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}

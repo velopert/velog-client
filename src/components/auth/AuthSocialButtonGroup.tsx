@@ -11,9 +11,11 @@ const AuthSocialButtonGroupBlock = styled.div`
 const AuthSocialButtonGroup = ({
   currentPath,
   isIntegrate,
+  integrateState,
 }: {
   currentPath: string;
   isIntegrate?: boolean;
+  integrateState?: string;
 }) => {
   return (
     <AuthSocialButtonGroupBlock>
@@ -22,18 +24,21 @@ const AuthSocialButtonGroup = ({
         tabIndex={4}
         currentPath={currentPath}
         isIntegrate={isIntegrate}
+        integrateState={integrateState}
       />
       <AuthSocialButton
         provider="google"
         tabIndex={5}
         currentPath={currentPath}
         isIntegrate={isIntegrate}
+        integrateState={integrateState}
       />
       <AuthSocialButton
         provider="facebook"
         tabIndex={6}
         currentPath={currentPath}
         isIntegrate={isIntegrate}
+        integrateState={integrateState}
       />
     </AuthSocialButtonGroupBlock>
   );

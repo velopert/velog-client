@@ -71,6 +71,7 @@ export interface AuthFormProps {
   registered: boolean | null;
   currentPath: string;
   isIntegrate?: boolean;
+  integrateState?: string;
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({
@@ -81,6 +82,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
   registered,
   currentPath,
   isIntegrate,
+  integrateState,
 }) => {
   const [email, onChangeEmail] = useInput('');
   const onSubmit = (email: string) => {
@@ -96,7 +98,10 @@ const AuthForm: React.FC<AuthFormProps> = ({
         <section>
           <h4>이메일로 {modeText}</h4>
           {registered !== null ? (
-            <AuthEmailSuccess registered={registered} />
+            <AuthEmailSuccess
+              registered={registered}
+              isIntegrate={isIntegrate}
+            />
           ) : (
             <AuthEmailForm
               value={email}
@@ -112,6 +117,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
           <AuthSocialButtonGroup
             currentPath={currentPath}
             isIntegrate={isIntegrate}
+            integrateState={integrateState}
           />
         </section>
       </div>
