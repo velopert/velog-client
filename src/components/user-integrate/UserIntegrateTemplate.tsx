@@ -69,7 +69,7 @@ function UserIntegrateTemplate() {
                 onClick={async () => {
                   const result = await acceptIntegration();
                   if (!result.data) return;
-                  window.location.href = `https://api-dev.codenary.co.kr/contents/velog/callback?code=${result.data.acceptIntegration}&state=${integrateState}`;
+                  window.location.href = `https://api.codenary.co.kr/contents/velog/callback?code=${result.data.acceptIntegration}&state=${integrateState}`;
                 }}
               >
                 승인
