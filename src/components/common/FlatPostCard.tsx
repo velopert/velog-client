@@ -187,7 +187,7 @@ const FlatPostCard = ({ post, hideUser }: PostCardProps) => {
       <Link to={url}>
         <h2>{post.title}</h2>
       </Link>
-      <p>{post.short_description}</p>
+      <p>{post.short_description.replace(/&#x3A;/g, ':')}{post.short_description.length === 150 && '...'}</p>
       <div className="tags-wrapper">
         {post.tags.map((tag) => (
           <Tag key={tag} name={tag} link />
