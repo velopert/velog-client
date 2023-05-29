@@ -61,9 +61,12 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     tags,
   } = useSelector((state: RootState) => state.write);
   const uncachedClient = useUncachedApolloClient();
-  const [writePost] = useMutation<WritePostResponse>(WRITE_POST, {
-    client: uncachedClient,
-  });
+  const [writePost, { loading: savingPosts }] = useMutation<WritePostResponse>(
+    WRITE_POST,
+    {
+      client: uncachedClient,
+    },
+  );
 
   const bodyRef = useRef(initialBody);
   const titleRef = useRef(title);
@@ -148,6 +151,10 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
 
   const onTempSave = useCallback(
     async (notify?: boolean) => {
+      if (savingPosts) {
+        toast.error('저장 중 입니다.');
+        return;
+      }
       if (!title || !markdown) {
         toast.error('제목 또는 내용이 비어있습니다.');
         return;
@@ -228,6 +235,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       lastSavedData,
       markdown,
       postId,
+      savingPosts,
       tags,
       title,
       writePost,

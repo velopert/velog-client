@@ -54,9 +54,12 @@ const PublishActionButtonsContainer: React.FC<
 
   const uncachedClient = useUncachedApolloClient();
 
-  const [writePost] = useMutation<WritePostResponse>(WRITE_POST, {
-    client: uncachedClient,
-  });
+  const [writePost, { loading: savingPosts }] = useMutation<WritePostResponse>(
+    WRITE_POST,
+    {
+      client: uncachedClient,
+    },
+  );
   const [editPost] = useMutation<EditPostResult>(EDIT_POST, {
     client: uncachedClient,
   });
@@ -79,7 +82,11 @@ const PublishActionButtonsContainer: React.FC<
     series_id: safe(() => options.selectedSeries!.id),
   };
 
-  const onPublish = async () => {
+  const onPublish = useCallback(async () => {
+    if (savingPosts) {
+      toast.error('저장중 입니다.');
+      return;
+    }
     if (options.title.trim() === '') {
       toast.error('제목이 비어있습니다.');
       return;
@@ -95,7 +102,7 @@ const PublishActionButtonsContainer: React.FC<
     } catch (e) {
       toast.error('포스트 작성 실패');
     }
-  };
+  }, [client, history, options.title, savingPosts, variables, writePost]);
 
   const onEdit = async () => {
     const response = await editPost({
