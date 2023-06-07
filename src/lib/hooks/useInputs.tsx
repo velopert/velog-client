@@ -1,17 +1,16 @@
 import { useReducer, useCallback } from 'react';
 
-type DefaultValues = {
-  [key: string]: string;
-};
-
 type UseInputsAction = {
   name: string;
   value: string;
 };
-function reducer<T>(state: T, action: UseInputsAction | null) {
+function reducer<T extends Record<string, string>>(
+  state: T,
+  action: UseInputsAction | null,
+) {
   if (!action) {
     const initialState: any = {};
-    Object.keys(state).forEach(key => {
+    Object.keys(state).forEach((key) => {
       initialState[key] = '';
     });
     return initialState;
@@ -36,6 +35,6 @@ export default function useInputs<T>(defaultValues: T) {
     T,
     typeof onChange,
     typeof onReset,
-    typeof dispatch
+    typeof dispatch,
   ];
 }

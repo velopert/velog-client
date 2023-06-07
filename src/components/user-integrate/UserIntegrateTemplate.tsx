@@ -22,7 +22,7 @@ function UserIntegrateTemplate() {
   const location = useLocation();
   const query = qs.parse(location.search, { ignoreQueryPrefix: true });
   const integrateState = query.state ?? '';
-  const [_sendAuthEmail, loading, data, , resetSendAuthEmail] =
+  const [_sendAuthEmail, loading, data] =
     useRequest<SendAuthEmailResponse>(sendAuthEmail);
 
   const [acceptIntegration] =
