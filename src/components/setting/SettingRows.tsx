@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import SettingRow from './SettingRow';
 import SettingTitleRow from './SettingTitleRow';
 import SettingSocialInfoRow from './SettingSocialInfoRow';
 import SettingEmailRulesRow from './SettingEmailRulesRow';
@@ -8,12 +7,14 @@ import { createFallbackTitle } from '../../lib/utils';
 import { ProfileLinks } from '../../lib/graphql/user';
 import SettingUnregisterRow from './SettingUnregisterRow';
 import media from '../../lib/styles/media';
+import SettingEmailRow from './SettingEmailRow';
 
 export type SettingRowsProps = {
   title: string | null;
   username: string;
   email: string;
   onUpdateTitle: (title: string) => Promise<any>;
+  onUpdateEmail: (email: string) => Promise<any>;
   onUpdateSocialInfo: (profileLinks: ProfileLinks) => Promise<any>;
   onUpdateEmailRules: (params: {
     promotion: boolean;
@@ -41,6 +42,7 @@ function SettingRows({
   userMeta,
   email,
   onUpdateTitle,
+  onUpdateEmail,
   onUpdateSocialInfo,
   onUpdateEmailRules,
   onUnregister,
@@ -52,12 +54,7 @@ function SettingRows({
         onUpdateTitle={onUpdateTitle}
       />
       <SettingSocialInfoRow {...profileLinks} onUpdate={onUpdateSocialInfo} />
-      <SettingRow
-        title="이메일 주소"
-        description="회원 인증 또는 시스템에서 발송하는 이메일을 수신하는 주소입니다."
-      >
-        {email}
-      </SettingRow>
+      <SettingEmailRow email={email} onUpdateEmail={onUpdateEmail} />
       {userMeta && (
         <SettingEmailRulesRow
           notification={userMeta.email_notification}

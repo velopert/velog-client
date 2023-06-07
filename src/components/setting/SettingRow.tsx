@@ -10,6 +10,7 @@ export type SettingRowProps = {
   onClickEdit?: () => void;
   editButton?: boolean;
   description?: string;
+  editButtonText?: string;
 };
 
 function SettingRow({
@@ -18,6 +19,7 @@ function SettingRow({
   editButton,
   description,
   onClickEdit,
+  editButtonText,
 }: SettingRowProps) {
   return (
     <Row>
@@ -29,7 +31,10 @@ function SettingRow({
           <div className="contents">{children}</div>
           {editButton && (
             <div className="edit-wrapper">
-              <SettingEditButton onClick={onClickEdit} />
+              <SettingEditButton
+                onClick={onClickEdit}
+                customText={editButtonText}
+              />
             </div>
           )}
         </div>
