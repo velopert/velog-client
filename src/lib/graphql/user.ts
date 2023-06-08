@@ -170,6 +170,12 @@ export const ACCEPT_INTEGRATION = gql`
   }
 `;
 
+export const CONFIRM_CHANGE_EMAIL = gql`
+  mutation ConfirmChangeEmail($email: String!) {
+    confirm_change_email(email: $email)
+  }
+`;
+
 export type AcceptIntegrationResponse = {
   acceptIntegration: string;
 };

@@ -28,6 +28,11 @@ const EmailLoginPage = loadable(
   () => import('./pages/EmailLoginPage'),
   loadableConfig,
 );
+const EmailChangePage = loadable(
+  () => import('./pages/EmailChangePage'),
+  loadableConfig,
+);
+
 const WritePage = loadable(() => import('./pages/WritePage'));
 const SearchPage = loadable(() => import('./pages/SearchPage'), loadableConfig);
 const SavesPage = loadable(() => import('./pages/SavesPage'), loadableConfig);
@@ -77,6 +82,7 @@ const App: React.FC<AppProps> = (props) => {
           <Route path="/@:username" component={VelogPage} />
           {/* <Route path="/@:username/:urlSlug" component={PostPage} /> */}
           <Route path="/email-login" component={EmailLoginPage} />
+          <Route path="/email-change" component={EmailChangePage} />
           <Route path="/write" component={WritePage} />
           <Route path="/search" component={SearchPage} />
           <Route path="/saves" component={SavesPage} />

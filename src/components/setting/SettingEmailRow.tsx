@@ -23,6 +23,8 @@ function SettingEmailRow({
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     //! TODO: 이메일 형식으로 입력하지 않을 경우 처리
+    //! TODO: 같은 이메일인 경우 처리
+    //! TODO: 이메일 중복 체크
     await onChangeEmail(value);
     setEdit(false);
   };
