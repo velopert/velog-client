@@ -171,8 +171,8 @@ export const ACCEPT_INTEGRATION = gql`
 `;
 
 export const CONFIRM_CHANGE_EMAIL = gql`
-  mutation ConfirmChangeEmail($email: String!) {
-    confirm_change_email(email: $email)
+  mutation ConfirmChangeEmail($code: String!) {
+    confirmChangeEmail(code: $code)
   }
 `;
 

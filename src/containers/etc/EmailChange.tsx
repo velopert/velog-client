@@ -9,6 +9,7 @@ import { useApolloClient } from '@apollo/react-hooks';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import SpinnerBlock from '../../components/common/SpinnerBlock';
+import usePopup from '../../lib/hooks/usePopup';
 
 const mapStateToProps = (state: RootState) => ({});
 const mapDispatchToProps = {};
@@ -26,7 +27,9 @@ const { useEffect, useCallback } = React;
 const EmailChange: React.FC<EmailChangeProps> = ({ location, history }) => {
   const query = qs.parse(location.search, { ignoreQueryPrefix: true });
   const client = useApolloClient();
-  useCallback(async () => {
+  const popup = usePopup();
+
+  const processChangeEmail = useCallback(async () => {
     try {
       await client.mutate({
         mutation: CONFIRM_CHANGE_EMAIL,
@@ -36,11 +39,15 @@ const EmailChange: React.FC<EmailChangeProps> = ({ location, history }) => {
       });
 
       history.replace('/setting');
+      popup.open({
+        title: '성공',
+        message: '이메일 변경이 완료 되었습니다.',
+      });
     } catch (e) {
       toast.error('잘못된 접근입니다.');
       history.replace('/');
     }
-  }, [client, history, query.code]);
+  }, [client, history, popup, query.code]);
 
   useEffect(() => {
     if (!query.code) {
@@ -48,7 +55,8 @@ const EmailChange: React.FC<EmailChangeProps> = ({ location, history }) => {
       toast.error('잘못된 접근입니다.');
       history.replace('/');
     }
-  }, [history, location.search, query.code]);
+    processChangeEmail();
+  }, [history, location.search, processChangeEmail, query.code]);
 
   return (
     <Fullscreen>
