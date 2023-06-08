@@ -14,7 +14,7 @@ export type SettingRowsProps = {
   username: string;
   email: string;
   onUpdateTitle: (title: string) => Promise<any>;
-  onUpdateEmail: (email: string) => Promise<any>;
+  onChangeEmail: (email: string) => Promise<any>;
   onUpdateSocialInfo: (profileLinks: ProfileLinks) => Promise<any>;
   onUpdateEmailRules: (params: {
     promotion: boolean;
@@ -42,7 +42,7 @@ function SettingRows({
   userMeta,
   email,
   onUpdateTitle,
-  onUpdateEmail,
+  onChangeEmail,
   onUpdateSocialInfo,
   onUpdateEmailRules,
   onUnregister,
@@ -54,7 +54,7 @@ function SettingRows({
         onUpdateTitle={onUpdateTitle}
       />
       <SettingSocialInfoRow {...profileLinks} onUpdate={onUpdateSocialInfo} />
-      <SettingEmailRow email={email} onUpdateEmail={onUpdateEmail} />
+      <SettingEmailRow email={email} onChangeEmail={onChangeEmail} />
       {userMeta && (
         <SettingEmailRulesRow
           notification={userMeta.email_notification}

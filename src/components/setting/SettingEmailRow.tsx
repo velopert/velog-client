@@ -7,16 +7,17 @@ import Button from '../common/Button';
 
 export type SettingEmailRowProps = {
   email: string;
-  onUpdateEmail: (email: string) => Promise<void>;
+  onChangeEmail: (email: string) => Promise<void>;
 };
 
-function SettingEmailRow({ email, onUpdateEmail }: SettingEmailRowProps) {
+function SettingEmailRow({ email, onChangeEmail }: SettingEmailRowProps) {
   const [edit, setEdit] = useState(false);
   const [value, onChange] = useInput(email);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await onUpdateEmail(value);
+    //! TODO: 이메일 형식으로 입력하지 않을 경우 처리
+    await onChangeEmail(value);
     setEdit(false);
   };
 
