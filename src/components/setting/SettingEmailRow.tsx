@@ -4,13 +4,19 @@ import useInput from '../../lib/hooks/useInput';
 import SettingInput from './SettingInput';
 import styled from 'styled-components';
 import Button from '../common/Button';
+import SettingEmailSuccess from './SettingEmailSuccess';
 
 export type SettingEmailRowProps = {
   email: string;
+  isEmailSent: boolean;
   onChangeEmail: (email: string) => Promise<void>;
 };
 
-function SettingEmailRow({ email, onChangeEmail }: SettingEmailRowProps) {
+function SettingEmailRow({
+  email,
+  isEmailSent,
+  onChangeEmail,
+}: SettingEmailRowProps) {
   const [edit, setEdit] = useState(false);
   const [value, onChange] = useInput(email);
 
@@ -26,6 +32,7 @@ function SettingEmailRow({ email, onChangeEmail }: SettingEmailRowProps) {
       title="이메일 주소"
       description="회원 인증 또는 시스템에서 발송하는 이메일을 수신하는 주소입니다."
       editButton={!edit}
+      showEditButton={!isEmailSent}
       onClickEdit={() => setEdit(true)}
       editButtonText="변경"
     >
@@ -38,6 +45,8 @@ function SettingEmailRow({ email, onChangeEmail }: SettingEmailRowProps) {
           />
           <Button>변경</Button>
         </Form>
+      ) : isEmailSent ? (
+        <SettingEmailSuccess />
       ) : (
         email
       )}

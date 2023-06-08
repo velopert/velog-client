@@ -9,8 +9,7 @@ const CHANGE_EMAIL = gql`
 `;
 
 export default function useChangeEmail() {
-  const [changeEmail] = useMutation(CHANGE_EMAIL);
-
+  const [changeEmail, { called }] = useMutation(CHANGE_EMAIL);
   const change = useCallback(
     (email: string) => {
       return changeEmail({
@@ -24,5 +23,6 @@ export default function useChangeEmail() {
 
   return {
     change,
+    called,
   };
 }

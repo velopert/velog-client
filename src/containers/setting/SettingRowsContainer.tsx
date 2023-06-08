@@ -17,7 +17,7 @@ function SettingRowsContainer(props: SettingRowsContainerProps) {
   const user = useSelector((state: RootState) => state.core.user);
   const updateSocialInfo = useUpdateSocialInfo();
   const { update: updateEmailRules } = useUpdateEmailRules();
-  const { change: changeEmail } = useChangeEmail();
+  const { change: changeEmail, called: isEmailSent } = useChangeEmail();
   const unregister = useUnregister();
 
   const onUpdateEmailRules = useCallback(
@@ -50,6 +50,7 @@ function SettingRowsContainer(props: SettingRowsContainerProps) {
       onUpdateEmailRules={onUpdateEmailRules}
       onUnregister={unregister}
       userMeta={meta}
+      isEmailSent={isEmailSent}
     />
   );
 }
