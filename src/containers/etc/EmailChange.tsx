@@ -3,13 +3,18 @@ import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router';
 import qs from 'qs';
 
-import { CONFIRM_CHANGE_EMAIL } from '../../lib/graphql/user';
+import {
+  CONFIRM_CHANGE_EMAIL,
+  CurrentUser,
+  GET_CURRENT_USER,
+} from '../../lib/graphql/user';
 import { RootState } from '../../modules';
 import { useApolloClient } from '@apollo/react-hooks';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import SpinnerBlock from '../../components/common/SpinnerBlock';
 import usePopup from '../../lib/hooks/usePopup';
+import storage from '../../lib/storage';
 
 const mapStateToProps = (state: RootState) => ({});
 const mapDispatchToProps = {};
@@ -38,12 +43,20 @@ const EmailChange: React.FC<EmailChangeProps> = ({ location, history }) => {
         },
       });
 
+      const response = await client.query<{ auth: CurrentUser }>({
+        query: GET_CURRENT_USER,
+        fetchPolicy: 'network-only',
+      });
+
+      storage.setItem('CURRENT_USER', response.data.auth);
+
       history.replace('/setting');
       popup.open({
         title: '성공',
         message: '이메일 변경이 완료 되었습니다.',
       });
     } catch (e) {
+      // TODO: show 401
       toast.error('잘못된 접근입니다.');
       history.replace('/');
     }

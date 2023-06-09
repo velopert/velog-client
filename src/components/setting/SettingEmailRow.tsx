@@ -5,6 +5,9 @@ import SettingInput from './SettingInput';
 import styled from 'styled-components';
 import Button from '../common/Button';
 import SettingEmailSuccess from './SettingEmailSuccess';
+import { toast } from 'react-toastify';
+import { CHECK_DUPLICATED_EMAIL } from '../../lib/graphql/user';
+import client from '../../lib/graphql/client';
 
 export type SettingEmailRowProps = {
   email: string;
@@ -22,9 +25,28 @@ function SettingEmailRow({
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    //! TODO: 이메일 형식으로 입력하지 않을 경우 처리
-    //! TODO: 같은 이메일인 경우 처리
-    //! TODO: 이메일 중복 체크
+
+    if (!validateEmail(value)) {
+      toast.error('잘못된 이메일 형식입니다.');
+      return;
+    }
+
+    if (value === email) {
+      toast.error('새 이메일 주소가 현재 이메일과 동일합니다.');
+      return;
+    }
+
+    const response = await client.query<{ isDuplicated: boolean }>({
+      query: CHECK_DUPLICATED_EMAIL,
+      fetchPolicy: 'network-only',
+      variables: { email: value },
+    });
+
+    if (response.data.isDuplicated) {
+      toast.error('동일한 이메일이 존재합니다.');
+      return;
+    }
+
     await onChangeEmail(value);
     setEdit(false);
   };
@@ -66,3 +88,9 @@ const Form = styled.form`
 `;
 
 export default SettingEmailRow;
+
+function validateEmail(email: string) {
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
