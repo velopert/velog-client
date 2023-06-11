@@ -130,11 +130,9 @@ export const GET_USER_SERIES_LIST = gql`
   }
 `;
 
-export const CHECK_DUPLICATED_EMAIL = gql`
-  query CHECK_DUPLICATED_EMAIL($email: String!) {
-    checkDuplicatedEmail(email: $email) {
-      isDuplicated
-    }
+export const EMAIL_EXISTS = gql`
+  query EMAIL_EXISTS($email: String!) {
+    emailExists(email: $email)
   }
 `;
 

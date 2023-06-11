@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Button from '../common/Button';
 import SettingEmailSuccess from './SettingEmailSuccess';
 import { toast } from 'react-toastify';
-import { CHECK_DUPLICATED_EMAIL } from '../../lib/graphql/user';
+import { EMAIL_EXISTS } from '../../lib/graphql/user';
 import client from '../../lib/graphql/client';
 
 export type SettingEmailRowProps = {
@@ -37,12 +37,12 @@ function SettingEmailRow({
     }
 
     const response = await client.query<{ isDuplicated: boolean }>({
-      query: CHECK_DUPLICATED_EMAIL,
+      query: EMAIL_EXISTS,
       fetchPolicy: 'network-only',
       variables: { email: value },
     });
 
-    if (response.data.isDuplicated) {
+    if (response.data) {
       toast.error('동일한 이메일이 존재합니다.');
       return;
     }
