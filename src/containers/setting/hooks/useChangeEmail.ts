@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import { useCallback } from 'react';
 
 const INITIATE_CHANGE_EMAIL = gql`
-  mutation INITIATE_CHANGE_EMAIL($email: String!) {
+  mutation InitiateChangeEmail($email: String!) {
     initiateChangeEmail(email: $email)
   }
 `;
