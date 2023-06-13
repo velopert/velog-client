@@ -131,7 +131,7 @@ export const GET_USER_SERIES_LIST = gql`
 `;
 
 export const EMAIL_EXISTS = gql`
-  query EMAIL_EXISTS($email: String!) {
+  query EmailExists($email: String!) {
     emailExists(email: $email)
   }
 `;

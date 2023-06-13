@@ -21,7 +21,7 @@ function SettingEmailRow({
   onChangeEmail,
 }: SettingEmailRowProps) {
   const [edit, setEdit] = useState(false);
-  const [value, onChange] = useInput(email);
+  const [value, onChange] = useInput(email ?? '');
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,13 +36,13 @@ function SettingEmailRow({
       return;
     }
 
-    const response = await client.query<{ isDuplicated: boolean }>({
+    const response = await client.query<{ emailExists: boolean }>({
       query: EMAIL_EXISTS,
       fetchPolicy: 'network-only',
-      variables: { email: value },
+      variables: { email: value.trim() },
     });
 
-    if (response.data) {
+    if (response.data.emailExists) {
       toast.error('동일한 이메일이 존재합니다.');
       return;
     }

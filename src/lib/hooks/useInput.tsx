@@ -12,6 +12,6 @@ export default function useInput(defaultValue: string) {
   return [input, onChange, onReset] as [
     string,
     typeof onChange,
-    typeof onReset
+    typeof onReset,
   ];
 }
