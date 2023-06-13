@@ -10,6 +10,8 @@ export type SettingRowProps = {
   onClickEdit?: () => void;
   editButton?: boolean;
   description?: string;
+  showEditButton?: boolean;
+  editButtonText?: string;
 };
 
 function SettingRow({
@@ -17,7 +19,9 @@ function SettingRow({
   children,
   editButton,
   description,
+  showEditButton = true,
   onClickEdit,
+  editButtonText,
 }: SettingRowProps) {
   return (
     <Row>
@@ -27,9 +31,12 @@ function SettingRow({
         </div>
         <div className="block-for-mobile">
           <div className="contents">{children}</div>
-          {editButton && (
+          {editButton && showEditButton && (
             <div className="edit-wrapper">
-              <SettingEditButton onClick={onClickEdit} />
+              <SettingEditButton
+                onClick={onClickEdit}
+                customText={editButtonText}
+              />
             </div>
           )}
         </div>

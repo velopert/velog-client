@@ -56,12 +56,12 @@ const AuthFormBlock = styled.div`
   }
 `;
 
-const Warning = styled.div`
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  font-size: 0.875rem;
-  color: ${themedPalette.text3};
-`;
+// const Warning = styled.div`
+//   margin-top: 1rem;
+//   margin-bottom: 1rem;
+//   font-size: 0.875rem;
+//   color: ${themedPalette.text3};
+// `;
 
 export interface AuthFormProps {
   mode: AuthMode;
