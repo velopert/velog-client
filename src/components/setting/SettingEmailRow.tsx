@@ -22,6 +22,7 @@ function SettingEmailRow({
 }: SettingEmailRowProps) {
   const [edit, setEdit] = useState(false);
   const [value, onChange] = useInput(email ?? '');
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,6 +37,7 @@ function SettingEmailRow({
       return;
     }
 
+    setIsLoading(true);
     const response = await client.query<{ emailExists: boolean }>({
       query: EMAIL_EXISTS,
       fetchPolicy: 'network-only',
@@ -44,11 +46,13 @@ function SettingEmailRow({
 
     if (response.data.emailExists) {
       toast.error('동일한 이메일이 존재합니다.');
+      setIsLoading(false);
       return;
     }
 
     await onChangeEmail(value);
     setEdit(false);
+    setIsLoading(false);
   };
 
   return (
@@ -66,8 +70,9 @@ function SettingEmailRow({
             value={value}
             onChange={onChange}
             placeholder="이메일"
+            disabled={isLoading}
           />
-          <Button>변경</Button>
+          <Button disabled={isLoading}>변경</Button>
         </Form>
       ) : isEmailSent ? (
         <SettingEmailSuccess />
