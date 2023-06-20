@@ -130,13 +130,17 @@ module.exports = {
   resolve: {
     modules: ['node_modules'],
     extensions: paths.moduleFileExtensions
-      .map(ext => `.${ext}`)
-      .filter(ext => true || !ext.includes('ts')),
+      .map((ext) => `.${ext}`)
+      .filter((ext) => true || !ext.includes('ts')),
   },
   plugins: [
     new webpack.DefinePlugin(env.stringified),
     new webpack.NormalModuleReplacementPlugin(
       /codemirror/,
+      path.resolve(paths.appSrc, 'lib/replacedModule.ts'),
+    ),
+    new webpack.NormalModuleReplacementPlugin(
+      /lib\/graphql\/client/,
       path.resolve(paths.appSrc, 'lib/replacedModule.ts'),
     ),
     new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
