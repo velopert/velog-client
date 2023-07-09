@@ -17,7 +17,7 @@ app.use(
 );
 
 const proxyMiddleware = proxy(
-  process.env.REACT_APP_API_HOST ?? 'http://localhost:5001',
+  process.env.REACT_APP_API_HOST ?? 'http://localhost:5002',
   {},
 );
 
