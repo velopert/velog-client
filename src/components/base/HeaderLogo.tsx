@@ -7,6 +7,7 @@ import { themedPalette } from '../../lib/styles/themes';
 import { createFallbackTitle } from '../../lib/utils';
 import media from '../../lib/styles/media';
 import { ellipsis } from '../../lib/styles/utils';
+import VLink from '../common/VLink';
 
 export interface HeaderLogoProps {
   custom: boolean;
@@ -22,9 +23,9 @@ const HeaderLogo: React.FC<HeaderLogoProps> = ({
   if (!custom) {
     return (
       <HeaderLogoBlock>
-        <Link to="/">
+        <VLink to="/">
           <Logo data-testid="velog-logo" className="velog-logo" />
-        </Link>
+        </VLink>
       </HeaderLogoBlock>
     );
   }
@@ -74,7 +75,7 @@ const HeaderLogoBlock = styled.div`
   }
 `;
 
-const VelogLogoLink = styled(Link)`
+const VelogLogoLink = styled(VLink)`
   color: inherit;
 
   svg {
