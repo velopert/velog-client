@@ -31,7 +31,7 @@ const Core: React.FC<CoreProps> = ({ layer }) => {
       // adds setTimeout for page title sync
       // is there any better solution?
       setTimeout(() => {
-        gtag('config', 'UA-125599395-1', {
+        gtag('config', 'G-8D0MD2S4PK', {
           page_path: location.pathname + location.search,
         });
       }, 1000);
