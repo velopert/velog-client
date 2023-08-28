@@ -79,15 +79,15 @@ function Html({
         ></script>
         <script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=UA-125599395-1"
+          src="https://www.googletagmanager.com/gtag/js?id=G-8D0MD2S4PK"
         ></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-        
-          gtag('config', 'UA-125599395-1');`,
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+          
+            gtag('config', 'G-8D0MD2S4PK');`,
           }}
         ></script>
       </head>
