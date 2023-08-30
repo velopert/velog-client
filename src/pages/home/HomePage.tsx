@@ -12,9 +12,7 @@ import FloatingHeader from '../../components/base/FloatingHeader';
 export type HomePageProps = {};
 
 function HomePage(props: HomePageProps) {
-  if (process.env.NODE_ENV === 'production') {
-    window.location.href = process.env.REACT_APP_CLIENT_V3_HOST!;
-  }
+  window.location.href = process.env.REACT_APP_CLIENT_V3_HOST!;
   return (
     <MainTemplate>
       <Header />
