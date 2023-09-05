@@ -61,7 +61,7 @@ const LabelInputBlock = styled.div<{ focus: boolean }>`
         border-color: ${themedPalette.primary1};
       `}
     input {
-      width: 1;
+      width: 100%;
     }
     svg {
       font-size: 1.5rem;

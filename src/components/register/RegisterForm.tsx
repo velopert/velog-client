@@ -78,7 +78,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
         label="아이디"
         placeholder="아이디를 입력하세요"
         value={form.username}
-        size={15}
+        size={20}
       />
       <LabelInput
         name="shortBio"
