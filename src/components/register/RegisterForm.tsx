@@ -1,9 +1,12 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import LabelInput from '../common/LabelInput';
 import useInputs from '../../lib/hooks/useInputs';
 import RoundButton from '../common/RoundButton';
 import palette from '../../lib/styles/palette';
+import { themedPalette } from '../../lib/styles/themes';
+import { CheckIcon } from '../../static/svg';
+import { useState, useEffect } from 'react';
 
 const RegisterFormBlock = styled.div`
   margin-top: 3rem;
@@ -17,6 +20,41 @@ const RegisterFormBlock = styled.div`
     line-height: 1.5;
     color: ${palette.red5};
     font-weight: bold;
+  }
+`;
+
+const CheckRow = styled.div`
+  display: flex;
+  align-items: center;
+  color: ${themedPalette.text1};
+  gap: 0.5rem;
+  cursor: pointer;
+
+  a {
+    color: ${themedPalette.primary1};
+  }
+`;
+
+const Box = styled.div<{ isChecked: boolean }>`
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid ${themedPalette.border2};
+  border-radius: 4px;
+  ${(props) =>
+    props.isChecked &&
+    css`
+      background: ${themedPalette.primary1};
+      border: 1px solid ${themedPalette.primary1};
+    `}
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    color: white;
+    width: 1rem;
+    height: 1rem;
   }
 `;
 
@@ -51,6 +89,15 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
     username: defaultInfo ? defaultInfo.username : '',
     shortBio: '',
   });
+  const [isChecked, setIsChecked] = useState(false);
+  const [localError, setLocalError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (isChecked) {
+      setLocalError(null);
+    }
+  }, [isChecked]);
+
   return (
     <RegisterFormBlock>
       <LabelInput
@@ -88,8 +135,39 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
         value={form.shortBio}
         size={30}
       />
+      <CheckRow
+        onClick={() => {
+          setIsChecked((v) => !v);
+        }}
+      >
+        <Box isChecked={isChecked}>
+          <CheckIcon />
+        </Box>
+        <span>
+          <a
+            href="https://velog.io/policy/terms"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+          >
+            이용약관
+          </a>
+          과{' '}
+          <a
+            href="https://velog.io/policy/terms"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+          >
+            개인정보취급방침
+          </a>
+          에 동의합니다.
+        </span>
+      </CheckRow>
       <div className="form-bottom">
-        {error && <div className="error">{error}</div>}
+        {(error || localError) && (
+          <div className="error">{error || localError}</div>
+        )}
         <div className="buttons">
           <RoundButton inline color="lightGray" to="/" size="LARGE">
             취소
@@ -97,9 +175,13 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
           <RoundButton
             inline
             type="submit"
-            onClick={() =>
-              onSubmit({ ...form, email: fixedEmail || form.email })
-            }
+            onClick={() => {
+              if (!isChecked) {
+                setLocalError('이용약관과 개인정보취급방침에 동의해주세요.');
+                return;
+              }
+              onSubmit({ ...form, email: fixedEmail || form.email });
+            }}
             size="LARGE"
             disabled={loading}
           >
