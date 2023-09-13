@@ -28,20 +28,15 @@ const UserProfileBlock = styled.div`
 const Section = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   .left {
     display: flex;
-    align-items: center;
+
+    ${media.small} {
+      flex-direction: column;
+    }
   }
 
-  .right {
-    display: flex;
-    align-items: center;
-  }
-
-  ${media.small} {
-    flex-direction: column;
-    align-items: flex-start;
-  }
   img {
     display: block;
     width: 8rem;
