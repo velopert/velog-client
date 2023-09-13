@@ -16,6 +16,7 @@ import SkeletonTexts from './SkeletonTexts';
 import { Link } from 'react-router-dom';
 import media from '../../lib/styles/media';
 import optimizeImage from '../../lib/optimizeImage';
+import PostFollowButton from '../post/PostFollowButton';
 
 const UserProfileBlock = styled.div`
   ${media.medium} {
@@ -26,7 +27,17 @@ const UserProfileBlock = styled.div`
 
 const Section = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+  .left {
+    display: flex;
+    align-items: center;
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+  }
+
   ${media.small} {
     flex-direction: column;
     align-items: flex-start;
@@ -169,18 +180,23 @@ const UserProfile: React.FC<UserProfileProps> = ({
   return (
     <UserProfileBlock className={className} style={style}>
       <Section>
-        <Link to={velogUrl}>
-          <img
-            src={optimizeImage(thumbnail || userThumbnail, 240)}
-            alt="profile"
-          />
-        </Link>
-        <UserInfo>
-          <div className="name">
-            <Link to={velogUrl}>{displayName}</Link>
-          </div>
-          <div className="description">{description}</div>
-        </UserInfo>
+        <div className="left">
+          <Link to={velogUrl}>
+            <img
+              src={optimizeImage(thumbnail || userThumbnail, 240)}
+              alt="profile"
+            />
+          </Link>
+          <UserInfo>
+            <div className="name">
+              <Link to={velogUrl}>{displayName}</Link>
+            </div>
+            <div className="description">{description}</div>
+          </UserInfo>
+        </div>
+        <div className="right">
+          <PostFollowButton />
+        </div>
       </Section>
       <Separator />
       <ProfileIcons>

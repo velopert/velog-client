@@ -12,6 +12,7 @@ import TagList from '../common/TagList';
 import { Link } from 'react-router-dom';
 import PrivatePostLabel from '../common/PrivatePostLabel';
 import optimizeImage from '../../lib/optimizeImage';
+import PostFollowButton from './PostFollowButton';
 
 const PostHeadBlock = styled(VelogResponsive)`
   margin-top: 5.5rem;
@@ -44,12 +45,12 @@ const PostHeadBlock = styled(VelogResponsive)`
 `;
 
 const SubInfo = styled.div`
-  align-items: center;
   font-size: 1rem;
   color: ${themedPalette.text2};
   /* font-family: 'Spoqa Han Sans'; */
   display: flex;
   justify-content: space-between;
+  align-items: center;
   .information {
     .username {
       color: ${themedPalette.text1};
@@ -75,6 +76,10 @@ const SubInfo = styled.div`
   ${media.small} {
     margin-bottom: 0.75rem;
   }
+`;
+
+const SubInfoRight = styled.div`
+  display: flex;
 `;
 
 const EditRemoveGroup = styled.div`
@@ -116,14 +121,6 @@ const Thumbnail = styled.img`
   margin-top: 2rem;
   ${media.small} {
     margin-top: 1.5rem;
-  }
-`;
-
-const MobileOnly = styled.div`
-  align-items: center;
-  display: none;
-  ${media.medium} {
-    display: flex;
   }
 `;
 
@@ -200,7 +197,10 @@ const PostHead: React.FC<PostHeadProps> = ({
               </>
             )}
           </div>
-          <MobileOnly>{mobileLikeButton}</MobileOnly>
+          <SubInfoRight>
+            {!ownPost && <PostFollowButton />}
+            {mobileLikeButton}
+          </SubInfoRight>
         </SubInfo>
         <TagList tags={tags} link />
         {shareButtons}

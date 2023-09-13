@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { themedPalette } from '../../lib/styles/themes';
 import { LikeIcon } from '../../static/svg';
+import media from '../../lib/styles/media';
 
 export type MobileLikeButtonProps = {
   likes: number;
@@ -19,11 +20,12 @@ function MobileLikeButton({ likes, onToggle, liked }: MobileLikeButtonProps) {
 }
 
 const Button = styled.button<{ liked: boolean }>`
+  display: none;
+  align-items: center;
   background: ${themedPalette.bg_element1};
   border: 1px solid ${themedPalette.border2};
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  display: flex;
   align-items: center;
   height: 1.5rem;
   border-radius: 0.75rem;
@@ -49,6 +51,11 @@ const Button = styled.button<{ liked: boolean }>`
         color: white;
       }
     `}
+
+  ${media.medium} {
+    display: flex;
+    margin-left: 0.5rem;
+  }
 `;
 
 export default MobileLikeButton;
