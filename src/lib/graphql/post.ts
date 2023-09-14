@@ -319,6 +319,7 @@ export const READ_POST = gql`
           }
         }
       }
+      followed
     }
   }
 `;
