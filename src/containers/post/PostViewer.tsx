@@ -306,7 +306,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
 
     const followFragment = gql`
       fragment post on Post {
-        follwed
+        followed
       }
     `;
 
