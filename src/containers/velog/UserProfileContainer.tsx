@@ -32,12 +32,8 @@ const UserProfileContainer: React.FC<UserProfileContainerProps> = ({
   if (loading || error || !data || !data.user)
     return <StyledUserProfileSkeleton />;
 
-  const {
-    display_name,
-    short_bio,
-    profile_links,
-    thumbnail,
-  } = data.user.profile;
+  const { display_name, short_bio, profile_links, thumbnail } =
+    data.user.profile;
 
   const isSeries = location.pathname.includes('/series');
 

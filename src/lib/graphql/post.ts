@@ -124,6 +124,7 @@ export interface SinglePost {
   liked: boolean;
   likes: number;
   linked_posts: LinkedPosts;
+  followed: boolean;
 }
 
 export interface CommentWithReplies {

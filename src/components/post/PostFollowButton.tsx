@@ -1,11 +1,29 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import media from '../../lib/styles/media';
 import { buttonColorMap } from '../../lib/styles/palette';
 
-export interface PostFollowButtonProps {}
+export interface PostFollowButtonProps {
+  followed: boolean;
+  onToggle: () => void;
+}
 
-const FollowButtonBlock = styled.button`
+const PostFollowButton: React.FC<PostFollowButtonProps> = ({
+  onToggle,
+  followed,
+}) => {
+  return (
+    <FollowButtonBlock
+      onClick={onToggle}
+      data-testid="follow-btn"
+      followed={followed}
+    >
+      {followed ? '팔로잉' : '팔로우'}
+    </FollowButtonBlock>
+  );
+};
+
+const FollowButtonBlock = styled.button<{ followed: boolean }>`
   outline: none;
   border: none;
   font-size: 1rem;
@@ -14,12 +32,28 @@ const FollowButtonBlock = styled.button`
   padding-right: 1rem;
   height: 2rem;
   border-radius: 1rem;
-  background: ${buttonColorMap['teal'].background};
-  color: ${buttonColorMap['teal'].color};
+
+  ${(props) =>
+    !props.followed &&
+    css`
+      background: ${buttonColorMap['teal'].background};
+      color: ${buttonColorMap['teal'].color};
+      &:hover {
+        background: ${buttonColorMap['teal'].hoverBackground};
+      }
+    `}
+
+  ${(props) =>
+    props.followed &&
+    css`
+      background: ${buttonColorMap['lightGray'].background};
+      color: ${buttonColorMap['lightGray'].color};
+      &:hover {
+        background: ${buttonColorMap['lightGray'].hoverBackground};
+      }
+    `}
+
   font-weight: 600;
-  &:hover {
-    background: ${buttonColorMap['teal'].hoverBackground};
-  }
 
   ${media.medium} {
     font-size: 0.875rem;
@@ -30,9 +64,4 @@ const FollowButtonBlock = styled.button`
     height: 24px;
   }
 `;
-
-const PostFollowButton: React.FC<PostFollowButtonProps> = () => {
-  return <FollowButtonBlock>팔로우</FollowButtonBlock>;
-};
-
 export default PostFollowButton;

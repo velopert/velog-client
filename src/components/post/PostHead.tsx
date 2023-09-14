@@ -12,7 +12,6 @@ import TagList from '../common/TagList';
 import { Link } from 'react-router-dom';
 import PrivatePostLabel from '../common/PrivatePostLabel';
 import optimizeImage from '../../lib/optimizeImage';
-import PostFollowButton from './PostFollowButton';
 
 const PostHeadBlock = styled(VelogResponsive)`
   margin-top: 5.5rem;
@@ -145,6 +144,7 @@ export interface PostHeadProps {
   toc: React.ReactNode;
   isPrivate?: boolean;
   mobileLikeButton: React.ReactNode;
+  followButton: React.ReactNode;
   onOpenStats(): void;
 }
 
@@ -165,6 +165,7 @@ const PostHead: React.FC<PostHeadProps> = ({
   isPrivate,
   mobileLikeButton,
   onOpenStats,
+  followButton,
 }) => {
   const [askRemove, toggleAskRemove] = useToggle(false);
 
@@ -198,7 +199,7 @@ const PostHead: React.FC<PostHeadProps> = ({
             )}
           </div>
           <SubInfoRight>
-            {!ownPost && <PostFollowButton />}
+            {!ownPost && followButton}
             {mobileLikeButton}
           </SubInfoRight>
         </SubInfo>

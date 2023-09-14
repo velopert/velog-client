@@ -16,7 +16,6 @@ import SkeletonTexts from './SkeletonTexts';
 import { Link } from 'react-router-dom';
 import media from '../../lib/styles/media';
 import optimizeImage from '../../lib/optimizeImage';
-import PostFollowButton from '../post/PostFollowButton';
 
 const UserProfileBlock = styled.div`
   ${media.medium} {
@@ -143,6 +142,7 @@ export interface UserProfileProps {
   description: string;
   profileLinks: ProfileLinks;
   username: string;
+  followButton?: React.ReactNode;
 }
 
 function includeProtocol(address: string) {
@@ -157,6 +157,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
   description,
   profileLinks,
   username,
+  followButton,
 }) => {
   const { email, facebook, github, twitter, url } = profileLinks;
   const [hoverEmail, setHoverEmail] = useState(false);
@@ -189,9 +190,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
             <div className="description">{description}</div>
           </UserInfo>
         </div>
-        <div className="right">
-          <PostFollowButton />
-        </div>
+        {followButton && <div className="right">{followButton}</div>}
       </Section>
       <Separator />
       <ProfileIcons>
