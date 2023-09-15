@@ -3,10 +3,10 @@ import { usePrevious } from 'react-use';
 import styled, { css } from 'styled-components';
 import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
-import { LikeIcon, ShareIcon, ClipIcon } from '../../static/svg';
+import { LikeIcon, ShareIcon, ClipIcon, TwitterIcon } from '../../static/svg';
 import { useSpring, animated, config } from 'react-spring';
 import useBoolean from '../../lib/hooks/useBoolean';
-import { FaFacebook, FaTwitter } from 'react-icons/fa';
+import { FaFacebook } from 'react-icons/fa';
 import OutsideClickHandler from 'react-outside-click-handler';
 import Sticky from '../common/Sticky';
 import media from '../../lib/styles/media';
@@ -195,7 +195,7 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
                 }}
               >
                 <CircleButton onClick={() => onShareClick('twitter')}>
-                  <FaTwitter />
+                  <TwitterIcon />
                 </CircleButton>
               </ShareButton>
               <ShareButton
