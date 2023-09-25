@@ -39,7 +39,7 @@ const EmailChange: React.FC<EmailChangeProps> = ({ location, history }) => {
       await client.mutate({
         mutation: CONFIRM_CHANGE_EMAIL,
         variables: {
-          code: query.code,
+          code: query.code.split(':')[1],
         },
       });
 
