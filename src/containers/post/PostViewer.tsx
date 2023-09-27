@@ -37,7 +37,7 @@ import RelatedPost from './RelatedPost';
 import optimizeImage from '../../lib/optimizeImage';
 import { useSetShowFooter } from '../../components/velog/VelogPageTemplate';
 import HorizontalBanner from './HorizontalBanner';
-import { FOLLOW_USER, UN_FOLLOW_USER } from '../../lib/graphql/user';
+import { FOLLOW_USER, UNFOLLOW_USER } from '../../lib/graphql/user';
 import PostFollowButton from '../../components/post/PostFollowButton';
 
 const UserProfileWrapper = styled(VelogResponsive)`
@@ -99,8 +99,8 @@ const PostViewer: React.FC<PostViewerProps> = ({
   const [likePost, { loading: loadingLike }] = useMutation(LIKE_POST);
   const [unlikePost, { loading: loadingUnlike }] = useMutation(UNLIKE_POST);
   const [followUser, { loading: loadingFollowUser }] = useMutation(FOLLOW_USER);
-  const [unFollowUser, { loading: loadingUnFollowUser }] =
-    useMutation(UN_FOLLOW_USER);
+  const [unfollowUser, { loading: loadingUnfollowUser }] =
+    useMutation(UNFOLLOW_USER);
   const { showNotFound } = useNotFound();
   // const userLogo = useSelector((state: RootState) => state.header.userLogo);
   // const velogTitle = useMemo(() => {
@@ -298,7 +298,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
   };
 
   const onFollowToggle = async () => {
-    if (loadingFollowUser || loadingUnFollowUser) return;
+    if (loadingFollowUser || loadingUnfollowUser) return;
 
     const variables = {
       follow_user_id: post.user.id,
@@ -325,7 +325,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
             __typename: 'Post',
           },
         });
-        await unFollowUser({ variables });
+        await unfollowUser({ variables });
       } else {
         client.writeFragment({
           id: `Post:${post.id}`,

@@ -188,9 +188,9 @@ export const FOLLOW_USER = gql`
   }
 `;
 
-export const UN_FOLLOW_USER = gql`
-  mutation UnFollow($follow_user_id: ID!) {
-    unFollow(follow_user_id: $follow_user_id)
+export const UNFOLLOW_USER = gql`
+  mutation Unfollow($follow_user_id: ID!) {
+    unfollow(follow_user_id: $follow_user_id)
   }
 `;
 
