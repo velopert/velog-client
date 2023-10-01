@@ -1,4 +1,10 @@
-import React, { useEffect, useCallback, useRef, useState } from 'react';
+import React, {
+  useEffect,
+  useCallback,
+  useRef,
+  useState,
+  useMemo,
+} from 'react';
 import { useDispatch } from 'react-redux';
 import {
   READ_POST,
@@ -37,6 +43,7 @@ import RelatedPost from './RelatedPost';
 import optimizeImage from '../../lib/optimizeImage';
 import { useSetShowFooter } from '../../components/velog/VelogPageTemplate';
 import HorizontalBanner from './HorizontalBanner';
+import gtag from '../../lib/gtag';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -189,6 +196,27 @@ const PostViewer: React.FC<PostViewerProps> = ({
     };
   }, [onScroll]);
 
+  const shouldShowBanner = useMemo(() => {
+    if (!data?.post) return;
+
+    const post = data.post;
+    const isOwnPost = post.user.id === userId;
+    const isVeryOld =
+      Date.now() - new Date(post.released_at).getTime() >
+      1000 * 60 * 60 * 24 * 30;
+
+    if (isOwnPost) return false;
+    if (!isVeryOld) return false;
+    return true;
+  }, [data?.post]);
+
+  useEffect(() => {
+    if (!data?.post?.id) return;
+    if (!shouldShowBanner) return;
+    gtag('event', 'banner_view');
+    console.log('banner_view');
+  }, [data?.post?.id, shouldShowBanner]);
+
   const onRemove = async () => {
     if (!data || !data.post) return;
     try {
@@ -320,9 +348,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
 
   const { post } = data;
 
-  const isVeryOld =
-    Date.now() - new Date(post.released_at).getTime() >
-    1000 * 60 * 60 * 24 * 180;
+  const isContentLongEnough = post.body.length > 500;
 
   const url = `https://velog.io/@${username}/${post.url_slug}`;
 
@@ -388,7 +414,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
           />
         }
       />
-      {userId === null && isVeryOld ? <HorizontalBanner /> : null}
+      {shouldShowBanner ? <HorizontalBanner /> : null}
       <PostContent isMarkdown={post.is_markdown} body={post.body} />
       <UserProfileWrapper>
         <UserProfile
@@ -411,9 +437,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
           }
         />
       )} */}
-      {userId === null && isVeryOld && post.body.length > 300 ? (
-        <HorizontalBanner />
-      ) : null}
+      {shouldShowBanner && isContentLongEnough ? <HorizontalBanner /> : null}
 
       <PostComments
         count={post.comments_count}
