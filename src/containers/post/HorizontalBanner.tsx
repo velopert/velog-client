@@ -1,14 +1,19 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import VelogResponsive from '../../components/velog/VelogResponsive';
+import gtag from '../../lib/gtag';
 
 function HorizontalBanner() {
   useEffect(() => {
     (window.adsbygoogle = window.adsbygoogle || []).push({});
   }, []);
 
+  const onClick = () => {
+    gtag('event', 'banner_click');
+  };
+
   return (
-    <StyledResponsive>
+    <StyledResponsive onClick={onClick}>
       <ins
         className="adsbygoogle"
         style={{ display: 'block', textAlign: 'center' }}
