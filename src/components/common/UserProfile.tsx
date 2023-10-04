@@ -143,6 +143,7 @@ export interface UserProfileProps {
   profileLinks: ProfileLinks;
   username: string;
   followButton?: React.ReactNode;
+  ownPost?: boolean;
 }
 
 function includeProtocol(address: string) {
@@ -158,6 +159,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
   profileLinks,
   username,
   followButton,
+  ownPost = false,
 }) => {
   const { email, facebook, github, twitter, url } = profileLinks;
   const [hoverEmail, setHoverEmail] = useState(false);
@@ -190,7 +192,9 @@ const UserProfile: React.FC<UserProfileProps> = ({
             <div className="description">{description}</div>
           </UserInfo>
         </div>
-        {followButton && <div className="right">{followButton}</div>}
+        {!ownPost && followButton && (
+          <div className="right">{followButton}</div>
+        )}
       </Section>
       <Separator />
       <ProfileIcons>

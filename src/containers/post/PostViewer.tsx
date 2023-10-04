@@ -453,6 +453,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
           description={post.user.profile.short_bio}
           profileLinks={post.user.profile.profile_links}
           username={post.user.username}
+          ownPost={post.user.id === userId}
           followButton={
             <PostFollowButton
               followed={post.followed}
