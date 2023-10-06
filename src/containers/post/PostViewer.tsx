@@ -457,7 +457,9 @@ const PostViewer: React.FC<PostViewerProps> = ({
           }
         />
       )} */}
-      {showRecommends ? <RelatedPost postId={post.id} showAds={false} /> : null}
+      {showRecommends ? (
+        <RelatedPost postId={post.id} showAds={post?.user.id !== userId} />
+      ) : null}
     </PostViewerProvider>
   );
 };
