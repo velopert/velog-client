@@ -208,14 +208,24 @@ const PostViewer: React.FC<PostViewerProps> = ({
     if (isOwnPost) return false;
     if (!isVeryOld) return false;
     return true;
-  }, [data?.post]);
+  }, [data?.post, userId]);
+
+  const shouldShowFooterBanner = useMemo(() => {
+    if (shouldShowBanner) return false;
+    if (!data?.post) return false;
+    if (userId) return false;
+    return true;
+  }, [userId, data?.post]);
 
   useEffect(() => {
     if (!data?.post?.id) return;
     if (!shouldShowBanner) return;
     gtag('event', 'banner_view');
     console.log('banner_view');
-  }, [data?.post?.id, shouldShowBanner]);
+    if (userId) {
+      gtag('event', 'banner_view_user');
+    }
+  }, [data?.post?.id, shouldShowBanner, userId]);
 
   const onRemove = async () => {
     if (!data || !data.post) return;
@@ -426,37 +436,14 @@ const PostViewer: React.FC<PostViewerProps> = ({
         />
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />
-      {/* {showRecommends && userId === null && !isVeryOld && (
-        <RelatedPostsForGuest
-          postId={post.id}
-          showAds={
-            false
-            // !isVeryOld &&
-            // Date.now() - new Date(post.released_at).getTime() >
-            //   1000 * 60 * 60 * 24 * 21
-          }
-        />
-      )} */}
       {shouldShowBanner && isContentLongEnough ? <HorizontalBanner /> : null}
-
+      {shouldShowFooterBanner ? <HorizontalBanner isDisplayAd /> : null}
       <PostComments
         count={post.comments_count}
         comments={post.comments}
         postId={post.id}
         ownPost={post.user.id === userId}
       />
-      {/* {showRecommends && (userId !== null || isVeryOld) && (
-        <RelatedPost
-          postId={post.id}
-          showAds={
-            false
-            // !isVeryOld &&
-            // post.user.id !== userId &&
-            // Date.now() - new Date(post.released_at).getTime() >
-            //   1000 * 60 * 60 * 24 * 30
-          }
-        />
-      )} */}
       {showRecommends ? (
         <RelatedPost postId={post.id} showAds={post?.user.id !== userId} />
       ) : null}

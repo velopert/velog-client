@@ -39,19 +39,12 @@ function RelatedPost({
     const cloned: (PartialPost | undefined)[] = [
       ...data.post.recommended_posts,
     ];
-    // get random number between 0 and length of array
-    const randomIndex = () => Math.floor(Math.random() * 8);
+    // get random number between 0 and 3
+    const randomIndex = () => Math.floor(Math.random() * 3);
     const firstAdIndex = randomIndex();
-    const secondAdIndex = (() => {
-      let index = randomIndex();
-      while (index === firstAdIndex) {
-        index = randomIndex();
-      }
-      return index;
-    })();
 
     cloned[firstAdIndex] = undefined;
-    cloned[secondAdIndex] = undefined;
+
     return cloned;
   }, [data, showAds, adBlocked]);
 
