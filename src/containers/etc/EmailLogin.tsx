@@ -42,7 +42,7 @@ const EmailLogin: React.FC<EmailLoginProps> = ({ location, history }) => {
       });
 
       storage.setItem('CURRENT_USER', response.data.auth);
-      history.replace('/');
+      window.location.href = '/';
     } catch (e) {
       // TODO: show 401
       toast.error('잘못된 접근입니다.');
