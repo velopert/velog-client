@@ -16,7 +16,7 @@ class FallbackStorage {
   valid: boolean = checkLocalStorage();
 
   setItem(key: string, value: any) {
-    const string = JSON.stringify(value);
+    const string = typeof value === 'string' ? value : JSON.stringify(value);
     if (this.valid) {
       localStorage.setItem(key, string);
       return;
@@ -28,11 +28,12 @@ class FallbackStorage {
     let value = this.valid
       ? localStorage.getItem(key)
       : this.fallbackStorage[key];
+    if (!value) return null;
     try {
       const parsed = JSON.parse(value || '');
       return parsed;
     } catch (e) {
-      return null;
+      return value || null;
     }
   }
 

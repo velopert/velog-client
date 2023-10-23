@@ -14,18 +14,21 @@ const VelogResponsiveBlock = styled.div`
 export interface VelogResponsiveProps {
   className?: string;
   style?: React.CSSProperties;
+  onClick?: () => void;
 }
 
 const VelogResponsive: React.FC<VelogResponsiveProps> = ({
   children,
   className,
   style,
+  onClick,
 }) => {
   return (
     <VelogResponsiveBlock
       children={children}
       className={className}
       style={style}
+      onClick={onClick}
     />
   );
 };

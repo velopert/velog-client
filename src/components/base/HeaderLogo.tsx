@@ -34,7 +34,7 @@ const HeaderLogo: React.FC<HeaderLogoProps> = ({
   const velogPath = `/@${username}`;
   return (
     <HeaderLogoBlock>
-      <VelogLogoLink to="/">
+      <VelogLogoLink href="/">
         <VelogIcon />
       </VelogLogoLink>
       <Link to={velogPath} className="user-logo">
@@ -75,7 +75,7 @@ const HeaderLogoBlock = styled.div`
   }
 `;
 
-const VelogLogoLink = styled(VLink)`
+const VelogLogoLink = styled(Link)`
   color: inherit;
 
   svg {
