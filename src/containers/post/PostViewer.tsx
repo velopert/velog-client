@@ -98,8 +98,8 @@ const PostViewer: React.FC<PostViewerProps> = ({
   const [postView] = useMutation(POST_VIEW);
   const [likePost, { loading: loadingLike }] = useMutation(LIKE_POST);
   const [unlikePost, { loading: loadingUnlike }] = useMutation(UNLIKE_POST);
-  const [followUser, { loading: loadingFollowUser }] = useMutation(FOLLOW_USER);
-  const [unfollowUser, { loading: loadingUnfollowUser }] =
+  const [follow, { loading: loadingFollowUser }] = useMutation(FOLLOW_USER);
+  const [unfollow, { loading: loadingUnfollowUser }] =
     useMutation(UNFOLLOW_USER);
   const { showNotFound } = useNotFound();
   // const userLogo = useSelector((state: RootState) => state.header.userLogo);
@@ -301,7 +301,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
     if (loadingFollowUser || loadingUnfollowUser) return;
 
     const variables = {
-      follow_user_id: post.user.id,
+      following_user_id: post.user.id,
     };
 
     const followFragment = gql`
@@ -325,7 +325,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
             __typename: 'Post',
           },
         });
-        await unfollowUser({ variables });
+        await unfollow({ variables });
       } else {
         client.writeFragment({
           id: `Post:${post.id}`,
@@ -335,7 +335,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
             __typename: 'Post',
           },
         });
-        await followUser({ variables });
+        await follow({ variables });
       }
     } catch (e) {
       console.log(e);
