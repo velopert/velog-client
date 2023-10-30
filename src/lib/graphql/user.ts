@@ -183,14 +183,14 @@ export const CONFIRM_CHANGE_EMAIL = gql`
 `;
 
 export const FOLLOW_USER = gql`
-  mutation Follow($follow_user_id: ID!) {
-    follow(follow_user_id: $follow_user_id)
+  mutation Follow($following_user_id: ID!) {
+    follow(following_user_id: $following_user_id)
   }
 `;
 
 export const UNFOLLOW_USER = gql`
-  mutation Unfollow($follow_user_id: ID!) {
-    unfollow(follow_user_id: $follow_user_id)
+  mutation Unfollow($following_user_id: ID!) {
+    unfollow(following_user_id: $following_user_id)
   }
 `;
 

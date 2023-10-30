@@ -252,6 +252,7 @@ export const READ_POST = gql`
       url_slug
       likes
       liked
+      followed
       user {
         id
         username
@@ -320,7 +321,6 @@ export const READ_POST = gql`
           }
         }
       }
-      followed
     }
   }
 `;
