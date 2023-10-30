@@ -213,14 +213,14 @@ const PostViewer: React.FC<PostViewerProps> = ({
     if (isOwnPost) return false;
     if (!isVeryOld) return false;
     return true;
-  }, [data?.post]);
+  }, [data, userId]);
 
   useEffect(() => {
     if (!data?.post?.id) return;
     if (!shouldShowBanner) return;
     gtag('event', 'banner_view');
     console.log('banner_view');
-  }, [data?.post?.id, shouldShowBanner]);
+  }, [data, shouldShowBanner]);
 
   const onRemove = async () => {
     if (!data || !data.post) return;
