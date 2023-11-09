@@ -44,7 +44,7 @@ const HeaderUserMenu: React.FC<HeaderUserMenuProps> = ({
     <OutsideClickHandler onOutsideClick={onClose}>
       <HeaderUserMenuBlock onClick={onClose}>
         <div className="menu-wrapper">
-          <HeaderUserMenuItem to={`/@${username}`}>
+          <HeaderUserMenuItem to={`/@${username}/posts`} isMigrated={true}>
             내 벨로그
           </HeaderUserMenuItem>
           <div className="mobile-only">

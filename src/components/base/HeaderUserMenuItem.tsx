@@ -2,8 +2,15 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { themedPalette } from '../../lib/styles/themes';
+import VLink from '../common/VLink';
 
 const WrapperLink = styled(Link)`
+  display: block;
+  color: inherit;
+  text-decoration: none;
+`;
+
+const WrapperVLink = styled(VLink)`
   display: block;
   color: inherit;
   text-decoration: none;
@@ -24,25 +31,38 @@ const HeaderUserMenuItemBlock = styled.div`
 interface HeaderUserMenuItemProps {
   to?: string;
   onClick?: () => void;
+  isMigrated?: boolean;
 }
 
 const HeaderUserMenuItem: React.FC<HeaderUserMenuItemProps> = ({
   children,
   to,
   onClick,
+  isMigrated = false,
 }) => {
   const jsx = (
     <HeaderUserMenuItemBlock onClick={onClick}>
       {children}
     </HeaderUserMenuItemBlock>
   );
-  return to ? (
-    <WrapperLink to={to} style={{ display: 'block' }}>
-      {jsx}
-    </WrapperLink>
-  ) : (
-    jsx
-  );
+
+  if (to && !isMigrated) {
+    return (
+      <WrapperLink to={to} style={{ display: 'block' }}>
+        {jsx}
+      </WrapperLink>
+    );
+  }
+
+  if (to && isMigrated) {
+    return (
+      <WrapperVLink to={to} style={{ display: 'block' }}>
+        {jsx}
+      </WrapperVLink>
+    );
+  }
+
+  return jsx;
 };
 
 export default HeaderUserMenuItem;
