@@ -32,6 +32,7 @@ const FollowButtonBlock = styled.button<{ followed: boolean }>`
   padding-right: 1rem;
   height: 2rem;
   border-radius: 1rem;
+  word-break: keep-all;
 
   ${(props) =>
     !props.followed &&
