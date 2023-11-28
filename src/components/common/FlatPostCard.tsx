@@ -14,6 +14,7 @@ import media from '../../lib/styles/media';
 import PrivatePostLabel from './PrivatePostLabel';
 import optimizeImage from '../../lib/optimizeImage';
 import { LikeIcon } from '../../static/svg';
+import VLink from './VLink';
 
 const PostCardBlock = styled.div`
   padding-top: 4rem;
@@ -150,7 +151,7 @@ const FlatPostCard = ({ post, hideUser }: PostCardProps) => {
   };
 
   const url = `/@${post.user.username}/${post.url_slug}`;
-  const velogUrl = `/@${post.user.username}`;
+  const velogUrl = `/@${post.user.username}/posts`;
 
   if (!post.user.profile) {
     console.log(post);
@@ -159,7 +160,7 @@ const FlatPostCard = ({ post, hideUser }: PostCardProps) => {
     <PostCardBlock onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       {!hideUser && (
         <div className="user-info">
-          <Link to={velogUrl}>
+          <VLink to={velogUrl}>
             <img
               src={optimizeImage(
                 post.user.profile?.thumbnail || userThumbnail,
@@ -167,9 +168,9 @@ const FlatPostCard = ({ post, hideUser }: PostCardProps) => {
               )}
               alt="thumbnail"
             />
-          </Link>
+          </VLink>
           <div className="username">
-            <Link to={`/@${post.user.username}`}>{post.user.username}</Link>
+            <VLink to={`${velogUrl}`}>{post.user.username}</VLink>
           </div>
         </div>
       )}

@@ -14,6 +14,7 @@ import { mediaQuery } from '../../lib/styles/media';
 import { Link } from 'react-router-dom';
 import usePrefetchPost from '../../lib/hooks/usePrefetchPost';
 import gtag from '../../lib/gtag';
+import VLink from './VLink';
 
 export type PostCardProps = {
   post: PartialPost;
@@ -73,7 +74,7 @@ function PostCard({ post, forHome, forPost }: PostCardProps) {
         </div>
       </Content>
       <Footer>
-        <Link className="userinfo" to={`/@${post.user.username}`}>
+        <VLink className="userinfo" to={`/@${post.user.username}/posts`}>
           <img
             src={optimizeImage(
               post.user.profile.thumbnail || userThumbnail,
@@ -84,7 +85,7 @@ function PostCard({ post, forHome, forPost }: PostCardProps) {
           <span>
             by <b>{post.user.username}</b>
           </span>
-        </Link>
+        </VLink>
         <div className="likes">
           <LikeIcon />
           {post.likes}

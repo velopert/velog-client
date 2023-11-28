@@ -9,9 +9,9 @@ import useToggle from '../../lib/hooks/useToggle';
 import PopupOKCancel from '../common/PopupOKCancel';
 import media from '../../lib/styles/media';
 import TagList from '../common/TagList';
-import { Link } from 'react-router-dom';
 import PrivatePostLabel from '../common/PrivatePostLabel';
 import optimizeImage from '../../lib/optimizeImage';
+import VLink from '../common/VLink';
 
 const PostHeadBlock = styled(VelogResponsive)`
   margin-top: 5.5rem;
@@ -187,7 +187,7 @@ const PostHead: React.FC<PostHeadProps> = ({
         <SubInfo>
           <div className="information">
             <span className="username">
-              <Link to={`/@${username}`}>{username}</Link>
+              <VLink to={`/@${username}/posts`}>{username}</VLink>
             </span>
             <span className="separator">&middot;</span>
             <span>{formatDate(date)}</span>

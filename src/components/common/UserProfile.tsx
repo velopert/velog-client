@@ -13,9 +13,9 @@ import { ProfileLinks } from '../../lib/graphql/user';
 import { MdHome } from 'react-icons/md';
 import Skeleton from './Skeleton';
 import SkeletonTexts from './SkeletonTexts';
-import { Link } from 'react-router-dom';
 import media from '../../lib/styles/media';
 import optimizeImage from '../../lib/optimizeImage';
+import VLink from './VLink';
 
 const UserProfileBlock = styled.div`
   ${media.medium} {
@@ -173,21 +173,21 @@ const UserProfile: React.FC<UserProfileProps> = ({
     setHoverEmail(false);
   };
 
-  const velogUrl = `/@${username}`;
+  const velogUrl = `/@${username}/posts`;
 
   return (
     <UserProfileBlock className={className} style={style}>
       <Section>
         <div className="left">
-          <Link to={velogUrl}>
+          <VLink to={velogUrl}>
             <img
               src={optimizeImage(thumbnail || userThumbnail, 240)}
               alt="profile"
             />
-          </Link>
+          </VLink>
           <UserInfo>
             <div className="name">
-              <Link to={velogUrl}>{displayName}</Link>
+              <VLink to={velogUrl}>{displayName}</VLink>
             </div>
             <div className="description">{description}</div>
           </UserInfo>

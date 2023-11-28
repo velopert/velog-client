@@ -10,9 +10,9 @@ import useBoolean from '../../lib/hooks/useBoolean';
 import PostRepliesContainer from '../../containers/post/PostRepliesContainer';
 import PostEditComment from '../../containers/post/PostEditComment';
 import media from '../../lib/styles/media';
-import { Link } from 'react-router-dom';
 import MarkdownRender from '../common/MarkdownRender';
 import optimizeImage from '../../lib/optimizeImage';
+import VLink from '../common/VLink';
 
 const PostCommentItemBlock = styled.div`
   padding-top: 1.5rem;
@@ -162,13 +162,13 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
   // hides comment where it is deleted and its every reply is also deleted
   if (deleted && replies_count === 0) return null;
 
-  const velogLink = `/@${user && user.username}`;
+  const velogLink = `/@${user?.username}/posts`;
 
   return (
     <PostCommentItemBlock className="comment">
       <CommentHead>
         <div className="profile">
-          <Link to={velogLink}>
+          <VLink to={velogLink}>
             <img
               src={optimizeImage(
                 (user && user.profile.thumbnail) || userThumbnail,
@@ -176,11 +176,11 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
               )}
               alt="comment-user-thumbnail"
             />
-          </Link>
+          </VLink>
           <div className="comment-info">
             <div className="username">
               {user ? (
-                <Link to={velogLink}>{user.username}</Link>
+                <VLink to={velogLink}>{user.username}</VLink>
               ) : (
                 '알 수 없음'
               )}
