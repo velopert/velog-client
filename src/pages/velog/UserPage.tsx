@@ -17,7 +17,8 @@ export interface UserPageProps
 
 const UserPage: React.FC<UserPageProps> = ({ match, location }) => {
   const { username, tab } = match.params;
-
+  window.location.href = `${process.env
+    .REACT_APP_CLIENT_V3_HOST!}/@${username}/posts`;
   return (
     <UserPageBlock>
       <UserProfileContainer username={username} />

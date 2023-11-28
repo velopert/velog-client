@@ -28,6 +28,7 @@ export type User = {
   is_certified: boolean;
   profile: UserProfile;
   velogConfig: VelogConfig | null;
+  is_followed: boolean;
 };
 
 export const GET_CURRENT_USER = gql`

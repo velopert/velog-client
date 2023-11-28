@@ -44,7 +44,6 @@ import optimizeImage from '../../lib/optimizeImage';
 import { useSetShowFooter } from '../../components/velog/VelogPageTemplate';
 import HorizontalBanner from './HorizontalBanner';
 import gtag from '../../lib/gtag';
-import { FOLLOW_USER, UNFOLLOW_USER } from '../../lib/graphql/user';
 import PostFollowButton from '../../components/post/PostFollowButton';
 
 const UserProfileWrapper = styled(VelogResponsive)`
@@ -105,10 +104,8 @@ const PostViewer: React.FC<PostViewerProps> = ({
   const [postView] = useMutation(POST_VIEW);
   const [likePost, { loading: loadingLike }] = useMutation(LIKE_POST);
   const [unlikePost, { loading: loadingUnlike }] = useMutation(UNLIKE_POST);
-  const [follow, { loading: loadingFollowUser }] = useMutation(FOLLOW_USER);
-  const [unfollow, { loading: loadingUnfollowUser }] =
-    useMutation(UNFOLLOW_USER);
   const { showNotFound } = useNotFound();
+
   // const userLogo = useSelector((state: RootState) => state.header.userLogo);
   // const velogTitle = useMemo(() => {
   //   if (!userLogo || !userLogo.title) return `${username}.log`;
@@ -325,51 +322,6 @@ const PostViewer: React.FC<PostViewerProps> = ({
     }
   };
 
-  const onFollowToggle = async () => {
-    if (loadingFollowUser || loadingUnfollowUser) return;
-
-    const variables = {
-      following_user_id: post.user.id,
-    };
-
-    const followFragment = gql`
-      fragment post on Post {
-        followed
-      }
-    `;
-
-    try {
-      if (!user) {
-        toast.error('로그인 후 이용해주세요.');
-        return;
-      }
-
-      if (post.followed) {
-        client.writeFragment({
-          id: `Post:${post.id}`,
-          fragment: followFragment,
-          data: {
-            followed: false,
-            __typename: 'Post',
-          },
-        });
-        await unfollow({ variables });
-      } else {
-        client.writeFragment({
-          id: `Post:${post.id}`,
-          fragment: followFragment,
-          data: {
-            followed: true,
-            __typename: 'Post',
-          },
-        });
-        await follow({ variables });
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   const onShareClick = (type: 'facebook' | 'twitter' | 'clipboard') => {
     const { url } = match;
     const link = `https://velog.io${url}`;
@@ -465,8 +417,8 @@ const PostViewer: React.FC<PostViewerProps> = ({
         }
         followButton={
           <PostFollowButton
-            followed={post.followed}
-            onToggle={onFollowToggle}
+            followed={post.user.is_followed}
+            followingUserId={post.user.id}
           />
         }
       />
@@ -482,8 +434,8 @@ const PostViewer: React.FC<PostViewerProps> = ({
           ownPost={post.user.id === userId}
           followButton={
             <PostFollowButton
-              followed={post.followed}
-              onToggle={onFollowToggle}
+              followed={post.user.is_followed}
+              followingUserId={post.user.id}
             />
           }
         />

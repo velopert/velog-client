@@ -102,6 +102,7 @@ export interface SinglePost {
   user: {
     id: string;
     username: string;
+    is_followed: boolean;
     profile: {
       id: string;
       display_name: string;
@@ -124,7 +125,6 @@ export interface SinglePost {
   liked: boolean;
   likes: number;
   linked_posts: LinkedPosts;
-  followed: boolean;
 }
 
 export interface CommentWithReplies {
@@ -252,10 +252,10 @@ export const READ_POST = gql`
       url_slug
       likes
       liked
-      followed
       user {
         id
         username
+        is_followed
         profile {
           id
           display_name

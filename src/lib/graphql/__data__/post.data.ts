@@ -22,6 +22,7 @@ export const postData: { post: SinglePost } = {
     user: {
       id: 'c76ccc50-b34d-11e8-b01f-598f1220d1c8',
       username: 'velopert',
+      is_followed: true,
       profile: {
         id: 'c7caf1e0-b34d-11e8-b01f-598f1220d1c8',
         display_name: 'Minjun Kim',
@@ -177,6 +178,5 @@ export const postData: { post: SinglePost } = {
         },
       },
     },
-    followed: false,
   },
 };
