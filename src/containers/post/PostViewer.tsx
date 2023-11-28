@@ -44,7 +44,7 @@ import optimizeImage from '../../lib/optimizeImage';
 import { useSetShowFooter } from '../../components/velog/VelogPageTemplate';
 import HorizontalBanner from './HorizontalBanner';
 import gtag from '../../lib/gtag';
-import PostFollowButton from '../../components/post/PostFollowButton';
+import FollowButton from '../../components/common/FollowButton';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -266,7 +266,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
     history.push(`/post-stats/${post.id}`);
   };
 
-  const onLikeToggle = async () => {
+  const onLikeToggle = () => {
     if (loadingLike || loadingUnlike) return;
 
     const variables = {
@@ -300,7 +300,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
             __typename: 'Post',
           },
         });
-        await unlikePost({
+        unlikePost({
           variables,
         });
       } else {
@@ -313,7 +313,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
             __typename: 'Post',
           },
         });
-        await likePost({
+        likePost({
           variables,
         });
       }
@@ -416,7 +416,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
           />
         }
         followButton={
-          <PostFollowButton
+          <FollowButton
             followed={post.user.is_followed}
             followingUserId={post.user.id}
           />
@@ -433,7 +433,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
           username={post.user.username}
           ownPost={post.user.id === userId}
           followButton={
-            <PostFollowButton
+            <FollowButton
               followed={post.user.is_followed}
               followingUserId={post.user.id}
             />

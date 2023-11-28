@@ -14,7 +14,7 @@ export interface PostFollowButtonProps {
   followed: boolean;
 }
 
-const PostFollowButton: React.FC<PostFollowButtonProps> = ({
+const FollowButton: React.FC<PostFollowButtonProps> = ({
   followingUserId,
   followed,
 }) => {
@@ -43,7 +43,7 @@ const PostFollowButton: React.FC<PostFollowButtonProps> = ({
     setButtonText('팔로잉');
   };
 
-  const onClick = debounce(300, async () => {
+  const onClick = debounce(300, () => {
     if (loadingFollowUser || loadingUnfollowUser) return;
 
     const variables = {
@@ -71,7 +71,7 @@ const PostFollowButton: React.FC<PostFollowButtonProps> = ({
             __typename: 'User',
           },
         });
-        await unfollow({ variables });
+        unfollow({ variables });
       } else {
         client.writeFragment({
           id: `User:${followingUserId}`,
@@ -81,7 +81,7 @@ const PostFollowButton: React.FC<PostFollowButtonProps> = ({
             __typename: 'User',
           },
         });
-        await follow({ variables });
+        follow({ variables });
         setButtonText('팔로잉');
       }
 
@@ -196,4 +196,4 @@ const FollowButtonBlock = styled.div<{
   }
 `;
 
-export default PostFollowButton;
+export default FollowButton;
