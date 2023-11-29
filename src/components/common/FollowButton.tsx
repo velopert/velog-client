@@ -11,7 +11,7 @@ import { themedPalette } from '../../lib/styles/themes';
 
 export interface PostFollowButtonProps {
   followingUserId: string;
-  followed: boolean;
+  followed: boolean | undefined;
 }
 
 const FollowButton: React.FC<PostFollowButtonProps> = ({
@@ -24,10 +24,8 @@ const FollowButton: React.FC<PostFollowButtonProps> = ({
   const [unfollow, { loading: loadingUnfollowUser }] =
     useMutation(UNFOLLOW_USER);
 
-  const [initialFollowState, setInitialFollowState] =
-    React.useState<boolean>(followed);
-  const [currentFollowState, setCurrentFollowState] =
-    React.useState<boolean>(followed);
+  const [initialFollowState, setInitialFollowState] = React.useState<boolean>();
+  const [currentFollowState, setCurrentFollowState] = React.useState<boolean>();
 
   const [buttonText, setButtonText] = React.useState('팔로잉');
 
@@ -93,6 +91,7 @@ const FollowButton: React.FC<PostFollowButtonProps> = ({
   });
 
   React.useEffect(() => {
+    if (followed === undefined) return;
     setInitialFollowState(followed);
     setCurrentFollowState(followed);
   }, [followed]);
