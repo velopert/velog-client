@@ -8,6 +8,7 @@ import { gql } from 'apollo-boost';
 import useUser from '../../lib/hooks/useUser';
 import { toast } from 'react-toastify';
 import { themedPalette } from '../../lib/styles/themes';
+import palette from '../../lib/styles/palette';
 
 export interface PostFollowButtonProps {
   followingUserId: string;
@@ -148,7 +149,7 @@ const FollowButtonBlock = styled.div<{
     box-shadow: none;
     align-items: center;
     justify-content: center;
-    background-color: white;
+    background-color: ${themedPalette.bg_element1};
     cursor: pointer;
     border-radius: 16px;
     font-weight: 700;
