@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import VelogResponsive from '../../components/velog/VelogResponsive';
 import gtag from '../../lib/gtag';
 
-function HorizontalBanner() {
+type Props = {
+  isDisplayAd?: boolean;
+};
+
+function HorizontalBanner({ isDisplayAd = false }: Props) {
   useEffect(() => {
     (window.adsbygoogle = window.adsbygoogle || []).push({});
   }, []);
@@ -14,14 +18,25 @@ function HorizontalBanner() {
 
   return (
     <StyledResponsive onClick={onClick}>
-      <ins
-        className="adsbygoogle"
-        style={{ display: 'block', textAlign: 'center' }}
-        data-ad-layout="in-article"
-        data-ad-format="fluid"
-        data-ad-client="ca-pub-9161852896103498"
-        data-ad-slot="6869845586"
-      ></ins>
+      {isDisplayAd ? (
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block', textAlign: 'center' }}
+          data-ad-client="ca-pub-9161852896103498"
+          data-ad-slot="5950320973"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+      ) : (
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block', textAlign: 'center' }}
+          data-ad-layout="in-article"
+          data-ad-format="fluid"
+          data-ad-client="ca-pub-9161852896103498"
+          data-ad-slot="6869845586"
+        ></ins>
+      )}
     </StyledResponsive>
   );
 }

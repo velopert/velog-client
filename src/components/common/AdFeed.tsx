@@ -64,9 +64,9 @@ function AdFeed({ forPost, index }: { forPost?: boolean; index: number }) {
           className="adsbygoogle"
           style={{ display: 'block' }}
           data-ad-format="fluid"
-          data-ad-layout-key="-6u+e5+1a-3q+77"
-          data-ad-client="ca-pub-5574866530496701"
-          data-ad-slot="2841722540"
+          data-ad-layout-key="-6c+ce+2v-x+66"
+          data-ad-client="ca-pub-9161852896103498"
+          data-ad-slot="9446928451"
         ></ins>
       </Block>
     );
@@ -87,18 +87,18 @@ function AdFeed({ forPost, index }: { forPost?: boolean; index: number }) {
           className="adsbygoogle"
           style={{ display: 'block' }}
           data-ad-format="fluid"
-          data-ad-layout-key="-6u+e5+1a-3q+77"
-          data-ad-client="ca-pub-5574866530496701"
-          data-ad-slot="8480422066"
+          data-ad-layout-key="-6c+ce+2v-x+66"
+          data-ad-client="ca-pub-9161852896103498"
+          data-ad-slot="2793890198"
         ></ins>
       ) : (
         <ins
           className="adsbygoogle"
           style={{ display: 'block' }}
           data-ad-format="fluid"
-          data-ad-layout-key="-6u+e7+18-4k+8t"
-          data-ad-client="ca-pub-5574866530496701"
-          data-ad-slot="3828701581"
+          data-ad-layout-key="-6c+ce+2v-x+66"
+          data-ad-client="ca-pub-9161852896103498"
+          data-ad-slot="2793890198"
         ></ins>
       )}
       {/* {isMobile ? (
