@@ -9,6 +9,7 @@ import SeriesTab from './tabs/SeriesTab';
 import AboutTab from './tabs/AboutTab';
 import { themedPalette } from '../../lib/styles/themes';
 import media from '../../lib/styles/media';
+import { Helmet } from 'react-helmet-async';
 
 const UserPageBlock = styled(VelogResponsive)``;
 
@@ -19,8 +20,12 @@ const UserPage: React.FC<UserPageProps> = ({ match, location }) => {
   const { username, tab } = match.params;
   window.location.href = `${process.env
     .REACT_APP_CLIENT_V3_HOST!}/@${username}/posts`;
+
   return (
     <UserPageBlock>
+      <Helmet>
+        <link rel="canonical" href={`/@${username}/posts`} />
+      </Helmet>
       <UserProfileContainer username={username} />
       <MobileSeparator />
       <VelogTab username={username} tab={tab || 'posts'} />
