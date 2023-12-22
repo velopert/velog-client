@@ -9,9 +9,9 @@ import useToggle from '../../lib/hooks/useToggle';
 import PopupOKCancel from '../common/PopupOKCancel';
 import media from '../../lib/styles/media';
 import TagList from '../common/TagList';
-import { Link } from 'react-router-dom';
 import PrivatePostLabel from '../common/PrivatePostLabel';
 import optimizeImage from '../../lib/optimizeImage';
+import VLink from '../common/VLink';
 
 const PostHeadBlock = styled(VelogResponsive)`
   margin-top: 5.5rem;
@@ -44,12 +44,12 @@ const PostHeadBlock = styled(VelogResponsive)`
 `;
 
 const SubInfo = styled.div`
-  align-items: center;
   font-size: 1rem;
   color: ${themedPalette.text2};
   /* font-family: 'Spoqa Han Sans'; */
   display: flex;
   justify-content: space-between;
+  align-items: center;
   .information {
     .username {
       color: ${themedPalette.text1};
@@ -75,6 +75,10 @@ const SubInfo = styled.div`
   ${media.small} {
     margin-bottom: 0.75rem;
   }
+`;
+
+const SubInfoRight = styled.div`
+  display: flex;
 `;
 
 const EditRemoveGroup = styled.div`
@@ -119,14 +123,6 @@ const Thumbnail = styled.img`
   }
 `;
 
-const MobileOnly = styled.div`
-  align-items: center;
-  display: none;
-  ${media.medium} {
-    display: flex;
-  }
-`;
-
 export interface PostHeadProps {
   title: string;
   tags: string[];
@@ -148,6 +144,7 @@ export interface PostHeadProps {
   toc: React.ReactNode;
   isPrivate?: boolean;
   mobileLikeButton: React.ReactNode;
+  followButton: React.ReactNode;
   onOpenStats(): void;
 }
 
@@ -168,6 +165,7 @@ const PostHead: React.FC<PostHeadProps> = ({
   isPrivate,
   mobileLikeButton,
   onOpenStats,
+  followButton,
 }) => {
   const [askRemove, toggleAskRemove] = useToggle(false);
 
@@ -189,7 +187,7 @@ const PostHead: React.FC<PostHeadProps> = ({
         <SubInfo>
           <div className="information">
             <span className="username">
-              <Link to={`/@${username}`}>{username}</Link>
+              <VLink to={`/@${username}/posts`}>{username}</VLink>
             </span>
             <span className="separator">&middot;</span>
             <span>{formatDate(date)}</span>
@@ -200,7 +198,10 @@ const PostHead: React.FC<PostHeadProps> = ({
               </>
             )}
           </div>
-          <MobileOnly>{mobileLikeButton}</MobileOnly>
+          <SubInfoRight>
+            {!ownPost && followButton}
+            {mobileLikeButton}
+          </SubInfoRight>
         </SubInfo>
         <TagList tags={tags} link />
         {shareButtons}

@@ -44,6 +44,7 @@ import optimizeImage from '../../lib/optimizeImage';
 import { useSetShowFooter } from '../../components/velog/VelogPageTemplate';
 import HorizontalBanner from './HorizontalBanner';
 import gtag from '../../lib/gtag';
+import FollowButton from '../../components/common/FollowButton';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -104,6 +105,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
   const [likePost, { loading: loadingLike }] = useMutation(LIKE_POST);
   const [unlikePost, { loading: loadingUnlike }] = useMutation(UNLIKE_POST);
   const { showNotFound } = useNotFound();
+
   // const userLogo = useSelector((state: RootState) => state.header.userLogo);
   // const velogTitle = useMemo(() => {
   //   if (!userLogo || !userLogo.title) return `${username}.log`;
@@ -274,7 +276,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
     history.push(`/post-stats/${post.id}`);
   };
 
-  const onLikeToggle = async () => {
+  const onLikeToggle = () => {
     if (loadingLike || loadingUnlike) return;
 
     const variables = {
@@ -308,7 +310,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
             __typename: 'Post',
           },
         });
-        await unlikePost({
+        unlikePost({
           variables,
         });
       } else {
@@ -321,7 +323,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
             __typename: 'Post',
           },
         });
-        await likePost({
+        likePost({
           variables,
         });
       }
@@ -423,6 +425,12 @@ const PostViewer: React.FC<PostViewerProps> = ({
             onToggle={onLikeToggle}
           />
         }
+        followButton={
+          <FollowButton
+            followed={post.user.is_followed}
+            followingUserId={post.user.id}
+          />
+        }
       />
       {shouldShowBanner ? <HorizontalBanner /> : null}
       <PostContent isMarkdown={post.is_markdown} body={post.body} />
@@ -433,6 +441,13 @@ const PostViewer: React.FC<PostViewerProps> = ({
           description={post.user.profile.short_bio}
           profileLinks={post.user.profile.profile_links}
           username={post.user.username}
+          ownPost={post.user.id === userId}
+          followButton={
+            <FollowButton
+              followed={post.user.is_followed}
+              followingUserId={post.user.id}
+            />
+          }
         />
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />

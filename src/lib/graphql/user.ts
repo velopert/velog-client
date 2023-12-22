@@ -28,6 +28,7 @@ export type User = {
   is_certified: boolean;
   profile: UserProfile;
   velogConfig: VelogConfig | null;
+  is_followed: boolean;
 };
 
 export const GET_CURRENT_USER = gql`
@@ -179,6 +180,18 @@ export const ACCEPT_INTEGRATION = gql`
 export const CONFIRM_CHANGE_EMAIL = gql`
   mutation ConfirmChangeEmail($code: String!) {
     confirmChangeEmail(code: $code)
+  }
+`;
+
+export const FOLLOW_USER = gql`
+  mutation Follow($following_user_id: ID!) {
+    follow(following_user_id: $following_user_id)
+  }
+`;
+
+export const UNFOLLOW_USER = gql`
+  mutation Unfollow($following_user_id: ID!) {
+    unfollow(following_user_id: $following_user_id)
   }
 `;
 

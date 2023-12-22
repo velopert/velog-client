@@ -13,9 +13,9 @@ import { ProfileLinks } from '../../lib/graphql/user';
 import { MdHome } from 'react-icons/md';
 import Skeleton from './Skeleton';
 import SkeletonTexts from './SkeletonTexts';
-import { Link } from 'react-router-dom';
 import media from '../../lib/styles/media';
 import optimizeImage from '../../lib/optimizeImage';
+import VLink from './VLink';
 
 const UserProfileBlock = styled.div`
   ${media.medium} {
@@ -26,11 +26,16 @@ const UserProfileBlock = styled.div`
 
 const Section = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  ${media.small} {
-    flex-direction: column;
-    align-items: flex-start;
+  .left {
+    display: flex;
+
+    ${media.small} {
+      flex-direction: column;
+    }
   }
+
   img {
     display: block;
     width: 8rem;
@@ -137,6 +142,8 @@ export interface UserProfileProps {
   description: string;
   profileLinks: ProfileLinks;
   username: string;
+  followButton?: React.ReactNode;
+  ownPost?: boolean;
 }
 
 function includeProtocol(address: string) {
@@ -151,6 +158,8 @@ const UserProfile: React.FC<UserProfileProps> = ({
   description,
   profileLinks,
   username,
+  followButton,
+  ownPost = false,
 }) => {
   const { email, facebook, github, twitter, url } = profileLinks;
   const [hoverEmail, setHoverEmail] = useState(false);
@@ -164,23 +173,28 @@ const UserProfile: React.FC<UserProfileProps> = ({
     setHoverEmail(false);
   };
 
-  const velogUrl = `/@${username}`;
+  const velogUrl = `/@${username}/posts`;
 
   return (
     <UserProfileBlock className={className} style={style}>
       <Section>
-        <Link to={velogUrl}>
-          <img
-            src={optimizeImage(thumbnail || userThumbnail, 240)}
-            alt="profile"
-          />
-        </Link>
-        <UserInfo>
-          <div className="name">
-            <Link to={velogUrl}>{displayName}</Link>
-          </div>
-          <div className="description">{description}</div>
-        </UserInfo>
+        <div className="left">
+          <VLink to={velogUrl}>
+            <img
+              src={optimizeImage(thumbnail || userThumbnail, 240)}
+              alt="profile"
+            />
+          </VLink>
+          <UserInfo>
+            <div className="name">
+              <VLink to={velogUrl}>{displayName}</VLink>
+            </div>
+            <div className="description">{description}</div>
+          </UserInfo>
+        </div>
+        {!ownPost && followButton && (
+          <div className="right">{followButton}</div>
+        )}
       </Section>
       <Separator />
       <ProfileIcons>

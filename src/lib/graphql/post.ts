@@ -102,6 +102,7 @@ export interface SinglePost {
   user: {
     id: string;
     username: string;
+    is_followed: boolean;
     profile: {
       id: string;
       display_name: string;
@@ -254,6 +255,7 @@ export const READ_POST = gql`
       user {
         id
         username
+        is_followed
         profile {
           id
           display_name

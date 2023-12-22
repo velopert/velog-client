@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { buttonColorMap } from '../../lib/styles/palette';
 import { Route } from 'react-router';
 import { themedPalette } from '../../lib/styles/themes';
+import VLink from './VLink';
 
 type ButtonSize = 'SMALL' | 'DEFAULT' | 'LARGE';
 
@@ -102,9 +103,17 @@ const RoundButton: React.FC<RoundButtonProps> = ({
   color = 'teal',
   size = 'DEFAULT',
   border = false,
+  children,
   ...rest
 }) => {
   if (to) {
+    if (to === '/') {
+      return (
+        <RoundButtonBlock color={color} size={size} border={border} {...rest}>
+          <VLink to="/"> {children}</VLink>
+        </RoundButtonBlock>
+      );
+    }
     return (
       <Route
         render={({ history }) => (
@@ -116,6 +125,7 @@ const RoundButton: React.FC<RoundButtonProps> = ({
             }}
             size={size}
             border={border}
+            children={children}
             {...rest}
           />
         )}
@@ -123,7 +133,13 @@ const RoundButton: React.FC<RoundButtonProps> = ({
     );
   }
   return (
-    <RoundButtonBlock color={color} size={size} border={border} {...rest} />
+    <RoundButtonBlock
+      color={color}
+      size={size}
+      border={border}
+      children={children}
+      {...rest}
+    />
   );
 };
 

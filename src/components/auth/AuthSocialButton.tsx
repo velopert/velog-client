@@ -62,7 +62,7 @@ const AuthSocialButton: React.FC<AuthSocialButtonProps> = ({
   const host =
     process.env.NODE_ENV === 'production'
       ? process.env.REACT_APP_API_HOST
-      : 'http://localhost:5001/';
+      : 'http://localhost:5002/';
 
   const redirectTo = `${host}api/v2/auth/social/redirect/${provider}?next=${currentPath}&isIntegrate=${
     isIntegrate ? 1 : 0

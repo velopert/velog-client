@@ -25,7 +25,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../modules';
 import PopupOKCancel from '../../components/common/PopupOKCancel';
 import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom';
 
 export interface SeriesPostsProps {
   username: string;
@@ -49,7 +48,6 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
     },
     fetchPolicy: 'cache-and-network',
   });
-  const history = useHistory();
 
   const client = useApolloClient();
 
@@ -63,7 +61,9 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
       });
       await client.resetStore();
       toast.success('시리즈가 삭제되었습니다.');
-      history.replace(`/@${username}/series/`);
+      // history.replace(`/@${username}/series/`);
+      window.location.href = `${process.env
+        .REACT_APP_CLIENT_V3_HOST!}/@${username}/series`;
     } catch (e) {
       toast.error('시리즈 삭제 실패');
     }
@@ -97,7 +97,7 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
     }
     if (!data || !data.series) return;
     setNextName(data.series.name);
-    setOrder(data.series.series_posts.map(sp => sp.id));
+    setOrder(data.series.series_posts.map((sp) => sp.id));
   }, [data, showNotFound]);
 
   if (ssrEnabled && data && !data.series) {

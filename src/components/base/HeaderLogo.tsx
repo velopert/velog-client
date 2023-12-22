@@ -1,12 +1,12 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { Logo, VelogIcon } from '../../static/svg';
 import { UserLogo } from '../../modules/header';
 import { themedPalette } from '../../lib/styles/themes';
 import { createFallbackTitle } from '../../lib/utils';
 import media from '../../lib/styles/media';
 import { ellipsis } from '../../lib/styles/utils';
+import VLink from '../common/VLink';
 
 export interface HeaderLogoProps {
   custom: boolean;
@@ -22,23 +22,23 @@ const HeaderLogo: React.FC<HeaderLogoProps> = ({
   if (!custom) {
     return (
       <HeaderLogoBlock>
-        <a href="/">
+        <VLink to="/">
           <Logo data-testid="velog-logo" className="velog-logo" />
-        </a>
+        </VLink>
       </HeaderLogoBlock>
     );
   }
   if (!userLogo) return <div />;
   if (!username) return <div />;
-  const velogPath = `/@${username}`;
+  const velogPath = `/@${username}/posts`;
   return (
     <HeaderLogoBlock>
-      <VelogLogoLink href="/">
+      <VelogLogoLink to={velogPath}>
         <VelogIcon />
       </VelogLogoLink>
-      <Link to={velogPath} className="user-logo">
+      <VLink to={velogPath} className="user-logo">
         {userLogo.title || createFallbackTitle(username)}
-      </Link>
+      </VLink>
     </HeaderLogoBlock>
   );
 };
@@ -74,7 +74,7 @@ const HeaderLogoBlock = styled.div`
   }
 `;
 
-const VelogLogoLink = styled.a`
+const VelogLogoLink = styled(VLink)`
   color: inherit;
 
   svg {
