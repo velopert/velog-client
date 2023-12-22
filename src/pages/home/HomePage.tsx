@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MainTemplate from '../../components/main/MainTemplate';
 import Header from '../../components/base/Header';
 import HomeTab from '../../components/home/HomeTab';
@@ -12,7 +12,9 @@ import FloatingHeader from '../../components/base/FloatingHeader';
 export type HomePageProps = {};
 
 function HomePage(props: HomePageProps) {
-  window.location.href = process.env.REACT_APP_CLIENT_V3_HOST!;
+  useEffect(() => {
+    window.location.href = process.env.REACT_APP_CLIENT_V3_HOST!;
+  }, []);
   return (
     <MainTemplate>
       <Header />

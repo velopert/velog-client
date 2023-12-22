@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import VelogResponsive from '../../components/velog/VelogResponsive';
 import UserProfileContainer from '../../containers/velog/UserProfileContainer';
@@ -18,8 +18,10 @@ export interface UserPageProps
 
 const UserPage: React.FC<UserPageProps> = ({ match, location }) => {
   const { username, tab } = match.params;
-  window.location.href = `${process.env
-    .REACT_APP_CLIENT_V3_HOST!}/@${username}/posts`;
+  useEffect(() => {
+    window.location.href = `${process.env
+      .REACT_APP_CLIENT_V3_HOST!}/@${username}/posts`;
+  }, []);
 
   return (
     <UserPageBlock>
