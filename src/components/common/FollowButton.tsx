@@ -25,8 +25,12 @@ const FollowButton: React.FC<PostFollowButtonProps> = ({
   const [unfollow, { loading: loadingUnfollowUser }] =
     useMutation(UNFOLLOW_USER);
 
-  const [initialFollowState, setInitialFollowState] = React.useState<boolean>();
-  const [currentFollowState, setCurrentFollowState] = React.useState<boolean>();
+  const [initialFollowState, setInitialFollowState] = React.useState<boolean>(
+    !!followed,
+  );
+  const [currentFollowState, setCurrentFollowState] = React.useState<boolean>(
+    !!followed,
+  );
 
   const [buttonText, setButtonText] = React.useState('팔로잉');
 
@@ -96,6 +100,8 @@ const FollowButton: React.FC<PostFollowButtonProps> = ({
     setInitialFollowState(followed);
     setCurrentFollowState(followed);
   }, [followed]);
+
+  if (followed === undefined) return null;
 
   return (
     <FollowButtonBlock
