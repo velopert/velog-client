@@ -37,6 +37,7 @@ jobs:
         REACT_APP_GRAPHQL_HOST_NOCDN: 'https://v2.velog.io/'
         PUBLIC_URL: 'https://static.velog.io/'
         REACT_APP_REDIS_HOST: ${{ secrets.REDIS_HOST }}
+        REACT_APP_CLIENT_V3_HOST: 'https://velog.io'
         CI: false
     - name: upload
       env:
