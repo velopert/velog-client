@@ -33,7 +33,7 @@ const HeaderLogo: React.FC<HeaderLogoProps> = ({
   const velogPath = `/@${username}/posts`;
   return (
     <HeaderLogoBlock>
-      <VelogLogoLink to={velogPath}>
+      <VelogLogoLink to="/">
         <VelogIcon />
       </VelogLogoLink>
       <VLink to={velogPath} className="user-logo">
