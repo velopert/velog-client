@@ -2,6 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 import remark from 'remark';
 // import htmlPlugin from 'remark-html';
+import rehypeSanitize from 'rehype-sanitize';
+import rehypeParse from 'rehype-parse';
 import slug from 'remark-slug';
 import prismPlugin from '../../lib/remark/prismPlugin';
 import prismThemes from '../../lib/styles/prismThemes';
@@ -218,6 +220,8 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
             .use(math)
             .use(katex)
             .use(stringify)
+            .use(rehypeParse, { fragment: true })
+            .use(rehypeSanitize)
             .processSync(markdown)
             .toString(),
         )
