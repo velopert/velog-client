@@ -31,6 +31,7 @@ export interface Comment {
     profile: {
       id: string;
       thumbnail: string | null;
+      display_name: string;
     };
   } | null;
   text: string | null;
@@ -165,6 +166,7 @@ export const GET_POST_LIST = gql`
         profile {
           id
           thumbnail
+          display_name
         }
       }
       url_slug
@@ -191,6 +193,7 @@ export const GET_RECENT_POSTS = gql`
         profile {
           id
           thumbnail
+          display_name
         }
       }
       url_slug
@@ -218,6 +221,7 @@ export const GET_TRENDING_POSTS = gql`
         profile {
           id
           thumbnail
+          display_name
         }
       }
       url_slug
@@ -275,6 +279,7 @@ export const READ_POST = gql`
           profile {
             id
             thumbnail
+            display_name
           }
         }
         text
@@ -365,6 +370,7 @@ export const GET_RECOMMENDED_POST = gql`
           profile {
             id
             thumbnail
+            display_name
           }
         }
         url_slug
@@ -429,6 +435,7 @@ export const RELOAD_COMMENTS = gql`
           profile {
             id
             thumbnail
+            display_name
           }
         }
         text
@@ -450,6 +457,7 @@ export const GET_COMMENT = gql`
         username
         profile {
           thumbnail
+          display_name
         }
       }
       text
@@ -473,6 +481,7 @@ export const GET_REPLIES = gql`
           profile {
             id
             thumbnail
+            display_name
           }
         }
         text
@@ -614,6 +623,7 @@ export const EDIT_POST = gql`
           profile {
             id
             thumbnail
+            dispay_name
           }
         }
         text
@@ -658,6 +668,7 @@ export const WRITE_COMMENT = gql`
         profile {
           id
           thumbnail
+          display_name
         }
       }
       text
@@ -722,6 +733,7 @@ export const SEARCH_POSTS = gql`
           profile {
             id
             thumbnail
+            display_name
           }
         }
         url_slug
@@ -793,6 +805,7 @@ export const GET_READING_LIST = gql`
         profile {
           id
           thumbnail
+          display_name
         }
       }
       url_slug

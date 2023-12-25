@@ -52,6 +52,7 @@ export const postData: { post: SinglePost } = {
             id: '500d0300-c630-11e8-a920-d3b6c9399aff',
             thumbnail:
               'https://images.velog.io/images/dever/profile/497f3750-0cc7-11e9-b291-5fc487ce9c76/JS.png',
+            display_name: 'dever',
           },
         },
         text: 'velog에서는 redux를 사용하셨나요 아니면 Mobx를 사용하셨나요??',

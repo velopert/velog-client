@@ -170,7 +170,7 @@ const FlatPostCard = ({ post, hideUser }: PostCardProps) => {
             />
           </VLink>
           <div className="username">
-            <VLink to={`${velogUrl}`}>{post.user.username}</VLink>
+            <VLink to={`${velogUrl}`}>{post.user.profile.display_name}</VLink>
           </div>
         </div>
       )}
