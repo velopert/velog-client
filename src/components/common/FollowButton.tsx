@@ -8,16 +8,17 @@ import { gql } from 'apollo-boost';
 import useUser from '../../lib/hooks/useUser';
 import { toast } from 'react-toastify';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 
 export interface PostFollowButtonProps {
   followingUserId: string;
   followed: boolean | undefined;
+  postId: string;
 }
 
 const FollowButton: React.FC<PostFollowButtonProps> = ({
   followingUserId,
   followed,
+  postId,
 }) => {
   const client = useApolloClient();
   const currentUser = useUser();
@@ -51,6 +52,7 @@ const FollowButton: React.FC<PostFollowButtonProps> = ({
 
     const variables = {
       following_user_id: followingUserId,
+      post_id: postId,
     };
 
     const followFragment = gql`

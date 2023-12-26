@@ -429,6 +429,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
           <FollowButton
             followed={post.user.is_followed}
             followingUserId={post.user.id}
+            postId={post.id}
           />
         }
       />
@@ -446,6 +447,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
             <FollowButton
               followed={post.user.is_followed}
               followingUserId={post.user.id}
+              postId={post.id}
             />
           }
         />
