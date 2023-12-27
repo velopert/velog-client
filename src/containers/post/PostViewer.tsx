@@ -45,6 +45,8 @@ import { useSetShowFooter } from '../../components/velog/VelogPageTemplate';
 import HorizontalBanner from './HorizontalBanner';
 import gtag from '../../lib/gtag';
 import FollowButton from '../../components/common/FollowButton';
+import { BANNER_ADS } from '../../lib/graphql/ad';
+import PostBanner from '../../components/post/PostBanner';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -105,6 +107,20 @@ const PostViewer: React.FC<PostViewerProps> = ({
   const [likePost, { loading: loadingLike }] = useMutation(LIKE_POST);
   const [unlikePost, { loading: loadingUnlike }] = useMutation(UNLIKE_POST);
   const { showNotFound } = useNotFound();
+  const { data: ads } = useQuery(BANNER_ADS, {
+    variables: {
+      writerUsername: username,
+    },
+  });
+
+  const customAd = useMemo(() => {
+    if (!ads) return null;
+    if (ads.bannerAds.length === 0) return null;
+    return {
+      image: ads.bannerAds[0].image,
+      url: ads.bannerAds[0].url,
+    };
+  }, [ads]);
 
   // const userLogo = useSelector((state: RootState) => state.header.userLogo);
   // const velogTitle = useMemo(() => {
@@ -433,7 +449,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
           />
         }
       />
-      {shouldShowBanner ? <HorizontalBanner /> : null}
+      {shouldShowBanner ? <PostBanner customAd={customAd} /> : null}
       <PostContent isMarkdown={post.is_markdown} body={post.body} />
       <UserProfileWrapper>
         <UserProfile
@@ -453,8 +469,12 @@ const PostViewer: React.FC<PostViewerProps> = ({
         />
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />
-      {shouldShowBanner && isContentLongEnough ? <HorizontalBanner /> : null}
-      {shouldShowFooterBanner ? <HorizontalBanner isDisplayAd /> : null}
+      {shouldShowBanner && isContentLongEnough ? (
+        <PostBanner customAd={customAd} />
+      ) : null}
+      {shouldShowFooterBanner ? (
+        <PostBanner isDisplayAd={true} customAd={customAd} />
+      ) : null}
       <PostComments
         count={post.comments_count}
         comments={post.comments}
