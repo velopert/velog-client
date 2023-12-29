@@ -21,7 +21,7 @@ const UserPage: React.FC<UserPageProps> = ({ match, location }) => {
   useEffect(() => {
     window.location.href = `${process.env
       .REACT_APP_CLIENT_V3_HOST!}/@${username}/posts`;
-  }, []);
+  }, [username]);
 
   return (
     <UserPageBlock>

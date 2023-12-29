@@ -8,7 +8,6 @@ import { gql } from 'apollo-boost';
 import useUser from '../../lib/hooks/useUser';
 import { toast } from 'react-toastify';
 import { themedPalette } from '../../lib/styles/themes';
-import palette from '../../lib/styles/palette';
 
 export interface PostFollowButtonProps {
   followingUserId: string;
@@ -84,6 +83,7 @@ const FollowButton: React.FC<PostFollowButtonProps> = ({
             __typename: 'User',
           },
         });
+
         follow({ variables });
         setButtonText('팔로잉');
       }
