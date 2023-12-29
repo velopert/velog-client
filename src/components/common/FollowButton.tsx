@@ -83,6 +83,7 @@ const FollowButton: React.FC<PostFollowButtonProps> = ({
             __typename: 'User',
           },
         });
+        console.log('hello', variables);
         follow({ variables });
         setButtonText('팔로잉');
       }
