@@ -185,16 +185,18 @@ export const CONFIRM_CHANGE_EMAIL = gql`
 
 export const FOLLOW_USER = gql`
   mutation Follow($following_user_id: ID!, $post_id: ID!) {
-    follow(following_user_id: $following_user_id, post_id: $post_id) {
+    follow(following_user_id: $following_user_id) {
       id
+      is_followed
     }
   }
 `;
 
 export const UNFOLLOW_USER = gql`
   mutation Unfollow($following_user_id: ID!, $post_id: ID!) {
-    unfollow(following_user_id: $following_user_id, post_id: $post_id) {
+    unfollow(following_user_id: $following_user_id) {
       id
+      is_followed
     }
   }
 `;
