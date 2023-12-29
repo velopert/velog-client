@@ -30,6 +30,10 @@ export interface MarkdownRenderProps {
   editing?: boolean;
 }
 
+function sanitizeEventScript(htmlString: string) {
+  return htmlString.replace(/ on\w+="[^"]*"/g, '');
+}
+
 const MarkdownRenderBlock = styled.div`
   &.atom-one {
     ${prismThemes['atom-one']}
@@ -123,7 +127,8 @@ const MarkdownRenderBlock = styled.div`
 `;
 
 function filter(html: string) {
-  return sanitize(html, {
+  const presanitized = sanitizeEventScript(html);
+  return sanitize(presanitized, {
     allowedTags: [
       'h1',
       'h2',
