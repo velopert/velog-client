@@ -623,7 +623,7 @@ export const EDIT_POST = gql`
           profile {
             id
             thumbnail
-            dispay_name
+            display_name
           }
         }
         text
