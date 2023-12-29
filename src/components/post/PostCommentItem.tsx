@@ -180,7 +180,7 @@ const PostCommentItem: React.FC<PostCommentItemProps> = ({
           <div className="comment-info">
             <div className="username">
               {user ? (
-                <VLink to={velogLink}>{user.username}</VLink>
+                <VLink to={velogLink}>{user.profile.display_name}</VLink>
               ) : (
                 '알 수 없음'
               )}

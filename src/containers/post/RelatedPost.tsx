@@ -48,14 +48,14 @@ function RelatedPost({
     return cloned;
   }, [data, showAds, adBlocked]);
 
-  if (!postWithAds) return null;
+  // if (!postWithAds) return null;
 
   return (
     <>
       <Background>
         <Title>관심 있을 만한 포스트</Title>
         <Wrapper>
-          <PostCardGrid posts={postWithAds} forPost />
+          <PostCardGrid posts={postWithAds || []} forPost />
         </Wrapper>
       </Background>
       <PullUp />
