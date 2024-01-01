@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import PageTemplate from '../components/base/PageTemplate';
 import SettingUserProfileContainer from '../containers/setting/SettingUserProfileContainer';
@@ -9,6 +9,10 @@ import { Helmet } from 'react-helmet-async';
 export type SettingPageProps = {};
 
 function SettingPage(props: SettingPageProps) {
+  useEffect(() => {
+    window.location.href = `${process.env.REACT_APP_CLIENT_V3_HOST!}/setting`;
+  }, []);
+
   return (
     <SettingTemplate>
       <Helmet>
