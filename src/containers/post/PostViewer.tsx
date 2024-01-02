@@ -239,11 +239,17 @@ const PostViewer: React.FC<PostViewerProps> = ({
     if (!data?.post?.id) return;
     if (!shouldShowBanner) return;
     gtag('event', 'banner_view');
-    console.log('banner_view');
+
     if (userId) {
       gtag('event', 'banner_view_user');
     }
   }, [data?.post?.id, shouldShowBanner, userId]);
+
+  useEffect(() => {
+    if (customAd && (shouldShowBanner || shouldShowFooterBanner)) {
+      gtag('event', 'ads_banner_view');
+    }
+  }, [customAd, shouldShowBanner, shouldShowFooterBanner]);
 
   const onRemove = async () => {
     if (!data || !data.post) return;
