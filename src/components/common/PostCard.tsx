@@ -83,7 +83,7 @@ function PostCard({ post, forHome, forPost }: PostCardProps) {
             alt={`user thumbnail of ${post.user.username}`}
           />
           <span>
-            by <b>{post.user.profile.display_name}</b>
+            by <b>{post.user?.profile?.display_name ?? post.user.username}</b>
           </span>
         </VLink>
         <div className="likes">
