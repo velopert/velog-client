@@ -127,6 +127,7 @@ export interface PostHeadProps {
   title: string;
   tags: string[];
   username: string;
+  displayName?: string;
   date: string;
   thumbnail: string | null;
   hideThumbnail: boolean;
@@ -151,6 +152,7 @@ export interface PostHeadProps {
 const PostHead: React.FC<PostHeadProps> = ({
   title,
   username,
+  displayName,
   date,
   tags,
   hideThumbnail,
@@ -187,7 +189,9 @@ const PostHead: React.FC<PostHeadProps> = ({
         <SubInfo>
           <div className="information">
             <span className="username">
-              <VLink to={`/@${username}/posts`}>{username}</VLink>
+              <VLink to={`/@${username}/posts`}>
+                {displayName || username}
+              </VLink>
             </span>
             <span className="separator">&middot;</span>
             <span>{formatDate(date)}</span>
