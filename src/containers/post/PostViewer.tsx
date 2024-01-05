@@ -415,6 +415,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         title={post.title}
         tags={post.tags}
         username={username}
+        displayName={post.user.profile.display_name}
         date={post.released_at}
         thumbnail={
           post.thumbnail &&
