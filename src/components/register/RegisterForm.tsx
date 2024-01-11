@@ -122,10 +122,10 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
       <LabelInput
         name="username"
         onChange={onChange}
-        label="아이디"
-        placeholder="아이디를 입력하세요"
+        label="사용자 ID"
+        placeholder="새 사용자 ID를 입력하세요"
         value={form.username}
-        size={20}
+        size={22}
       />
       <LabelInput
         name="shortBio"
@@ -185,7 +185,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
             size="LARGE"
             disabled={loading}
           >
-            다음
+            가입
           </RoundButton>
         </div>
       </div>
