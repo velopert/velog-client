@@ -42,7 +42,6 @@ import MobileLikeButton from '../../components/post/MobileLikeButton';
 import RelatedPost from './RelatedPost';
 import optimizeImage from '../../lib/optimizeImage';
 import { useSetShowFooter } from '../../components/velog/VelogPageTemplate';
-import HorizontalBanner from './HorizontalBanner';
 import gtag from '../../lib/gtag';
 import FollowButton from '../../components/common/FollowButton';
 import { BANNER_ADS } from '../../lib/graphql/ad';

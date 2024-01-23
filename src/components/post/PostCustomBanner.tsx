@@ -16,7 +16,7 @@ const onClick = () => {
 const PostCustomBanner: React.FC<PostCustomBannerProps> = ({ image, url }) => {
   return (
     <PostCustomBannerBlock onClick={onClick}>
-      <a href={url} target="_blank">
+      <a href={url} target="_blank" rel="noopener noreferrer">
         <img src={image} alt="post-custom-banner" />
       </a>
     </PostCustomBannerBlock>
