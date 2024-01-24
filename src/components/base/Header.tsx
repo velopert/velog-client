@@ -1,5 +1,5 @@
 import React, { useRef, useCallback } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { NotificationIcon, SearchIcon3 } from '../../static/svg';
 import RoundButton from '../common/RoundButton';
 import MainResponsive from '../main/MainResponsive';
@@ -14,11 +14,15 @@ import { themedPalette } from '../../lib/styles/themes';
 import VLink from '../common/VLink';
 import { useDispatch } from 'react-redux';
 import { showAuthModal } from '../../modules/core';
+import { useQuery } from '@apollo/react-hooks';
+import { NOTIFICATION_COUNT } from '../../lib/graphql/notification';
 
 export type MainHeaderProps = {};
 
 function Header(props: MainHeaderProps) {
   const dispatch = useDispatch();
+  const { data: notificationCountData } = useQuery(NOTIFICATION_COUNT);
+
   const { user, onLoginClick, onLogout, customHeader } = useHeader();
   const [userMenu, toggleUserMenu] = useToggle(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -39,6 +43,7 @@ function Header(props: MainHeaderProps) {
     }
   };
 
+  const notificationCount = notificationCountData?.notificationCount ?? 0;
   const urlForSearch = customHeader.custom
     ? `/search?username=${customHeader.username}`
     : '/search';
@@ -53,6 +58,13 @@ function Header(props: MainHeaderProps) {
         />
         <Right>
           <NotificationButton to="/notifications" onClick={onClickNotification}>
+            {user && notificationCount !== 0 && (
+              <NotificationCounter
+                isSingle={Math.floor(notificationCount / 10) === 0}
+              >
+                {Math.min(99, notificationCount)}
+              </NotificationCounter>
+            )}
             <NotificationIcon />
           </NotificationButton>
           <SearchButton to={urlForSearch}>
@@ -123,6 +135,7 @@ const SearchButton = styled(Link)`
 `;
 
 const NotificationButton = styled(VLink)`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,6 +154,24 @@ const NotificationButton = styled(VLink)`
     width: 24px;
     height: 24px;
   }
+`;
+
+const NotificationCounter = styled.div<{ isSingle: boolean }>`
+  position: absolute;
+  top: 3px;
+  right: -3px;
+  padding: 1px 4px;
+  font-weight: 500;
+  font-size: 11px;
+  background-color: var(--primary1);
+  color: var(--button-text);
+  border-radius: 100px;
+
+  ${(props) =>
+    props.isSingle &&
+    css`
+      right: 4px;
+    `}
 `;
 
 const Inner = styled(MainResponsive)`
