@@ -5,6 +5,7 @@ import palette from '../../lib/styles/palette';
 import transitions from '../../lib/styles/transitions';
 import { mediaQuery } from '../../lib/styles/media';
 import { useTransition, animated } from 'react-spring';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 export interface TagInputProps {
   ref?: React.RefObject<HTMLDivElement>;
@@ -24,7 +25,6 @@ const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
   const [value, setValue] = useState('');
   const [focus, setFocus] = useState(false);
   const ignore = useRef(false);
-  const editableDiv = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (tags.length === 0) return;
@@ -39,13 +39,10 @@ const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
     setValue(e.target.value);
   };
 
-  useEffect(() => {
-    if (editableDiv.current) {
-      if (value === '') {
-        editableDiv.current.innerText = value;
-      }
-    }
-  }, [value]);
+  const onOutsideClick = () => {
+    if (value === '') return;
+    insertTag(value);
+  };
 
   const insertTag = useCallback(
     (tag: string) => {
@@ -96,23 +93,25 @@ const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
   };
 
   return (
-    <TagInputBlock>
-      {tags.map((tag) => (
-        <TagItem key={tag} onClick={() => onRemove(tag)}>
-          {tag}
-        </TagItem>
-      ))}
-      <StyledInput
-        placeholder="태그를 입력하세요"
-        tabIndex={2}
-        onKeyDown={onKeyDown}
-        onChange={onChangeInput}
-        value={value}
-        onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)}
-      />
-      <Help focus={focus} />
-    </TagInputBlock>
+    <OutsideClickHandler onOutsideClick={onOutsideClick}>
+      <TagInputBlock>
+        {tags.map((tag) => (
+          <TagItem key={tag} onClick={() => onRemove(tag)}>
+            {tag}
+          </TagItem>
+        ))}
+        <StyledInput
+          placeholder="태그를 입력하세요"
+          tabIndex={2}
+          onKeyDown={onKeyDown}
+          onChange={onChangeInput}
+          value={value}
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
+        />
+        <Help focus={focus} />
+      </TagInputBlock>
+    </OutsideClickHandler>
   );
 };
 
