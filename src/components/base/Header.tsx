@@ -36,7 +36,8 @@ function Header(props: MainHeaderProps) {
     [toggleUserMenu],
   );
 
-  const onClickNotification = () => {
+  const onClickNotification = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
     if (!user) {
       dispatch(showAuthModal('LOGIN'));
       return;
