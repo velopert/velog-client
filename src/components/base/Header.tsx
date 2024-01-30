@@ -7,7 +7,7 @@ import useHeader from './hooks/useHeader';
 import HeaderUserIcon from './HeaderUserIcon';
 import useToggle from '../../lib/hooks/useToggle';
 import HeaderUserMenu from './HeaderUserMenu';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import media from '../../lib/styles/media';
 import HeaderLogo from './HeaderLogo';
 import { themedPalette } from '../../lib/styles/themes';
@@ -37,8 +37,8 @@ function Header(props: MainHeaderProps) {
   );
 
   const onClickNotification = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
     if (!user) {
+      event.preventDefault();
       dispatch(showAuthModal('LOGIN'));
       return;
     }
