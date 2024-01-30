@@ -7,7 +7,7 @@ import useHeader from './hooks/useHeader';
 import HeaderUserIcon from './HeaderUserIcon';
 import useToggle from '../../lib/hooks/useToggle';
 import HeaderUserMenu from './HeaderUserMenu';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import media from '../../lib/styles/media';
 import HeaderLogo from './HeaderLogo';
 import { themedPalette } from '../../lib/styles/themes';

@@ -69,7 +69,6 @@ const PostRepliesContainer: React.FC<PostRepliesProps> = ({
     [onToggleAskRemove],
   );
 
-  console.log(replies);
   if (replies.loading || !replies.data) {
     return null;
   }
