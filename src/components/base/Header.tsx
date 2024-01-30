@@ -148,6 +148,7 @@ const NotificationButton = styled(VLink)`
   border-radius: 50%;
   color: ${themedPalette.text1};
   cursor: pointer;
+  margin-right: 4px;
   &:hover {
     background: ${themedPalette.slight_layer};
   }
