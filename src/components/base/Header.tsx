@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from 'react';
-import styled from 'styled-components';
-import { SearchIcon2 } from '../../static/svg';
+import styled, { css } from 'styled-components';
+import { NotificationIcon, SearchIcon3 } from '../../static/svg';
 import RoundButton from '../common/RoundButton';
 import MainResponsive from '../main/MainResponsive';
 import useHeader from './hooks/useHeader';
@@ -11,19 +11,21 @@ import { Link } from 'react-router-dom';
 import media from '../../lib/styles/media';
 import HeaderLogo from './HeaderLogo';
 import { themedPalette } from '../../lib/styles/themes';
-import ThemeToggleButton from './ThemeToggleButton';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../modules';
+import VLink from '../common/VLink';
+import { useDispatch } from 'react-redux';
+import { showAuthModal } from '../../modules/core';
+import { useQuery } from '@apollo/react-hooks';
+import { NOTIFICATION_COUNT } from '../../lib/graphql/notification';
 
 export type MainHeaderProps = {};
 
 function Header(props: MainHeaderProps) {
+  const dispatch = useDispatch();
+  const { data: notificationCountData } = useQuery(NOTIFICATION_COUNT);
+
   const { user, onLoginClick, onLogout, customHeader } = useHeader();
   const [userMenu, toggleUserMenu] = useToggle(false);
   const ref = useRef<HTMLDivElement>(null);
-  const themeReady = useSelector(
-    (state: RootState) => state.darkMode.systemTheme !== 'not-ready',
-  );
 
   const onOutsideClick = useCallback(
     (e: React.MouseEvent) => {
@@ -34,6 +36,15 @@ function Header(props: MainHeaderProps) {
     [toggleUserMenu],
   );
 
+  const onClickNotification = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!user) {
+      event.preventDefault();
+      dispatch(showAuthModal('LOGIN'));
+      return;
+    }
+  };
+
+  const notificationCount = notificationCountData?.notificationCount ?? 0;
   const urlForSearch = customHeader.custom
     ? `/search?username=${customHeader.username}`
     : '/search';
@@ -46,44 +57,48 @@ function Header(props: MainHeaderProps) {
           userLogo={customHeader.userLogo}
           username={customHeader.username}
         />
+        <Right>
+          <NotificationButton to="/notifications" onClick={onClickNotification}>
+            {user && notificationCount !== 0 && (
+              <NotificationCounter
+                isSingle={Math.floor(notificationCount / 10) === 0}
+              >
+                {Math.min(99, notificationCount)}
+              </NotificationCounter>
+            )}
+            <NotificationIcon />
+          </NotificationButton>
+          <SearchButton to={urlForSearch}>
+            <SearchIcon3 />
+          </SearchButton>
+          {user ? (
+            <>
+              <RoundButton
+                border
+                color="darkGray"
+                style={{ marginRight: '1.25rem' }}
+                to="/write"
+                className="write-button"
+              >
+                새 글 작성
+              </RoundButton>
 
-        {user ? (
-          <Right>
-            {themeReady && <ThemeToggleButton />}
-            <SearchButton to={urlForSearch}>
-              <SearchIcon2 />
-            </SearchButton>
-            <RoundButton
-              border
-              color="darkGray"
-              style={{ marginRight: '1.25rem' }}
-              to="/write"
-              className="write-button"
-            >
-              새 글 작성
-            </RoundButton>
-
-            <div ref={ref}>
-              <HeaderUserIcon user={user} onClick={toggleUserMenu} />
-            </div>
-            <HeaderUserMenu
-              onClose={onOutsideClick}
-              onLogout={onLogout}
-              username={user.username}
-              visible={userMenu}
-            />
-          </Right>
-        ) : (
-          <Right>
-            {themeReady && <ThemeToggleButton />}
-            <SearchButton to={urlForSearch}>
-              <SearchIcon2 />
-            </SearchButton>
+              <div ref={ref}>
+                <HeaderUserIcon user={user} onClick={toggleUserMenu} />
+              </div>
+              <HeaderUserMenu
+                onClose={onOutsideClick}
+                onLogout={onLogout}
+                username={user.username}
+                visible={userMenu}
+              />
+            </>
+          ) : (
             <RoundButton color="darkGray" onClick={onLoginClick}>
               로그인
             </RoundButton>
-          </Right>
-        )}
+          )}
+        </Right>
       </Inner>
     </Block>
   );
@@ -114,10 +129,51 @@ const SearchButton = styled(Link)`
     background: ${themedPalette.slight_layer};
   }
   svg {
-    width: 1.125rem;
-    height: 1.125rem;
+    width: 24px;
+    height: 24px;
   }
   margin-right: 0.5rem;
+`;
+
+const NotificationButton = styled(VLink)`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  outline: none;
+  border-radius: 50%;
+  color: ${themedPalette.text1};
+  cursor: pointer;
+  margin-right: 4px;
+  &:hover {
+    background: ${themedPalette.slight_layer};
+  }
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+`;
+
+const NotificationCounter = styled.div<{ isSingle: boolean }>`
+  position: absolute;
+  top: 3px;
+  right: -3px;
+  padding: 1px 4px;
+  font-weight: 500;
+  font-size: 11px;
+  background-color: var(--primary1);
+  color: var(--button-text);
+  border-radius: 100px;
+
+  ${(props) =>
+    props.isSingle &&
+    css`
+      right: 4px;
+    `}
 `;
 
 const Inner = styled(MainResponsive)`
