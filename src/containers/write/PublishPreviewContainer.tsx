@@ -91,6 +91,7 @@ const PublishPreviewContainer: React.FC<PublishPreviewContainerProps> = ({
         thumbnail: null,
         meta: {},
         series_id: null,
+        token: null,
       },
     });
 

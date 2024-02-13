@@ -171,6 +171,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
             thumbnail: null,
             meta: {},
             series_id: null,
+            token: null,
           },
         });
         if (!response || !response.data) return;
@@ -194,6 +195,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
             meta: {},
             series_id: null,
             tags,
+            token: null,
           },
         });
         notifySuccess();
@@ -259,6 +261,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
             thumbnail: null,
             meta: {},
             series_id: null,
+            token: null,
           },
         });
         if (!response || !response.data) return;

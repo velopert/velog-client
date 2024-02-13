@@ -528,6 +528,7 @@ export const WRITE_POST = gql`
     $thumbnail: String
     $meta: JSON
     $series_id: ID
+    $token: String
   ) {
     writePost(
       title: $title
@@ -540,6 +541,7 @@ export const WRITE_POST = gql`
       thumbnail: $thumbnail
       meta: $meta
       series_id: $series_id
+      token: $token
     ) {
       id
       user {
@@ -575,6 +577,7 @@ export const EDIT_POST = gql`
     $thumbnail: String
     $meta: JSON
     $series_id: ID
+    $token: String
   ) {
     editPost(
       id: $id
@@ -588,6 +591,7 @@ export const EDIT_POST = gql`
       thumbnail: $thumbnail
       meta: $meta
       series_id: $series_id
+      token: $token
     ) {
       id
       title
