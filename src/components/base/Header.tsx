@@ -21,7 +21,7 @@ export type MainHeaderProps = {};
 
 function Header(props: MainHeaderProps) {
   const dispatch = useDispatch();
-  const { data: notificationCountData } = useQuery(NOTIFICATION_COUNT);
+  const { data: notificationCountData, refetch } = useQuery(NOTIFICATION_COUNT);
 
   const { user, onLoginClick, onLogout, customHeader } = useHeader();
   const [userMenu, toggleUserMenu] = useToggle(false);
@@ -42,6 +42,7 @@ function Header(props: MainHeaderProps) {
       dispatch(showAuthModal('LOGIN'));
       return;
     }
+    refetch();
   };
 
   const notificationCount = notificationCountData?.notificationCount ?? 0;
