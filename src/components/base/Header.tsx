@@ -12,18 +12,26 @@ import media from '../../lib/styles/media';
 import HeaderLogo from './HeaderLogo';
 import { themedPalette } from '../../lib/styles/themes';
 import VLink from '../common/VLink';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { showAuthModal } from '../../modules/core';
 import { useQuery } from '@apollo/react-hooks';
 import { NOTIFICATION_COUNT } from '../../lib/graphql/notification';
+import { RootState } from '../../modules';
 
 export type MainHeaderProps = {};
 
 function Header(props: MainHeaderProps) {
   const dispatch = useDispatch();
-  const { data: notificationCountData, refetch } = useQuery(NOTIFICATION_COUNT);
 
   const { user, onLoginClick, onLogout, customHeader } = useHeader();
+  const { data: notificationCountData, refetch } = useQuery(
+    NOTIFICATION_COUNT,
+    {
+      fetchPolicy: 'network-only',
+      skip: !user,
+    },
+  );
+
   const [userMenu, toggleUserMenu] = useToggle(false);
   const ref = useRef<HTMLDivElement>(null);
 
