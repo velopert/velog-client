@@ -21,9 +21,16 @@ export type MainHeaderProps = {};
 
 function Header(props: MainHeaderProps) {
   const dispatch = useDispatch();
-  const { data: notificationCountData, refetch } = useQuery(NOTIFICATION_COUNT);
 
   const { user, onLoginClick, onLogout, customHeader } = useHeader();
+  const { data: notificationCountData, refetch } = useQuery(
+    NOTIFICATION_COUNT,
+    {
+      fetchPolicy: 'network-only',
+      skip: !user,
+    },
+  );
+
   const [userMenu, toggleUserMenu] = useToggle(false);
   const ref = useRef<HTMLDivElement>(null);
 
