@@ -19,9 +19,11 @@ import darkMode from './modules/darkMode';
 import { UncachedApolloProvider } from './lib/graphql/UncachedApolloContext';
 import { ssrEnabled } from './lib/utils';
 
-Sentry.init({
-  dsn: 'https://99d0ac3ca0f64b4d8709e385e7692893@sentry.io/1886813',
-});
+if (process.env.NODE_ENV === 'production') {
+  Sentry.init({
+    dsn: 'https://99d0ac3ca0f64b4d8709e385e7692893@sentry.io/1886813',
+  });
+}
 
 const store = createStore(
   rootReducer,

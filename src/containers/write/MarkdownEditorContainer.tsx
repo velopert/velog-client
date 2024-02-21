@@ -179,12 +179,14 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
             token: null,
           },
         });
+
         if (!response || !response.data) return;
         const { id } = response.data.writePost;
         dispatch(setWritePostId(id));
         history.replace(`/write?id=${id}`);
         notifySuccess();
       }
+
       // tempsaving unreleased post:
       if (isTemp) {
         await editPost({
@@ -212,14 +214,16 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       if (shallowEqual(lastSavedData, { title, body: markdown })) {
         return;
       }
-      await createPostHistory({
-        variables: {
-          post_id: postId,
-          title,
-          body: markdown,
-          is_markdown: true,
-        },
-      });
+      if (postId) {
+        await createPostHistory({
+          variables: {
+            post_id: postId,
+            title,
+            body: markdown,
+            is_markdown: true,
+          },
+        });
+      }
       setLastSavedData({
         title,
         body: markdown,
@@ -272,6 +276,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
             token: null,
           },
         });
+
         if (!response || !response.data) return;
         id = response.data.writePost.id;
         dispatch(setWritePostId(id));

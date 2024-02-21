@@ -90,7 +90,7 @@ const PublishActionButtonsContainer: React.FC<
   };
 
   const onPublish = async () => {
-    if (writePostLoading || editPostLoading) return;
+    if (writePostLoading) return;
     if (options.title.trim() === '') {
       toast.error('제목이 비어있습니다.');
       return;
@@ -99,27 +99,34 @@ const PublishActionButtonsContainer: React.FC<
       const response = await writePost({
         variables: variables,
       });
+
       if (!response || !response.data) return;
       const { user, url_slug } = response.data.writePost;
       await client.resetStore();
       history.push(`/@${user.username}/${url_slug}`);
-    } catch (e) {
+    } catch (error) {
+      console.log('writePost error', error);
       toast.error('포스트 작성 실패');
     }
   };
 
   const onEdit = async () => {
     if (editPostLoading) return;
-    const response = await editPost({
-      variables: {
-        id: options.postId,
-        ...variables,
-      },
-    });
-    if (!response || !response.data) return;
-    const { user, url_slug } = response.data.editPost;
-    await client.resetStore();
-    history.push(`/@${user.username}/${url_slug}`);
+    try {
+      const response = await editPost({
+        variables: {
+          id: options.postId,
+          ...variables,
+        },
+      });
+      if (!response || !response.data) return;
+      const { user, url_slug } = response.data.editPost;
+      await client.resetStore();
+      history.push(`/@${user.username}/${url_slug}`);
+    } catch (error) {
+      console.log('editPost error', error);
+      toast.error('포스트 수정 실패');
+    }
   };
 
   return (
