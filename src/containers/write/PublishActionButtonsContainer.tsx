@@ -59,12 +59,16 @@ const PublishActionButtonsContainer: React.FC<
 
   const uncachedClient = useUncachedApolloClient();
 
-  const [writePost] = useMutation<WritePostResponse>(WRITE_POST, {
-    client: uncachedClient,
-  });
-  const [editPost] = useMutation<EditPostResult>(EDIT_POST, {
-    client: uncachedClient,
-  });
+  const [writePost, { loading: writePostLoading }] =
+    useMutation<WritePostResponse>(WRITE_POST, {
+      client: uncachedClient,
+    });
+  const [editPost, { loading: editPostLoading }] = useMutation<EditPostResult>(
+    EDIT_POST,
+    {
+      client: uncachedClient,
+    },
+  );
 
   const variables = {
     title: options.title,
@@ -86,6 +90,7 @@ const PublishActionButtonsContainer: React.FC<
   };
 
   const onPublish = async () => {
+    if (writePostLoading || editPostLoading) return;
     if (options.title.trim() === '') {
       toast.error('제목이 비어있습니다.');
       return;
@@ -104,6 +109,7 @@ const PublishActionButtonsContainer: React.FC<
   };
 
   const onEdit = async () => {
+    if (editPostLoading) return;
     const response = await editPost({
       variables: {
         id: options.postId,

@@ -47,9 +47,10 @@ const PublishPreviewContainer: React.FC<PublishPreviewContainerProps> = ({
     [changeDescription],
   );
   const uncachedClient = useUncachedApolloClient();
-  const [writePost] = useMutation<WritePostResponse>(WRITE_POST, {
-    client: uncachedClient,
-  });
+  const [writePost, { loading: writePostLoading }] =
+    useMutation<WritePostResponse>(WRITE_POST, {
+      client: uncachedClient,
+    });
   const [upload, file] = useUpload();
   const { upload: cfUpload, image } = useCFUpload();
 
@@ -103,6 +104,7 @@ const PublishPreviewContainer: React.FC<PublishPreviewContainerProps> = ({
 
   const uploadWithPostId = useCallback(
     async (file: File) => {
+      if (!file) return;
       const id = await getValidPostId();
       if (!id) return;
       cfUpload(file, { type: 'post', refId: id });
@@ -112,9 +114,10 @@ const PublishPreviewContainer: React.FC<PublishPreviewContainerProps> = ({
 
   useEffect(() => {
     if (!file) return;
+    if (writePostLoading) return;
     uploadWithPostId(file);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [file]);
+  }, [file, writePostLoading]);
 
   useEffect(() => {
     if (!image) return;

@@ -61,17 +61,21 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     tags,
   } = useSelector((state: RootState) => state.write);
   const uncachedClient = useUncachedApolloClient();
-  const [writePost] = useMutation<WritePostResponse>(WRITE_POST, {
-    client: uncachedClient,
-  });
+  const [writePost, { loading: writePostLoading }] =
+    useMutation<WritePostResponse>(WRITE_POST, {
+      client: uncachedClient,
+    });
 
   const bodyRef = useRef(initialBody);
   const titleRef = useRef(title);
   const [createPostHistory] =
     useMutation<CreatePostHistoryResponse>(CREATE_POST_HISTORY);
-  const [editPost] = useMutation<EditPostResult>(EDIT_POST, {
-    client: uncachedClient,
-  });
+  const [editPost, { loading: editPostLoading }] = useMutation<EditPostResult>(
+    EDIT_POST,
+    {
+      client: uncachedClient,
+    },
+  );
 
   const [lastSavedData, setLastSavedData] = useState({
     title: initialTitle,
@@ -148,6 +152,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
 
   const onTempSave = useCallback(
     async (notify?: boolean) => {
+      if (writePostLoading || editPostLoading) return;
       if (!title || !markdown) {
         toast.error('제목 또는 내용이 비어있습니다.');
         return;
@@ -233,6 +238,8 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       tags,
       title,
       writePost,
+      writePostLoading,
+      editPostLoading,
     ],
   );
 
@@ -244,6 +251,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
   const uploadWithPostId = useCallback(
     async (file: File) => {
       if (!file) return;
+      if (writePostLoading || editPostLoading) return;
       let id = postIdRef.current;
       if (!id) {
         const title = titleRef.current || 'Temp Title';
@@ -278,7 +286,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
         toast.error('이미지 업로드 실패! 잠시 후 다시 시도하세요.');
       });
     },
-    [cfUpload, writePost, dispatch, history],
+    [cfUpload, writePost, dispatch, history, writePostLoading, editPostLoading],
   );
 
   const onDragDropUpload = useCallback(
