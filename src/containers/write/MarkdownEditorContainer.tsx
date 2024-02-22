@@ -180,7 +180,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
           },
         });
 
-        if (!response || !response.data) return;
+        if (!response.data?.writePost) return;
         const { id } = response.data.writePost;
         dispatch(setWritePostId(id));
         history.replace(`/write?id=${id}`);
@@ -277,7 +277,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
           },
         });
 
-        if (!response || !response.data) return;
+        if (!response.data?.writePost) return;
         id = response.data.writePost.id;
         dispatch(setWritePostId(id));
         history.replace(`/write?id=${id}`);

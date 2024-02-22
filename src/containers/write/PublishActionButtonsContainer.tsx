@@ -100,12 +100,15 @@ const PublishActionButtonsContainer: React.FC<
         variables: variables,
       });
 
-      if (!response || !response.data) return;
+      if (!response.data?.writePost) {
+        toast.error('포스트 작성 실패');
+        return;
+      }
+
       const { user, url_slug } = response.data.writePost;
       await client.resetStore();
       history.push(`/@${user.username}/${url_slug}`);
     } catch (error) {
-      console.log('writePost error', error);
       toast.error('포스트 작성 실패');
     }
   };
@@ -119,12 +122,16 @@ const PublishActionButtonsContainer: React.FC<
           ...variables,
         },
       });
-      if (!response || !response.data) return;
+
+      if (!response.data?.editPost) {
+        toast.error('포스트 수정 실패');
+        return;
+      }
+
       const { user, url_slug } = response.data.editPost;
       await client.resetStore();
       history.push(`/@${user.username}/${url_slug}`);
     } catch (error) {
-      console.log('editPost error', error);
       toast.error('포스트 수정 실패');
     }
   };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FormEvent } from 'react';
+import React, { useState, useEffect, FormEvent, useRef } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { themedPalette } from '../../lib/styles/themes';
 import OutsideClickHandler from 'react-outside-click-handler';
@@ -110,8 +110,8 @@ const PublishSeriesCreate: React.FC<PublishSeriesCreateProps> = ({
     urlSlug: '',
   });
   const [editing, setEditing] = useState<boolean>(false);
-
   const [defaultUrlSlug, setDefaultUrlSlug] = useState('');
+  const hideTimeoutId = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
@@ -137,14 +137,32 @@ const PublishSeriesCreate: React.FC<PublishSeriesCreateProps> = ({
     setEditing(true);
   }, [form.urlSlug]);
 
+  useEffect(() => {
+    return () => {
+      if (hideTimeoutId.current) {
+        clearTimeout(hideTimeoutId.current);
+      }
+    };
+  }, [hideTimeoutId]);
+
   const onHide = () => {
     setDisappear(true);
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       setOpen(false);
       setDisappear(false);
       setShowOpenBlock(false);
     }, 125);
+    const timeoutId = timeout;
+    hideTimeoutId.current = timeoutId;
   };
+
+  useEffect(() => {
+    return () => {
+      if (hideTimeoutId.current) {
+        clearTimeout(hideTimeoutId.current);
+      }
+    };
+  }, []);
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
