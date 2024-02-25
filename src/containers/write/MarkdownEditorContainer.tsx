@@ -214,6 +214,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       if (shallowEqual(lastSavedData, { title, body: markdown })) {
         return;
       }
+
       if (postId) {
         await createPostHistory({
           variables: {
@@ -224,6 +225,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
           },
         });
       }
+
       setLastSavedData({
         title,
         body: markdown,
@@ -255,7 +257,6 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
   const uploadWithPostId = useCallback(
     async (file: File) => {
       if (!file) return;
-      if (writePostLoading || editPostLoading) return;
       let id = postIdRef.current;
       if (!id) {
         const title = titleRef.current || 'Temp Title';
@@ -291,7 +292,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
         toast.error('이미지 업로드 실패! 잠시 후 다시 시도하세요.');
       });
     },
-    [cfUpload, writePost, dispatch, history, writePostLoading, editPostLoading],
+    [cfUpload, writePost, dispatch, history],
   );
 
   const onDragDropUpload = useCallback(

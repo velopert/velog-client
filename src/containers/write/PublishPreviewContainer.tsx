@@ -114,7 +114,6 @@ const PublishPreviewContainer: React.FC<PublishPreviewContainerProps> = ({
 
   useEffect(() => {
     if (!file) return;
-    if (writePostLoading) return;
     uploadWithPostId(file);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [file, writePostLoading]);
