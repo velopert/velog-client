@@ -90,11 +90,16 @@ const PublishActionButtonsContainer: React.FC<
   };
 
   const onPublish = async () => {
-    if (writePostLoading) return;
+    if (writePostLoading) {
+      toast.info('포스트 작성 중입니다.');
+      return;
+    }
+
     if (options.title.trim() === '') {
       toast.error('제목이 비어있습니다.');
       return;
     }
+
     try {
       const response = await writePost({
         variables: variables,
@@ -114,7 +119,16 @@ const PublishActionButtonsContainer: React.FC<
   };
 
   const onEdit = async () => {
-    if (editPostLoading) return;
+    if (editPostLoading) {
+      toast.info('포스트 수정 중입니다.');
+      return;
+    }
+
+    if (options.title.trim() === '') {
+      toast.error('제목이 비어있습니다.');
+      return;
+    }
+
     try {
       const response = await editPost({
         variables: {

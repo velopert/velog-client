@@ -230,7 +230,6 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
         title,
         body: markdown,
       });
-      notifySuccess();
     },
     [
       createPostHistory,
