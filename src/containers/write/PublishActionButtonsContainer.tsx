@@ -114,6 +114,7 @@ const PublishActionButtonsContainer: React.FC<
       await client.resetStore();
       history.push(`/@${user.username}/${url_slug}`);
     } catch (error) {
+      console.log('write post failed', error);
       toast.error('포스트 작성 실패');
     }
   };
@@ -146,6 +147,7 @@ const PublishActionButtonsContainer: React.FC<
       await client.resetStore();
       history.push(`/@${user.username}/${url_slug}`);
     } catch (error) {
+      console.log('edit post failed', error);
       toast.error('포스트 수정 실패');
     }
   };

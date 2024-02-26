@@ -132,6 +132,7 @@ const ActiveEditor: React.FC<ActiveEditorProps> = () => {
   }, [dispatch, lastPostHistory, post]);
 
   if (
+    id &&
     !newPost &&
     ((!readPostForEdit.loading && post === null) ||
       (post && post.user.id !== userId))
