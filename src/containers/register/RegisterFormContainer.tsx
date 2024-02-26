@@ -76,7 +76,7 @@ const RegisterFormContainer: React.FC<RegisterFormContainerProps> = ({
       },
       username: (text: string) => {
         if (!/^[a-z0-9-_]{3,16}$/.test(text)) {
-          return '아이디는 3~16자의 알파벳,숫자,혹은 - _ 으로 이루어져야 합니다.';
+          return '아이디는 3~16자의 알파벳 소문자,숫자,혹은 - _ 으로 이루어져야 합니다.';
         }
       },
       shortBio: (text: string) => {
