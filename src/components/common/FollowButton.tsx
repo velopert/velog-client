@@ -139,7 +139,7 @@ const FollowButtonBlock = styled.div<{
   height: 32px;
   font-size: 16px;
 
-  ${media.small} {
+  ${media.medium} {
     width: 80px;
     height: 24px;
     font-size: 14px;
