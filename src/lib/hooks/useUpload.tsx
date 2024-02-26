@@ -11,8 +11,6 @@ const useUpload = () => {
       input.type = 'file';
       input.onchange = () => {
         clearTimeout(timeout);
-        console.log('onchange');
-        console.log(input.files);
         if (!input.files) return reject();
         const file = input.files[0];
         setFile(file);

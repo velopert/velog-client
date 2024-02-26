@@ -37,7 +37,7 @@ const HeaderLogo: React.FC<HeaderLogoProps> = ({
         <VelogIcon />
       </VelogLogoLink>
       <VLink to={velogPath} className="user-logo">
-        {userLogo.title || createFallbackTitle(username)}
+        <span>{userLogo.title || createFallbackTitle(username)}</span>
       </VLink>
     </HeaderLogoBlock>
   );
@@ -69,7 +69,7 @@ const HeaderLogoBlock = styled.div`
 
   .user-logo {
     display: block;
-    max-width: calc(100vw - 200px);
+    max-width: calc(100vw - 250px);
     ${ellipsis};
   }
 `;

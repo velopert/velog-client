@@ -528,6 +528,7 @@ export const WRITE_POST = gql`
     $thumbnail: String
     $meta: JSON
     $series_id: ID
+    $token: String
   ) {
     writePost(
       title: $title
@@ -540,6 +541,7 @@ export const WRITE_POST = gql`
       thumbnail: $thumbnail
       meta: $meta
       series_id: $series_id
+      token: $token
     ) {
       id
       user {
@@ -575,6 +577,7 @@ export const EDIT_POST = gql`
     $thumbnail: String
     $meta: JSON
     $series_id: ID
+    $token: String
   ) {
     editPost(
       id: $id
@@ -588,74 +591,27 @@ export const EDIT_POST = gql`
       thumbnail: $thumbnail
       meta: $meta
       series_id: $series_id
+      token: $token
     ) {
       id
-      title
-      released_at
-      updated_at
-      tags
-      body
-      short_description
-      is_markdown
-      is_private
-      is_temp
-      thumbnail
-      comments_count
-      url_slug
       user {
         id
         username
-        profile {
-          id
-          display_name
-          thumbnail
-          short_bio
-        }
-        velog_config {
-          title
-        }
       }
-      comments {
-        id
-        user {
-          id
-          username
-          profile {
-            id
-            thumbnail
-            display_name
-          }
-        }
-        text
-        replies_count
-        level
-        created_at
-        level
-        deleted
-      }
-      series {
-        id
-        name
-        url_slug
-        series_posts {
-          id
-          post {
-            id
-            title
-            url_slug
-            user {
-              id
-              username
-            }
-          }
-        }
-      }
+      url_slug
     }
   }
 `;
 
 export type EditPostResult = {
-  editPost: SinglePost;
+  editPost: {
+    id: string;
+    user: {
+      id: string;
+      username: string;
+    };
+    url_slug: string;
+  };
 };
 
 export const WRITE_COMMENT = gql`

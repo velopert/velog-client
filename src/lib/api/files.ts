@@ -35,9 +35,7 @@ export async function uploadImage(
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-      onUploadProgress(e) {
-        console.log(e);
-      },
+      onUploadProgress(event) {},
     },
   );
 

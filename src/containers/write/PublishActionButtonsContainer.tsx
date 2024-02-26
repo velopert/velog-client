@@ -17,6 +17,7 @@ import { setHeadingId } from '../../lib/heading';
 import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
 import { useUncachedApolloClient } from '../../lib/graphql/UncachedApolloContext';
+import useTurnstile from '../../lib/hooks/useTurnstile';
 
 type PublishActionButtonsContainerProps = {};
 
@@ -25,6 +26,10 @@ const PublishActionButtonsContainer: React.FC<
 > = () => {
   const history = useHistory();
   const client = useApolloClient();
+  const user = useSelector((state: RootState) => state.core.user);
+
+  const isTurnstileEnabled = !!user && !user.is_trusted;
+  const { isLoading, token } = useTurnstile(isTurnstileEnabled);
 
   const options = useSelector((state: RootState) =>
     pick(
@@ -54,12 +59,16 @@ const PublishActionButtonsContainer: React.FC<
 
   const uncachedClient = useUncachedApolloClient();
 
-  const [writePost] = useMutation<WritePostResponse>(WRITE_POST, {
-    client: uncachedClient,
-  });
-  const [editPost] = useMutation<EditPostResult>(EDIT_POST, {
-    client: uncachedClient,
-  });
+  const [writePost, { loading: writePostLoading }] =
+    useMutation<WritePostResponse>(WRITE_POST, {
+      client: uncachedClient,
+    });
+  const [editPost, { loading: editPostLoading }] = useMutation<EditPostResult>(
+    EDIT_POST,
+    {
+      client: uncachedClient,
+    },
+  );
 
   const variables = {
     title: options.title,
@@ -77,37 +86,70 @@ const PublishActionButtonsContainer: React.FC<
       short_description: options.description,
     },
     series_id: safe(() => options.selectedSeries!.id),
+    token,
   };
 
   const onPublish = async () => {
+    if (writePostLoading) {
+      toast.info('포스트 작성 중입니다.');
+      return;
+    }
+
     if (options.title.trim() === '') {
       toast.error('제목이 비어있습니다.');
       return;
     }
+
     try {
       const response = await writePost({
         variables: variables,
       });
-      if (!response || !response.data) return;
+
+      if (!response.data?.writePost) {
+        toast.error('포스트 작성 실패');
+        return;
+      }
+
       const { user, url_slug } = response.data.writePost;
       await client.resetStore();
       history.push(`/@${user.username}/${url_slug}`);
-    } catch (e) {
+    } catch (error) {
+      console.log('write post failed', error);
       toast.error('포스트 작성 실패');
     }
   };
 
   const onEdit = async () => {
-    const response = await editPost({
-      variables: {
-        id: options.postId,
-        ...variables,
-      },
-    });
-    if (!response || !response.data) return;
-    const { user, url_slug } = response.data.editPost;
-    await client.resetStore();
-    history.push(`/@${user.username}/${url_slug}`);
+    if (editPostLoading) {
+      toast.info('포스트 수정 중입니다.');
+      return;
+    }
+
+    if (options.title.trim() === '') {
+      toast.error('제목이 비어있습니다.');
+      return;
+    }
+
+    try {
+      const response = await editPost({
+        variables: {
+          id: options.postId,
+          ...variables,
+        },
+      });
+
+      if (!response.data?.editPost) {
+        toast.error('포스트 수정 실패');
+        return;
+      }
+
+      const { user, url_slug } = response.data.editPost;
+      await client.resetStore();
+      history.push(`/@${user.username}/${url_slug}`);
+    } catch (error) {
+      console.log('edit post failed', error);
+      toast.error('포스트 수정 실패');
+    }
   };
 
   return (
@@ -115,6 +157,7 @@ const PublishActionButtonsContainer: React.FC<
       onCancel={onCancel}
       onPublish={options.postId ? onEdit : onPublish}
       edit={!!options.postId && !options.isTemp}
+      isLoading={isLoading}
     />
   );
 };

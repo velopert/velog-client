@@ -29,6 +29,7 @@ export type User = {
   profile: UserProfile;
   velogConfig: VelogConfig | null;
   is_followed: boolean;
+  is_trusted: boolean;
 };
 
 export const GET_CURRENT_USER = gql`
@@ -37,6 +38,7 @@ export const GET_CURRENT_USER = gql`
       id
       username
       email
+      is_trusted
       profile {
         id
         thumbnail
@@ -64,6 +66,7 @@ export type CurrentUser = {
     display_name: string;
   };
   email: string;
+  is_trusted: boolean;
 };
 
 export const GET_USER_PROFILE = gql`

@@ -61,17 +61,21 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     tags,
   } = useSelector((state: RootState) => state.write);
   const uncachedClient = useUncachedApolloClient();
-  const [writePost] = useMutation<WritePostResponse>(WRITE_POST, {
-    client: uncachedClient,
-  });
+  const [writePost, { loading: writePostLoading }] =
+    useMutation<WritePostResponse>(WRITE_POST, {
+      client: uncachedClient,
+    });
 
   const bodyRef = useRef(initialBody);
   const titleRef = useRef(title);
   const [createPostHistory] =
     useMutation<CreatePostHistoryResponse>(CREATE_POST_HISTORY);
-  const [editPost] = useMutation<EditPostResult>(EDIT_POST, {
-    client: uncachedClient,
-  });
+  const [editPost, { loading: editPostLoading }] = useMutation<EditPostResult>(
+    EDIT_POST,
+    {
+      client: uncachedClient,
+    },
+  );
 
   const [lastSavedData, setLastSavedData] = useState({
     title: initialTitle,
@@ -148,6 +152,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
 
   const onTempSave = useCallback(
     async (notify?: boolean) => {
+      if (writePostLoading || editPostLoading) return;
       if (!title || !markdown) {
         toast.error('제목 또는 내용이 비어있습니다.');
         return;
@@ -171,14 +176,17 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
             thumbnail: null,
             meta: {},
             series_id: null,
+            token: null,
           },
         });
-        if (!response || !response.data) return;
+
+        if (!response.data?.writePost) return;
         const { id } = response.data.writePost;
         dispatch(setWritePostId(id));
         history.replace(`/write?id=${id}`);
         notifySuccess();
       }
+
       // tempsaving unreleased post:
       if (isTemp) {
         await editPost({
@@ -194,6 +202,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
             meta: {},
             series_id: null,
             tags,
+            token: null,
           },
         });
         notifySuccess();
@@ -205,19 +214,22 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       if (shallowEqual(lastSavedData, { title, body: markdown })) {
         return;
       }
-      await createPostHistory({
-        variables: {
-          post_id: postId,
-          title,
-          body: markdown,
-          is_markdown: true,
-        },
-      });
+
+      if (postId) {
+        await createPostHistory({
+          variables: {
+            post_id: postId,
+            title,
+            body: markdown,
+            is_markdown: true,
+          },
+        });
+      }
+
       setLastSavedData({
         title,
         body: markdown,
       });
-      notifySuccess();
     },
     [
       createPostHistory,
@@ -231,6 +243,8 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       tags,
       title,
       writePost,
+      writePostLoading,
+      editPostLoading,
     ],
   );
 
@@ -259,9 +273,11 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
             thumbnail: null,
             meta: {},
             series_id: null,
+            token: null,
           },
         });
-        if (!response || !response.data) return;
+
+        if (!response.data?.writePost) return;
         id = response.data.writePost.id;
         dispatch(setWritePostId(id));
         history.replace(`/write?id=${id}`);

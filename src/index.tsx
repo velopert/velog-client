@@ -17,10 +17,13 @@ import * as Sentry from '@sentry/browser';
 import { HelmetProvider } from 'react-helmet-async';
 import darkMode from './modules/darkMode';
 import { UncachedApolloProvider } from './lib/graphql/UncachedApolloContext';
+import { ssrEnabled } from './lib/utils';
 
-Sentry.init({
-  dsn: 'https://99d0ac3ca0f64b4d8709e385e7692893@sentry.io/1886813',
-});
+if (process.env.NODE_ENV === 'production') {
+  Sentry.init({
+    dsn: 'https://99d0ac3ca0f64b4d8709e385e7692893@sentry.io/1886813',
+  });
+}
 
 const store = createStore(
   rootReducer,
@@ -45,8 +48,18 @@ const loadTheme = () => {
   document.body.dataset.theme = theme;
 };
 
+const loadTurnstile = () => {
+  if (ssrEnabled) return;
+  (window as any).onAppReady = function () {
+    (window as any).isTurnstileReady = true;
+    const event = new CustomEvent('isTurnstileReadyChange');
+    window.dispatchEvent(event);
+  };
+};
+
 loadUser();
 loadTheme();
+loadTurnstile();
 
 if (process.env.NODE_ENV === 'production') {
   loadableReady(() => {
