@@ -90,6 +90,10 @@ function Html({
             gtag('config', 'G-8D0MD2S4PK');`,
           }}
         ></script>
+        <script
+          defer
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onAppReady"
+        ></script>
       </head>
       <body data-theme={theme}>
         <div id="root" dangerouslySetInnerHTML={{ __html: content }}></div>
