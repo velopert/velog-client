@@ -32,6 +32,7 @@ const PostHeadBlock = styled(VelogResponsive)`
     color: ${themedPalette.text1};
     margin-bottom: 2rem;
     word-break: keep-all;
+    overflow-wrap: break-word;
     transition: color 0.125s ease-in;
   }
 
