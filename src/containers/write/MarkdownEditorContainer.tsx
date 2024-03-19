@@ -188,7 +188,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       }
 
       // tempsaving unreleased post:
-      if (isTemp) {
+      if (isTemp && postId) {
         await editPost({
           variables: {
             id: postId,
