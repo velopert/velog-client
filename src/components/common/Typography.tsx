@@ -9,8 +9,8 @@ const TypographyBlock = styled.div`
   transition: color 0.125s ease-in;
   line-height: 1.7;
   letter-spacing: -0.004em;
-  word-break: keep-all;
-  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
   ul,
   ol,
   p {
