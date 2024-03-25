@@ -92,7 +92,7 @@
     "jest-resolve": "24.9.0",
     "jest-watch-typeahead": "0.4.2",
     "just-detect-adblock": "^1.1.0",
-    "katex": "^0.11.1",
+    "katex": "^0.16.10",
     "koa": "^2.11.0",
     "koa-better-http-proxy": "^0.2.4",
     "koa-bodyparser": "^4.2.1",
