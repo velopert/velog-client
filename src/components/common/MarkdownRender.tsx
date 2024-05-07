@@ -170,7 +170,7 @@ function filter(html: string) {
     ],
     allowedAttributes: {
       a: ['href', 'name', 'target'],
-      img: ['src'],
+      img: ['src', 'alt', 'width', 'height'],
       iframe: ['src', 'allow', 'allowfullscreen', 'scrolling', 'class'],
       '*': ['class', 'id', 'aria-hidden'],
       span: ['style'],
