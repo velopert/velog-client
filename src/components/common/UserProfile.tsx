@@ -176,6 +176,8 @@ const UserProfile: React.FC<UserProfileProps> = ({
 
   const velogUrl = `/@${username}/posts`;
 
+  const getSocialId = (link: string) => link.split('/').reverse()[0];
+
   return (
     <UserProfileBlock className={className} style={style}>
       <Section>
@@ -201,7 +203,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
       <ProfileIcons>
         {github && (
           <a
-            href={`https://github.com/${github}`}
+            href={`https://github.com/${getSocialId(github)}`}
             target="_blank"
             rel="noopener noreferrer"
             data-testid="github"
@@ -211,7 +213,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
         )}
         {twitter && (
           <a
-            href={`https://twitter.com/${twitter}`}
+            href={`https://twitter.com/${getSocialId(twitter)}`}
             target="_blank"
             rel="noopener noreferrer"
             data-testid="twitter"
@@ -221,7 +223,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
         )}
         {facebook && (
           <a
-            href={`https://facebook.com/${facebook}`}
+            href={`https://facebook.com/${getSocialId(facebook)}`}
             target="_blank"
             rel="noopener noreferrer"
             data-testid="facebook"
