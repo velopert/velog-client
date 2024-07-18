@@ -20,15 +20,17 @@ const PostCommentsList: React.FC<PostCommentsListProps> = ({
 }) => {
   return (
     <PostCommentsListBlock>
-      {comments.map((comment) => (
-        <PostCommentItem
-          comment={comment}
-          key={comment.id}
-          ownComment={currentUserId === (comment.user && comment.user.id)}
-          onRemove={onRemove}
-          ownPost={ownPost}
-        />
-      ))}
+      {comments
+        .filter((comment) => !!comment.user?.profile)
+        .map((comment) => (
+          <PostCommentItem
+            comment={comment}
+            key={comment.id}
+            ownComment={currentUserId === (comment.user && comment.user.id)}
+            onRemove={onRemove}
+            ownPost={ownPost}
+          />
+        ))}
     </PostCommentsListBlock>
   );
 };
