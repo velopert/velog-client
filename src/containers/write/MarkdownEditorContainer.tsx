@@ -189,6 +189,10 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
 
       // tempsaving unreleased post:
       if (isTemp && postId) {
+        setLastSavedData({
+          title,
+          body: markdown,
+        });
         await editPost({
           variables: {
             id: postId,
