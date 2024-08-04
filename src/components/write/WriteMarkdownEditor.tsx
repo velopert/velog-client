@@ -1121,7 +1121,7 @@ const checker = {
   },
   codesandbox: (text: string) => {
     const regex =
-      /^<iframe.*src="https:\/\/codesandbox.io\/embed\/(.*?)".*<\/iframe>$/s;
+      /^<iframe[\s\S]*src="https:\/\/codesandbox.io\/embed\/(.*?)"[\s\S]*<\/iframe>$/;
     const result = regex.exec(text);
     if (!result) return null;
     return result[1];
