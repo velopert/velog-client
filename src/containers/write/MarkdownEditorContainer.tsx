@@ -150,7 +150,10 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
 
   const onTempSave = useCallback(
     async (notify?: boolean) => {
-      console.log('onTempSave');
+      const notifySuccess = () => {
+        if (!notify) return;
+        toast.success('포스트가 임시저장되었습니다.');
+      };
 
       if (isWritePostLoading || isEditPostLoading) return;
       if (!title || !markdown) {
@@ -158,13 +161,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
         return;
       }
 
-      const notifySuccess = () => {
-        if (!notify) return;
-        toast.success('포스트가 임시저장되었습니다.');
-      };
-
       if (!postId) {
-        console.log('writePost');
         const response = await writePost({
           variables: {
             title,
@@ -189,7 +186,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       }
 
       // tempsaving unreleased post:
-      if (isTemp && postId) {
+      if (postId) {
         await editPost({
           variables: {
             id: postId,
@@ -282,6 +279,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
         dispatch(setWritePostId(id));
         history.replace(`/write?id=${id}`);
       }
+    
       if (!id) return;
 
       const url = URL.createObjectURL(file);
@@ -312,7 +310,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
 
     const timeoutId = setTimeout(() => {
       if (!postId && !title && markdown.length < 30) return;
-      onTempSave(true);
+      onTempSave(false);
     }, 1000 * 10);
 
     return () => {
