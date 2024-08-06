@@ -279,7 +279,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
         dispatch(setWritePostId(id));
         history.replace(`/write?id=${id}`);
       }
-    
+
       if (!id) return;
 
       const url = URL.createObjectURL(file);
@@ -306,16 +306,16 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
 
   useEffect(() => {
     const changed = !shallowEqual(lastSavedData, { title, body: markdown });
-    if (!changed) return;
+    if (changed) {
+      const timeoutId = setTimeout(() => {
+        if (!postId && !title && markdown.length < 30) return;
+        onTempSave(true);
+      }, 10 * 1000);
 
-    const timeoutId = setTimeout(() => {
-      if (!postId && !title && markdown.length < 30) return;
-      onTempSave(false);
-    }, 1000 * 10);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
   }, [title, postId, onTempSave, lastSavedData, markdown]);
 
   useSaveHotKey(() => onTempSave(true));
