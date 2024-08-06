@@ -1129,7 +1129,6 @@ const checker = {
   codepen: (text: string) => {
     const regex = /^<iframe.*src="https:\/\/codepen.io\/(.*?)".*/;
     const result = regex.exec(text);
-    console.log(result);
     if (!result) return null;
     return result[1];
   },

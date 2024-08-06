@@ -61,7 +61,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     tags,
   } = useSelector((state: RootState) => state.write);
   const uncachedClient = useUncachedApolloClient();
-  const [writePost, { loading: writePostLoading }] =
+  const [writePost, { loading: isWritePostLoading }] =
     useMutation<WritePostResponse>(WRITE_POST, {
       client: uncachedClient,
     });
@@ -70,12 +70,10 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
   const titleRef = useRef(title);
   const [createPostHistory] =
     useMutation<CreatePostHistoryResponse>(CREATE_POST_HISTORY);
-  const [editPost, { loading: editPostLoading }] = useMutation<EditPostResult>(
-    EDIT_POST,
-    {
+  const [editPost, { loading: isEditPostLoading }] =
+    useMutation<EditPostResult>(EDIT_POST, {
       client: uncachedClient,
-    },
-  );
+    });
 
   const [lastSavedData, setLastSavedData] = useState({
     title: initialTitle,
@@ -152,7 +150,9 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
 
   const onTempSave = useCallback(
     async (notify?: boolean) => {
-      if (writePostLoading || editPostLoading) return;
+      console.log('onTempSave');
+
+      if (isWritePostLoading || isEditPostLoading) return;
       if (!title || !markdown) {
         toast.error('제목 또는 내용이 비어있습니다.');
         return;
@@ -164,6 +164,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       };
 
       if (!postId) {
+        console.log('writePost');
         const response = await writePost({
           variables: {
             title,
@@ -206,7 +207,6 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
           },
         });
         notifySuccess();
-        return;
       }
 
       // tempsaving released post:
@@ -243,8 +243,8 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       tags,
       title,
       writePost,
-      writePostLoading,
-      editPostLoading,
+      isWritePostLoading,
+      isEditPostLoading,
     ],
   );
 
@@ -308,16 +308,16 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
 
   useEffect(() => {
     const changed = !shallowEqual(lastSavedData, { title, body: markdown });
-    if (changed) {
-      const timeoutId = setTimeout(() => {
-        if (!postId && !title && markdown.length < 30) return;
-        onTempSave(true);
-      }, 10 * 1000);
+    if (!changed) return;
 
-      return () => {
-        clearTimeout(timeoutId);
-      };
-    }
+    const timeoutId = setTimeout(() => {
+      if (!postId && !title && markdown.length < 30) return;
+      onTempSave(true);
+    }, 1000 * 10);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [title, postId, onTempSave, lastSavedData, markdown]);
 
   useSaveHotKey(() => onTempSave(true));
