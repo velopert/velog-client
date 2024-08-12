@@ -59,15 +59,17 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
           id: data?.series?.id,
         },
       });
+
       await client.resetStore();
-      toast.success('시리즈가 삭제되었습니다.');
-      // history.replace(`/@${username}/series/`);
-      window.location.href = `${process.env
+
+      const redirect = `${process.env
         .REACT_APP_CLIENT_V3_HOST!}/@${username}/series`;
+      window.location.href = redirect;
     } catch (e) {
       toast.error('시리즈 삭제 실패');
     }
   };
+
   const onCancelRemove = () => {
     setAskRemove(false);
   };
