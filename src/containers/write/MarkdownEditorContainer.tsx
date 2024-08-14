@@ -60,6 +60,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     initialTitle,
     tags,
     isPrivate,
+    selectedSeries,
   } = useSelector((state: RootState) => state.write);
   const uncachedClient = useUncachedApolloClient();
   const [writePost, { loading: isWritePostLoading }] =
@@ -199,7 +200,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
             url_slug: escapeForUrl(title),
             thumbnail: null,
             meta: {},
-            series_id: null,
+            series_id: selectedSeries?.id || null,
             tags,
             token: null,
           },
