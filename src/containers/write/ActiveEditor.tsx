@@ -77,7 +77,6 @@ const ActiveEditor: React.FC<ActiveEditorProps> = () => {
   useEffect(() => {
     if (!post) return;
     if (initialized.current) return;
-    console.log('post.series', post.series);
     dispatch(
       prepareEdit({
         id: post.id,
