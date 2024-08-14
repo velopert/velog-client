@@ -59,6 +59,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
     initialBody,
     initialTitle,
     tags,
+    isPrivate,
   } = useSelector((state: RootState) => state.write);
   const uncachedClient = useUncachedApolloClient();
   const [writePost, { loading: isWritePostLoading }] =
@@ -193,8 +194,8 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
             title,
             body: markdown,
             is_markdown: true,
-            is_temp: true,
-            is_private: false,
+            is_temp: isTemp,
+            is_private: isPrivate,
             url_slug: escapeForUrl(title),
             thumbnail: null,
             meta: {},
@@ -233,7 +234,6 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       dispatch,
       editPost,
       history,
-      isTemp,
       lastSavedData,
       markdown,
       postId,
@@ -242,6 +242,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       writePost,
       isWritePostLoading,
       isEditPostLoading,
+      isTemp,
     ],
   );
 
@@ -310,7 +311,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       const timeoutId = setTimeout(() => {
         if (!postId && !title && markdown.length < 30) return;
         onTempSave(true);
-      }, 10 * 1000);
+      }, 1000 * 10);
 
       return () => {
         clearTimeout(timeoutId);
