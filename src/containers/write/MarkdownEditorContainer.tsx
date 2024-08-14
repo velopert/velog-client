@@ -244,6 +244,8 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       isWritePostLoading,
       isEditPostLoading,
       isTemp,
+      isPrivate,
+      selectedSeries,
     ],
   );
 
