@@ -40,6 +40,7 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
   const user = useUser();
   const isOwnSeries = user && user.username === username;
   const [askRemove, setAskRemove] = useState(false);
+  const [isSkip, setIsSkip] = useState(false);
   const [removeSeries] = useMutation(REMOVE_SERIES);
   const { data } = useQuery<GetSeriesResponse>(GET_SERIES, {
     variables: {
@@ -47,6 +48,7 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
       url_slug: urlSlug,
     },
     fetchPolicy: 'cache-and-network',
+    skip: isSkip,
   });
 
   const client = useApolloClient();
@@ -54,6 +56,7 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
   const onAskRemove = () => setAskRemove(true);
   const onConfirmRemove = async () => {
     try {
+      setIsSkip(true);
       await removeSeries({
         variables: {
           id: data?.series?.id,
@@ -64,7 +67,10 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
 
       const redirect = `${process.env
         .REACT_APP_CLIENT_V3_HOST!}/@${username}/series`;
-      window.location.href = redirect;
+
+      setTimeout(() => {
+        window.location.href = redirect;
+      }, 100);
     } catch (e) {
       toast.error('시리즈 삭제 실패');
     }
