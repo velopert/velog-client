@@ -57,20 +57,28 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
   const onConfirmRemove = async () => {
     try {
       setIsSkip(true);
+      setAskRemove(false);
+
+      if (!data?.series?.id) {
+        throw new Error('Series ID is not available');
+      }
+
       await removeSeries({
         variables: {
-          id: data?.series?.id,
+          id: data.series.id,
         },
       });
 
       await client.resetStore();
 
-      const redirect = `${process.env
-        .REACT_APP_CLIENT_V3_HOST!}/@${username}/series`;
-
-      setTimeout(() => {
-        window.location.href = redirect;
-      }, 100);
+      toast.success('시리즈가 성공적으로 삭제되었습니다.', {
+        autoClose: 800,
+        onClose: () => {
+          const redirect = `${process.env
+            .REACT_APP_CLIENT_V3_HOST!}/@${username}/series`;
+          window.location.href = redirect;
+        },
+      });
     } catch (e) {
       toast.error('시리즈 삭제 실패');
     }
