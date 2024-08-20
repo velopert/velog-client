@@ -21,6 +21,7 @@ require('codemirror/mode/markdown/markdown');
 require('codemirror/mode/javascript/javascript');
 require('codemirror/mode/jsx/jsx');
 require('codemirror/addon/display/placeholder');
+require('codemirror/mode/dockerfile/dockerfile');
 
 export interface MarkdownEditorProps {
   onChangeMarkdown: (markdown: string) => void;
