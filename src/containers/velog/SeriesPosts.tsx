@@ -40,15 +40,15 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
   const user = useUser();
   const isOwnSeries = user && user.username === username;
   const [askRemove, setAskRemove] = useState(false);
-  const [removeSeries, { loading: isRemoveSeriesLoading }] =
-    useMutation(REMOVE_SERIES);
+  const [isSkip, setIsSkip] = useState(false);
+  const [removeSeries] = useMutation(REMOVE_SERIES);
   const { data } = useQuery<GetSeriesResponse>(GET_SERIES, {
     variables: {
       username,
       url_slug: urlSlug,
     },
     fetchPolicy: 'cache-and-network',
-    skip: isRemoveSeriesLoading,
+    skip: isSkip,
   });
 
   const client = useApolloClient();
@@ -56,6 +56,7 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
   const onAskRemove = () => setAskRemove(true);
   const onConfirmRemove = async () => {
     try {
+      setIsSkip(true);
       setAskRemove(false);
 
       if (!data?.series?.id) {
