@@ -81,6 +81,7 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
       });
     } catch (e) {
       toast.error('시리즈 삭제 실패');
+      console.error('Series deletion failed:', e);
     }
   };
 
