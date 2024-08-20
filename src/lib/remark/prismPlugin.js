@@ -28,6 +28,7 @@ import 'prismjs/components/prism-ruby.min';
 import 'prismjs/components/prism-rust.min';
 import 'prismjs/components/prism-yaml.min';
 import 'prismjs/components/prism-dart';
+import 'prismjs/components/prism-docker';
 
 import { ssrEnabled } from '../utils';
 
@@ -73,5 +74,5 @@ export default function attacher({ include, exclude } = {}) {
     //   'language-' + lang,
     // ];
   }
-  return ast => visit(ast, 'code', visitor);
+  return (ast) => visit(ast, 'code', visitor);
 }
