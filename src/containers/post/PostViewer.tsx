@@ -101,6 +101,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
   );
   const prefetched = useRef(false);
 
+  const [isRemoveLoading, setIsRemoveLoading] = useState(false);
   const [removePost] = useMutation(REMOVE_POST);
   const [postView] = useMutation(POST_VIEW);
   const [likePost, { loading: loadingLike }] = useMutation(LIKE_POST);
@@ -252,15 +253,27 @@ const PostViewer: React.FC<PostViewerProps> = ({
 
   const onRemove = async () => {
     if (!data || !data.post) return;
+    setIsRemoveLoading(true);
     try {
       await removePost({
         variables: {
           id: data.post.id,
         },
       });
-      history.push('/');
-      await client.resetStore();
-    } catch (e) {}
+
+      toast.success('게시글이 성공적으로 삭제되었습니다.', {
+        autoClose: 800,
+        onClose: () => {
+          const redirect = `${process.env
+            .REACT_APP_CLIENT_V3_HOST!}/@${username}/posts`;
+          window.location.href = redirect;
+        },
+      });
+    } catch (e) {
+      toast.error('게시글 삭제 실패');
+      console.error('Post deletion failed:', e);
+      setIsRemoveLoading(false);
+    }
   };
 
   if (error) {
@@ -377,7 +390,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
     }
   };
 
-  if (!data || !data.post) return <PostSkeleton />;
+  if (!data || !data.post || isRemoveLoading) return <PostSkeleton />;
 
   const { post } = data;
 

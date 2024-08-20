@@ -176,6 +176,7 @@ const PostHead: React.FC<PostHeadProps> = ({
     toggleAskRemove();
     onRemove();
   };
+
   return (
     <PostHeadBlock>
       <div className="head-wrapper">
