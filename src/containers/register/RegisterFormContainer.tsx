@@ -67,16 +67,16 @@ const RegisterFormContainer: React.FC<RegisterFormContainerProps> = ({
     // validate
     const validation = {
       displayName: (text: string) => {
-        if (text === '') {
+        if (text.trim() === '') {
           return '이름을 입력해주세요.';
         }
-        if (text.length > 45) {
+        if (text.trim().length > 45) {
           return '이름은 최대 45자까지 입력 할 수 있습니다.';
         }
       },
       username: (text: string) => {
         if (!/^[a-z0-9-_]{3,16}$/.test(text)) {
-          return '아이디는 3~16자의 알파벳 소문자,숫자,혹은 - _ 으로 이루어져야 합니다.';
+          return '사용자 ID는 3~16자의 알파벳 소문자,숫자,혹은 - _ 으로 이루어져야 합니다.';
         }
       },
       shortBio: (text: string) => {
