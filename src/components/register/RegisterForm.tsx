@@ -103,8 +103,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
       <LabelInput
         name="displayName"
         onChange={onChange}
-        label="이름"
-        placeholder="이름을 입력하세요"
+        label="프로필 이름"
+        placeholder="프로필 이름을 입력하세요. 프로필 설정에서 변경이 가능합니다."
         value={form.displayName}
         size={20}
       />
@@ -123,7 +123,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
         name="username"
         onChange={onChange}
         label="사용자 ID"
-        placeholder="새 사용자 ID를 입력하세요"
+        placeholder="새 사용자 ID를 입력하세요. 변경이 불가능합니다."
         value={form.username}
         size={22}
       />
