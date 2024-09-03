@@ -17,6 +17,7 @@ import qs from 'qs';
 import { useApolloClient } from '@apollo/react-hooks';
 import { GET_CURRENT_USER } from '../../lib/graphql/user';
 import { isEmpty, trim } from 'ramda';
+import { isEmptyOrWhitespace } from '../../lib/utils';
 
 interface RegisterFormContainerProps extends RouteComponentProps<{}> {}
 
@@ -67,16 +68,9 @@ const RegisterFormContainer: React.FC<RegisterFormContainerProps> = ({
     setError(null);
     // validate
 
-    const isCustomEmpty = (str: string) => {
-      if (typeof str !== 'string') {
-        return isEmpty(str);
-      }
-      return isEmpty(trim(str.replace(/\s/g, '')));
-    };
-
     const validation = {
       displayName: (text: string) => {
-        if (isCustomEmpty(text)) {
+        if (isEmptyOrWhitespace(text)) {
           return '프로필 이름을 입력해주세요.';
         }
         if (text.trim().length > 45) {
@@ -84,7 +78,7 @@ const RegisterFormContainer: React.FC<RegisterFormContainerProps> = ({
         }
       },
       username: (text: string) => {
-        if (isCustomEmpty(text)) {
+        if (isEmptyOrWhitespace(text)) {
           return '사용자 ID를 입력해주세요.';
         }
 
