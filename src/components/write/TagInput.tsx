@@ -50,7 +50,7 @@ const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
       setValue('');
       if (tag === '' || tags.includes(tag)) return;
       let processed = tag;
-      processed = tag.trim();
+      processed = tag.trim().slice(0,255);
       if (processed.indexOf(' #') > 0) {
         const tempTags: string[] = [];
         const regex = /#(\S+)/g;
