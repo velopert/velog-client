@@ -6,6 +6,7 @@ import transitions from '../../lib/styles/transitions';
 import { mediaQuery } from '../../lib/styles/media';
 import { useTransition, animated } from 'react-spring';
 import OutsideClickHandler from 'react-outside-click-handler';
+import { isEmptyOrWhitespace } from '../../lib/utils';
 
 export interface TagInputProps {
   ref?: React.RefObject<HTMLDivElement>;
@@ -48,9 +49,8 @@ const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
     (tag: string) => {
       ignore.current = true;
       setValue('');
-      if (tag === '' || tags.includes(tag)) return;
-      let processed = tag;
-      processed = tag.trim().slice(0,255);
+      if (isEmptyOrWhitespace(tag) || tags.includes(tag)) return;
+      let processed = tag.trim().slice(0, 255);
       if (processed.indexOf(' #') > 0) {
         const tempTags: string[] = [];
         const regex = /#(\S+)/g;

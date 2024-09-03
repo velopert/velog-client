@@ -1,6 +1,7 @@
 import distanceInWordsToNow from 'date-fns/formatDistanceToNow';
 import format from 'date-fns/format';
 import koLocale from 'date-fns/locale/ko';
+import { isEmpty, trim } from 'ramda';
 
 export const formatDate = (date: string): string => {
   const d = new Date(date);
@@ -115,3 +116,10 @@ export const createFallbackTitle = (username: string | null) => {
 };
 
 export const ssrEnabled = process.env.REACT_APP_SSR === 'enabled';
+
+export const isEmptyOrWhitespace = (str: string) => {
+  if (typeof str !== 'string') {
+    return isEmpty(str);
+  }
+  return isEmpty(trim(str.replace(/\s/g, '')));
+};

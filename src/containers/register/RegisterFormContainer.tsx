@@ -16,6 +16,8 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import qs from 'qs';
 import { useApolloClient } from '@apollo/react-hooks';
 import { GET_CURRENT_USER } from '../../lib/graphql/user';
+import { isEmpty, trim } from 'ramda';
+import { isEmptyOrWhitespace } from '../../lib/utils';
 
 interface RegisterFormContainerProps extends RouteComponentProps<{}> {}
 
@@ -65,16 +67,21 @@ const RegisterFormContainer: React.FC<RegisterFormContainerProps> = ({
   const onSubmit = async (form: RegisterFormType) => {
     setError(null);
     // validate
+
     const validation = {
       displayName: (text: string) => {
-        if (text.trim() === '') {
-          return '이름을 입력해주세요.';
+        if (isEmptyOrWhitespace(text)) {
+          return '프로필 이름을 입력해주세요.';
         }
         if (text.trim().length > 45) {
           return '이름은 최대 45자까지 입력 할 수 있습니다.';
         }
       },
       username: (text: string) => {
+        if (isEmptyOrWhitespace(text)) {
+          return '사용자 ID를 입력해주세요.';
+        }
+
         if (!/^[a-z0-9-_]{3,16}$/.test(text)) {
           return '사용자 ID는 3~16자의 알파벳 소문자,숫자,혹은 - _ 으로 이루어져야 합니다.';
         }
