@@ -14,7 +14,7 @@
     "@loadable/server": "^5.15.1",
     "@react-spring/web": "^9.4.2",
     "@reduxjs/toolkit": "^1.2.2",
-    "@sentry/browser": "^5.11.1",
+    "@sentry/browser": "^7.119.1",
     "@svgr/webpack": "4.3.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
