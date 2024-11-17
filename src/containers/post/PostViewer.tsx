@@ -46,6 +46,7 @@ import gtag from '../../lib/gtag';
 import FollowButton from '../../components/common/FollowButton';
 import { BANNER_ADS } from '../../lib/graphql/ad';
 import PostBanner from '../../components/post/PostBanner';
+import JobPositions from '../../components/post/JobPositions';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -75,6 +76,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
 }) => {
   const setShowFooter = useSetShowFooter();
   const [showRecommends, setShowRecommends] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [username, urlSlug]);
@@ -250,6 +252,40 @@ const PostViewer: React.FC<PostViewerProps> = ({
       gtag('event', 'ads_banner_view');
     }
   }, [customAd, shouldShowBanner, shouldShowFooterBanner]);
+
+  const category = useMemo(() => {
+    const frontendKeywords = ['프런트엔드', '리액트', 'vue', 'react', 'next'];
+    const backendKeywords = ['백엔드', '서버', '데이터베이스', 'db'];
+    const aiKeywords = ['인공지능', '머신러닝', '딥러닝', 'ai'];
+    const mobileKeywords = [
+      '모바일',
+      '안드로이드',
+      'ios',
+      'react native',
+      '플러터',
+      'flutter',
+    ];
+    const pythonKeywords = ['파이썬', 'python'];
+    const nodeKeywords = ['노드', 'node', 'express', 'koa', 'nest'];
+
+    if (!data?.post) return null;
+    const { post } = data;
+    const merged = post.title
+      .concat(post.tags.join(','))
+      .concat(post.body)
+      .toLowerCase();
+    if (frontendKeywords.some((keyword) => merged.includes(keyword)))
+      return 'frontend';
+    if (backendKeywords.some((keyword) => merged.includes(keyword)))
+      return 'backend';
+    if (aiKeywords.some((keyword) => merged.includes(keyword))) return 'ai';
+    if (mobileKeywords.some((keyword) => merged.includes(keyword)))
+      return 'mobile';
+    if (pythonKeywords.some((keyword) => merged.includes(keyword)))
+      return 'python';
+    if (nodeKeywords.some((keyword) => merged.includes(keyword))) return 'node';
+    return null;
+  }, [data]);
 
   const onRemove = async () => {
     if (!data || !data.post) return;
@@ -486,10 +522,10 @@ const PostViewer: React.FC<PostViewerProps> = ({
         />
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />
-      {shouldShowBanner && isContentLongEnough ? (
+      {shouldShowBanner && isContentLongEnough && customAd ? (
         <PostBanner customAd={customAd} />
       ) : null}
-      {shouldShowFooterBanner ? (
+      {shouldShowFooterBanner && customAd ? (
         <PostBanner isDisplayAd={true} customAd={customAd} />
       ) : null}
       <PostComments
@@ -498,6 +534,10 @@ const PostViewer: React.FC<PostViewerProps> = ({
         postId={post.id}
         ownPost={post.user.id === userId}
       />
+      {(shouldShowBanner || shouldShowFooterBanner) && !customAd ? (
+        <JobPositions category={category} />
+      ) : null}
+
       {showRecommends ? (
         <RelatedPost postId={post.id} showAds={post?.user.id !== userId} />
       ) : null}

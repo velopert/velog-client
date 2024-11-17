@@ -8,6 +8,15 @@ export type Ad = {
   url: string;
 };
 
+export type JobPosition = {
+  id: string;
+  name: string;
+  companyName: string;
+  companyLogo: string;
+  thumbnail: string;
+  url: string;
+};
+
 export const BANNER_ADS = gql`
   query BannerAds($writerUsername: String!) {
     bannerAds(writer_username: $writerUsername) {
@@ -16,6 +25,19 @@ export const BANNER_ADS = gql`
       body
       url
       image
+    }
+  }
+`;
+
+export const JOB_POSITIONS = gql`
+  query JobPositions($category: String) {
+    jobPositions(category: $category) {
+      id
+      name
+      companyName
+      companyLogo
+      thumbnail
+      url
     }
   }
 `;
