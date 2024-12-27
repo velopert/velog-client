@@ -28,7 +28,6 @@ const TagInput: React.FC<TagInputProps> = ({ onChange, tags: initialTags }) => {
   const ignore = useRef(false);
 
   useEffect(() => {
-    if (tags.length === 0) return;
     onChange(tags);
   }, [tags, onChange]);
 
