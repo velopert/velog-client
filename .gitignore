@@ -30,3 +30,7 @@ jspm_packages
 # Serverless directories
 .serverless
 .webpack
+
+# ignore setting
+.idea
+.vscode
