@@ -8,6 +8,7 @@ import { themedPalette } from '../../lib/styles/themes';
 import { ellipsis } from '../../lib/styles/utils';
 import media from '../../lib/styles/media';
 import gtag from '../../lib/gtag';
+import { getJobs, Job } from '../../lib/api/jobs';
 
 type Props = {
   category: 'frontend' | 'backend' | 'mobile' | 'python' | 'node' | 'ai' | null;
@@ -15,15 +16,18 @@ type Props = {
 
 function JobPositions({ category }: Props) {
   const [isObserved, setIsObserved] = useState(false);
-  const { data } = useQuery<{ jobPositions: JobPosition[] }>(JOB_POSITIONS, {
-    variables: {
-      category: category ?? undefined,
-    },
-    skip: !isObserved,
-  });
+  const [data, setData] = useState<Job[]>([]);
 
   const ref = useRef<HTMLDivElement>(null);
   const initializedRef = useRef(false);
+
+  useEffect(() => {
+    getJobs(category || 'general').then((jobs) => {
+      const shuffled = jobs.sort(() => Math.random() - 0.5);
+      const sliced = shuffled.slice(0, 3);
+      setData(sliced);
+    });
+  }, [category]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -57,7 +61,7 @@ function JobPositions({ category }: Props) {
     gtag('event', 'job_position_view');
   }, [isObserved]);
 
-  if (!data?.jobPositions)
+  if (!data)
     return (
       <Block>
         <div ref={ref}></div>
@@ -70,7 +74,7 @@ function JobPositions({ category }: Props) {
       <Typography>
         <h4>관련 채용 정보</h4>
         <Container>
-          {data.jobPositions.map((jobPosition) => (
+          {data.map((jobPosition) => (
             <Card key={jobPosition.id} onClick={onClick}>
               <a href={jobPosition.url}>
                 <Thumbnail src={jobPosition.thumbnail} />
@@ -84,6 +88,7 @@ function JobPositions({ category }: Props) {
                 </div>
               </Company>
               <JobTitle href={jobPosition.url}>{jobPosition.name}</JobTitle>
+              <JobDescription>{jobPosition.summary}</JobDescription>
             </Card>
           ))}
         </Container>
@@ -122,10 +127,10 @@ const Container = styled.div`
 `;
 
 const Card = styled.div`
-  width: 25%;
+  width: 33.33%;
   ${media.small} {
     flex-shrink: 0;
-    width: 27vw;
+    width: 60vw;
   }
 `;
 
@@ -152,9 +157,16 @@ const Company = styled.div`
 `;
 
 const JobTitle = styled.a`
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.25;
+`;
+
+const JobDescription = styled.div`
+  margin-top: 8px;
+  color: ${themedPalette.text2};
+  font-size: 12px;
+  line-height: 1.5;
 `;
 
 export default JobPositions;

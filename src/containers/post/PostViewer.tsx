@@ -223,7 +223,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
     const isOwnPost = post.user.id === userId;
     const isVeryOld =
       Date.now() - new Date(post.released_at).getTime() >
-      1000 * 60 * 60 * 24 * 30;
+      1000 * 60 * 60 * 24 * 10;
 
     if (isOwnPost) return false;
     if (!isVeryOld) return false;
@@ -254,16 +254,24 @@ const PostViewer: React.FC<PostViewerProps> = ({
   }, [customAd, shouldShowBanner, shouldShowFooterBanner]);
 
   const category = useMemo(() => {
-    const frontendKeywords = ['프런트엔드', '리액트', 'vue', 'react', 'next'];
+    const frontendKeywords = [
+      '프런트엔드',
+      '리액트',
+      'vue',
+      'react',
+      'next',
+      '프론트엔드',
+    ];
     const backendKeywords = ['백엔드', '서버', '데이터베이스', 'db'];
-    const aiKeywords = ['인공지능', '머신러닝', '딥러닝', 'ai'];
+    const aiKeywords = ['인공지능', '머신러닝', '딥러닝', 'nlp', 'llm'];
     const mobileKeywords = [
-      '모바일',
       '안드로이드',
       'ios',
       'react native',
       '플러터',
       'flutter',
+      'swift',
+      'xcode',
     ];
     const pythonKeywords = ['파이썬', 'python'];
     const nodeKeywords = ['노드', 'node', 'express', 'koa', 'nest'];
@@ -274,15 +282,25 @@ const PostViewer: React.FC<PostViewerProps> = ({
       .concat(post.tags.join(','))
       .concat(post.body)
       .toLowerCase();
+    if (
+      aiKeywords.some((keyword) => {
+        const value = merged.includes(keyword);
+        if (value) {
+          console.log(merged);
+          console.log(keyword);
+        }
+        return value;
+      })
+    )
+      return 'ai';
     if (frontendKeywords.some((keyword) => merged.includes(keyword)))
       return 'frontend';
-    if (backendKeywords.some((keyword) => merged.includes(keyword)))
-      return 'backend';
-    if (aiKeywords.some((keyword) => merged.includes(keyword))) return 'ai';
     if (mobileKeywords.some((keyword) => merged.includes(keyword)))
       return 'mobile';
     if (pythonKeywords.some((keyword) => merged.includes(keyword)))
       return 'python';
+    if (backendKeywords.some((keyword) => merged.includes(keyword)))
+      return 'backend';
     if (nodeKeywords.some((keyword) => merged.includes(keyword))) return 'node';
     return null;
   }, [data]);
@@ -522,10 +540,10 @@ const PostViewer: React.FC<PostViewerProps> = ({
         />
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />
-      {shouldShowBanner && isContentLongEnough && customAd ? (
+      {shouldShowBanner && isContentLongEnough ? (
         <PostBanner customAd={customAd} />
       ) : null}
-      {shouldShowFooterBanner && customAd ? (
+      {shouldShowFooterBanner ? (
         <PostBanner isDisplayAd={true} customAd={customAd} />
       ) : null}
       <PostComments
