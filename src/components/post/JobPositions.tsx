@@ -88,7 +88,9 @@ function JobPositions({ category }: Props) {
                 </div>
               </Company>
               <JobTitle href={jobPosition.url}>{jobPosition.name}</JobTitle>
-              <JobDescription>{jobPosition.summary}</JobDescription>
+              <JobDescription>
+                <a href={jobPosition.url}>{jobPosition.summary}</a>
+              </JobDescription>
             </Card>
           ))}
         </Container>
