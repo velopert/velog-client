@@ -201,6 +201,64 @@ export default class WriteMarkdownEditor extends React.Component<
         e.preventDefault();
       }
     }) as any);
+
+    this.codemirror.on('keydown', (cm, e) => {
+      const { key, ctrlKey, metaKey, shiftKey } = e;
+      const doc = cm.getDoc();
+      const selection = doc.getSelection();
+
+      if (!selection) return;
+
+      if (key === '`' && !ctrlKey && !metaKey) {
+        if (selection.length > 0) {
+          e.preventDefault();
+          doc.replaceSelection(`\`${selection}\``);
+          return;
+        }
+      }
+
+      if ((ctrlKey || metaKey) && key === 'b') {
+        e.preventDefault();
+        doc.replaceSelection(`**${selection}**`);
+        return;
+      }
+
+      if ((ctrlKey || metaKey) && key === 'i') {
+        e.preventDefault();
+        doc.replaceSelection(`*${selection}*`);
+        return;
+      }
+
+      if ((ctrlKey || metaKey) && shiftKey && key === 's') {
+        e.preventDefault();
+        doc.replaceSelection(`~~${selection}~~`);
+        return;
+      }
+
+      if (key === '[') {
+        e.preventDefault();
+        doc.replaceSelection(`[${selection}]`);
+        return;
+      }
+
+      if (key === '(') {
+        e.preventDefault();
+        doc.replaceSelection(`(${selection})`);
+        return;
+      }
+
+      if (key === '{') {
+        e.preventDefault();
+        doc.replaceSelection(`{${selection}}`);
+        return;
+      }
+
+      if (key === '<') {
+        e.preventDefault();
+        doc.replaceSelection(`<${selection}>`);
+        return;
+      }
+    });
   };
 
   stickToBottomIfNeeded = () => {
