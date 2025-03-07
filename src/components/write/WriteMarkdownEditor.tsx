@@ -225,7 +225,7 @@ export default class WriteMarkdownEditor extends React.Component<
 
       if ((ctrlKey || metaKey) && key === 'i') {
         e.preventDefault();
-        doc.replaceSelection(`*${selection}*`);
+        doc.replaceSelection(`_${selection}_`);
         return;
       }
 
