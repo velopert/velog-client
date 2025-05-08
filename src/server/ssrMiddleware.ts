@@ -19,7 +19,8 @@ const ssrMiddleware: Middleware = async (ctx, next) => {
   if (!isLoggedIn) {
     const exists = await cache.get(ctx.url);
     if (exists !== null) {
-      return exists;
+      ctx.body = exists;
+      ctx.status = 200;
     }
   }
 
