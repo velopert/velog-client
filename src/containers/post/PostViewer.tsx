@@ -253,57 +253,57 @@ const PostViewer: React.FC<PostViewerProps> = ({
     }
   }, [customAd, shouldShowBanner, shouldShowFooterBanner]);
 
-  const category = useMemo(() => {
-    const frontendKeywords = [
-      '프런트엔드',
-      '리액트',
-      'vue',
-      'react',
-      'next',
-      '프론트엔드',
-    ];
-    const backendKeywords = ['백엔드', '서버', '데이터베이스', 'db'];
-    const aiKeywords = ['인공지능', '머신러닝', '딥러닝', 'nlp', 'llm'];
-    const mobileKeywords = [
-      '안드로이드',
-      'ios',
-      'react native',
-      '플러터',
-      'flutter',
-      'swift',
-      'xcode',
-    ];
-    const pythonKeywords = ['파이썬', 'python'];
-    const nodeKeywords = ['노드', 'node', 'express', 'koa', 'nest'];
+  // const category = useMemo(() => {
+  //   const frontendKeywords = [
+  //     '프런트엔드',
+  //     '리액트',
+  //     'vue',
+  //     'react',
+  //     'next',
+  //     '프론트엔드',
+  //   ];
+  //   const backendKeywords = ['백엔드', '서버', '데이터베이스', 'db'];
+  //   const aiKeywords = ['인공지능', '머신러닝', '딥러닝', 'nlp', 'llm'];
+  //   const mobileKeywords = [
+  //     '안드로이드',
+  //     'ios',
+  //     'react native',
+  //     '플러터',
+  //     'flutter',
+  //     'swift',
+  //     'xcode',
+  //   ];
+  //   const pythonKeywords = ['파이썬', 'python'];
+  //   const nodeKeywords = ['노드', 'node', 'express', 'koa', 'nest'];
 
-    if (!data?.post) return null;
-    const { post } = data;
-    const merged = post.title
-      .concat(post.tags.join(','))
-      .concat(post.body)
-      .toLowerCase();
-    if (
-      aiKeywords.some((keyword) => {
-        const value = merged.includes(keyword);
-        if (value) {
-          // console.log(merged);
-          // console.log(keyword);
-        }
-        return value;
-      })
-    )
-      return 'ai';
-    if (frontendKeywords.some((keyword) => merged.includes(keyword)))
-      return 'frontend';
-    if (mobileKeywords.some((keyword) => merged.includes(keyword)))
-      return 'mobile';
-    if (pythonKeywords.some((keyword) => merged.includes(keyword)))
-      return 'python';
-    if (backendKeywords.some((keyword) => merged.includes(keyword)))
-      return 'backend';
-    if (nodeKeywords.some((keyword) => merged.includes(keyword))) return 'node';
-    return null;
-  }, [data]);
+  //   if (!data?.post) return null;
+  //   const { post } = data;
+  //   const merged = post.title
+  //     .concat(post.tags.join(','))
+  //     .concat(post.body)
+  //     .toLowerCase();
+  //   if (
+  //     aiKeywords.some((keyword) => {
+  //       const value = merged.includes(keyword);
+  //       if (value) {
+  //         // console.log(merged);
+  //         // console.log(keyword);
+  //       }
+  //       return value;
+  //     })
+  //   )
+  //     return 'ai';
+  //   if (frontendKeywords.some((keyword) => merged.includes(keyword)))
+  //     return 'frontend';
+  //   if (mobileKeywords.some((keyword) => merged.includes(keyword)))
+  //     return 'mobile';
+  //   if (pythonKeywords.some((keyword) => merged.includes(keyword)))
+  //     return 'python';
+  //   if (backendKeywords.some((keyword) => merged.includes(keyword)))
+  //     return 'backend';
+  //   if (nodeKeywords.some((keyword) => merged.includes(keyword))) return 'node';
+  //   return null;
+  // }, [data]);
 
   const onRemove = async () => {
     if (!data || !data.post) return;
