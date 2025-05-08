@@ -1,7 +1,7 @@
 import Redis from 'ioredis';
 import checkCacheRule from './checkCacheRule';
 
-const redis = new Redis({
+export const redis = new Redis({
   host: process.env.REACT_APP_REDIS_HOST || 'localhost',
 });
 
