@@ -18,9 +18,10 @@ export default class CacheManager {
       return null;
     }
   }
-  set(url: string, html: string) {
+  async set(url: string, html: string) {
     const rule = checkCacheRule(url);
     if (!rule) return;
-    return redis.set(createCacheKey(url), html);
+    await redis.set(createCacheKey(url), html);
+    await redis.expire(createCacheKey(url), 300);
   }
 }

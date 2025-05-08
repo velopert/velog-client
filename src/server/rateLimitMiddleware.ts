@@ -11,6 +11,13 @@ const parseNumber = (value: string | null) => {
 const rateLimitMiddleware: Middleware = async (ctx, next) => {
   const ip = ctx.request.ips.slice(-1)[0] || ctx.request.ip;
 
+  const isBlockedUrl = await redis.get(`${ctx.url}:blocked`);
+  if (isBlockedUrl === '1') {
+    ctx.status = 429;
+    ctx.body = { msg: 'Too many request' };
+    return;
+  }
+
   const key = `${ip}:pageview`;
   const blockedKey = `${ip}:blocked`;
 
