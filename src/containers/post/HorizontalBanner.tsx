@@ -21,9 +21,9 @@ function HorizontalBanner({ isDisplayAd = false }: Props) {
       {isDisplayAd ? (
         <ins
           className="adsbygoogle"
-          style={{ display: 'block', textAlign: 'center' }}
-          data-ad-client="ca-pub-9161852896103498"
-          data-ad-slot="5950320973"
+          style={{ display: 'block' }}
+          data-ad-client="ca-pub-5574866530496701"
+          data-ad-slot="8809887603"
           data-ad-format="auto"
           data-full-width-responsive="true"
         ></ins>
@@ -33,8 +33,8 @@ function HorizontalBanner({ isDisplayAd = false }: Props) {
           style={{ display: 'block', textAlign: 'center' }}
           data-ad-layout="in-article"
           data-ad-format="fluid"
-          data-ad-client="ca-pub-9161852896103498"
-          data-ad-slot="6869845586"
+          data-ad-client="ca-pub-5574866530496701"
+          data-ad-slot="1310741884"
         ></ins>
       )}
     </StyledResponsive>
