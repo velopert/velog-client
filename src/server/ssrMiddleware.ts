@@ -8,6 +8,8 @@ const ssrMiddleware: Middleware = async (ctx, next) => {
     return;
   }
 
+  console.log('>> ' + ctx.url);
+
   try {
     const result = await serverRender({
       url: ctx.url,
@@ -24,6 +26,7 @@ const ssrMiddleware: Middleware = async (ctx, next) => {
   } catch (e) {
     ctx.throw(500, e as any);
   }
+  console.log('<< ' + ctx.url);
 };
 
 export default ssrMiddleware;
