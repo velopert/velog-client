@@ -4,6 +4,7 @@ import serve from 'koa-static';
 import proxy from 'koa-better-http-proxy';
 import Router from '@koa/router';
 import ssrMiddleware from './server/ssrMiddleware';
+import rateLimitMiddleware from './server/rateLimitMiddleware';
 
 console.log(process.env.REACT_APP_SSR);
 
@@ -22,6 +23,7 @@ const proxyMiddleware = proxy(
 );
 
 app.use(router.routes()).use(router.allowedMethods());
+app.use(rateLimitMiddleware);
 app.use(ssrMiddleware);
 app.use(proxyMiddleware);
 router.get('/ads.txt', (ctx) => {
