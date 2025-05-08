@@ -11,6 +11,8 @@ console.log(process.env.REACT_APP_SSR);
 const app = new Koa();
 const router = new Router();
 
+app.proxy = true;
+
 app.use(
   serve(path.resolve('./build'), {
     index: false,

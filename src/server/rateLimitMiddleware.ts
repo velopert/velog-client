@@ -1,6 +1,13 @@
 import { Middleware } from 'koa';
 import { redis } from './CacheManager';
 
+const parseNumber = (value: string | null) => {
+  if (value === null) return null;
+  const parsed = parseInt(value, 10);
+  if (isNaN(parsed)) return null;
+  return parsed;
+};
+
 const rateLimitMiddleware: Middleware = async (ctx, next) => {
   const ip = ctx.request.ips.slice(-1)[0] || ctx.request.ip;
 
@@ -9,14 +16,16 @@ const rateLimitMiddleware: Middleware = async (ctx, next) => {
 
   const blocked = await redis.get(blockedKey);
 
-  if (blocked) {
+  if (parseNumber(blocked) === 1) {
     ctx.status = 429;
     ctx.body = { msg: 'Too many request' };
     return;
   }
   const exists = await redis.get(key);
+  const parsed = parseNumber(exists);
 
-  if (typeof exists === 'number' && exists > 100) {
+  if (parsed !== null && parsed >= 100) {
+    console.log(`Blocking... ${ip} - ${exists}`);
     await redis.set(blockedKey, 1);
     await redis.expire(blockedKey, 300);
     ctx.status = 429;

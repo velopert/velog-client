@@ -2,13 +2,14 @@ import { Middleware } from 'koa';
 import serverRender from './serverRender';
 
 const ssrMiddleware: Middleware = async (ctx, next) => {
+  const ip = ctx.request.ips.slice(-1)[0] || ctx.request.ip;
   // redirect to v3 for user posts tab
   if (/^\/@([a-z0-9]+)$/.test(ctx.path)) {
     ctx.redirect(`${ctx.path}/posts`);
     return;
   }
 
-  console.log('>> ' + ctx.url);
+  console.log(ip + ' >> ' + ctx.url);
 
   try {
     const result = await serverRender({
@@ -26,7 +27,7 @@ const ssrMiddleware: Middleware = async (ctx, next) => {
   } catch (e) {
     ctx.throw(500, e as any);
   }
-  console.log('<< ' + ctx.url);
+  console.log(ip + '<< ' + ctx.url);
 };
 
 export default ssrMiddleware;
