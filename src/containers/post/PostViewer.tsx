@@ -286,8 +286,8 @@ const PostViewer: React.FC<PostViewerProps> = ({
       aiKeywords.some((keyword) => {
         const value = merged.includes(keyword);
         if (value) {
-          console.log(merged);
-          console.log(keyword);
+          // console.log(merged);
+          // console.log(keyword);
         }
         return value;
       })
