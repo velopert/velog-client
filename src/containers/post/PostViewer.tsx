@@ -552,9 +552,9 @@ const PostViewer: React.FC<PostViewerProps> = ({
         postId={post.id}
         ownPost={post.user.id === userId}
       />
-      {(shouldShowBanner || shouldShowFooterBanner) && !customAd ? (
+      {/* {(shouldShowBanner || shouldShowFooterBanner) && !customAd ? (
         <JobPositions category={category} />
-      ) : null}
+      ) : null} */}
 
       {showRecommends ? (
         <RelatedPost postId={post.id} showAds={post?.user.id !== userId} />
