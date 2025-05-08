@@ -21,6 +21,7 @@ const ssrMiddleware: Middleware = async (ctx, next) => {
     if (exists !== null) {
       ctx.body = exists;
       ctx.status = 200;
+      return;
     }
   }
 
