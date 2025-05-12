@@ -8,7 +8,7 @@ const parseNumber = (value: string | null) => {
   return parsed;
 };
 
-const WHITELIST_IPS = (process.env.WHITELIST_IPS ?? '')
+const WHITELIST_IPS = (process.env.REACT_APP_WHITELIST_IPS ?? '')
   .split(',')
   .map((ip) => ip.trim());
 
