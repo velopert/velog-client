@@ -8,8 +8,16 @@ const parseNumber = (value: string | null) => {
   return parsed;
 };
 
+const WHITELIST_IPS = (process.env.WHITELIST_IPS ?? '')
+  .split(',')
+  .map((ip) => ip.trim());
+
 const rateLimitMiddleware: Middleware = async (ctx, next) => {
   const ip = ctx.request.ips.slice(-1)[0] || ctx.request.ip;
+
+  if (WHITELIST_IPS.some((whitelistIp) => ip.includes(whitelistIp))) {
+    return next();
+  }
 
   const isBlockedUrl = await redis.get(`${ctx.url}:blocked`);
   if (isBlockedUrl === '1') {
@@ -31,7 +39,7 @@ const rateLimitMiddleware: Middleware = async (ctx, next) => {
   const exists = await redis.get(key);
   const parsed = parseNumber(exists);
 
-  if (parsed !== null && parsed >= 100) {
+  if (parsed !== null && parsed >= 300) {
     console.log(`Blocking... ${ip} - ${exists}`);
     await redis.set(blockedKey, 1);
     await redis.expire(blockedKey, 300);
