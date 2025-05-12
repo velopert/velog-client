@@ -521,7 +521,9 @@ const PostViewer: React.FC<PostViewerProps> = ({
           />
         }
       />
-      {shouldShowBanner ? <PostBanner customAd={customAd} /> : null}
+      {shouldShowBanner ? (
+        <PostBanner customAd={customAd} isDisplayAd={true} />
+      ) : null}
       <PostContent isMarkdown={post.is_markdown} body={post.body} />
       <UserProfileWrapper>
         <UserProfile
@@ -541,7 +543,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />
       {shouldShowBanner && isContentLongEnough ? (
-        <PostBanner customAd={customAd} />
+        <PostBanner customAd={customAd} isDisplayAd={true} />
       ) : null}
       {shouldShowFooterBanner ? (
         <PostBanner isDisplayAd={true} customAd={customAd} />
