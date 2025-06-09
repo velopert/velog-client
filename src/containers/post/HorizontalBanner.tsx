@@ -18,25 +18,14 @@ function HorizontalBanner({ isDisplayAd = false }: Props) {
 
   return (
     <StyledResponsive onClick={onClick}>
-      {isDisplayAd ? (
-        <ins
-          className="adsbygoogle"
-          style={{ display: 'block' }}
-          data-ad-client="ca-pub-5574866530496701"
-          data-ad-slot="8809887603"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        ></ins>
-      ) : (
-        <ins
-          className="adsbygoogle"
-          style={{ display: 'block', textAlign: 'center' }}
-          data-ad-layout="in-article"
-          data-ad-format="fluid"
-          data-ad-client="ca-pub-5574866530496701"
-          data-ad-slot="1310741884"
-        ></ins>
-      )}
+      <ins
+        className="adsbygoogle"
+        style={{ display: 'block', textAlign: 'center' }}
+        data-ad-client="ca-pub-5574866530496701"
+        data-ad-slot="7675625634"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      ></ins>
     </StyledResponsive>
   );
 }
