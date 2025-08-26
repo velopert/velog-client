@@ -44,8 +44,6 @@ const rateLimitMiddleware: Middleware = async (ctx, next) => {
   const isCrawler = await cache.isCrawlerIP(ip);
   if (isCrawler) {
     return next();
-  } else {
-    console.log(`[${ip}] is not a crawler`);
   }
 
   const isBlockedUrl = await redis.get(`${ctx.url}:blocked`);
