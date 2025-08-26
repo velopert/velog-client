@@ -1,5 +1,22 @@
 import { Middleware } from 'koa';
 import { redis } from './CacheManager';
+import GoogleBotIPCache from './crawlerCheck';
+
+const cache = new GoogleBotIPCache(); // 기본 TTL 1시간
+async function main() {
+  try {
+    const docs = await cache.getRawDocs();
+    console.log('[googlebot] prefixes:', docs.googlebot.prefixes.length);
+    console.log('[userFetchers] prefixes:', docs.userFetchers.prefixes.length);
+
+    const cidrs = await cache.getAllCIDRs();
+    console.log('Total unique CIDRs:', cidrs.length);
+  } catch (e) {
+    console.error('[GoogleCrawlIPCache] error:', e);
+  }
+}
+
+main();
 
 const parseNumber = (value: string | null) => {
   if (value === null) return null;
@@ -12,11 +29,23 @@ const WHITELIST_IPS = (process.env.REACT_APP_WHITELIST_IPS ?? '')
   .split(',')
   .map((ip) => ip.trim());
 
+console.log({ WHITELIST_IPS });
+
 const rateLimitMiddleware: Middleware = async (ctx, next) => {
   const ip = ctx.request.ips.slice(-1)[0] || ctx.request.ip;
 
-  if (WHITELIST_IPS.some((whitelistIp) => ip.includes(whitelistIp))) {
+  if (
+    WHITELIST_IPS.length > 0 &&
+    WHITELIST_IPS.some((whitelistIp) => ip.includes(whitelistIp))
+  ) {
     return next();
+  }
+
+  const isCrawler = await cache.isCrawlerIP(ip);
+  if (isCrawler) {
+    return next();
+  } else {
+    console.log(`[${ip}] is not a crawler`);
   }
 
   const isBlockedUrl = await redis.get(`${ctx.url}:blocked`);
