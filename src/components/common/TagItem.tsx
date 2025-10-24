@@ -4,6 +4,7 @@ import { themedPalette } from '../../lib/styles/themes';
 import { Link } from 'react-router-dom';
 import { escapeForUrl } from '../../lib/utils';
 import media from '../../lib/styles/media';
+import VLink from './VLink';
 
 type TagItemProps = {
   name: string;
@@ -46,7 +47,7 @@ const TagDiv = styled.div`
   ${tagStyle}
 `;
 
-const TagLink = styled(Link)`
+const TagLink = styled(VLink)`
   ${tagStyle}
   &:hover {
     opacity: 0.75;
