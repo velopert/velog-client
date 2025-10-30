@@ -23,6 +23,11 @@ const useGoogleAnalyticsUserTracking = () => {
           username: currentUser.username,
         },
       });
+      gtag('set', { login_status: 'logged_in' });
+      console.log('hello, user');
+    } else {
+      gtag('set', { login_status: 'guest' });
+      console.log('hello, guest');
     }
   }, [currentUser]);
 };
