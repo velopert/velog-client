@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom';
 import gtag from '../../lib/gtag';
 import { useThemeEffect } from '../../components/base/hooks/useThemeEffect';
 import BodyTransition from '../../components/base/BodyTransition';
+import useGoogleAnalyticsUserTracking from '../../lib/hooks/useGoogleAnalyticsUserTracking';
 
 interface OwnProps {}
 interface StateProps {
@@ -23,6 +24,7 @@ type CoreProps = OwnProps & StateProps & DispatchProps;
 const Core: React.FC<CoreProps> = ({ layer }) => {
   useUserLoader();
   useThemeEffect();
+  useGoogleAnalyticsUserTracking();
 
   const history = useHistory();
 
