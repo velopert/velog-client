@@ -5,8 +5,10 @@ export const redis = new Redis({
   host: process.env.REACT_APP_REDIS_HOST || 'localhost',
 });
 
+const env = process.env.REACT_APP_STAGE === 'true' ? 'stage:' : '';
+
 function createCacheKey(url: string) {
-  return `ssr:${url}`;
+  return `ssr:${env}${url}`;
 }
 
 export default class CacheManager {

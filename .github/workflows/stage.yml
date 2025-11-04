@@ -1,0 +1,52 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - stage
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Setup Node.js 16.x
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16.x'
+    - name: Get yarn cache
+      id: yarn-cache
+      run: echo "::set-output name=dir::$(yarn cache dir)"
+
+    - uses: actions/cache@v3
+      with:
+        path: ${{ steps.yarn-cache.outputs.dir }}
+        key: ${{ runner.os }}-yarn-v1-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+    - name: yarn install
+      uses: borales/actions-yarn@v4.0.0
+      with:
+        cmd: install
+    - name: npm run build:ci
+      run: npm run build:ci
+      env:
+        REACT_APP_API_HOST: 'https://v2.velog.io/'
+        REACT_APP_GRAPHQL_HOST: 'https://v2.velog.io/'
+        REACT_APP_GRAPHQL_HOST_NOCDN: 'https://v2.velog.io/'
+        PUBLIC_URL: 'https://stage-assets.velog.io/assets'
+        REACT_APP_REDIS_HOST: ${{ secrets.REDIS_HOST }}
+        REACT_APP_CLIENT_V3_HOST: 'https://velog.io'
+        REACT_APP_WHITELIST_IPS: ${{ secrets.REACT_APP_WHITELIST_IPS }}
+        REACT_APP_STAGE: true
+        CI: false
+    - name: upload
+      env:
+        S3_BUCKET_STAGE: ${{ secrets.AWS_S3_BUCKET_STAGE }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+        AWS_REGION: 'ap-northeast-2'
+      run: |
+        yarn upload:stage
+        yarn upload:ssr:stage
