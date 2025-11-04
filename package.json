@@ -176,7 +176,7 @@
     "download": "aws s3 cp s3://$S3_BUCKET ./build/ --recursive && aws s3 cp s3://$S3_BUCKET_SSR ./dist/ --recursive",
     "upload:stage": "aws s3 cp --recursive ./build s3://$S3_BUCKET_STAGE/assets",
     "upload:ssr:stage": "aws s3 cp --recursive ./dist s3://$S3_BUCKET_STAGE/ssr",
-    "download:stage": "aws s3 cp s3://$S3_BUCKET/assets ./build/ --recursive && aws s3 cp s3://$S3_BUCKET_STAGE/ssr ./dist/ --recursive",
+    "download:stage": "aws s3 cp s3://$S3_BUCKET_STAGE/assets ./build/ --recursive && aws s3 cp s3://$S3_BUCKET_STAGE/ssr ./dist/ --recursive",
     "deploy": "pm2 reload deploy.config.json"
   },
   "eslintConfig": {
