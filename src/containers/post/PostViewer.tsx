@@ -47,6 +47,7 @@ import FollowButton from '../../components/common/FollowButton';
 import { BANNER_ADS } from '../../lib/graphql/ad';
 import PostBanner from '../../components/post/PostBanner';
 import JobPositions from '../../components/post/JobPositions';
+import SideAd from '../../components/post/SideAd';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -109,20 +110,21 @@ const PostViewer: React.FC<PostViewerProps> = ({
   const [likePost, { loading: loadingLike }] = useMutation(LIKE_POST);
   const [unlikePost, { loading: loadingUnlike }] = useMutation(UNLIKE_POST);
   const { showNotFound } = useNotFound();
-  const { data: ads } = useQuery(BANNER_ADS, {
-    variables: {
-      writerUsername: username,
-    },
-  });
 
-  const customAd = useMemo(() => {
-    if (!ads) return null;
-    if (ads.bannerAds.length === 0) return null;
-    return {
-      image: ads.bannerAds[0].image,
-      url: ads.bannerAds[0].url,
-    };
-  }, [ads]);
+  // const { data: ads } = useQuery(BANNER_ADS, {
+  //   variables: {
+  //     writerUsername: username,
+  //   },
+  // });
+
+  // const customAd = useMemo(() => {
+  //   if (!ads) return null;
+  //   if (ads.bannerAds.length === 0) return null;
+  //   return {
+  //     image: ads.bannerAds[0].image,
+  //     url: ads.bannerAds[0].url,
+  //   };
+  // }, [ads]);
 
   // const userLogo = useSelector((state: RootState) => state.header.userLogo);
   // const velogTitle = useMemo(() => {
@@ -170,6 +172,27 @@ const PostViewer: React.FC<PostViewerProps> = ({
 
   const postReady = !!data?.post;
 
+  const shouldShowAds = useMemo(() => {
+    // 14일 이상된 게시글에선 비로그인 사용자에게 광고가 노출됩니다.
+    if (!data?.post) {
+      return false;
+    }
+
+    if (userId) {
+      return false;
+    }
+
+    const isOldEnough =
+      Date.now() - new Date(data?.post?.released_at).getTime() >
+      1000 * 60 * 60 * 24 * 14;
+
+    if (!isOldEnough) {
+      return false;
+    }
+
+    return true;
+  }, [userId, data]);
+
   useEffect(() => {
     setShowFooter(postReady);
   }, [setShowFooter, postReady]);
@@ -216,42 +239,42 @@ const PostViewer: React.FC<PostViewerProps> = ({
     };
   }, [onScroll]);
 
-  const shouldShowBanner = useMemo(() => {
-    if (!data?.post) return;
+  // const shouldShowBanner = useMemo(() => {
+  //   if (!data?.post) return;
 
-    const post = data.post;
-    const isOwnPost = post.user.id === userId;
-    const isVeryOld =
-      Date.now() - new Date(post.released_at).getTime() >
-      1000 * 60 * 60 * 24 * 10;
+  //   const post = data.post;
+  //   const isOwnPost = post.user.id === userId;
+  //   const isVeryOld =
+  //     Date.now() - new Date(post.released_at).getTime() >
+  //     1000 * 60 * 60 * 24 * 10;
 
-    if (isOwnPost) return false;
-    if (!isVeryOld) return false;
-    return true;
-  }, [data?.post, userId]);
+  //   if (isOwnPost) return false;
+  //   if (!isVeryOld) return false;
+  //   return true;
+  // }, [data?.post, userId]);
 
-  const shouldShowFooterBanner = useMemo(() => {
-    if (shouldShowBanner) return false;
-    if (!data?.post) return false;
-    if (userId) return false;
-    return true;
-  }, [userId, data?.post]);
+  // const shouldShowFooterBanner = useMemo(() => {
+  //   if (shouldShowBanner) return false;
+  //   if (!data?.post) return false;
+  //   if (userId) return false;
+  //   return true;
+  // }, [userId, data?.post]);
 
   useEffect(() => {
     if (!data?.post?.id) return;
-    if (!shouldShowBanner) return;
+    // if (!shouldShowBanner) return;
     gtag('event', 'banner_view');
 
     if (userId) {
       gtag('event', 'banner_view_user');
     }
-  }, [data?.post?.id, shouldShowBanner, userId]);
+  }, [data?.post?.id, , userId]);
 
-  useEffect(() => {
-    if (customAd && (shouldShowBanner || shouldShowFooterBanner)) {
-      gtag('event', 'ads_banner_view');
-    }
-  }, [customAd, shouldShowBanner, shouldShowFooterBanner]);
+  // useEffect(() => {
+  //   if (customAd && (shouldShowBanner || shouldShowFooterBanner)) {
+  //     gtag('event', 'ads_banner_view');
+  //   }
+  // }, [customAd, shouldShowBanner, shouldShowFooterBanner]);
 
   // const category = useMemo(() => {
   //   const frontendKeywords = [
@@ -520,11 +543,16 @@ const PostViewer: React.FC<PostViewerProps> = ({
             followingUserId={post.user.id}
           />
         }
+        sideAd={shouldShowAds ? <SideAd /> : undefined}
       />
-      {shouldShowBanner ? (
+      {/* {shouldShowBanner ? (
         <PostBanner customAd={customAd} isDisplayAd={true} />
-      ) : null}
-      <PostContent isMarkdown={post.is_markdown} body={post.body} />
+      ) : null} */}
+      <PostContent
+        isMarkdown={post.is_markdown}
+        body={post.body}
+        shouldShowAds={shouldShowAds}
+      />
       <UserProfileWrapper>
         <UserProfile
           thumbnail={post.user.profile.thumbnail}
@@ -542,12 +570,12 @@ const PostViewer: React.FC<PostViewerProps> = ({
         />
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />
-      {shouldShowBanner && isContentLongEnough ? (
+      {/* {shouldShowBanner && isContentLongEnough ? (
         <PostBanner customAd={customAd} isDisplayAd={true} />
-      ) : null}
-      {shouldShowFooterBanner ? (
+      ) : null} */}
+      {/* {shouldShowFooterBanner ? (
         <PostBanner isDisplayAd={true} customAd={customAd} />
-      ) : null}
+      ) : null} */}
       <PostComments
         count={post.comments_count}
         comments={post.comments}
@@ -559,7 +587,11 @@ const PostViewer: React.FC<PostViewerProps> = ({
       ) : null} */}
 
       {showRecommends ? (
-        <RelatedPost postId={post.id} showAds={post?.user.id !== userId} />
+        <RelatedPost
+          postId={post.id}
+          showAds={false}
+          isContained={shouldShowAds}
+        />
       ) : null}
     </PostViewerProvider>
   );

@@ -14,9 +14,11 @@ import { detectAnyAdblocker } from 'just-detect-adblock';
 function RelatedPost({
   postId,
   showAds,
+  isContained = false,
 }: {
   postId: string;
   showAds: boolean;
+  isContained?: boolean;
 }) {
   const [adBlocked, setAdBlocked] = useState(false);
   useEffect(() => {
@@ -52,9 +54,9 @@ function RelatedPost({
 
   return (
     <>
-      <Background>
+      <Background isContained={isContained}>
         <Title>관심 있을 만한 포스트</Title>
-        <Wrapper>
+        <Wrapper isContained={isContained}>
           <PostCardGrid posts={postWithAds || []} forPost />
         </Wrapper>
       </Background>
@@ -79,7 +81,7 @@ const Title = styled.div`
   }
 `;
 
-const Background = styled.div`
+const Background = styled.div<{ isContained: boolean }>`
   z-index: 5;
   position: relative;
   padding-top: 4rem;
@@ -90,15 +92,15 @@ const Background = styled.div`
     padding-bottom: 1rem;
   }
   margin-top: 4rem;
-  background: ${themedPalette.bg_page1};
-  box-shadow: 0px -16px 16px rgb(0 0 0 / 4%);
+  background: ${(props) => (props.isContained ? 'transparent' : themedPalette.bg_page1)};
+  box-shadow: ${(props) => (props.isContained ? 'none' : '0px -16px 16px rgb(0 0 0 / 4%)')};
 `;
-const Wrapper = styled.div`
-  width: 1376px;
+const Wrapper = styled.div<{ isContained: boolean }>`
+  width: ${(props) => (props.isContained ? '768px' : '1376px')};
   margin: 0 auto;
   padding-bottom: 3rem;
   ${media.xlarge} {
-    width: 1024px;
+    width: ${(props) => (props.isContained ? '768px' : '1024px')};
   }
   ${media.custom(1056)} {
     width: 100%;

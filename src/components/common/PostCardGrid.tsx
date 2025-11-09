@@ -88,6 +88,7 @@ const Block = styled.div`
   display: flex;
   margin: -1rem;
   flex-wrap: wrap;
+  justify-content: center;
   ${mediaQuery(767)} {
     margin: 0;
   }
