@@ -19,7 +19,7 @@ const Positioner = styled.div`
 const AdBlock = styled.div<{ width: number; height: number }>`
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
-  background: #e0e0e0;
+  // background: #e0e0e0;
   // border-radius: 4px;
   display: flex;
   // color: #666;
