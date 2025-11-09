@@ -22,8 +22,6 @@ const AdBlock = styled.div<{ width: number; height: number }>`
   // background: #e0e0e0;
   // border-radius: 4px;
   display: flex;
-  align-items: center;
-  justify-content: center;
   // color: #666;
   // font-size: 14px;
 `;

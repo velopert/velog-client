@@ -173,7 +173,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
   const postReady = !!data?.post;
 
   const shouldShowAds = useMemo(() => {
-    // 14일 이상된 게시글에선 비로그인 사용자에게 광고가 노출됩니다.
+    // 10일 이상된 게시글에선 비로그인 사용자에게 사이드바 광고가 노출됩니다.
     if (!data?.post) {
       return false;
     }
@@ -184,7 +184,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
 
     const isOldEnough =
       Date.now() - new Date(data?.post?.released_at).getTime() >
-      1000 * 60 * 60 * 24 * 14;
+      1000 * 60 * 60 * 24 * 10;
 
     if (!isOldEnough) {
       return false;
