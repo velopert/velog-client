@@ -48,6 +48,7 @@ import { BANNER_ADS } from '../../lib/graphql/ad';
 import PostBanner from '../../components/post/PostBanner';
 import JobPositions from '../../components/post/JobPositions';
 import SideAd from '../../components/post/SideAd';
+import NarrowAd from '../../components/common/NarrowAd';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -570,9 +571,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         />
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />
-      {/* {shouldShowBanner && isContentLongEnough ? (
-        <PostBanner customAd={customAd} isDisplayAd={true} />
-      ) : null} */}
+      {shouldShowAds ? <NarrowAd /> : null}
       {/* {shouldShowFooterBanner ? (
         <PostBanner isDisplayAd={true} customAd={customAd} />
       ) : null} */}
