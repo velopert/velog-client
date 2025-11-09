@@ -234,7 +234,6 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   const [element, setElement] = useState<RenderedElement>(null);
   const [hasTagError, setHasTagError] = useState(false);
   const [delay, setDelay] = useState(25);
-  const [hasEnoughBlock, setHasEnoughBlock] = useState(false);
   const [htmlWithAds, setHtmlWithAds] = useState('');
 
   const throttledUpdate = React.useMemo(() => {
@@ -300,63 +299,78 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
 
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
-    const blockElements = doc.querySelectorAll('p, h1, h2, h3, h4, h5, h6, blockquote, pre, ul, ol, hr, table');
+    const blockElements = doc.querySelectorAll(
+      'p, h1, h2, h3, h4, h5, h6, blockquote, pre, ul, ol, hr, table',
+    );
 
     console.log('Total blocks:', blockElements.length);
 
-    const hasEnough = blockElements.length >= 20;
-    setHasEnoughBlock(hasEnough);
-    console.log('hasEnoughBlock:', hasEnough);
+    const blockCount = blockElements.length;
 
-    if (hasEnough) {
-      // Find the position to insert ad
-      let targetBlock = null;
-      let insertPosition = 19; // 20th block (0-based index)
+    // Find the position to insert ad
+    let insertPosition = -1;
+
+    if (blockCount >= 20) {
+      // 블록이 20개 이상이면 20번째 블록부터 헤딩 찾기
+      insertPosition = 19; // 20th block (0-based index)
 
       // Look for first h1, h2, h3 after 20th block
       for (let i = 20; i < blockElements.length && i < 50; i++) {
         const block = blockElements[i];
-        if (block.tagName === 'H1' || block.tagName === 'H2' || block.tagName === 'H3') {
-          targetBlock = block;
+        if (
+          block.tagName === 'H1' ||
+          block.tagName === 'H2' ||
+          block.tagName === 'H3'
+        ) {
           insertPosition = i;
           break;
         }
       }
+    } else {
+      // 블록이 20개 미만이면 블록수 / 2부터 헤딩 찾기
+      const startPosition = Math.floor(blockCount / 2);
+      insertPosition = startPosition;
 
-      // If heading found and before index 50, insert before it
-      // Otherwise insert after 20th block
-      const blockToInsertAfter = targetBlock
-        ? blockElements[insertPosition - 1]
-        : blockElements[19];
-
-      if (blockToInsertAfter) {
-        const adDiv = doc.createElement('ins');
-        adDiv.className = 'adsbygoogle';
-        adDiv.style.display = 'block';
-        adDiv.style.textAlign = 'center';
-        adDiv.setAttribute('data-ad-layout', 'in-article');
-        adDiv.setAttribute('data-ad-format', 'fluid');
-        adDiv.setAttribute('data-ad-client', 'ca-pub-5574866530496701');
-        adDiv.setAttribute('data-ad-slot', '9632367492');
-
-        // Insert after the target block (or before heading if found)
-        if (targetBlock) {
-          targetBlock.parentNode?.insertBefore(adDiv, targetBlock);
-        } else {
-          blockToInsertAfter.parentNode?.insertBefore(adDiv, blockToInsertAfter.nextSibling);
+      // Look for first h1, h2, h3 from the middle
+      for (let i = startPosition; i < blockElements.length; i++) {
+        const block = blockElements[i];
+        if (
+          block.tagName === 'H1' ||
+          block.tagName === 'H2' ||
+          block.tagName === 'H3'
+        ) {
+          insertPosition = i;
+          break;
         }
-
-        // Set the modified HTML
-        const updatedHtml = doc.body.innerHTML;
-        setHtmlWithAds(updatedHtml);
-
-        // Push ad after 1 second
-        setTimeout(() => {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
-        }, 1000);
-      } else {
-        setHtmlWithAds('');
       }
+    }
+
+    // Determine where to insert the ad
+    const insertBlock = blockElements[insertPosition];
+
+    if (insertBlock) {
+      const adDiv = doc.createElement('ins');
+      adDiv.className = 'adsbygoogle';
+      adDiv.style.display = 'block';
+      adDiv.style.textAlign = 'center';
+      adDiv.setAttribute('data-ad-layout', 'in-article');
+      adDiv.setAttribute('data-ad-format', 'fluid');
+      adDiv.setAttribute('data-ad-client', 'ca-pub-5574866530496701');
+      adDiv.setAttribute('data-ad-slot', '9632367492');
+
+      // Insert before the target block
+      // If heading found, insert before heading
+      // Otherwise, insert at the calculated position
+      insertBlock.parentNode?.insertBefore(adDiv, insertBlock);
+
+      // Set the modified HTML
+      const updatedHtml = doc.body.innerHTML;
+      setHtmlWithAds(updatedHtml);
+
+      // Push ad after 1 second
+      setTimeout(() => {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      }, 1000);
     } else {
       setHtmlWithAds('');
     }
