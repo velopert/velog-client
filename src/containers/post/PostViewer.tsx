@@ -546,6 +546,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         }
         sideAd={shouldShowAds ? <SideAd /> : undefined}
       />
+      {shouldShowAds ? <NarrowAd /> : null}
       {/* {shouldShowBanner ? (
         <PostBanner customAd={customAd} isDisplayAd={true} />
       ) : null} */}
@@ -571,7 +572,7 @@ const PostViewer: React.FC<PostViewerProps> = ({
         />
       </UserProfileWrapper>
       <LinkedPostList linkedPosts={post.linked_posts} />
-      {shouldShowAds ? <NarrowAd /> : null}
+
       {/* {shouldShowFooterBanner ? (
         <PostBanner isDisplayAd={true} customAd={customAd} />
       ) : null} */}
