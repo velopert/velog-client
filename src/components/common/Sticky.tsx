@@ -22,7 +22,7 @@ const Sticky: React.FC<StickyProps> = ({ className, top, children }) => {
 
   const onScroll = useCallback(() => {
     const scrollTop = getScrollTop();
-    const nextFixed = scrollTop + 112 > y;
+    const nextFixed = scrollTop + 80 > y;
     if (fixed !== nextFixed) {
       setFixed(nextFixed);
     }

@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 
 const Positioner = styled.div`
   position: absolute;
-  top: 182px;
+  top: 162px;
 `;
 
 const AdBlock = styled.div<{ width: number; height: number }>`
@@ -26,7 +26,15 @@ const AdBlock = styled.div<{ width: number; height: number }>`
   // font-size: 14px;
 `;
 
-function AdInsComponent() {
+function AdInsComponent({
+  width,
+  height,
+  slot,
+}: {
+  width: number;
+  height: number;
+  slot: string;
+}) {
   useEffect(() => {
     (window.adsbygoogle = window.adsbygoogle || []).push({});
   }, []);
@@ -36,17 +44,18 @@ function AdInsComponent() {
       className="adsbygoogle"
       style={{
         display: 'inline-block',
-        width: '160px',
-        height: '600px',
+        width: `${width}px`,
+        height: `${height}px`,
       }}
       data-ad-client="ca-pub-5574866530496701"
-      data-ad-slot="1933254146"
+      data-ad-slot={slot}
     ></ins>
   );
 }
 
 export default function SideAd() {
   const [isDesktop, setIsDesktop] = useState(false);
+  const [mode, setMode] = useState<'mini' | 'regular'>('regular');
   const [fixed, setFixed] = useState(false);
   const [y, setY] = useState(0);
   const element = useRef<HTMLDivElement | null>(null);
@@ -59,7 +68,7 @@ export default function SideAd() {
 
   const onScroll = useCallback(() => {
     const scrollTop = getScrollTop();
-    const nextFixed = scrollTop + 112 + 182 > y;
+    const nextFixed = scrollTop + 112 + 142 > y;
     if (fixed !== nextFixed) {
       setFixed(nextFixed);
     }
@@ -74,6 +83,10 @@ export default function SideAd() {
     const hasMinWidth = window.innerWidth >= 1200;
 
     setIsDesktop(!isMobile && hasMinWidth);
+
+    // Set mode based on window height
+    const windowHeight = window.innerHeight;
+    setMode(windowHeight < 864 ? 'mini' : 'regular');
   }, []);
 
   useEffect(() => {
@@ -87,7 +100,21 @@ export default function SideAd() {
     };
   }, [onScroll]);
 
-  const size = { width: 160, height: 600 };
+  useEffect(() => {
+    const handleResize = () => {
+      const windowHeight = window.innerHeight;
+      setMode(windowHeight < 864 ? 'mini' : 'regular');
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const size =
+    mode === 'mini' ? { width: 160, height: 500 } : { width: 160, height: 600 };
+  const adSlot = mode === 'mini' ? '7825010541' : '1933254146';
   const leftPosition = '-208px';
 
   return (
@@ -99,10 +126,14 @@ export default function SideAd() {
             height={size.height}
             style={{
               position: fixed ? 'fixed' : undefined,
-              top: fixed ? 282 : undefined,
+              top: fixed ? 242 : undefined,
             }}
           >
-            <AdInsComponent />
+            <AdInsComponent
+              width={size.width}
+              height={size.height}
+              slot={adSlot}
+            />
           </AdBlock>
         ) : null}
       </Positioner>
