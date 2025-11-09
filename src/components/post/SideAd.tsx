@@ -135,7 +135,7 @@ export default function SideAd() {
   return (
     <Wrapper>
       <Positioner ref={element} style={{ left: leftPosition }}>
-        {isDesktop ? (
+        {isDesktop && mode === 'mini' && (
           <AdBlock
             width={size.width}
             height={size.height}
@@ -150,7 +150,23 @@ export default function SideAd() {
               slot={adSlot}
             />
           </AdBlock>
-        ) : null}
+        )}
+        {isDesktop && mode === 'regular' && (
+          <AdBlock
+            width={size.width}
+            height={size.height}
+            style={{
+              position: fixed ? 'fixed' : undefined,
+              top: fixed ? 242 : undefined,
+            }}
+          >
+            <AdInsComponent
+              width={size.width}
+              height={size.height}
+              slot={adSlot}
+            />
+          </AdBlock>
+        )}
       </Positioner>
     </Wrapper>
   );
