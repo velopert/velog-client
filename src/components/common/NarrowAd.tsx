@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import media from '../../lib/styles/media';
+import { isTablet } from '../../lib/deviceDetection';
 
 const Wrapper = styled.div`
-  display: none;
-  ${media.medium} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 16px 0;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px 0;
 `;
 
 const AdBlock = styled.div<{ width: number; height: number }>`
@@ -48,7 +46,7 @@ function AdInsComponent({
 }
 
 export default function NarrowAd() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
   const [mode, setMode] = useState<'wide' | 'narrow'>('wide');
 
   useEffect(() => {
@@ -57,8 +55,9 @@ export default function NarrowAd() {
       /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
         userAgent,
       );
+    const checkIsTablet = isTablet();
 
-    setIsMobile(checkIsMobile);
+    setIsMobileOrTablet(checkIsMobile || checkIsTablet);
 
     // Set mode based on window width
     const windowWidth = window.innerWidth;
@@ -80,14 +79,12 @@ export default function NarrowAd() {
   }, []);
 
   const size =
-    mode === 'narrow'
-      ? { width: 300, height: 50 }
-      : { width: 728, height: 90 };
+    mode === 'narrow' ? { width: 300, height: 50 } : { width: 728, height: 90 };
   const adSlot = mode === 'narrow' ? '1778476944' : '5606751754';
 
   return (
     <Wrapper>
-      {isMobile && mode === 'narrow' && (
+      {isMobileOrTablet && mode === 'narrow' && (
         <AdBlock width={size.width} height={size.height}>
           <AdInsComponent
             width={size.width}
@@ -96,7 +93,7 @@ export default function NarrowAd() {
           />
         </AdBlock>
       )}
-      {isMobile && mode === 'wide' && (
+      {isMobileOrTablet && mode === 'wide' && (
         <AdBlock width={size.width} height={size.height}>
           <AdInsComponent
             width={size.width}

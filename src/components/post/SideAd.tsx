@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import media from '../../lib/styles/media';
 import { getScrollTop } from '../../lib/utils';
+import { isTablet } from '../../lib/deviceDetection';
 
 const Wrapper = styled.div`
   position: relative;
@@ -80,10 +81,11 @@ export default function SideAd() {
       /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
         userAgent,
       );
+    const checkIsTablet = isTablet();
     const hasMinWidth = window.innerWidth >= 1200;
     const hasMinHeight = window.innerHeight >= 674;
 
-    setIsDesktop(!isMobile && hasMinWidth && hasMinHeight);
+    setIsDesktop(!isMobile && !checkIsTablet && hasMinWidth && hasMinHeight);
 
     // Set mode based on window height
     const windowHeight = window.innerHeight;
@@ -115,10 +117,11 @@ export default function SideAd() {
         /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
           userAgent,
         );
+      const checkIsTablet = isTablet();
       const hasMinWidth = windowWidth >= 1200;
       const hasMinHeight = windowHeight >= 674;
 
-      setIsDesktop(!isMobile && hasMinWidth && hasMinHeight);
+      setIsDesktop(!isMobile && !checkIsTablet && hasMinWidth && hasMinHeight);
     };
 
     window.addEventListener('resize', handleResize);
