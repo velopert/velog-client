@@ -19,7 +19,7 @@ const Positioner = styled.div`
 const AdBlock = styled.div<{ width: number; height: number }>`
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
-  // background: #e0e0e0;
+  background: #e0e0e0;
   // border-radius: 4px;
   display: flex;
   // color: #666;
@@ -68,7 +68,7 @@ export default function SideAd() {
 
   const onScroll = useCallback(() => {
     const scrollTop = getScrollTop();
-    const nextFixed = scrollTop + 112 + 142 > y;
+    const nextFixed = scrollTop + 242 > y;
     if (fixed !== nextFixed) {
       setFixed(nextFixed);
     }
@@ -81,8 +81,9 @@ export default function SideAd() {
         userAgent,
       );
     const hasMinWidth = window.innerWidth >= 1200;
+    const hasMinHeight = window.innerHeight >= 674;
 
-    setIsDesktop(!isMobile && hasMinWidth);
+    setIsDesktop(!isMobile && hasMinWidth && hasMinHeight);
 
     // Set mode based on window height
     const windowHeight = window.innerHeight;
@@ -91,7 +92,7 @@ export default function SideAd() {
 
   useEffect(() => {
     setup();
-  }, [setup]);
+  }, [setup, mode]);
 
   useEffect(() => {
     window.addEventListener('scroll', onScroll);
@@ -103,7 +104,21 @@ export default function SideAd() {
   useEffect(() => {
     const handleResize = () => {
       const windowHeight = window.innerHeight;
+      const windowWidth = window.innerWidth;
+
+      // Update mode based on height
       setMode(windowHeight < 864 ? 'mini' : 'regular');
+
+      // Update isDesktop based on width and height
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isMobile =
+        /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+          userAgent,
+        );
+      const hasMinWidth = windowWidth >= 1200;
+      const hasMinHeight = windowHeight >= 674;
+
+      setIsDesktop(!isMobile && hasMinWidth && hasMinHeight);
     };
 
     window.addEventListener('resize', handleResize);
