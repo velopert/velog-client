@@ -303,73 +303,85 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
       'p, h1, h2, h3, h4, h5, h6, blockquote, pre, ul, ol, hr, table',
     );
 
-    console.log('Total blocks:', blockElements.length);
-
     const blockCount = blockElements.length;
 
-    // Find the position to insert ad
-    let insertPosition = -1;
+    // Find the position to insert first ad (10~25 범위)
+    let firstAdPosition = 9; // 10th block (0-based index)
 
-    if (blockCount >= 20) {
-      // 블록이 20개 이상이면 20번째 블록부터 헤딩 찾기
-      insertPosition = 19; // 20th block (0-based index)
+    // Look for first h1, h2, h3 from 10th to 25th block
+    for (let i = 10; i <= 25 && i < blockElements.length; i++) {
+      const block = blockElements[i];
+      if (
+        block.tagName === 'H1' ||
+        block.tagName === 'H2' ||
+        block.tagName === 'H3'
+      ) {
+        firstAdPosition = i;
+        break;
+      }
+    }
 
-      // Look for first h1, h2, h3 after 20th block
-      for (let i = 20; i < blockElements.length && i < 50; i++) {
+    // Find the position to insert second ad (only if blockCount >= 35)
+    let secondAdPosition = -1;
+    if (blockCount >= 35) {
+      // 블록이 35 이상인 경우: 25번째부터 40번째까지 h1, h2, h3 찾기
+      secondAdPosition = 24; // 25th block (0-based index)
+
+      // Look for first h1, h2, h3 from 25th to 40th block
+      for (let i = 25; i <= 40 && i < blockElements.length; i++) {
         const block = blockElements[i];
         if (
           block.tagName === 'H1' ||
           block.tagName === 'H2' ||
           block.tagName === 'H3'
         ) {
-          insertPosition = i;
+          secondAdPosition = i;
           break;
         }
       }
     } else {
-      // 블록이 20개 미만이면 블록수 / 2부터 헤딩 찾기
-      const startPosition = Math.floor(blockCount / 2);
-      insertPosition = startPosition;
-
-      // Look for first h1, h2, h3 from the middle
-      for (let i = startPosition; i < blockElements.length; i++) {
-        const block = blockElements[i];
-        if (
-          block.tagName === 'H1' ||
-          block.tagName === 'H2' ||
-          block.tagName === 'H3'
-        ) {
-          insertPosition = i;
-          break;
-        }
-      }
     }
 
-    // Determine where to insert the ad
-    const insertBlock = blockElements[insertPosition];
+    // Insert ads
+    const firstAdBlock = blockElements[firstAdPosition];
+    const secondAdBlock =
+      secondAdPosition >= 0 ? blockElements[secondAdPosition] : null;
 
-    if (insertBlock) {
-      const adDiv = doc.createElement('ins');
-      adDiv.className = 'adsbygoogle';
-      adDiv.style.display = 'block';
-      adDiv.style.textAlign = 'center';
-      adDiv.setAttribute('data-ad-layout', 'in-article');
-      adDiv.setAttribute('data-ad-format', 'fluid');
-      adDiv.setAttribute('data-ad-client', 'ca-pub-5574866530496701');
-      adDiv.setAttribute('data-ad-slot', '9632367492');
+    if (firstAdBlock) {
+      // Insert first ad
+      const adDiv1 = doc.createElement('ins');
+      adDiv1.className = 'adsbygoogle';
+      adDiv1.style.display = 'block';
+      adDiv1.style.textAlign = 'center';
+      adDiv1.setAttribute('data-ad-layout', 'in-article');
+      adDiv1.setAttribute('data-ad-format', 'fluid');
+      adDiv1.setAttribute('data-ad-client', 'ca-pub-5574866530496701');
+      adDiv1.setAttribute('data-ad-slot', '9632367492');
+      firstAdBlock.parentNode?.insertBefore(adDiv1, firstAdBlock);
 
-      // Insert before the target block
-      // If heading found, insert before heading
-      // Otherwise, insert at the calculated position
-      insertBlock.parentNode?.insertBefore(adDiv, insertBlock);
+      // Insert second ad if applicable
+      if (secondAdBlock) {
+        const adDiv2 = doc.createElement('ins');
+        adDiv2.className = 'adsbygoogle';
+        adDiv2.style.display = 'block';
+        adDiv2.style.textAlign = 'center';
+        adDiv2.setAttribute('data-ad-layout', 'in-article');
+        adDiv2.setAttribute('data-ad-format', 'fluid');
+        adDiv2.setAttribute('data-ad-client', 'ca-pub-5574866530496701');
+        adDiv2.setAttribute('data-ad-slot', '9632367492');
+        secondAdBlock.parentNode?.insertBefore(adDiv2, secondAdBlock);
+      }
 
       // Set the modified HTML
       const updatedHtml = doc.body.innerHTML;
       setHtmlWithAds(updatedHtml);
 
-      // Push ad after 1 second
+      // Push ads after 1 second
       setTimeout(() => {
         (window.adsbygoogle = window.adsbygoogle || []).push({});
+        if (secondAdBlock) {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
       }, 1000);
     } else {
       setHtmlWithAds('');

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import media from '../../lib/styles/media';
-import { isTablet } from '../../lib/deviceDetection';
 
 const Wrapper = styled.div`
   display: flex;
@@ -46,27 +45,24 @@ function AdInsComponent({
 }
 
 export default function NarrowAd() {
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+  const [isWindowNarrow, setIsWindowNarrow] = useState(false);
   const [mode, setMode] = useState<'wide' | 'narrow'>('wide');
 
   useEffect(() => {
-    const userAgent = navigator.userAgent.toLowerCase();
-    const checkIsMobile =
-      /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
-        userAgent,
-      );
-    const checkIsTablet = isTablet();
+    const windowWidth = window.innerWidth;
 
-    setIsMobileOrTablet(checkIsMobile || checkIsTablet);
+    setIsWindowNarrow(windowWidth <= 1200);
 
     // Set mode based on window width
-    const windowWidth = window.innerWidth;
     setMode(windowWidth < 768 ? 'narrow' : 'wide');
   }, []);
 
   useEffect(() => {
     const handleResize = () => {
       const windowWidth = window.innerWidth;
+
+      // Update isWindowNarrow based on width
+      setIsWindowNarrow(windowWidth <= 1200);
 
       // Update mode based on width
       setMode(windowWidth < 768 ? 'narrow' : 'wide');
@@ -84,7 +80,7 @@ export default function NarrowAd() {
 
   return (
     <Wrapper>
-      {isMobileOrTablet && mode === 'narrow' && (
+      {isWindowNarrow && mode === 'narrow' && (
         <AdBlock width={size.width} height={size.height}>
           <AdInsComponent
             width={size.width}
@@ -93,7 +89,7 @@ export default function NarrowAd() {
           />
         </AdBlock>
       )}
-      {isMobileOrTablet && mode === 'wide' && (
+      {isWindowNarrow && mode === 'wide' && (
         <AdBlock width={size.width} height={size.height}>
           <AdInsComponent
             width={size.width}
