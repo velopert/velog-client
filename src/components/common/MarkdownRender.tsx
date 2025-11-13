@@ -321,14 +321,15 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
       }
     }
 
-    // Find the position to insert second ad (only if blockCount >= 35)
+    // Find the position to insert second ad (only if blockCount >= 40)
     let secondAdPosition = -1;
-    if (blockCount >= 35) {
-      // 블록이 35 이상인 경우: 25번째부터 40번째까지 h1, h2, h3 찾기
-      secondAdPosition = 24; // 25th block (0-based index)
+    if (blockCount >= 40) {
+      // 블록이 40 이상인 경우: 35번째부터 50번째(또는 끝)까지 h1, h2, h3 찾기
+      secondAdPosition = 34; // 35th block (0-based index)
 
-      // Look for first h1, h2, h3 from 25th to 40th block
-      for (let i = 25; i <= 40 && i < blockElements.length; i++) {
+      const searchEnd = Math.min(50, blockElements.length);
+      // Look for first h1, h2, h3 from 35th to searchEnd
+      for (let i = 35; i < searchEnd; i++) {
         const block = blockElements[i];
         if (
           block.tagName === 'H1' ||
@@ -339,7 +340,6 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
           break;
         }
       }
-    } else {
     }
 
     // Insert ads
