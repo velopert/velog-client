@@ -89,7 +89,7 @@ export default function SideAd() {
 
     // Set mode based on window height
     const windowHeight = window.innerHeight;
-    setMode(windowHeight < 864 ? 'mini' : 'regular');
+    setMode(windowHeight < 852 ? 'mini' : 'regular');
   }, []);
 
   useEffect(() => {
