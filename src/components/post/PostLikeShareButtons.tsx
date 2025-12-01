@@ -146,7 +146,7 @@ const PostLikeShareButtons: React.FC<PostLikeShareButtonsProps> = ({
   return (
     <Wrapper>
       <Positioner>
-        <PostLikeShareButtonsBlock top={112}>
+        <PostLikeShareButtonsBlock top={80}>
           <CircleButton
             data-testid="like"
             onClick={onLikeToggle}

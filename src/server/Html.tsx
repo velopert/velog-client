@@ -91,11 +91,16 @@ function Html({
           }}
         ></script>
         <script
+          async
+          src="https://cdn.fuseplatform.net/publift/tags/2/4158/fuse.js"
+        ></script>
+        <script
           defer
           src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onAppReady"
         ></script>
       </head>
       <body data-theme={theme}>
+        <div id="fuse-sidebar"></div>
         <div id="root" dangerouslySetInnerHTML={{ __html: content }}></div>
         <script
           dangerouslySetInnerHTML={{

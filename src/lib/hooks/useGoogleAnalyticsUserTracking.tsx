@@ -24,10 +24,10 @@ const useGoogleAnalyticsUserTracking = () => {
         },
       });
       gtag('set', { login_status: 'logged_in' });
-      console.log('hello, user');
+      // console.log('hello, user');
     } else {
       gtag('set', { login_status: 'guest' });
-      console.log('hello, guest');
+      // console.log('hello, guest');
     }
   }, [currentUser]);
 };

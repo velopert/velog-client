@@ -147,6 +147,7 @@ export interface PostHeadProps {
   isPrivate?: boolean;
   mobileLikeButton: React.ReactNode;
   followButton: React.ReactNode;
+  sideAd?: React.ReactNode;
   onOpenStats(): void;
 }
 
@@ -169,6 +170,7 @@ const PostHead: React.FC<PostHeadProps> = ({
   mobileLikeButton,
   onOpenStats,
   followButton,
+  sideAd,
 }) => {
   const [askRemove, toggleAskRemove] = useToggle(false);
 
@@ -211,6 +213,7 @@ const PostHead: React.FC<PostHeadProps> = ({
         </SubInfo>
         <TagList tags={tags} link />
         {shareButtons}
+        {sideAd}
         {toc}
         {series && (
           <PostSeriesInfo

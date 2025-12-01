@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import styled from 'styled-components';
 import { useTheme } from '../../lib/hooks/useTheme';
-import { themedPalette } from '../../lib/styles/themes';
 import PageTemplate from '../base/PageTemplate';
 
 const VelogPageTemplateBlock = styled(PageTemplate)`
@@ -28,10 +27,7 @@ export function useSetShowFooter() {
 
 function GraphCDNFooter() {
   const theme = useTheme();
-  const img =
-    theme === 'dark'
-      ? 'https://graphcdn.io/badge-light.svg'
-      : 'https://graphcdn.io/badge.svg';
+  const img = 'https://i.imgur.com/BMhDSUt.png';
   return (
     <Block>
       <a href="https://graphcdn.io/?ref=powered-by">
@@ -42,7 +38,7 @@ function GraphCDNFooter() {
 }
 
 const Block = styled.div`
-  background: ${themedPalette.bg_page1};
+  background: transparent;
   display: flex;
   justify-content: center;
   padding-top: 1rem;

@@ -28,6 +28,7 @@ export interface MarkdownRenderProps {
   codeTheme?: string;
   onConvertFinish?: (html: string) => any;
   editing?: boolean;
+  shouldShowAds?: boolean;
 }
 
 function sanitizeEventScript(htmlString: string) {
@@ -208,6 +209,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   codeTheme = 'atom-one',
   onConvertFinish,
   editing,
+  shouldShowAds = false,
 }) => {
   const [html, setHtml] = useState(
     ssrEnabled
@@ -232,6 +234,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   const [element, setElement] = useState<RenderedElement>(null);
   const [hasTagError, setHasTagError] = useState(false);
   const [delay, setDelay] = useState(25);
+  const [htmlWithAds, setHtmlWithAds] = useState('');
 
   const throttledUpdate = React.useMemo(() => {
     return throttle(delay, (markdown: string) => {
@@ -288,6 +291,115 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
     throttledUpdate(markdown);
   }, [markdown, throttledUpdate]);
 
+  useEffect(() => {
+    if (!shouldShowAds || !html) {
+      setHtmlWithAds('');
+      return;
+    }
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const blockElements = doc.querySelectorAll(
+      'p, h1, h2, h3, h4, h5, h6, blockquote, pre, ul, ol, hr, table',
+    );
+
+    const blockCount = blockElements.length;
+
+    // Find the position to insert first ad (10~25 범위)
+    let firstAdPosition = 9; // 10th block (0-based index)
+
+    // Look for first h1, h2, h3 from 10th to 25th block
+    for (let i = 10; i <= 25 && i < blockElements.length; i++) {
+      const block = blockElements[i];
+      if (
+        block.tagName === 'H1' ||
+        block.tagName === 'H2' ||
+        block.tagName === 'H3'
+      ) {
+        firstAdPosition = i;
+        break;
+      }
+    }
+
+    // Find the position to insert second ad (only if blockCount >= 40)
+    let secondAdPosition = -1;
+    if (blockCount >= 40) {
+      // 블록이 40 이상인 경우: 35번째부터 50번째(또는 끝)까지 h1, h2, h3 찾기
+      secondAdPosition = 34; // 35th block (0-based index)
+
+      const searchEnd = Math.min(50, blockElements.length);
+      // Look for first h1, h2, h3 from 35th to searchEnd
+      for (let i = 35; i < searchEnd; i++) {
+        const block = blockElements[i];
+        if (
+          block.tagName === 'H1' ||
+          block.tagName === 'H2' ||
+          block.tagName === 'H3'
+        ) {
+          secondAdPosition = i;
+          break;
+        }
+      }
+    }
+
+    // Insert ads
+    const firstAdBlock = blockElements[firstAdPosition];
+    const secondAdBlock =
+      secondAdPosition >= 0 ? blockElements[secondAdPosition] : null;
+
+    if (firstAdBlock) {
+      // Insert first ad
+      // const adDiv1 = doc.createElement('ins');
+      // adDiv1.className = 'adsbygoogle';
+      // adDiv1.style.display = 'block';
+      // adDiv1.style.textAlign = 'center';
+      // adDiv1.setAttribute('data-ad-layout', 'in-article');
+      // adDiv1.setAttribute('data-ad-format', 'fluid');
+      // adDiv1.setAttribute('data-ad-client', 'ca-pub-5574866530496701');
+      // adDiv1.setAttribute('data-ad-slot', '9632367492');
+      const adDiv1 = doc.createElement('div');
+      adDiv1.setAttribute('data-fuse', 'incontent_1_articlepage');
+      firstAdBlock.parentNode?.insertBefore(adDiv1, firstAdBlock);
+
+      // Insert second ad if applicable
+      if (secondAdBlock) {
+        // const adDiv2 = doc.createElement('ins');
+        // adDiv2.className = 'adsbygoogle';
+        // adDiv2.style.display = 'block';
+        // adDiv2.style.textAlign = 'center';
+        // adDiv2.setAttribute('data-ad-layout', 'in-article');
+        // adDiv2.setAttribute('data-ad-format', 'fluid');
+        // adDiv2.setAttribute('data-ad-client', 'ca-pub-5574866530496701');
+        // adDiv2.setAttribute('data-ad-slot', '9632367492');
+        const adDiv2 = doc.createElement('div');
+        adDiv2.setAttribute('data-fuse', 'incontent_2_articlepage');
+        secondAdBlock.parentNode?.insertBefore(adDiv2, secondAdBlock);
+      }
+
+      // Set the modified HTML
+      const updatedHtml = doc.body.innerHTML;
+      setHtmlWithAds(updatedHtml);
+
+      // Push ads after 1 second
+      setTimeout(() => {
+        // (window.adsbygoogle = window.adsbygoogle || []).push({});
+        // if (secondAdBlock) {
+        //   (window.adsbygoogle = window.adsbygoogle || []).push({});
+        // }
+
+        const fusetag = window.fusetag || (window.fusetag = { que: [] });
+
+        fusetag.que.push(function () {
+          const init = (fusetag as any).pageInit;
+          if (!init) return;
+          init({});
+        });
+      }, 1000);
+    } else {
+      setHtmlWithAds('');
+    }
+  }, [html, shouldShowAds]);
+
   return (
     <Typography>
       <Helmet>
@@ -312,7 +424,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
       ) : (
         <MarkdownRenderBlock
           className={codeTheme}
-          dangerouslySetInnerHTML={{ __html: html }}
+          dangerouslySetInnerHTML={{ __html: htmlWithAds || html }}
         />
       )}
     </Typography>

@@ -22,6 +22,7 @@ const PostContentBlock = styled.div`
 export interface PostContentProps {
   isMarkdown: boolean;
   body: string;
+  shouldShowAds?: boolean;
 }
 
 function optimizeImagesFromPost(markdown: string) {
@@ -45,7 +46,7 @@ function optimizeImagesFromPost(markdown: string) {
   }, markdown);
 }
 
-const PostContent: React.FC<PostContentProps> = ({ isMarkdown, body }) => {
+const PostContent: React.FC<PostContentProps> = ({ isMarkdown, body, shouldShowAds = false }) => {
   const [html, setHtml] = useState(isMarkdown ? null : body);
   const dispatch = usePostViewerDispatch();
   const imageOptimizedPost = useMemo(
@@ -65,6 +66,7 @@ const PostContent: React.FC<PostContentProps> = ({ isMarkdown, body }) => {
         <MarkdownRender
           markdown={imageOptimizedPost}
           onConvertFinish={setHtml}
+          shouldShowAds={shouldShowAds}
         />
       ) : (
         <PostHtmlContent html={body} />
