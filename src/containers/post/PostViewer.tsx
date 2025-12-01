@@ -49,6 +49,7 @@ import PostBanner from '../../components/post/PostBanner';
 import JobPositions from '../../components/post/JobPositions';
 import SideAd from '../../components/post/SideAd';
 import NarrowAd from '../../components/common/NarrowAd';
+import FuseSideAd from '../../components/post/FuseSideAd';
 
 const UserProfileWrapper = styled(VelogResponsive)`
   margin-top: 16rem;
@@ -521,13 +522,15 @@ const PostViewer: React.FC<PostViewerProps> = ({
         onEdit={onEdit}
         onOpenStats={onOpenStats}
         shareButtons={
-          <PostLikeShareButtons
-            onLikeToggle={onLikeToggle}
-            onShareClick={onShareClick}
-            likes={post.likes}
-            liked={post.liked}
-            postId={post.id}
-          />
+          userId ? (
+            <PostLikeShareButtons
+              onLikeToggle={onLikeToggle}
+              onShareClick={onShareClick}
+              likes={post.likes}
+              liked={post.liked}
+              postId={post.id}
+            />
+          ) : null
         }
         toc={<PostToc />}
         isPrivate={post.is_private}
@@ -544,9 +547,9 @@ const PostViewer: React.FC<PostViewerProps> = ({
             followingUserId={post.user.id}
           />
         }
-        sideAd={shouldShowAds ? <SideAd /> : undefined}
+        sideAd={shouldShowAds ? <FuseSideAd /> : undefined}
       />
-      {shouldShowAds ? <NarrowAd /> : null}
+      {/* {shouldShowAds ? <NarrowAd /> : null} */}
       {/* {shouldShowBanner ? (
         <PostBanner customAd={customAd} isDisplayAd={true} />
       ) : null} */}

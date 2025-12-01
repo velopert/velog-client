@@ -349,26 +349,30 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
 
     if (firstAdBlock) {
       // Insert first ad
-      const adDiv1 = doc.createElement('ins');
-      adDiv1.className = 'adsbygoogle';
-      adDiv1.style.display = 'block';
-      adDiv1.style.textAlign = 'center';
-      adDiv1.setAttribute('data-ad-layout', 'in-article');
-      adDiv1.setAttribute('data-ad-format', 'fluid');
-      adDiv1.setAttribute('data-ad-client', 'ca-pub-5574866530496701');
-      adDiv1.setAttribute('data-ad-slot', '9632367492');
+      // const adDiv1 = doc.createElement('ins');
+      // adDiv1.className = 'adsbygoogle';
+      // adDiv1.style.display = 'block';
+      // adDiv1.style.textAlign = 'center';
+      // adDiv1.setAttribute('data-ad-layout', 'in-article');
+      // adDiv1.setAttribute('data-ad-format', 'fluid');
+      // adDiv1.setAttribute('data-ad-client', 'ca-pub-5574866530496701');
+      // adDiv1.setAttribute('data-ad-slot', '9632367492');
+      const adDiv1 = doc.createElement('div');
+      adDiv1.setAttribute('data-fuse', 'incontent_1_articlepage');
       firstAdBlock.parentNode?.insertBefore(adDiv1, firstAdBlock);
 
       // Insert second ad if applicable
       if (secondAdBlock) {
-        const adDiv2 = doc.createElement('ins');
-        adDiv2.className = 'adsbygoogle';
-        adDiv2.style.display = 'block';
-        adDiv2.style.textAlign = 'center';
-        adDiv2.setAttribute('data-ad-layout', 'in-article');
-        adDiv2.setAttribute('data-ad-format', 'fluid');
-        adDiv2.setAttribute('data-ad-client', 'ca-pub-5574866530496701');
-        adDiv2.setAttribute('data-ad-slot', '9632367492');
+        // const adDiv2 = doc.createElement('ins');
+        // adDiv2.className = 'adsbygoogle';
+        // adDiv2.style.display = 'block';
+        // adDiv2.style.textAlign = 'center';
+        // adDiv2.setAttribute('data-ad-layout', 'in-article');
+        // adDiv2.setAttribute('data-ad-format', 'fluid');
+        // adDiv2.setAttribute('data-ad-client', 'ca-pub-5574866530496701');
+        // adDiv2.setAttribute('data-ad-slot', '9632367492');
+        const adDiv2 = doc.createElement('div');
+        adDiv2.setAttribute('data-fuse', 'incontent_2_articlepage');
         secondAdBlock.parentNode?.insertBefore(adDiv2, secondAdBlock);
       }
 
@@ -378,10 +382,18 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
 
       // Push ads after 1 second
       setTimeout(() => {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-        if (secondAdBlock) {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
-        }
+        // (window.adsbygoogle = window.adsbygoogle || []).push({});
+        // if (secondAdBlock) {
+        //   (window.adsbygoogle = window.adsbygoogle || []).push({});
+        // }
+
+        const fusetag = window.fusetag || (window.fusetag = { que: [] });
+
+        fusetag.que.push(function () {
+          const init = (fusetag as any).pageInit;
+          if (!init) return;
+          init({});
+        });
       }, 1000);
     } else {
       setHtmlWithAds('');

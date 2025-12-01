@@ -17,6 +17,10 @@ const PolicyTemplate = styled(PageTemplate)`
     width: 768px;
     padding-bottom: 5rem;
   }
+
+  #fuse-privacy-tool {
+    font-size: 0.5rem;
+  }
 `;
 
 function PolicyPage({ match }: PolicyPageProps) {
@@ -24,6 +28,7 @@ function PolicyPage({ match }: PolicyPageProps) {
 
   return (
     <PolicyTemplate>
+      <div data-fuse-privacy-tool></div>
       <main>
         <HorizontalTab activeTab={type} tabWidth={12}>
           <HorizontalTab.TabItem
