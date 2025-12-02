@@ -72,7 +72,7 @@ const MarkdownRenderBlock = styled.div`
     margin-bottom: 1.5rem;
   }
 
-  iframe {
+  iframe:not([id^='google_ads']) {
     width: 768px;
     height: 430px;
     max-width: 100%;
