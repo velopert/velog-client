@@ -60,16 +60,6 @@ const TypographyBlock = styled.div`
     margin-bottom: 2rem;
   }
 
-  p {
-    img {
-      display: block;
-      margin: 0 auto;
-      max-width: 100%;
-      margin-top: 3rem;
-      margin-bottom: 3rem;
-    }
-  }
-
   h1 {
     font-size: 2.5rem;
   }
