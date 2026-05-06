@@ -827,7 +827,7 @@ export default class WriteMarkdownEditor extends React.Component<
       codeblock: () => {
         const selected = doc.getSelection();
         if (selected.length === 0) {
-          doc.replaceSelection('```\n코드를 입력하세요\n```');
+          doc.replaceSelection('```코드를 입력하세요```');
           doc.setSelection(
             {
               line: cursor.line + 1,
