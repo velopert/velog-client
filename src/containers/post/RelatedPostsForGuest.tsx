@@ -13,6 +13,7 @@ import { userThumbnail } from '../../static/images';
 import { Link } from 'react-router-dom';
 import gtag from '../../lib/gtag';
 import optimizeImage from '../../lib/optimizeImage';
+import sanitizeDescription from '../../lib/sanitizeDescription';
 import RelatedPostAd from './RelatedPostAd';
 // import { detectAnyAdblocker } from 'just-detect-adblock';
 
@@ -101,7 +102,7 @@ function RelatedPostsForGuest({
                 <div className="content">
                   <h5>{post.title}</h5>
                   <p>
-                    {post.short_description.replace(/&#x3A;/g, ':')}
+                    {sanitizeDescription(post.short_description)}
                     {post.short_description.length === 150 && '...'}
                   </p>
                 </div>

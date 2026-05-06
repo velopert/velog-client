@@ -13,6 +13,7 @@ import RatioImage from './RatioImage';
 import media from '../../lib/styles/media';
 import PrivatePostLabel from './PrivatePostLabel';
 import optimizeImage from '../../lib/optimizeImage';
+import sanitizeDescription from '../../lib/sanitizeDescription';
 import { LikeIcon } from '../../static/svg';
 import VLink from './VLink';
 
@@ -190,7 +191,7 @@ const FlatPostCard = ({ post, hideUser }: PostCardProps) => {
       <Link to={url}>
         <h2>{post.title}</h2>
       </Link>
-      <p>{post.short_description}</p>
+      <p>{sanitizeDescription(post.short_description)}</p>
       <div className="tags-wrapper">
         {post.tags.map((tag) => (
           <Tag key={tag} name={tag} link />

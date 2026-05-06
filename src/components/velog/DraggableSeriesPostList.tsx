@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { SeriesPostPreview } from '../../lib/graphql/series';
 import SeriesPostItem from './SeriesPostItem';
+import sanitizeDescription from '../../lib/sanitizeDescription';
 import {
   DragDropContext,
   Droppable,
@@ -89,7 +90,7 @@ const DraggableSeriesList = ({
                         <SeriesPostItem
                           date={item.post.released_at}
                           title={item.post.title}
-                          description={item.post.short_description}
+                          description={sanitizeDescription(item.post.short_description)}
                           thumbnail={item.post.thumbnail}
                           index={index + 1}
                           urlSlug={item.post.url_slug}

@@ -1,5 +1,6 @@
 import { deprecated } from 'typesafe-actions';
 import { createReducer, updateKey } from '../lib/utils';
+import sanitizeDescription from '../lib/sanitizeDescription';
 
 const { createStandardAction } = deprecated;
 
@@ -203,7 +204,7 @@ const write = createReducer(
         ...state,
         title,
         tags,
-        description: description.slice(0, 150),
+        description: sanitizeDescription(description),
         urlSlug,
         isPrivate,
         isTemp: isTemp || false,

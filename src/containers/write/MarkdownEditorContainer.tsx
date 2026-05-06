@@ -34,6 +34,7 @@ import {
   EDIT_POST,
 } from '../../lib/graphql/post';
 import { escapeForUrl } from '../../lib/utils';
+import sanitizeDescription from '../../lib/sanitizeDescription';
 import { useHistory } from 'react-router';
 import useSaveHotKey from './hooks/useSaveHotkey';
 import embedPlugin from '../../lib/remark/embedPlugin';
@@ -132,7 +133,7 @@ const MarkdownEditorContainer: React.FC<MarkdownEditorContainerProps> = () => {
       .use(strip)
       .process(markdown.replace(/#(.*?)\n/g, ''), (err: any, file: any) => {
         const text = String(file);
-        const sliced = text.replace(/\n/g, '').slice(0, 150);
+        const sliced = sanitizeDescription(text);
         actionCreators.setDefaultDescription(sliced);
         actionCreators.openPublish();
       });

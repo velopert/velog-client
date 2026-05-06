@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import SeriesPostItem, { SeriesPostItemSkeleton } from './SeriesPostItem';
 import { SeriesPostPreview } from '../../lib/graphql/series';
+import sanitizeDescription from '../../lib/sanitizeDescription';
 
 const SeriesPostListBlock = styled.div`
   margin-top: 4rem;
@@ -31,7 +32,7 @@ const SeriesPostList: React.FC<SeriesPostListProps> = ({
         <SeriesPostItem
           date={seriesPost.post.released_at}
           title={seriesPost.post.title}
-          description={seriesPost.post.short_description}
+          description={sanitizeDescription(seriesPost.post.short_description)}
           thumbnail={seriesPost.post.thumbnail}
           index={reversed ? seriesPosts.length - i : i + 1}
           urlSlug={seriesPost.post.url_slug}

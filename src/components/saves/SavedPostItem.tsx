@@ -5,6 +5,7 @@ import { themedPalette } from '../../lib/styles/themes';
 import palette from '../../lib/styles/palette';
 import { formatDate } from '../../lib/utils';
 import { Link } from 'react-router-dom';
+import sanitizeDescription from '../../lib/sanitizeDescription';
 
 export interface SavedPostItemProps {
   post: PartialPost;
@@ -64,7 +65,7 @@ function SavedPostItem({ post, onRemove }: SavedPostItemProps) {
         <Link to={editUrl}>{post.title}</Link>
       </h3>
       <p>
-        <Link to={editUrl}>{post.short_description}</Link>
+        <Link to={editUrl}>{sanitizeDescription(post.short_description)}</Link>
       </p>
       <section>
         <div className="time">{formatDate(post.updated_at)}</div>

@@ -8,6 +8,7 @@ import { PartialPost } from '../../lib/graphql/post';
 import { formatDate } from '../../lib/utils';
 import { userThumbnail } from '../../static/images';
 import optimizeImage from '../../lib/optimizeImage';
+import sanitizeDescription from '../../lib/sanitizeDescription';
 import SkeletonTexts from './SkeletonTexts';
 import Skeleton from './Skeleton';
 import { mediaQuery } from '../../lib/styles/media';
@@ -62,7 +63,7 @@ function PostCard({ post, forHome, forPost }: PostCardProps) {
           <h4>{post.title}</h4>
           <div className="description-wrapper">
             <p>
-              {post.short_description.replace(/&#x3A;/g, ':')}
+              {sanitizeDescription(post.short_description)}
               {post.short_description.length === 150 && '...'}
             </p>
           </div>
