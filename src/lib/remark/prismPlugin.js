@@ -36,6 +36,8 @@ export default function attacher({ include, exclude } = {}) {
   function visitor(node) {
     let { lang, data } = node;
 
+    if (lang === 'mermaid') return;
+
     // if (
     //   !lang ||
     //   (include && include.indexOf(lang) === -1) ||
