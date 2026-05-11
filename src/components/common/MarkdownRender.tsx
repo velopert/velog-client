@@ -8,6 +8,7 @@ import prismThemes from '../../lib/styles/prismThemes';
 import breaks from 'remark-breaks';
 import Typography from './Typography';
 import embedPlugin from '../../lib/remark/embedPlugin';
+import mermaidPlugin from '../../lib/remark/mermaidPlugin';
 import { loadScript, ssrEnabled } from '../../lib/utils';
 import media from '../../lib/styles/media';
 import parse from 'html-react-parser';
@@ -125,6 +126,23 @@ const MarkdownRenderBlock = styled.div`
   .katex-mathml {
     display: none;
   }
+
+  .mermaid-block {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+
+    pre.mermaid {
+      background: transparent;
+      padding: 0;
+      text-align: center;
+    }
+
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+  }
 `;
 
 function filter(html: string) {
@@ -218,6 +236,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
             .use(breaks)
             .use(remarkParse)
             .use(slug)
+            .use(mermaidPlugin)
             .use(prismPlugin)
             .use(embedPlugin)
             .use(remark2rehype, { allowDangerousHTML: true })
@@ -242,6 +261,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
         .use(breaks)
         .use(remarkParse)
         .use(slug)
+        .use(mermaidPlugin)
         .use(prismPlugin)
         .use(embedPlugin)
         .use(remark2rehype, { allowDangerousHTML: true })
@@ -290,6 +310,33 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
   useEffect(() => {
     throttledUpdate(markdown);
   }, [markdown, throttledUpdate]);
+
+  useEffect(() => {
+    if (!html || html.indexOf('class="mermaid"') === -1) return;
+
+    const renderMermaid = () => {
+      const mermaid = (window as any).mermaid;
+      if (!mermaid) return;
+      mermaid.initialize({
+        startOnLoad: false,
+        theme:
+          codeTheme === 'atom-one' ||
+          codeTheme === 'monokai' ||
+          codeTheme === 'dracula'
+            ? 'dark'
+            : 'default',
+      });
+      mermaid.run({ querySelector: '.mermaid' });
+    };
+
+    if ((window as any).mermaid) {
+      renderMermaid();
+    } else {
+      loadScript(
+        'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js',
+      ).then(renderMermaid);
+    }
+  }, [html, codeTheme]);
 
   useEffect(() => {
     if (!shouldShowAds || !html) {

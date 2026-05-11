@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Mermaid Rendering Integration Test</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 768px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: #1e1e1e;
+      color: #e0e0e0;
+    }
+    h1 { border-bottom: 2px solid #444; padding-bottom: 0.5rem; }
+    h2 { color: #96d0ff; margin-top: 2rem; }
+    .test-case {
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      background: #252525;
+    }
+    .test-case.pass { border-color: #4caf50; }
+    .test-case.fail { border-color: #f44336; }
+    .status { font-weight: bold; margin-bottom: 0.5rem; }
+    .status.pass { color: #4caf50; }
+    .status.fail { color: #f44336; }
+
+    /* MarkdownRender.tsx 와 동일한 스타일 */
+    .mermaid-block {
+      display: flex;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+    .mermaid-block pre.mermaid {
+      background: transparent;
+      padding: 0;
+      text-align: center;
+    }
+    .mermaid-block svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Prism 코드 블록 스타일 (비교용) */
+    pre.code-block {
+      font-family: 'Fira Mono', monospace;
+      font-size: 0.875rem;
+      padding: 1rem;
+      border-radius: 4px;
+      background: #282c34;
+      color: #abb2bf;
+      overflow-x: auto;
+    }
+
+    #summary {
+      position: sticky;
+      top: 0;
+      background: #1e1e1e;
+      padding: 1rem 0;
+      border-bottom: 1px solid #444;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div id="summary">
+    <h1>Mermaid Rendering Integration Test</h1>
+    <p id="result">Loading mermaid...</p>
+  </div>
+
+  <!-- Test 1: Flowchart -->
+  <div class="test-case" id="test-flowchart">
+    <div class="status" id="status-flowchart">PENDING</div>
+    <h2>1. Flowchart (graph TD)</h2>
+    <div class="mermaid-block">
+      <pre class="mermaid">graph TD;
+    A[Start] --> B{Condition?};
+    B -->|Yes| C[Process];
+    B -->|No| D[End];
+    C --> D;</pre>
+    </div>
+  </div>
+
+  <!-- Test 2: Sequence Diagram -->
+  <div class="test-case" id="test-sequence">
+    <div class="status" id="status-sequence">PENDING</div>
+    <h2>2. Sequence Diagram</h2>
+    <div class="mermaid-block">
+      <pre class="mermaid">sequenceDiagram
+    participant U as User
+    participant S as Server
+    participant DB as Database
+    U->>S: API Request
+    S->>DB: Query
+    DB-->>S: Result
+    S-->>U: JSON Response</pre>
+    </div>
+  </div>
+
+  <!-- Test 3: Class Diagram -->
+  <div class="test-case" id="test-class">
+    <div class="status" id="status-class">PENDING</div>
+    <h2>3. Class Diagram</h2>
+    <div class="mermaid-block">
+      <pre class="mermaid">classDiagram
+    class Animal {
+        +String name
+        +int age
+        +makeSound()
+    }
+    class Dog {
+        +fetch()
+        +bark()
+    }
+    class Cat {
+        +purr()
+        +scratch()
+    }
+    Animal <|-- Dog
+    Animal <|-- Cat</pre>
+    </div>
+  </div>
+
+  <!-- Test 4: State Diagram -->
+  <div class="test-case" id="test-state">
+    <div class="status" id="status-state">PENDING</div>
+    <h2>4. State Diagram (v2)</h2>
+    <div class="mermaid-block">
+      <pre class="mermaid">stateDiagram-v2
+    [*] --> Idle
+    Idle --> Processing : submit
+    Processing --> Success : done
+    Processing --> Error : fail
+    Error --> Idle : retry
+    Success --> [*]</pre>
+    </div>
+  </div>
+
+  <!-- Test 5: ER Diagram -->
+  <div class="test-case" id="test-er">
+    <div class="status" id="status-er">PENDING</div>
+    <h2>5. ER Diagram</h2>
+    <div class="mermaid-block">
+      <pre class="mermaid">erDiagram
+    USER ||--o{ POST : writes
+    USER ||--o{ COMMENT : writes
+    POST ||--o{ COMMENT : has
+    POST ||--o{ TAG : has</pre>
+    </div>
+  </div>
+
+  <!-- Test 6: Gantt Chart -->
+  <div class="test-case" id="test-gantt">
+    <div class="status" id="status-gantt">PENDING</div>
+    <h2>6. Gantt Chart</h2>
+    <div class="mermaid-block">
+      <pre class="mermaid">gantt
+    title Sprint Plan
+    dateFormat  YYYY-MM-DD
+    section Backend
+    API Design     :a1, 2024-01-01, 7d
+    Implementation :a2, after a1, 14d
+    section Frontend
+    UI Design      :b1, 2024-01-01, 5d
+    Development    :b2, after b1, 14d</pre>
+    </div>
+  </div>
+
+  <!-- Test 7: Pie Chart -->
+  <div class="test-case" id="test-pie">
+    <div class="status" id="status-pie">PENDING</div>
+    <h2>7. Pie Chart</h2>
+    <div class="mermaid-block">
+      <pre class="mermaid">pie title Tech Stack Usage
+    "React" : 45
+    "Vue" : 25
+    "Angular" : 15
+    "Svelte" : 10
+    "Other" : 5</pre>
+    </div>
+  </div>
+
+  <!-- Test 8: Git Graph -->
+  <div class="test-case" id="test-git">
+    <div class="status" id="status-git">PENDING</div>
+    <h2>8. Git Graph</h2>
+    <div class="mermaid-block">
+      <pre class="mermaid">gitGraph
+    commit id: "init"
+    branch develop
+    commit id: "feat-1"
+    commit id: "feat-2"
+    checkout main
+    merge develop id: "merge" tag: "v1.0"
+    commit id: "hotfix"</pre>
+    </div>
+  </div>
+
+  <!-- Test 9: Non-mermaid code block (should NOT be rendered as diagram) -->
+  <div class="test-case" id="test-code">
+    <div class="status" id="status-code">PENDING</div>
+    <h2>9. Prism Code Block (should remain as code, not diagram)</h2>
+    <pre class="code-block"><code class="language-javascript">const greeting = "Hello, Mermaid!";
+console.log(greeting);
+
+function renderDiagram(md) {
+  return mermaid.render(md);
+}</code></pre>
+  </div>
+
+  <!-- Test 10: Invalid mermaid (error handling) -->
+  <div class="test-case" id="test-invalid">
+    <div class="status" id="status-invalid">PENDING</div>
+    <h2>10. Invalid Mermaid Syntax (should not crash)</h2>
+    <div class="mermaid-block">
+      <pre class="mermaid">this is not valid mermaid syntax!!!</pre>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script>
+    const tests = [
+      { id: 'flowchart', name: 'Flowchart' },
+      { id: 'sequence', name: 'Sequence Diagram' },
+      { id: 'class', name: 'Class Diagram' },
+      { id: 'state', name: 'State Diagram' },
+      { id: 'er', name: 'ER Diagram' },
+      { id: 'gantt', name: 'Gantt Chart' },
+      { id: 'pie', name: 'Pie Chart' },
+      { id: 'git', name: 'Git Graph' },
+    ];
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+    });
+
+    mermaid.run({ querySelector: '.mermaid' }).then(() => {
+      let passed = 0;
+      let failed = 0;
+
+      // Check diagram tests (1-8)
+      tests.forEach(test => {
+        const container = document.querySelector(`#test-${test.id} .mermaid-block`);
+        const svg = container ? container.querySelector('svg') : null;
+        const statusEl = document.getElementById(`status-${test.id}`);
+        const caseEl = document.getElementById(`test-${test.id}`);
+
+        if (svg) {
+          statusEl.textContent = `PASS - ${test.name}`;
+          statusEl.className = 'status pass';
+          caseEl.className = 'test-case pass';
+          passed++;
+        } else {
+          statusEl.textContent = `FAIL - ${test.name} (no SVG found)`;
+          statusEl.className = 'status fail';
+          caseEl.className = 'test-case fail';
+          failed++;
+        }
+      });
+
+      // Test 9: Code block should NOT have SVG
+      const codeEl = document.getElementById('test-code');
+      const codeStatus = document.getElementById('status-code');
+      const codeSvg = codeEl.querySelector('svg');
+      if (!codeSvg) {
+        codeStatus.textContent = 'PASS - Code block preserved (no SVG)';
+        codeStatus.className = 'status pass';
+        codeEl.className = 'test-case pass';
+        passed++;
+      } else {
+        codeStatus.textContent = 'FAIL - Code block was converted to SVG';
+        codeStatus.className = 'status fail';
+        codeEl.className = 'test-case fail';
+        failed++;
+      }
+
+      // Test 10: Invalid mermaid should not crash the page
+      const invalidStatus = document.getElementById('status-invalid');
+      const invalidEl = document.getElementById('test-invalid');
+      invalidStatus.textContent = 'PASS - Page did not crash';
+      invalidStatus.className = 'status pass';
+      invalidEl.className = 'test-case pass';
+      passed++;
+
+      // Summary
+      const resultEl = document.getElementById('result');
+      resultEl.textContent = `Result: ${passed}/${passed + failed} passed, ${failed} failed`;
+      resultEl.style.color = failed === 0 ? '#4caf50' : '#f44336';
+    }).catch(err => {
+      document.getElementById('result').textContent = 'Mermaid rendering error: ' + err.message;
+      document.getElementById('result').style.color = '#f44336';
+    });
+  </script>
+</body>
+</html>
