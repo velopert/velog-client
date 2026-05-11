@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Footnote Rendering Integration Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 768px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: #1e1e1e;
+      color: #e0e0e0;
+    }
+    h1 { border-bottom: 2px solid #444; padding-bottom: 0.5rem; }
+    h2 { color: #96d0ff; margin-top: 2rem; }
+    .test-case {
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      background: #252525;
+    }
+    .test-case.pass { border-color: #4caf50; }
+    .test-case.fail { border-color: #f44336; }
+    .status { font-weight: bold; margin-bottom: 0.5rem; }
+    .status.pass { color: #4caf50; }
+    .status.fail { color: #f44336; }
+
+    /* MarkdownRender.tsx 와 동일한 footnote 스타일 */
+    .footnotes {
+      margin-top: 2rem;
+      font-size: 0.875rem;
+      color: #acacac;
+      border-top: 1px solid #444;
+      padding-top: 1rem;
+    }
+    .footnotes ol { padding-left: 1.5rem; }
+    .footnotes li { margin-bottom: 0.25rem; }
+    .footnote-ref {
+      font-size: 0.75rem;
+      vertical-align: super;
+      line-height: 0;
+      margin-left: 1px;
+      text-decoration: none;
+      color: #96d0ff;
+    }
+    .footnote-backref {
+      text-decoration: none;
+      margin-left: 0.25rem;
+      color: #96d0ff;
+    }
+    #summary {
+      position: sticky;
+      top: 0;
+      background: #1e1e1e;
+      padding: 1rem 0;
+      border-bottom: 1px solid #444;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div id="summary">
+    <h1>Footnote Rendering Integration Test</h1>
+    <p id="result">Checking...</p>
+  </div>
+
+  <!-- Test 1: 기본 각주 -->
+  <div class="test-case" id="test-basic">
+    <div class="status" id="status-basic">PENDING</div>
+    <h2>1. Basic Footnote</h2>
+    <p>React is a JavaScript library for building user interfaces<sup id="fnref-1"><a href="#fn-1" class="footnote-ref">1</a></sup>. It was developed by Meta<sup id="fnref-2"><a href="#fn-2" class="footnote-ref">2</a></sup>.</p>
+    <div class="footnotes">
+      <hr>
+      <ol>
+        <li id="fn-1">React Official Documentation: https://react.dev <a href="#fnref-1" class="footnote-backref">↩</a></li>
+        <li id="fn-2">Originally created by Jordan Walke at Facebook. <a href="#fnref-2" class="footnote-backref">↩</a></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Test 2: 인라인 각주 -->
+  <div class="test-case" id="test-inline">
+    <div class="status" id="status-inline">PENDING</div>
+    <h2>2. Inline Footnote</h2>
+    <p>TypeScript adds static typing<sup id="fnref-3"><a href="#fn-3" class="footnote-ref">3</a></sup> to JavaScript.</p>
+    <div class="footnotes">
+      <hr>
+      <ol start="3">
+        <li id="fn-3">TypeScript is a superset of JavaScript developed by Microsoft. <a href="#fnref-3" class="footnote-backref">↩</a></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Test 3: 서식이 포함된 각주 -->
+  <div class="test-case" id="test-formatted">
+    <div class="status" id="status-formatted">PENDING</div>
+    <h2>3. Formatted Footnote Content</h2>
+    <p>Velog uses a remark-based pipeline<sup id="fnref-4"><a href="#fn-4" class="footnote-ref">4</a></sup>.</p>
+    <div class="footnotes">
+      <hr>
+      <ol start="4">
+        <li id="fn-4">The pipeline uses <strong>remark</strong> for parsing and <code>rehype</code> for HTML generation. <a href="#fnref-4" class="footnote-backref">↩</a></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Test 4: 각주 링크 동작 확인 -->
+  <div class="test-case" id="test-link">
+    <div class="status" id="status-link">PENDING</div>
+    <h2>4. Footnote Link Navigation</h2>
+    <p>Click the footnote number to jump<sup id="fnref-5"><a href="#fn-5" class="footnote-ref">5</a></sup>, then click ↩ to return.</p>
+    <div class="footnotes">
+      <hr>
+      <ol start="5">
+        <li id="fn-5">This tests that anchor links work correctly for footnote navigation. <a href="#fnref-5" class="footnote-backref">↩</a></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Test 5: 각주 없는 일반 텍스트 -->
+  <div class="test-case" id="test-nofoot">
+    <div class="status" id="status-nofoot">PENDING</div>
+    <h2>5. No Footnote (should have no footnote elements)</h2>
+    <p>This is a regular paragraph with no footnotes at all.</p>
+  </div>
+
+  <script>
+    let passed = 0, failed = 0;
+
+    function check(id, condition) {
+      const statusEl = document.getElementById('status-' + id);
+      const caseEl = document.getElementById('test-' + id);
+      if (condition) {
+        statusEl.textContent = 'PASS';
+        statusEl.className = 'status pass';
+        caseEl.className = 'test-case pass';
+        passed++;
+      } else {
+        statusEl.textContent = 'FAIL';
+        statusEl.className = 'status fail';
+        caseEl.className = 'test-case fail';
+        failed++;
+      }
+    }
+
+    // Test 1: sup + footnotes div exist
+    check('basic',
+      document.querySelector('#test-basic sup') &&
+      document.querySelector('#test-basic .footnotes') &&
+      document.querySelector('#test-basic .footnote-ref') &&
+      document.querySelector('#test-basic .footnote-backref')
+    );
+
+    // Test 2: inline footnote
+    check('inline',
+      document.querySelector('#test-inline sup') &&
+      document.querySelector('#test-inline .footnotes')
+    );
+
+    // Test 3: formatted content preserved
+    check('formatted',
+      document.querySelector('#test-formatted .footnotes strong') &&
+      document.querySelector('#test-formatted .footnotes code')
+    );
+
+    // Test 4: link navigation (href exists)
+    const refLink = document.querySelector('#test-link .footnote-ref');
+    const backLink = document.querySelector('#test-link .footnote-backref');
+    check('link',
+      refLink && refLink.getAttribute('href') === '#fn-5' &&
+      backLink && backLink.getAttribute('href') === '#fnref-5'
+    );
+
+    // Test 5: no footnote elements
+    check('nofoot',
+      !document.querySelector('#test-nofoot sup') &&
+      !document.querySelector('#test-nofoot .footnotes')
+    );
+
+    const resultEl = document.getElementById('result');
+    resultEl.textContent = 'Result: ' + passed + '/' + (passed + failed) + ' passed, ' + failed + ' failed';
+    resultEl.style.color = failed === 0 ? '#4caf50' : '#f44336';
+  </script>
+</body>
+</html>

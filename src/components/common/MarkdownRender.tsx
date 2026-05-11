@@ -8,6 +8,7 @@ import prismThemes from '../../lib/styles/prismThemes';
 import breaks from 'remark-breaks';
 import Typography from './Typography';
 import embedPlugin from '../../lib/remark/embedPlugin';
+import footnotes from 'remark-footnotes';
 import { loadScript, ssrEnabled } from '../../lib/utils';
 import media from '../../lib/styles/media';
 import parse from 'html-react-parser';
@@ -125,6 +126,35 @@ const MarkdownRenderBlock = styled.div`
   .katex-mathml {
     display: none;
   }
+
+  .footnotes {
+    margin-top: 2rem;
+    font-size: 0.875rem;
+    color: ${themedPalette.text2};
+    border-top: 1px solid ${themedPalette.border2};
+    padding-top: 1rem;
+
+    ol {
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  .footnote-ref {
+    font-size: 0.75rem;
+    vertical-align: super;
+    line-height: 0;
+    margin-left: 1px;
+    text-decoration: none;
+  }
+
+  .footnote-backref {
+    text-decoration: none;
+    margin-left: 0.25rem;
+  }
 `;
 
 function filter(html: string) {
@@ -166,6 +196,8 @@ function filter(html: string) {
       'img',
       'del',
       'input',
+      'sup',
+      'section',
 
       ...katexWhitelist.tags,
     ],
@@ -218,6 +250,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
             .use(breaks)
             .use(remarkParse)
             .use(slug)
+            .use(footnotes, { inlineNotes: true })
             .use(prismPlugin)
             .use(embedPlugin)
             .use(remark2rehype, { allowDangerousHTML: true })
@@ -242,6 +275,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = ({
         .use(breaks)
         .use(remarkParse)
         .use(slug)
+        .use(footnotes, { inlineNotes: true })
         .use(prismPlugin)
         .use(embedPlugin)
         .use(remark2rehype, { allowDangerousHTML: true })
