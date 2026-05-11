@@ -11676,6 +11676,11 @@ remark-breaks@^2.0.1:
   resolved "https://registry.yarnpkg.com/remark-breaks/-/remark-breaks-2.0.1.tgz#5dfe54e5b9ab65cfa1e25d6810fb556dda1c8ec1"
   integrity sha512-CZKI8xdPUnvMqPxYEIBBUg8C0B0kyn14lkW0abzhfh/P71YRIxCC3wvBh6AejQL602OxF6kNRl1x4HAZA07JyQ==
 
+remark-footnotes@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/remark-footnotes/-/remark-footnotes-2.0.0.tgz#9001c4c2ffebba55695d2dd80ffb8b82f7e6303f"
+  integrity sha512-3Clt8ZMH75Ayjp9q4CorNeyjwIxHFcTkaektplKGl2A1jNGEUey8cKL0ZC5vJwfcD5GFGsNLImLG/NGzWIzoMQ==
+
 remark-highlight.js@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/remark-highlight.js/-/remark-highlight.js-5.2.0.tgz#6d8d22085e0c76573744b7e3706fc232269f5b02"
