@@ -137,6 +137,7 @@ const SeriesPosts: React.FC<SeriesPostsProps> = ({ username, urlSlug }) => {
 
   return (
     <SeriesPostsTemplate
+      username={username}
       name={data.series.name}
       nextName={nextName}
       editing={editing}

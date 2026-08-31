@@ -7,6 +7,7 @@ import SeriesPostsTemplate, {
 describe('SeriesPostsTemplate', () => {
   const setup = (props: Partial<SeriesPostsTemplateProps> = {}) => {
     const initialProps: SeriesPostsTemplateProps = {
+      username: 'velopert',
       name: '시리즈 이름',
     };
     const utils = render(<SeriesPostsTemplate {...initialProps} {...props} />);

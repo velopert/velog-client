@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { themedPalette } from '../../lib/styles/themes';
 import SkeletonTexts from '../common/SkeletonTexts';
+import VLink from '../common/VLink';
 
 const SeriesPostsTemplateBlock = styled.div`
   & > label {
@@ -34,6 +35,7 @@ const Separator = styled.div`
 `;
 
 export interface SeriesPostsTemplateProps {
+  username: string;
   name: string;
   nextName: string;
   editing: boolean;
@@ -43,6 +45,7 @@ export interface SeriesPostsTemplateProps {
 const SeriesPostsTemplate: React.FC<SeriesPostsTemplateProps> = ({
   children,
   editing,
+  username,
   name,
   onInput,
 }) => {
@@ -54,7 +57,9 @@ const SeriesPostsTemplate: React.FC<SeriesPostsTemplateProps> = ({
   }, [editing]);
   return (
     <SeriesPostsTemplateBlock>
-      <label>시리즈</label>
+      <label>
+        <VLink to={`/@${username}/series`}>시리즈</VLink>
+      </label>
       <h1
         contentEditable={editing}
         ref={titleRef}
